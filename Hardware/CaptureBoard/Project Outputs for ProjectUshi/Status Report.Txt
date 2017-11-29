@@ -1,0 +1,11 @@
+Output: PADS ASCII Netlist
+Type  : PADSNetlist
+From  : Project [ProjectUshi.PrjPcb]
+   Generated File[Main.NET]
+   Generated File[Main.PRT]
+
+
+Files Generated   : 2
+Documents Printed : 0
+
+Finished Output Generation At 15:25:14 On 2017/11/28
