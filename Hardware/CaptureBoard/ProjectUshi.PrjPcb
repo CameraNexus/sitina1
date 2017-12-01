@@ -139,26 +139,10 @@ GenerateClassCluster=0
 DocumentUniqueId=MFRJLQAG
 
 [GeneratedDocument1]
-DocumentPath=Project Outputs for ProjectUshi\CPU.NET
-DItemRevisionGUID=
-
-[GeneratedDocument2]
-DocumentPath=Project Outputs for ProjectUshi\CPU.PRT
-DItemRevisionGUID=
-
-[GeneratedDocument3]
-DocumentPath=Project Outputs for ProjectUshi\FPGA.NET
-DItemRevisionGUID=
-
-[GeneratedDocument4]
-DocumentPath=Project Outputs for ProjectUshi\FPGA.PRT
-DItemRevisionGUID=
-
-[GeneratedDocument5]
 DocumentPath=Project Outputs for ProjectUshi\Main.NET
 DItemRevisionGUID=
 
-[GeneratedDocument6]
+[GeneratedDocument2]
 DocumentPath=Project Outputs for ProjectUshi\Main.PRT
 DItemRevisionGUID=
 
