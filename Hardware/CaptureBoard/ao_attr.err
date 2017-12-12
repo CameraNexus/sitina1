@@ -1,0 +1,14 @@
+Assembly Variant Service has detected improper attribute values
+
+Sun Dec 10 16:23:41 2017
+
+Current Job : CaptureBoard.pcb
+
+
+Format:
+OBJ_NAME
+OLD_VALUE{EMPTY;TOO_LONG}
+NEW_VALUE{DELETED;TOO_LONG}
+RESUME
+
+
