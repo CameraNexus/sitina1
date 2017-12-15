@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "C:/Users/ZephRay/Documents/FPGA/ProjectUshi/tim_vfsm_test_isim_beh.exe" -prj "C:/Users/ZephRay/Documents/FPGA/ProjectUshi/tim_vfsm_test_beh.prj" "work.tim_vfsm_test" "work.glbl" 

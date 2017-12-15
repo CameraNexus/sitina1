@@ -139,18 +139,10 @@ GenerateClassCluster=0
 DocumentUniqueId=MFRJLQAG
 
 [GeneratedDocument1]
-DocumentPath=Project Outputs for ProjectUshi\CPU.NET
-DItemRevisionGUID=
-
-[GeneratedDocument2]
-DocumentPath=Project Outputs for ProjectUshi\CPU.PRT
-DItemRevisionGUID=
-
-[GeneratedDocument3]
 DocumentPath=Project Outputs for ProjectUshi\Main.NET
 DItemRevisionGUID=
 
-[GeneratedDocument4]
+[GeneratedDocument2]
 DocumentPath=Project Outputs for ProjectUshi\Main.PRT
 DItemRevisionGUID=
 
@@ -279,12 +271,42 @@ OutputName22=WireList Netlist
 OutputDocumentPath22=
 OutputVariantName22=
 OutputDefault22=0
+OutputType23=SIMetrixNetlist
+OutputName23=SIMetrix
+OutputDocumentPath23=
+OutputVariantName23=
+OutputDefault23=0
+OutputType24=SIMPLISNetlist
+OutputName24=SIMPLIS
+OutputDocumentPath24=
+OutputVariantName24=
+OutputDefault24=0
+OutputType25=XSpiceNetlist
+OutputName25=XSpice Netlist
+OutputDocumentPath25=
+OutputVariantName25=
+OutputDefault25=0
 
 [OutputGroup2]
 Name=Simulator Outputs
 Description=
-TargetPrinter=RemotePrintingColor on MOBILEPRINT.WIN.PSU.EDU
+TargetPrinter=Microsoft Print to PDF
 PrinterOptions=Record=PrinterOptions|Copies=1|Duplex=1|TrueTypeOptions=3|Collate=1|PrintJobKind=1|PrintWhat=1
+OutputType1=AdvSimNetlist
+OutputName1=Mixed Sim
+OutputDocumentPath1=
+OutputVariantName1=
+OutputDefault1=0
+OutputType2=SIMetrixSimulation
+OutputName2=SIMetrix
+OutputDocumentPath2=
+OutputVariantName2=
+OutputDefault2=0
+OutputType3=SIMPLISSimulation
+OutputName3=SIMPLIS
+OutputDocumentPath3=
+OutputVariantName3=
+OutputDefault3=0
 
 [OutputGroup3]
 Name=Documentation Outputs
