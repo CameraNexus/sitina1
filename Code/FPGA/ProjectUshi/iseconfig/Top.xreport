@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2017-12-14T21:46:14</DateModified>
+  <DateModified>2017-12-26T20:04:05</DateModified>
   <ModuleName>Top</ModuleName>
-  <SummaryTimeStamp>2017-12-14T20:30:54</SummaryTimeStamp>
-  <SavedFilePath>C:/Users/ZephRay/Documents/FPGA/ProjectUshi/iseconfig/Top.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>C:/Users/ZephRay/Documents/FPGA/ProjectUshi\</ImplementationReportsDirectory>
+  <SummaryTimeStamp>2017-12-26T08:03:07</SummaryTimeStamp>
+  <SavedFilePath>C:/Users/ZephRay/Documents/GitHub/ProjectUshi/Code/FPGA/ProjectUshi/iseconfig/Top.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>C:/Users/ZephRay/Documents/GitHub/ProjectUshi/Code/FPGA/ProjectUshi\</ImplementationReportsDirectory>
   <DateInitialized>2017-12-13T18:21:32</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

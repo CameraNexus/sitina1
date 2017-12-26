@@ -37,6 +37,7 @@ localparam T3D   = 600;   // 20us
 localparam TD1L  = 1800;  // 60us
 localparam THD   = 180;   // 6us
 localparam TL    = THD + 2492; //THD + Line Pixel Count
+localparam THL   = 2;     // 50ns
 localparam LINES = 3324;
 
 //USE FIXED TIME FOR EXPERIMENT
@@ -196,7 +197,7 @@ begin
 				if (main_counter == TL) begin
 					main_counter <= 1'b0;
 					if (line_counter < LINES) begin
-						state <= 4'd9;
+						state <= 4'd11;
 						line_counter <= line_counter + 1'b1;
 					end
 					else begin
@@ -206,6 +207,21 @@ begin
 				else begin
 					main_counter <= main_counter + 1'b1;
 				end
+			end
+			4'd11:
+			begin
+				vact <= 0;
+				if (main_counter == THL) begin
+					main_counter <= 1'b0;
+					state <= 4'd9;
+				end
+				else begin
+					main_counter <= main_counter + 1'b1;
+				end
+			end
+			default:
+			begin
+			   state <= 4'd0;
 			end
 		endcase
 	end

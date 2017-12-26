@@ -38,8 +38,8 @@ module timgen(
     output cpu_hsync
     );
 
-assign ccd_hl = ccd_h1;
-assign ccd_h2 = !ccd_h1;
+assign ccd_h1 = !ccd_h2;
+assign ccd_hl = ccd_h2;
 
 wire vact;
 
@@ -51,7 +51,7 @@ tim_vfsm tim_vfsm(
     .d(), 
 	 .we(),
     .v1(ccd_v1),
-    .v2(ccd_v2),
+    .v2(ccd_v2), 
     .shut(ccd_shut),
     .vact(vact) 
     );

@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=C:\Users\ZephRay\Documents\GitHub\ProjectUshi\Code\FPGA\ProjectUshi\Top.ncd
+OUTFILE=C:\Users\ZephRay\Documents\GitHub\ProjectUshi\Code\FPGA\ProjectUshi\Top.bit
+FAMILY=Spartan6
+PART=xc6slx9-3tqg144
+WORKINGDIR=C:\Users\ZephRay\Documents\GitHub\ProjectUshi\Code\FPGA\ProjectUshi
+LICENSE=WebPack
+USER_INFO=211318806_0_0_510

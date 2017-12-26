@@ -38,7 +38,7 @@ module Top(
     output CPU_VSYNC,
     output CPU_HSYNC,
     output [13:0] CPU_VD,
-    input CLK_60M,
+    input CLK_24M,
     output [3:0] LED
     );
 
@@ -50,7 +50,7 @@ wire PLL_LOCKED;
 
 pll1 pll_1
    (// Clock in ports
-    .CLK_IN1(CLK_60M),      // IN
+    .CLK_IN1(CLK_24M),      // IN
     // Clock out ports
     .CLK_OUT1(CLK_300M),     // OUT
     .CLK_OUT2(CLK_30M),     // OUT
@@ -95,5 +95,28 @@ timgen timgen
     .cpu_hsync(CPU_HSYNC)
     );
 
+reg [23:0] led_counter;
+
+always @(posedge CLK_30M)
+begin
+  led_counter <= led_counter + 1;
+end
+
+assign LED[3:0] = led_counter[23:20];
+
+assign AFE_HD = 1'b0;
+assign CCD_FD = 1'b0;
+assign AFE_VD = 1'b0;
+assign CCD_RG = 1'b0;
+assign AFE_CLPDM = 1'b0;
+assign AFE_CLPOB = 1'b0;
+assign AFE_SHD = 1'b0;
+assign AFE_SHP = 1'b0;
+assign CPU_VD[13:0] = 14'b0;
+assign AFE_DCLK = 1'b0;
+assign AFE_PBLK = 1'b0;
+assign CPU_HSYNC = 1'b0;
+assign CPU_VSYNC = 1'b0;
+assign CPU_PCLK = 1'b0;
 
 endmodule
