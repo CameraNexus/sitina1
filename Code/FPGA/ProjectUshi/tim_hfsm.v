@@ -13,7 +13,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 module tim_hfsm(
     input clk,
+	 input rst,
     input vact,
+	 input firstline,
     output r,
     output h,
     output clpob,
@@ -21,7 +23,9 @@ module tim_hfsm(
     output pblk,
     output shp,
     output shd,
-    output dclk
+    output dclk,
+	 output hd,
+	 output vd
     );
 
 localparam NDUM = 12;
@@ -30,12 +34,12 @@ localparam NBUF = 16;
 localparam NACT = 2436;
 localparam NPIX = NDUM + NBLA + NBUF + NACT;
 
-reg[12:0] pixel_counter;
-reg[3:0] state;
+reg[12:0] pixel_counter = 0;
+reg[3:0] state = 0;
 
 wire[3:0] next_state;
 
-assign next_state = ((state == 4'd0)?((v_act == 1)?(4'd1):(4'd0)):((state == 4'd10)?(4'd0):(state + 1'b1)));
+assign next_state = ((state == 4'd0)?((vact == 1)?(4'd1):(4'd0)):((state == 4'd10)?(4'd1):(state + 1'b1)));
 
 always @(posedge clk)
 begin
@@ -45,17 +49,21 @@ begin
   end
   else begin
     state <= next_state;
-    pixel_counter <= (pixel_counter == NPIX) ? (13'b0) : (pixel_counter + 1);
+	 pixel_counter <= (vact == 1'b1) ? ((state == 4'd1) ? ((pixel_counter == NPIX) ? (13'b0) : (pixel_counter + 1'b1)) : (pixel_counter)) : 13'b0;
   end
 end
 
-assign h = (state >= 4'd1)&(state <=4'd5) ? 1 : 0;
-assign r = (state == 4'd1) ? 1 : 0;
-assign shp = (state >= 4'd1)&(state <= 4'd3) ? 0 : 1;
-assign shd = (state >= 4'd6)&(state <= 4'd8) ? 0 : 1;
+assign h = (vact)&((state >= 4'd1)&(state <=4'd5) ? 1'b1 : 1'b0);
+assign r = (state == 4'd1) ? 1'b1 : 1'b0;
+assign shp = (state >= 4'd1)&(state <= 4'd3) ? 1'b0 : 1'b1;
+assign shd = (state >= 4'd6)&(state <= 4'd8) ? 1'b0 : 1'b1;
 assign dclk = h;
 
-assign clpob = (pixel_counter >= (NDUM + 1))&(pixel_counter <= (NDUM + NBLA - 1)) ? 0 : 1;
+assign clpob = (pixel_counter >= (NDUM + 1))&(pixel_counter <= (NDUM + NBLA - 1)) ? 1'b0 : 1'b1;
 assign clpdm = clpob; 
+assign pblk = vact;
+
+assign hd = ((pixel_counter >= (NDUM + NBLA + 5))&(pixel_counter <= (NDUM + NBLA + NBUF))) ? 1'b0 : 1'b1;
+assign vd = ((firstline == 1)&(pixel_counter >= (NDUM + NBLA + 3))&(pixel_counter <= (NDUM + NBLA + NBUF - 2))) ? 1'b0 : 1'b1;
 
 endmodule

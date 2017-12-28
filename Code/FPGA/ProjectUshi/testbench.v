@@ -4,9 +4,9 @@
 // Company: 
 // Engineer:
 //
-// Create Date:   19:12:51 12/14/2017
+// Create Date:   16:03:05 12/27/2017
 // Design Name:   Top
-// Module Name:   C:/Users/ZephRay/Documents/FPGA/ProjectUshi/testbench.v
+// Module Name:   C:/Users/ZephRay/Documents/GitHub/ProjectUshi/Code/FPGA/ProjectUshi/testbench.v
 // Project Name:  ProjectUshi
 // Target Device:  
 // Tool versions:  
@@ -30,7 +30,7 @@ module testbench;
 	reg CPU_SCLK;
 	reg CPU_MOSI;
 	reg CPU_RST;
-	reg CLK_60M;
+	reg CLK_24M;
 
 	// Outputs
 	wire AFE_DCLK;
@@ -84,7 +84,7 @@ module testbench;
 		.CPU_VSYNC(CPU_VSYNC), 
 		.CPU_HSYNC(CPU_HSYNC), 
 		.CPU_VD(CPU_VD), 
-		.CLK_60M(CLK_60M), 
+		.CLK_24M(CLK_24M), 
 		.LED(LED)
 	);
 
@@ -95,8 +95,8 @@ module testbench;
 		CPU_SCLK = 0;
 		CPU_MOSI = 0;
 		CPU_RST = 0;
-		CLK_60M = 0;
-		
+		CLK_24M = 0;
+
 		// Wait 100 ns for global reset to finish
 		#100;
         

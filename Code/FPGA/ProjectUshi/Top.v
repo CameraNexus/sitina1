@@ -37,25 +37,25 @@ module Top(
     output CPU_PCLK,
     output CPU_VSYNC,
     output CPU_HSYNC,
-    output [13:0] CPU_VD,
+    inout [13:0] CPU_VD,
     input CLK_24M,
     output [3:0] LED
     );
 
-wire CLK_300M;
-wire CLK_30M;
-
-wire PLL_RESET;
-wire PLL_LOCKED;
+wire clk_300m;
+wire clk_30m;
+wire clk_60m;
+wire pll_locked;
 
 pll1 pll_1
    (// Clock in ports
     .CLK_IN1(CLK_24M),      // IN
     // Clock out ports
-    .CLK_OUT1(CLK_300M),     // OUT
-    .CLK_OUT2(CLK_30M),     // OUT
+    .CLK_OUT1(clk_300m),     // OUT
+    .CLK_OUT2(clk_30m),     // OUT
+	 .CLK_OUT3(clk_60m),
     // Status and control signals
-    .LOCKED(LOCKED));      // OUT
+    .LOCKED(pll_locked));      // OUT
 	 
 wire[1:0] ccd_v1;
 wire ccd_v2;
@@ -67,13 +67,18 @@ assign CCD_nXV2 = ((ccd_v1 == 2'b10) || (ccd_v1 == 2'b01)) ? 1'b1 : 1'b0;
 wire trigger;
 assign trigger = 1;
 
+wire rst;
+assign rst = !(CPU_RST & pll_locked);
+
+wire done;
+
 timgen timgen 
 	(
-    .clk_pix(CLK_30M),
-	 .clk_rg(CLK_300M),
-    .rst(CPU_RST),
+    .clk_pix(clk_30m),
+	 .clk_rg(clk_300m),
+    .rst(rst),
 	 .trigger(trigger),
-    .done(),
+    .done(done),
 	 .afe_dclk(AFE_DCLK),
     .afe_hd(AFE_HD),
     .afe_pblk(AFE_PBLK),
@@ -90,33 +95,39 @@ timgen timgen
     .ccd_shut(CCD_SHUT),
 	 .ccd_v1(ccd_v1), 
 	 .ccd_v2(ccd_v2),
-	 .cpu_pclk(CPU_PCLK),
     .cpu_vsync(CPU_VSYNC),
     .cpu_hsync(CPU_HSYNC)
     );
 
 reg [23:0] led_counter;
 
-always @(posedge CLK_30M)
+always @(posedge clk_30m)
 begin
-  led_counter <= led_counter + 1;
+  led_counter <= led_counter + 1'b1;
 end
 
-assign LED[3:0] = led_counter[23:20];
+assign LED[3] = led_counter[23];
+assign LED[2] = rst;
+assign LED[1] = trigger;
+assign LED[0] = done;
 
-assign AFE_HD = 1'b0;
-assign CCD_FD = 1'b0;
-assign AFE_VD = 1'b0;
-assign CCD_RG = 1'b0;
-assign AFE_CLPDM = 1'b0;
-assign AFE_CLPOB = 1'b0;
-assign AFE_SHD = 1'b0;
-assign AFE_SHP = 1'b0;
-assign CPU_VD[13:0] = 14'b0;
-assign AFE_DCLK = 1'b0;
-assign AFE_PBLK = 1'b0;
-assign CPU_HSYNC = 1'b0;
-assign CPU_VSYNC = 1'b0;
-assign CPU_PCLK = 1'b0;
+assign CPU_VD[13:6] = led_counter[7:0];
+assign CPU_VD[5:0] = 6'bz;
+
+ODDR2 #(
+    .DDR_ALIGNMENT("NONE"),
+    .INIT(1'b0),
+    .SRTYPE("SYNC")
+    ) clk_forward
+(
+      .Q(CPU_PCLK), 
+      .C0(clk_60m), 
+      .C1(~clk_60m),
+      .CE(1'b1),
+      .D0(1'b1),
+      .D1(1'b0),
+      .R(1'b0),  
+      .S(1'b0) 
+);
 
 endmodule

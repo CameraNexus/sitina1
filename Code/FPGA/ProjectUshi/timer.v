@@ -28,11 +28,14 @@ module timer(
 
 parameter WIDTH = 16;
 
-always @(posedge clk, posedge load)
+reg[12:0] prediv;
+
+always @(posedge clk)
 begin
 	if (load) begin
 		count <= preset;
 		done <= 0;
+		prediv <= 0;
 	end
 	else begin
 		if (count == 0) begin
@@ -40,8 +43,14 @@ begin
 			count <= 0;
 		end
 		else begin 
+		   if (prediv == 13'd1875) begin
+				prediv <= 13'b0;
+				count <= count - 1'b1;
+			end
+			else begin
+				prediv <= prediv + 1'b1;
+			end
 			done <= 0;
-			count <= count - 1'b1;
 		end
 	end
 end
