@@ -1,0 +1,19 @@
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\bin\armproc.dll" 
+
+"C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\bin\armJET.dll" 
+
+"C:\Users\ZephRay\Documents\ARM\RT_USHI\IAR\Debug\Exe\Project.out" 
+
+--plugin "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\bin\armbat.dll" 
+
+--device_macro "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\config\debugger\NXP\iMXRT.dmac" 
+
+--device_macro "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\config\debugger\NXP\iMXRT_Trace.dmac" 
+
+--macro "C:\Users\ZephRay\Documents\ARM\RT_USHI\IAR\evkmimxrt1050_sdram_init.mac" 
+
+--flash_loader "C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\arm\config\flashloader\NXP\FlashIMXRT1050_EVK_FlexSPI.board" 
+
+
+
+

@@ -1,0 +1,3 @@
+// Config FlexRAM 192KB 128KB 192KB
+  __writeMemory32(0x55FFFAA5, 0x400AC044, "Memory");
+  __writeMemory32(0x00020007, 0x400AC040, "Memory");
