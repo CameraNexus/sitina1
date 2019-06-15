@@ -2,6 +2,8 @@ Hardware/CaptureBoard/History/
 Hardware/CaptureBoard/Project Logs for ProjectUshi/
 Hardware/CaptureBoard/__Previews/
 
+*.bak
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
