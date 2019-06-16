@@ -3,6 +3,7 @@
    <common>
       <processor>MIMXRT1052xxxxB</processor>
       <package>MIMXRT1052DVL6B</package>
+      <board></board>
       <mcu_data>ksdk2_0</mcu_data>
       <cores selected="core0">
          <core name="Cortex-M7F" id="core0" description="M7 core"/>
@@ -150,7 +151,6 @@
                   <pin peripheral="SEMC" signal="DM, 0" pin_num="H3" pin_signal="GPIO_EMC_08"/>
                   <pin peripheral="SEMC" signal="DM, 1" pin_num="D6" pin_signal="GPIO_EMC_38"/>
                   <pin peripheral="SEMC" signal="semc_dqs" pin_num="B7" pin_signal="GPIO_EMC_39"/>
-                  <pin peripheral="SEMC" signal="semc_rdy" pin_num="A7" pin_signal="GPIO_EMC_40"/>
                   <pin peripheral="SEMC" signal="semc_ras" pin_num="D2" pin_signal="GPIO_EMC_25"/>
                   <pin peripheral="SEMC" signal="semc_we" pin_num="D1" pin_signal="GPIO_EMC_28"/>
                   <pin peripheral="CSI" signal="csi_data, 00" pin_num="B13" pin_signal="GPIO_B1_10"/>

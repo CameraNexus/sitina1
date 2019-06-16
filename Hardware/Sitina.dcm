@@ -1,3 +1,23 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP +VRTC
+D Power symbol creates a global label with name "+VRTC"
+K power-flag
+$ENDCMP
+#
+$CMP +VSD
+D Power symbol creates a global label with name "+VSD"
+K power-flag
+$ENDCMP
+#
+$CMP MT48LC32M16A2B4
+D 512Mb Synchronous DRAM, 8 M x 16 b x 4 Banks, TSOP-II-54
+K DRAM MEMORY
+$ENDCMP
+#
+$CMP MT48LC32M16A2P
+D 512Mb Synchronous DRAM, 8 M x 16 b x 4 Banks, TSOP-II-54
+K DRAM MEMORY
+$ENDCMP
+#
 #End Doc Library
