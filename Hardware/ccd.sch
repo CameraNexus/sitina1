@@ -1,0 +1,327 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 5 7
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Sitina:KAI-1100x U?
+U 1 1 5F4ED094
+P 5700 2700
+F 0 "U?" H 6828 1446 50  0000 L CNN
+F 1 "KAI-1100x" H 6828 1355 50  0000 L CNN
+F 2 "" H 5700 2700 50  0001 C CNN
+F 3 "" H 5700 2700 50  0001 C CNN
+	1    5700 2700
+	1    0    0    -1  
+$EndComp
+Text HLabel 4800 5300 3    50   Input ~ 0
+RL
+Text HLabel 5200 5300 3    50   Input ~ 0
+H1BINL
+Text HLabel 5400 5300 3    50   Input ~ 0
+H2SL
+Text HLabel 5500 5300 3    50   Input ~ 0
+H1SL
+Text HLabel 5600 5300 3    50   Input ~ 0
+H1BL
+Text HLabel 5700 5300 3    50   Input ~ 0
+H2BL
+Text HLabel 5800 5300 3    50   Input ~ 0
+H2BR
+Text HLabel 6000 5300 3    50   Input ~ 0
+H1SR
+Text HLabel 6100 5300 3    50   Input ~ 0
+H2SR
+Text HLabel 6300 5300 3    50   Input ~ 0
+H1BINR
+Text HLabel 6700 5300 3    50   Input ~ 0
+RR
+Text HLabel 5900 5300 3    50   Input ~ 0
+H1BR
+Text HLabel 4900 2400 1    50   Input ~ 0
+FDG
+Connection ~ 4900 2800
+Wire Wire Line
+	4800 5300 4800 4900
+Wire Wire Line
+	5200 5300 5200 4900
+Wire Wire Line
+	5400 5300 5400 4900
+Wire Wire Line
+	5500 5300 5500 4900
+Wire Wire Line
+	5600 5300 5600 4900
+Wire Wire Line
+	5700 5300 5700 4900
+Wire Wire Line
+	5800 5300 5800 4900
+Wire Wire Line
+	5900 5300 5900 4900
+Wire Wire Line
+	6000 5300 6000 4900
+Wire Wire Line
+	6100 5300 6100 4900
+Wire Wire Line
+	6300 5300 6300 4900
+Wire Wire Line
+	6700 5300 6700 4900
+Wire Wire Line
+	5100 4900 5100 5000
+Wire Wire Line
+	5100 5000 5300 5000
+Wire Wire Line
+	6400 5000 6400 4900
+Wire Wire Line
+	6200 4900 6200 5000
+Connection ~ 6200 5000
+Wire Wire Line
+	6200 5000 6400 5000
+Wire Wire Line
+	5300 4900 5300 5000
+Connection ~ 5300 5000
+Wire Wire Line
+	5300 5000 6200 5000
+Wire Wire Line
+	5100 5000 5100 5300
+Connection ~ 5100 5000
+Wire Wire Line
+	6500 4900 6500 5100
+Wire Wire Line
+	6500 5100 5000 5100
+Wire Wire Line
+	5000 5100 5000 4900
+Wire Wire Line
+	5000 5100 4500 5100
+Connection ~ 5000 5100
+$Comp
+L power:GND #PWR?
+U 1 1 5F506A21
+P 5100 5300
+F 0 "#PWR?" H 5100 5050 50  0001 C CNN
+F 1 "GND" H 5105 5127 50  0000 C CNN
+F 2 "" H 5100 5300 50  0001 C CNN
+F 3 "" H 5100 5300 50  0001 C CNN
+	1    5100 5300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+15V #PWR?
+U 1 1 5F506EC1
+P 4500 5000
+F 0 "#PWR?" H 4500 4850 50  0001 C CNN
+F 1 "+15V" H 4515 5173 50  0000 C CNN
+F 2 "" H 4500 5000 50  0001 C CNN
+F 3 "" H 4500 5000 50  0001 C CNN
+	1    4500 5000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 4900 4900 5200
+Wire Wire Line
+	4900 5200 7000 5200
+Wire Wire Line
+	6600 4900 6600 5100
+Wire Wire Line
+	6600 5100 7000 5100
+Text HLabel 5400 2400 1    50   Input ~ 0
+VSUB
+Wire Wire Line
+	6200 3100 6200 3000
+Wire Wire Line
+	6200 3000 6100 3000
+Wire Wire Line
+	5300 3000 5300 3100
+Wire Wire Line
+	5500 3100 5500 3000
+Connection ~ 5500 3000
+Wire Wire Line
+	5600 3100 5600 3000
+Connection ~ 5600 3000
+Wire Wire Line
+	5600 3000 5500 3000
+Wire Wire Line
+	5700 3100 5700 3000
+Connection ~ 5700 3000
+Wire Wire Line
+	5700 3000 5600 3000
+Wire Wire Line
+	5800 3100 5800 3000
+Connection ~ 5800 3000
+Wire Wire Line
+	5800 3000 5700 3000
+Wire Wire Line
+	5900 3100 5900 3000
+Connection ~ 5900 3000
+Wire Wire Line
+	5900 3000 5800 3000
+Wire Wire Line
+	6000 3100 6000 3000
+Connection ~ 6000 3000
+Wire Wire Line
+	6000 3000 5900 3000
+Wire Wire Line
+	6100 3100 6100 3000
+Connection ~ 6100 3000
+Wire Wire Line
+	6100 3000 6000 3000
+Wire Wire Line
+	6200 3000 7000 3000
+Wire Wire Line
+	7000 3000 7000 3200
+Connection ~ 6200 3000
+$Comp
+L power:GND #PWR?
+U 1 1 5F50E6D1
+P 7000 3200
+F 0 "#PWR?" H 7000 2950 50  0001 C CNN
+F 1 "GND" H 7005 3027 50  0000 C CNN
+F 2 "" H 7000 3200 50  0001 C CNN
+F 3 "" H 7000 3200 50  0001 C CNN
+	1    7000 3200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5300 3000 5500 3000
+Wire Wire Line
+	6600 2800 6600 3100
+Wire Wire Line
+	4900 2800 4900 3100
+Wire Wire Line
+	6700 3100 6700 2900
+Wire Wire Line
+	6700 2900 4800 2900
+Wire Wire Line
+	4800 2900 4800 3100
+Connection ~ 4800 2900
+Text HLabel 4800 2400 1    50   Input ~ 0
+VOG
+Wire Wire Line
+	4900 2800 6600 2800
+Text HLabel 5100 2400 1    50   Input ~ 0
+V1
+Text HLabel 5200 2400 1    50   Input ~ 0
+V2
+Wire Wire Line
+	5100 2400 5100 2600
+Wire Wire Line
+	5100 2600 6300 2600
+Connection ~ 5100 2600
+Wire Wire Line
+	5200 2400 5200 2500
+Connection ~ 5200 2500
+Wire Wire Line
+	6500 3100 6500 2700
+Wire Wire Line
+	5000 3100 5000 2700
+Wire Wire Line
+	6300 2600 6300 3100
+Wire Wire Line
+	6400 2500 6400 3100
+Wire Wire Line
+	5100 2600 5100 3100
+Wire Wire Line
+	5200 2500 5200 3100
+Wire Wire Line
+	5200 2500 6400 2500
+Wire Wire Line
+	5400 2400 5400 3100
+Wire Wire Line
+	6500 2700 5000 2700
+Connection ~ 5000 2700
+Wire Wire Line
+	4800 2400 4800 2900
+Wire Wire Line
+	4900 2400 4900 2800
+Text Label 4500 2700 0    50   ~ 0
+VRD
+$Comp
+L Device:C C?
+U 1 1 5F54268F
+P 4100 2950
+F 0 "C?" H 4215 2996 50  0000 L CNN
+F 1 "100nF 25V" H 4215 2905 50  0000 L CNN
+F 2 "" H 4138 2800 50  0001 C CNN
+F 3 "~" H 4100 2950 50  0001 C CNN
+	1    4100 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5F542C4F
+P 3700 2950
+F 0 "R?" H 3770 2996 50  0000 L CNN
+F 1 "196K" H 3770 2905 50  0000 L CNN
+F 2 "" V 3630 2950 50  0001 C CNN
+F 3 "~" H 3700 2950 50  0001 C CNN
+	1    3700 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5F543056
+P 3700 2450
+F 0 "R?" H 3770 2496 50  0000 L CNN
+F 1 "60.4K" H 3770 2405 50  0000 L CNN
+F 2 "" V 3630 2450 50  0001 C CNN
+F 3 "~" H 3700 2450 50  0001 C CNN
+	1    3700 2450
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5F54848E
+P 3700 3200
+F 0 "#PWR?" H 3700 2950 50  0001 C CNN
+F 1 "GND" H 3705 3027 50  0000 C CNN
+F 2 "" H 3700 3200 50  0001 C CNN
+F 3 "" H 3700 3200 50  0001 C CNN
+	1    3700 3200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4100 3100 3700 3100
+Wire Wire Line
+	3700 3200 3700 3100
+Connection ~ 3700 3100
+$Comp
+L power:+15V #PWR?
+U 1 1 5F54BB49
+P 3700 2200
+F 0 "#PWR?" H 3700 2050 50  0001 C CNN
+F 1 "+15V" H 3715 2373 50  0000 C CNN
+F 2 "" H 3700 2200 50  0001 C CNN
+F 3 "" H 3700 2200 50  0001 C CNN
+	1    3700 2200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3700 2700 4100 2700
+Wire Wire Line
+	4100 2800 4100 2700
+Connection ~ 4100 2700
+Wire Wire Line
+	4100 2700 5000 2700
+Wire Wire Line
+	3700 2800 3700 2700
+Wire Wire Line
+	3700 2600 3700 2700
+Connection ~ 3700 2700
+Wire Wire Line
+	3700 2200 3700 2300
+Wire Wire Line
+	4500 5000 4500 5100
+Text HLabel 7000 5200 2    50   Output ~ 0
+VOUTL
+Text HLabel 7000 5100 2    50   Output ~ 0
+VOUTR
+$EndSCHEMATC

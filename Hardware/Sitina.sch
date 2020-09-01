@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 4
+Sheet 1 7
 Title ""
 Date ""
 Rev ""
@@ -115,5 +115,23 @@ S 4750 3450 950  1050
 U 5D0B94DA
 F0 "afe" 50
 F1 "afe.sch" 50
+$EndSheet
+$Sheet
+S 7800 3500 1000 1000
+U 5F4D8A66
+F0 "ccd" 50
+F1 "ccd.sch" 50
+$EndSheet
+$Sheet
+S 6400 3500 1000 1100
+U 5F4E9EC9
+F0 "driver" 50
+F1 "driver.sch" 50
+$EndSheet
+$Sheet
+S 6400 4900 1000 700 
+U 5F5596FF
+F0 "vsub" 50
+F1 "vsub.sch" 50
 $EndSheet
 $EndSCHEMATC
