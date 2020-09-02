@@ -1,5 +1,10 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP +16V
+D Power symbol creates a global label with name "+15V"
+K power-flag
+$ENDCMP
+#
 $CMP +1V8A
 D Power symbol creates a global label with name "+1V8"
 K power-flag
@@ -15,6 +20,16 @@ D Power symbol creates a global label with name "+VSD"
 K power-flag
 $ENDCMP
 #
+$CMP -VH
+D Power symbol creates a global label with name "+15V"
+K power-flag
+$ENDCMP
+#
+$CMP -VRESET
+D Power symbol creates a global label with name "+15V"
+K power-flag
+$ENDCMP
+#
 $CMP MT48LC32M16A2B4
 D 512Mb Synchronous DRAM, 8 M x 16 b x 4 Banks, TSOP-II-54
 K DRAM MEMORY
@@ -23,6 +38,12 @@ $ENDCMP
 $CMP MT48LC32M16A2P
 D 512Mb Synchronous DRAM, 8 M x 16 b x 4 Banks, TSOP-II-54
 K DRAM MEMORY
+$ENDCMP
+#
+$CMP NC7SZ08
+D Single AND Gate, Low-Voltage CMOS
+K Single Gate AND LVC CMOS
+F http://www.ti.com/lit/sg/scyt129e/scyt129e.pdf
 $ENDCMP
 #
 #End Doc Library
