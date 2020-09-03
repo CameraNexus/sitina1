@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 5 7
+Sheet 5 8
 Title ""
 Date ""
 Rev ""
@@ -482,7 +482,7 @@ L Device:D_Schottky D?
 U 1 1 5F523C17
 P 6300 5750
 F 0 "D?" V 6254 5830 50  0000 L CNN
-F 1 "HSMS-2805" V 6345 5830 50  0000 L CNN
+F 1 "HSMS-2805" V 6500 5500 50  0000 L CNN
 F 2 "" H 6300 5750 50  0001 C CNN
 F 3 "~" H 6300 5750 50  0001 C CNN
 	1    6300 5750
@@ -565,8 +565,6 @@ Wire Wire Line
 	6300 5900 6600 5900
 Wire Wire Line
 	6600 5900 6600 6000
-Wire Wire Line
-	6600 5600 6600 5900
 Connection ~ 6600 5900
 Wire Wire Line
 	6600 5000 6600 5100
@@ -697,4 +695,17 @@ Wire Wire Line
 	8100 5100 7800 5100
 Text HLabel 8100 5100 2    50   Output ~ 0
 VSUB
+$Comp
+L Device:R R?
+U 1 1 5F507730
+P 6600 5750
+F 0 "R?" H 6670 5796 50  0000 L CNN
+F 1 "0" H 6670 5705 50  0000 L CNN
+F 2 "" V 6530 5750 50  0001 C CNN
+F 3 "~" H 6600 5750 50  0001 C CNN
+	1    6600 5750
+	1    0    0    -1  
+$EndComp
+Text Notes 4250 6450 0    50   ~ 0
+TODO: Pulse voltage of 28V might not be sufficient over the whole VAB range. Optimal value should be 31V.
 $EndSCHEMATC

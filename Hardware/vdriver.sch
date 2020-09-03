@@ -1,0 +1,159 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 8 8
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Text HLabel 2600 2700 0    50   Input ~ 0
+V1_3rd_AFE
+$Comp
+L Diode:BAT54S D?
+U 1 1 5F8E5566
+P 3500 2700
+F 0 "D?" V 3546 2788 50  0000 L CNN
+F 1 "BAT54S" V 3455 2788 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 3575 2825 50  0001 L CNN
+F 3 "https://www.diodes.com/assets/Datasheets/ds11005.pdf" H 3380 2700 50  0001 C CNN
+	1    3500 2700
+	0    1    -1   0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5F8EB205
+P 3250 2300
+AR Path="/5F5596FF/5F8EB205" Ref="R?"  Part="1" 
+AR Path="/5F8E5255/5F8EB205" Ref="R?"  Part="1" 
+F 0 "R?" V 3043 2300 50  0000 C CNN
+F 1 "220" V 3134 2300 50  0000 C CNN
+F 2 "" V 3180 2300 50  0001 C CNN
+F 3 "~" H 3250 2300 50  0001 C CNN
+	1    3250 2300
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3400 2300 3500 2300
+$Comp
+L Device:R R?
+U 1 1 5F8EB55C
+P 3250 3100
+AR Path="/5F5596FF/5F8EB55C" Ref="R?"  Part="1" 
+AR Path="/5F8E5255/5F8EB55C" Ref="R?"  Part="1" 
+F 0 "R?" V 3043 3100 50  0000 C CNN
+F 1 "220" V 3134 3100 50  0000 C CNN
+F 2 "" V 3180 3100 50  0001 C CNN
+F 3 "~" H 3250 3100 50  0001 C CNN
+	1    3250 3100
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3400 3100 3500 3100
+Wire Wire Line
+	3500 3100 3500 3000
+Wire Wire Line
+	2600 2700 3000 2700
+Wire Wire Line
+	3100 3100 3000 3100
+Wire Wire Line
+	3000 3100 3000 2700
+Connection ~ 3000 2700
+Wire Wire Line
+	3000 2700 3300 2700
+Wire Wire Line
+	3100 2300 3000 2300
+Wire Wire Line
+	3000 2300 3000 2700
+Wire Wire Line
+	3500 2300 3500 2400
+$Comp
+L Device:C C?
+U 1 1 5F8ED068
+P 4000 2450
+AR Path="/5FAA94D1/5F8ED068" Ref="C?"  Part="1" 
+AR Path="/5F8E5255/5F8ED068" Ref="C?"  Part="1" 
+F 0 "C?" H 3885 2404 50  0000 R CNN
+F 1 "1nF" H 3885 2495 50  0000 R CNN
+F 2 "" H 4038 2300 50  0001 C CNN
+F 3 "~" H 4000 2450 50  0001 C CNN
+	1    4000 2450
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 5F8EDF15
+P 4000 2950
+AR Path="/5FAA94D1/5F8EDF15" Ref="C?"  Part="1" 
+AR Path="/5F8E5255/5F8EDF15" Ref="C?"  Part="1" 
+F 0 "C?" H 3885 2904 50  0000 R CNN
+F 1 "1nF" H 3885 2995 50  0000 R CNN
+F 2 "" H 4038 2800 50  0001 C CNN
+F 3 "~" H 4000 2950 50  0001 C CNN
+	1    4000 2950
+	-1   0    0    1   
+$EndComp
+$Comp
+L Transistor_FET:DMC3071LVT Q?
+U 1 1 5F8F33B2
+P 4500 3100
+F 0 "Q?" H 4605 3146 50  0000 L CNN
+F 1 "DMC3071LVT" H 4605 3055 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:TSOT-23-6" H 4450 2625 50  0001 C CNN
+F 3 "https://www.diodes.com/assets/Datasheets/DMC3071LVT.pdf" H 4400 3100 50  0001 C CNN
+	1    4500 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:DMC3071LVT Q?
+U 2 1 5F8F3CA6
+P 4500 2300
+F 0 "Q?" H 4605 2254 50  0000 L CNN
+F 1 "DMC3071LVT" H 4605 2345 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:TSOT-23-6" H 4450 1825 50  0001 C CNN
+F 3 "https://www.diodes.com/assets/Datasheets/DMC3071LVT.pdf" H 4400 2300 50  0001 C CNN
+	2    4500 2300
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	3500 2300 4000 2300
+Connection ~ 3500 2300
+Connection ~ 4000 2300
+Wire Wire Line
+	4000 2300 4200 2300
+Wire Wire Line
+	3500 3100 4000 3100
+Connection ~ 3500 3100
+Connection ~ 4000 3100
+Wire Wire Line
+	4000 3100 4200 3100
+Wire Wire Line
+	4000 2600 4000 2700
+Wire Wire Line
+	4000 2700 4500 2700
+Wire Wire Line
+	4500 2700 4500 2900
+Connection ~ 4000 2700
+Wire Wire Line
+	4000 2700 4000 2800
+Wire Wire Line
+	4500 2700 4500 2500
+Connection ~ 4500 2700
+$Comp
+L power:GND #PWR?
+U 1 1 5F8FB457
+P 4500 3300
+F 0 "#PWR?" H 4500 3050 50  0001 C CNN
+F 1 "GND" H 4505 3127 50  0000 C CNN
+F 2 "" H 4500 3300 50  0001 C CNN
+F 3 "" H 4500 3300 50  0001 C CNN
+	1    4500 3300
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
