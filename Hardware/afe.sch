@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 4 8
+Sheet 8 9
 Title ""
 Date ""
 Rev ""
@@ -125,7 +125,7 @@ AFE_SDATA
 Text HLabel 6500 4800 2    50   Input ~ 0
 AFE_SL
 Text HLabel 6500 4700 2    50   Output ~ 0
-AFE_D[0..13]
+CSI_D[0..13]
 Wire Wire Line
 	5900 4800 6500 4800
 Wire Wire Line
@@ -880,10 +880,6 @@ Text HLabel 4200 2000 0    50   Output ~ 0
 AFE_H1_A
 Text HLabel 4200 2100 0    50   Output ~ 0
 AFE_H2_A
-Text HLabel 4200 2200 0    50   Output ~ 0
-AFE_H3_A
-Text HLabel 4200 2300 0    50   Output ~ 0
-AFE_H4_A
 Text HLabel 4200 2400 0    50   Output ~ 0
 AFE_HL_A
 Text HLabel 4200 2500 0    50   Output ~ 0
@@ -892,56 +888,22 @@ Text HLabel 4200 2600 0    50   Output ~ 0
 AFE_H1_B
 Text HLabel 4200 2700 0    50   Output ~ 0
 AFE_H2_B
-Text HLabel 4200 2800 0    50   Output ~ 0
-AFE_H3_B
-Text HLabel 4200 2900 0    50   Output ~ 0
-AFE_H4_B
 Text HLabel 4200 3000 0    50   Output ~ 0
 AFE_HL_B
 Text HLabel 4200 3200 0    50   Output ~ 0
 AFE_SUBCK
 Text HLabel 4200 3300 0    50   Output ~ 0
-AFE_XV1
+AFE_V1
 Text HLabel 4200 3400 0    50   Output ~ 0
-AFE_XV2
+AFE_V2
 Text HLabel 4200 3500 0    50   Output ~ 0
-AFE_XV3
-Text HLabel 4200 3600 0    50   Output ~ 0
-AFE_XV4
-Text HLabel 4200 3700 0    50   Output ~ 0
-AFE_XV5
-Text HLabel 4200 3800 0    50   Output ~ 0
-AFE_XV6
-Text HLabel 4200 3900 0    50   Output ~ 0
-AFE_XV7
-Text HLabel 4200 4000 0    50   Output ~ 0
-AFE_XV8
-Text HLabel 4200 4100 0    50   Output ~ 0
-AFE_XV9
-Text HLabel 4200 4200 0    50   Output ~ 0
-AFE_XV10
-Text HLabel 4200 4300 0    50   Output ~ 0
-AFE_XV11
-Text HLabel 4200 4400 0    50   Output ~ 0
-AFE_XV12
-Text HLabel 4200 4500 0    50   Output ~ 0
-AFE_XV13
-Text HLabel 4200 4600 0    50   Output ~ 0
-AFE_XV14
-Text HLabel 4200 4700 0    50   Output ~ 0
-AFE_XV15
-Text HLabel 4200 4800 0    50   Output ~ 0
-AFE_XV16
+AFE_V2_3rd
 Wire Wire Line
 	4200 1900 4400 1900
 Wire Wire Line
 	4200 2000 4400 2000
 Wire Wire Line
 	4200 2100 4400 2100
-Wire Wire Line
-	4200 2200 4400 2200
-Wire Wire Line
-	4200 2300 4400 2300
 Wire Wire Line
 	4200 2400 4400 2400
 Wire Wire Line
@@ -950,10 +912,6 @@ Wire Wire Line
 	4200 2600 4400 2600
 Wire Wire Line
 	4200 2700 4400 2700
-Wire Wire Line
-	4200 2800 4400 2800
-Wire Wire Line
-	4200 2900 4400 2900
 Wire Wire Line
 	4200 3000 4400 3000
 Wire Wire Line
@@ -964,32 +922,6 @@ Wire Wire Line
 	4200 3400 4400 3400
 Wire Wire Line
 	4200 3500 4400 3500
-Wire Wire Line
-	4200 3600 4400 3600
-Wire Wire Line
-	4200 3700 4400 3700
-Wire Wire Line
-	4200 3800 4400 3800
-Wire Wire Line
-	4200 3900 4400 3900
-Wire Wire Line
-	4200 4000 4400 4000
-Wire Wire Line
-	4200 4100 4400 4100
-Wire Wire Line
-	4200 4200 4400 4200
-Wire Wire Line
-	4200 4300 4400 4300
-Wire Wire Line
-	4200 4400 4400 4400
-Wire Wire Line
-	4200 4500 4400 4500
-Wire Wire Line
-	4200 4600 4400 4600
-Wire Wire Line
-	4200 4700 4400 4700
-Wire Wire Line
-	4200 4800 4400 4800
 $Comp
 L Sitina:ADA4800 U?
 U 1 1 5F60A19B
@@ -1455,6 +1387,45 @@ Wire Wire Line
 	3700 6700 3700 6200
 Wire Wire Line
 	3700 6200 2400 6200
+Wire Wire Line
+	4200 3600 4400 3600
+Text HLabel 4200 3600 0    50   Output ~ 0
+AFE_FDG
+NoConn ~ 4400 3700
+NoConn ~ 4400 3800
+NoConn ~ 4400 3900
+NoConn ~ 4400 4000
+NoConn ~ 4400 4100
+NoConn ~ 4400 4200
+NoConn ~ 4400 4300
+NoConn ~ 4400 4400
+NoConn ~ 4400 4500
+NoConn ~ 4400 4600
+NoConn ~ 4400 4700
+NoConn ~ 4400 4800
+NoConn ~ 4400 4900
+NoConn ~ 4400 5000
+NoConn ~ 4400 5100
+NoConn ~ 4400 5200
+NoConn ~ 4400 5300
+NoConn ~ 4400 5400
+NoConn ~ 4400 5500
+NoConn ~ 4400 5600
+NoConn ~ 4400 2800
+NoConn ~ 4400 2900
+NoConn ~ 4400 2200
+NoConn ~ 4400 2300
+Text HLabel 4200 5800 0    50   Output ~ 0
+GPO1_STROBE
+Wire Wire Line
+	4200 5800 4400 5800
+NoConn ~ 4400 5900
+NoConn ~ 4400 6000
+NoConn ~ 4400 6100
+NoConn ~ 4400 6200
+NoConn ~ 4400 6300
+NoConn ~ 4400 6400
+NoConn ~ 4400 6500
 Wire Wire Line
 	5900 5400 6500 5400
 Wire Bus Line

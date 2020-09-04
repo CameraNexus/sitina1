@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 6 8
+Sheet 6 9
 Title ""
 Date ""
 Rev ""
@@ -203,8 +203,6 @@ Wire Wire Line
 Wire Wire Line
 	4800 2900 4800 3100
 Connection ~ 4800 2900
-Text HLabel 4800 2400 1    50   Input ~ 0
-VOG
 Wire Wire Line
 	4900 2800 6600 2800
 Text HLabel 5100 2400 1    50   Input ~ 0
@@ -238,8 +236,6 @@ Wire Wire Line
 Wire Wire Line
 	6500 2700 5000 2700
 Connection ~ 5000 2700
-Wire Wire Line
-	4800 2400 4800 2900
 Wire Wire Line
 	4900 2400 4900 2800
 Text Label 4500 2700 0    50   ~ 0
@@ -324,4 +320,86 @@ Text HLabel 7000 5200 2    50   Output ~ 0
 VOUTL
 Text HLabel 7000 5100 2    50   Output ~ 0
 VOUTR
+$Comp
+L Device:C C?
+U 1 1 5F566DE0
+P 4500 2050
+F 0 "C?" H 4615 2096 50  0000 L CNN
+F 1 "100nF 25V" H 4615 2005 50  0000 L CNN
+F 2 "" H 4538 1900 50  0001 C CNN
+F 3 "~" H 4500 2050 50  0001 C CNN
+	1    4500 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5F566DE6
+P 4100 2050
+F 0 "R?" H 4170 2096 50  0000 L CNN
+F 1 "20K/1%" H 4170 2005 50  0000 L CNN
+F 2 "" V 4030 2050 50  0001 C CNN
+F 3 "~" H 4100 2050 50  0001 C CNN
+	1    4100 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5F566DEC
+P 4100 1550
+F 0 "R?" H 4170 1596 50  0000 L CNN
+F 1 "20K/1%" H 4170 1505 50  0000 L CNN
+F 2 "" V 4030 1550 50  0001 C CNN
+F 3 "~" H 4100 1550 50  0001 C CNN
+	1    4100 1550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4500 2200 4100 2200
+Wire Wire Line
+	4100 2300 4100 2200
+Connection ~ 4100 2200
+Wire Wire Line
+	4100 1800 4500 1800
+Wire Wire Line
+	4500 1900 4500 1800
+Wire Wire Line
+	4100 1900 4100 1800
+Wire Wire Line
+	4100 1700 4100 1800
+Connection ~ 4100 1800
+Wire Wire Line
+	4100 1300 4100 1400
+Wire Wire Line
+	4500 1800 4800 1800
+Wire Wire Line
+	4800 1800 4800 2900
+Connection ~ 4500 1800
+Text Label 4500 1800 0    50   ~ 0
+VOD
+$Comp
+L power:GND #PWR?
+U 1 1 5F56BEE4
+P 4100 1300
+F 0 "#PWR?" H 4100 1050 50  0001 C CNN
+F 1 "GND" H 4105 1127 50  0000 C CNN
+F 2 "" H 4100 1300 50  0001 C CNN
+F 3 "" H 4100 1300 50  0001 C CNN
+	1    4100 1300
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:-5V #PWR?
+U 1 1 5F56CAFB
+P 4100 2300
+F 0 "#PWR?" H 4100 2400 50  0001 C CNN
+F 1 "-5V" H 4115 2473 50  0000 C CNN
+F 2 "" H 4100 2300 50  0001 C CNN
+F 3 "" H 4100 2300 50  0001 C CNN
+	1    4100 2300
+	-1   0    0    1   
+$EndComp
+Text Notes 4200 1800 0    50   ~ 0
+-2.5V
+Text Notes 4200 2700 0    50   ~ 0
++11.5V
 $EndSCHEMATC
