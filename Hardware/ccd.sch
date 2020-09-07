@@ -3,11 +3,11 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 6 9
-Title ""
+Sheet 7 14
+Title "Sitina Ne"
 Date ""
-Rev ""
-Comp ""
+Rev "R0P2"
+Comp "ZephRay"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -138,8 +138,6 @@ VSUB
 Wire Wire Line
 	6200 3100 6200 3000
 Wire Wire Line
-	6200 3000 6100 3000
-Wire Wire Line
 	5300 3000 5300 3100
 Wire Wire Line
 	5500 3100 5500 3000
@@ -166,19 +164,10 @@ Wire Wire Line
 	5900 3000 5800 3000
 Wire Wire Line
 	6000 3100 6000 3000
-Connection ~ 6000 3000
 Wire Wire Line
 	6000 3000 5900 3000
 Wire Wire Line
-	6100 3100 6100 3000
-Connection ~ 6100 3000
-Wire Wire Line
-	6100 3000 6000 3000
-Wire Wire Line
-	6200 3000 7000 3000
-Wire Wire Line
 	7000 3000 7000 3200
-Connection ~ 6200 3000
 $Comp
 L power:GND #PWR?
 U 1 1 5F50E6D1
@@ -222,7 +211,7 @@ Wire Wire Line
 Wire Wire Line
 	5000 3100 5000 2700
 Wire Wire Line
-	6300 2600 6300 3100
+	6300 2600 6300 3000
 Wire Wire Line
 	6400 2500 6400 3100
 Wire Wire Line
@@ -402,4 +391,17 @@ Text Notes 4200 1800 0    50   ~ 0
 -2.5V
 Text Notes 4200 2700 0    50   ~ 0
 +11.5V
+Wire Wire Line
+	6000 3000 6200 3000
+Connection ~ 6000 3000
+Connection ~ 6300 3000
+Wire Wire Line
+	6300 3000 6300 3100
+Wire Wire Line
+	6300 3000 7000 3000
+Connection ~ 6200 3000
+Wire Wire Line
+	6200 3000 6300 3000
+Wire Wire Line
+	6100 3100 6100 2400
 $EndSCHEMATC

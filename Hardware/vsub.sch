@@ -3,11 +3,11 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 4 9
-Title ""
+Sheet 4 14
+Title "Sitina Ne"
 Date ""
-Rev ""
-Comp ""
+Rev "R0P2"
+Comp "ZephRay"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -35,32 +35,6 @@ F 3 "~" H 4000 2450 50  0001 C CNN
 	1    4000 2450
 	-1   0    0    1   
 $EndComp
-$Comp
-L Device:R R?
-U 1 1 5F4F080C
-P 3600 2450
-F 0 "R?" H 3670 2496 50  0000 L CNN
-F 1 "100K" H 3670 2405 50  0000 L CNN
-F 2 "" V 3530 2450 50  0001 C CNN
-F 3 "~" H 3600 2450 50  0001 C CNN
-	1    3600 2450
-	1    0    0    -1  
-$EndComp
-Text HLabel 3300 1400 0    50   Input ~ 0
-VAB_ADJ
-Text HLabel 3300 2200 0    50   Input ~ 0
-VAB_EN
-$Comp
-L Sitina:+16V #PWR?
-U 1 1 5F4F26C2
-P 4000 1900
-F 0 "#PWR?" H 4000 1750 50  0001 C CNN
-F 1 "+16V" H 4015 2073 50  0000 C CNN
-F 2 "" H 4000 1900 50  0001 C CNN
-F 3 "" H 4000 1900 50  0001 C CNN
-	1    4000 1900
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	5200 2000 5100 2000
 Wire Wire Line
@@ -81,21 +55,6 @@ F 3 "" H 4000 2600 50  0001 C CNN
 	1    4000 2600
 	1    0    0    -1  
 $EndComp
-$Comp
-L power:GND #PWR?
-U 1 1 5F4F3A88
-P 3600 2600
-F 0 "#PWR?" H 3600 2350 50  0001 C CNN
-F 1 "GND" H 3605 2427 50  0000 C CNN
-F 2 "" H 3600 2600 50  0001 C CNN
-F 3 "" H 3600 2600 50  0001 C CNN
-	1    3600 2600
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3600 2300 3600 2200
-Wire Wire Line
-	3300 2200 3600 2200
 $Comp
 L Device:C C?
 U 1 1 5F4F6DCF
@@ -140,9 +99,6 @@ F 3 "" H 4400 2900 50  0001 C CNN
 	1    4400 2900
 	1    0    0    -1  
 $EndComp
-Connection ~ 3600 2200
-Wire Wire Line
-	3600 2200 5200 2200
 Wire Wire Line
 	4400 2600 4800 2600
 Connection ~ 4800 2600
@@ -151,40 +107,6 @@ Wire Wire Line
 NoConn ~ 5200 2800
 Wire Wire Line
 	4000 1900 5100 1900
-Connection ~ 4000 1900
-$Comp
-L Device:R R?
-U 1 1 5F4F925A
-P 6600 2150
-F 0 "R?" H 6670 2196 50  0000 L CNN
-F 1 "196K" H 6670 2105 50  0000 L CNN
-F 2 "" V 6530 2150 50  0001 C CNN
-F 3 "~" H 6600 2150 50  0001 C CNN
-	1    6600 2150
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R?
-U 1 1 5F4FA025
-P 6600 2650
-F 0 "R?" H 6670 2696 50  0000 L CNN
-F 1 "9.09K" H 6670 2605 50  0000 L CNN
-F 2 "" V 6530 2650 50  0001 C CNN
-F 3 "~" H 6600 2650 50  0001 C CNN
-	1    6600 2650
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR?
-U 1 1 5F4FA02B
-P 6600 2800
-F 0 "#PWR?" H 6600 2550 50  0001 C CNN
-F 1 "GND" H 6605 2627 50  0000 C CNN
-F 2 "" H 6600 2800 50  0001 C CNN
-F 3 "" H 6600 2800 50  0001 C CNN
-	1    6600 2800
-	1    0    0    -1  
-$EndComp
 $Comp
 L Device:C C?
 U 1 1 5F4FAEA9
@@ -208,34 +130,21 @@ F 3 "" H 6200 3200 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6600 2400 6600 2500
-Wire Wire Line
-	6600 2300 6600 2400
-Connection ~ 6600 2400
-Wire Wire Line
 	6200 1900 6300 1900
 Wire Wire Line
 	6200 2000 6300 2000
 Wire Wire Line
 	6300 2000 6300 1900
 Connection ~ 6300 1900
-Wire Wire Line
-	6600 2000 6600 1900
-Wire Wire Line
-	6300 1900 6600 1900
-Wire Wire Line
-	6200 2600 6500 2600
-Wire Wire Line
-	6500 2600 6500 3200
 $Comp
 L power:GND #PWR?
 U 1 1 5F4FCD6D
-P 6500 3200
-F 0 "#PWR?" H 6500 2950 50  0001 C CNN
-F 1 "GND" H 6505 3027 50  0000 C CNN
-F 2 "" H 6500 3200 50  0001 C CNN
-F 3 "" H 6500 3200 50  0001 C CNN
-	1    6500 3200
+P 6400 3200
+F 0 "#PWR?" H 6400 2950 50  0001 C CNN
+F 1 "GND" H 6405 3027 50  0000 C CNN
+F 2 "" H 6400 3200 50  0001 C CNN
+F 3 "" H 6400 3200 50  0001 C CNN
+	1    6400 3200
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -260,21 +169,6 @@ F 3 "" H 5600 3200 50  0001 C CNN
 	1    5600 3200
 	1    0    0    -1  
 $EndComp
-$Comp
-L Device:R R?
-U 1 1 5F4FF519
-P 6950 2400
-F 0 "R?" V 6743 2400 50  0000 C CNN
-F 1 "63.4K" V 6834 2400 50  0000 C CNN
-F 2 "" V 6880 2400 50  0001 C CNN
-F 3 "~" H 6950 2400 50  0001 C CNN
-	1    6950 2400
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	6800 2400 6600 2400
-Wire Wire Line
-	7100 2400 7200 2400
 $Comp
 L Device:C C?
 U 1 1 5F502295
@@ -507,24 +401,10 @@ Wire Wire Line
 Connection ~ 5900 4800
 Wire Wire Line
 	5900 4800 6300 4800
-$Comp
-L Sitina:+16V #PWR?
-U 1 1 5F52A4FF
-P 5900 4300
-F 0 "#PWR?" H 5900 4150 50  0001 C CNN
-F 1 "+16V" H 5915 4473 50  0000 C CNN
-F 2 "" H 5900 4300 50  0001 C CNN
-F 3 "" H 5900 4300 50  0001 C CNN
-	1    5900 4300
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	5900 4400 5900 4300
 Wire Wire Line
-	5900 4300 6600 4300
-Wire Wire Line
 	6600 4300 6600 4600
-Connection ~ 5900 4300
 $Comp
 L Device:C C?
 U 1 1 5F52C58F
@@ -538,7 +418,6 @@ F 3 "~" H 7000 4450 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	6600 4300 7000 4300
-Connection ~ 6600 4300
 $Comp
 L power:GND #PWR?
 U 1 1 5F52D8EE
@@ -664,18 +543,9 @@ F 3 "~" H 7800 4750 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	6200 2800 6200 2900
-Wire Wire Line
-	6200 2400 6600 2400
-Connection ~ 6600 1900
-Wire Wire Line
-	7200 2400 7200 1400
-Wire Wire Line
-	7200 1400 3300 1400
 Connection ~ 8200 1900
 Wire Wire Line
 	8200 1900 8800 1900
-Wire Wire Line
-	6600 1900 7800 1900
 Wire Wire Line
 	7800 4600 7800 1900
 Connection ~ 7800 1900
@@ -706,6 +576,48 @@ F 3 "~" H 6600 5750 50  0001 C CNN
 	1    6600 5750
 	1    0    0    -1  
 $EndComp
-Text Notes 4250 6450 0    50   ~ 0
-TODO: Pulse voltage of 28V might not be sufficient over the whole VAB range. Optimal value should be 31V.
+Wire Wire Line
+	6600 4300 5900 4300
+Connection ~ 6600 4300
+Wire Wire Line
+	5200 2200 5100 2200
+Wire Wire Line
+	5100 2200 5100 2000
+Connection ~ 5100 2000
+Wire Wire Line
+	6200 2600 6300 2600
+Wire Wire Line
+	6300 2600 6300 3200
+Wire Wire Line
+	6300 3200 6400 3200
+Text Notes 6350 1800 0    50   ~ 0
+VAB range: 6.2V - 17.4V (Target range: 8V - 17V)
+Text Notes 5700 4200 0    50   ~ 0
+Pulse Voltage: 31V
+Text Notes 8050 5250 0    50   ~ 0
+Voltage range: 39V - 48V
+$Comp
+L Sitina:+19V #PWR?
+U 1 1 60B20E91
+P 5100 1900
+F 0 "#PWR?" H 5100 1750 50  0001 C CNN
+F 1 "+19V" H 5115 2073 50  0000 C CNN
+F 2 "" H 5100 1900 50  0001 C CNN
+F 3 "" H 5100 1900 50  0001 C CNN
+	1    5100 1900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Sitina:+19V #PWR?
+U 1 1 60B21704
+P 6600 4300
+F 0 "#PWR?" H 6600 4150 50  0001 C CNN
+F 1 "+19V" H 6615 4473 50  0000 C CNN
+F 2 "" H 6600 4300 50  0001 C CNN
+F 3 "" H 6600 4300 50  0001 C CNN
+	1    6600 4300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6300 1900 7800 1900
 $EndSCHEMATC

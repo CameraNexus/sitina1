@@ -3,11 +3,11 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 9 9
-Title ""
+Sheet 9 14
+Title "Sitina Ne"
 Date ""
-Rev ""
-Comp ""
+Rev "R0P2"
+Comp "ZephRay"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -24,17 +24,6 @@ F 1 "GND" H 3105 6427 50  0000 C CNN
 F 2 "" H 3100 6600 50  0001 C CNN
 F 3 "" H 3100 6600 50  0001 C CNN
 	1    3100 6600
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:+3.3V #PWR0102
-U 1 1 5C8E9A3C
-P 3200 1500
-F 0 "#PWR0102" H 3200 1350 50  0001 C CNN
-F 1 "+3.3V" H 3215 1673 50  0000 C CNN
-F 2 "" H 3200 1500 50  0001 C CNN
-F 3 "" H 3200 1500 50  0001 C CNN
-	1    3200 1500
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -141,12 +130,6 @@ F 3 "~" H 8800 2800 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	8600 2200 8800 2200
-Text HLabel 8800 2000 2    50   Input ~ 0
-PPI_CLK
-Text HLabel 8800 2200 2    50   Input ~ 0
-PPI_VS
-Text HLabel 8800 2400 2    50   Input ~ 0
-PPI_HS
 Text HLabel 8800 2600 2    50   Input ~ 0
 LCD_DI
 $Comp
@@ -166,12 +149,6 @@ Connection ~ 3900 2600
 Connection ~ 3900 2500
 Wire Wire Line
 	3900 2500 3900 2600
-Text HLabel 3300 5500 2    50   Input ~ 0
-PPI_CLK
-Text HLabel 3300 5700 2    50   Input ~ 0
-PPI_VS
-Text HLabel 3300 5600 2    50   Input ~ 0
-PPI_HS
 Text HLabel 3300 3200 2    50   Input ~ 0
 LCD_DI
 Wire Wire Line
@@ -192,42 +169,6 @@ Wire Wire Line
 	8600 2800 8800 2800
 Text Notes 8000 6000 0    50   ~ 0
 LCD Controller Pin Multiplexing:\nAsync Parallel SPI         I2C\n---------------------------\n    CS         CS         Not used\n    WR         CLK        SCL\n    RD         Not used   Not used\n    Not used   MOSI       SDA\n    Not used   MISO       Not used
-Text HLabel 3300 3500 2    50   Input ~ 0
-PPI_D00
-Text HLabel 3300 3600 2    50   Input ~ 0
-PPI_D01
-Text HLabel 3300 3700 2    50   Input ~ 0
-PPI_D02
-Text HLabel 3300 3800 2    50   Input ~ 0
-PPI_D03
-Text HLabel 3300 3900 2    50   Input ~ 0
-PPI_D04
-Text HLabel 3300 4000 2    50   Input ~ 0
-PPI_D05
-Text HLabel 3300 4100 2    50   Input ~ 0
-PPI_D06
-Text HLabel 3300 4200 2    50   Input ~ 0
-PPI_D07
-Text HLabel 3300 4300 2    50   Input ~ 0
-PPI_D08
-Text HLabel 3300 4400 2    50   Input ~ 0
-PPI_D09
-Text HLabel 3300 4500 2    50   Input ~ 0
-PPI_D10
-Text HLabel 3300 4600 2    50   Input ~ 0
-PPI_D11
-Text HLabel 3300 4700 2    50   Input ~ 0
-PPI_D12
-Text HLabel 3300 4900 2    50   Input ~ 0
-PPI_D13
-Text HLabel 3300 5000 2    50   Input ~ 0
-PPI_D14
-Text HLabel 3300 5100 2    50   Input ~ 0
-PPI_D15
-Text HLabel 3300 5200 2    50   Input ~ 0
-PPI_D16
-Text HLabel 3300 5300 2    50   Input ~ 0
-PPI_D17
 Text HLabel 3300 5800 2    50   Input ~ 0
 LCD_RST
 Text HLabel 3300 3000 2    50   Input ~ 0
@@ -240,42 +181,6 @@ Wire Wire Line
 	3000 3000 3300 3000
 Wire Wire Line
 	3300 5800 3000 5800
-Wire Wire Line
-	3000 3500 3300 3500
-Wire Wire Line
-	3000 3600 3300 3600
-Wire Wire Line
-	3000 3700 3300 3700
-Wire Wire Line
-	3000 3800 3300 3800
-Wire Wire Line
-	3000 3900 3300 3900
-Wire Wire Line
-	3000 4000 3300 4000
-Wire Wire Line
-	3000 4100 3300 4100
-Wire Wire Line
-	3000 4200 3300 4200
-Wire Wire Line
-	3000 4300 3300 4300
-Wire Wire Line
-	3000 4400 3300 4400
-Wire Wire Line
-	3000 4500 3300 4500
-Wire Wire Line
-	3000 4600 3300 4600
-Wire Wire Line
-	3000 4700 3300 4700
-Wire Wire Line
-	3000 4900 3300 4900
-Wire Wire Line
-	3000 5000 3300 5000
-Wire Wire Line
-	3000 5100 3300 5100
-Wire Wire Line
-	3000 5200 3300 5200
-Wire Wire Line
-	3000 5300 3300 5300
 $Comp
 L Sitina:TM032PDZ17 LCD?
 U 1 1 5FE6D27F
@@ -287,8 +192,6 @@ F 3 "" H 2600 5300 50  0001 C CNN
 	1    2600 3800
 	1    0    0    -1  
 $EndComp
-Text HLabel 3300 5400 2    50   Input ~ 0
-PPI_DE
 Wire Wire Line
 	3000 5400 3300 5400
 Wire Wire Line
@@ -703,4 +606,141 @@ Wire Wire Line
 	3100 2000 3100 1900
 Wire Wire Line
 	3000 2200 3500 2200
+Text HLabel 3300 5400 2    50   Input ~ 0
+LCD_DE
+Text HLabel 3300 5500 2    50   Input ~ 0
+LCD_CLK
+Text HLabel 3300 5600 2    50   Input ~ 0
+LCD_HSYNC
+Text HLabel 3300 5700 2    50   Input ~ 0
+LCD_VSYNC
+Text HLabel 8800 2000 2    50   Input ~ 0
+LCD_CLK
+Text HLabel 8800 2200 2    50   Input ~ 0
+LCD_HSYNC
+Text HLabel 8800 2400 2    50   Input ~ 0
+LCD_VSYNC
+Text Label 3300 3500 0    50   ~ 0
+LCD_D0
+Text Label 3300 3600 0    50   ~ 0
+LCD_D1
+Text Label 3300 3700 0    50   ~ 0
+LCD_D2
+Text Label 3300 3800 0    50   ~ 0
+LCD_D3
+Text Label 3300 3900 0    50   ~ 0
+LCD_D4
+Text Label 3300 4000 0    50   ~ 0
+LCD_D5
+Text Label 3300 4100 0    50   ~ 0
+LCD_D6
+Text Label 3300 4200 0    50   ~ 0
+LCD_D7
+Text Label 3300 4300 0    50   ~ 0
+LCD_D8
+Text Label 3300 4400 0    50   ~ 0
+LCD_D9
+Text Label 3300 4500 0    50   ~ 0
+LCD_D10
+Text Label 3300 4600 0    50   ~ 0
+LCD_D11
+Text Label 3300 4700 0    50   ~ 0
+LCD_D12
+Text Label 3300 4900 0    50   ~ 0
+LCD_D13
+Text Label 3300 5000 0    50   ~ 0
+LCD_D14
+Text Label 3300 5100 0    50   ~ 0
+LCD_D15
+Text Label 3300 5200 0    50   ~ 0
+LCD_D16
+Text Label 3300 5300 0    50   ~ 0
+LCD_D17
+Text HLabel 3700 3300 2    50   Input ~ 0
+LCD_D[17..0]
+Entry Wire Line
+	3600 3500 3700 3400
+Entry Wire Line
+	3600 3600 3700 3500
+Entry Wire Line
+	3600 3700 3700 3600
+Entry Wire Line
+	3600 3800 3700 3700
+Entry Wire Line
+	3600 3900 3700 3800
+Entry Wire Line
+	3600 4000 3700 3900
+Entry Wire Line
+	3600 4100 3700 4000
+Entry Wire Line
+	3600 4200 3700 4100
+Entry Wire Line
+	3600 4300 3700 4200
+Entry Wire Line
+	3600 4400 3700 4300
+Entry Wire Line
+	3600 4500 3700 4400
+Entry Wire Line
+	3600 4600 3700 4500
+Entry Wire Line
+	3600 4700 3700 4600
+Entry Wire Line
+	3600 4900 3700 4800
+Entry Wire Line
+	3600 5000 3700 4900
+Entry Wire Line
+	3600 5100 3700 5000
+Entry Wire Line
+	3600 5200 3700 5100
+Entry Wire Line
+	3600 5300 3700 5200
+Wire Wire Line
+	3000 3500 3600 3500
+Wire Wire Line
+	3000 3600 3600 3600
+Wire Wire Line
+	3000 3700 3600 3700
+Wire Wire Line
+	3000 3800 3600 3800
+Wire Wire Line
+	3000 3900 3600 3900
+Wire Wire Line
+	3000 4000 3600 4000
+Wire Wire Line
+	3000 4100 3600 4100
+Wire Wire Line
+	3000 4200 3600 4200
+Wire Wire Line
+	3000 4300 3600 4300
+Wire Wire Line
+	3000 4400 3600 4400
+Wire Wire Line
+	3000 4500 3600 4500
+Wire Wire Line
+	3000 4600 3600 4600
+Wire Wire Line
+	3000 4700 3600 4700
+Wire Wire Line
+	3000 4900 3600 4900
+Wire Wire Line
+	3000 5000 3600 5000
+Wire Wire Line
+	3000 5100 3600 5100
+Wire Wire Line
+	3000 5200 3600 5200
+Wire Wire Line
+	3000 5300 3600 5300
+Wire Bus Line
+	3700 3300 3700 5200
+$Comp
+L power:+3V3 #PWR?
+U 1 1 60AD7873
+P 3200 1500
+F 0 "#PWR?" H 3200 1350 50  0001 C CNN
+F 1 "+3V3" H 3215 1673 50  0000 C CNN
+F 2 "" H 3200 1500 50  0001 C CNN
+F 3 "" H 3200 1500 50  0001 C CNN
+	1    3200 1500
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

@@ -3,11 +3,11 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 9
-Title ""
+Sheet 2 14
+Title "Sitina Ne"
 Date ""
-Rev ""
-Comp ""
+Rev "R0P2"
+Comp "ZephRay"
 Comment1 ""
 Comment2 ""
 Comment3 ""

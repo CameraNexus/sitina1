@@ -1,0 +1,245 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 13 14
+Title "Sitina Ne"
+Date ""
+Rev "R0P2"
+Comp "ZephRay"
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Connector_Generic:Conn_02x05_Odd_Even J100
+U 1 1 5D31C612
+P 6500 4300
+F 0 "J100" H 6550 4717 50  0000 C CNN
+F 1 "Conn_02x05_Odd_Even" H 6550 4626 50  0000 C CNN
+F 2 "Connector_PinHeader_1.27mm:PinHeader_2x05_P1.27mm_Vertical_SMD" H 6500 4300 50  0001 C CNN
+F 3 "~" H 6500 4300 50  0001 C CNN
+	1    6500 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR0112
+U 1 1 5D32043C
+P 6200 3600
+F 0 "#PWR0112" H 6200 3450 50  0001 C CNN
+F 1 "+3V3" H 6215 3773 50  0000 C CNN
+F 2 "" H 6200 3600 50  0001 C CNN
+F 3 "" H 6200 3600 50  0001 C CNN
+	1    6200 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R108
+U 1 1 5D32601B
+P 6900 3750
+F 0 "R108" H 6970 3796 50  0000 L CNN
+F 1 "10K" H 6970 3705 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6830 3750 50  0001 C CNN
+F 3 "~" H 6900 3750 50  0001 C CNN
+	1    6900 3750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6800 4100 6900 4100
+Wire Wire Line
+	6900 3900 6900 4100
+Wire Wire Line
+	6900 3600 6200 3600
+Wire Wire Line
+	6300 4100 6200 4100
+Wire Wire Line
+	6200 4100 6200 3600
+Connection ~ 6200 3600
+$Comp
+L power:GND #PWR0113
+U 1 1 5D35B6F4
+P 6200 4600
+F 0 "#PWR0113" H 6200 4350 50  0001 C CNN
+F 1 "GND" H 6205 4427 50  0000 C CNN
+F 2 "" H 6200 4600 50  0001 C CNN
+F 3 "" H 6200 4600 50  0001 C CNN
+	1    6200 4600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6300 4200 6200 4200
+Wire Wire Line
+	6200 4200 6200 4300
+Wire Wire Line
+	6300 4300 6200 4300
+Connection ~ 6200 4300
+Wire Wire Line
+	6200 4300 6200 4600
+NoConn ~ 6300 4400
+$Comp
+L Device:D_Schottky D100
+U 1 1 5D37EF0D
+P 7150 4500
+F 0 "D100" H 6950 4550 50  0000 C CNN
+F 1 "1N5819" H 7400 4550 50  0000 C CNN
+F 2 "Diode_SMD:D_SOD-123" H 7150 4500 50  0001 C CNN
+F 3 "~" H 7150 4500 50  0001 C CNN
+	1    7150 4500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7000 4500 6800 4500
+Text Notes 7400 3900 0    100  ~ 0
+ARM JTAG
+NoConn ~ 6300 4500
+Wire Wire Line
+	7300 4500 7500 4500
+Text HLabel 7500 4100 2    50   BiDi ~ 0
+JTAG_TMS
+Text HLabel 7500 4200 2    50   Output ~ 0
+JTAG_TCK
+Text HLabel 7500 4300 2    50   Input ~ 0
+JTAG_TDO
+Text HLabel 7500 4400 2    50   Output ~ 0
+JTAG_TDI
+Text HLabel 7500 4500 2    50   Output ~ 0
+SYS_RST
+Wire Wire Line
+	7500 4100 6900 4100
+Connection ~ 6900 4100
+Wire Wire Line
+	7500 4200 6800 4200
+Wire Wire Line
+	7500 4300 6800 4300
+Wire Wire Line
+	7500 4400 6800 4400
+$Comp
+L Switch:SW_DIP_x02 SW?
+U 1 1 60A7F175
+P 4900 4200
+F 0 "SW?" V 4946 4070 50  0000 R CNN
+F 1 "SW_DIP_x02" V 4855 4070 50  0000 R CNN
+F 2 "" H 4900 4200 50  0001 C CNN
+F 3 "~" H 4900 4200 50  0001 C CNN
+	1    4900 4200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60A81364
+P 4350 4700
+AR Path="/5F5596FF/60A81364" Ref="R?"  Part="1" 
+AR Path="/5FE3519F/60A81364" Ref="R?"  Part="1" 
+AR Path="/5F6B6546/60A81364" Ref="R?"  Part="1" 
+F 0 "R?" V 4143 4700 50  0000 C CNN
+F 1 "10K" V 4234 4700 50  0000 C CNN
+F 2 "" V 4280 4700 50  0001 C CNN
+F 3 "~" H 4350 4700 50  0001 C CNN
+	1    4350 4700
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 60A81854
+P 4350 5000
+AR Path="/5F5596FF/60A81854" Ref="R?"  Part="1" 
+AR Path="/5FE3519F/60A81854" Ref="R?"  Part="1" 
+AR Path="/5F6B6546/60A81854" Ref="R?"  Part="1" 
+F 0 "R?" V 4143 5000 50  0000 C CNN
+F 1 "10K" V 4234 5000 50  0000 C CNN
+F 2 "" V 4280 5000 50  0001 C CNN
+F 3 "~" H 4350 5000 50  0001 C CNN
+	1    4350 5000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4500 5000 4800 5000
+Text HLabel 5400 4700 2    50   Output ~ 0
+BOOT0
+Text HLabel 5400 5000 2    50   Output ~ 0
+BOOT1
+$Comp
+L Device:R R?
+U 1 1 60A82BB6
+P 4800 3650
+AR Path="/5F5596FF/60A82BB6" Ref="R?"  Part="1" 
+AR Path="/5FE3519F/60A82BB6" Ref="R?"  Part="1" 
+AR Path="/5F6B6546/60A82BB6" Ref="R?"  Part="1" 
+F 0 "R?" H 4900 3600 50  0000 L CNN
+F 1 "1K" H 4900 3700 50  0000 L CNN
+F 2 "" V 4730 3650 50  0001 C CNN
+F 3 "~" H 4800 3650 50  0001 C CNN
+	1    4800 3650
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4800 3800 4800 3900
+$Comp
+L Device:R R?
+U 1 1 60A830D3
+P 4900 3650
+AR Path="/5F5596FF/60A830D3" Ref="R?"  Part="1" 
+AR Path="/5FE3519F/60A830D3" Ref="R?"  Part="1" 
+AR Path="/5F6B6546/60A830D3" Ref="R?"  Part="1" 
+F 0 "R?" H 4970 3696 50  0000 L CNN
+F 1 "1K" H 4970 3605 50  0000 L CNN
+F 2 "" V 4830 3650 50  0001 C CNN
+F 3 "~" H 4900 3650 50  0001 C CNN
+	1    4900 3650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 60A84403
+P 4000 5100
+F 0 "#PWR?" H 4000 4850 50  0001 C CNN
+F 1 "GND" H 4005 4927 50  0000 C CNN
+F 2 "" H 4000 5100 50  0001 C CNN
+F 3 "" H 4000 5100 50  0001 C CNN
+	1    4000 5100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4000 5100 4000 5000
+Wire Wire Line
+	4000 4700 4200 4700
+Wire Wire Line
+	4000 5000 4200 5000
+Connection ~ 4000 5000
+Wire Wire Line
+	4000 5000 4000 4700
+Wire Wire Line
+	4500 4700 4900 4700
+Wire Wire Line
+	4800 4500 4800 5000
+Connection ~ 4800 5000
+Wire Wire Line
+	4800 5000 5400 5000
+Wire Wire Line
+	4900 4500 4900 4700
+Connection ~ 4900 4700
+Wire Wire Line
+	4900 4700 5400 4700
+Wire Wire Line
+	4900 3900 4900 3800
+Wire Wire Line
+	4800 3500 4800 3400
+$Comp
+L power:+3V3 #PWR?
+U 1 1 60A86541
+P 4800 3400
+F 0 "#PWR?" H 4800 3250 50  0001 C CNN
+F 1 "+3V3" H 4815 3573 50  0000 C CNN
+F 2 "" H 4800 3400 50  0001 C CNN
+F 3 "" H 4800 3400 50  0001 C CNN
+	1    4800 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 3500 4900 3400
+Wire Wire Line
+	4900 3400 4800 3400
+Connection ~ 4800 3400
+$EndSCHEMATC

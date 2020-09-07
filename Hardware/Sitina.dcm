@@ -5,6 +5,11 @@ D Power symbol creates a global label with name "+16V"
 K power-flag
 $ENDCMP
 #
+$CMP +19V
+D Power symbol creates a global label with name "+19V"
+K power-flag
+$ENDCMP
+#
 $CMP +1V8A
 D Power symbol creates a global label with name "+1V8A"
 K power-flag
@@ -43,6 +48,15 @@ $ENDCMP
 $CMP -VRESET
 D Power symbol creates a global label with name "+15V"
 K power-flag
+$ENDCMP
+#
+$CMP LT3023
+D Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower Regulator
+$ENDCMP
+#
+$CMP LTC3567
+D High Efficiency USB Power Manager Plus 1A Buck-Boost Converter with I2C Control
+F https://www.analog.com/media/en/technical-documentation/data-sheets/3567f.pdf
 $ENDCMP
 #
 $CMP MT48LC32M16A2B4

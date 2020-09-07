@@ -3,11 +3,11 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 8 9
-Title ""
+Sheet 8 14
+Title "Sitina Ne"
 Date ""
-Rev ""
-Comp ""
+Rev "R0P2"
+Comp "ZephRay"
 Comment1 ""
 Comment2 ""
 Comment3 ""
@@ -125,7 +125,7 @@ AFE_SDATA
 Text HLabel 6500 4800 2    50   Input ~ 0
 AFE_SL
 Text HLabel 6500 4700 2    50   Output ~ 0
-CSI_D[0..13]
+CSI_D[13..0]
 Wire Wire Line
 	5900 4800 6500 4800
 Wire Wire Line
@@ -1317,7 +1317,7 @@ AR Path="/5DB2122B/5F88A2CB" Ref="Y?"  Part="1"
 AR Path="/5EFF1520/5F88A2CB" Ref="Y?"  Part="1" 
 AR Path="/5D0B94DA/5F88A2CB" Ref="Y?"  Part="1" 
 F 0 "Y?" H 2894 6546 50  0000 L CNN
-F 1 "25MHz" H 2850 6400 50  0000 L CNN
+F 1 "30MHz" H 2850 6400 50  0000 L CNN
 F 2 "Crystal:Crystal_SMD_3225-4Pin_3.2x2.5mm" H 2700 6500 50  0001 C CNN
 F 3 "~" H 2700 6500 50  0001 C CNN
 	1    2700 6500
