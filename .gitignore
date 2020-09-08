@@ -1,8 +1,99 @@
-Hardware/CaptureBoard/History/
-Hardware/CaptureBoard/Project Logs for ProjectUshi/
-Hardware/CaptureBoard/__Previews/
-
+# KiCAD files
 *.bak
+*.dcm
+*.bck
+fp-*
+_autosave*
+*.kicad_pcb-bak
+*.sch-bak
+gerber/
+pcb.step
+pcb.pdf
+
+# Xilinx ISE files
+obj_dir/
+isim/
+_xmsgs/
+_ngo/
+iseconfig/
+tmp/
+xst/
+top_*
+impact*
+
+# FW build
+Debug/
+Release/
+
+*.zip
+
+*.map
+*.obj
+*.rom
+*.sym
+*.mif
+*.mcs
+*.cfi
+*.hex
+*.prm
+*.ncd
+*.xml
+*.html
+*.xwbt
+*.gise
+*.log
+*.cmd
+*.twx
+*.exe
+*.wdb
+*.bgn
+*.bit
+*.bld
+*.cmd_log
+*.drc
+*.lso
+*.ngc
+*.ngd
+*.par
+*.pcf
+*.prj
+*.ptwx
+*.stx
+*.syr
+*.twr
+*.unroutes
+*.ut
+*.xpi
+*.xst
+*.pad
+*.ngr
+*.blc
+*.mrp
+*.ngm
+*.xrpt
+*.csv
+*.xbcd
+*.xmsgs
+
+# PCB temp files
+*.asc
+*.onl
+
+# Test
+*.vcd
+*.actual
+*.expected
+
+# binary files
+*.gb
+
+# C object files
+*.d
+*.o
+*.elf
+
+# LibreOffice files
+*.ods#
 
 # Windows image file caches
 Thumbs.db
@@ -55,3 +146,4 @@ Temporary Items
 *.wsdt
 *.dbgdt
 *.dnx
+/.metadata/
