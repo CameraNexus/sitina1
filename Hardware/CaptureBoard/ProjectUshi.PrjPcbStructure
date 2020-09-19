@@ -1,5 +1,0 @@
-Record=TopLevelDocument|FileName=Main.SchDoc
-Record=SheetSymbol|Record=SheetSymbol|SourceDocument=Main.SchDoc|Designator=CCD|SchDesignator=CCD|FileName=CCD.SchDoc|SymbolType=Normal|RawFileName=CCD.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
-Record=SheetSymbol|Record=SheetSymbol|SourceDocument=Main.SchDoc|Designator=CPU|SchDesignator=CPU|FileName=CPU.SchDoc|SymbolType=Normal|RawFileName=CPU.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
-Record=SheetSymbol|Record=SheetSymbol|SourceDocument=Main.SchDoc|Designator=Designator|SchDesignator=Designator|FileName=Power.SchDoc|SymbolType=Normal|RawFileName=Power.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
-Record=SheetSymbol|Record=SheetSymbol|SourceDocument=Main.SchDoc|Designator=FPGA|SchDesignator=FPGA|FileName=FPGA.SchDoc|SymbolType=Normal|RawFileName=FPGA.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
