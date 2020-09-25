@@ -1,78 +1,0 @@
-EESchema-DOCLIB  Version 2.0
-#
-$CMP +16V
-D Power symbol creates a global label with name "+16V"
-K power-flag
-$ENDCMP
-#
-$CMP +19V
-D Power symbol creates a global label with name "+19V"
-K power-flag
-$ENDCMP
-#
-$CMP +1V8A
-D Power symbol creates a global label with name "+1V8A"
-K power-flag
-$ENDCMP
-#
-$CMP +2V
-D Power symbol creates a global label with name "+2V"
-K power-flag
-$ENDCMP
-#
-$CMP +SYS
-D Power symbol creates a global label with name "+SYS"
-K power-flag
-$ENDCMP
-#
-$CMP +VRTC
-D Power symbol creates a global label with name "+VRTC"
-K power-flag
-$ENDCMP
-#
-$CMP +VSD
-D Power symbol creates a global label with name "+VSD"
-K power-flag
-$ENDCMP
-#
-$CMP -3V5
-D Power symbol creates a global label with name "+15V"
-K power-flag
-$ENDCMP
-#
-$CMP -4V
-D Power symbol creates a global label with name "+15V"
-K power-flag
-$ENDCMP
-#
-$CMP -VRESET
-D Power symbol creates a global label with name "+15V"
-K power-flag
-$ENDCMP
-#
-$CMP LT3023
-D Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower RegulatorDual 100mA, Low Dropout, Low Noise, Micropower Regulator
-$ENDCMP
-#
-$CMP LTC3567
-D High Efficiency USB Power Manager Plus 1A Buck-Boost Converter with I2C Control
-F https://www.analog.com/media/en/technical-documentation/data-sheets/3567f.pdf
-$ENDCMP
-#
-$CMP MT48LC32M16A2B4
-D 512Mb Synchronous DRAM, 8 M x 16 b x 4 Banks, TSOP-II-54
-K DRAM MEMORY
-$ENDCMP
-#
-$CMP MT48LC32M16A2P
-D 512Mb Synchronous DRAM, 8 M x 16 b x 4 Banks, TSOP-II-54
-K DRAM MEMORY
-$ENDCMP
-#
-$CMP NC7SZ08
-D Single AND Gate, Low-Voltage CMOS
-K Single Gate AND LVC CMOS
-F http://www.ti.com/lit/sg/scyt129e/scyt129e.pdf
-$ENDCMP
-#
-#End Doc Library
