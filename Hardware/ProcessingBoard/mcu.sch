@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 3 10
+Sheet 2 10
 Title "Sitina Ne"
 Date ""
 Rev "R0P2"
@@ -2180,6 +2180,9 @@ Wire Wire Line
 	1100 1400 1200 1400
 Wire Wire Line
 	1200 1300 1200 1400
+Connection ~ 1200 1400
+Wire Wire Line
+	1200 1400 1800 1400
 Wire Wire Line
 	3550 6300 4500 6300
 Wire Wire Line
@@ -2195,9 +2198,9 @@ Wire Wire Line
 Wire Wire Line
 	1200 2800 1800 2800
 Wire Bus Line
-	3750 3300 3750 7100
-Wire Bus Line
 	1300 1900 1300 2400
+Wire Bus Line
+	3750 3300 3750 7100
 Wire Bus Line
 	5850 1900 5850 2600
 Wire Bus Line
@@ -2205,14 +2208,11 @@ Wire Bus Line
 Wire Bus Line
 	1300 2500 1300 3100
 Wire Bus Line
-	1300 3200 1300 7000
-Wire Bus Line
 	3850 3200 3850 5600
 Wire Bus Line
-	3950 3100 3950 7000
-Wire Bus Line
 	1200 4300 1200 6400
-Connection ~ 1200 1400
-Wire Wire Line
-	1200 1400 1800 1400
+Wire Bus Line
+	1300 3200 1300 7000
+Wire Bus Line
+	3950 3100 3950 7000
 $EndSCHEMATC
