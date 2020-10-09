@@ -1423,40 +1423,6 @@ F 3 "" H 5600 2500 50  0001 C CNN
 	1    5600 2500
 	1    0    0    -1  
 $EndComp
-$Comp
-L Connector:TestPoint TP?
-U 1 1 61979555
-P 8300 5300
-AR Path="/5FE3519F/61979555" Ref="TP?"  Part="1" 
-AR Path="/5D0B94DA/61979555" Ref="TP1"  Part="1" 
-F 0 "TP1" V 8358 5374 50  0000 L CNN
-F 1 "TestPoint" H 8358 5329 50  0001 L CNN
-F 2 "Connector_Pin:Pin_D1.0mm_L10.0mm" H 8500 5300 50  0001 C CNN
-F 3 "~" H 8500 5300 50  0001 C CNN
-	1    8300 5300
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Connector:TestPoint TP?
-U 1 1 6197955B
-P 8300 5500
-AR Path="/5FE3519F/6197955B" Ref="TP?"  Part="1" 
-AR Path="/5D0B94DA/6197955B" Ref="TP2"  Part="1" 
-F 0 "TP2" V 8358 5574 50  0000 L CNN
-F 1 "TestPoint" H 8358 5529 50  0001 L CNN
-F 2 "Connector_Pin:Pin_D1.0mm_L10.0mm" H 8500 5500 50  0001 C CNN
-F 3 "~" H 8500 5500 50  0001 C CNN
-	1    8300 5500
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	8300 5500 8500 5500
-Wire Wire Line
-	8300 5300 8500 5300
-Text HLabel 8500 5500 2    50   Output ~ 0
-CSI_HSYNC
-Text HLabel 8500 5300 2    50   Output ~ 0
-CSI_VSYNC
 Text HLabel 4700 5900 0    50   Output ~ 0
 PWR_EN
 Wire Wire Line

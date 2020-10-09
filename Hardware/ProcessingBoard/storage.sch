@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 10 10
+Sheet 4 10
 Title "Sitina Ne"
 Date ""
 Rev "R0P2"
@@ -120,7 +120,7 @@ U 1 1 5DB98410
 P 8500 4400
 F 0 "MICRO_SD400" H 8828 4503 60  0000 L CNN
 F 1 "MICRO_SD(TFC-WPAPR-08)" H 8828 4397 60  0000 L CNN
-F 2 "footprint:TFC-WPAPR-08" H 8750 4400 60  0001 C CNN
+F 2 "Footprints:TFC-WPAPR-08" H 8750 4400 60  0001 C CNN
 F 3 "" H 8750 4400 60  0001 C CNN
 	1    8500 4400
 	1    0    0    -1  
@@ -603,10 +603,6 @@ F 3 "" H 8000 1800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Connection ~ 8000 1800
-Wire Bus Line
-	5000 4800 5000 5300
-Wire Bus Line
-	6100 4000 6100 4400
 $Comp
 L power:+3V3 #PWR0239
 U 1 1 609934E8
@@ -618,4 +614,8 @@ F 3 "" H 3800 4500 50  0001 C CNN
 	1    3800 4500
 	1    0    0    -1  
 $EndComp
+Wire Bus Line
+	5000 4800 5000 5300
+Wire Bus Line
+	6100 4000 6100 4400
 $EndSCHEMATC
