@@ -1135,11 +1135,9 @@ Wire Wire Line
 Wire Wire Line
 	3600 2200 3800 2200
 Wire Wire Line
-	3800 2200 3800 1600
+	3800 2200 3800 1700
 Wire Wire Line
 	3600 4200 3900 4200
-Wire Wire Line
-	3900 4200 3900 1700
 $Comp
 L power:GND #PWR0222
 U 1 1 5F88A2C5
@@ -1405,11 +1403,7 @@ Wire Wire Line
 Wire Wire Line
 	6500 2900 6400 2900
 Wire Wire Line
-	3800 1600 4900 1600
-Wire Wire Line
 	6500 2700 6400 2700
-Wire Wire Line
-	3900 1700 4900 1700
 Wire Wire Line
 	6400 2600 6500 2600
 $Comp
@@ -1429,6 +1423,12 @@ Wire Wire Line
 	4900 5900 4700 5900
 Wire Wire Line
 	6500 6900 6400 6900
+Wire Wire Line
+	4900 1700 3800 1700
+Wire Wire Line
+	4900 1600 3900 1600
+Wire Wire Line
+	3900 1600 3900 4200
 Wire Wire Line
 	6400 5400 7000 5400
 Wire Bus Line

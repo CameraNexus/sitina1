@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 7 8
+Sheet 5 8
 Title "Sitina Ne"
 Date ""
 Rev "R0P2"
@@ -211,8 +211,6 @@ Wire Wire Line
 Wire Wire Line
 	5000 3100 5000 2700
 Wire Wire Line
-	6300 2600 6300 3000
-Wire Wire Line
 	6400 2500 6400 3100
 Wire Wire Line
 	5100 2600 5100 3100
@@ -383,14 +381,7 @@ Text Notes 4200 2700 0    50   ~ 0
 Wire Wire Line
 	6000 3000 6200 3000
 Connection ~ 6000 3000
-Connection ~ 6300 3000
-Wire Wire Line
-	6300 3000 6300 3100
-Wire Wire Line
-	6300 3000 7000 3000
 Connection ~ 6200 3000
-Wire Wire Line
-	6200 3000 6300 3000
 Wire Wire Line
 	6100 3100 6100 2400
 $Comp
@@ -404,4 +395,19 @@ F 3 "" H 4100 2300 50  0001 C CNN
 	1    4100 2300
 	-1   0    0    1   
 $EndComp
+$Comp
+L power:-8V #PWR?
+U 1 1 5F8D2B35
+P 6100 2400
+F 0 "#PWR?" H 6100 2500 50  0001 C CNN
+F 1 "-8V" V 6115 2528 50  0000 L CNN
+F 2 "" H 6100 2400 50  0001 C CNN
+F 3 "" H 6100 2400 50  0001 C CNN
+	1    6100 2400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6300 2600 6300 3100
+Wire Wire Line
+	6200 3000 7000 3000
 $EndSCHEMATC
