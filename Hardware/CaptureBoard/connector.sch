@@ -13,9 +13,9 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-Text HLabel 5400 4200 0    50   Input ~ 0
+Text HLabel 5400 4400 0    50   Input ~ 0
 CSI_HSYNC
-Text HLabel 5400 4100 0    50   Input ~ 0
+Text HLabel 5400 4300 0    50   Input ~ 0
 CSI_VSYNC
 Text HLabel 5400 5000 0    50   Output ~ 0
 AFE_SYNC
@@ -29,7 +29,7 @@ Text HLabel 5400 4600 0    50   Output ~ 0
 AFE_SL
 Text HLabel 5400 2400 0    50   Input ~ 0
 CSI_D[13..0]
-Text HLabel 5400 4400 0    50   Input ~ 0
+Text HLabel 5400 4100 0    50   Input ~ 0
 CSI_PCLK
 $Comp
 L Connector_Generic_MountingPin:Conn_01x30_MountingPin J100
@@ -70,11 +70,11 @@ Text Label 5600 3800 0    50   ~ 0
 CSI_D12
 Text Label 5600 3900 0    50   ~ 0
 CSI_D13
-Text Label 5600 4100 0    50   ~ 0
+Text Label 5600 4300 0    50   ~ 0
 CSI_VSYNC
-Text Label 5600 4200 0    50   ~ 0
-CSI_HSYNC
 Text Label 5600 4400 0    50   ~ 0
+CSI_HSYNC
+Text Label 5600 4100 0    50   ~ 0
 CSI_PCLK
 Text Label 5600 4600 0    50   ~ 0
 AFE_SL
@@ -155,17 +155,8 @@ Wire Wire Line
 	6100 5600 6400 5600
 Wire Wire Line
 	6200 4000 6100 4000
-Connection ~ 6100 4000
-Wire Wire Line
-	6100 4000 6100 4300
-Wire Wire Line
-	6200 4300 6100 4300
-Connection ~ 6100 4300
-Wire Wire Line
-	6100 4300 6100 4500
 Wire Wire Line
 	6200 4500 6100 4500
-Connection ~ 6100 4500
 Wire Wire Line
 	6100 4500 6100 5100
 Wire Wire Line
@@ -216,11 +207,11 @@ Wire Wire Line
 Wire Wire Line
 	5600 3900 6200 3900
 Wire Wire Line
-	5400 4100 6200 4100
-Wire Wire Line
-	5400 4200 6200 4200
+	5400 4300 6200 4300
 Wire Wire Line
 	5400 4400 6200 4400
+Wire Wire Line
+	5400 4100 6200 4100
 Wire Wire Line
 	5400 4600 6200 4600
 Wire Wire Line
@@ -231,6 +222,15 @@ Wire Wire Line
 	5400 4900 6200 4900
 Wire Wire Line
 	5400 5000 6200 5000
+Wire Wire Line
+	6100 4500 6100 4200
+Connection ~ 6100 4500
+Connection ~ 6100 4000
+Wire Wire Line
+	6200 4200 6100 4200
 Wire Bus Line
 	5500 2400 5500 3800
+Connection ~ 6100 4200
+Wire Wire Line
+	6100 4200 6100 4000
 $EndSCHEMATC
