@@ -1,1 +1,0 @@
--intstyle "ise" -incremental -lib "unisims_ver" -lib "unimacro_ver" -lib "xilinxcorelib_ver" -lib "secureip" -o "C:/Users/ZephRay/Documents/GitHub/ProjectUshi/Code/FPGA/ProjectUshi/timgen_test_isim_beh.exe" -prj "C:/Users/ZephRay/Documents/GitHub/ProjectUshi/Code/FPGA/ProjectUshi/timgen_test_beh.prj" "work.timgen_test" "work.glbl" 
