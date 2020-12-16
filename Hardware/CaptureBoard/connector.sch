@@ -17,13 +17,13 @@ Text HLabel 5400 4400 0    50   Input ~ 0
 CSI_HSYNC
 Text HLabel 5400 4300 0    50   Input ~ 0
 CSI_VSYNC
-Text HLabel 5400 5000 0    50   Output ~ 0
-AFE_SYNC
 Text HLabel 5400 4900 0    50   Output ~ 0
-AFE_RST
+AFE_SYNC
 Text HLabel 5400 4800 0    50   Output ~ 0
-AFE_SCK
+AFE_RST
 Text HLabel 5400 4700 0    50   Output ~ 0
+AFE_SCK
+Text HLabel 5400 5000 0    50   Output ~ 0
 AFE_SDATA
 Text HLabel 5400 4600 0    50   Output ~ 0
 AFE_SL
@@ -78,13 +78,13 @@ Text Label 5600 4100 0    50   ~ 0
 CSI_PCLK
 Text Label 5600 4600 0    50   ~ 0
 AFE_SL
-Text Label 5600 4700 0    50   ~ 0
-AFE_SDATA
-Text Label 5600 4800 0    50   ~ 0
-AFE_SCK
-Text Label 5600 4900 0    50   ~ 0
-AFE_RST
 Text Label 5600 5000 0    50   ~ 0
+AFE_SDATA
+Text Label 5600 4700 0    50   ~ 0
+AFE_SCK
+Text Label 5600 4800 0    50   ~ 0
+AFE_RST
+Text Label 5600 4900 0    50   ~ 0
 AFE_SYNC
 $Comp
 L power:+3V3 #PWR0101
@@ -215,22 +215,22 @@ Wire Wire Line
 Wire Wire Line
 	5400 4600 6200 4600
 Wire Wire Line
+	5400 5000 6200 5000
+Wire Wire Line
 	5400 4700 6200 4700
 Wire Wire Line
 	5400 4800 6200 4800
 Wire Wire Line
 	5400 4900 6200 4900
 Wire Wire Line
-	5400 5000 6200 5000
-Wire Wire Line
 	6100 4500 6100 4200
 Connection ~ 6100 4500
 Connection ~ 6100 4000
 Wire Wire Line
 	6200 4200 6100 4200
-Wire Bus Line
-	5500 2400 5500 3800
 Connection ~ 6100 4200
 Wire Wire Line
 	6100 4200 6100 4000
+Wire Bus Line
+	5500 2400 5500 3800
 $EndSCHEMATC
