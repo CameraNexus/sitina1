@@ -1,3 +1,4 @@
 (sym_lib_table
-  (lib (name Sitina)(type Legacy)(uri ${KIPRJMOD}/Sitina.lib)(options "")(descr ""))
+  (lib (name "Sitina")(type "Legacy")(uri "${KIPRJMOD}/Sitina.lib")(options "")(descr ""))
+  (lib (name "Sitina-rescue")(type "Legacy")(uri "${KIPRJMOD}/Sitina-rescue.lib")(options "")(descr ""))
 )
