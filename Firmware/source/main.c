@@ -38,9 +38,15 @@
 #include "pin_mux.h"
 #include "clock_config.h"
 #include "MIMXRT1052.h"
-/* TODO: insert other include files here. */
-
-/* TODO: insert other definitions and declarations here. */
+#include "fsl_gpio.h"
+#include "fsl_elcdif.h"
+#include "fsl_pwm.h"
+#include "umm_malloc.h"
+#include "syslog.h"
+#include "usb_support.h"
+#include "nano_shell.h"
+#include "fb.h"
+#include "lcd.h"
 
 /*
  * @brief   Application entry point.
@@ -53,16 +59,18 @@ int main(void) {
     BOARD_InitBootClocks();
     BOARD_InitBootPeripherals();
 
-    printf("Hello World\n");
+    umm_init();
+    syslog_init();
+    usbsup_init();
 
-    /* Force the counter to be placed into memory. */
-    volatile static int i = 0 ;
-    /* Enter an infinite loop, just incrementing a counter. */
-    while(1) {
-        i++ ;
-        /* 'Dummy' NOP to allow source level single stepping of
-            tight while() loop */
-        __asm volatile ("nop");
-    }
+    lcd_init();
+    fb_init();
+    lcd_set_bl(127);
+
+    // Initialize SD card
+
+
+    // Start the shell
+    nano_shell_loop(NULL);
     return 0 ;
 }

@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding= "UTF-8" ?>
+<configuration name="" xsi:schemaLocation="http://mcuxpresso.nxp.com/XSD/mex_configuration_1.9 http://mcuxpresso.nxp.com/XSD/mex_configuration_1.9.xsd" uuid="9b13b23a-0ebe-4837-ac05-615d262fcfa1" version="1.9" xmlns="http://mcuxpresso.nxp.com/XSD/mex_configuration_1.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <common>
+      <processor>MIMXRT1052xxxxB</processor>
+      <package>MIMXRT1052DVJ6B</package>
+      <mcu_data>ksdk2_0</mcu_data>
+      <cores selected="core0">
+         <core name="Cortex-M7F" id="core0" description="M7 core"/>
+      </cores>
+      <description>Configuration imported from MIMXRT1052_Project</description>
+   </common>
+   <preferences>
+      <validate_boot_init_only>true</validate_boot_init_only>
+      <generate_extended_information>false</generate_extended_information>
+      <generate_code_modified_registers_only>false</generate_code_modified_registers_only>
+   </preferences>
+   <tools>
+      <pins name="Pins" version="9.0" enabled="true" update_project_code="true">
+         <generated_project_files>
+            <file path="board/pin_mux.c" update_enabled="true"/>
+            <file path="board/pin_mux.h" update_enabled="true"/>
+         </generated_project_files>
+         <pins_profile>
+            <processor_version>9.0.1</processor_version>
+            <power_domains/>
+            <pin_labels>
+               <pin_label pin_num="M14" pin_signal="GPIO_AD_B0_00" label="SPI_SCK"/>
+               <pin_label pin_num="H10" pin_signal="GPIO_AD_B0_01" label="SPI_MOSI"/>
+               <pin_label pin_num="M11" pin_signal="GPIO_AD_B0_02" label="AFE_CS"/>
+               <pin_label pin_num="G11" pin_signal="GPIO_AD_B0_03" label="PERI_RST"/>
+               <pin_label pin_num="M12" pin_signal="GPIO_AD_B1_03" label="SD_PWR_EN"/>
+               <pin_label pin_num="B14" pin_signal="GPIO_B1_15" label="LCD_CS"/>
+               <pin_label pin_num="C7" pin_signal="GPIO_EMC_41" label="LCD_EN"/>
+               <pin_label pin_num="B7" pin_signal="GPIO_EMC_39" label="LCD_PWM"/>
+            </pin_labels>
+         </pins_profile>
+         <functions_list>
+            <function name="BOARD_InitPins">
+               <description>Configures pin routing and optionally pin electrical features.</description>
+               <options>
+                  <callFromInitBoot>true</callFromInitBoot>
+                  <coreID>core0</coreID>
+                  <enableClock>true</enableClock>
+               </options>
+               <dependencies>
+                  <dependency resourceType="Peripheral" resourceId="CSI" description="Peripheral CSI is not initialized" problem_level="1" source="Pins:BOARD_InitPins">
+                     <feature name="initialized" evaluation="equal">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="Peripheral" resourceId="LCDIF" description="Peripheral LCDIF is not initialized" problem_level="1" source="Pins:BOARD_InitPins">
+                     <feature name="initialized" evaluation="equal">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="Peripheral" resourceId="USDHC1" description="Peripheral USDHC1 is not initialized" problem_level="1" source="Pins:BOARD_InitPins">
+                     <feature name="initialized" evaluation="equal">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="Peripheral" resourceId="LPI2C1" description="Peripheral LPI2C1 is not initialized" problem_level="1" source="Pins:BOARD_InitPins">
+                     <feature name="initialized" evaluation="equal">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="Peripheral" resourceId="PWM1" description="Peripheral PWM1 is not initialized" problem_level="1" source="Pins:BOARD_InitPins">
+                     <feature name="initialized" evaluation="equal">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="SWComponent" resourceId="platform.drivers.common" description="Pins initialization requires the COMMON Driver in the project." problem_level="2" source="Pins:BOARD_InitPins">
+                     <feature name="enabled" evaluation="equal" configuration="core0">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="SWComponent" resourceId="platform.drivers.iomuxc" description="Pins initialization requires the IOMUXC Driver in the project." problem_level="2" source="Pins:BOARD_InitPins">
+                     <feature name="enabled" evaluation="equal" configuration="core0">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
+               </dependencies>
+               <pins>
+                  <pin peripheral="CSI" signal="csi_data, 00" pin_num="B13" pin_signal="GPIO_B1_10"/>
+                  <pin peripheral="CSI" signal="csi_data, 01" pin_num="C13" pin_signal="GPIO_B1_11"/>
+                  <pin peripheral="CSI" signal="csi_data, 02" pin_num="J14" pin_signal="GPIO_AD_B1_15"/>
+                  <pin peripheral="CSI" signal="csi_data, 03" pin_num="G12" pin_signal="GPIO_AD_B1_14"/>
+                  <pin peripheral="CSI" signal="csi_data, 04" pin_num="H11" pin_signal="GPIO_AD_B1_13"/>
+                  <pin peripheral="CSI" signal="csi_data, 05" pin_num="H12" pin_signal="GPIO_AD_B1_12"/>
+                  <pin peripheral="CSI" signal="csi_data, 06" pin_num="F12" pin_signal="GPIO_AD_B0_07"/>
+                  <pin peripheral="CSI" signal="csi_data, 07" pin_num="L13" pin_signal="GPIO_AD_B1_10"/>
+                  <pin peripheral="CSI" signal="csi_data, 08" pin_num="M13" pin_signal="GPIO_AD_B1_09"/>
+                  <pin peripheral="CSI" signal="csi_data, 09" pin_num="H13" pin_signal="GPIO_AD_B1_08"/>
+                  <pin peripheral="CSI" signal="csi_data, 10" pin_num="A13" pin_signal="GPIO_B1_09"/>
+                  <pin peripheral="CSI" signal="csi_data, 11" pin_num="A12" pin_signal="GPIO_B1_08"/>
+                  <pin peripheral="CSI" signal="csi_data, 12" pin_num="B12" pin_signal="GPIO_B1_07"/>
+                  <pin peripheral="CSI" signal="csi_data, 13" pin_num="C12" pin_signal="GPIO_B1_06"/>
+                  <pin peripheral="CSI" signal="csi_hsync" pin_num="C14" pin_signal="GPIO_B1_14"/>
+                  <pin peripheral="CSI" signal="csi_vsync" pin_num="D14" pin_signal="GPIO_B1_13"/>
+                  <pin peripheral="CSI" signal="csi_pixclk" pin_num="D13" pin_signal="GPIO_B1_12"/>
+                  <pin peripheral="LCDIF" signal="lcdif_clk" pin_num="D7" pin_signal="GPIO_B0_00"/>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 00" pin_num="C8" pin_signal="GPIO_B0_04"/>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 01" pin_num="B8" pin_signal="GPIO_B0_05"/>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 02" pin_num="A8" pin_signal="GPIO_B0_06"/>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 03" pin_num="A9" pin_signal="GPIO_B0_07"/>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 04" pin_num="B9" pin_signal="GPIO_B0_08"/>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 05" pin_num="C9" pin_signal="GPIO_B0_09"/>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 06" pin_num="D9" pin_signal="GPIO_B0_10"/>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 07" pin_num="A10" pin_signal="GPIO_B0_11"/>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 08" pin_num="C10" pin_signal="GPIO_B0_12"/>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 09" pin_num="D10" pin_signal="GPIO_B0_13"/>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 10" pin_num="E10" pin_signal="GPIO_B0_14"/>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 11" pin_num="E11" pin_signal="GPIO_B0_15"/>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 12" pin_num="A11" pin_signal="GPIO_B1_00"/>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 13" pin_num="B11" pin_signal="GPIO_B1_01"/>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 14" pin_num="C11" pin_signal="GPIO_B1_02"/>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 15" pin_num="D11" pin_signal="GPIO_B1_03"/>
+                  <pin peripheral="LCDIF" signal="lcdif_enable" pin_num="E7" pin_signal="GPIO_B0_01"/>
+                  <pin peripheral="LCDIF" signal="lcdif_hsync" pin_num="E8" pin_signal="GPIO_B0_02"/>
+                  <pin peripheral="LCDIF" signal="lcdif_vsync" pin_num="D8" pin_signal="GPIO_B0_03"/>
+                  <pin peripheral="USDHC1" signal="usdhc_data, 0" pin_num="J1" pin_signal="GPIO_SD_B0_02"/>
+                  <pin peripheral="USDHC1" signal="usdhc_data, 1" pin_num="K1" pin_signal="GPIO_SD_B0_03"/>
+                  <pin peripheral="USDHC1" signal="usdhc_data, 2" pin_num="H2" pin_signal="GPIO_SD_B0_04"/>
+                  <pin peripheral="USDHC1" signal="usdhc_data, 3" pin_num="J2" pin_signal="GPIO_SD_B0_05"/>
+                  <pin peripheral="USDHC1" signal="usdhc_cmd" pin_num="J4" pin_signal="GPIO_SD_B0_00"/>
+                  <pin peripheral="USDHC1" signal="usdhc_clk" pin_num="J3" pin_signal="GPIO_SD_B0_01"/>
+                  <pin peripheral="LPI2C1" signal="SCL" pin_num="P2" pin_signal="GPIO_SD_B1_04"/>
+                  <pin peripheral="LPI2C1" signal="SDA" pin_num="N3" pin_signal="GPIO_SD_B1_05"/>
+                  <pin peripheral="GPIO1" signal="gpio_io, 00" pin_num="M14" pin_signal="GPIO_AD_B0_00"/>
+                  <pin peripheral="GPIO1" signal="gpio_io, 01" pin_num="H10" pin_signal="GPIO_AD_B0_01"/>
+                  <pin peripheral="GPIO1" signal="gpio_io, 02" pin_num="M11" pin_signal="GPIO_AD_B0_02"/>
+                  <pin peripheral="GPIO1" signal="gpio_io, 03" pin_num="G11" pin_signal="GPIO_AD_B0_03"/>
+                  <pin peripheral="USDHC1" signal="usdhc_vselect" pin_num="K11" pin_signal="GPIO_AD_B1_01"/>
+                  <pin peripheral="USDHC1" signal="usdhc_cd_b" pin_num="L11" pin_signal="GPIO_AD_B1_02"/>
+                  <pin peripheral="GPIO1" signal="gpio_io, 19" pin_num="M12" pin_signal="GPIO_AD_B1_03"/>
+                  <pin peripheral="GPIO2" signal="gpio_io, 31" pin_num="B14" pin_signal="GPIO_B1_15"/>
+                  <pin peripheral="PWM1" signal="B, 3" pin_num="B7" pin_signal="GPIO_EMC_39"/>
+                  <pin peripheral="GPIO3" signal="gpio_io, 27" pin_num="C7" pin_signal="GPIO_EMC_41"/>
+               </pins>
+            </function>
+         </functions_list>
+      </pins>
+      <clocks name="Clocks" version="7.0" enabled="true" update_project_code="true">
+         <generated_project_files>
+            <file path="board/clock_config.c" update_enabled="true"/>
+            <file path="board/clock_config.h" update_enabled="true"/>
+         </generated_project_files>
+         <clocks_profile>
+            <processor_version>9.0.1</processor_version>
+         </clocks_profile>
+         <clock_configurations>
+            <clock_configuration name="BOARD_BootClockRUN">
+               <description></description>
+               <options/>
+               <dependencies>
+                  <dependency resourceType="PinSignal" resourceId="XTALOSC24M.xtali" description="&apos;XTALI&apos; (Pins tool id: XTALOSC24M.xtali, Clocks tool id: XTALOSC24M.XTALI) needs to be routed" problem_level="1" source="Clocks:BOARD_BootClockRUN">
+                     <feature name="routed" evaluation="">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="PinSignal" resourceId="XTALOSC24M.xtali" description="&apos;XTALI&apos; (Pins tool id: XTALOSC24M.xtali, Clocks tool id: XTALOSC24M.XTALI) needs to have &apos;INPUT&apos; direction" problem_level="1" source="Clocks:BOARD_BootClockRUN">
+                     <feature name="direction" evaluation="">
+                        <data>INPUT</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="PinSignal" resourceId="XTALOSC24M.xtalo" description="&apos;XTALO&apos; (Pins tool id: XTALOSC24M.xtalo, Clocks tool id: XTALOSC24M.XTALO) needs to be routed" problem_level="1" source="Clocks:BOARD_BootClockRUN">
+                     <feature name="routed" evaluation="">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="PinSignal" resourceId="XTALOSC24M.xtalo" description="&apos;XTALO&apos; (Pins tool id: XTALOSC24M.xtalo, Clocks tool id: XTALOSC24M.XTALO) needs to have &apos;OUTPUT&apos; direction" problem_level="1" source="Clocks:BOARD_BootClockRUN">
+                     <feature name="direction" evaluation="">
+                        <data>OUTPUT</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="SWComponent" resourceId="platform.drivers.common" description="Clocks initialization requires the COMMON Driver in the project." problem_level="2" source="Clocks:BOARD_BootClockRUN">
+                     <feature name="enabled" evaluation="equal" configuration="core0">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="SWComponent" resourceId="platform.drivers.iomuxc" description="Clocks initialization requires the IOMUXC Driver in the project." problem_level="2" source="Clocks:BOARD_BootClockRUN">
+                     <feature name="enabled" evaluation="equal" configuration="core0">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
+               </dependencies>
+               <clock_sources/>
+               <clock_outputs>
+                  <clock_output id="AHB_CLK_ROOT.outFreq" value="600 MHz" locked="true" accuracy="0.001"/>
+                  <clock_output id="CAN_CLK_ROOT.outFreq" value="2 MHz" locked="false" accuracy=""/>
+                  <clock_output id="CLK_1M.outFreq" value="1 MHz" locked="false" accuracy=""/>
+                  <clock_output id="CLK_24M.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="CSI_CLK_ROOT.outFreq" value="79.2 MHz" locked="false" accuracy=""/>
+                  <clock_output id="ENET1_TX_CLK.outFreq" value="2.4 MHz" locked="false" accuracy=""/>
+                  <clock_output id="ENET_125M_CLK.outFreq" value="2.4 MHz" locked="false" accuracy=""/>
+                  <clock_output id="ENET_25M_REF_CLK.outFreq" value="1.2 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FLEXIO1_CLK_ROOT.outFreq" value="1.5 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FLEXIO2_CLK_ROOT.outFreq" value="1.5 MHz" locked="false" accuracy=""/>
+                  <clock_output id="FLEXSPI_CLK_ROOT.outFreq" value="60 MHz" locked="false" accuracy=""/>
+                  <clock_output id="GPT1_ipg_clk_highfreq.outFreq" value="50/11 MHz" locked="false" accuracy=""/>
+                  <clock_output id="GPT2_ipg_clk_highfreq.outFreq" value="50/11 MHz" locked="false" accuracy=""/>
+                  <clock_output id="IPG_CLK_ROOT.outFreq" value="150 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LCDIF_CLK_ROOT.outFreq" value="22 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LPI2C_CLK_ROOT.outFreq" value="3 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LPSPI_CLK_ROOT.outFreq" value="3 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LVDS1_CLK.outFreq" value="1.2 GHz" locked="false" accuracy=""/>
+                  <clock_output id="MQS_MCLK.outFreq" value="3 MHz" locked="false" accuracy=""/>
+                  <clock_output id="PERCLK_CLK_ROOT.outFreq" value="50/11 MHz" locked="false" accuracy=""/>
+                  <clock_output id="PLL7_MAIN_CLK.outFreq" value="24 MHz" locked="false" accuracy=""/>
+                  <clock_output id="SAI1_CLK_ROOT.outFreq" value="3 MHz" locked="false" accuracy=""/>
+                  <clock_output id="SAI1_MCLK1.outFreq" value="3 MHz" locked="false" accuracy=""/>
+                  <clock_output id="SAI1_MCLK2.outFreq" value="3 MHz" locked="false" accuracy=""/>
+                  <clock_output id="SAI1_MCLK3.outFreq" value="1.5 MHz" locked="false" accuracy=""/>
+                  <clock_output id="SAI2_CLK_ROOT.outFreq" value="3 MHz" locked="false" accuracy=""/>
+                  <clock_output id="SAI2_MCLK1.outFreq" value="3 MHz" locked="false" accuracy=""/>
+                  <clock_output id="SAI2_MCLK3.outFreq" value="1.5 MHz" locked="false" accuracy=""/>
+                  <clock_output id="SAI3_CLK_ROOT.outFreq" value="3 MHz" locked="false" accuracy=""/>
+                  <clock_output id="SAI3_MCLK1.outFreq" value="3 MHz" locked="false" accuracy=""/>
+                  <clock_output id="SAI3_MCLK3.outFreq" value="1.5 MHz" locked="false" accuracy=""/>
+                  <clock_output id="SEMC_CLK_ROOT.outFreq" value="120 MHz" locked="false" accuracy=""/>
+                  <clock_output id="SPDIF0_CLK_ROOT.outFreq" value="1.5 MHz" locked="false" accuracy=""/>
+                  <clock_output id="TRACE_CLK_ROOT.outFreq" value="88 MHz" locked="false" accuracy=""/>
+                  <clock_output id="UART_CLK_ROOT.outFreq" value="4 MHz" locked="false" accuracy=""/>
+                  <clock_output id="USDHC1_CLK_ROOT.outFreq" value="198 MHz" locked="true" accuracy="0.001"/>
+                  <clock_output id="USDHC2_CLK_ROOT.outFreq" value="198 MHz" locked="false" accuracy=""/>
+               </clock_outputs>
+               <clock_settings>
+                  <setting id="CCM.CSI_CLK_SEL.sel" value="CCM_ANALOG.PLL2_PFD2_CLK" locked="false"/>
+                  <setting id="CCM.CSI_PODF.scale" value="5" locked="false"/>
+                  <setting id="CCM.LCDIF_PODF.scale" value="6" locked="true"/>
+                  <setting id="CCM.LCDIF_PRED.scale" value="4" locked="true"/>
+                  <setting id="CCM.LCDIF_PRE_CLK_SEL.sel" value="CCM_ANALOG.PLL2_MAIN_CLK" locked="false"/>
+                  <setting id="CCM.LPSPI_CLK_SEL.sel" value="CCM_ANALOG.PLL3_PFD1_CLK" locked="false"/>
+                  <setting id="CCM.LPSPI_PODF.scale" value="8" locked="true"/>
+                  <setting id="CCM.PERCLK_PODF.scale" value="33" locked="false"/>
+                  <setting id="CCM.SEMC_PODF.scale" value="5" locked="false"/>
+                  <setting id="CCM_ANALOG.PLL1_BYPASS.sel" value="CCM_ANALOG.PLL1" locked="false"/>
+                  <setting id="CCM_ANALOG.PLL1_VDIV.scale" value="50" locked="false"/>
+                  <setting id="CCM_ANALOG.PLL2.denom" value="1" locked="false"/>
+                  <setting id="CCM_ANALOG.PLL2.num" value="0" locked="false"/>
+                  <setting id="CCM_ANALOG.PLL2_BYPASS.sel" value="CCM_ANALOG.PLL2_BYPASS_CLK_SRC" locked="false"/>
+                  <setting id="CCM_ANALOG.PLL2_PFD0_BYPASS.sel" value="CCM_ANALOG.PLL2_BYPASS_CLK_SRC" locked="false"/>
+                  <setting id="CCM_ANALOG.PLL2_PFD1_BYPASS.sel" value="CCM_ANALOG.PLL2_BYPASS_CLK_SRC" locked="false"/>
+                  <setting id="CCM_ANALOG.PLL2_PFD2_BYPASS.sel" value="CCM_ANALOG.PLL2_PFD2" locked="false"/>
+                  <setting id="CCM_ANALOG.PLL2_PFD3_BYPASS.sel" value="CCM_ANALOG.PLL2_BYPASS_CLK_SRC" locked="false"/>
+                  <setting id="CCM_ANALOG_PLL_ENET_POWERDOWN_CFG" value="Yes" locked="false"/>
+               </clock_settings>
+               <called_from_default_init>true</called_from_default_init>
+            </clock_configuration>
+         </clock_configurations>
+      </clocks>
+      <dcdx name="DCDx" version="3.0" enabled="false" update_project_code="true">
+         <generated_project_files/>
+         <dcdx_profile>
+            <processor_version>9.0.1</processor_version>
+            <output_format>c_array</output_format>
+         </dcdx_profile>
+         <dcdx_configurations>
+            <dcdx_configuration name="Device_configuration">
+               <description></description>
+               <options/>
+               <command_groups>
+                  <command_group name="New empty group 1" enabled="true">
+                     <commands/>
+                  </command_group>
+               </command_groups>
+            </dcdx_configuration>
+         </dcdx_configurations>
+      </dcdx>
+      <periphs name="Peripherals" version="9.0" enabled="false" update_project_code="true">
+         <generated_project_files/>
+         <peripherals_profile>
+            <processor_version>9.0.1</processor_version>
+         </peripherals_profile>
+         <functional_groups>
+            <functional_group name="BOARD_InitPeripherals" uuid="9f074665-fdb8-43af-87de-03e75dbfd51d" called_from_default_init="true" id_prefix="" core="core0">
+               <description></description>
+               <options/>
+               <dependencies/>
+               <instances>
+                  <instance name="NVIC" uuid="bbc2553f-59c3-4eb2-bb30-436e5c5ff0c7" type="nvic" type_id="nvic_57b5eef3774cc60acaede6f5b8bddc67" mode="general" peripheral="NVIC" enabled="true" comment="" custom_name_enabled="false" editing_lock="false">
+                     <config_set name="nvic">
+                        <array name="interrupt_table"/>
+                        <array name="interrupts"/>
+                     </config_set>
+                  </instance>
+               </instances>
+            </functional_group>
+         </functional_groups>
+         <components>
+            <component name="system" uuid="dfa01528-5a72-43e7-95f8-178701d91f19" type_id="system_54b53072540eeeb8f8e9343e71f28176">
+               <config_set_global name="global_system_definitions">
+                  <setting name="user_definitions" value=""/>
+                  <setting name="user_includes" value=""/>
+               </config_set_global>
+            </component>
+            <component name="generic_can" uuid="3fc1f816-3e73-4d35-8428-37288ec41588" type_id="generic_can_1bfdd78b1af214566c1f23cf6a582d80">
+               <config_set_global name="global_can"/>
+            </component>
+            <component name="generic_uart" uuid="92d48a9a-5164-4576-b6d9-a21de0a776c3" type_id="generic_uart_8cae00565451cf2346eb1b8c624e73a6">
+               <config_set_global name="global_uart"/>
+            </component>
+            <component name="msg" uuid="9d1d9edc-e649-43bd-aa3f-15d4b8a9ee6c" type_id="msg_6e2baaf3b97dbeef01c0043275f9a0e7">
+               <config_set_global name="global_messages"/>
+            </component>
+         </components>
+      </periphs>
+      <tee name="TEE" version="3.0" enabled="false" update_project_code="true">
+         <generated_project_files/>
+         <tee_profile>
+            <processor_version>N/A</processor_version>
+         </tee_profile>
+         <global_options/>
+         <user_memory_regions/>
+      </tee>
+   </tools>
+</configuration>

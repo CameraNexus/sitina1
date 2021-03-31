@@ -41,12 +41,17 @@
 /**
  * @brief	The board name 
  */
-#define BOARD_NAME "board"
+#define BOARD_NAME "SNE-PB"
+
+/* USB PHY condfiguration */
+#define BOARD_USB_PHY_D_CAL     (0x0CU)
+#define BOARD_USB_PHY_TXCAL45DP (0x06U)
+#define BOARD_USB_PHY_TXCAL45DM (0x06U)
 
 /**
  * @brief	The flash size
  */
-#define BOARD_FLASH_SIZE (0x0U)
+#define BOARD_FLASH_SIZE (4u * 1024u * 1024u)
 
 #if defined(__cplusplus)
 extern "C" {
