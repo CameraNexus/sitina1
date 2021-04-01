@@ -29,6 +29,10 @@
 #include "fsl_pwm.h"
 #include "lcd.h"
 
+#include "nano_shell.h"
+#include "command/command.h"
+#include "shell_io/shell_io.h"
+
 #define ST7701S_CMD(cmd, params...)                         \
     {                                                       \
         const uint8_t d[] = {params};                       \
@@ -174,3 +178,32 @@ void lcd_set_bl(uint8_t brightness) {
 
     GPIO_PinWrite(LCD_BL_GPIO, LCD_BL_GPIO_PIN, (brightness) ? 1 : 0);
 }
+
+int lcd_cmd(const shell_cmd_t *pcmd, int argc, char *const argv[]) {
+    if (argc == 1) {
+        shell_printf("lcd command expects an operation\n");
+        return 1;
+    }
+    if (strcmp(argv[1], "reset") == 0) {
+        lcd_reset();
+        st7701s_init();
+        return 0;
+    }
+    if (strcmp(argv[1], "brightness") == 0) {
+        if (argc != 3) {
+            shell_printf("lcd brightness expects a parameter\n");
+            return 1;
+        }
+        int brightness = atoi(argv[2]);
+        if ((brightness > 255) || (brightness < 0)) {
+            shell_printf("invalid brightness value\n");
+            return 1;
+        }
+        lcd_set_bl(brightness);
+        return 0;
+    }
+    shell_printf("invalid operation\n");
+    return 1;
+}
+
+NANO_SHELL_ADD_CMD(lcd, lcd_cmd, "control lcd", "set lcd parameters");

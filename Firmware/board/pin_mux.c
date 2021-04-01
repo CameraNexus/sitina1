@@ -20,6 +20,7 @@ pin_labels:
 - {pin_num: B14, pin_signal: GPIO_B1_15, label: LCD_CS}
 - {pin_num: C7, pin_signal: GPIO_EMC_41, label: LCD_EN}
 - {pin_num: B7, pin_signal: GPIO_EMC_39, label: LCD_PWM}
+- {pin_num: A7, pin_signal: GPIO_EMC_40, label: AFE_SYNC}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 
@@ -97,6 +98,7 @@ BOARD_InitPins:
   - {pin_num: B14, peripheral: GPIO2, signal: 'gpio_io, 31', pin_signal: GPIO_B1_15}
   - {pin_num: B7, peripheral: PWM1, signal: 'B, 3', pin_signal: GPIO_EMC_39}
   - {pin_num: C7, peripheral: GPIO3, signal: 'gpio_io, 27', pin_signal: GPIO_EMC_41}
+  - {pin_num: A7, peripheral: GPIO3, signal: 'gpio_io, 26', pin_signal: GPIO_EMC_40}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 
@@ -155,6 +157,7 @@ void BOARD_InitPins(void) {
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_14_CSI_HSYNC, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_15_GPIO2_IO31, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_39_FLEXPWM1_PWMB03, 0U); 
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_40_GPIO3_IO26, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_41_GPIO3_IO27, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_00_USDHC1_CMD, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_01_USDHC1_CLK, 0U); 

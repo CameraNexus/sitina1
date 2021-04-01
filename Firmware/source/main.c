@@ -47,6 +47,7 @@
 #include "nano_shell.h"
 #include "fb.h"
 #include "lcd.h"
+#include "storage.h"
 
 /*
  * @brief   Application entry point.
@@ -68,7 +69,7 @@ int main(void) {
     lcd_set_bl(127);
 
     // Initialize SD card
-
+    storage_mount();
 
     // Start the shell
     nano_shell_loop(NULL);

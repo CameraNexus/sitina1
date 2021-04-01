@@ -59,6 +59,7 @@ int syslog_printf(const char *format, ...)
 int syslog_cmd(const shell_cmd_t *pcmd, int argc, char *const argv[]) {
     if (argc > 1) {
         shell_printf("syslog command does not take any arguments.\n");
+        return 1;
     }
     char buf[128 + 1];
     int length;
@@ -69,6 +70,8 @@ int syslog_cmd(const shell_cmd_t *pcmd, int argc, char *const argv[]) {
             shell_puts(buf);
         }
     } while (length != 0);
+
+    return 0;
 }
 
 NANO_SHELL_ADD_CMD(syslog, syslog_cmd, "show syslog",

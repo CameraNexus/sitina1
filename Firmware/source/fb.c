@@ -23,6 +23,7 @@
 //
 #include "fsl_elcdif.h"
 #include "fb.h"
+
 // Clock should already be enabled in clock_init()
 // Pixel clock = 22 MHz
 // Frame rate = 22M / (640 + 41 + 4 + 18) / (480 + 10 + 4 + 10) = 62 Hz
@@ -71,5 +72,36 @@ void fb_init(void) {
 
 void LCDIF_IRQHandler(void) {
     ELCDIF_ClearInterruptStatus(LCDIF, (uint32_t)kELCDIF_CurFrameDone);
-
+    // ?
 }
+
+#include "nano_shell.h"
+#include "command/command.h"
+#include "shell_io/shell_io.h"
+
+int fb_cmd(const shell_cmd_t *pcmd, int argc, char *const argv[]) {
+    if (argc == 1) {
+        shell_printf("fb command expects an operation\n");
+        return 1;
+    }
+    if (strcmp(argv[1], "color") == 0) {
+        if (argc != 5) {
+            shell_printf("usage: fb color <r> <g> <b>\n");
+            return 1;
+        }
+        int r = atoi(argv[2]);
+        int g = atoi(argv[3]);
+        int b = atoi(argv[4]);
+        int c = ((r & 0xf8) << 8) | ((g & 0xfc) << 3) | ((b & 0xf8) >> 3);
+        shell_printf("Setting color to %04x\n", c);
+        uint16_t *wrptr = (uint16_t *)framebuffer;
+        for (int i = 0; i < FB_HEIGHT * FB_WIDTH; i++) {
+            *wrptr++ = (uint16_t)c;
+        }
+        return 0;
+    }
+    shell_printf("invalid operation\n");
+    return 1;
+}
+
+NANO_SHELL_ADD_CMD(fb, fb_cmd, "framebuffer", "test the framebuffer");
