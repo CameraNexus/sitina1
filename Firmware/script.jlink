@@ -1,0 +1,7 @@
+ExitOnError 1
+r
+h
+loadfile "/home/wenting/Documents/SitinaNe/Firmware/Debug/Firmware.hex"
+qc
+
+qc

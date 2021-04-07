@@ -87,7 +87,6 @@
                   <pin peripheral="CSI" signal="csi_data, 03" pin_num="G12" pin_signal="GPIO_AD_B1_14"/>
                   <pin peripheral="CSI" signal="csi_data, 04" pin_num="H11" pin_signal="GPIO_AD_B1_13"/>
                   <pin peripheral="CSI" signal="csi_data, 05" pin_num="H12" pin_signal="GPIO_AD_B1_12"/>
-                  <pin peripheral="CSI" signal="csi_data, 06" pin_num="F12" pin_signal="GPIO_AD_B0_07"/>
                   <pin peripheral="CSI" signal="csi_data, 07" pin_num="L13" pin_signal="GPIO_AD_B1_10"/>
                   <pin peripheral="CSI" signal="csi_data, 08" pin_num="M13" pin_signal="GPIO_AD_B1_09"/>
                   <pin peripheral="CSI" signal="csi_data, 09" pin_num="H13" pin_signal="GPIO_AD_B1_08"/>
@@ -137,11 +136,12 @@
                   <pin peripheral="PWM1" signal="B, 3" pin_num="B7" pin_signal="GPIO_EMC_39"/>
                   <pin peripheral="GPIO3" signal="gpio_io, 27" pin_num="C7" pin_signal="GPIO_EMC_41"/>
                   <pin peripheral="GPIO3" signal="gpio_io, 26" pin_num="A7" pin_signal="GPIO_EMC_40"/>
+                  <pin peripheral="CSI" signal="csi_data, 06" pin_num="J13" pin_signal="GPIO_AD_B1_11"/>
                </pins>
             </function>
          </functions_list>
       </pins>
-      <clocks name="Clocks" version="7.0" enabled="true" update_project_code="true">
+      <clocks name="Clocks" version="7.0" enabled="true" update_project_code="false">
          <generated_project_files>
             <file path="board/clock_config.c" update_enabled="true"/>
             <file path="board/clock_config.h" update_enabled="true"/>
@@ -201,7 +201,7 @@
                   <clock_output id="GPT1_ipg_clk_highfreq.outFreq" value="50/11 MHz" locked="false" accuracy=""/>
                   <clock_output id="GPT2_ipg_clk_highfreq.outFreq" value="50/11 MHz" locked="false" accuracy=""/>
                   <clock_output id="IPG_CLK_ROOT.outFreq" value="150 MHz" locked="false" accuracy=""/>
-                  <clock_output id="LCDIF_CLK_ROOT.outFreq" value="22 MHz" locked="false" accuracy=""/>
+                  <clock_output id="LCDIF_CLK_ROOT.outFreq" value="1 MHz" locked="false" accuracy=""/>
                   <clock_output id="LPI2C_CLK_ROOT.outFreq" value="3 MHz" locked="false" accuracy=""/>
                   <clock_output id="LPSPI_CLK_ROOT.outFreq" value="3 MHz" locked="false" accuracy=""/>
                   <clock_output id="LVDS1_CLK.outFreq" value="1.2 GHz" locked="false" accuracy=""/>
@@ -220,7 +220,7 @@
                   <clock_output id="SAI3_MCLK3.outFreq" value="1.5 MHz" locked="false" accuracy=""/>
                   <clock_output id="SEMC_CLK_ROOT.outFreq" value="120 MHz" locked="false" accuracy=""/>
                   <clock_output id="SPDIF0_CLK_ROOT.outFreq" value="1.5 MHz" locked="false" accuracy=""/>
-                  <clock_output id="TRACE_CLK_ROOT.outFreq" value="88 MHz" locked="false" accuracy=""/>
+                  <clock_output id="TRACE_CLK_ROOT.outFreq" value="6 MHz" locked="false" accuracy=""/>
                   <clock_output id="UART_CLK_ROOT.outFreq" value="4 MHz" locked="false" accuracy=""/>
                   <clock_output id="USDHC1_CLK_ROOT.outFreq" value="198 MHz" locked="true" accuracy="0.001"/>
                   <clock_output id="USDHC2_CLK_ROOT.outFreq" value="198 MHz" locked="false" accuracy=""/>
@@ -239,11 +239,6 @@
                   <setting id="CCM_ANALOG.PLL1_VDIV.scale" value="50" locked="false"/>
                   <setting id="CCM_ANALOG.PLL2.denom" value="1" locked="false"/>
                   <setting id="CCM_ANALOG.PLL2.num" value="0" locked="false"/>
-                  <setting id="CCM_ANALOG.PLL2_BYPASS.sel" value="CCM_ANALOG.PLL2_BYPASS_CLK_SRC" locked="false"/>
-                  <setting id="CCM_ANALOG.PLL2_PFD0_BYPASS.sel" value="CCM_ANALOG.PLL2_BYPASS_CLK_SRC" locked="false"/>
-                  <setting id="CCM_ANALOG.PLL2_PFD1_BYPASS.sel" value="CCM_ANALOG.PLL2_BYPASS_CLK_SRC" locked="false"/>
-                  <setting id="CCM_ANALOG.PLL2_PFD2_BYPASS.sel" value="CCM_ANALOG.PLL2_PFD2" locked="false"/>
-                  <setting id="CCM_ANALOG.PLL2_PFD3_BYPASS.sel" value="CCM_ANALOG.PLL2_BYPASS_CLK_SRC" locked="false"/>
                   <setting id="CCM_ANALOG_PLL_ENET_POWERDOWN_CFG" value="Yes" locked="false"/>
                </clock_settings>
                <called_from_default_init>true</called_from_default_init>
@@ -274,12 +269,12 @@
             <processor_version>9.0.1</processor_version>
          </peripherals_profile>
          <functional_groups>
-            <functional_group name="BOARD_InitPeripherals" uuid="abb6a4ec-bc13-44a5-a1e9-da9df6db8a03" called_from_default_init="true" id_prefix="" core="core0">
+            <functional_group name="BOARD_InitPeripherals" uuid="0ccfce46-17c8-462b-b0e9-6930d4667301" called_from_default_init="true" id_prefix="" core="core0">
                <description></description>
                <options/>
                <dependencies/>
                <instances>
-                  <instance name="NVIC" uuid="131e0dc4-4c99-442e-a79f-05950ad74f2c" type="nvic" type_id="nvic_57b5eef3774cc60acaede6f5b8bddc67" mode="general" peripheral="NVIC" enabled="true" comment="" custom_name_enabled="false" editing_lock="false">
+                  <instance name="NVIC" uuid="7fe57506-2bb4-4b9b-830a-beab98380f7f" type="nvic" type_id="nvic_57b5eef3774cc60acaede6f5b8bddc67" mode="general" peripheral="NVIC" enabled="true" comment="" custom_name_enabled="false" editing_lock="false">
                      <config_set name="nvic">
                         <array name="interrupt_table"/>
                         <array name="interrupts"/>
@@ -289,19 +284,19 @@
             </functional_group>
          </functional_groups>
          <components>
-            <component name="system" uuid="e6190e80-dce2-4618-b0b8-28ca41d72ca5" type_id="system_54b53072540eeeb8f8e9343e71f28176">
+            <component name="system" uuid="aac78652-2f84-4b66-bf78-bf70c0b0229a" type_id="system_54b53072540eeeb8f8e9343e71f28176">
                <config_set_global name="global_system_definitions">
                   <setting name="user_definitions" value=""/>
                   <setting name="user_includes" value=""/>
                </config_set_global>
             </component>
-            <component name="generic_can" uuid="e6caf394-d799-4a12-8093-da64140af829" type_id="generic_can_1bfdd78b1af214566c1f23cf6a582d80">
+            <component name="generic_can" uuid="8f36089c-ff69-4d67-bd93-26e295b53189" type_id="generic_can_1bfdd78b1af214566c1f23cf6a582d80">
                <config_set_global name="global_can"/>
             </component>
-            <component name="generic_uart" uuid="8b002967-07f4-4c53-afe4-ecf0e12a735f" type_id="generic_uart_8cae00565451cf2346eb1b8c624e73a6">
+            <component name="generic_uart" uuid="1191a6d6-2ebe-4b67-9486-8afd7128f992" type_id="generic_uart_8cae00565451cf2346eb1b8c624e73a6">
                <config_set_global name="global_uart"/>
             </component>
-            <component name="msg" uuid="64efd702-cef8-4ea0-a336-89ee33b5ebb4" type_id="msg_6e2baaf3b97dbeef01c0043275f9a0e7">
+            <component name="msg" uuid="177391a5-6516-4834-a905-3798fce3e27a" type_id="msg_6e2baaf3b97dbeef01c0043275f9a0e7">
                <config_set_global name="global_messages"/>
             </component>
          </components>

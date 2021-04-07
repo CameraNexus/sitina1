@@ -59,18 +59,20 @@ int main(void) {
     BOARD_InitBootPins();
     BOARD_InitBootClocks();
     BOARD_InitBootPeripherals();
+    BOARD_InitSEMC();
 
-    umm_init();
+    //umm_init();
     syslog_init();
     usbsup_init();
 
-    lcd_init();
-    fb_init();
-    lcd_set_bl(127);
+    //lcd_init();
+    //fb_init();
+    //lcd_set_bl(127);
 
     // Initialize SD card
-    storage_mount();
+    //storage_mount();
 
+    usbsup_waitconnect();
     // Start the shell
     nano_shell_loop(NULL);
     return 0 ;

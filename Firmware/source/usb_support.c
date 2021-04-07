@@ -12,12 +12,12 @@
 #include "usb_device_config.h"
 #include "usb.h"
 #include "usb_device.h"
-#include "usb_device_class.h"
 
 #include "usb_device_cdc_acm.h"
 #include "usb_device_ch9.h"
 
 #include "usb_device_descriptor.h"
+#include "usb_support.h"
 
 #if ((defined FSL_FEATURE_SOC_USBPHY_COUNT) && (FSL_FEATURE_SOC_USBPHY_COUNT > 0U))
 #include "usb_phy.h"
@@ -32,7 +32,6 @@ extern uint8_t USB_EnterLowpowerMode(void);
 void USB_DeviceTaskFn(void *deviceHandle);
 #endif
 
-#include "usb_support.h"
 #include "ringbuf.h"
 
 /*******************************************************************************
@@ -490,7 +489,7 @@ usb_status_t USB_DeviceProcessClassRequest(usb_device_handle handle,
 
             /* Initialize the serial state buffer */
             acmInfo->serialStateBuf[0] = NOTIF_REQUEST_TYPE;                        /* bmRequestType */
-            acmInfo->serialStateBuf[1] = USB_DEVICE_CDC_NOTIF_SERIAL_STATE;         /* bNotification */
+            acmInfo->serialStateBuf[1] = USB_DEVICE_CDC_REQUEST_SERIAL_STATE_NOTIF; /* bNotification */
             acmInfo->serialStateBuf[2] = 0x00;                                      /* wValue */
             acmInfo->serialStateBuf[3] = 0x00;
             acmInfo->serialStateBuf[4] = 0x00; /* wIndex */
@@ -577,7 +576,7 @@ usb_status_t USB_DeviceCallback(usb_device_handle handle, uint32_t event, void *
     {
         case kUSB_DeviceEventBusReset:
         {
-            USB_DeviceControlPipeInit(s_cdcVcom.deviceHandle, s_cdcVcom.deviceHandle);
+            USB_DeviceControlPipeInit(s_cdcVcom.deviceHandle);
             s_cdcVcom.attach               = 0;
             s_cdcVcom.currentConfiguration = 0U;
 #if (defined(USB_DEVICE_CONFIG_EHCI) && (USB_DEVICE_CONFIG_EHCI > 0U)) || \
@@ -744,7 +743,7 @@ bool usbsup_sendbuf(char *buf, int size) {
     // Make sure push into ringbuf first to avoid racing between ISR
     if (ringbuf_push(usbsup_tx_ringbuf, buf, size)) {
         // If USB is not busy, fill the TX DMA memory and initiate transfer
-        if (!tx_busy) {
+        if ((!tx_busy) && (s_cdcVcom.attach) && (s_cdcVcom.startTransactions)) {
             tx_busy = true;
             int size = ringbuf_pop(usbsup_tx_ringbuf, (char *)s_currSendBuf, DATA_BUFF_SIZE, false);
             if (size != 0) {
@@ -766,4 +765,10 @@ bool usbsup_sendbuf(char *buf, int size) {
 
 int usbsup_recvbuf(char *buf, int maxSize) {
     return ringbuf_pop(usbsup_rx_ringbuf, buf, maxSize, false);
+}
+
+void usbsup_waitconnect(void) {
+    while ((!s_cdcVcom.attach) && (!s_cdcVcom.startTransactions));
+    // Wait a while before continue
+    SDK_DelayAtLeastUs(5000, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
 }

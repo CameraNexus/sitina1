@@ -49,7 +49,6 @@ BOARD_InitPins:
   - {pin_num: G12, peripheral: CSI, signal: 'csi_data, 03', pin_signal: GPIO_AD_B1_14}
   - {pin_num: H11, peripheral: CSI, signal: 'csi_data, 04', pin_signal: GPIO_AD_B1_13}
   - {pin_num: H12, peripheral: CSI, signal: 'csi_data, 05', pin_signal: GPIO_AD_B1_12}
-  - {pin_num: F12, peripheral: CSI, signal: 'csi_data, 06', pin_signal: GPIO_AD_B0_07}
   - {pin_num: L13, peripheral: CSI, signal: 'csi_data, 07', pin_signal: GPIO_AD_B1_10}
   - {pin_num: M13, peripheral: CSI, signal: 'csi_data, 08', pin_signal: GPIO_AD_B1_09}
   - {pin_num: H13, peripheral: CSI, signal: 'csi_data, 09', pin_signal: GPIO_AD_B1_08}
@@ -99,6 +98,7 @@ BOARD_InitPins:
   - {pin_num: B7, peripheral: PWM1, signal: 'B, 3', pin_signal: GPIO_EMC_39}
   - {pin_num: C7, peripheral: GPIO3, signal: 'gpio_io, 27', pin_signal: GPIO_EMC_41}
   - {pin_num: A7, peripheral: GPIO3, signal: 'gpio_io, 26', pin_signal: GPIO_EMC_40}
+  - {pin_num: J13, peripheral: CSI, signal: 'csi_data, 06', pin_signal: GPIO_AD_B1_11}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 
@@ -115,13 +115,13 @@ void BOARD_InitPins(void) {
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_01_GPIO1_IO01, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_02_GPIO1_IO02, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_03_GPIO1_IO03, 0U); 
-  IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_07_CSI_DATA06, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_01_USDHC1_VSELECT, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_02_USDHC1_CD_B, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_03_GPIO1_IO19, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_08_CSI_DATA09, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_09_CSI_DATA08, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_10_CSI_DATA07, 0U); 
+  IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_11_CSI_DATA06, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_12_CSI_DATA05, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_13_CSI_DATA04, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_14_CSI_DATA03, 0U); 

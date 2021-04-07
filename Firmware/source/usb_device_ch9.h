@@ -16,6 +16,11 @@
  * @addtogroup usb_device_ch9
  * @{
  */
+
+/*******************************************************************************
+ * Definitions
+ ******************************************************************************/
+
 /*! @brief Defines USB device status size when the host request to get device status */
 #define USB_DEVICE_STATUS_SIZE (0x02U)
 
@@ -49,6 +54,9 @@ typedef enum _usb_device_control_read_write_sequence
     kUSB_DeviceControlPipeStatusStage,     /*!< status stage */
 } usb_device_control_read_write_sequence_t;
 
+/*******************************************************************************
+ * API
+ ******************************************************************************/
 #if defined(__cplusplus)
 extern "C" {
 #endif
@@ -58,17 +66,16 @@ extern "C" {
  ******************************************************************************/
 
 /*!
- * @brief Initializes the control pipes.
+ * @brief Initialize the control pipes.
  *
  * The function is used to initialize the control pipes. This function should be called when event
  * kUSB_DeviceEventBusReset is received.
  *
- * @param[in] handle      The device handle.
- * @param[in] param       The event parameter.
+ * @param handle      The device handle.
  *
  * @return A USB error code or kStatus_USB_Success.
  */
-extern usb_status_t USB_DeviceControlPipeInit(usb_device_handle handle, void *param);
+extern usb_status_t USB_DeviceControlPipeInit(usb_device_handle handle);
 
 #if defined(__cplusplus)
 }

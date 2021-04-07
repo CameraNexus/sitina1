@@ -13,5 +13,6 @@
 void usbsup_init(void);
 bool usbsup_sendbuf(char *buf, int size);
 int usbsup_recvbuf(char *buf, int maxSize);
+void usbsup_waitconnect(void);
 
 #endif /* _USB_SUPPORT_H_ */

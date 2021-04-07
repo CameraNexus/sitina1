@@ -25,13 +25,13 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdbool.h>
+#include <assert.h>
 #include "ringbuf.h"
 
 Ringbuf * ringbuf_init(int elements) {
     Ringbuf *buf = RINGBUF_MALLOC(sizeof(Ringbuf) +
             elements * sizeof(RINGBUF_ELEMENT_TYPE));
-    if (!buf)
-        return NULL;
+    assert(buf);
     buf->rx_ptr = 0;
     buf->tx_ptr = 0;
     buf->elements = elements;
@@ -72,6 +72,8 @@ bool ringbuf_push(Ringbuf *buf, RINGBUF_ELEMENT_TYPE *tx, int count) {
 int ringbuf_pop(Ringbuf *buf, RINGBUF_ELEMENT_TYPE *rx, int count, bool required) {
     if (count == 0) {
         count = ringbuf_getcount(buf);
+        if (count == 0)
+            return 0;
     }
     else {
         int avail = ringbuf_getcount(buf);

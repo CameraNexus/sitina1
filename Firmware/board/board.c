@@ -39,6 +39,7 @@
 #include "board.h"
 #include "fsl_common.h"
 #include "fsl_iomuxc.h"
+#include "fsl_semc.h"
 
 #if BOARD_FLASH_SIZE == 0
 #warning "BOARD_FLASH_SIZE not set; using 0 as default value"
@@ -153,7 +154,7 @@ void BOARD_ConfigMPU(void) {
 #if defined(XIP_EXTERNAL_FLASH) && (XIP_EXTERNAL_FLASH == 1)
     /* Region 3 setting: Memory with Normal type, not shareable, outer/inner write back. */
     MPU->RBAR = ARM_MPU_RBAR(3, 0x60000000U);
-    MPU->RASR = ARM_MPU_RASR(0, ARM_MPU_AP_RO, 0, 0, 1, 1, 0, ARM_MPU_REGION_SIZE_64MB);
+    MPU->RASR = ARM_MPU_RASR(0, ARM_MPU_AP_RO, 0, 0, 1, 1, 0, ARM_MPU_REGION_SIZE_4MB);
 #endif
 
     /* Region 4 setting: Memory with Device type, not shareable, non-cacheable. */
@@ -174,7 +175,8 @@ void BOARD_ConfigMPU(void) {
 
     /* Region 8 setting: Memory with Normal type, not shareable, outer/inner write back */
     MPU->RBAR = ARM_MPU_RBAR(8, 0x80000000U);
-    MPU->RASR = ARM_MPU_RASR(0, ARM_MPU_AP_FULL, 0, 0, 1, 1, 0, ARM_MPU_REGION_SIZE_32MB);
+    //MPU->RASR = ARM_MPU_RASR(0, ARM_MPU_AP_FULL, 0, 0, 1, 1, 0, ARM_MPU_REGION_SIZE_32MB);
+    MPU->RASR = ARM_MPU_RASR(0, ARM_MPU_AP_FULL, 1, 0, 0, 0, 0, ARM_MPU_REGION_SIZE_32MB);
 
     while ((size >> i) > 0x1U)
     {
@@ -203,4 +205,45 @@ void BOARD_ConfigMPU(void) {
     /* Enable I cache and D cache */
     SCB_EnableDCache();
     SCB_EnableICache();
+}
+
+void BOARD_InitSEMC(void)
+{
+    semc_config_t config;
+    semc_sdram_config_t sdramconfig;
+    uint32_t clockFrq = CLOCK_GetFreq(kCLOCK_SemcClk);
+
+    /* Initializes the MAC configure structure to zero. */
+    memset(&config, 0, sizeof(semc_config_t));
+    memset(&sdramconfig, 0, sizeof(semc_sdram_config_t));
+
+    /* Initialize SEMC. */
+    SEMC_GetDefaultConfig(&config);
+    config.dqsMode = kSEMC_Loopbackinternal;
+    SEMC_Init(SEMC, &config);
+
+    /* Configure SDRAM. */
+    sdramconfig.csxPinMux           = kSEMC_MUXCSX0;
+    sdramconfig.address             = 0x80000000;
+    sdramconfig.memsize_kbytes      = 32 * 1024; /* 32MB = 32*1024*1KBytes*/
+    sdramconfig.portSize            = kSEMC_PortSize16Bit;
+    sdramconfig.burstLen            = kSEMC_Sdram_BurstLen1;
+    sdramconfig.columnAddrBitNum    = kSEMC_SdramColunm_9bit;
+    sdramconfig.casLatency          = kSEMC_LatencyThree;
+    sdramconfig.tPrecharge2Act_Ns   = 18; /* Trp 18ns */
+    sdramconfig.tAct2ReadWrite_Ns   = 18; /* Trcd 18ns */
+    sdramconfig.tRefreshRecovery_Ns = 67; /* Use the maximum of the (Trfc , Txsr). */
+    sdramconfig.tWriteRecovery_Ns   = 12; /* 12ns */
+    sdramconfig.tCkeOff_Ns =
+        42; /* The minimum cycle of SDRAM CLK off state. CKE is off in self refresh at a minimum period tRAS.*/
+    sdramconfig.tAct2Prechage_Ns       = 42; /* Tras 42ns */
+    sdramconfig.tSelfRefRecovery_Ns    = 67;
+    sdramconfig.tRefresh2Refresh_Ns    = 60;
+    sdramconfig.tAct2Act_Ns            = 60;
+    sdramconfig.tPrescalePeriod_Ns     = 160 * (1000000000 / clockFrq);
+    sdramconfig.refreshPeriod_nsPerRow = 64 * 1000000 / 8192; /* 64ms/8192 */
+    sdramconfig.refreshUrgThreshold    = sdramconfig.refreshPeriod_nsPerRow;
+    sdramconfig.refreshBurstLen        = 1;
+
+    SEMC_ConfigureSDRAM(SEMC, kSEMC_SDRAM_CS0, &sdramconfig, clockFrq);
 }

@@ -67,6 +67,8 @@ void BOARD_InitDebugConsole(void);
  */
 void BOARD_ConfigMPU(void);
 
+void BOARD_InitSEMC(void);
+
 #if defined(__cplusplus)
 }
 #endif /* __cplusplus */

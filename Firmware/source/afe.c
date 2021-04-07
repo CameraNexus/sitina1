@@ -136,12 +136,12 @@ void afe_init_reg_copy(void) {
     for (int i = 0; i < REG_COPY_COUNT; i++)
         reg_copy[i].dirty = false;
     // Initial values
-    reg_copy[0x30] = 0x100 | (20 << 8);
-    reg_copy[0x31] = 0x100 | (20 << 8);
-    reg_copy[0x32] = 0x100 | (20 << 8);
-    reg_copy[0x33] = 0x100 | (20 << 8);
-    reg_copy[0x34] = 0x100 | (10 << 8);
-    reg_copy[0x7a] = 0xff00;
+    reg_copy[0x30].value = 0x100 | (20 << 8);
+    reg_copy[0x31].value = 0x100 | (20 << 8);
+    reg_copy[0x32].value = 0x100 | (20 << 8);
+    reg_copy[0x33].value = 0x100 | (20 << 8);
+    reg_copy[0x34].value = 0x100 | (10 << 8);
+    reg_copy[0x7a].value = 0xff00;
 }
 
 void afe_set_conf_reg(REG_TYPE t, int group, uint32_t offset, uint32_t val) {

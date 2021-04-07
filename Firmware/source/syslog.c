@@ -56,6 +56,13 @@ int syslog_printf(const char *format, ...)
     return length;
 }
 
+void syslog_fatal(const char *msg)
+{
+    // Semihosting printf for now
+    printf(msg);
+    while(1);
+}
+
 int syslog_cmd(const shell_cmd_t *pcmd, int argc, char *const argv[]) {
     if (argc > 1) {
         shell_printf("syslog command does not take any arguments.\n");
