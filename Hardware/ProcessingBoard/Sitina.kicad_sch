@@ -261,6 +261,11 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid c00b70cc-2c2b-441d-8bf9-2e9463a4b339)
   )
+  (text "Changelog:\nr0.1:\n1. Initial version\nr0.2:\n1. Add R/C delay for DCDC PSWITCH\n2. Fix boot mode selection pin\n3. Remove incorrect pull-up for RESET line\n4. Move LCD_PWM from EMC_39 to SD_B1_01\n   EMC_39 is now reserved for SEMC DQS\n5. Move I2C_SDA from SD_B1_04 to SD_B1_02\n6. Move I2C_SCL from SD_B1_05 to SD_B1_03\n   SD_B1_05 is now reserved for SPI DQS\n   Forced to use software I2C"
+    (at 213.36 53.34 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 4cf4334b-a77b-4c55-ba22-db9b77a6afcc)
+  )
 
   (sheet (at 124.46 27.94) (size 45.72 149.86)
     (stroke (width 0) (type solid) (color 0 0 0 0))
@@ -1184,6 +1189,12 @@
     (path "/00000000-0000-0000-0000-00005d0408df/00000000-0000-0000-0000-0000617e7a4f"
       (reference "#PWR0149") (unit 1) (value "+3V3") (footprint "")
     )
+    (path "/00000000-0000-0000-0000-00005d0408df/4bac5e56-63ee-4fe4-aac0-11875615cfd5"
+      (reference "#PWR?") (unit 1) (value "+3V3") (footprint "")
+    )
+    (path "/00000000-0000-0000-0000-00005d0408df/f578e944-931e-4904-a84a-99b6a9a0b8a3"
+      (reference "#PWR?") (unit 1) (value "GND") (footprint "")
+    )
     (path "/00000000-0000-0000-0000-00005d0408df/00000000-0000-0000-0000-00005d2d9f87"
       (reference "C100") (unit 1) (value "0.22uF") (footprint "Capacitor_SMD:C_0402_1005Metric")
     )
@@ -1310,6 +1321,9 @@
     (path "/00000000-0000-0000-0000-00005d0408df/00000000-0000-0000-0000-000060c399da"
       (reference "C149") (unit 1) (value "18pF") (footprint "Capacitor_SMD:C_0402_1005Metric")
     )
+    (path "/00000000-0000-0000-0000-00005d0408df/d97e3bae-6bed-4d11-98c7-f39778284ece"
+      (reference "C?") (unit 1) (value "0.22uF") (footprint "Capacitor_SMD:C_0402_1005Metric")
+    )
     (path "/00000000-0000-0000-0000-00005d0408df/00000000-0000-0000-0000-00005d5d3b8f"
       (reference "L100") (unit 1) (value "4.7uH") (footprint "Inductor_SMD:L_Vishay_IHLP-1212")
     )
@@ -1321,6 +1335,15 @@
     )
     (path "/00000000-0000-0000-0000-00005d0408df/00000000-0000-0000-0000-00005fb634b4"
       (reference "R102") (unit 1) (value "10K") (footprint "Resistor_SMD:R_0402_1005Metric")
+    )
+    (path "/00000000-0000-0000-0000-00005d0408df/5b9ee988-070f-486d-80f3-e7b79475c248"
+      (reference "R?") (unit 1) (value "30K") (footprint "Resistor_SMD:R_0402_1005Metric")
+    )
+    (path "/00000000-0000-0000-0000-00005d0408df/44a47b70-f6f6-475d-abbb-f42848cdf26b"
+      (reference "TP?") (unit 1) (value "TestPoint_Small") (footprint "")
+    )
+    (path "/00000000-0000-0000-0000-00005d0408df/bc65f4f9-cb45-49aa-973b-51008514c06b"
+      (reference "TP?") (unit 1) (value "TestPoint_Small") (footprint "")
     )
     (path "/00000000-0000-0000-0000-00005d0408df/00000000-0000-0000-0000-00005d5d6758"
       (reference "U100") (unit 1) (value "IMXRT1050") (footprint "Footprints:BGA-196_14x14_12.0x12.0mm")
