@@ -4,7 +4,7 @@
     "active_layer_preset": "",
     "auto_track_width": true,
     "hidden_nets": [],
-    "high_contrast_mode": 1,
+    "high_contrast_mode": 0,
     "net_color_mode": 1,
     "opacity": {
       "pads": 1.0,
@@ -14,12 +14,12 @@
     },
     "ratsnest_display_mode": 0,
     "selection_filter": {
-      "dimensions": false,
+      "dimensions": true,
       "footprints": true,
       "graphics": true,
-      "keepouts": false,
-      "lockedItems": true,
-      "otherItems": false,
+      "keepouts": true,
+      "lockedItems": false,
+      "otherItems": true,
       "pads": true,
       "text": true,
       "tracks": true,
@@ -63,7 +63,7 @@
       35,
       36
     ],
-    "visible_layers": "003ffff_80000007",
+    "visible_layers": "003ffff_80000005",
     "zone_display_mode": 0
   },
   "meta": {

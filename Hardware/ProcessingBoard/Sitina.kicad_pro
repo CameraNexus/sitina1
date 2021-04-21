@@ -120,7 +120,8 @@
         0.0,
         0.2,
         0.3,
-        0.6
+        0.6,
+        2.0
       ],
       "via_dimensions": [
         {
@@ -378,24 +379,7 @@
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
         "name": "CSI",
-        "nets": [
-          "/MCU/CSI_D0",
-          "/MCU/CSI_D1",
-          "/MCU/CSI_D10",
-          "/MCU/CSI_D11",
-          "/MCU/CSI_D12",
-          "/MCU/CSI_D13",
-          "/MCU/CSI_D2",
-          "/MCU/CSI_D3",
-          "/MCU/CSI_D4",
-          "/MCU/CSI_D5",
-          "/MCU/CSI_D6",
-          "/MCU/CSI_D7",
-          "/MCU/CSI_D8",
-          "/MCU/CSI_D9",
-          "/MCU/CSI_HSYNC",
-          "/MCU/CSI_VSYNC"
-        ],
+        "nets": [],
         "pcb_color": "rgb(0, 0, 194)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.1,
@@ -413,34 +397,7 @@
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
         "name": "LCD",
-        "nets": [
-          "/MCU/LCD_CLK",
-          "/MCU/LCD_CS",
-          "/MCU/LCD_D0",
-          "/MCU/LCD_D1",
-          "/MCU/LCD_D10",
-          "/MCU/LCD_D11",
-          "/MCU/LCD_D12",
-          "/MCU/LCD_D13",
-          "/MCU/LCD_D14",
-          "/MCU/LCD_D15",
-          "/MCU/LCD_D16",
-          "/MCU/LCD_D17",
-          "/MCU/LCD_D2",
-          "/MCU/LCD_D3",
-          "/MCU/LCD_D4",
-          "/MCU/LCD_D5",
-          "/MCU/LCD_D6",
-          "/MCU/LCD_D7",
-          "/MCU/LCD_D8",
-          "/MCU/LCD_D9",
-          "/MCU/LCD_DE",
-          "/MCU/LCD_DI",
-          "/MCU/LCD_EN",
-          "/MCU/LCD_HSYNC",
-          "/MCU/LCD_PWM",
-          "/MCU/LCD_VSYNC"
-        ],
+        "nets": [],
         "pcb_color": "rgb(0, 194, 0)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.1,
@@ -458,43 +415,7 @@
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
         "name": "SDRAM",
-        "nets": [
-          "/MCU/SDRAM_A0",
-          "/MCU/SDRAM_A1",
-          "/MCU/SDRAM_A10",
-          "/MCU/SDRAM_A11",
-          "/MCU/SDRAM_A12",
-          "/MCU/SDRAM_A2",
-          "/MCU/SDRAM_A3",
-          "/MCU/SDRAM_A4",
-          "/MCU/SDRAM_A5",
-          "/MCU/SDRAM_A6",
-          "/MCU/SDRAM_A7",
-          "/MCU/SDRAM_A8",
-          "/MCU/SDRAM_A9",
-          "/MCU/SDRAM_BA0",
-          "/MCU/SDRAM_BA1",
-          "/MCU/SDRAM_D0",
-          "/MCU/SDRAM_D1",
-          "/MCU/SDRAM_D10",
-          "/MCU/SDRAM_D11",
-          "/MCU/SDRAM_D12",
-          "/MCU/SDRAM_D13",
-          "/MCU/SDRAM_D14",
-          "/MCU/SDRAM_D15",
-          "/MCU/SDRAM_D2",
-          "/MCU/SDRAM_D3",
-          "/MCU/SDRAM_D4",
-          "/MCU/SDRAM_D5",
-          "/MCU/SDRAM_D6",
-          "/MCU/SDRAM_D7",
-          "/MCU/SDRAM_D8",
-          "/MCU/SDRAM_D9",
-          "/MCU/SDRAM_DM0",
-          "/MCU/SDRAM_DM1",
-          "/SDRAM/SDRAM_RAS",
-          "/SDRAM/SDRAM_WE"
-        ],
+        "nets": [],
         "pcb_color": "rgb(0, 194, 194)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.1,
@@ -586,19 +507,23 @@
     ],
     [
       "00000000-0000-0000-0000-00005d0408df",
-      "MCU"
+      "mcu"
     ],
     [
       "00000000-0000-0000-0000-00005f87aa48",
-      "connector"
+      "cb_interface"
     ],
     [
       "00000000-0000-0000-0000-00005dc83261",
-      "SDRAM"
+      "sdram"
     ],
     [
       "00000000-0000-0000-0000-00005f683ba6",
       "power"
+    ],
+    [
+      "42e6c0e8-418a-4152-bbad-6ac64a4bf222",
+      "grip_interface"
     ]
   ],
   "text_variables": {}

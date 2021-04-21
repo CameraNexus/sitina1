@@ -3,9 +3,9 @@
   (paper "A4")
 
   (title_block
-    (title "Sitina Ne")
-    (rev "R0P2")
-    (company "ZephRay")
+    (title "SitinaNe")
+    (rev "R0.2")
+    (company "Wenting")
   )
 
   (lib_symbols
