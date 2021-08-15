@@ -48,7 +48,13 @@
           "min_clearance": 0.19999999999999998
         }
       },
-      "diff_pair_dimensions": [],
+      "diff_pair_dimensions": [
+        {
+          "gap": 0.0,
+          "via_gap": 0.0,
+          "width": 0.0
+        }
+      ],
       "drc_exclusions": [],
       "meta": {
         "filename": "board_design_settings.json",
@@ -108,7 +114,8 @@
         "min_through_hole_diameter": 0.19999999999999998,
         "min_track_width": 0.09,
         "min_via_annular_width": 0.049999999999999996,
-        "min_via_diameter": 0.44999999999999996
+        "min_via_diameter": 0.44999999999999996,
+        "use_height_for_length_calcs": true
       },
       "track_widths": [
         0.0,
@@ -313,6 +320,7 @@
     ],
     "rule_severities": {
       "bus_definition_conflict": "error",
+      "bus_entry_needed": "error",
       "bus_label_syntax": "error",
       "bus_to_bus_conflict": "error",
       "bus_to_net_conflict": "error",
@@ -366,10 +374,106 @@
         "via_diameter": 0.45,
         "via_drill": 0.2,
         "wire_width": 6.0
+      },
+      {
+        "bus_width": 12.0,
+        "clearance": 0.1,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "CSI",
+        "nets": [
+          "/afe/CSI_D0",
+          "/afe/CSI_D1",
+          "/afe/CSI_D10",
+          "/afe/CSI_D11",
+          "/afe/CSI_D12",
+          "/afe/CSI_D13",
+          "/afe/CSI_D2",
+          "/afe/CSI_D3",
+          "/afe/CSI_D4",
+          "/afe/CSI_D5",
+          "/afe/CSI_D6",
+          "/afe/CSI_D7",
+          "/afe/CSI_D8",
+          "/afe/CSI_D9",
+          "/afe/CSI_HSYNC",
+          "/afe/CSI_PCLK",
+          "/afe/CSI_VSYNC"
+        ],
+        "pcb_color": "rgb(194, 0, 194)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.1,
+        "via_diameter": 0.45,
+        "via_drill": 0.2,
+        "wire_width": 6.0
+      },
+      {
+        "bus_width": 12.0,
+        "clearance": 0.1,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "LVDS",
+        "nets": [
+          "/afe/AFE_CKA",
+          "/afe/AFE_CKP",
+          "/afe/AFE_D0N",
+          "/afe/AFE_D0P",
+          "/afe/AFE_D1N",
+          "/afe/AFE_D1P",
+          "/afe/AFE_D2N",
+          "/afe/AFE_D2P",
+          "/afe/AFE_D3N",
+          "/afe/AFE_D3P"
+        ],
+        "pcb_color": "rgb(0, 194, 0)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.1,
+        "via_diameter": 0.45,
+        "via_drill": 0.2,
+        "wire_width": 6.0
+      },
+      {
+        "bus_width": 12.0,
+        "clearance": 0.1,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "TCON",
+        "nets": [
+          "/afe/AFE_FDG",
+          "/afe/AFE_H1_A",
+          "/afe/AFE_H1_B",
+          "/afe/AFE_H2_A",
+          "/afe/AFE_H2_B",
+          "/afe/AFE_HL_A",
+          "/afe/AFE_HL_B",
+          "/afe/AFE_RG_A",
+          "/afe/AFE_RG_B",
+          "/afe/AFE_V1",
+          "/afe/AFE_V2",
+          "/afe/AFE_V2_3rd"
+        ],
+        "pcb_color": "rgb(0, 194, 194)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.1,
+        "via_diameter": 0.45,
+        "via_drill": 0.2,
+        "wire_width": 6.0
       }
     ],
     "meta": {
-      "version": 0
+      "version": 1
     },
     "net_colors": null
   },
@@ -385,6 +489,7 @@
     "page_layout_descr_file": ""
   },
   "schematic": {
+    "annotate_start_num": 0,
     "drawing": {
       "default_bus_thickness": 12.0,
       "default_junction_size": 36.0,
@@ -411,7 +516,8 @@
       "meta": {
         "version": 0
       },
-      "model_mode": 0
+      "model_mode": 0,
+      "workbook_filename": ""
     },
     "page_layout_descr_file": "",
     "plot_directory": "",
@@ -422,7 +528,7 @@
   },
   "sheets": [
     [
-      "e44d9ae1-a4c3-4895-9f3f-7dc745dd5ca1",
+      "e6cd5e79-4483-4353-a156-ca63508cadf0",
       ""
     ],
     [

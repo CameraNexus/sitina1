@@ -1,4 +1,6 @@
-(kicad_sch (version 20210126) (generator eeschema)
+(kicad_sch (version 20210621) (generator eeschema)
+
+  (uuid d838b6b7-fc8a-4ae7-af1c-6036cfbb08a1)
 
   (paper "A4")
 
@@ -467,7 +469,7 @@
           (number "3" (effects (font (size 1.27 1.27))))
         )
         (pin input line (at -10.16 -2.54 0) (length 2.54)
-          (name "~SHDN~" (effects (font (size 1.27 1.27))))
+          (name "~{SHDN}" (effects (font (size 1.27 1.27))))
           (number "4" (effects (font (size 1.27 1.27))))
         )
         (pin power_in line (at -10.16 2.54 0) (length 2.54)
