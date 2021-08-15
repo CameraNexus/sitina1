@@ -401,7 +401,6 @@
           "/afe/CSI_D8",
           "/afe/CSI_D9",
           "/afe/CSI_HSYNC",
-          "/afe/CSI_PCLK",
           "/afe/CSI_VSYNC"
         ],
         "pcb_color": "rgb(194, 0, 194)",
@@ -422,7 +421,6 @@
         "microvia_drill": 0.1,
         "name": "LVDS",
         "nets": [
-          "/afe/AFE_CKA",
           "/afe/AFE_CKP",
           "/afe/AFE_D0N",
           "/afe/AFE_D0P",
@@ -503,16 +501,19 @@
       "intersheets_ref_show": false,
       "intersheets_ref_suffix": "",
       "junction_size_choice": 3,
+      "label_size_ratio": 0.3,
       "pin_symbol_size": 25.0,
       "text_offset_ratio": 0.3
     },
     "legacy_lib_dir": "",
     "legacy_lib_list": [],
     "meta": {
-      "version": 0
+      "version": 1
     },
     "net_format_name": "",
     "ngspice": {
+      "fix_include_paths": true,
+      "fix_passive_vals": false,
       "meta": {
         "version": 0
       },
