@@ -39,6 +39,8 @@
 #define ST7701_NORON     0x13  ///< Normal display mode on
 #define ST7701_INVOFF    0x20  ///< Display inversion off (normal)
 #define ST7701_INVON     0x21  ///< Display inversion on
+#define ST7701_ALLPOFF   0x22  ///< All pixel off
+#define ST7701_ALLPON    0x23  ///< All pixel on
 #define ST7701_DISPOFF   0x28  ///< Display off
 #define ST7701_DISPON    0x29  ///< Display on
 #define ST7701_TEON      0x35  ///< Tearing effect line on

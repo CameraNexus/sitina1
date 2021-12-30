@@ -1,5 +1,5 @@
 //
-// ringbuffer.c: A simple interrupt save ring buffer implementation
+// ringbuffer.c: A simple interrupt safe ring buffer implementation
 //
 // Copyright 2021 Wenting Zhang <zephray@outlook.com>
 //

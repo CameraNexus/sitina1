@@ -768,7 +768,7 @@ int usbsup_recvbuf(char *buf, int maxSize) {
 }
 
 void usbsup_waitconnect(void) {
-    while ((!s_cdcVcom.attach) && (!s_cdcVcom.startTransactions));
+    while ((!s_cdcVcom.attach) || (!s_cdcVcom.startTransactions));
     // Wait a while before continue
     SDK_DelayAtLeastUs(5000, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
 }

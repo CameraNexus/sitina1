@@ -48,6 +48,10 @@
 #include "fb.h"
 #include "lcd.h"
 #include "storage.h"
+#include "ui.h"
+#include "afe.h"
+
+extern const unsigned char gImage_test[614408];
 
 /*
  * @brief   Application entry point.
@@ -65,12 +69,37 @@ int main(void) {
     syslog_init();
     usbsup_init();
 
-    //lcd_init();
-    //fb_init();
-    //lcd_set_bl(127);
+    lcd_init();
+    memset(framebuffer, 0x00, 614408);
+    fb_init();
+    lcd_set_bl(50);
+
+    ui_init();
+    /*uint8_t *rdptr = gImage_test;
+    uint8_t *wrptr = framebuffer;
+    for (int i = 0; i < 614408/2; i++) {
+        uint8_t i1 = *rdptr++;
+        uint8_t i2 = *rdptr++;
+        *wrptr++ = i2;
+        *wrptr++ = i1;
+    }*/
+    /*uint16_t *wrptr = framebuffer;
+    for (int i = 0; i < 640; i++) {
+        int c6 = i / 10;
+        int c5 = c6 / 2;
+        uint16_t c = (c5 << 11) | (c6 << 5) | (c5);
+        for (int j = 0; j < 480; j++) {
+            *wrptr++ = c;
+        }
+    }*/
+    //memcpy(framebuffer, gImage_test, 614408);
 
     // Initialize SD card
     //storage_mount();
+
+    // Initialize AFE
+    //afe_init();
+    //afe_start();
 
     usbsup_waitconnect();
     // Start the shell

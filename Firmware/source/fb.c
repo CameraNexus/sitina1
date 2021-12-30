@@ -30,7 +30,8 @@
 
 // Framebuffer in the NCACHE_REGION, last 1MB of the SDRAM
 // Occupies 640*480*2 = 614KB
-uint8_t *framebuffer = (uint8_t *)0x81f00000;
+uint16_t *framebuffer = (uint8_t *)0x81f00000;
+//uint16_t *framebuffer = (uint8_t *)0x20200000;
 
 void fb_init(void) {
     // Reset LCDIF
@@ -41,8 +42,8 @@ void fb_init(void) {
     CLOCK_DisableClock(kCLOCK_LcdPixel);
     CLOCK_DisableClock(kCLOCK_Lcd);
 
-    NVIC_SetPriority(LCDIF_IRQn, 3);
-    EnableIRQ(LCDIF_IRQn);
+    //NVIC_SetPriority(LCDIF_IRQn, 3);
+    //EnableIRQ(LCDIF_IRQn);
 
     // Initialize LCDIF
     elcdif_rgb_mode_config_t elcdif_config = {0};
@@ -75,32 +76,36 @@ void LCDIF_IRQHandler(void) {
     // ?
 }
 
+void fb_color(uint16_t c) {
+    uint16_t *wrptr = (uint16_t *)framebuffer;
+    for (int i = 0; i < FB_HEIGHT * FB_WIDTH; i++) {
+        *wrptr++ = c;
+    }
+}
+
 #include "nano_shell.h"
 #include "command/command.h"
 #include "shell_io/shell_io.h"
 
 int fb_cmd(const shell_cmd_t *pcmd, int argc, char *const argv[]) {
     if (argc == 1) {
-        shell_printf("fb command expects an operation\n");
+        shell_printf("fb command expects an operation\r\n");
         return 1;
     }
     if (strcmp(argv[1], "color") == 0) {
         if (argc != 5) {
-            shell_printf("usage: fb color <r> <g> <b>\n");
+            shell_printf("usage: fb color <r> <g> <b>\r\n");
             return 1;
         }
         int r = atoi(argv[2]);
         int g = atoi(argv[3]);
         int b = atoi(argv[4]);
         int c = ((r & 0xf8) << 8) | ((g & 0xfc) << 3) | ((b & 0xf8) >> 3);
-        shell_printf("Setting color to %04x\n", c);
-        uint16_t *wrptr = (uint16_t *)framebuffer;
-        for (int i = 0; i < FB_HEIGHT * FB_WIDTH; i++) {
-            *wrptr++ = (uint16_t)c;
-        }
+        shell_printf("Setting color to %04x\r\n", c);
+        fb_color((uint16_t)c);
         return 0;
     }
-    shell_printf("invalid operation\n");
+    shell_printf("invalid operation\r\n");
     return 1;
 }
 

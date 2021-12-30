@@ -86,26 +86,64 @@ void lcd_init_pwm(void) {
     PWM_StartTimer(LCD_BL_PWM, LCD_BL_PWM_CTRL_MOD);
 }
 
+#define LCD_SPI_9B
+
 // This function is only used during initialization, doesn't need to be fast
-void lcd_write_byte(uint8_t byte, int dc) {
+#if defined(LCD_SPI_9B)
+void lcd_write(uint8_t byte, int dc) {
+    //SDK_DelayAtLeastUs(1, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
     GPIO_PinWrite(LCD_MOSI_GPIO, LCD_MOSI_GPIO_PIN, dc);
     GPIO_PinWrite(LCD_SCK_GPIO, LCD_SCK_GPIO_PIN, 1);
+    //SDK_DelayAtLeastUs(1, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
     for (int i = 0; i < 8; i++) {
         GPIO_PinWrite(LCD_SCK_GPIO, LCD_SCK_GPIO_PIN, 0);
         GPIO_PinWrite(LCD_MOSI_GPIO, LCD_MOSI_GPIO_PIN, byte & 0x80);
+        //SDK_DelayAtLeastUs(1, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
         GPIO_PinWrite(LCD_SCK_GPIO, LCD_SCK_GPIO_PIN, 1);
+        //SDK_DelayAtLeastUs(1, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
+        byte <<= 1;
+    }
+    GPIO_PinWrite(LCD_SCK_GPIO, LCD_SCK_GPIO_PIN, 0);
+    //SDK_DelayAtLeastUs(1, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
+}
+#elif defined(LCD_SPI_16B)
+void lcd_write_byte(uint8_t byte) {
+    for (int i = 0; i < 8; i++) {
+        GPIO_PinWrite(LCD_SCK_GPIO, LCD_SCK_GPIO_PIN, 0);
+        GPIO_PinWrite(LCD_MOSI_GPIO, LCD_MOSI_GPIO_PIN, byte & 0x80);
+        SDK_DelayAtLeastUs(1, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
+        GPIO_PinWrite(LCD_SCK_GPIO, LCD_SCK_GPIO_PIN, 1);
+        SDK_DelayAtLeastUs(1, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
         byte <<= 1;
     }
     GPIO_PinWrite(LCD_SCK_GPIO, LCD_SCK_GPIO_PIN, 0);
 }
 
-void lcd_write_cmd(const uint8_t cmd, const int count, const uint8_t *params) {
+void lcd_write(uint8_t byte, int dc) {
     GPIO_PinWrite(LCD_CS_GPIO, LCD_CS_GPIO_PIN, 0);
-    lcd_write_byte(cmd, 0);
+    SDK_DelayAtLeastUs(1, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
+    lcd_write_byte(dc ? 0x40 : 0x00);
+    lcd_write_byte(byte);
+    GPIO_PinWrite(LCD_CS_GPIO, LCD_CS_GPIO_PIN, 1);
+    SDK_DelayAtLeastUs(1, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
+}
+#endif
+
+void lcd_write_cmd(const uint8_t cmd, const int count, const uint8_t *params) {
+#if (defined(LCD_SPI_9B) || defined(LCD_SPI_8B))
+    GPIO_PinWrite(LCD_CS_GPIO, LCD_CS_GPIO_PIN, 0);
+    lcd_write(cmd, 0);
     for (int i = 0; i < count; i++) {
-        lcd_write_byte(cmd, 1);
+        lcd_write(params[i], 1);
     }
     GPIO_PinWrite(LCD_CS_GPIO, LCD_CS_GPIO_PIN, 1);
+#elif defined(LCD_SPI_16B)
+    for (int i = 0; i < count; i++) {
+        lcd_write(cmd, 0);
+        lcd_write(i, 0);
+        lcd_write(params[i], 1);
+    }
+#endif
 }
 
 // Probably shouldn't be called, as the 7701 shares the reset line with 9990
@@ -121,47 +159,61 @@ void st7701s_init(void) {
     ST7701S_CMD(ST7701_SLPOUT);
     SDK_DelayAtLeastUs(5000, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
 
+    ST7701S_CMD(ST7701_CND2BKxSEL, 0x77, 0x01, 0x00, 0x00, 0x13);
+    ST7701S_CMD(0xEF, 0x08);
+
     // Command2, BK0
     ST7701S_CMD(ST7701_CND2BKxSEL, 0x77, 0x01, 0x00, 0x00, ST7701_CMD2BK0SEL);
-    ST7701S_CMD(ST7701_BK0_LNESET, 0x3B, 0x00);
-    ST7701S_CMD(ST7701_BK0_PORCTRL, 0x14, 0x0A);  // vbp, vfp
-    ST7701S_CMD(ST7701_BK0_INVSEL, 0x21, 0x08);
-    ST7701S_CMD(ST7701_BK0_PVGAMCTRL, 0x00, 0x11, 0x18, 0x0E, 0x11, 0x06, 0x07, 0x08, 0x07, 0x22, 0x04, 0x12, 0x0F, 0xAA, 0x31, 0x18);
-    ST7701S_CMD(ST7701_BK0_NVGAMCTRL, 0x00, 0x11, 0x19, 0x0E, 0x12, 0x07, 0x08, 0x08, 0x08, 0x22, 0x04, 0x11, 0x11, 0xA9, 0x32, 0x18);
+    ST7701S_CMD(ST7701_BK0_LNESET, 0x4F, 0x00); // 640 Line
+    ST7701S_CMD(ST7701_BK0_PORCTRL, 0x10, 0x0C);  // vbp, vfp
+    ST7701S_CMD(ST7701_BK0_INVSEL, 0x01, 0x14);
+    ST7701S_CMD(ST7701_BK0_SDIR, 0x04);
 
+    ST7701S_CMD(ST7701_BK0_RGBCTRL, 0x00, 0x08, 0x02); // DE mode, VS/HS low active, data inp on posedge, EN high active
+    //ST7701S_CMD(ST7701_BK0_RGBCTRL, 0x80, 0x08, 0x02); // HV mode, VS/HS low active, data inp on posedge, EN high active
+
+    ST7701S_CMD(0xCC, 0x10);
+
+    ST7701S_CMD(ST7701_BK0_PVGAMCTRL, 0x0A, 0x18, 0x1E, 0x12, 0x16, 0x0C, 0x0E, 0x0D, 0x0C, 0x29, 0x06, 0x14, 0x13, 0x29, 0x33, 0x1C);
+    ST7701S_CMD(ST7701_BK0_NVGAMCTRL, 0x0A, 0x19, 0x21, 0x0A, 0x0C, 0x00, 0x0C, 0x03, 0x03, 0x23, 0x01, 0x0E, 0x0C, 0x27, 0x2B, 0x1C);
     // Command2, BK1
     ST7701S_CMD(ST7701_CND2BKxSEL, 0x77, 0x01, 0x00, 0x00, ST7701_CMD2BK1SEL);
-    ST7701S_CMD(ST7701_BK1_VRHS, 0x60);
-    ST7701S_CMD(ST7701_BK1_VCOM, 0x30);
-    ST7701S_CMD(ST7701_BK1_VGHSS, 0x87);
+    ST7701S_CMD(ST7701_BK1_VRHS, 0x5D);
+    ST7701S_CMD(ST7701_BK1_VCOM, 0x48);
+    ST7701S_CMD(ST7701_BK1_VGHSS, 0x84);
     ST7701S_CMD(ST7701_BK1_TESTCMD, 0x80);
-    ST7701S_CMD(ST7701_BK1_VGLS, 0x49);
+    ST7701S_CMD(ST7701_BK1_VGLS, 0x4D);
     ST7701S_CMD(ST7701_BK1_PWCTLR1, 0x85);
-    ST7701S_CMD(ST7701_BK1_PWCTLR2, 0x21);
+    ST7701S_CMD(ST7701_BK1_PWCTLR2, 0x20);
     ST7701S_CMD(ST7701_BK1_SPD1, 0x78);
     ST7701S_CMD(ST7701_BK1_SPD2, 0x78);
 
-    // Todo: How to calibrate the gamma for the screen?
-    /*ST7701S_CMD(0xE0, 0x00, 0x1B, 0x02);
-    ST7701S_CMD(0xE1, 0x08, 0xA0, 0x00, 0x00, 0x07, 0xA0, 0x00, 0x00, 0x00, 0x44, 0x44);
-    ST7701S_CMD(0xE2, 0x11, 0x11, 0x44, 0x44, 0xED, 0xA0, 0x00, 0x00, 0xEC, 0xA0, 0x00, 0x00);
-    ST7701S_CMD(0xE3, 0x00, 0x00, 0x11, 0x11);
+    ST7701S_CMD(0xD0, 0x88);
+
+    ST7701S_CMD(0xE0, 0x00, 0x00, 0x02);
+    ST7701S_CMD(0xE1, 0x06, 0xA0, 0x08, 0xA0, 0x05, 0xA0, 0x07, 0xA0, 0x00, 0x44, 0x44);
+    ST7701S_CMD(0xE2, 0x20, 0x20, 0x44, 0x44, 0x96, 0xA0, 0x00, 0x00, 0x96, 0xA0, 0x00, 0x00);
+    ST7701S_CMD(0xE3, 0x00, 0x00, 0x22, 0x22);
     ST7701S_CMD(0xE4, 0x44, 0x44);
-    ST7701S_CMD(0xE5, 0x0A, 0xE9, 0xD8, 0xA0, 0x0C, 0xEB, 0xD8, 0xA0, 0x0E, 0xED, 0xD8, 0xA0, 0x10, 0xEF, 0xD8, 0xA0);
-    ST7701S_CMD(0xE6, 0x00, 0x00, 0x11, 0x11);
+    ST7701S_CMD(0xE5, 0x0D, 0x91, 0x0A, 0xA0, 0x0F, 0x93, 0x0A, 0xA0, 0x09, 0x8D, 0x0A, 0xA0, 0x0B, 0x8F, 0x0A, 0xA0);
+    ST7701S_CMD(0xE6, 0x00, 0x00, 0x22, 0x22);
     ST7701S_CMD(0xE7, 0x44, 0x44);
-    ST7701S_CMD(0xE8, 0x09, 0xE8, 0xD8, 0xA0, 0x0B, 0xEA, 0xD8, 0xA0, 0x0D, 0xEC, 0xD8, 0xA0, 0x0F, 0xEE, 0xD8, 0xA0);
-    ST7701S_CMD(0xEB, 0x02, 0x00, 0xE4, 0xE4, 0x88, 0x00, 0x40);
-    ST7701S_CMD(0xEC, 0x3C, 0x00);
-    ST7701S_CMD(0xED, 0xAB, 0x89, 0x76, 0x54, 0x02, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0x20, 0x45, 0x67, 0x98, 0xBA);*/
+    ST7701S_CMD(0xE8, 0x0C, 0x90, 0x0A, 0xA0, 0x0E, 0x92, 0x0A, 0xA0, 0x08, 0x8C, 0x0A, 0xA0, 0x0A, 0x8E, 0x0A, 0xA0);
+    ST7701S_CMD(0xE9, 0x36, 0x00);
+    ST7701S_CMD(0xEB, 0x00, 0x01, 0xE4, 0xE4, 0x44, 0x88, 0x40);
+    ST7701S_CMD(0xED, 0xFF, 0x45, 0x67, 0xFA, 0x01, 0x2B, 0xCF, 0xFF, 0xFF, 0xFC, 0xB2, 0x10, 0xAF, 0x76, 0x54, 0xFF);
+    ST7701S_CMD(0xEF, 0x10, 0x0D, 0x04, 0x08, 0x3F, 0x1F);
 
     ST7701S_CMD(ST7701_CND2BKxSEL, 0x77, 0x01, 0x00, 0x00, ST7701_CMD2BKxSEL_NONE);
 
+    ST7701S_CMD(ST7701_MADCTL, 0x00);
     // set pixel format
     ST7701S_CMD(ST7701_COLMOD, 0x50); // 0x50: RGB565
 
     // display on
     ST7701S_CMD(ST7701_DISPON);
+
+    //ST7701S_CMD(ST7701_ALLPON);
 }
 
 void lcd_init(void) {
@@ -181,7 +233,7 @@ void lcd_set_bl(uint8_t brightness) {
 
 int lcd_cmd(const shell_cmd_t *pcmd, int argc, char *const argv[]) {
     if (argc == 1) {
-        shell_printf("lcd command expects an operation\n");
+        shell_printf("lcd command expects an operation\r\n");
         return 1;
     }
     if (strcmp(argv[1], "reset") == 0) {
@@ -191,18 +243,18 @@ int lcd_cmd(const shell_cmd_t *pcmd, int argc, char *const argv[]) {
     }
     if (strcmp(argv[1], "brightness") == 0) {
         if (argc != 3) {
-            shell_printf("lcd brightness expects a parameter\n");
+            shell_printf("lcd brightness expects a parameter\r\n");
             return 1;
         }
         int brightness = atoi(argv[2]);
-        if ((brightness > 255) || (brightness < 0)) {
-            shell_printf("invalid brightness value\n");
+        if ((brightness > 100) || (brightness < 0)) {
+            shell_printf("invalid brightness value\r\n");
             return 1;
         }
         lcd_set_bl(brightness);
         return 0;
     }
-    shell_printf("invalid operation\n");
+    shell_printf("invalid operation\r\n");
     return 1;
 }
 

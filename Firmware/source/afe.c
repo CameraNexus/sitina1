@@ -45,6 +45,9 @@
 // XV3 - V2_3rd / VSG
 // XV4 - FDG
 
+// All the timing calculation are based on 24 MHz clock! (48 MP/s)
+// Rated maximum data rate of KAI-11000/11002: 28 MHz (56 MP/s)
+
 // These settings only affect the memory layout.
 // Actual used count could be less.
 #define AFE_FIELD_COUNT (1)
@@ -62,17 +65,18 @@ typedef enum {
     R_VPAT
 } REG_TYPE;
 
-// Only AFE base registers are saved in the copy
-#define REG_COPY_COUNT 0xd8
-static REG_COPY reg_copy[REG_COPY_COUNT];
-
+#define CCD_TVCCD_PIX 84 // At 24MHz, 3.5us = 84 pixels
+#define CCD_THD_PIX 84
 #define CCD_DUMMY_PIX 4
 #define CCD_DARK_PIX 19
 #define CCD_BUFFER_PIX 13
 #define CCD_ACTIVE_PIX 2004
-#define CCD_LINE_WIDTH (CCD_DUMMY_PIX + CCD_DARK_PIX + CCD_BUFFER_PIX + CCD_ACTIVE_PIX)
+#define CCD_LINE_WIDTH (CCD_TVCCD_PIX + CCD_THD_PIX + CCD_DUMMY_PIX + CCD_DARK_PIX + CCD_BUFFER_PIX + CCD_ACTIVE_PIX)
+#define CCD_HBLK_LENGTH (CCD_TVCCD_PIX + CCD_THD_PIX)
+#define CCD_CLPOB_BEGIN (CCD_HBLK_LENGTH + CCD_DUMMY_PIX + 1)
+#define CCD_CLPOB_END (CCD_HBLK_LENGTH + CCD_DUMMY_PIX + CCD_DARK_PIX - 1)
 
-#define CCD_SWEEP_LINES (-1) // TO BE FILLED IN
+#define CCD_SWEEP_LINES (-1) // TODO
 #define CCD_DUMMY_READ_LINES (2)
 #define CCD_VSG_LINES (1)
 
@@ -96,6 +100,12 @@ void afe_init_io(void) {
     GPIO_PinInit(AFE_MOSI_GPIO, AFE_MOSI_GPIO_PIN, &config);
     GPIO_PinInit(AFE_SCK_GPIO, AFE_SCK_GPIO_PIN, &config);
     GPIO_PinInit(AFE_CS_GPIO, AFE_CS_GPIO_PIN, &config);
+    GPIO_PinInit(AFE_RST_GPIO, AFE_RST_GPIO_PIN, &config);
+}
+
+static void afe_delay() {
+    volatile int x = 10;
+    while (x--);
 }
 
 // Clock high on idle, latch on rising edge, LSB first
@@ -103,8 +113,10 @@ void afe_write_byte(uint8_t byte) {
     for (int i = 0; i < 8; i++) {
         GPIO_PinWrite(AFE_SCK_GPIO, AFE_SCK_GPIO_PIN, 0);
         GPIO_PinWrite(AFE_MOSI_GPIO, AFE_MOSI_GPIO_PIN, byte & 0x01);
+        afe_delay();
         GPIO_PinWrite(AFE_SCK_GPIO, AFE_SCK_GPIO_PIN, 1);
         byte >>= 1;
+        afe_delay();
     }
 }
 
@@ -117,31 +129,6 @@ void afe_write_reg(uint32_t reg, uint32_t val) {
     afe_write_byte((val >> 12) & 0xff);
     afe_write_byte((val >> 20) & 0xff);
     GPIO_PinWrite(AFE_CS_GPIO, AFE_CS_GPIO_PIN, 1);
-}
-
-void afe_set_reg(uint32_t reg, uint32_t offset, uint32_t mask, uint32_t val,
-        bool update_immediately) {
-    reg_copy[reg].value &= ~(mask << offset);
-    reg_copy[reg].value |= (val & mask) << offset;
-    if (update_immediately) {
-        afe_write_reg(reg, reg_copy[reg].value);
-        reg_copy[reg].dirty = false;
-    }
-    else {
-        reg_copy[reg].dirty = true;
-    }
-}
-
-void afe_init_reg_copy(void) {
-    for (int i = 0; i < REG_COPY_COUNT; i++)
-        reg_copy[i].dirty = false;
-    // Initial values
-    reg_copy[0x30].value = 0x100 | (20 << 8);
-    reg_copy[0x31].value = 0x100 | (20 << 8);
-    reg_copy[0x32].value = 0x100 | (20 << 8);
-    reg_copy[0x33].value = 0x100 | (20 << 8);
-    reg_copy[0x34].value = 0x100 | (10 << 8);
-    reg_copy[0x7a].value = 0xff00;
 }
 
 void afe_set_conf_reg(REG_TYPE t, int group, uint32_t offset, uint32_t val) {
@@ -158,42 +145,56 @@ void afe_set_conf_reg(REG_TYPE t, int group, uint32_t offset, uint32_t val) {
 void afe_init(void) {
     afe_init_io();
 
+    SDK_DelayAtLeastUs(500, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
+    GPIO_PinWrite(AFE_RST_GPIO, AFE_RST_GPIO_PIN, 0);
+    SDK_DelayAtLeastUs(500, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
+    GPIO_PinWrite(AFE_RST_GPIO, AFE_RST_GPIO_PIN, 1);
+    SDK_DelayAtLeastUs(500, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
+
     afe_write_reg(0x10, 0x1); // Software reset
+    SDK_DelayAtLeastUs(500, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
 
     // Define the standby status of the AD9990 vertical outputs
-    afe_set_reg(AFE_REG_VT_STBY12, 0x1ff8000, true);
-    afe_set_reg(AFE_REG_VT_STBY3, 0x1ff8000, true);
-    afe_set_reg(AFE_REG_VSGSELECT, 0xff8000, true);
+    afe_write_reg(0x25, 0x1ff8000); // VT_STBY12
+    afe_write_reg(0x26, 0x1ff8000); // VT_STBY3
+    afe_write_reg(0x1c, 0xff8000); // VSGSELECT
 
     // Place the AFE into normal operation
-    afe_set_reg(AFE_REG_VSGSELECT, 0x0, true);
+    afe_write_reg(0x00, 0x0); // Standby
 
     // Configure timing
 
     // Setting H driving strength to 4.3mA
-    afe_set_reg(AFE_REG_H1ADRV, 0x1, false);
-    afe_set_reg(AFE_REG_H2ADRV, 0x1, false);
-    afe_set_reg(AFE_REG_HLADRV, 0x1, false);
-    afe_set_reg(AFE_REG_RGADRV, 0x1, true);
-    afe_set_reg(AFE_REG_H1BDRV, 0x1, false);
-    afe_set_reg(AFE_REG_H2BDRV, 0x1, false);
-    afe_set_reg(AFE_REG_HLBDRV, 0x1, false);
-    afe_set_reg(AFE_REG_RGBDRV, 0x1, true);
+    /*afe_write_reg(0x36,
+            (1 << 0) | // H1ADRV = 4.3mA
+            (1 << 4) | // H2ADRV = 4.3mA
+            (1 << 16) | // HLADRV = 4.3mA
+            (1 << 20)); // RGADRV = 4.3mA
+    afe_write_reg(0x37,
+            (1 << 0) | // H1BDRV = 4.3mA
+            (1 << 4) | // H2BDRV = 4.3mA
+            (1 << 16) | // HLBDRV = 4.3mA
+            (1 << 20)); // RGBDRV = 4.3mA
 
     // HCLK mode 1: H1A = H1B, H2A = H2B = inverse of H1
-    afe_set_reg(AFE_REG_HCLKMODE, 0x1, true);
+    afe_write_reg(0x24, 0x1);
 
     // Data output
-    afe_set_reg(AFE_REG_DOUTPHASEP, 0x0, false);
-    afe_set_reg(AFE_REG_DOUTPHASEN, 0x10, false); // In SDR mode, must be P+16
-    afe_set_reg(AFE_REG_DCLK_EDGEMODE, 0x3, true); // SDR output
+    afe_write_reg(0x39,
+            (0 << 0) | // DOUTPHASEP = 0
+            (16 << 8) | // DOUTPHASEN = 16, in SDR mode, must be P+16
+            (3 << 20)); // SDR output
 
-    afe_set_reg(AFE_REG_VSGSELECT, 0x4, true); // Select XV3 as VSG output
+    afe_write_reg(0x1c,
+            (1 << 2)); // Select XV3 as VSG output
 
-    afe_set_reg(AFE_REG_VPATNUM, AFE_VPAT_COUNT, false);
-    afe_set_reg(AFE_REG_SEQNUM, AFE_VSEQ_COUNT, true);
-    afe_set_reg(AFE_REG_MODE, AFE_FIELD_COUNT, true);
-    afe_set_reg(AFE_REG_FIELD0, 0x0, true); // Use field 0
+    afe_write_reg(0x28,
+            (AFE_VPAT_COUNT << 0) | // VPATNUM
+            (AFE_VSEQ_COUNT << 5)); // SEQNUM
+    afe_write_reg(0x2a,
+            (AFE_FIELD_COUNT << 0)); // MODE
+    afe_write_reg(0x2b,
+            (0 << 0)); // FIELD0 = 0
 
     SDK_DelayAtLeastUs(500, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
 
@@ -225,18 +226,103 @@ void afe_init(void) {
     afe_set_conf_reg(R_FIELD, 0, 0x0e, 8191); // Disable PBLK region 2
     afe_set_conf_reg(R_FIELD, 0, 0x0f, 8191); // Disable PBLK region 3
 
+    // Configure vertical sequence 0: fast dump
+    //afe_set_conf_reg(R_VSEQ, 0, );
+
+    // Configure vertical sequence 1: image readout
+    afe_set_conf_reg(R_VSEQ, 1, 0x00,
+            (1 << 0) | // CLPOB starts as invalid
+            (0 << 1)); // PBLK starts as valid
+    afe_set_conf_reg(R_VSEQ, 1, 0x01, CCD_LINE_WIDTH); // HD even line length
+    afe_set_conf_reg(R_VSEQ, 1, 0x02, CCD_LINE_WIDTH); // HD odd line length
+    afe_set_conf_reg(R_VSEQ, 1, 0x03, 0); // VSG pulse use toggle 1, toggle 2
+    afe_set_conf_reg(R_VSEQ, 1, 0x04, CCD_LINE_WIDTH); // LASTREPLEN_A
+    afe_set_conf_reg(R_VSEQ, 1, 0x05, 0); // LASTREPLEN C/D
+    afe_set_conf_reg(R_VSEQ, 1, 0x06,
+            (0 << 0) | // XV1 (V1) starts with low
+            (1 << 1) | // XV2 (V2) starts with high
+            (0 << 2) | // XV3 (VSG) starts with low
+            (0 << 2)); // XV4 (FDG) starts with low
+    afe_set_conf_reg(R_VSEQ, 1, 0x07, 0); // Assign V1 to V12 to group A
+    afe_set_conf_reg(R_VSEQ, 1, 0x08, 0); // Assign V13 to V24 to group A
+    afe_set_conf_reg(R_VSEQ, 1, 0x09, 0x1); // Assign VPAT1 to group A
+    afe_set_conf_reg(R_VSEQ, 1, 0x0a,
+            (0 << 0) | // VSTARTA = 0
+            (CCD_LINE_WIDTH << 13)); // VLENA = the total length
+    afe_set_conf_reg(R_VSEQ, 1, 0x0b,
+            (0 << 0) | // VREPA_1 = 0
+            (0 << 13)); // VREPA_2 = 0
+    afe_set_conf_reg(R_VSEQ, 1, 0x0c,
+            (0 << 0) | // VREPA_3 = 0
+            (0 << 13)); // VREPA_4 = 0
+    afe_set_conf_reg(R_VSEQ, 1, 0x0d, 0);
+    afe_set_conf_reg(R_VSEQ, 1, 0x0e, 0);
+    afe_set_conf_reg(R_VSEQ, 1, 0x0f, 0);
+    afe_set_conf_reg(R_VSEQ, 1, 0x10, 0);
+    afe_set_conf_reg(R_VSEQ, 1, 0x11, 0);
+    afe_set_conf_reg(R_VSEQ, 1, 0x12, 0);
+    afe_set_conf_reg(R_VSEQ, 1, 0x13, 0);
+    afe_set_conf_reg(R_VSEQ, 1, 0x14, 0);
+    afe_set_conf_reg(R_VSEQ, 1, 0x15, 0);
+    afe_set_conf_reg(R_VSEQ, 1, 0x16, 0);
+    afe_set_conf_reg(R_VSEQ, 1, 0x17,
+            (0 << 0) | // HBLKSTART = 0
+            (CCD_HBLK_LENGTH << 13)); // HBLKEND = CCD_HBLK_LENGTH
+    afe_set_conf_reg(R_VSEQ, 1, 0x18,
+            (CCD_HBLK_LENGTH << 0) | // HBLKLEN
+            (0 << 13) | // HBLKREP = 0
+            (1 << 21) | // Masking polarity of H1 during HBLK is 1
+            (0 << 22) | // Masking polarity of H2 during HBLK is 0
+            (1 << 23) | // Masking polarity of HLA during HBLK is 1
+            (1 << 24)); // Masking polarity of HLB during HBLK is 1
+    afe_set_conf_reg(R_VSEQ, 1, 0x19, 0); // No toggle for HBLK
+    afe_set_conf_reg(R_VSEQ, 1, 0x1a, 0);
+    afe_set_conf_reg(R_VSEQ, 1, 0x1b, 0);
+    afe_set_conf_reg(R_VSEQ, 1, 0x1c, 0);
+    afe_set_conf_reg(R_VSEQ, 1, 0x1d, 0);
+    afe_set_conf_reg(R_VSEQ, 1, 0x1e, 0);
+    afe_set_conf_reg(R_VSEQ, 1, 0x1f,
+            (8191 << 0) | // Disable HBLK repeat area start position A
+            (8191 << 13));// Disable HBLK repeat area start position B
+    afe_set_conf_reg(R_VSEQ, 1, 0x20,
+            (8191 << 0) | // Disable HBLK repeat area start position C
+            0); // FREEZE/RESUME not enabled
+    afe_set_conf_reg(R_VSEQ, 1, 0x21, 0); // HBLK Odd field repeat area pattern
+    afe_set_conf_reg(R_VSEQ, 1, 0x22,
+            (CCD_CLPOB_BEGIN << 0) | // CLPOB toggle position 1
+            (CCD_CLPOB_END << 22)); // CLPOB toggle position 2
+    afe_set_conf_reg(R_VSEQ, 1, 0x23,
+            (CCD_HBLK_LENGTH << 0) | // PBLK toggle position 1
+            (8191 << 13)); // PBLK toggle position 2
+    afe_set_conf_reg(R_VSEQ, 1, 0x24, 0); // HBLK offset A for mode 2
+    afe_set_conf_reg(R_VSEQ, 1, 0x25, 0); // HBLK offset B for mode 2
+    afe_set_conf_reg(R_VSEQ, 1, 0x26, 0); // HBLK offset C for mode 2
+    afe_set_conf_reg(R_VSEQ, 1, 0x27, 0); // HBLK counter start position
+
+    // Configure vertical pattern 1 for image readout
+    //   VPAT1: V1 and V2 toggle only once at CCD_TVCCD_PIX
+    for (int i = 0; i <= 0x2f; i++)
+        afe_set_conf_reg(R_VPAT, 1, i, 0); // Set all positions to zero
+    afe_set_conf_reg(R_VPAT, 1, 0x00, CCD_TVCCD_PIX); // Set V1 toggle position
+    afe_set_conf_reg(R_VPAT, 1, 0x02, CCD_TVCCD_PIX); // Set V2 toggle position
+
+    // Configure vertical sequence 2: vsg pulse
+*/
     // Reset the internal timing core
-    afe_set_reg(AFE_REG_TGCORE_RSTB, 0x1, true);
+    afe_write_reg(0x14, 0x01);
 
     // Enable External power supply (not enabled until out control = 1)
-    afe_set_reg(AFE_REG_GP2_PROTOCOL, 0x7, true); // Keep on
-    afe_set_reg(AFE_REG_GPO_OUTPUT_EN, 0xff, true);
+    afe_write_reg(0x73,
+            (7 << 3)); // GP2_PROTOCOL = KEEP ON
+    afe_write_reg(0x7a,
+            (0xff << 8) | // SEL_GPO = 0xff
+            (0xff << 16)); // GPO_OUTPUT_EN = 0xff
 
     // Enable outputs
-    afe_set_reg(AFE_REG_OUTCONTROL, 0x1, true);
+    afe_write_reg(0x11, 0x1);
 
     // Enable master mode operation
-    afe_set_reg(AFE_REG_MASTER, 0x1, true);
+    afe_write_reg(0x20, 0x1);
 }
 
 void afe_start(void) {
@@ -247,21 +333,24 @@ void afe_start(void) {
 
 void afe_power_down(void) {
     // Enter standby 3
-    afe_set_reg(AFE_REG_STANDBY, 0x3, true);
+    //afe_set_reg(AFE_REG_STANDBY, 0x3, true);
 }
 
 int afe_cmd(const shell_cmd_t *pcmd, int argc, char *const argv[]) {
     if (argc == 1) {
-        shell_printf("afe command expects an operation\n");
+        shell_printf("afe command expects an operation\r\n");
         return 1;
     }
     if (strcmp(argv[1], "init") == 0) {
         afe_init();
         return 0;
     }
-    shell_printf("invalid operation\n");
+    if (strcmp(argv[1], "start") == 0) {
+        afe_start();
+        return 0;
+    }
+    shell_printf("invalid operation\r\n");
     return 1;
 }
 
 NANO_SHELL_ADD_CMD(afe, afe_cmd, "control afe", "afe debugging command");
-
