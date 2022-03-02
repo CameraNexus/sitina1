@@ -39,18 +39,15 @@
 #define AFE_SYNC_GPIO       (GPIO3)
 #define AFE_SYNC_GPIO_PIN   (26)*/
 
-// AFE_CS, M11
+// AFE_CS, K14
 #define AFE_CS_GPIO         (GPIO1)
-#define AFE_CS_GPIO_PIN     (2)
-// AFE_RST, M14
+#define AFE_CS_GPIO_PIN     (12)
+// AFE_RST, G11
 #define AFE_RST_GPIO        (GPIO1)
-#define AFE_RST_GPIO_PIN    (0)
-// AFE_SCK, H10
+#define AFE_RST_GPIO_PIN    (3)
+// AFE_SCK, M14
 #define AFE_SCK_GPIO        (GPIO1)
-#define AFE_SCK_GPIO_PIN    (1)
-// AFE_SYNC, G11
-#define AFE_SYNC_GPIO       (GPIO1)
-#define AFE_SYNC_GPIO_PIN   (3)
-// AFE_MOSI, A7
-#define AFE_MOSI_GPIO       (GPIO3)
-#define AFE_MOSI_GPIO_PIN   (26)
+#define AFE_SCK_GPIO_PIN    (0)
+// AFE_MOSI, H10
+#define AFE_MOSI_GPIO       (GPIO1)
+#define AFE_MOSI_GPIO_PIN   (1)

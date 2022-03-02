@@ -69,12 +69,12 @@ int main(void) {
     syslog_init();
     usbsup_init();
 
-    lcd_init();
+    /*lcd_init();
     memset(framebuffer, 0x00, 614408);
     fb_init();
     lcd_set_bl(50);
 
-    ui_init();
+    ui_init();*/
     /*uint8_t *rdptr = gImage_test;
     uint8_t *wrptr = framebuffer;
     for (int i = 0; i < 614408/2; i++) {
@@ -98,8 +98,9 @@ int main(void) {
     //storage_mount();
 
     // Initialize AFE
-    //afe_init();
-    //afe_start();
+    afe_init();
+    SDK_DelayAtLeastUs(1000, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
+    afe_start();
 
     usbsup_waitconnect();
     // Start the shell

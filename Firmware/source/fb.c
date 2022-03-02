@@ -30,7 +30,7 @@
 
 // Framebuffer in the NCACHE_REGION, last 1MB of the SDRAM
 // Occupies 640*480*2 = 614KB
-uint16_t *framebuffer = (uint8_t *)0x81f00000;
+uint16_t *framebuffer = (uint16_t *)0x81f00000;
 //uint16_t *framebuffer = (uint8_t *)0x20200000;
 
 void fb_init(void) {

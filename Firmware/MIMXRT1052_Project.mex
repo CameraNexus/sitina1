@@ -33,6 +33,7 @@
                <pin_label pin_num="B14" pin_signal="GPIO_B1_15" label="LCD_CS"/>
                <pin_label pin_num="C7" pin_signal="GPIO_EMC_41" label="LCD_EN"/>
                <pin_label pin_num="A7" pin_signal="GPIO_EMC_40" label="AFE_SYNC"/>
+               <pin_label pin_num="K14" pin_signal="GPIO_AD_B0_12" label="AFE_CS"/>
             </pin_labels>
          </pins_profile>
          <functions_list>
@@ -454,6 +455,7 @@
                         <pin_feature name="slew_rate" value="Fast"/>
                      </pin_features>
                   </pin>
+                  <pin peripheral="GPIO1" signal="gpio_io, 12" pin_num="K14" pin_signal="GPIO_AD_B0_12"/>
                </pins>
             </function>
          </functions_list>
