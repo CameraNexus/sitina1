@@ -1,4 +1,4 @@
-(kicad_sch (version 20210621) (generator eeschema)
+(kicad_sch (version 20211123) (generator eeschema)
 
   (uuid 66828e8a-079c-412c-915e-a3da111afe98)
 
@@ -121,7 +121,7 @@
     (property "Datasheet" "~" (id 3) (at 134.62 101.6 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid bfb6d60c-77e4-4a1d-abd3-d3f85a2a9b10))
+    (pin "1" (uuid bfb6d60c-77e4-4a1d-abd3-d3f85a2a9b11))
   )
 
   (symbol (lib_id "Connector:TestPoint_Small") (at 139.7 104.14 180) (unit 1)
@@ -139,7 +139,7 @@
     (property "Datasheet" "~" (id 3) (at 134.62 104.14 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid bfb6d60c-77e4-4a1d-abd3-d3f85a2a9b10))
+    (pin "1" (uuid bfb6d60c-77e4-4a1d-abd3-d3f85a2a9b12))
   )
 
   (symbol (lib_id "Connector:TestPoint_Small") (at 139.7 106.68 180) (unit 1)
@@ -157,6 +157,6 @@
     (property "Datasheet" "~" (id 3) (at 134.62 106.68 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid bfb6d60c-77e4-4a1d-abd3-d3f85a2a9b10))
+    (pin "1" (uuid bfb6d60c-77e4-4a1d-abd3-d3f85a2a9b13))
   )
 )

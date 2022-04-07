@@ -1,4 +1,4 @@
-(kicad_sch (version 20210621) (generator eeschema)
+(kicad_sch (version 20211123) (generator eeschema)
 
   (uuid 46f1d123-bfe2-4f3e-acaa-2114f5fd73de)
 
@@ -1428,7 +1428,7 @@
       (reference "Q1") (unit 1) (value "2N7002") (footprint "Package_TO_SOT_SMD:SOT-23")
     )
     (path "/00000000-0000-0000-0000-00005d0408df/5b9ee988-070f-486d-80f3-e7b79475c248"
-      (reference "R1") (unit 1) (value "30K") (footprint "Resistor_SMD:R_0402_1005Metric")
+      (reference "R1") (unit 1) (value "36K") (footprint "Resistor_SMD:R_0402_1005Metric")
     )
     (path "/00000000-0000-0000-0000-00005f683ba6/00000000-0000-0000-0000-00005d2e92cb"
       (reference "R2") (unit 1) (value "316K/1%") (footprint "Resistor_SMD:R_0402_1005Metric")
