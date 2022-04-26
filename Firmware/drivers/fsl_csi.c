@@ -669,7 +669,7 @@ status_t CSI_TransferStart(CSI_Type *base, csi_handle_t *handle)
 
     emptyBufferCount = CSI_TransferGetEmptyBufferCount(handle);
 
-    if (emptyBufferCount < 2U)
+    if (emptyBufferCount < 1U)
     {
         return kStatus_CSI_NoEmptyBuffer;
     }
@@ -684,9 +684,14 @@ status_t CSI_TransferStart(CSI_Type *base, csi_handle_t *handle)
 
     /* Load the frame buffer to CSI register, there are at least two empty buffers. */
     CSI_REG_DMASA_FB1(base) = CSI_TransferGetEmptyBuffer(handle);
-    CSI_REG_DMASA_FB2(base) = CSI_TransferGetEmptyBuffer(handle);
-
-    handle->activeBufferNum = CSI_MAX_ACTIVE_FRAME_NUM;
+    if (emptyBufferCount >= 2) {
+        CSI_REG_DMASA_FB2(base) = CSI_TransferGetEmptyBuffer(handle);
+        handle->activeBufferNum = CSI_MAX_ACTIVE_FRAME_NUM;
+    }
+    else {
+        CSI_REG_DMASA_FB2(base) = CSI_REG_DMASA_FB1(base);
+        handle->activeBufferNum = 1;
+    }
 
     /* After reflash DMA, the CSI saves frame to frame buffer 0. */
     CSI_ReflashFifoDma(base, kCSI_RxFifo);
@@ -862,7 +867,7 @@ void CSI_TransferHandleIRQ(CSI_Type *base, csi_handle_t *handle)
             dmaDoneBufferIdx = 0;
         }
 
-        if (handle->activeBufferNum == CSI_MAX_ACTIVE_FRAME_NUM)
+        if (handle->activeBufferNum > 0)
         {
             queueWriteIdx = handle->queueWriteIdx;
             queueReadIdx  = handle->queueReadIdx;

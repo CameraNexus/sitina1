@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding= "UTF-8" ?>
-<configuration name="" xsi:schemaLocation="http://mcuxpresso.nxp.com/XSD/mex_configuration_10 http://mcuxpresso.nxp.com/XSD/mex_configuration_10.xsd" uuid="9b13b23a-0ebe-4837-ac05-615d262fcfa1" version="10" xmlns="http://mcuxpresso.nxp.com/XSD/mex_configuration_10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<configuration name="" xsi:schemaLocation="http://mcuxpresso.nxp.com/XSD/mex_configuration_11 http://mcuxpresso.nxp.com/XSD/mex_configuration_11.xsd" uuid="9b13b23a-0ebe-4837-ac05-615d262fcfa1" version="11" xmlns="http://mcuxpresso.nxp.com/XSD/mex_configuration_11" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
    <common>
       <processor>MIMXRT1052xxxxB</processor>
       <package>MIMXRT1052DVJ6B</package>
@@ -14,15 +14,16 @@
       <generate_extended_information>false</generate_extended_information>
       <generate_code_modified_registers_only>false</generate_code_modified_registers_only>
       <update_include_paths>true</update_include_paths>
+      <generate_registers_defines>false</generate_registers_defines>
    </preferences>
    <tools>
-      <pins name="Pins" version="10.0" enabled="true" update_project_code="true">
+      <pins name="Pins" version="11.0" enabled="true" update_project_code="true">
          <generated_project_files>
             <file path="board/pin_mux.c" update_enabled="true"/>
             <file path="board/pin_mux.h" update_enabled="true"/>
          </generated_project_files>
          <pins_profile>
-            <processor_version>10.0.0</processor_version>
+            <processor_version>11.0.1</processor_version>
             <power_domains/>
             <pin_labels>
                <pin_label pin_num="M14" pin_signal="GPIO_AD_B0_00" label="SPI_SCK"/>
@@ -34,6 +35,7 @@
                <pin_label pin_num="C7" pin_signal="GPIO_EMC_41" label="LCD_EN"/>
                <pin_label pin_num="A7" pin_signal="GPIO_EMC_40" label="AFE_SYNC"/>
                <pin_label pin_num="K14" pin_signal="GPIO_AD_B0_12" label="AFE_CS"/>
+               <pin_label pin_num="F14" pin_signal="GPIO_AD_B0_09" label="USER1"/>
             </pin_labels>
          </pins_profile>
          <functions_list>
@@ -98,26 +100,106 @@
                   <pin peripheral="CSI" signal="csi_hsync" pin_num="C14" pin_signal="GPIO_B1_14"/>
                   <pin peripheral="CSI" signal="csi_vsync" pin_num="D14" pin_signal="GPIO_B1_13"/>
                   <pin peripheral="CSI" signal="csi_pixclk" pin_num="D13" pin_signal="GPIO_B1_12"/>
-                  <pin peripheral="LCDIF" signal="lcdif_clk" pin_num="D7" pin_signal="GPIO_B0_00"/>
-                  <pin peripheral="LCDIF" signal="lcdif_data, 00" pin_num="C8" pin_signal="GPIO_B0_04"/>
-                  <pin peripheral="LCDIF" signal="lcdif_data, 01" pin_num="B8" pin_signal="GPIO_B0_05"/>
-                  <pin peripheral="LCDIF" signal="lcdif_data, 02" pin_num="A8" pin_signal="GPIO_B0_06"/>
-                  <pin peripheral="LCDIF" signal="lcdif_data, 03" pin_num="A9" pin_signal="GPIO_B0_07"/>
-                  <pin peripheral="LCDIF" signal="lcdif_data, 04" pin_num="B9" pin_signal="GPIO_B0_08"/>
-                  <pin peripheral="LCDIF" signal="lcdif_data, 05" pin_num="C9" pin_signal="GPIO_B0_09"/>
-                  <pin peripheral="LCDIF" signal="lcdif_data, 06" pin_num="D9" pin_signal="GPIO_B0_10"/>
-                  <pin peripheral="LCDIF" signal="lcdif_data, 07" pin_num="A10" pin_signal="GPIO_B0_11"/>
-                  <pin peripheral="LCDIF" signal="lcdif_data, 08" pin_num="C10" pin_signal="GPIO_B0_12"/>
-                  <pin peripheral="LCDIF" signal="lcdif_data, 09" pin_num="D10" pin_signal="GPIO_B0_13"/>
-                  <pin peripheral="LCDIF" signal="lcdif_data, 10" pin_num="E10" pin_signal="GPIO_B0_14"/>
-                  <pin peripheral="LCDIF" signal="lcdif_data, 11" pin_num="E11" pin_signal="GPIO_B0_15"/>
-                  <pin peripheral="LCDIF" signal="lcdif_data, 12" pin_num="A11" pin_signal="GPIO_B1_00"/>
-                  <pin peripheral="LCDIF" signal="lcdif_data, 13" pin_num="B11" pin_signal="GPIO_B1_01"/>
-                  <pin peripheral="LCDIF" signal="lcdif_data, 14" pin_num="C11" pin_signal="GPIO_B1_02"/>
-                  <pin peripheral="LCDIF" signal="lcdif_data, 15" pin_num="D11" pin_signal="GPIO_B1_03"/>
-                  <pin peripheral="LCDIF" signal="lcdif_enable" pin_num="E7" pin_signal="GPIO_B0_01"/>
-                  <pin peripheral="LCDIF" signal="lcdif_hsync" pin_num="E8" pin_signal="GPIO_B0_02"/>
-                  <pin peripheral="LCDIF" signal="lcdif_vsync" pin_num="D8" pin_signal="GPIO_B0_03"/>
+                  <pin peripheral="LCDIF" signal="lcdif_clk" pin_num="D7" pin_signal="GPIO_B0_00">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 00" pin_num="C8" pin_signal="GPIO_B0_04">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 01" pin_num="B8" pin_signal="GPIO_B0_05">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 02" pin_num="A8" pin_signal="GPIO_B0_06">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 03" pin_num="A9" pin_signal="GPIO_B0_07">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 04" pin_num="B9" pin_signal="GPIO_B0_08">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 05" pin_num="C9" pin_signal="GPIO_B0_09">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 06" pin_num="D9" pin_signal="GPIO_B0_10">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 07" pin_num="A10" pin_signal="GPIO_B0_11">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 08" pin_num="C10" pin_signal="GPIO_B0_12">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 09" pin_num="D10" pin_signal="GPIO_B0_13">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 10" pin_num="E10" pin_signal="GPIO_B0_14">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 11" pin_num="E11" pin_signal="GPIO_B0_15">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 12" pin_num="A11" pin_signal="GPIO_B1_00">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 13" pin_num="B11" pin_signal="GPIO_B1_01">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 14" pin_num="C11" pin_signal="GPIO_B1_02">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_data, 15" pin_num="D11" pin_signal="GPIO_B1_03">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_enable" pin_num="E7" pin_signal="GPIO_B0_01">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_hsync" pin_num="E8" pin_signal="GPIO_B0_02">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LCDIF" signal="lcdif_vsync" pin_num="D8" pin_signal="GPIO_B0_03">
+                     <pin_features>
+                        <pin_feature name="slew_rate" value="Fast"/>
+                     </pin_features>
+                  </pin>
                   <pin peripheral="USDHC1" signal="usdhc_data, 0" pin_num="J1" pin_signal="GPIO_SD_B0_02"/>
                   <pin peripheral="USDHC1" signal="usdhc_data, 1" pin_num="K1" pin_signal="GPIO_SD_B0_03"/>
                   <pin peripheral="USDHC1" signal="usdhc_data, 2" pin_num="H2" pin_signal="GPIO_SD_B0_04"/>
@@ -456,20 +538,21 @@
                      </pin_features>
                   </pin>
                   <pin peripheral="GPIO1" signal="gpio_io, 12" pin_num="K14" pin_signal="GPIO_AD_B0_12"/>
+                  <pin peripheral="GPIO1" signal="gpio_io, 09" pin_num="F14" pin_signal="GPIO_AD_B0_09"/>
                </pins>
             </function>
          </functions_list>
       </pins>
-      <clocks name="Clocks" version="8.0" enabled="true" update_project_code="true">
+      <clocks name="Clocks" version="9.0" enabled="true" update_project_code="true">
          <generated_project_files>
             <file path="board/clock_config.c" update_enabled="true"/>
             <file path="board/clock_config.h" update_enabled="true"/>
          </generated_project_files>
          <clocks_profile>
-            <processor_version>10.0.0</processor_version>
+            <processor_version>11.0.1</processor_version>
          </clocks_profile>
          <clock_configurations>
-            <clock_configuration name="BOARD_BootClockRUN">
+            <clock_configuration name="BOARD_BootClockRUN" id_prefix="" prefix_user_defined="false">
                <description></description>
                <options/>
                <dependencies>

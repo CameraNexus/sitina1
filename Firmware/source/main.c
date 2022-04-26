@@ -41,6 +41,7 @@
 #include "fsl_gpio.h"
 #include "fsl_elcdif.h"
 #include "fsl_pwm.h"
+#include "fsl_cache.h"
 #include "umm_malloc.h"
 #include "syslog.h"
 #include "usb_support.h"
@@ -48,15 +49,19 @@
 #include "fb.h"
 #include "lcd.h"
 #include "storage.h"
+#include "ff.h"
 #include "ui.h"
 #include "afe.h"
+#include "csi.h"
 
-extern const unsigned char gImage_test[614408];
+uint16_t *camera_buffer = (uint16_t *)0x80000000;
 
 /*
  * @brief   Application entry point.
  */
 int main(void) {
+
+    bool result;
 
     /* Init board hardware. */
     BOARD_ConfigMPU();
@@ -94,13 +99,64 @@ int main(void) {
     }*/
     //memcpy(framebuffer, gImage_test, 614408);
 
-    // Initialize SD card
-    //storage_mount();
-
     // Initialize AFE
-    afe_init();
+/*    afe_init();
     SDK_DelayAtLeastUs(1000, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
+
+    csi_init();
+    csi_submit_empty_buffer((uint8_t *)camera_buffer);
+
+    afe_strobe();
+
+    csi_start();
     afe_start();
+
+    csi_wait_framedone();
+    csi_stop();*/
+
+    /*afe_stop();
+    DCACHE_InvalidateByRange((uint32_t)camera_buffer, 28*1024*1024);*/
+
+    lcd_init();
+    memset(framebuffer, 0x00, 614408);
+    fb_init();
+    lcd_set_bl(50);
+
+    ui_clear(0x0000);
+    ui_disp_string(0, 0, "Waiting for SD card to be inserted...", 0xffff);
+
+    // Initialize SD card
+    result = storage_mount();
+    if (!result) {
+        ui_clear(0xf800);
+        ui_disp_string(0, 0, "SD card initialization failed!", 0xffff);
+        while (1);
+    }
+
+    //ui_init();
+    for (int y = 0; y < CCD_FIELD_LINES / 7; y++) {
+        for (int x = 0; x < CCD_LINE_LENGTH * 2 / 7; x++) {
+            uint16_t src_pixel = camera_buffer[2000 + y * 7 * (CCD_LINE_LENGTH * 2) + x * 7];
+            uint16_t dst_pixel = src_pixel;
+            framebuffer[x * FB_WIDTH + y] = dst_pixel;
+        }
+    }
+
+    /*for (int y = 0; y < 120; y++) {
+        for (int x = 0; x < 512; x++) {
+            framebuffer[x * FB_WIDTH + y] = (x / 2 / 8) << 11;
+            framebuffer[x * FB_WIDTH + y + 120] = (x / 2 / 4) << 5;
+            framebuffer[x * FB_WIDTH + y + 240] = (x / 2 / 8);
+        }
+    }*/
+
+    FIL fp;
+    uint32_t bw;
+    f_open(&fp, "capture.bin", FA_CREATE_ALWAYS | FA_WRITE);
+    f_write(&fp, camera_buffer + 2000, CCD_FIELD_LINES * CCD_LINE_LENGTH * 2, &bw);
+    f_close(&fp);
+
+    ui_disp_string(0, 470, "File saved!", 0xffff);
 
     usbsup_waitconnect();
     // Start the shell

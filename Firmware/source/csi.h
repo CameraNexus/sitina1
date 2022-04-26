@@ -1,7 +1,7 @@
 //
-// storage.h: Storage related helper functions
+// csi.h: CSI binding driver
 //
-// Copyright 2021 Wenting Zhang <zephray@outlook.com>
+// Copyright 2022 Wenting Zhang <zephray@outlook.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,4 +23,9 @@
 //
 #pragma once
 
-bool storage_mount(void);
+void csi_init();
+void csi_start();
+void csi_stop();
+void csi_submit_empty_buffer(uint8_t *buffer);
+uint8_t *csi_get_full_buffer();
+void csi_wait_framedone();

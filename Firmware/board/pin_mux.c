@@ -6,11 +6,11 @@
 /*
  * TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
 !!GlobalInfo
-product: Pins v10.0
+product: Pins v11.0
 processor: MIMXRT1052xxxxB
 package_id: MIMXRT1052DVJ6B
 mcu_data: ksdk2_0
-processor_version: 10.0.0
+processor_version: 11.0.1
 pin_labels:
 - {pin_num: M14, pin_signal: GPIO_AD_B0_00, label: SPI_SCK}
 - {pin_num: H10, pin_signal: GPIO_AD_B0_01, label: SPI_MOSI}
@@ -20,6 +20,8 @@ pin_labels:
 - {pin_num: B14, pin_signal: GPIO_B1_15, label: LCD_CS}
 - {pin_num: C7, pin_signal: GPIO_EMC_41, label: LCD_EN}
 - {pin_num: A7, pin_signal: GPIO_EMC_40, label: AFE_SYNC}
+- {pin_num: K14, pin_signal: GPIO_AD_B0_12, label: AFE_CS}
+- {pin_num: F14, pin_signal: GPIO_AD_B0_09, label: USER1}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 
@@ -58,26 +60,26 @@ BOARD_InitPins:
   - {pin_num: C14, peripheral: CSI, signal: csi_hsync, pin_signal: GPIO_B1_14}
   - {pin_num: D14, peripheral: CSI, signal: csi_vsync, pin_signal: GPIO_B1_13}
   - {pin_num: D13, peripheral: CSI, signal: csi_pixclk, pin_signal: GPIO_B1_12}
-  - {pin_num: D7, peripheral: LCDIF, signal: lcdif_clk, pin_signal: GPIO_B0_00}
-  - {pin_num: C8, peripheral: LCDIF, signal: 'lcdif_data, 00', pin_signal: GPIO_B0_04}
-  - {pin_num: B8, peripheral: LCDIF, signal: 'lcdif_data, 01', pin_signal: GPIO_B0_05}
-  - {pin_num: A8, peripheral: LCDIF, signal: 'lcdif_data, 02', pin_signal: GPIO_B0_06}
-  - {pin_num: A9, peripheral: LCDIF, signal: 'lcdif_data, 03', pin_signal: GPIO_B0_07}
-  - {pin_num: B9, peripheral: LCDIF, signal: 'lcdif_data, 04', pin_signal: GPIO_B0_08}
-  - {pin_num: C9, peripheral: LCDIF, signal: 'lcdif_data, 05', pin_signal: GPIO_B0_09}
-  - {pin_num: D9, peripheral: LCDIF, signal: 'lcdif_data, 06', pin_signal: GPIO_B0_10}
-  - {pin_num: A10, peripheral: LCDIF, signal: 'lcdif_data, 07', pin_signal: GPIO_B0_11}
-  - {pin_num: C10, peripheral: LCDIF, signal: 'lcdif_data, 08', pin_signal: GPIO_B0_12}
-  - {pin_num: D10, peripheral: LCDIF, signal: 'lcdif_data, 09', pin_signal: GPIO_B0_13}
-  - {pin_num: E10, peripheral: LCDIF, signal: 'lcdif_data, 10', pin_signal: GPIO_B0_14}
-  - {pin_num: E11, peripheral: LCDIF, signal: 'lcdif_data, 11', pin_signal: GPIO_B0_15}
-  - {pin_num: A11, peripheral: LCDIF, signal: 'lcdif_data, 12', pin_signal: GPIO_B1_00}
-  - {pin_num: B11, peripheral: LCDIF, signal: 'lcdif_data, 13', pin_signal: GPIO_B1_01}
-  - {pin_num: C11, peripheral: LCDIF, signal: 'lcdif_data, 14', pin_signal: GPIO_B1_02}
-  - {pin_num: D11, peripheral: LCDIF, signal: 'lcdif_data, 15', pin_signal: GPIO_B1_03}
-  - {pin_num: E7, peripheral: LCDIF, signal: lcdif_enable, pin_signal: GPIO_B0_01}
-  - {pin_num: E8, peripheral: LCDIF, signal: lcdif_hsync, pin_signal: GPIO_B0_02}
-  - {pin_num: D8, peripheral: LCDIF, signal: lcdif_vsync, pin_signal: GPIO_B0_03}
+  - {pin_num: D7, peripheral: LCDIF, signal: lcdif_clk, pin_signal: GPIO_B0_00, slew_rate: Fast}
+  - {pin_num: C8, peripheral: LCDIF, signal: 'lcdif_data, 00', pin_signal: GPIO_B0_04, slew_rate: Fast}
+  - {pin_num: B8, peripheral: LCDIF, signal: 'lcdif_data, 01', pin_signal: GPIO_B0_05, slew_rate: Fast}
+  - {pin_num: A8, peripheral: LCDIF, signal: 'lcdif_data, 02', pin_signal: GPIO_B0_06, slew_rate: Fast}
+  - {pin_num: A9, peripheral: LCDIF, signal: 'lcdif_data, 03', pin_signal: GPIO_B0_07, slew_rate: Fast}
+  - {pin_num: B9, peripheral: LCDIF, signal: 'lcdif_data, 04', pin_signal: GPIO_B0_08, slew_rate: Fast}
+  - {pin_num: C9, peripheral: LCDIF, signal: 'lcdif_data, 05', pin_signal: GPIO_B0_09, slew_rate: Fast}
+  - {pin_num: D9, peripheral: LCDIF, signal: 'lcdif_data, 06', pin_signal: GPIO_B0_10, slew_rate: Fast}
+  - {pin_num: A10, peripheral: LCDIF, signal: 'lcdif_data, 07', pin_signal: GPIO_B0_11, slew_rate: Fast}
+  - {pin_num: C10, peripheral: LCDIF, signal: 'lcdif_data, 08', pin_signal: GPIO_B0_12, slew_rate: Fast}
+  - {pin_num: D10, peripheral: LCDIF, signal: 'lcdif_data, 09', pin_signal: GPIO_B0_13, slew_rate: Fast}
+  - {pin_num: E10, peripheral: LCDIF, signal: 'lcdif_data, 10', pin_signal: GPIO_B0_14, slew_rate: Fast}
+  - {pin_num: E11, peripheral: LCDIF, signal: 'lcdif_data, 11', pin_signal: GPIO_B0_15, slew_rate: Fast}
+  - {pin_num: A11, peripheral: LCDIF, signal: 'lcdif_data, 12', pin_signal: GPIO_B1_00, slew_rate: Fast}
+  - {pin_num: B11, peripheral: LCDIF, signal: 'lcdif_data, 13', pin_signal: GPIO_B1_01, slew_rate: Fast}
+  - {pin_num: C11, peripheral: LCDIF, signal: 'lcdif_data, 14', pin_signal: GPIO_B1_02, slew_rate: Fast}
+  - {pin_num: D11, peripheral: LCDIF, signal: 'lcdif_data, 15', pin_signal: GPIO_B1_03, slew_rate: Fast}
+  - {pin_num: E7, peripheral: LCDIF, signal: lcdif_enable, pin_signal: GPIO_B0_01, slew_rate: Fast}
+  - {pin_num: E8, peripheral: LCDIF, signal: lcdif_hsync, pin_signal: GPIO_B0_02, slew_rate: Fast}
+  - {pin_num: D8, peripheral: LCDIF, signal: lcdif_vsync, pin_signal: GPIO_B0_03, slew_rate: Fast}
   - {pin_num: J1, peripheral: USDHC1, signal: 'usdhc_data, 0', pin_signal: GPIO_SD_B0_02}
   - {pin_num: K1, peripheral: USDHC1, signal: 'usdhc_data, 1', pin_signal: GPIO_SD_B0_03}
   - {pin_num: H2, peripheral: USDHC1, signal: 'usdhc_data, 2', pin_signal: GPIO_SD_B0_04}
@@ -135,6 +137,8 @@ BOARD_InitPins:
   - {pin_num: B7, peripheral: SEMC, signal: semc_dqs, pin_signal: GPIO_EMC_39, hysteresis_enable: Enable, speed: MHZ_200, drive_strength: R0_7, slew_rate: Fast}
   - {pin_num: D2, peripheral: SEMC, signal: semc_ras, pin_signal: GPIO_EMC_25, hysteresis_enable: Enable, speed: MHZ_200, drive_strength: R0_7, slew_rate: Fast}
   - {pin_num: D1, peripheral: SEMC, signal: semc_we, pin_signal: GPIO_EMC_28, hysteresis_enable: Enable, speed: MHZ_200, drive_strength: R0_7, slew_rate: Fast}
+  - {pin_num: K14, peripheral: GPIO1, signal: 'gpio_io, 12', pin_signal: GPIO_AD_B0_12}
+  - {pin_num: F14, peripheral: GPIO1, signal: 'gpio_io, 09', pin_signal: GPIO_AD_B0_09}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 
@@ -151,6 +155,8 @@ void BOARD_InitPins(void) {
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_01_GPIO1_IO01, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_02_GPIO1_IO02, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_03_GPIO1_IO03, 0U); 
+  IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_09_GPIO1_IO09, 0U); 
+  IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B0_12_GPIO1_IO12, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_01_USDHC1_VSELECT, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_02_USDHC1_CD_B, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_AD_B1_03_GPIO1_IO19, 0U); 
@@ -192,14 +198,46 @@ void BOARD_InitPins(void) {
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_13_CSI_VSYNC, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_14_CSI_HSYNC, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_B1_15_GPIO2_IO31, 0U); 
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_00_SEMC_DA00, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_00_SEMC_DATA00, 0U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_01_SEMC_DA01, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_01_SEMC_DATA01, 0U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_02_SEMC_DA02, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_02_SEMC_DATA02, 0U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_03_SEMC_DA03, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_03_SEMC_DATA03, 0U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_04_SEMC_DA04, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_04_SEMC_DATA04, 0U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_05_SEMC_DA05, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_05_SEMC_DATA05, 0U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_06_SEMC_DA06, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_06_SEMC_DATA06, 0U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_07_SEMC_DA07, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_07_SEMC_DATA07, 0U); 
+#endif
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_08_SEMC_DM00, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_09_SEMC_ADDR00, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_10_SEMC_ADDR01, 0U); 
@@ -222,14 +260,46 @@ void BOARD_InitPins(void) {
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_27_SEMC_CKE, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_28_SEMC_WE, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_29_SEMC_CS0, 0U); 
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_30_SEMC_DA08, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_30_SEMC_DATA08, 0U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_31_SEMC_DA09, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_31_SEMC_DATA09, 0U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_32_SEMC_DA10, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_32_SEMC_DATA10, 0U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_33_SEMC_DA11, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_33_SEMC_DATA11, 0U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_34_SEMC_DA12, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_34_SEMC_DATA12, 0U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_35_SEMC_DA13, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_35_SEMC_DATA13, 0U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_36_SEMC_DA14, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_36_SEMC_DATA14, 0U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_37_SEMC_DA15, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_37_SEMC_DATA15, 0U); 
+#endif
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_38_SEMC_DM01, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_39_SEMC_DQS, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_EMC_41_GPIO3_IO27, 0U); 
@@ -239,15 +309,71 @@ void BOARD_InitPins(void) {
   IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_03_USDHC1_DATA1, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_04_USDHC1_DATA2, 0U); 
   IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B0_05_USDHC1_DATA3, 0U); 
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B1_01_FLEXPWM1_PWM3_B, 0U); 
+#else
   IOMUXC_SetPinMux(IOMUXC_GPIO_SD_B1_01_FLEXPWM1_PWMB03, 0U); 
+#endif
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_00_LCD_CLK, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_01_LCD_ENABLE, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_02_LCD_HSYNC, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_03_LCD_VSYNC, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_04_LCD_DATA00, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_05_LCD_DATA01, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_06_LCD_DATA02, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_07_LCD_DATA03, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_08_LCD_DATA04, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_09_LCD_DATA05, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_10_LCD_DATA06, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_11_LCD_DATA07, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_12_LCD_DATA08, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_13_LCD_DATA09, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_14_LCD_DATA10, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B0_15_LCD_DATA11, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_00_LCD_DATA12, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_01_LCD_DATA13, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_02_LCD_DATA14, 0x10B1U); 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_B1_03_LCD_DATA15, 0x10B1U); 
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_00_SEMC_DA00, 0x0110F9U); 
+#else
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_00_SEMC_DATA00, 0x0110F9U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_01_SEMC_DA01, 0x0110F9U); 
+#else
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_01_SEMC_DATA01, 0x0110F9U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_02_SEMC_DA02, 0x0110F9U); 
+#else
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_02_SEMC_DATA02, 0x0110F9U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_03_SEMC_DA03, 0x0110F9U); 
+#else
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_03_SEMC_DATA03, 0x0110F9U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_04_SEMC_DA04, 0x0110F9U); 
+#else
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_04_SEMC_DATA04, 0x0110F9U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_05_SEMC_DA05, 0x0110F9U); 
+#else
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_05_SEMC_DATA05, 0x0110F9U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_06_SEMC_DA06, 0x0110F9U); 
+#else
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_06_SEMC_DATA06, 0x0110F9U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_07_SEMC_DA07, 0x0110F9U); 
+#else
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_07_SEMC_DATA07, 0x0110F9U); 
+#endif
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_08_SEMC_DM00, 0x0110F9U); 
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_09_SEMC_ADDR00, 0x0110F9U); 
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_10_SEMC_ADDR01, 0x0110F9U); 
@@ -270,14 +396,46 @@ void BOARD_InitPins(void) {
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_27_SEMC_CKE, 0x0130F9U); 
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_28_SEMC_WE, 0x0110F9U); 
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_29_SEMC_CS0, 0x0110F9U); 
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_30_SEMC_DA08, 0x0110F9U); 
+#else
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_30_SEMC_DATA08, 0x0110F9U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_31_SEMC_DA09, 0x0110F9U); 
+#else
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_31_SEMC_DATA09, 0x0110F9U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_32_SEMC_DA10, 0x0110F9U); 
+#else
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_32_SEMC_DATA10, 0x0110F9U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_33_SEMC_DA11, 0x0110F9U); 
+#else
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_33_SEMC_DATA11, 0x0110F9U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_34_SEMC_DA12, 0x0110F9U); 
+#else
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_34_SEMC_DATA12, 0x0110F9U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_35_SEMC_DA13, 0x0110F9U); 
+#else
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_35_SEMC_DATA13, 0x0110F9U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_36_SEMC_DA14, 0x0110F9U); 
+#else
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_36_SEMC_DATA14, 0x0110F9U); 
+#endif
+#if FSL_IOMUXC_DRIVER_VERSION >= MAKE_VERSION(2, 0, 3)
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_37_SEMC_DA15, 0x0110F9U); 
+#else
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_37_SEMC_DATA15, 0x0110F9U); 
+#endif
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_38_SEMC_DM01, 0x0110F9U); 
   IOMUXC_SetPinConfig(IOMUXC_GPIO_EMC_39_SEMC_DQS, 0x0110F9U); 
 }

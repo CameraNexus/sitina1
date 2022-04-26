@@ -219,7 +219,7 @@ void st7701s_init(void) {
 void lcd_init(void) {
     lcd_init_io();
     lcd_init_pwm();
-    lcd_reset();
+    //lcd_reset();
     st7701s_init();
 }
 

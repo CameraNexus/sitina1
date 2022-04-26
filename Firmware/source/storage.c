@@ -32,7 +32,7 @@
 
 __attribute__((section(".ocram"))) FATFS storage_fs;
 
-void storage_mount(void) {
+bool storage_mount(void) {
     const TCHAR driverName[3U] = {SDDISK + '0', ':', '/'};
 
     memset((void *)&storage_fs, 0, sizeof(storage_fs));
@@ -42,7 +42,7 @@ void storage_mount(void) {
     /* SD host init function */
     if (SD_HostInit(&g_sd) != kStatus_Success) {
         syslog_printf("SD host init fail\n");
-        return;
+        return false;
     }
     /* power off card */
     SD_SetCardPower(&g_sd, false);
@@ -54,18 +54,19 @@ void storage_mount(void) {
     }
     else {
         syslog_printf("Card detect fail\n");
-        return;
+        return false;
     }
 
     if (f_mount(&storage_fs, driverName, 0)) {
         syslog_printf("Mount volume failed\n");
-        return;
+        return false;
     }
 
     if (f_chdrive((char const *)driverName)) {
         syslog_printf("Change drive failed\n");
-        return;
+        return false;
     }
 
     syslog_printf("Storage initialized\n");
+    return true;
 }

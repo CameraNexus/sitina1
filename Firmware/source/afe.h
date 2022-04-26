@@ -51,3 +51,45 @@
 // AFE_MOSI, H10
 #define AFE_MOSI_GPIO       (GPIO1)
 #define AFE_MOSI_GPIO_PIN   (1)
+// AFE_SYNC, USE USER1
+#define AFE_SYNC_GPIO       (GPIO1)
+#define AFE_SYNC_GPIO_PIN   (9)
+
+// Timing for normal readout
+#define CCD_TVCCD_PIX       84 // 3.5 us
+#define CCD_THD_PIX         84 // 3.5 us
+#define CCD_DUMMY_PIX       4
+#define CCD_DARK_PIX        19
+#define CCD_BUFFER_PIX      13
+#define CCD_ACTIVE_PIX      2004
+#define CCD_T3P_PIX         2880 // 120 us
+#define CCD_TV3RD_PIX       240 // 10 us
+#define CCD_T3D_PIX         480 // 20 us
+#define CCD_LINE_LENGTH     (CCD_TVCCD_PIX + CCD_THD_PIX + CCD_DUMMY_PIX + CCD_DARK_PIX + CCD_BUFFER_PIX + CCD_ACTIVE_PIX)
+#define CCD_HBLK_LENGTH     (CCD_TVCCD_PIX + CCD_THD_PIX)
+#define CCD_VSG_LENGTH      (CCD_T3P_PIX + CCD_TV3RD_PIX + CCD_LINE_LENGTH)
+#define CCD_CLPOB_BEGIN     (CCD_HBLK_LENGTH + CCD_DUMMY_PIX + 1)
+#define CCD_CLPOB_END       (CCD_HBLK_LENGTH + CCD_DUMMY_PIX + CCD_DARK_PIX - 1)
+
+// Timing for fast line dumping
+#define CCD_TFD_PIX         24 // 1us
+#define CCD_DUMP_VTOG       (CCD_TFD_PIX + CCD_TVCCD_PIX)
+#define CCD_DUMP_LENGTH     (CCD_TVCCD_PIX * 2)
+
+#define CCD_SWEEP_LINES     (207) // For timing purposes, in complete line timing
+#define CCD_DUMP_LINES      (2720) // Lines need to be dumped
+#define CCD_DUMMY_READ_LINES (2)
+#define CCD_VSG_LINES       (1)
+
+#define CCD_DARK_LINES_U    (16)
+#define CCD_BUF_LINES_U     (8)
+#define CCD_ACTIVE_LINES    (2672)
+#define CCD_BUF_LINES_D     (8)
+#define CCD_DARK_LINES_D    (16)
+#define CCD_LINES           (CCD_DARK_LINES_U + CCD_BUF_LINES_U + CCD_ACTIVE_LINES + CCD_BUF_LINES_D + CCD_DARK_LINES_D)
+#define CCD_FIELD_LINES     (CCD_SWEEP_LINES + CCD_DUMMY_READ_LINES + CCD_VSG_LINES + CCD_LINES)
+
+void afe_init(void);
+void afe_start(void);
+void afe_stop(void);
+

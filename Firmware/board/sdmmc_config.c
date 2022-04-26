@@ -138,7 +138,7 @@ void BOARD_SDCardDetectInit(sd_cd_t cd, void *userData)
         BOARD_SDCardPowerControl(true);
     }
 }
-
+#if 0
 void BOARD_SDCardPowerResetInit(void)
 {
     gpio_pin_config_t sw_config = {
@@ -165,7 +165,7 @@ void BOARD_SDCardPowerControl(bool enable)
         }
     }
 }
-
+#endif
 void BOARD_SD_Pin_Config(uint32_t freq)
 {
     uint32_t speed = 0U, strength = 0U;
@@ -236,12 +236,13 @@ void BOARD_SD_Config(void *card, sd_cd_t cd, uint32_t hostIRQPriority, void *use
     ((sd_card_t *)card)->host->hostController.sourceClock_Hz = BOARD_USDHC1ClockConfiguration();
 
     ((sd_card_t *)card)->usrParam.cd         = &s_cd;
-    ((sd_card_t *)card)->usrParam.pwr        = BOARD_SDCardPowerControl;
+    //((sd_card_t *)card)->usrParam.pwr        = BOARD_SDCardPowerControl;
+    ((sd_card_t *)card)->usrParam.pwr        = NULL;
     ((sd_card_t *)card)->usrParam.ioStrength = BOARD_SD_Pin_Config;
     ((sd_card_t *)card)->usrParam.ioVoltage  = &s_ioVoltage;
     ((sd_card_t *)card)->usrParam.maxFreq    = BOARD_SDMMC_SD_HOST_SUPPORT_SDR104_FREQ;
 
-    BOARD_SDCardPowerResetInit();
+    //BOARD_SDCardPowerResetInit();
     BOARD_SDCardDetectInit(cd, userData);
 
     NVIC_SetPriority(BOARD_SDMMC_SD_HOST_IRQ, hostIRQPriority);
