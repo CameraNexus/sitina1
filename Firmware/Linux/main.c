@@ -1,7 +1,6 @@
 //
-// afe.h: AD9990 AFE driver
-//
-// Copyright 2021 Wenting Zhang <zephray@outlook.com>
+// Project Fobu
+// Copyright 2020 Wenting Zhang
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -9,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-//
+// 
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -21,41 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-#pragma once
+// File : main.c
+// Brief: Platform-specific program entry point
+//
+#include <stdio.h>
+#include "app.h"
 
-/*// AFE_CS, M11
-#define AFE_CS_GPIO         (GPIO1)
-#define AFE_CS_GPIO_PIN     (2)
-// AFE_SCK, M14
-#define AFE_SCK_GPIO        (GPIO1)
-#define AFE_SCK_GPIO_PIN    (0)
-// AFE_MOSI, H10
-#define AFE_MOSI_GPIO       (GPIO1)
-#define AFE_MOSI_GPIO_PIN   (1)
-// AFE_RST, G11
-#define AFE_RST_GPIO        (GPIO1)
-#define AFE_RST_GPIO_PIN    (3)
-// AFE_SYNC, A7
-#define AFE_SYNC_GPIO       (GPIO3)
-#define AFE_SYNC_GPIO_PIN   (26)*/
-
-// AFE_CS, K14
-#define AFE_CS_GPIO         (GPIO1)
-#define AFE_CS_GPIO_PIN     (12)
-// AFE_RST, G11
-#define AFE_RST_GPIO        (GPIO1)
-#define AFE_RST_GPIO_PIN    (3)
-// AFE_SCK, M14
-#define AFE_SCK_GPIO        (GPIO1)
-#define AFE_SCK_GPIO_PIN    (0)
-// AFE_MOSI, H10
-#define AFE_MOSI_GPIO       (GPIO1)
-#define AFE_MOSI_GPIO_PIN   (1)
-// AFE_SYNC, USE USER1
-#define AFE_SYNC_GPIO       (GPIO1)
-#define AFE_SYNC_GPIO_PIN   (9)
-
-void afe_init(void);
-void afe_start(void);
-void afe_stop(void);
-
+int main(){
+    app_init();
+    app_main();
+    return 0;
+}

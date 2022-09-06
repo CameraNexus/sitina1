@@ -25,6 +25,7 @@
 #include <stdbool.h>
 #include "fsl_gpio.h"
 #include "afe.h"
+#include "ccd_timing.h"
 
 #include "nano_shell.h"
 #include "command/command.h"
