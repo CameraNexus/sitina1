@@ -48,7 +48,7 @@ void sdram_init(void) {
     // Configure SDRAM.
     sdramconfig.csxPinMux           = kSEMC_MUXCSX0;
     sdramconfig.address             = 0x80000000;
-    sdramconfig.memsize_kbytes      = 64 * 1024; // 32MB
+    sdramconfig.memsize_kbytes      = 64 * 1024; // 64MB
     sdramconfig.portSize            = kSEMC_PortSize32Bit;
     sdramconfig.burstLen            = kSEMC_Sdram_BurstLen1;
     sdramconfig.columnAddrBitNum    = kSEMC_SdramColunm_9bit;

@@ -33,55 +33,7 @@ void BOARD_InitPins(void) {
   CLOCK_EnableClock(kCLOCK_Iomuxc_Lpsr);      /* LPCG on: LPCG is ON. */
 
   IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_06_VIDEO_MUX_CSI_DATA15,  /* GPIO_AD_06 is configured as VIDEO_MUX_CSI_DATA15 */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_07_VIDEO_MUX_CSI_DATA14,  /* GPIO_AD_07 is configured as VIDEO_MUX_CSI_DATA14 */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_08_VIDEO_MUX_CSI_DATA13,  /* GPIO_AD_08 is configured as VIDEO_MUX_CSI_DATA13 */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_09_VIDEO_MUX_CSI_DATA12,  /* GPIO_AD_09 is configured as VIDEO_MUX_CSI_DATA12 */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_10_VIDEO_MUX_CSI_DATA11,  /* GPIO_AD_10 is configured as VIDEO_MUX_CSI_DATA11 */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_11_VIDEO_MUX_CSI_DATA10,  /* GPIO_AD_11 is configured as VIDEO_MUX_CSI_DATA10 */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_12_VIDEO_MUX_CSI_PIXCLK,  /* GPIO_AD_12 is configured as VIDEO_MUX_CSI_PIXCLK */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_14_VIDEO_MUX_CSI_VSYNC,  /* GPIO_AD_14 is configured as VIDEO_MUX_CSI_VSYNC */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_15_VIDEO_MUX_CSI_HSYNC,  /* GPIO_AD_15 is configured as VIDEO_MUX_CSI_HSYNC */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_16_VIDEO_MUX_CSI_DATA09,  /* GPIO_AD_16 is configured as VIDEO_MUX_CSI_DATA09 */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_17_VIDEO_MUX_CSI_DATA08,  /* GPIO_AD_17 is configured as VIDEO_MUX_CSI_DATA08 */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_18_VIDEO_MUX_CSI_DATA07,  /* GPIO_AD_18 is configured as VIDEO_MUX_CSI_DATA07 */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_19_VIDEO_MUX_CSI_DATA06,  /* GPIO_AD_19 is configured as VIDEO_MUX_CSI_DATA06 */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_20_VIDEO_MUX_CSI_DATA05,  /* GPIO_AD_20 is configured as VIDEO_MUX_CSI_DATA05 */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_21_VIDEO_MUX_CSI_DATA04,  /* GPIO_AD_21 is configured as VIDEO_MUX_CSI_DATA04 */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_22_VIDEO_MUX_CSI_DATA03,  /* GPIO_AD_22 is configured as VIDEO_MUX_CSI_DATA03 */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_AD_23_VIDEO_MUX_CSI_DATA02,  /* GPIO_AD_23 is configured as VIDEO_MUX_CSI_DATA02 */
+      IOMUXC_GPIO_DISP_B2_14_GPIO11_IO15,     /* GPIO_DISP_B2_14 is configured as GPIO11_IO15 */
       0U);                                    /* Software Input On Field: Input Path is determined by functionality */
   IOMUXC_SetPinMux(
       IOMUXC_GPIO_DISP_B1_08_USDHC1_CD_B,     /* GPIO_DISP_B1_08 is configured as USDHC1_CD_B */
@@ -94,12 +46,6 @@ void BOARD_InitPins(void) {
       0U);                                    /* Software Input On Field: Input Path is determined by functionality */
   IOMUXC_SetPinMux(
       IOMUXC_GPIO_DISP_B2_09_LPUART1_RXD,     /* GPIO_DISP_B2_09 is configured as LPUART1_RXD */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_DISP_B2_12_LPI2C4_SCL,      /* GPIO_DISP_B2_12 is configured as LPI2C4_SCL */
-      0U);                                    /* Software Input On Field: Input Path is determined by functionality */
-  IOMUXC_SetPinMux(
-      IOMUXC_GPIO_DISP_B2_13_LPI2C4_SDA,      /* GPIO_DISP_B2_13 is configured as LPI2C4_SDA */
       0U);                                    /* Software Input On Field: Input Path is determined by functionality */
   IOMUXC_SetPinMux(
       IOMUXC_GPIO_SD_B1_00_USDHC1_CMD,        /* GPIO_SD_B1_00 is configured as USDHC1_CMD */
