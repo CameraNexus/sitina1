@@ -1,0 +1,66 @@
+/*!
+@page middleware_log Middleware Change Log
+
+@section host_usdhc Host USDHC driver for MCUXpresso SDK
+The current driver version is 2.6.3.
+  - 2.6.3
+    - Improvements
+      - Added macro SDMMCHOST_SUPPORT_VOLTAGE_CONTROL.
+
+  - 2.6.2
+    - Bug Fixes
+      - Added clock force on during standard tuning to fix the card access not stable after initialization.
+
+  - 2.6.1
+    - Improvements
+      - Increased the delay after enable DAT3 detect card feature to fix the misdetect issue.
+
+  - 2.6.0
+    - Improvements
+      - Removed deprecated api in SDHC host driver.
+      - Added SDMMCHOST_ConvertDataToLittleEndian api.
+      - Added capability/maxBlockCount/maxBlockSize in host decriptior.
+      - Improved the manual tuning flow according to specification.
+      - Added mutual exclusive access for function init/deinit/reset/transfer function.
+      - Fixed violations of MISRA C-2012 rule 10.1, 10.4, 16.3, 4.7.
+
+  - 2.5.3
+    - Bug Fixes
+      - Corrected the DAT3 detect card flow by PULL down the DAT3 pin firstly and then enable the host DAT3 function.
+
+  - 2.5.2
+    - Improvements
+      - Improved DAT3 card detect mechanism to avoid card false detection.
+
+  - 2.5.1
+    - Improvements
+      - Enabled DAT3 card detect interrupt in function SDMMCHOST_PollingCardDetectStatus to support DAT3 re-detect card.
+
+  - 2.5.0
+    - Improvements
+      - Added cache line size alignment maintain for the read transfer.
+      - Added FSL_FEATURE_HAS_L1CACHE to enable cache maintain operation for the soc has LMEM cache.
+    - Bug Fixes
+      - Fixed violations of MISRA C-2012 rule 11.9, 15.7, 4.7, 16.4, 10.1, 10.3, 10.4, 11.3, 14.4, 10.6, 17.7, 16.1, 16.3.
+
+  - 2.4.0
+    - Improvements
+      - Added cache maintain functionality in the host driver.
+      - Enabled DAT3 card detect feature.
+      - Increase the default STD tuning counter to 60 to cover range of the tuning window.
+      - Added host instance capability macro.
+      - Added clear card inserted/removed event when card removed/inserted interrupt generated.
+
+  - 2.3.0
+    - Improvements
+      - Merged the host controller driver from polling/freertos/interrupt to non_blocking/blocking.
+      - Added SDMMC OSA layer to support muxtex access/event/delay.
+
+  - 2.2.14
+    - Bug Fixes
+      - Fixed uninitialized value Coverity issue.
+
+  - 2.0.0
+    - Initial version
+
+*/

@@ -16,6 +16,10 @@
 #include "fsl_debug_console.h"
 #include "fsl_component_serial_manager.h"
 #include "fsl_shell.h"
+#include "ff.h"
+#include "diskio.h"
+#include "fsl_sd_disk.h"
+#include "sdmmc_config.h"
 #include "sdram.h"
 #include "vout.h"
 #include "i2c.h"
@@ -53,6 +57,9 @@ SDK_ALIGN(static uint8_t s_shellHandleBuffer[SHELL_HANDLE_SIZE], 4);
 static shell_handle_t s_shellHandle;
 
 extern serial_handle_t g_serialHandle;
+
+AT_NONCACHEABLE_SECTION(static FATFS g_fileSystem); /* File system object */
+AT_NONCACHEABLE_SECTION(static FIL imgFil);
 /*******************************************************************************
  * Code
  ******************************************************************************/
@@ -176,84 +183,73 @@ void lcd_set_color(uint16_t cl) {
 	DCACHE_CleanInvalidateByRange((uint32_t)framebuffer, (720 * 720 * 2));
 }
 
-typedef enum {
-	AXP_DCDC2 = 0,
-	AXP_DCDC3 = 1,
-	AXP_LDO2 = 2,
-	AXP_LDO3 = 3,
-	AXP_LDO4 = 4
-} AXP_RAIL;
-
-static const uint8_t axp_rail_reg[] = {
-	0x23, // dcdc2
-	0x27, // dcdc3
-	0x28, // ldo2 / 4
-	0x29, // ldo3
-	0x28  // ldo2 / 4
-};
-
-static const char *axp_rail_name[] = {
-	"DCDC2",
-	"DCDC3",
-	"LDO2",
-	"LDO3",
-	"LDO4"
-};
-
-static const int axp_ldo4volts[] = {1250, 1300, 1400, 1500, 1600, 1700,
-		1800, 1900, 2000, 2500, 2700, 2800, 3000, 3100, 3200, 3300};
-
-#define AXP_I2C_HOST	LPI2C4
-#define AXP_I2C_ADDR	0x34
-
-void axp_read_volt(AXP_RAIL rail) {
-    uint8_t val;
-    i2c_read_reg(AXP_I2C_HOST, AXP_I2C_ADDR, axp_rail_reg[rail], &val);
-    int volt;
-    if (rail == AXP_LDO2) {
-    	volt = 1800 + 100 * ((val >> 4) & 0x0f);
-    }
-    else if (rail == AXP_LDO4) {
-    	volt = axp_ldo4volts[(val & 0x0f)];
-    }
-    else {
-    	volt = 700 + val * 25;
-    }
-    PRINTF("%s: %d mV\r\n", axp_rail_name[rail], volt);
-}
-
-void axp_set_volt(AXP_RAIL rail, uint32_t microvolt) {
-	uint8_t val;
-
-	if (rail == AXP_LDO2) {
-		i2c_read_reg(AXP_I2C_HOST, AXP_I2C_ADDR, axp_rail_reg[rail], &val);
-		val &= ~0xf0;
-		val |= ((microvolt - 1800) / 100) << 4;
-	}
-	else if (rail == AXP_LDO4) {
-		i2c_read_reg(AXP_I2C_HOST, AXP_I2C_ADDR, axp_rail_reg[rail], &val);
-		val &= ~0x0f;
-		for (int i = 0; i < (sizeof(axp_ldo4volts) / sizeof(axp_ldo4volts[0])); i++) {
-			if (microvolt == axp_ldo4volts[i]) {
-				val |= (i & 0xf);
-				break;
-			}
-		}
-	}
-	else {
-		val = (microvolt - 700) / 25;
-	}
-	i2c_write_reg(AXP_I2C_HOST, AXP_I2C_ADDR, axp_rail_reg[rail], val);
-}
-
 // LCD buffer takes 720*720*2= ~1MB for now, reserve 4MB for LCD
 
 
 uint16_t *camera_buffer_0 = (uint16_t *)0x80400000;
 uint16_t *camera_buffer_1 = (uint16_t *)0x82000000;
 
-#define BOARD_POWER_LED_GPIO    GPIO11
-#define BOARD_POWER_LED_PIN     15
+static status_t sdcardWaitCardInsert(void)
+{
+    BOARD_SD_Config(&g_sd, NULL, BOARD_SDMMC_SD_HOST_IRQ_PRIORITY, NULL);
+
+    /* SD host init function */
+    if (SD_HostInit(&g_sd) != kStatus_Success)
+    {
+        PRINTF("\r\nSD host init fail\r\n");
+        return kStatus_Fail;
+    }
+    /* power off card */
+    //SD_SetCardPower(&g_sd, false);
+    /* wait card insert */
+    if (SD_PollingCardInsert(&g_sd, kSD_Inserted) == kStatus_Success)
+    {
+        PRINTF("\r\nCard inserted.\r\n");
+        /* power on the card */
+        //SD_SetCardPower(&g_sd, true);
+    }
+    else
+    {
+        PRINTF("\r\nCard detect fail.\r\n");
+        return kStatus_Fail;
+    }
+
+    return kStatus_Success;
+}
+
+static int MOUNT_SDCard(void)
+{
+    FRESULT error;
+    const TCHAR driverName[3U] = {SDDISK + '0', ':', '/'};
+
+    // clear FATFS manually
+    memset((void *)&g_fileSystem, 0, sizeof(g_fileSystem));
+
+    /* Wait for the card insert. */
+    if (sdcardWaitCardInsert() != kStatus_Success)
+    {
+        PRINTF("Card not inserted.\r\n");
+        return -1;
+    }
+
+    // Mount the driver
+    if (f_mount(&g_fileSystem, driverName, 0))
+    {
+        PRINTF("Mount volume failed.\r\n");
+        return -2;
+    }
+
+#if (FF_FS_RPATH >= 2U)
+    if (f_chdrive((char const *)&driverName[0U]))
+    {
+        PRINTF("Change drive failed.\r\n");
+        return -3;
+    }
+#endif
+
+    return 0;
+}
+
 
 /*! @brief Main function */
 int main(void)
@@ -282,6 +278,22 @@ int main(void)
     afe_init();
     PRINTF("AFE Initialized.\r\n");
 
+    /* ERR050396
+     * Errata description:
+     * AXI to AHB conversion for CM7 AHBS port (port to access CM7 to TCM) is by a NIC301 block, instead of XHB400
+     * block. NIC301 doesn't support sparse write conversion. Any AXI to AHB conversion need XHB400, not by NIC. This
+     * will result in data corruption in case of AXI sparse write reaches the NIC301 ahead of AHBS. Errata workaround:
+     * For uSDHC, don't set the bit#1 of IOMUXC_GPR28 (AXI transaction is cacheable), if write data to TCM aligned in 4
+     * bytes; No such write access limitation for OCRAM or external RAM
+     */
+    IOMUXC_GPR->GPR28 &= (~IOMUXC_GPR_GPR28_AWCACHE_USDHC_MASK);
+
+//    int result = MOUNT_SDCard();
+//    if (result != 0) {
+//        ui_printf(0, 0, "Unable to mount SD card!");
+//        while (1);
+//    }
+
     csi_init();
     csi_submit_empty_buffer((uint8_t *)camera_buffer_0);
     csi_submit_empty_buffer((uint8_t *)camera_buffer_1);
@@ -293,11 +305,13 @@ int main(void)
     PRINTF("Capture started...\r\n");
 
     uint32_t seq = 0;
+    int i = 0;
+
+    uint16_t *camera_buffer;
     while (1) {
         uint16_t max = 0;
         uint16_t min = 65535;
         csi_wait_framedone();
-        uint16_t *camera_buffer;
         uint64_t sum = 0;
 
         while ((camera_buffer = csi_get_full_buffer()) == NULL);
@@ -318,6 +332,10 @@ int main(void)
             }
         }
 
+//        i++;
+//        if (i == 10)
+//            break;
+
         csi_submit_empty_buffer((uint8_t *)camera_buffer);
 
         sum /= (CCD_FIELD_LINES / 7) * (CCD_LINE_LENGTH * 2 / 7);
@@ -331,6 +349,29 @@ int main(void)
     afe_stop();
     PRINTF("Capture done.\r\n");
 
+//    // Save to SD card
+//    FRESULT error = f_open(&imgFil, "/capture.bin", FA_CREATE_ALWAYS | FA_WRITE);
+//    if (error != FR_OK)
+//    {
+//        memset(framebuffer + 400*720*2, 0x00, 30*720*2);
+//        ui_printf(0, 400, "Unable to create file");
+//        while(1);
+//    }
+//
+//    uint32_t btw = (CCD_LINE_LENGTH * 2 * 2) * (CCD_FIELD_LINES + 1);
+//    uint32_t bw;
+//    error = f_write(&imgFil, camera_buffer, btw, &bw);
+//    if (error != FR_OK)
+//    {
+//        memset(framebuffer + 400*720*2, 0x00, 30*720*2);
+//        ui_printf(0, 400, "Unable to write file");
+//        while(1);
+//    }
+//
+//    f_close(&imgFil);
+//
+//    memset(framebuffer + 400*720*2, 0x00, 30*720*2);
+//    ui_printf(0, 400, "Image write finished.");
 
     /* Init SHELL */
     s_shellHandle = &s_shellHandleBuffer[0];

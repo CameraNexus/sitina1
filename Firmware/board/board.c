@@ -399,7 +399,7 @@ void BOARD_ConfigMPU(void)
     MPU->RASR = ARM_MPU_RASR(0, ARM_MPU_AP_RO, 0, 0, 1, 1, 0, ARM_MPU_REGION_SIZE_16MB);
 #endif
 
-#ifdef USE_SDRAM
+//#ifdef USE_SDRAM
 #if defined(CACHE_MODE_WRITE_THROUGH) && CACHE_MODE_WRITE_THROUGH
     /* Region 9 setting: Memory with Normal type, not shareable, write trough */
     MPU->RBAR = ARM_MPU_RBAR(9, 0x80000000U);
@@ -409,7 +409,7 @@ void BOARD_ConfigMPU(void)
     MPU->RBAR = ARM_MPU_RBAR(9, 0x80000000U);
     MPU->RASR = ARM_MPU_RASR(0, ARM_MPU_AP_FULL, 0, 0, 1, 1, 0, ARM_MPU_REGION_SIZE_64MB);
 #endif
-#endif
+//#endif
 
     while ((size >> i) > 0x1U)
     {
