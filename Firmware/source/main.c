@@ -23,6 +23,7 @@
 #include "ccd_timing.h"
 #include "csi.h"
 #include "ui.h"
+#include "power.h"
 
 /*******************************************************************************
  * Definitions
@@ -263,19 +264,9 @@ int main(void)
     BOARD_InitDebugConsole();
 
     i2c_init();
-    axp_set_volt(AXP_LDO2, 1800);
-    axp_set_volt(AXP_DCDC2, 2000);
-
-    const gpio_pin_config_t pinConfig = {kGPIO_DigitalOutput, 1, kGPIO_NoIntmode};
-    GPIO_PinInit(BOARD_POWER_LED_GPIO, BOARD_POWER_LED_PIN, &pinConfig);
+    power_init();
 
     PRINTF("\r\nSitinaNe\r\n");
-
-    axp_read_volt(AXP_DCDC2);
-    axp_read_volt(AXP_DCDC3);
-    axp_read_volt(AXP_LDO2);
-    axp_read_volt(AXP_LDO3);
-    axp_read_volt(AXP_LDO4);
 
     vout_init();
     PRINTF("LCD Initialized.\r\n");
