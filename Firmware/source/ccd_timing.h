@@ -31,6 +31,7 @@
 #define CCD_ACTIVE_PIX      2004
 #define CCD_T3P_PIX         2880 // 120 us
 #define CCD_TV3RD_PIX       240 // 10 us
+#define CCD_TV3RD_COMP      3 // Compensate for slow turn on
 #define CCD_T3D_PIX         480 // 20 us
 #define CCD_LINE_LENGTH     (CCD_TVCCD_PIX + CCD_THD_PIX + CCD_DUMMY_PIX + CCD_DARK_PIX + CCD_BUFFER_PIX + CCD_ACTIVE_PIX)
 #define CCD_HBLK_LENGTH     (CCD_TVCCD_PIX + CCD_THD_PIX)

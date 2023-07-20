@@ -97,6 +97,16 @@ void afe_init_io(void) {
         IOMUXC_GPIO_AD_35_GPIO10_IO02,          /* GPIO_AD_35 is configured as GPIO10_IO02 */
         0U);                                    /* Software Input On Field: Input Path is determined by functionality */
 
+    IOMUXC_SetPinConfig(
+        IOMUXC_GPIO_AD_02_GPIO9_IO01,           /* GPIO_AD_02 PAD functional properties : */
+        0x07U);                                 /* Slew Rate Field: Fast Slew Rate
+                                                   Drive Strength Field: high drive strength
+                                                   Pull / Keep Select Field: Pull Enable
+                                                   Pull Up / Down Config. Field: Weak pull down
+                                                   Open Drain Field: Disabled
+                                                   Domain write protection: Both cores are allowed
+                                                   Domain write protection lock: Neither of DWP bits is locked */
+
     // IOs default to 1
     GPIO_PinInit(AFE_MOSI_GPIO, AFE_MOSI_GPIO_PIN, &config);
     GPIO_PinInit(AFE_SCK_GPIO, AFE_SCK_GPIO_PIN, &config);
@@ -104,7 +114,8 @@ void afe_init_io(void) {
     GPIO_PinInit(AFE_RST_GPIO, AFE_RST_GPIO_PIN, &config);
     GPIO_PinInit(AFE_SYNC_GPIO, AFE_SYNC_GPIO_PIN, &config);
 
-    config.outputLogic = 0;
+    //config.direction = kGPIO_DigitalInput; // TODO
+    config.outputLogic = 1;
     GPIO_PinInit(AFE_STROBE_GPIO, AFE_STROBE_GPIO_PIN, &config);
 }
 
@@ -168,6 +179,9 @@ void afe_init(void) {
     // Place the AFE into normal operation
     afe_write_reg(0x00, 0x04); // Standby
 
+    // Divide clock by 2
+    afe_write_reg(0x0d, 0x00);
+
     // Mode setup
     afe_write_reg(0x13, AFE_SYNC_CONFIG);
 
@@ -188,19 +202,20 @@ void afe_init(void) {
     afe_write_reg(0x23, 0x0e); // 3.3V IO
 
     // HCLK mode 1: H1A = H1B, H2A = H2B = inverse of H1
-    afe_write_reg(0x24, 0x1);
+    // HCLK mode 2: H1A = H1B, H2A = H2B, individually programmable
+    afe_write_reg(0x24, 0x2);
 
     afe_write_reg(0x30,
-            (0 << 0) |  // H1 rising edge location
+            (4 << 0) |  // H1 rising edge location
             (32 << 8) | // H1 falling edge location
             (1 << 16)); // Must be 1
     afe_write_reg(0x31,
-            (0 << 0) |  // H2 rising edge location
-            (32 << 8) | // H2 falling edge location
+            (36 << 0) |  // H2 rising edge location
+            (0 << 8) | // H2 falling edge location
             (1 << 16)); // Must be 1
     afe_write_reg(0x32,
-            (0 << 0) |  // HLA rising edge location
-            (16 << 8) | // HLA falling edge location
+            (4 << 0) |  // HLA rising edge location
+            (14 << 8) | // HLA falling edge location
             (1 << 16)); // Must be 1
     afe_write_reg(0x33,
             (0 << 0) |  // HLB rising edge location
@@ -210,8 +225,8 @@ void afe_init(void) {
             (0 << 0) |  // RG rising edge location
             (16 << 8) | // RG falling edge location //TODO: Should be 8
             (1 << 16)); // Must be 1
-    afe_write_reg(0x35, 0x00); // Disable retime for H1, H2, HLA, HLB
-    //afe_write_reg(0x35, 0x0f); // Enable retime for H1, H2, HLA, HLB
+    //afe_write_reg(0x35, 0x00); // Disable retime for H1, H2, HLA, HLB
+    afe_write_reg(0x35, 0x0f); // Enable retime for H1, H2, HLA, HLB
 
     afe_write_reg(0x38,
             (31 << 0) | // SHDLOC
@@ -476,6 +491,9 @@ void afe_init(void) {
     afe_set_conf_reg(R_VSEQ, 1, 0x22,
             (CCD_CLPOB_BEGIN << 0) | // CLPOB toggle position 1
             (CCD_CLPOB_END << 13)); // CLPOB toggle position 2
+//    afe_set_conf_reg(R_VSEQ, 1, 0x22,
+//            (CCD_CLPOB_BEGIN << 0) | // CLPOB toggle position 1
+//            (CCD_CLPOB_END << 13)); // CLPOB toggle position 2
     afe_set_conf_reg(R_VSEQ, 1, 0x23,
             (CCD_HBLK_LENGTH << 0) | // PBLK toggle position 1
             (8191 << 13)); // PBLK toggle position 2
@@ -574,7 +592,7 @@ void afe_init(void) {
             (1 << 0) | // V2 toggle position 1
             ((CCD_T3P_PIX + CCD_TV3RD_PIX + CCD_T3D_PIX) << 13)); // V2 toggle position 2
     afe_set_conf_reg(R_VPAT, 2, 0x04,
-            ((CCD_T3P_PIX + 2) << 0) | // V3 toggle position 1
+            ((CCD_T3P_PIX + 2 - CCD_TV3RD_COMP) << 0) | // V3 toggle position 1
             ((CCD_T3P_PIX + CCD_TV3RD_PIX) << 13)); // V3 toggle position 2
 
     SDK_DelayAtLeastUs(500, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
@@ -625,9 +643,9 @@ AT_QUICKACCESS_SECTION_CODE(void afe_strobe(void)) {
 //    afe_write_reg(0xc3, gpo_status);
 //    gpo_status &= ~0x1;
 //    afe_write_reg(0xc3, gpo_status);
-    GPIO_PinWrite(AFE_STROBE_GPIO, AFE_STROBE_GPIO_PIN, 1);
-    SDK_DelayAtLeastUs(3, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
     GPIO_PinWrite(AFE_STROBE_GPIO, AFE_STROBE_GPIO_PIN, 0);
+    SDK_DelayAtLeastUs(4, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
+    GPIO_PinWrite(AFE_STROBE_GPIO, AFE_STROBE_GPIO_PIN, 1);
 }
 
 void afe_stop(void) {
