@@ -8,18 +8,15 @@ The following are preliminary.
 
 ### Hardware
 
-![Block Diagram](./Hardware/block_diagram.svg)
-
-- Processor: NXP i.MX6 ULL (900MHz Cortex-A7)
-- RAM: 512MB 16-bit DDR3-1066 (2GB/s)
-- OS Storage: 4GB eMMC
+- Processor: NXP i.MX RT1176 (1GHz Cortex-M7F)
+- RAM: 64MB 32-bit LPSDR SDRAM
 - AFE: Analog Devices AD9990
 - Sensor: Kodak/ONsemi KAI-11000/KAI-11002M/CM
+- Screen: 4.0" 720x720 DSI TFT LCD
 - User Expansion:
-  - microSD slot (UHS-I, 104MB/s)
+  - SD slot (UHS-I, 104MB/s)
   - USB Type-C (USB 2.0 HS, 480Mbps)
   - USB Micro-B (USB serial debugging)
-  - 100M Ethernet
   - Flash sync terminal
 
 ### Camera Features
@@ -29,7 +26,7 @@ The following are possible with hardware, but not necessarily supported by the c
 - Sensor Type: 35mm Interline CCD sensor
 - Sensor Size: 36.0 x 24.0 mm
 - Effective Pixels: 10.7MP
-- Lens Mount: Active FE mount
+- Lens Mount: Passive M mount
 - Still Resolutions:
   - 4008x2672 10.7MP 3:2
   - 3563x2672 9.5MP 4:3 1.08X crop
@@ -50,3 +47,9 @@ The following are possible with hardware, but not necessarily supported by the c
 ## Status
 
 Harware R0.4 soldered and mostly working. R0.5 working in progress. See schematics for change logs.
+
+## License
+
+Unless otherwise stated, the hardware design is released under CERN-OHL-P, and the software/ firmware are released under MIT.
+
+Most other 3D models are obtained from vendor website, refer to the corresponding vendor website for licensing details. They are provided for convience only.
