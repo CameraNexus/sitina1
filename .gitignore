@@ -5,10 +5,15 @@
 fp-*
 _autosave*
 *.kicad_pcb-bak
+*.kicad_sch-bak
 *.sch-bak
 gerber/
 pcb.step
 pcb.pdf
+production/
+
+# Eclipse/ MCUXpresso files
+*.launch
 
 # Xilinx ISE files
 obj_dir/

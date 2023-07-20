@@ -1,0 +1,16 @@
+(kicad_sch (version 20230121) (generator eeschema)
+
+  (uuid 99adcf1c-6a7c-46c9-9546-936dcdfd6a28)
+
+  (paper "A4")
+
+  (title_block
+    (date "2023-03-16")
+    (rev "R0.6")
+    (company "Copyright 2023 Wenting Zhang")
+  )
+
+  (lib_symbols
+  )
+
+)

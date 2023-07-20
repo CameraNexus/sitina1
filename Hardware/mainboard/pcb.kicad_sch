@@ -6,9 +6,9 @@
 
   (title_block
     (title "Sitina 1 Mainboard")
-    (date "2022-04-28")
-    (rev "R0.1")
-    (company "Copyright 2022 Wenting Zhang")
+    (date "2023-03-16")
+    (rev "R0.6")
+    (company "Copyright 2023 Wenting Zhang")
     (comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
     (comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
     (comment 4 "This source describes Open Hardware and is licensed under the CERN-OHL-P v2.")
@@ -63,6 +63,11 @@
     (effects (font (size 2.54 2.54)) (justify left bottom))
     (uuid 3fe83452-8f35-4e46-8007-249a8eed789b)
   )
+  (text "1. Switch from iMX6ULL to iMXRT1176\n2. Shrink board size\n3. Removed builtin ethernet\n4. CCD power supply bug fixes\n5. Use MIPI DSI LCD instead of DPI"
+    (at 148.59 104.14 0)
+    (effects (font (size 2 2)) (justify left bottom))
+    (uuid 49c72e7e-6eb6-44d3-b557-73616adf5625)
+  )
   (text "0.4 2022-03" (at 125.73 71.12 0)
     (effects (font (size 2 2)) (justify left bottom))
     (uuid 505768e5-4faf-4c3a-ad60-084f21426a87)
@@ -87,7 +92,7 @@
     (effects (font (size 2.54 2.54)) (justify left bottom))
     (uuid 9a1c8ec0-d8e8-48f7-9b9a-73d36cfb311f)
   )
-  (text "0.6 2022-11" (at 125.73 91.44 0)
+  (text "0.6 2023-03" (at 125.73 91.44 0)
     (effects (font (size 2 2)) (justify left bottom))
     (uuid 9ca56caf-cb53-4240-b60e-972458dbbc8f)
   )

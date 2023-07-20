@@ -6,9 +6,9 @@
 
   (title_block
     (title "Sitina 1 Mainboard")
-    (date "2022-04-28")
-    (rev "R0.1")
-    (company "Copyright 2022 Wenting Zhang")
+    (date "2023-03-16")
+    (rev "R0.6")
+    (company "Copyright 2023 Wenting Zhang")
     (comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
     (comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
     (comment 4 "This source describes Open Hardware and is licensed under the CERN-OHL-P v2.")
