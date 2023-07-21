@@ -1213,11 +1213,11 @@
         )
       )
     )
-    (symbol "symbols:IPSOUT" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
+    (symbol "symbols:+SYS" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
       (property "Reference" "#PWR" (at 0 -3.81 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "Value" "IPSOUT" (at 0 3.556 0)
+      (property "Value" "+SYS" (at 0 3.556 0)
         (effects (font (size 1.27 1.27)))
       )
       (property "Footprint" "" (at 0 0 0)
@@ -1226,7 +1226,7 @@
       (property "Datasheet" "" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (symbol "IPSOUT_0_1"
+      (symbol "+SYS_0_1"
         (polyline
           (pts
             (xy -0.762 1.27)
@@ -1252,9 +1252,9 @@
           (fill (type none))
         )
       )
-      (symbol "IPSOUT_1_1"
+      (symbol "+SYS_1_1"
         (pin power_in line (at 0 0 90) (length 0) hide
-          (name "IPSOUT" (effects (font (size 1.27 1.27))))
+          (name "+SYS" (effects (font (size 1.27 1.27))))
           (number "1" (effects (font (size 1.27 1.27))))
         )
       )
@@ -3792,31 +3792,6 @@
     )
   )
 
-  (symbol (lib_id "symbols:IPSOUT") (at 30.48 33.02 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 3fe1c410-7f2c-4fe5-8b0a-c92c443653c0)
-    (property "Reference" "#PWR01203" (at 30.48 36.83 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "IPSOUT" (at 30.9118 28.6258 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 30.48 33.02 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 30.48 33.02 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 044f322a-ea71-4c98-908d-8ab9cf86d287))
-    (instances
-      (project "pcb"
-        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
-          (reference "#PWR01203") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "Device:C") (at 139.7 115.57 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 41ff6113-cef8-457e-8546-56740ef09f25)
@@ -4177,7 +4152,7 @@
   (symbol (lib_id "Device:L") (at 184.15 74.93 0) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 55ede3ea-d1c9-41ba-a0eb-efe763a1853a)
-    (property "Reference" "L1206" (at 186.69 73.66 0)
+    (property "Reference" "L1206" (at 187.96 73.66 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "4.7uH" (at 187.96 76.2 0)
@@ -4322,6 +4297,34 @@
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
           (reference "#PWR01248") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "symbols:+SYS") (at 30.48 101.6 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 5ff484f8-cc4e-43c6-82ce-e7464d9f9800)
+    (property "Reference" "#PWR0508" (at 30.48 105.41 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+SYS" (at 30.48 97.79 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 30.48 101.6 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 30.48 101.6 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid a43f89dc-2695-4f23-bae5-a960c953b521))
+    (instances
+      (project "pcb"
+        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d4c99f9"
+          (reference "#PWR0508") (unit 1)
+        )
+        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
+          (reference "#PWR0512") (unit 1)
         )
       )
     )
@@ -4554,6 +4557,34 @@
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
           (reference "RV1201") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "symbols:+SYS") (at 135.89 45.72 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 6c2f88ff-be04-46cc-88a6-345b4d18eba1)
+    (property "Reference" "#PWR0508" (at 135.89 49.53 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+SYS" (at 135.89 41.91 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 135.89 45.72 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 135.89 45.72 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 07e5b96e-dfca-4d95-95b3-4c6aef480340))
+    (instances
+      (project "pcb"
+        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d4c99f9"
+          (reference "#PWR0508") (unit 1)
+        )
+        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
+          (reference "#PWR0513") (unit 1)
         )
       )
     )
@@ -5913,31 +5944,6 @@
     )
   )
 
-  (symbol (lib_id "symbols:IPSOUT") (at 135.89 45.72 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid b1f7baaf-c27f-48ef-bb8a-9264943331df)
-    (property "Reference" "#PWR01230" (at 135.89 49.53 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "IPSOUT" (at 136.3218 41.3258 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 135.89 45.72 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 135.89 45.72 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 4047aad1-df55-4791-8857-8acab1c09b1a))
-    (instances
-      (project "pcb"
-        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
-          (reference "#PWR01230") (unit 1)
-        )
-      )
-    )
-  )
-
   (symbol (lib_id "Device:C") (at 106.68 97.79 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b3acebe4-637e-460e-a9db-dd62efbc7941)
@@ -6011,6 +6017,34 @@
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
           (reference "D1210") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "symbols:+SYS") (at 30.48 33.02 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid bc58fe78-6eb3-42b1-8b68-6a6f229cd0e2)
+    (property "Reference" "#PWR0508" (at 30.48 36.83 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+SYS" (at 30.48 29.21 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 30.48 33.02 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 30.48 33.02 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 9fb10705-4046-42da-9fe7-1d66689b73b4))
+    (instances
+      (project "pcb"
+        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d4c99f9"
+          (reference "#PWR0508") (unit 1)
+        )
+        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
+          (reference "#PWR0511") (unit 1)
         )
       )
     )
@@ -6190,31 +6224,6 @@
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
           (reference "C1232") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "symbols:IPSOUT") (at 30.48 101.6 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid d1c1c492-274e-4b23-a6ac-abb8468b0a33)
-    (property "Reference" "#PWR01204" (at 30.48 105.41 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "IPSOUT" (at 30.9118 97.2058 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 30.48 101.6 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 30.48 101.6 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 604067ab-2af2-4730-ac02-0f1d652c5456))
-    (instances
-      (project "pcb"
-        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
-          (reference "#PWR01204") (unit 1)
         )
       )
     )

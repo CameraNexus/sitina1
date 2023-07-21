@@ -72,6 +72,11 @@
     (effects (font (size 2 2)) (justify left bottom))
     (uuid 505768e5-4faf-4c3a-ad60-084f21426a87)
   )
+  (text "1. Use individual MOSFET for V clock\n2. Fix LCD reset\n3. Add global power switch for battery"
+    (at 148.59 114.3 0)
+    (effects (font (size 2 2)) (justify left bottom))
+    (uuid 508f1f71-34ed-421f-b539-2f5e65eadedb)
+  )
   (text "1" (at 33.02 35.56 0)
     (effects (font (size 2.54 2.54)) (justify left bottom))
     (uuid 69967e43-1c12-4c14-9657-453ca7ddd2d1)
@@ -79,6 +84,10 @@
   (text "Rev Date      Description " (at 125.73 41.91 0)
     (effects (font (size 2 2)) (justify left bottom))
     (uuid 77fd0bea-14ec-49a3-b22b-a475cbb74a31)
+  )
+  (text "0.7 2023-08" (at 125.73 107.95 0)
+    (effects (font (size 2 2)) (justify left bottom))
+    (uuid 844c6b63-e9d6-48fe-879c-a0eaac14627e)
   )
   (text "6" (at 33.02 86.36 0)
     (effects (font (size 2.54 2.54)) (justify left bottom))
@@ -289,7 +298,7 @@
     )
     (instances
       (project "pcb"
-        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097" (page "8"))
+        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097" (page "11"))
       )
     )
   )
@@ -306,7 +315,7 @@
     )
     (instances
       (project "pcb"
-        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097" (page "12"))
+        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097" (page "5"))
       )
     )
   )

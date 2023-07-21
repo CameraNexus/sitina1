@@ -2956,7 +2956,7 @@
     (property "Reference" "U501" (at 190.5 121.133 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "W25Q128JVP" (at 190.5 123.444 0)
+    (property "Value" "W25Q128JWP" (at 190.5 123.444 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Package_SON:WSON-8-1EP_6x5mm_P1.27mm_EP3.4x4.3mm" (at 182.88 133.35 0)
