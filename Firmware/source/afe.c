@@ -592,8 +592,8 @@ void afe_init(void) {
             (1 << 0) | // V2 toggle position 1
             ((CCD_T3P_PIX + CCD_TV3RD_PIX + CCD_T3D_PIX) << 13)); // V2 toggle position 2
     afe_set_conf_reg(R_VPAT, 2, 0x04,
-            ((CCD_T3P_PIX + 2 - CCD_TV3RD_COMP) << 0) | // V3 toggle position 1
-            ((CCD_T3P_PIX + CCD_TV3RD_PIX) << 13)); // V3 toggle position 2
+            ((CCD_T3P_PIX + 2 - CCD_TV3RD_COMP1) << 0) | // V3 toggle position 1
+            ((CCD_T3P_PIX + CCD_TV3RD_PIX + CCD_TV3RD_COMP2) << 13)); // V3 toggle position 2
 
     SDK_DelayAtLeastUs(500, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
 
