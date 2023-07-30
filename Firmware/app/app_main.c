@@ -21,6 +21,7 @@
 // SOFTWARE.
 //
 #include <stdio.h>
+#include <stdbool.h>
 #include "os_display.h"
 #include "os_filesystem.h"
 #include "os_input.h"

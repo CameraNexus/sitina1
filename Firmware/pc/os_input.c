@@ -21,9 +21,11 @@
 // SOFTWARE.
 //
 #include <SDL.h>
+#include <stdbool.h>
 #include "os_input.h"
 
 uint32_t key_state;
+touch_point touch_state;
 
 void os_input_init(void) {
     key_state = 0;
@@ -37,7 +39,7 @@ uint32_t os_input_get_keys(void) {
     return key_state;
 }
 
-void _os_input_handle_sdl_keyevent(SDL_KeyboardEvent event) {
+static void _os_input_handle_sdl_keyevent(SDL_KeyboardEvent event) {
     uint32_t key_mask;
 
     switch (event.keysym.sym) {
@@ -78,6 +80,21 @@ void _os_input_handle_sdl_keyevent(SDL_KeyboardEvent event) {
     }
 }
 
+static void _os_input_handle_sdl_mousebuttonevent(SDL_MouseButtonEvent event) {
+    touch_state.x = (uint16_t)event.x;
+    touch_state.y = (uint16_t)event.y;
+    touch_state.touched = (event.state == SDL_PRESSED);
+}
+
+static void _os_input_handle_sdl_mousemotionevent(SDL_MouseMotionEvent event) {
+    touch_state.x = (uint16_t)event.x;
+    touch_state.y = (uint16_t)event.y;
+}
+
+void os_input_get_touch(touch_point *points) {
+    *points = touch_state;   
+}
+
 void os_input_scan(void) {
     SDL_Event event;
 
@@ -94,6 +111,15 @@ void os_input_scan(void) {
             _os_input_handle_sdl_keyevent(event.key);
             break;
         
+        case SDL_MOUSEBUTTONDOWN:
+        case SDL_MOUSEBUTTONUP:
+            _os_input_handle_sdl_mousebuttonevent(event.button);
+            break;
+
+        case SDL_MOUSEMOTION:
+            _os_input_handle_sdl_mousemotionevent(event.motion);
+            break;
+
         default:
             break;
         }

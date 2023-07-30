@@ -27,9 +27,8 @@ static SDL_TimerID timerID = 0;
 static os_timer_cb user_callback;
 
 static uint32_t sdl_callback(uint32_t interval, void* name) {
-
     user_callback();
-    return 0;
+    return interval;
 }
 
 

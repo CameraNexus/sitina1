@@ -31,7 +31,7 @@ static SDL_Texture *texture = NULL;
 static SDL_Rect textureRect;
 
 void os_disp_init() {
-    window = SDL_CreateWindow("VerilogBoy Simulation", 
+    window = SDL_CreateWindow("Sitina", 
             SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
             DISP_WIDTH, DISP_HEIGHT, SDL_SWSURFACE);
 

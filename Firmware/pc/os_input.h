@@ -31,7 +31,14 @@
 #define KEY_MASK_START  (1 << 6)
 #define KEY_MASK_SELECT (1 << 7)
 
+typedef struct {
+    uint16_t x;
+    uint16_t y;
+    bool touched;
+} touch_point;
+
 void os_input_init(void);
 void os_input_deinit(void);
 uint32_t os_input_get_keys(void);
+void os_input_get_touch(touch_point *points);
 void os_input_scan(void);

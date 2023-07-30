@@ -21,6 +21,7 @@
 // SOFTWARE.
 //
 #include <stdio.h>
+#include <stdbool.h>
 #include "os_display.h"
 #include "os_filesystem.h"
 #include "os_input.h"
@@ -29,6 +30,8 @@
 #define LVGL_SCREEN_BUF_HEIGHT DISP_HEIGHT
 
 lv_indev_t * indev_keypad;
+lv_indev_t * indev_touchpad;
+static lv_indev_drv_t indev_drv;
 
 static lv_disp_draw_buf_t draw_buf_dsc_1;
 static lv_color_t buf[DISP_WIDTH * LVGL_SCREEN_BUF_HEIGHT];
@@ -122,12 +125,28 @@ static void keypad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data) {
     data->key = last_key;
 }
 
-void lv_port_indev_init(void) {
-    lv_indev_drv_t indev_drv;
+// Will be called by the library to read the touchpad
+static void touchpad_read(lv_indev_drv_t * indev_drv, lv_indev_data_t * data)
+{
+    touch_point point;
 
-    // Register a keypad input device
+    os_input_get_touch(&point);
+
+    data->state = (point.touched) ? LV_INDEV_STATE_PR : LV_INDEV_STATE_REL;
+    data->point.x = (lv_coord_t)point.x;
+    data->point.y = (lv_coord_t)point.y;
+}
+
+void lv_port_indev_init(void) {
+    // // Register a keypad input device
+    // lv_indev_drv_init(&indev_drv);
+    // indev_drv.type = LV_INDEV_TYPE_KEYPAD;
+    // indev_drv.read_cb = keypad_read;
+    // indev_keypad = lv_indev_drv_register(&indev_drv);
+
+    // Register a touchpad input device
     lv_indev_drv_init(&indev_drv);
-    indev_drv.type = LV_INDEV_TYPE_KEYPAD;
-    indev_drv.read_cb = keypad_read;
-    indev_keypad = lv_indev_drv_register(&indev_drv);
+    indev_drv.type = LV_INDEV_TYPE_POINTER;
+    indev_drv.read_cb = touchpad_read;
+    indev_touchpad = lv_indev_drv_register(&indev_drv);
 }
