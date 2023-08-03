@@ -76,7 +76,7 @@ void axp_read_volt(AXP_RAIL rail) {
     else {
         volt = 700 + val * 25;
     }
-    PRINTF("%s: %d mV\r\n", axp_rail_name[rail], volt);
+    printf("%s: %d mV\r\n", axp_rail_name[rail], volt);
 }
 
 void axp_set_volt(AXP_RAIL rail, uint32_t microvolt) {
@@ -112,11 +112,11 @@ void power_init(void) {
     const gpio_pin_config_t pinConfig = {kGPIO_DigitalOutput, 1, kGPIO_NoIntmode};
     GPIO_PinInit(BOARD_POWER_LED_GPIO, BOARD_POWER_LED_PIN, &pinConfig);
 
-//    axp_read_volt(AXP_DCDC2);
-//    axp_read_volt(AXP_DCDC3);
-//    axp_read_volt(AXP_LDO2);
-//    axp_read_volt(AXP_LDO3);
-//    axp_read_volt(AXP_LDO4);
+    axp_read_volt(AXP_DCDC2);
+    axp_read_volt(AXP_DCDC3);
+    axp_read_volt(AXP_LDO2);
+    axp_read_volt(AXP_LDO3);
+    axp_read_volt(AXP_LDO4);
 
 }
 

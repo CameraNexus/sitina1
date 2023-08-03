@@ -27,7 +27,7 @@
 #include "os_input.h"
 #include "lvgl.h"
 
-#define LVGL_SCREEN_BUF_HEIGHT DISP_HEIGHT
+#define LVGL_SCREEN_BUF_HEIGHT 10
 
 lv_indev_t * indev_keypad;
 lv_indev_t * indev_touchpad;
@@ -42,11 +42,11 @@ static lv_disp_drv_t disp_drv;
 // background but 'lv_disp_flush_ready()' has to be called when finished.
 static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area,
         lv_color_t * color_p) {
-    uint32_t *screen = os_disp_get_buffer();
-    uint32_t *rdptr = (uint32_t *)color_p;
+    uint16_t *screen = os_disp_get_buffer();
+    uint16_t *rdptr = (uint16_t *)color_p;
     for (int y = area->y1; y <= area->y2; y++) {
         int width = area->x2 - area->x1 + 1;
-        memcpy(screen + y * DISP_WIDTH + area->x1, rdptr, width * 4);
+        memcpy(screen + y * DISP_WIDTH + area->x1, rdptr, width * 2);
         rdptr += width;
     }
     os_disp_return_buffer(screen);

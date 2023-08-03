@@ -76,6 +76,18 @@ void i2c_init(void) {
     LPI2C_MasterInit(LPI2C4, &masterConfig, LPI2C_CLOCK_FREQUENCY);
 }
 
+int i2c_write_byte(LPI2C_Type *i2c, uint8_t addr, uint8_t val) {
+    if (kStatus_Success != LPI2C_MasterStart(i2c, addr, kLPI2C_Write)) goto error;
+    if (kStatus_Success != LPI2C_MasterSend(i2c, &val, 1)) goto error;
+    if (kStatus_Success != LPI2C_MasterStop(i2c)) goto error;
+
+    return 0;
+
+error:
+    printf("I2C write failed\n");
+    return -1;
+}
+
 int i2c_write_reg(LPI2C_Type *i2c, uint8_t addr, uint8_t reg, uint8_t val) {
     if (kStatus_Success != LPI2C_MasterStart(i2c, addr, kLPI2C_Write)) goto error;
     if (kStatus_Success != LPI2C_MasterSend(i2c, &reg, 1)) goto error;
@@ -143,8 +155,28 @@ error:
     return -1;
 }
 
+int i2c_read_byte(LPI2C_Type *i2c, uint8_t addr, uint8_t *val) {
+    if (kStatus_Success != LPI2C_MasterStart(i2c, addr, kLPI2C_Read)) goto error;
+    if (kStatus_Success != LPI2C_MasterReceive(i2c, val, 1)) goto error;
+    if (kStatus_Success != LPI2C_MasterStop(i2c)) goto error;
+
+    return 0;
+
+error:
+    printf("I2C read failed\n");
+    return -1;
+}
+
 bool i2c_ping(LPI2C_Type *i2c, uint8_t addr) {
     if (kStatus_Success != LPI2C_MasterStart(i2c, addr, kLPI2C_Write)) return false;
     if (kStatus_Success != LPI2C_MasterStop(i2c)) return false;
     return true;
+}
+
+void i2c_probe(LPI2C_Type *i2c) {
+    for (int i = 0x08; i < 0x78; i++) {
+        if (i2c_ping(i2c, i)) {
+            printf("Found I2C device at address %08x\n", i);
+        }
+    }
 }

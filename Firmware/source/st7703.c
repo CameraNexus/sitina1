@@ -92,7 +92,7 @@ void nt35310_init(void) {
     		0x73, 0x73, 0x50, 0x50, 0x00, 0x00, 0x08, 0x70, 0x00);
     LCD_CMD(0xBC, 0x46); // Set VDC
     //LCD_CMD(0xCC, 0x0B); // Set panel (direction, polarity, BGR)
-    LCD_CMD(0xCC, 0x06); // Set panel (direction, polarity, BGR)
+    LCD_CMD(0xCC, 0x07); // Set panel (direction, polarity, BGR)
     LCD_CMD(0xB4, 0x80); // Set CYC
     LCD_CMD(0xB2, // Set DISP
     		0x3C, // NL = 60
