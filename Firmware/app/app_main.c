@@ -26,34 +26,29 @@
 #include "os_filesystem.h"
 #include "os_input.h"
 #include "os_timer.h"
-#include "lvgl.h"
-#include "lv_port.h"
-#include "demos/lv_demos.h"
+#include "gui.h"
 
 void app_tick(void) {
-    lv_tick_inc(10);
+
 }
 
 void app_main(void) {
     os_disp_init();
     os_fs_init();
     os_input_init();
-    os_timer_register_systick(10, app_tick);
+    //os_timer_register_systick(10, app_tick);
 
-    lv_init();
+    gui_init();
+    gui_setup_preview_screen();
 
-    lv_port_disp_init();
-    lv_port_indev_init();
-
-    lv_demo_widgets();
-
-    uint32_t lvgl_timeout = 0;
     while(1) {
         os_input_scan();
-        lvgl_timeout = lv_timer_handler_run_in_period(lvgl_timeout);
+        gui_scan_input();
     }
 
-    os_timer_deinit();
+    gui_deinit();
+
+    //os_timer_deinit();
     os_disp_deinit();
     os_fs_deinit();
     os_input_deinit();
