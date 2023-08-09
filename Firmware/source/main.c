@@ -24,6 +24,7 @@
 #include "csi.h"
 #include "vt.h"
 #include "power.h"
+#include "app_main.h"
 
 /*******************************************************************************
  * Code
@@ -46,7 +47,7 @@ void memtest_test(uint32_t addr, uint32_t size) {
             testval = ~(uint32_t)ptr;
             actual = *ptr++;
             if (actual != testval) {
-            	printf("Test failed at %p, exp %08x, got %08x\r\n",
+                printf("Test failed at %p, exp %08x, got %08x\r\n",
                         ptr, testval, actual);
                 return;
             }
@@ -112,60 +113,58 @@ int main(void)
 //        while (1);
 //    }
 
-//     csi_init();
-//     csi_submit_empty_buffer((uint8_t *)camera_buffer_0);
-//     csi_submit_empty_buffer((uint8_t *)camera_buffer_1);
+     csi_init();
+     csi_submit_empty_buffer((uint8_t *)camera_buffer_0);
+     csi_submit_empty_buffer((uint8_t *)camera_buffer_1);
 
-//     afe_strobe();
+     afe_strobe();
 
-//     csi_start();
-//     afe_start();
-//     printf("Capture started...\r\n");
+     csi_start();
+     afe_start();
+     printf("Capture started...\r\n");
 
-//     uint32_t seq = 0;
-//     int i = 0;
+     uint32_t seq = 0;
+     int i = 0;
 
-//     uint16_t *camera_buffer;
-//     while (1) {
-//         uint16_t max = 0;
-//         uint16_t min = 65535;
-//         csi_wait_framedone();
-//         uint64_t sum = 0;
+     uint16_t *camera_buffer;
+     while (1) {
+         uint16_t max = 0;
+         uint16_t min = 65535;
+         csi_wait_framedone();
+         uint64_t sum = 0;
 
-//         while ((camera_buffer = csi_get_full_buffer()) == NULL);
-//         DCACHE_InvalidateByRange((uint32_t)camera_buffer, 28*1024*1024);
+         while ((camera_buffer = csi_get_full_buffer()) == NULL);
+         DCACHE_InvalidateByRange((uint32_t)camera_buffer, 28*1024*1024);
 
-//         uint16_t *fb_ptr = framebuffer;
-//         for (int y = 0; y < CCD_FIELD_LINES / 7; y++) {
-//             for (int x = 0; x < CCD_LINE_LENGTH * 2 / 7; x++) {
-//                 uint16_t src_pixel = camera_buffer[2000 + y * 7 * (CCD_LINE_LENGTH * 2) + x * 7];
-//                 if (src_pixel > max) max = src_pixel;
-//                 if (src_pixel < min) min = src_pixel;
-//                 sum += src_pixel;
-//                 uint16_t dst_pixel = (src_pixel >> 11) & 0x1f;
-//                 dst_pixel = (dst_pixel << 11) | (dst_pixel << 6) | dst_pixel;
-//                 //fb_ptr[y * FB_WIDTH + x] = dst_pixel;
-//                 uint32_t dst_x = (x & 0x1) ? (CCD_LINE_LENGTH * 2 / 7 - 1 - x / 2) : x / 2;
-//                 fb_ptr[y * FB_WIDTH + dst_x] = dst_pixel;
-//             }
-//         }
+         uint16_t *fb_ptr = framebuffer;
+         for (int y = 0; y < CCD_FIELD_LINES / 7; y++) {
+             for (int x = 0; x < CCD_LINE_LENGTH * 2 / 7; x++) {
+                 uint16_t src_pixel = camera_buffer[2000 + y * 7 * (CCD_LINE_LENGTH * 2) + x * 7];
+                 if (src_pixel > max) max = src_pixel;
+                 if (src_pixel < min) min = src_pixel;
+                 sum += src_pixel;
+                 uint16_t dst_pixel = (src_pixel >> 11) & 0x1f;
+                 dst_pixel = (dst_pixel << 11) | (dst_pixel << 6) | dst_pixel;
+                 //fb_ptr[y * FB_WIDTH + x] = dst_pixel;
+                 uint32_t dst_x = (x & 0x1) ? (CCD_LINE_LENGTH * 2 / 7 - 1 - x / 2) : x / 2;
+                 fb_ptr[y * FB_WIDTH + dst_x] = dst_pixel;
+             }
+         }
 
-// //        i++;
-// //        if (i == 10)
-// //            break;
+ //        i++;
+ //        if (i == 10)
+ //            break;
 
-//         csi_submit_empty_buffer((uint8_t *)camera_buffer);
+         csi_submit_empty_buffer((uint8_t *)camera_buffer);
 
-//         sum /= (CCD_FIELD_LINES / 7) * (CCD_LINE_LENGTH * 2 / 7);
-//         memset(framebuffer + 400*720*2, 0x00, 30*720*2);
-//         //seq++;
-//         ui_printf(0, 400, "%d %d %d", min, max, (uint32_t)sum);
-//     }
+         sum /= (CCD_FIELD_LINES / 7) * (CCD_LINE_LENGTH * 2 / 7);
+         memset(framebuffer + 400*720*2, 0x00, 30*720*2);
+     }
 
-//     csi_stop();
+     csi_stop();
 
-//     afe_stop();
-//     printf("Capture done.\r\n");
+     afe_stop();
+     printf("Capture done.\r\n");
 
 //    // Save to SD card
 //    FRESULT error = f_open(&imgFil, "/capture.bin", FA_CREATE_ALWAYS | FA_WRITE);
@@ -191,6 +190,8 @@ int main(void)
 //    memset(framebuffer + 400*720*2, 0x00, 30*720*2);
 //    ui_printf(0, 400, "Image write finished.");
 
-    app_main();
+    //app_main();
+
+     while (1);
 
 }

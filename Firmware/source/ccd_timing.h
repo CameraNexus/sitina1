@@ -34,8 +34,9 @@
 #define CCD_TV3RD_COMP1     30 // Compensate for slow turn on
 #define CCD_TV3RD_COMP2     2
 #define CCD_T3D_PIX         480 // 20 us
-#define CCD_LINE_LENGTH     (CCD_TVCCD_PIX + CCD_THD_PIX + CCD_DUMMY_PIX + CCD_DARK_PIX + CCD_BUFFER_PIX + CCD_ACTIVE_PIX)
+#define CCD_LINE_PIXCNT     (CCD_DUMMY_PIX + CCD_DARK_PIX + CCD_BUFFER_PIX + CCD_ACTIVE_PIX)
 #define CCD_HBLK_LENGTH     (CCD_TVCCD_PIX + CCD_THD_PIX)
+#define CCD_LINE_LENGTH     (CCD_HBLK_LENGTH + CCD_LINE_PIXCNT)
 #define CCD_VSG_LENGTH      (CCD_T3P_PIX + CCD_TV3RD_PIX + CCD_LINE_LENGTH)
 #define CCD_CLPOB_BEGIN     (CCD_HBLK_LENGTH + CCD_DUMMY_PIX + 1)
 #define CCD_CLPOB_END       (CCD_HBLK_LENGTH + CCD_DUMMY_PIX + CCD_DARK_PIX - 1)
@@ -58,3 +59,30 @@
 #define CCD_LINES           (CCD_DARK_LINES_U + CCD_BUF_LINES_U + CCD_ACTIVE_LINES + CCD_BUF_LINES_D + CCD_DARK_LINES_D)
 //#define CCD_FIELD_LINES     (CCD_SWEEP_LINES + CCD_DUMMY_READ_LINES + CCD_VSG_LINES + CCD_LINES)
 #define CCD_FIELD_LINES     (CCD_DUMMY_READ_LINES + CCD_VSG_LINES + CCD_LINES)
+
+
+// Timing for preview readout
+#define CCD_LINESKIPPING    11 // Skip 10 lines every 11 lines
+// For 2720 lines, we run 2720/11=248 lines
+// Each line is then 3888 pixels (spending lot of time on toggling V lines)
+// Each frame is then 249 lines, totaling 249*3888=968112 cycles
+// At 24MHz, this is 25FPS
+// In draft mode, each line is 3888/24M=0.000162s, or about 1/6172s.
+// 2 lines ~= 1/3000s
+// 3 lines ~= 1/2000s
+// 4 lines ~= 1/1500s
+// 6 lines ~= 1/1000s
+// 8 lines ~= 1/800s
+// 15 lines ~= 1/400s
+// 31 lines ~= 1/200s
+// 62 lines ~= 1/100s
+// 123 lines ~= 1/50s
+// 247 lines ~= 1/25s <- not necessary, at 25FPS live view the natural exposure time is 1/25s
+#define CCD_PRV_SKIP_LENGTH ((CCD_TVCCD_PIX + CCD_THD_PIX) * (CCD_LINESKIPPING - 1))
+#define CCD_PRV_HBLK_LENGTH ((CCD_TVCCD_PIX + CCD_THD_PIX) * CCD_LINESKIPPING)
+#define CCD_PRV_LINE_LENGTH (CCD_PRV_HBLK_LENGTH + CCD_LINE_PIXCNT)
+#define CCD_PRV_CLPOB_BEGIN (CCD_PRV_HBLK_LENGTH + CCD_DUMMY_PIX + 1)
+#define CCD_PRV_CLPOB_END   (CCD_PRV_HBLK_LENGTH + CCD_DUMMY_PIX + CCD_DARK_PIX - 1)
+
+#define CCD_PRV_ARRAY_LINES (248)
+#define CCD_PRV_FIELD_LINES (CCD_VSG_LINES + CCD_PRV_ARRAY_LINES)

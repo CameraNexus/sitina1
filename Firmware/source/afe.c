@@ -49,11 +49,12 @@
 // Rated maximum data rate of KAI-11000/11002: 28 MHz (56 MP/s)
 // At 24MHz, 1 pixel = 41.67ns
 
+// This is the active field count. Programmed numbers can be higher
+#define AFE_FIELD_COUNT (1)
 // These settings only affect the memory layout.
 // Actual used count could be less.
-#define AFE_FIELD_COUNT (1)
-#define AFE_VPAT_COUNT (3)
-#define AFE_VSEQ_COUNT (3)
+#define AFE_VPAT_COUNT (4)
+#define AFE_VSEQ_COUNT (4)
 
 // Base settings
 #define AFE_SYNC_CONFIG (0x61) // External sync enable should be set even if using software sync
@@ -248,32 +249,12 @@ void afe_init(void) {
     afe_write_reg(0x2a,
             (AFE_FIELD_COUNT << 0)); // MODE
     afe_write_reg(0x2b,
-            (0 << 0)); // FIELD0 = 0
+            (1 << 0)); // FIELD0 = 1 // Boot up in preview mode
     afe_write_reg(0x2c, 0);
 
     // Configure timing
 
     // Configure field
-//    afe_set_conf_reg(R_FIELD, 0, 0x00,
-//            (0 << 0) |  // Use seq 0 for region 0 (Fast Dump)
-//            (1 << 5) |  // Use seq 1 for region 1 (Dummy readout, 2 lines)
-//            (2 << 10) | // Use seq 2 for region 2 (VSG pulse)
-//            (1 << 15)); // Use seq 1 for region 3 (Image readout)
-//    afe_set_conf_reg(R_FIELD, 0, 0x01,
-//            (1 << 20)); // Sweep mode on for Region 0*/
-//    afe_set_conf_reg(R_FIELD, 0, 0x02,
-//            (CCD_LINE_LENGTH)); // Line length of the last line
-//    afe_set_conf_reg(R_FIELD, 0, 0x03,
-//            (0 << 0) |  // Enter Fast Dump mode immediately
-//            (CCD_SWEEP_LINES << 13)); // Enter Dummy readout mode
-//    afe_set_conf_reg(R_FIELD, 0, 0x04,
-//            (CCD_SWEEP_LINES + CCD_DUMMY_READ_LINES) |
-//            ((CCD_SWEEP_LINES + CCD_DUMMY_READ_LINES + CCD_VSG_LINES) << 13));
-//    afe_set_conf_reg(R_FIELD, 0, 0x07,
-//            (CCD_FIELD_LINES << 13)); // VD field length
-//    afe_set_conf_reg(R_FIELD, 0, 0x08,
-//            ((CCD_SWEEP_LINES + CCD_DUMMY_READ_LINES)) | // SG active line
-//            (8191 << 13));
 
     afe_set_conf_reg(R_FIELD, 0, 0x00,
             (1 << 0) |  // Use seq 1 for region 0 (Dummy readout, 2 lines)
@@ -293,37 +274,36 @@ void afe_init(void) {
             ((CCD_DUMMY_READ_LINES)) | // SG active line
             (8191 << 13));
 
-
-//    afe_set_conf_reg(R_FIELD, 0, 0x00,
-//            (1 << 0));  // Use seq 1 for region 0 (Image readout)
-//    afe_set_conf_reg(R_FIELD, 0, 0x01, 0);
-//    afe_set_conf_reg(R_FIELD, 0, 0x02,
-//            (CCD_LINE_LENGTH)); // Line length of the last line
-//    afe_set_conf_reg(R_FIELD, 0, 0x03,
-//            (0 << 0) |  // Enter Fast Dump mode immediately
-//            (8191 << 13)); // Enter Dummy readout mode
-//    afe_set_conf_reg(R_FIELD, 0, 0x04,
-//            (8191 << 0) |
-//            (8191 << 13));
-//    afe_set_conf_reg(R_FIELD, 0, 0x05,
-//            (8191 << 0) |
-//            (8191 << 13));
-//    afe_set_conf_reg(R_FIELD, 0, 0x06,
-//            (8191 << 0) |
-//            (8191 << 13));
-//    afe_set_conf_reg(R_FIELD, 0, 0x07,
-//            (8191 << 0) |
-//            (CCD_LINES << 13)); // VD field length
-//    afe_set_conf_reg(R_FIELD, 0, 0x08,
-//            (CCD_DUMMY_READ_LINES) | // SG active line
-//            (8191 << 13));
-
     afe_set_conf_reg(R_FIELD, 0, 0x0a, 8191); // Disable CLPOB region 1
     afe_set_conf_reg(R_FIELD, 0, 0x0b, 8191); // Disable CLPOB region 2
     afe_set_conf_reg(R_FIELD, 0, 0x0c, 8191); // Disable CLPOB region 3
     afe_set_conf_reg(R_FIELD, 0, 0x0d, 8191); // Disable PBLK region 1
     afe_set_conf_reg(R_FIELD, 0, 0x0e, 8191); // Disable PBLK region 2
     afe_set_conf_reg(R_FIELD, 0, 0x0f, 8191); // Disable PBLK region 3
+
+    afe_set_conf_reg(R_FIELD, 1, 0x00,
+            (2 << 0) |  // Use seq 2 for region 1 (VSG pulse)
+            (3 << 5));  // Use seq 3 for region 2 (Draft image readout)
+    afe_set_conf_reg(R_FIELD, 1, 0x01, 0);
+    afe_set_conf_reg(R_FIELD, 1, 0x02,
+            (CCD_PRV_LINE_LENGTH)); // Line length of the last line
+    afe_set_conf_reg(R_FIELD, 1, 0x03,
+            (0 << 0) |  // Enter Dummy readout mode immediately
+            (CCD_VSG_LINES << 13)); // Enter draft readout mode
+    afe_set_conf_reg(R_FIELD, 1, 0x04,
+            0x0); // TODO: Vsub pulse and additional delay
+    afe_set_conf_reg(R_FIELD, 1, 0x07,
+            (CCD_PRV_FIELD_LINES << 13)); // VD field length
+    afe_set_conf_reg(R_FIELD, 1, 0x08,
+            (0) | // SG active line
+            (8191 << 13));
+
+    afe_set_conf_reg(R_FIELD, 1, 0x0a, 8191); // Disable CLPOB region 1
+    afe_set_conf_reg(R_FIELD, 1, 0x0b, 8191); // Disable CLPOB region 2
+    afe_set_conf_reg(R_FIELD, 1, 0x0c, 8191); // Disable CLPOB region 3
+    afe_set_conf_reg(R_FIELD, 1, 0x0d, 8191); // Disable PBLK region 1
+    afe_set_conf_reg(R_FIELD, 1, 0x0e, 8191); // Disable PBLK region 2
+    afe_set_conf_reg(R_FIELD, 1, 0x0f, 8191); // Disable PBLK region 3
 
     // Configure vertical sequence 0: fast dump
     afe_set_conf_reg(R_VSEQ, 0, 0x00,
@@ -595,6 +575,118 @@ void afe_init(void) {
             ((CCD_T3P_PIX + 2 - CCD_TV3RD_COMP1) << 0) | // V3 toggle position 1
             ((CCD_T3P_PIX + CCD_TV3RD_PIX + CCD_TV3RD_COMP2) << 13)); // V3 toggle position 2
 
+    // Configure vertical sequence 3: draft image readout
+    afe_set_conf_reg(R_VSEQ, 3, 0x00,
+            (1 << 0) | // CLPOB starts as invalid
+            (0 << 1) | // PBLK starts as valid
+            (1 << 6)); // Enable Special Vseq Alt Mode
+    afe_set_conf_reg(R_VSEQ, 3, 0x01, CCD_PRV_LINE_LENGTH); // HD even line length
+    afe_set_conf_reg(R_VSEQ, 3, 0x02, CCD_PRV_LINE_LENGTH); // HD odd line length
+    afe_set_conf_reg(R_VSEQ, 3, 0x03, 0); // VSG pulse use toggle 1, toggle 2
+    afe_set_conf_reg(R_VSEQ, 3, 0x04, CCD_PRV_LINE_LENGTH); // LASTREPLEN_A
+    afe_set_conf_reg(R_VSEQ, 3, 0x05, 0); // LASTREPLEN C/D
+    afe_set_conf_reg(R_VSEQ, 3, 0x06,
+            (1 << 0) | // XV1 (V1) starts with high
+            (0 << 1) | // XV2 (V2) starts with low
+            (0 << 2) | // XV3 (VSG) starts with low
+            (1 << 3)); // XV4 (FDG) starts with high
+    afe_set_conf_reg(R_VSEQ, 3, 0x07, 0); // Assign V1 to V12 to group A
+    afe_set_conf_reg(R_VSEQ, 3, 0x08, 0); // Assign V13 to V24 to group A
+    afe_set_conf_reg(R_VSEQ, 3, 0x09,
+            (1 << 0) | // Assign VPAT1 to group A
+            (3 << 5) | // Assign VPAT3 to group B
+            (0 << 10) | // group C (not used)
+            (0 << 15)); // group D (not used)
+    afe_set_conf_reg(R_VSEQ, 3, 0x0a,
+            (0 << 0) | // VSTARTA = 0 (not used)
+            (CCD_DUMP_LENGTH << 13)); // VLENA = one V toggle duration
+    afe_set_conf_reg(R_VSEQ, 3, 0x0b,
+            (CCD_LINESKIPPING << 0) | // VREPA_1 = Line skipping factor (no. of patterns concatenated)
+            (0 << 13)); // VREPA_2 = 0 (not used)
+    afe_set_conf_reg(R_VSEQ, 3, 0x0c,
+            (0 << 0) | // VREPA_3 = 0 (not used)
+            (0 << 13)); // VREPA_4 = 0 (not used)
+    afe_set_conf_reg(R_VSEQ, 3, 0x0d,
+            (0 << 0) | // VSTARTB = 0 (not used)
+            (CCD_DUMP_LENGTH << 13)); // VLENB = one V toggle duration
+    afe_set_conf_reg(R_VSEQ, 3, 0x0e,
+            (0 << 0) | // VREPB_ODD = 0 (not used)
+            (0 << 13)); // VREPB_EVEN = 0 (not used)
+    afe_set_conf_reg(R_VSEQ, 3, 0x0f, 0);
+    afe_set_conf_reg(R_VSEQ, 3, 0x10, 0);
+    afe_set_conf_reg(R_VSEQ, 3, 0x11, 0);
+    afe_set_conf_reg(R_VSEQ, 3, 0x12, 0);
+    // This is trying to build a sequence where GRPA is repeated LINESKIPPING - 1 times
+    // And then GRPB is used exactly once.
+    // For each bit pair in SEL0 and SEL1, SEL0 = 0, SEL1 = 0 means GRPA, 1/0 means GRPB
+    // Counting starting from LSB, LINESKIPPING - 1 numbers of 0/0 is needed then a single 1/0
+    afe_set_conf_reg(R_VSEQ, 3, 0x13, // VALTSEL0_EVEN
+            1 << (CCD_LINESKIPPING - 1));
+    afe_set_conf_reg(R_VSEQ, 3, 0x14, // VALTSEL1_EVEN
+            0);
+    afe_set_conf_reg(R_VSEQ, 3, 0x15, // VALTSEL0_ODD
+            1 << (CCD_LINESKIPPING - 1));
+    afe_set_conf_reg(R_VSEQ, 3, 0x16, // VALTSEL1_ODD
+            0);
+    afe_set_conf_reg(R_VSEQ, 3, 0x17,
+            (0 << 0) | // HBLKSTART = 0
+            ((CCD_PRV_HBLK_LENGTH - 1) << 13)); // HBLKEND = CCD_PRV_HBLK_LENGTH
+    afe_set_conf_reg(R_VSEQ, 3, 0x18,
+            (CCD_PRV_HBLK_LENGTH << 0) | // HBLKLEN
+            (1 << 13) | // HBLKREP = 1
+            (0 << 21) | // Masking polarity of H1 during HBLK is 0
+            (1 << 22) | // Masking polarity of H2 during HBLK is 1
+            (1 << 23) | // Masking polarity of HLA during HBLK is 1
+            (1 << 24)); // Masking polarity of HLB during HBLK is 1
+    afe_set_conf_reg(R_VSEQ, 3, 0x19,
+            (8191 << 0) |
+            (8191 << 13));
+    afe_set_conf_reg(R_VSEQ, 3, 0x1a,
+            (8191 << 0) |
+            (8191 << 13));
+    afe_set_conf_reg(R_VSEQ, 3, 0x1b,
+            (8191 << 0) |
+            (8191 << 13));
+    afe_set_conf_reg(R_VSEQ, 3, 0x1c,
+            (8191 << 0) |
+            (8191 << 13));
+    afe_set_conf_reg(R_VSEQ, 3, 0x1d,
+            (8191 << 0) |
+            (8191 << 13));
+    afe_set_conf_reg(R_VSEQ, 3, 0x1e,
+            (8191 << 0) |
+            (8191 << 13));
+    afe_set_conf_reg(R_VSEQ, 3, 0x1f,
+            (8191 << 0) | // Disable HBLK repeat area start position A
+            (8191 << 13));// Disable HBLK repeat area start position B
+    afe_set_conf_reg(R_VSEQ, 3, 0x20,
+            (8191 << 0) | // Disable HBLK repeat area start position C
+            0); // FREEZE/RESUME not enabled
+    afe_set_conf_reg(R_VSEQ, 3, 0x21, 0); // HBLK Odd field repeat area pattern
+    afe_set_conf_reg(R_VSEQ, 3, 0x22,
+            (CCD_PRV_CLPOB_BEGIN << 0) | // CLPOB toggle position 1
+            (CCD_PRV_CLPOB_END << 13)); // CLPOB toggle position 2
+    afe_set_conf_reg(R_VSEQ, 3, 0x23,
+            (CCD_PRV_HBLK_LENGTH << 0) | // PBLK toggle position 1
+            (8191 << 13)); // PBLK toggle position 2
+    afe_set_conf_reg(R_VSEQ, 3, 0x24, 0); // HBLK offset A for mode 2
+    afe_set_conf_reg(R_VSEQ, 3, 0x25, 0); // HBLK offset B for mode 2
+    afe_set_conf_reg(R_VSEQ, 3, 0x26, 0); // HBLK offset C for mode 2
+    afe_set_conf_reg(R_VSEQ, 3, 0x27, 0); // HBLK counter start position
+
+    // Configure vertical pattern 3 for image readout
+    for (int i = 0; i <= 0x2f; i++)
+        afe_set_conf_reg(R_VPAT, 3, i, 0); // Set all positions to zero
+    afe_set_conf_reg(R_VPAT, 3, 0x00,
+            (1 << 0) | // V1 toggle position 1
+            (CCD_TVCCD_PIX << 13)); // V1 toggle position 2
+    afe_set_conf_reg(R_VPAT, 3, 0x02,
+            (1 << 0) | // V2 toggle position 1
+            (CCD_TVCCD_PIX << 13)); // V2 toggle position 2
+    afe_set_conf_reg(R_VPAT, 3, 0x06,
+            (1 << 0) | // V4(FDG) toggle position 1
+            (0 << 13));
+
     SDK_DelayAtLeastUs(500, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
 
     // Release internal timing core reset
@@ -659,19 +751,17 @@ void afe_power_down(void) {
     //afe_set_reg(AFE_REG_STANDBY, 0x3, true);
 }
 
-//int afe_cmd(const shell_cmd_t *pcmd, int argc, char *const argv[]) {
-//    if (argc == 1) {
-//        shell_printf("afe command expects an operation\r\n");
-//        return 1;
-//    }
-//    if (strcmp(argv[1], "init") == 0) {
-//        afe_init();
-//        return 0;
-//    }
-//    if (strcmp(argv[1], "start") == 0) {
-//        afe_start();
-//        return 0;
-//    }
-//    shell_printf("invalid operation\r\n");
-//    return 1;
-//}
+void afe_switch_to_draft(void) {
+    afe_write_reg(0x2b, (1 << 0)); // FIELD0 = 1
+}
+
+void afe_pause(void) {
+    GPIO_PinWrite(AFE_SYNC_GPIO, AFE_SYNC_GPIO_PIN, 0);
+}
+
+void afe_capture(uint32_t delay) {
+    afe_write_reg(0x2b, (0 << 0)); // FIELD0 = 1
+    afe_strobe();
+    // TODO: Some way of precise delay
+    GPIO_PinWrite(AFE_SYNC_GPIO, AFE_SYNC_GPIO_PIN, 1);
+}

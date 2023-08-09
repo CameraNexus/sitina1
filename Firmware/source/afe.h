@@ -39,4 +39,6 @@
 void afe_init(void);
 void afe_start(void);
 void afe_stop(void);
-
+void afe_switch_to_draft(void);
+void afe_pause(void);
+void afe_capture(uint32_t delay);
