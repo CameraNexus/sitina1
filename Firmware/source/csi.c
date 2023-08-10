@@ -118,11 +118,11 @@ void csi_init() {
     CSI_GetDefaultConfig(&config);
 
     // Probably exact size not important... IMXRT105x's CSI doesn't even care HSYNC
-    config.width           = CCD_LINE_LENGTH * 2;
-    config.height          = CCD_FIELD_LINES + 1;
+    config.width           = CCD_PRV_LINE_LENGTH * 2;
+    config.height          = CCD_PRV_FIELD_LINES;
     config.polarityFlags   = (uint32_t)kCSI_VsyncActiveLow | (uint32_t)kCSI_DataLatchOnFallingEdge;
     config.bytesPerPixel   = 2U;
-    config.linePitch_Bytes = CCD_LINE_LENGTH * 2 * 2U;
+    config.linePitch_Bytes = CCD_PRV_LINE_LENGTH * 2 * 2U;
     config.workMode        = kCSI_NonGatedClockMode;
     config.dataBus         = kCSI_DataBus16Bit;
     config.useExtVsync     = true;
@@ -130,6 +130,24 @@ void csi_init() {
     CSI_Init(CSI, &config);
 
     CSI_TransferCreateHandle(CSI, &csi_handle, csi_callback, NULL);
+}
+
+void csi_switch_resultion(uint32_t width, uint32_t height) {
+    csi_config_t config;
+
+    CSI_GetDefaultConfig(&config);
+
+    // Probably exact size not important... IMXRT105x's CSI doesn't even care HSYNC
+    config.width           = width;
+    config.height          = height;
+    config.polarityFlags   = (uint32_t)kCSI_VsyncActiveLow | (uint32_t)kCSI_DataLatchOnFallingEdge;
+    config.bytesPerPixel   = 2U;
+    config.linePitch_Bytes = width * 2U;
+    config.workMode        = kCSI_NonGatedClockMode;
+    config.dataBus         = kCSI_DataBus16Bit;
+    config.useExtVsync     = true;
+
+    CSI_Init(CSI, &config);
 }
 
 void csi_start() {

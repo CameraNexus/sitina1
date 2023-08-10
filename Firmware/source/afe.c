@@ -578,8 +578,7 @@ void afe_init(void) {
     // Configure vertical sequence 3: draft image readout
     afe_set_conf_reg(R_VSEQ, 3, 0x00,
             (1 << 0) | // CLPOB starts as invalid
-            (0 << 1) | // PBLK starts as valid
-            (1 << 6)); // Enable Special Vseq Alt Mode
+            (0 << 1)); // PBLK starts as valid
     afe_set_conf_reg(R_VSEQ, 3, 0x01, CCD_PRV_LINE_LENGTH); // HD even line length
     afe_set_conf_reg(R_VSEQ, 3, 0x02, CCD_PRV_LINE_LENGTH); // HD odd line length
     afe_set_conf_reg(R_VSEQ, 3, 0x03, 0); // VSG pulse use toggle 1, toggle 2
@@ -589,16 +588,18 @@ void afe_init(void) {
             (1 << 0) | // XV1 (V1) starts with high
             (0 << 1) | // XV2 (V2) starts with low
             (0 << 2) | // XV3 (VSG) starts with low
-            (1 << 3)); // XV4 (FDG) starts with high
-    afe_set_conf_reg(R_VSEQ, 3, 0x07, 0); // Assign V1 to V12 to group A
+            (0 << 3)); // XV4 (FDG) starts with high
+    afe_set_conf_reg(R_VSEQ, 3, 0x07,
+            (0 << 0) | // By default assign V1 to V12 to group A
+            (1 << 6)); // Assign V4 to group B
     afe_set_conf_reg(R_VSEQ, 3, 0x08, 0); // Assign V13 to V24 to group A
     afe_set_conf_reg(R_VSEQ, 3, 0x09,
-            (1 << 0) | // Assign VPAT1 to group A
+            (0 << 0) | // Assign VPAT1 to group A
             (3 << 5) | // Assign VPAT3 to group B
-            (0 << 10) | // group C (not used)
-            (0 << 15)); // group D (not used)
+            (3 << 10) | // group C (not used)
+            (3 << 15)); // group D (not used)
     afe_set_conf_reg(R_VSEQ, 3, 0x0a,
-            (0 << 0) | // VSTARTA = 0 (not used)
+            (0 << 0) | // VSTARTA = 0
             (CCD_DUMP_LENGTH << 13)); // VLENA = one V toggle duration
     afe_set_conf_reg(R_VSEQ, 3, 0x0b,
             (CCD_LINESKIPPING << 0) | // VREPA_1 = Line skipping factor (no. of patterns concatenated)
@@ -607,27 +608,19 @@ void afe_init(void) {
             (0 << 0) | // VREPA_3 = 0 (not used)
             (0 << 13)); // VREPA_4 = 0 (not used)
     afe_set_conf_reg(R_VSEQ, 3, 0x0d,
-            (0 << 0) | // VSTARTB = 0 (not used)
-            (CCD_DUMP_LENGTH << 13)); // VLENB = one V toggle duration
+            (0 << 0) | // VSTARTB
+            ((CCD_PRV_SKIP_LENGTH - 24) << 13)); // VLENB = one V toggle duration
     afe_set_conf_reg(R_VSEQ, 3, 0x0e,
-            (0 << 0) | // VREPB_ODD = 0 (not used)
-            (0 << 13)); // VREPB_EVEN = 0 (not used)
+            (0 << 0) | // VREPB_ODD = 1
+            (2 << 13)); // VREPB_EVEN = 0 (not used)
     afe_set_conf_reg(R_VSEQ, 3, 0x0f, 0);
     afe_set_conf_reg(R_VSEQ, 3, 0x10, 0);
     afe_set_conf_reg(R_VSEQ, 3, 0x11, 0);
     afe_set_conf_reg(R_VSEQ, 3, 0x12, 0);
-    // This is trying to build a sequence where GRPA is repeated LINESKIPPING - 1 times
-    // And then GRPB is used exactly once.
-    // For each bit pair in SEL0 and SEL1, SEL0 = 0, SEL1 = 0 means GRPA, 1/0 means GRPB
-    // Counting starting from LSB, LINESKIPPING - 1 numbers of 0/0 is needed then a single 1/0
-    afe_set_conf_reg(R_VSEQ, 3, 0x13, // VALTSEL0_EVEN
-            1 << (CCD_LINESKIPPING - 1));
-    afe_set_conf_reg(R_VSEQ, 3, 0x14, // VALTSEL1_EVEN
-            0);
-    afe_set_conf_reg(R_VSEQ, 3, 0x15, // VALTSEL0_ODD
-            1 << (CCD_LINESKIPPING - 1));
-    afe_set_conf_reg(R_VSEQ, 3, 0x16, // VALTSEL1_ODD
-            0);
+    afe_set_conf_reg(R_VSEQ, 2, 0x13, 0);
+    afe_set_conf_reg(R_VSEQ, 2, 0x14, 0);
+    afe_set_conf_reg(R_VSEQ, 2, 0x15, 0);
+    afe_set_conf_reg(R_VSEQ, 2, 0x16, 0);
     afe_set_conf_reg(R_VSEQ, 3, 0x17,
             (0 << 0) | // HBLKSTART = 0
             ((CCD_PRV_HBLK_LENGTH - 1) << 13)); // HBLKEND = CCD_PRV_HBLK_LENGTH
