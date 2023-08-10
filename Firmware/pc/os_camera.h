@@ -23,7 +23,7 @@
 #pragma once
 
 typedef enum {
-    CM_PREVIEW, // preview size image
+    CM_DRAFT, // small size image
     CM_STILL // full size still image
 } CAM_CAPTURE_MODE;
 
@@ -35,4 +35,4 @@ void os_cam_set_gain(uint32_t gain_x10);
 void os_cam_start(void);
 void os_cam_stop(void);
 void os_cam_submit_empty_buffer(uint8_t *buf);
-uint8_t os_cam_get_full_buffer();
+uint8_t *os_cam_get_full_buffer();

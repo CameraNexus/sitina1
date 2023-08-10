@@ -21,41 +21,62 @@
 // SOFTWARE.
 //
 #include <stdio.h>
+#include <stdbool.h>
 #include <assert.h>
 #include <SDL.h>
 #include "os_camera.h"
 
-#define FAKECAM_FILE "./fakecamcontent.bin"
+#define CAM_STILL_SAMPLE_FILE   "./cam_still_sample.bin"
+#define CAM_DRAFT_SAMPLE_FILE   "./cam_draft_sample.bin"
 
 #define PREVIEW_READOUT_TIME_MS 35
 #define STILL_READOUT_TIME_MS   200
 
-static uint8_t *cam_buf; // Fake camera source
+// Emulated camera image source
+static uint8_t *cam_buf;
+static uint8_t *cam_still_buf;
+static uint8_t *cam_draft_buf;
 static CAM_CAPTURE_MODE cam_cm;
 static uint32_t cam_shutter_ms;
 static SDL_TimerID timer_id = 0;
 volatile bool frame_ready;
 
-void os_cam_init(void) {
-    // Load source of fake camera image
+static uint8_t *load_file(char *fn) {
+    uint8_t *buf;
     FILE *fp;
-    fp = fopen(FAKECAM_FILE, "rb");
+    fp = fopen(fn, "rb");
     fseek(fp, 0, SEEK_END);
     size_t size = (size_t)ftell(fp);
+    printf("Loading file %d bytes\n", size);
     fseek(fp, 0, SEEK_SET);
-    cam_buf = malloc(size);
-    assert(cam_buf);
-    fread(cam_buf, 1, size, fp);
+    buf = malloc(size);
+    assert(buf);
+    fread(buf, 1, size, fp);
     fclose(fp);
+    return buf;
+}
+
+void os_cam_init(void) {
+    // Load source of fake camera image
+    cam_still_buf = load_file(CAM_STILL_SAMPLE_FILE);
+    cam_draft_buf = load_file(CAM_DRAFT_SAMPLE_FILE);
+    cam_buf = cam_draft_buf;
     frame_ready = false;
 }
 
 void os_cam_deinit(void) {
-    free(cam_buf);
+    free(cam_still_buf);
+    free(cam_draft_buf);
 }
 
 void os_cam_set_capture_mode(CAM_CAPTURE_MODE cm) {
     cam_cm = cm;
+    if (cm == CM_DRAFT) {
+        cam_buf = cam_draft_buf;
+    }
+    else {
+        cam_buf = cam_still_buf;
+    }
 }
 
 void os_cam_set_shutter_speed(uint32_t shutter_ns) {
@@ -67,7 +88,7 @@ void os_cam_set_gain(uint32_t gain_x10) {
 }
 
 static uint32_t get_total_readout_time() {
-    if (cam_cm == CM_PREVIEW) {
+    if (cam_cm == CM_DRAFT) {
         return PREVIEW_READOUT_TIME_MS + cam_shutter_ms;
     }
     else {
@@ -76,13 +97,13 @@ static uint32_t get_total_readout_time() {
 }
 
 static uint32_t cam_timer_callback(uint32_t interval, void *name) {
-    printf("Camera tick!\n");
     frame_ready = true;
     return get_total_readout_time();
 }
 
 void os_cam_start(void) {
     frame_ready = false;
+    //frame_ready = true;
     timer_id = SDL_AddTimer(get_total_readout_time(), cam_timer_callback, NULL);
 }
 

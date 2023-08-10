@@ -19,6 +19,7 @@ INCLUDES += \
 
 CSRCS += \
 	./main.c \
+	./os_camera.c \
 	./os_display.c \
 	./os_filesystem.c \
 	./os_input.c \
@@ -71,7 +72,8 @@ CSRCS += \
 	../ugui/ugui_progress.c \
 	../ugui/ugui_textbox.c \
 	../app/app_main.c \
-	../app/gui.c
+	../app/gui.c \
+	../app/image_processing.c
 
 OBJS :=	$(CSRCS:%.c=$(OBJODIR)/%.o)
 

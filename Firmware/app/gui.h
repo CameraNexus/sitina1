@@ -25,3 +25,4 @@
 void gui_init(void);
 void gui_deinit(void);
 void gui_setup_preview_screen(void);
+void gui_scan_input(void);
