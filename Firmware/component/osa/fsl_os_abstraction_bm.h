@@ -27,7 +27,7 @@
 
 /*! @brief Configure what timer is used in Bare Metal. */
 #ifndef FSL_OSA_BM_TIMER_CONFIG
-#define FSL_OSA_BM_TIMER_CONFIG FSL_OSA_BM_TIMER_NONE
+#define FSL_OSA_BM_TIMER_CONFIG FSL_OSA_BM_TIMER_SYSTICK
 #endif
 
 /*! @brief Type for task parameter */

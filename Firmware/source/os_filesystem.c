@@ -78,7 +78,17 @@ static int MOUNT_SDCard(void)
 }
 
 int os_fs_init() {
-    //MOUNT_SDCard();
+    /* ERR050396
+     * Errata description:
+     * AXI to AHB conversion for CM7 AHBS port (port to access CM7 to TCM) is by a NIC301 block, instead of XHB400
+     * block. NIC301 doesn't support sparse write conversion. Any AXI to AHB conversion need XHB400, not by NIC. This
+     * will result in data corruption in case of AXI sparse write reaches the NIC301 ahead of AHBS. Errata workaround:
+     * For uSDHC, don't set the bit#1 of IOMUXC_GPR28 (AXI transaction is cacheable), if write data to TCM aligned in 4
+     * bytes; No such write access limitation for OCRAM or external RAM
+     */
+    IOMUXC_GPR->GPR28 &= (~IOMUXC_GPR_GPR28_AWCACHE_USDHC_MASK);
+
+    MOUNT_SDCard();
 
     return 0;
 }

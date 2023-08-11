@@ -78,8 +78,8 @@ static uint32_t populate_pixel(uint16_t a, uint16_t b, uint8_t x_odd, uint8_t y_
 
 // This function takes draft input and rescale to output as 720x480 image
 void ip_filter_draft_image(uint16_t *inp, uint32_t *outp, int offset) {
-    int y_offset = 4;
-    int x_offset = (CCD_PRV_HBLK_LENGTH + CCD_DUMMY_PIX + CCD_DARK_PIX + CCD_BUFFER_PIX + 24) * 2;
+    int y_offset = 3;
+    int x_offset = (CCD_PRV_HBLK_LENGTH + CCD_DUMMY_PIX + CCD_DARK_PIX + CCD_BUFFER_PIX + 40) * 2;
     // 248 lines, drop 8 lines
     for (int y = 0; y < 240; y++) {
         //printf("Black level: %d\n", inp[(y + y_offset) * CCD_PRV_LINE_LENGTH * 2 + x_offset - 80]);
@@ -114,38 +114,37 @@ void ip_filter_draft_image(uint16_t *inp, uint32_t *outp, int offset) {
             uint16_t p2a = ip_scale_pixel(*rdptr++);
             rdptr += 6;
             uint8_t x_odd = x & 0x1;
-            outp[y * 2 * 720 + x * 2 + 0] = populate_pixel(p0a, p0b, x_odd, y_odd);
-            outp[y * 2 * 720 + x * 2 + 1] = populate_pixel(p1a, p1b, x_odd, y_odd);;
-            outp[y * 2 * 720 + (360 - x) * 2 - 1] = populate_pixel(p3a, p3b, x_odd, y_odd);
-            outp[y * 2 * 720 + (360 - x) * 2 - 2] = populate_pixel(p2a, p2b, x_odd, y_odd);
+            outp[y * 2 * 720 + (360 - x) * 2 - 1] = populate_pixel(p0a, p0b, x_odd, y_odd);
+            outp[y * 2 * 720 + (360 - x) * 2 - 2] = populate_pixel(p1a, p1b, x_odd, y_odd);;
+            outp[y * 2 * 720 + x * 2 + 0] = populate_pixel(p3a, p3b, x_odd, y_odd);
+            outp[y * 2 * 720 + x * 2 + 1] = populate_pixel(p2a, p2b, x_odd, y_odd);
+        }
+        // Filling missing color
+        // Run every 2 lines
+        if (y_odd) {
+            for (int i = 0; i < 2; i++) {
+                int yy = (y & ~0x1) | i;
+                for (int x = 0; x < 720; x++) {
+                    uint32_t inpix = outp[yy * 2 * 720 + x];
+                    uint32_t nbpix = outp[(yy ^ 0x1) * 2 * 720 + x];
+                    uint8_t x_odd = x & 0x2;
+                    uint32_t outpix = inpix;
+                    if (yy & 0x1) {
+                        // RG or GR
+                        outpix |= nbpix & 0xfful;
+                    }
+                    else {
+                        // GB or BG
+                        outpix |= nbpix & 0xff0000ul;
+                    }
+                    outp[yy * 2 * 720 + x] = outpix;
+                }
+                // Line doubling
+                memcpy(&outp[(yy * 2 + 1) * 720], &outp[(yy * 2) * 720], 4 * 720);
+            }
         }
     }
 
-    // Second pass: filling in missing color
-    for (int y = 0; y < 240; y++) {
-        uint8_t y_odd = y & 0x1;
-        for (int x = 0; x < 720; x++) {
-            uint32_t inpix = outp[y * 2 * 720 + x];
-            uint32_t nbpix = outp[(y ^ 0x1) * 2 * 720 + x];
-            uint8_t x_odd = x & 0x2;
-            uint32_t outpix = inpix;
-            if (y_odd) {
-                // RG or GR
-                outpix |= nbpix & 0xfful;
-            }
-            else {
-                // GB or BG
-                outpix |= nbpix & 0xff0000ul;
-            }
-            outp[y * 2 * 720 + x] = outpix;
-            //outp[y * 2 * 720 + x] = outpix & 0xff00ff00ul;
-        }
-    }
-
-    // Third pass: line doubling
-    for (int y = 0; y < 240; y++) {
-        memcpy(&outp[(y * 2 + 1) * 720], &outp[(y * 2) * 720], 4 * 720);
-    }
     // printf("min: %d\n", min);
     // printf("max: %d\n", max);
 }

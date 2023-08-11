@@ -44,7 +44,7 @@
 #define LCD_VSW 4
 #define LCD_VFP 20
 #define LCD_VBP 12
-#define LCD_STRIDE_BYTES (LCD_WIDTH * 2)
+#define LCD_STRIDE_BYTES (LCD_WIDTH * 4)
 
 #define MIPI_LANES (2)
 
@@ -53,7 +53,7 @@
 #else
 #define LCDIF_DOMAIN 0
 #endif
-#define LCDIF_PIXFMT (kLCDIFV2_PixelFormatRGB565)
+#define LCDIF_PIXFMT (kLCDIFV2_PixelFormatARGB8888)
 
 #define USE_LCDIFV2 1
 

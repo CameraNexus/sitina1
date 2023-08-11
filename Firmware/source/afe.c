@@ -54,7 +54,12 @@
 // These settings only affect the memory layout.
 // Actual used count could be less.
 #define AFE_VPAT_COUNT (4)
-#define AFE_VSEQ_COUNT (4)
+#define AFE_VSEQ_COUNT (5)
+
+// Up to 3072 registers
+// V-PAT registers are 48 each
+// V-SEQ registers are 40 each
+// FIELD registers are 16 each
 
 // Base settings
 #define AFE_SYNC_CONFIG (0x61) // External sync enable should be set even if using software sync
@@ -115,7 +120,7 @@ void afe_init_io(void) {
     GPIO_PinInit(AFE_RST_GPIO, AFE_RST_GPIO_PIN, &config);
     GPIO_PinInit(AFE_SYNC_GPIO, AFE_SYNC_GPIO_PIN, &config);
 
-    //config.direction = kGPIO_DigitalInput; // TODO
+    config.direction = kGPIO_DigitalInput; // TODO
     config.outputLogic = 1;
     GPIO_PinInit(AFE_STROBE_GPIO, AFE_STROBE_GPIO_PIN, &config);
 }
@@ -158,6 +163,16 @@ void afe_set_conf_reg(REG_TYPE t, int group, uint32_t offset, uint32_t val) {
         addr = 0x400 + AFE_VPAT_COUNT * 48 + AFE_VSEQ_COUNT * 40 + group * 16;
     addr += offset;
     afe_write_reg(addr, val);
+}
+
+void afe_set_draft_shutter_speed(uint32_t lines) {
+    afe_set_conf_reg(R_FIELD, 1, 0x04,
+            CCD_PRV_ARRAY_LINES + lines); // TODO: Vsub pulse and additional delay
+    afe_set_conf_reg(R_FIELD, 1, 0x07,
+            ((CCD_PRV_FIELD_LINES + lines) << 13)); // VD field length
+    afe_set_conf_reg(R_FIELD, 1, 0x08,
+            (CCD_PRV_ARRAY_LINES + lines) | // SG active line
+            (8191 << 13));
 }
 
 void afe_init(void) {
@@ -255,7 +270,7 @@ void afe_init(void) {
     // Configure timing
 
     // Configure field
-
+    // Field 0: Full resolution readout
     afe_set_conf_reg(R_FIELD, 0, 0x00,
             (1 << 0) |  // Use seq 1 for region 0 (Dummy readout, 2 lines)
             (2 << 5) |  // Use seq 2 for region 1 (VSG pulse)
@@ -281,22 +296,18 @@ void afe_init(void) {
     afe_set_conf_reg(R_FIELD, 0, 0x0e, 8191); // Disable PBLK region 2
     afe_set_conf_reg(R_FIELD, 0, 0x0f, 8191); // Disable PBLK region 3
 
+    // Field 1: Draft readout
     afe_set_conf_reg(R_FIELD, 1, 0x00,
-            (2 << 0) |  // Use seq 2 for region 1 (VSG pulse)
-            (3 << 5));  // Use seq 3 for region 2 (Draft image readout)
+            (3 << 0) |  // Use seq 3 for region 1 (Draft image readout)
+            (4 << 5) |  // Use seq 4 for region 2 (Delay)
+            (2 << 10)); // Use seq 2 for region 3 (VSG pulse)
     afe_set_conf_reg(R_FIELD, 1, 0x01, 0);
     afe_set_conf_reg(R_FIELD, 1, 0x02,
             (CCD_PRV_LINE_LENGTH)); // Line length of the last line
     afe_set_conf_reg(R_FIELD, 1, 0x03,
-            (0 << 0) |  // Enter Dummy readout mode immediately
-            (CCD_VSG_LINES << 13)); // Enter draft readout mode
-    afe_set_conf_reg(R_FIELD, 1, 0x04,
-            0x0); // TODO: Vsub pulse and additional delay
-    afe_set_conf_reg(R_FIELD, 1, 0x07,
-            (CCD_PRV_FIELD_LINES << 13)); // VD field length
-    afe_set_conf_reg(R_FIELD, 1, 0x08,
-            (0) | // SG active line
-            (8191 << 13));
+            (0 << 0) |  // Enter readout mode immediately
+            (CCD_PRV_ARRAY_LINES << 13)); // Enter delay
+    afe_set_draft_shutter_speed(62); // Set default shutter speed
 
     afe_set_conf_reg(R_FIELD, 1, 0x0a, 8191); // Disable CLPOB region 1
     afe_set_conf_reg(R_FIELD, 1, 0x0b, 8191); // Disable CLPOB region 2
@@ -594,7 +605,7 @@ void afe_init(void) {
             (1 << 6)); // Assign V4 to group B
     afe_set_conf_reg(R_VSEQ, 3, 0x08, 0); // Assign V13 to V24 to group A
     afe_set_conf_reg(R_VSEQ, 3, 0x09,
-            (0 << 0) | // Assign VPAT1 to group A
+            (0 << 0) | // Assign VPAT0 to group A
             (3 << 5) | // Assign VPAT3 to group B
             (3 << 10) | // group C (not used)
             (3 << 15)); // group D (not used)
@@ -667,18 +678,92 @@ void afe_init(void) {
     afe_set_conf_reg(R_VSEQ, 3, 0x26, 0); // HBLK offset C for mode 2
     afe_set_conf_reg(R_VSEQ, 3, 0x27, 0); // HBLK counter start position
 
-    // Configure vertical pattern 3 for image readout
+    // Configure vertical pattern 3 for FD toggle and nothing else
     for (int i = 0; i <= 0x2f; i++)
         afe_set_conf_reg(R_VPAT, 3, i, 0); // Set all positions to zero
-    afe_set_conf_reg(R_VPAT, 3, 0x00,
-            (1 << 0) | // V1 toggle position 1
-            (CCD_TVCCD_PIX << 13)); // V1 toggle position 2
-    afe_set_conf_reg(R_VPAT, 3, 0x02,
-            (1 << 0) | // V2 toggle position 1
-            (CCD_TVCCD_PIX << 13)); // V2 toggle position 2
     afe_set_conf_reg(R_VPAT, 3, 0x06,
             (1 << 0) | // V4(FDG) toggle position 1
             (0 << 13));
+
+    // Configure vertical sequence 4: just nothing
+    afe_set_conf_reg(R_VSEQ, 4, 0x00,
+            (1 << 0) | // CLPOB starts as invalid
+            (0 << 1)); // PBLK starts as valid
+    afe_set_conf_reg(R_VSEQ, 4, 0x01, CCD_PRV_LINE_LENGTH); // HD even line length
+    afe_set_conf_reg(R_VSEQ, 4, 0x02, CCD_PRV_LINE_LENGTH); // HD odd line length
+    afe_set_conf_reg(R_VSEQ, 4, 0x03, 0); // VSG pulse use toggle 1, toggle 2
+    afe_set_conf_reg(R_VSEQ, 4, 0x04, CCD_PRV_LINE_LENGTH); // LASTREPLEN_A
+    afe_set_conf_reg(R_VSEQ, 4, 0x05, 0); // LASTREPLEN C/D
+    afe_set_conf_reg(R_VSEQ, 4, 0x06,
+            (1 << 0) | // XV1 (V1) starts with high
+            (0 << 1) | // XV2 (V2) starts with low
+            (0 << 2) | // XV3 (VSG) starts with low
+            (0 << 3)); // XV4 (FDG) starts with low
+    afe_set_conf_reg(R_VSEQ, 4, 0x07, 0); // Assign V1 to V12 to group A
+    afe_set_conf_reg(R_VSEQ, 4, 0x08, 0); // Assign V13 to V24 to group A
+    afe_set_conf_reg(R_VSEQ, 4, 0x09, (3 << 0)); // Assign VPAT3 to group A
+    afe_set_conf_reg(R_VSEQ, 4, 0x0a,
+            (0 << 0) | // VSTARTA = 0
+            (1 << 13)); // VLENA = only 1
+    afe_set_conf_reg(R_VSEQ, 4, 0x0b,
+            (0 << 0) | // VREPA_1 = 0 (just dont)
+            (0 << 13)); // VREPA_2 = 0 (not used)
+    afe_set_conf_reg(R_VSEQ, 4, 0x0c, 0);
+    afe_set_conf_reg(R_VSEQ, 4, 0x0d, 0);
+    afe_set_conf_reg(R_VSEQ, 4, 0x0e, 0);
+    afe_set_conf_reg(R_VSEQ, 4, 0x0f, 0);
+    afe_set_conf_reg(R_VSEQ, 4, 0x10, 0);
+    afe_set_conf_reg(R_VSEQ, 4, 0x11, 0);
+    afe_set_conf_reg(R_VSEQ, 4, 0x12, 0);
+    afe_set_conf_reg(R_VSEQ, 4, 0x13, 0);
+    afe_set_conf_reg(R_VSEQ, 4, 0x14, 0);
+    afe_set_conf_reg(R_VSEQ, 4, 0x15, 0);
+    afe_set_conf_reg(R_VSEQ, 4, 0x16, 0);
+    afe_set_conf_reg(R_VSEQ, 4, 0x17,
+            (0 << 0) | // HBLKSTART = 0
+            ((CCD_PRV_LINE_LENGTH - 1) << 13)); // HBLKEND = CCD_PRV_LINE_LENGTH (Always in blanking)
+    afe_set_conf_reg(R_VSEQ, 4, 0x18,
+            (CCD_PRV_LINE_LENGTH << 0) | // HBLKLEN
+            (1 << 13) | // HBLKREP = 1
+            (0 << 21) | // Masking polarity of H1 during HBLK is 0
+            (1 << 22) | // Masking polarity of H2 during HBLK is 1
+            (1 << 23) | // Masking polarity of HLA during HBLK is 1
+            (1 << 24)); // Masking polarity of HLB during HBLK is 1
+    afe_set_conf_reg(R_VSEQ, 4, 0x19,
+            (8191 << 0) |
+            (8191 << 13));
+    afe_set_conf_reg(R_VSEQ, 4, 0x1a,
+            (8191 << 0) |
+            (8191 << 13));
+    afe_set_conf_reg(R_VSEQ, 4, 0x1b,
+            (8191 << 0) |
+            (8191 << 13));
+    afe_set_conf_reg(R_VSEQ, 4, 0x1c,
+            (8191 << 0) |
+            (8191 << 13));
+    afe_set_conf_reg(R_VSEQ, 4, 0x1d,
+            (8191 << 0) |
+            (8191 << 13));
+    afe_set_conf_reg(R_VSEQ, 4, 0x1e,
+            (8191 << 0) |
+            (8191 << 13));
+    afe_set_conf_reg(R_VSEQ, 4, 0x1f,
+            (8191 << 0) | // Disable HBLK repeat area start position A
+            (8191 << 13));// Disable HBLK repeat area start position B
+    afe_set_conf_reg(R_VSEQ, 4, 0x20,
+            (8191 << 0) | // Disable HBLK repeat area start position C
+            0); // FREEZE/RESUME not enabled
+    afe_set_conf_reg(R_VSEQ, 4, 0x21, 0); // HBLK Odd field repeat area pattern
+    afe_set_conf_reg(R_VSEQ, 4, 0x22,
+            (8191 << 0) | // CLPOB toggle position 1
+            (8191 << 13)); // CLPOB toggle position 2
+    afe_set_conf_reg(R_VSEQ, 4, 0x23,
+            (8191 << 0) | // PBLK toggle position 1
+            (8191 << 13)); // PBLK toggle position 2
+    afe_set_conf_reg(R_VSEQ, 4, 0x24, 0); // HBLK offset A for mode 2
+    afe_set_conf_reg(R_VSEQ, 4, 0x25, 0); // HBLK offset B for mode 2
+    afe_set_conf_reg(R_VSEQ, 4, 0x26, 0); // HBLK offset C for mode 2
+    afe_set_conf_reg(R_VSEQ, 4, 0x27, 0); // HBLK counter start position
 
     SDK_DelayAtLeastUs(500, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
 
@@ -688,11 +773,29 @@ void afe_init(void) {
     // Enable External power supply (not enabled until out control = 1)
     //afe_write_reg(0x73,
     //        (7 << 3)); // GP2_PROTOCOL = KEEP ON
-//    afe_write_reg(0x73,
-//            (7 << 0)); // GP1_PROTOCOL = KEEP ON
-//    afe_write_reg(0x7a,
-//            (0xff << 8) | // SEL_GPO = 0xff
-//            (0xff << 16)); // GPO_OUTPUT_EN = 0xff
+    afe_write_reg(0x7a,
+            (0x1 << 0) | // GP1 start with high
+            (0xff << 8) | // SEL_GPO = 0xff
+            (0xff << 16)); // GPO_OUTPUT_EN = 0xff
+    afe_write_reg(0x7c,
+            (1 << 0) | // TOG1_FD
+            (CCD_PRV_ARRAY_LINES << 13)); // TOG1_LN
+    afe_write_reg(0x7d,
+            (0 << 0) | // TOG1_PX
+            (1 << 13)); // TOG2_FD
+    afe_write_reg(0x7e,
+            (CCD_PRV_ARRAY_LINES << 0) | // TOG2_LN
+            (90 << 13)); // TOG2_PX
+    afe_write_reg(0x7f, 0);
+    afe_write_reg(0x80, 0);
+    afe_write_reg(0x81, 0);
+
+    afe_write_reg(0x73,
+            (4 << 0)); // GP1_PROTOCOL = Link to mode counter
+
+    afe_write_reg(0x71, 1);
+
+    afe_write_reg(0x70, 1);
 
     //afe_write_reg(0xc3, 0x1);
     gpo_status = 0;

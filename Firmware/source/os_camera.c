@@ -1,6 +1,6 @@
 //
 // Sitina1
-// Copyright 2022 Wenting Zhang
+// Copyright 2023 Wenting Zhang
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-//
+// 
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -21,54 +21,64 @@
 // SOFTWARE.
 //
 #include <stdio.h>
-#include <stdint.h>
 #include <stdbool.h>
+#include <assert.h>
+#include "fsl_cache.h"
+#include "afe.h"
+#include "csi.h"
 #include "os_camera.h"
-#include "os_display.h"
-#include "os_filesystem.h"
-#include "os_input.h"
-#include "os_timer.h"
-#include "gui.h"
-#include "image_processing.h"
 
-void app_tick(void) {
+
+// Reserve 4MB for LCD
+uint16_t *camera_buffer_0 = (uint16_t *)0x80400000;
+uint16_t *camera_buffer_1 = (uint16_t *)0x82000000;
+
+static size_t image_size;
+
+void os_cam_init(void) {
+    afe_init();
+    csi_init();
+    image_size = 2*1024*1024;
+
+    csi_submit_empty_buffer(camera_buffer_0);
+    csi_submit_empty_buffer(camera_buffer_1);
+}
+
+void os_cam_deinit(void) {
 
 }
 
-void app_main(void) {
-    os_disp_init();
-    //os_fs_init();
-    os_input_init();
-    //os_timer_register_systick(10, app_tick);
-    os_cam_init();
-    os_cam_set_capture_mode(CM_DRAFT);
+void os_cam_set_capture_mode(CAM_CAPTURE_MODE cm) {
 
-    gui_init();
-    gui_setup_preview_screen();
+}
 
-    uint8_t *disp_buf = os_disp_get_buffer();
+void os_cam_set_shutter_speed(uint32_t shutter_ns) {
 
-    //OSA_TimeInit();
+}
 
-    os_cam_start();
+void os_cam_set_gain(uint32_t gain_x10) {
 
-    uint8_t *cam_buf;
-    while(1) {
-        while ((cam_buf = os_cam_get_full_buffer()) == NULL);
-        //uint32_t duration = OSA_TimeGetMsec();
-        ip_filter_draft_image(cam_buf, disp_buf + 120*720*4, 0);
-        os_cam_submit_empty_buffer(cam_buf);
-        //duration = OSA_TimeGetMsec() - duration;
-        //printf("%d ms\n", duration);
-        os_input_scan();
-        gui_scan_input();
-        os_disp_return_buffer(disp_buf);
+}
+
+void os_cam_start(void) {
+    csi_start();
+    afe_start();
+}
+
+void os_cam_stop(void) {
+    csi_stop();
+    afe_stop();
+}
+
+void os_cam_submit_empty_buffer(uint8_t *buf) {
+    csi_submit_empty_buffer(buf);
+}
+
+uint8_t *os_cam_get_full_buffer() {
+    uint8_t *buf = csi_get_full_buffer();
+    if (buf) {
+        DCACHE_InvalidateByRange((uint32_t)buf, image_size);
+        return buf;
     }
-
-    gui_deinit();
-
-    //os_timer_deinit();
-    os_disp_deinit();
-    os_fs_deinit();
-    os_input_deinit();
+    return NULL;
 }

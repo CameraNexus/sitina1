@@ -20,31 +20,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-#include <stdint.h>
-#include "fsl_cache.h"
-#include "vout.h"
-#include "os_display.h"
+#pragma once
 
-void os_disp_init() {
-    vout_init();
-}
+typedef enum {
+    CM_DRAFT, // small size image
+    CM_STILL // full size still image
+} CAM_CAPTURE_MODE;
 
-void os_disp_deinit() {
-
-}
-
-void os_disp_enter_sleep() {
-
-}
-
-void os_disp_exit_sleep() {
-
-}
-
-uint32_t *os_disp_get_buffer() {
-    return (uint32_t *)framebuffer;
-}
-
-void os_disp_return_buffer(uint32_t *buf) {
-    DCACHE_CleanInvalidateByRange((uint32_t)framebuffer, (720 * 720 * 4));
-}
+void os_cam_init(void);
+void os_cam_deinit(void);
+void os_cam_set_capture_mode(CAM_CAPTURE_MODE cm);
+void os_cam_set_shutter_speed(uint32_t shutter_ns);
+void os_cam_set_gain(uint32_t gain_x10);
+void os_cam_start(void);
+void os_cam_stop(void);
+void os_cam_submit_empty_buffer(uint8_t *buf);
+uint8_t *os_cam_get_full_buffer();

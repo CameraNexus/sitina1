@@ -28,8 +28,8 @@
 #include "vout.h"
 #include "font.h"
 
-#define COLOR_BG 0x0000
-#define COLOR_FG 0xffff
+#define COLOR_BG 0x00000000
+#define COLOR_FG 0xffc0c0c0
 
 #define SCR_WIDTH (FB_WIDTH / 8)
 #define SCR_HEIGHT (FB_HEIGHT / 16)
@@ -37,8 +37,8 @@
 static uint8_t screenbuf[SCR_HEIGHT][SCR_WIDTH];
 static int x, y;
 
-static void vt_set_pixel(size_t x, size_t y, uint16_t c) {
-    uint16_t *fbptr = framebuffer;
+static void vt_set_pixel(size_t x, size_t y, uint32_t c) {
+    uint32_t *fbptr = framebuffer;
     fbptr[y * FB_WIDTH + x] = c;
 }
 
