@@ -152,4 +152,59 @@ extern UG_FONT FONT_arial_49X57[];
 extern UG_FONT FONT_arial_49X57_CYRILLIC[];
 #endif
 
+#ifdef UGUI_USE_FONT_terminus_bold_10X18
+extern UG_FONT FONT_terminus_bold_10X18[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_bold_10X20
+extern UG_FONT FONT_terminus_bold_10X20[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_bold_11X22
+extern UG_FONT FONT_terminus_bold_11X22[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_bold_12X24
+extern UG_FONT FONT_terminus_bold_12X24[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_bold_14X28
+extern UG_FONT FONT_terminus_bold_14X28[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_bold_16X32
+extern UG_FONT FONT_terminus_bold_16X32[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_bold_6X12
+extern UG_FONT FONT_terminus_bold_6X12[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_bold_8X14
+extern UG_FONT FONT_terminus_bold_8X14[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_bold_8X16
+extern UG_FONT FONT_terminus_bold_8X16[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_10X18
+extern UG_FONT FONT_terminus_10X18[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_10X20
+extern UG_FONT FONT_terminus_10X20[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_11X22
+extern UG_FONT FONT_terminus_11X22[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_12X24
+extern UG_FONT FONT_terminus_12X24[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_14X28
+extern UG_FONT FONT_terminus_14X28[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_16X32
+extern UG_FONT FONT_terminus_16X32[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_6X12
+extern UG_FONT FONT_terminus_6X12[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_8X14
+extern UG_FONT FONT_terminus_8X14[];
+#endif
+#ifdef UGUI_USE_FONT_terminus_8X16
+extern UG_FONT FONT_terminus_8X16[];
+#endif
+
 #endif // __UGUI_FONTS_DATA_H

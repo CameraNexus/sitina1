@@ -70,6 +70,25 @@
 #define UGUI_USE_FONT_arial_49X57
 #define UGUI_USE_FONT_arial_49X57_CYRILLIC
 
+#define UGUI_USE_FONT_terminus_bold_10X18
+#define UGUI_USE_FONT_terminus_bold_10X20
+#define UGUI_USE_FONT_terminus_bold_11X22
+#define UGUI_USE_FONT_terminus_bold_12X24
+#define UGUI_USE_FONT_terminus_bold_14X28
+#define UGUI_USE_FONT_terminus_bold_16X32
+#define UGUI_USE_FONT_terminus_bold_6X12
+#define UGUI_USE_FONT_terminus_bold_8X14
+#define UGUI_USE_FONT_terminus_bold_8X16
+#define UGUI_USE_FONT_terminus_10X18
+#define UGUI_USE_FONT_terminus_10X20
+#define UGUI_USE_FONT_terminus_11X22
+#define UGUI_USE_FONT_terminus_12X24
+#define UGUI_USE_FONT_terminus_14X28
+#define UGUI_USE_FONT_terminus_16X32
+#define UGUI_USE_FONT_terminus_6X12
+#define UGUI_USE_FONT_terminus_8X14
+#define UGUI_USE_FONT_terminus_8X16
+
 /* Feature enablers */
 // #define UGUI_USE_PRERENDER_EVENT
 // #define UGUI_USE_POSTRENDER_EVENT
