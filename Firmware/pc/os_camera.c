@@ -80,7 +80,7 @@ void os_cam_set_capture_mode(CAM_CAPTURE_MODE cm) {
 }
 
 void os_cam_set_shutter_speed(uint32_t shutter_ns) {
-    cam_shutter_ms = shutter_ns / 1000;
+    cam_shutter_ms = shutter_ns / 1000000;
 }
 
 void os_cam_set_gain(uint32_t gain_x10) {

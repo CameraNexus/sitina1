@@ -20,9 +20,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
+#include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "os_camera.h"
 #include "os_display.h"
 #include "os_input.h"
 #include "gui.h"
@@ -31,7 +33,7 @@
 static UG_GUI gui;
 static uint32_t *framebuffer;
 
-#define DEFAULT_FONT FONT_arial_25X28
+#define DEFAULT_FONT FONT_terminus_bold_14X28
 
 #define MAX_OBJECTS 10
 
@@ -47,6 +49,38 @@ static UG_TEXTBOX tb_shutter;
 static UG_TEXTBOX tb_shutter_val;
 static UG_OBJECT obj_buff_wnd_1[MAX_OBJECTS];
 
+#define BTN_ISO_INC_ID      OBJ_ID_0
+#define BTN_ISO_DEC_ID      OBJ_ID_1
+#define BTN_SHUTTER_INC_ID  OBJ_ID_4
+#define BTN_SHUTTER_DEC_ID  OBJ_ID_5
+#define BTN_SHUTTER_REL_ID  OBJ_ID_8
+#define TB_ISO_TITLE_ID     OBJ_ID_2
+#define TB_ISO_VAL_ID       OBJ_ID_3
+#define TB_SHUTTER_TITLE_ID OBJ_ID_6
+#define TB_SHUTTER_VAL_ID   OBJ_ID_7
+
+static uint32_t iso_setpoints[] = {
+    100, 200, 400, 800, 1600, 3200, 6400
+};
+
+#define DEFAULT_ISO_INDEX 0
+#define MAX_ISO_INDEX (sizeof(iso_setpoints) / sizeof(iso_setpoints[0]))
+
+static char iso_labels[MAX_ISO_INDEX][5];
+
+static uint32_t shutter_setpoints[] = {
+    3000, 2000, 1500, 1000, 800, 640, 500, 400, 320, 250, 200, 160, 125, 100,
+    80, 60, 50, 40, 30, 25, 20, 15, 10, 8, 4, 2, 1
+};
+
+#define DEFAULT_SHUTTER_INDEX 13
+#define MAX_SHUTTER_INDEX (sizeof(shutter_setpoints) / sizeof(shutter_setpoints[0]))
+
+static char shutter_labels[MAX_SHUTTER_INDEX][7];
+
+static size_t iso_index = DEFAULT_ISO_INDEX;
+static size_t shutter_index = DEFAULT_SHUTTER_INDEX;
+
 static void gui_set_pixel(int16_t x, int16_t y, uint32_t c) {
     uint32_t *fbptr = framebuffer;
     fbptr[y * DISP_WIDTH + x] = c;
@@ -55,8 +89,8 @@ static void gui_set_pixel(int16_t x, int16_t y, uint32_t c) {
 static void gui_fill(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1,
         uint32_t c) {
     uint32_t *fbptr = framebuffer;
-    for (size_t y = y0; y < y1; y++) {
-        for (size_t x = x0; x < x1; x++) {
+    for (size_t y = y0; y <= y1; y++) {
+        for (size_t x = x0; x <= x1; x++) {
             fbptr[y * DISP_WIDTH + x] = c;
         }
     }
@@ -87,37 +121,62 @@ void gui_init(void) {
     UG_FontSelect(DEFAULT_FONT);
     UG_FillScreen(C_BLACK);
     UG_Update();
+
+    for (int i = 0; i < MAX_ISO_INDEX; i++) {
+        snprintf(iso_labels[i], 5, "%d", iso_setpoints[i]);
+    }
+
+    for (int i = 0; i < MAX_SHUTTER_INDEX; i++) {
+        snprintf(shutter_labels[i], 7, "1/%d", shutter_setpoints[i]);
+    }
 }
 
 void gui_deinit(void) {
     // Nothing to do here
 }
 
-static void window_1_callback(UG_MESSAGE *msg)
-{
+static void update_iso() {
+    UG_TextboxSetText(&window_1, TB_ISO_VAL_ID, iso_labels[iso_index]);
+    //os_cam_set_gain(iso_setpoints[iso_index]);
+}
+
+static void update_shutter_speed() {
+    UG_TextboxSetText(&window_1, TB_SHUTTER_VAL_ID, shutter_labels[shutter_index]);
+    uint32_t shutter_ns = 1000000000 / shutter_setpoints[shutter_index];
+    os_cam_set_shutter_speed(shutter_ns);
+}
+
+static void window_1_callback(UG_MESSAGE *msg) {
     //
-    if(msg->type == MSG_TYPE_OBJECT)
-    {
-        if(msg->id == OBJ_TYPE_BUTTON)
-        {
-            if(msg->event == OBJ_EVENT_PRESSED)
-            {
-                switch(msg->sub_id)
-                {
-                    case BTN_ID_0:
-                    {
-                        UG_TextboxSetText(&window_1, TXB_ID_0, "Pressed!");
-                        break;
-                    }
-                }
+    if ((msg->type == MSG_TYPE_OBJECT) && (msg->id == OBJ_TYPE_BUTTON) &&
+            (msg->event == OBJ_EVENT_RELEASED)) {
+        switch (msg->sub_id) {
+        case BTN_ISO_INC_ID:
+            if (iso_index < (MAX_ISO_INDEX - 1)) {
+                iso_index++;
             }
-            if(msg->event == OBJ_EVENT_RELEASED)
-            {
-                if(msg->sub_id == BTN_ID_0)
-                {
-                        UG_TextboxSetText(&window_1, TXB_ID_0, "This is a \n test sample window!");
-                }
+            update_iso();
+            break;
+        case BTN_ISO_DEC_ID:
+            if (iso_index > 0) {
+                iso_index--;
             }
+            update_iso();
+            break;
+        case BTN_SHUTTER_INC_ID:
+            if (shutter_index < (MAX_SHUTTER_INDEX - 1)) {
+                shutter_index++;
+            }
+            update_shutter_speed();
+            break;
+        case BTN_SHUTTER_DEC_ID:
+            if (shutter_index > 0) {
+                shutter_index--;
+            }
+            update_shutter_speed();
+            break;
+        default:
+            break;
         }
     }
 }
@@ -146,18 +205,21 @@ void gui_setup_preview_screen(void) {
     UG_WindowSetYEnd(&window_1, DISP_HEIGHT-1);
 
     // Create Buttons
-    _gui_create_button(&window_1, &btn_iso_inc, OBJ_ID_0, "+", 250, 650, 50, 50);
-    _gui_create_button(&window_1, &btn_iso_dec, OBJ_ID_1, "-", 50, 650, 50, 50);
-    _gui_create_button(&window_1, &btn_shutter_inc, OBJ_ID_4, "+", 620, 650, 50, 50);
-    _gui_create_button(&window_1, &btn_shutter_dec, OBJ_ID_5, "-", 420, 650, 50, 50);
+    _gui_create_button(&window_1, &btn_iso_inc, BTN_ISO_INC_ID, "+", 250, 650, 50, 50);
+    _gui_create_button(&window_1, &btn_iso_dec, BTN_ISO_DEC_ID, "-", 50, 650, 50, 50);
+    _gui_create_button(&window_1, &btn_shutter_inc, BTN_SHUTTER_INC_ID, "+", 420, 650, 50, 50);
+    _gui_create_button(&window_1, &btn_shutter_dec, BTN_SHUTTER_DEC_ID, "-", 620, 650, 50, 50);
 
-    _gui_create_button(&window_1, &btn_shutter_release, OBJ_ID_8, "REL", 620, 20, 80, 80);
+    _gui_create_button(&window_1, &btn_shutter_release, BTN_SHUTTER_REL_ID, "REL", 620, 20, 80, 80);
 
     // Create Textbox
-    _gui_create_textbox(&window_1, &tb_iso, OBJ_ID_2, "ISO", 50, 600, 200, 50, ALIGN_CENTER_LEFT);
-    _gui_create_textbox(&window_1, &tb_iso_val, OBJ_ID_3, "100", 100, 650, 150, 50, ALIGN_CENTER);
-    _gui_create_textbox(&window_1, &tb_shutter, OBJ_ID_6, "Shutter", 420, 600, 200, 50, ALIGN_CENTER_LEFT);
-    _gui_create_textbox(&window_1, &tb_shutter_val, OBJ_ID_7, "1/100", 470, 650, 150, 50, ALIGN_CENTER);
+    _gui_create_textbox(&window_1, &tb_iso, TB_ISO_TITLE_ID, "ISO", 50, 600, 200, 50, ALIGN_CENTER_LEFT);
+    _gui_create_textbox(&window_1, &tb_iso_val, TB_ISO_VAL_ID, "-", 100, 650, 150, 50, ALIGN_CENTER);
+    _gui_create_textbox(&window_1, &tb_shutter, TB_SHUTTER_TITLE_ID, "Shutter", 420, 600, 200, 50, ALIGN_CENTER_LEFT);
+    _gui_create_textbox(&window_1, &tb_shutter_val, TB_SHUTTER_VAL_ID, "-", 470, 650, 150, 50, ALIGN_CENTER);
+
+    update_iso();
+    update_shutter_speed();
 
     UG_WindowShow(&window_1);
     UG_Update();
