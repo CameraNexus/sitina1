@@ -37,7 +37,7 @@ static uint32_t *framebuffer;
 #define DEFAULT_FONT FONT_terminus_bold_14X28
 #define LARGE_FONT FONT_terminus_bold_16X32
 
-#define WND_PREVIEW_MAX_OBJECTS 10
+#define WND_PREVIEW_MAX_OBJECTS 11
 
 static UG_WINDOW wnd_preview;
 static UG_BUTTON btn_iso_inc;
@@ -49,6 +49,8 @@ static UG_TEXTBOX tb_iso;
 static UG_TEXTBOX tb_iso_val;
 static UG_TEXTBOX tb_shutter;
 static UG_TEXTBOX tb_shutter_val;
+static UG_TEXTBOX tb_preview_logo;
+static UG_TEXTBOX tb_running_label;
 static UG_OBJECT obj_buff_wnd_preview[WND_PREVIEW_MAX_OBJECTS];
 
 #define BTN_ISO_INC_ID      OBJ_ID_0
@@ -60,16 +62,22 @@ static UG_OBJECT obj_buff_wnd_preview[WND_PREVIEW_MAX_OBJECTS];
 #define TB_ISO_VAL_ID       OBJ_ID_3
 #define TB_SHUTTER_TITLE_ID OBJ_ID_6
 #define TB_SHUTTER_VAL_ID   OBJ_ID_7
+#define TB_PREVIEW_LOGO     OBJ_ID_9
+#define TB_RUNNING_LABEL    OBJ_ID_10
 
-#define WND_PROGRESS_MAX_OBJECTS 3
+#define WND_PROGRESS_MAX_OBJECTS 4
 
 static UG_WINDOW wnd_progress;
 static UG_TEXTBOX tb_saving_label;
 static UG_PROGRESS pg_saving;
+static UG_TEXTBOX tb_saving_logo;
+static UG_TEXTBOX tb_stopped_label;
 static UG_OBJECT obj_buff_wnd_progress[WND_PROGRESS_MAX_OBJECTS];
 
 #define TB_SAVING_LABEL_ID  OBJ_ID_0
 #define PG_SAVING_ID        OBJ_ID_1
+#define TB_SAVING_LOGO      OBJ_ID_2
+#define TB_STOPPED_LABEL    OBJ_ID_3
 
 static uint32_t iso_setpoints[] = {
     100, 200, 400, 800, 1600, 3200, 6400
@@ -241,6 +249,10 @@ void gui_setup_preview_screen(void) {
     UG_TextboxSetFont(&wnd_preview, TB_ISO_VAL_ID, LARGE_FONT);
     UG_TextboxSetFont(&wnd_preview, TB_SHUTTER_VAL_ID, LARGE_FONT);
 
+    _gui_create_textbox(&wnd_preview, &tb_preview_logo, TB_PREVIEW_LOGO, "Sitina1", 20, 20, 140, 29, ALIGN_CENTER_LEFT);
+    _gui_create_textbox(&wnd_preview, &tb_running_label, TB_RUNNING_LABEL, "Running", 20, 49, 140, 29, ALIGN_CENTER_LEFT);
+    UG_TextboxSetForeColor(&wnd_preview, TB_RUNNING_LABEL, C_GREEN);
+
     update_iso();
     update_shutter_speed();
 
@@ -285,6 +297,10 @@ void gui_setup_progress_screen(void) {
             100, 610, 520, 50, ALIGN_CENTER);
     
     _gui_create_progress(&wnd_progress, &pg_saving, PG_SAVING_ID, 100, 670, 520, 30);
+
+    _gui_create_textbox(&wnd_progress, &tb_saving_logo, TB_SAVING_LOGO, "Sitina1", 20, 20, 140, 29, ALIGN_CENTER_LEFT);
+    _gui_create_textbox(&wnd_progress, &tb_stopped_label, TB_STOPPED_LABEL, "Stopped", 20, 49, 140, 29, ALIGN_CENTER_LEFT);
+    UG_TextboxSetForeColor(&wnd_progress, TB_STOPPED_LABEL, C_RED);
 
     UG_WindowHide(&wnd_progress);
 }
