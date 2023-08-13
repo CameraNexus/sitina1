@@ -133,7 +133,7 @@ int main (int argc, char** argv){
     }
     // Render to SDL buffer
     
-    const long bias = CCD_W;
+    const long bias = 768;
     long gapsize  = 176;    // Dirty Hack
     long gapshift = 1191;
     uint16_t* vram = (uint16_t*)(semu->pixels);
@@ -154,10 +154,10 @@ int main (int argc, char** argv){
             r=0;g=0;b=0;
             #define MAKE16(a8) (fbuf[(a8)*2+bias+1]<<8|fbuf[(a8)*2+bias])
             if(x&0x01){
-                g1  = MAKE16((y+1)*2*CCD_W+((x+1)*2+1));
-                b   = MAKE16( y   *2*CCD_W+((x+1)*2+1));
-                g2  = MAKE16( y   *2*CCD_W+( x   *2+1));
-                r   = MAKE16((y+1)*2*CCD_W+( x   *2+1));
+                b  = MAKE16((y*2+1)*CCD_W+((x+1)*2+1));
+                g2 = MAKE16( y   *2*CCD_W+((x+1)*2+1));
+                r  = MAKE16( y   *2*CCD_W+( x   *2+1));
+                g1 = MAKE16((y*2+1)*CCD_W+( x   *2+1));
                 // vram[y*SCR_W+x/2] = (r<<11)&0xF800 | (g<<5)&0x07E0 | b&0x001F;
                 
                 raw[3*(y*SCR_W+x/2)+0] = r;
@@ -165,10 +165,10 @@ int main (int argc, char** argv){
                 raw[3*(y*SCR_W+x/2)+2] = b;
                 
             } else {
-                g1 = MAKE16( y   *2*CCD_W+( x   *2));
-                b  = MAKE16( y   *2*CCD_W+((x+1)*2));
-                g2 = MAKE16((y+1)*2*CCD_W+((x+1)*2));
-                r  = MAKE16((y+1)*2*CCD_W+( x   *2));
+                r   = MAKE16( y   *2*CCD_W+( x   *2));
+                g2  = MAKE16( y   *2*CCD_W+((x+1)*2));
+                b   = MAKE16((y*2+1)*CCD_W+((x+1)*2));
+                g1  = MAKE16((y*2+1)*CCD_W+( x   *2));
                 // vram[y*SCR_W+(SCR_W-x/2)] = (r<<11)&0xF800 | (g<<5)&0x07E0 | b&0x001F;
                 
                 raw[3*(y*SCR_W+(SCR_W-x/2))+0] = r;
@@ -199,7 +199,7 @@ int main (int argc, char** argv){
 
     SDL_Event event;
 	bool running = true;
-    /*
+    
     while(running){
 		while(SDL_PollEvent(&event)){
 			running = event.type != SDL_QUIT;
@@ -217,7 +217,7 @@ int main (int argc, char** argv){
         SDL_SoftStretch(semu,&rsrc,swin,&rdst);
 		SDL_Flip(swin);
 	}
-    */
+    
 
     SDL_SoftStretch(semu,&rsrc,swin,&rdst);
 	SDL_Flip(swin);
