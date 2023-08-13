@@ -73,6 +73,7 @@ void app_main(void) {
             cam_buf = os_cam_still_capture();
             gui_show_progress_screen();
             gui_set_progress(0);
+            ip_filter_still_image(cam_buf, disp_buf + 120*720, 0);
             os_disp_return_buffer(disp_buf);
             // Save image here...
             File *fp = os_fs_open("CAPTURE.RAW", OM_WRITE);

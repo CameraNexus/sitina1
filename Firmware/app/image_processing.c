@@ -26,6 +26,10 @@
 #include "image_processing.h"
 #include "ccd_timing.h"
 
+// NOTE: functions present in this file does not optimize anything for image
+// quality. They are used as on-device preview only.
+// IN OTHER WORDS... IT USES NEAREST NEIGHBOR TO BE FAST
+
 static uint16_t max = 0;
 static uint16_t min = 65535;
 
@@ -74,7 +78,7 @@ static uint32_t populate_pixel(uint16_t a, uint16_t b, uint8_t x_odd, uint8_t y_
             return (0xff000000ul | (a << 8) | (b));
         }
     }
-} 
+}
 
 // This function takes draft input and rescale to output as 720x480 image
 void ip_filter_draft_image(uint16_t *inp, uint32_t *outp, int offset) {
@@ -147,4 +151,78 @@ void ip_filter_draft_image(uint16_t *inp, uint32_t *outp, int offset) {
 
     // printf("min: %d\n", min);
     // printf("max: %d\n", max);
+}
+
+static void append_pixel(uint32_t *pptr, uint16_t a, uint16_t b, uint8_t x_odd, uint8_t y_odd) {
+    uint32_t pixel = *pptr;
+    if (y_odd) {
+        // Keep B
+        if (x_odd) {
+            // RG
+            pixel = (pixel & 0x000000fful) | (0xff000000ul | (b << 16) | (a << 8));
+        }
+        else {
+            // GR
+            pixel = (pixel & 0x000000fful) | (0xff000000ul | (a << 16) | (b << 8));
+        }
+    }
+    else {
+        // Keep R
+        if (x_odd) {
+            // GB
+            pixel = (pixel & 0x00ff0000ul) | (0xff000000ul | (b << 8) | (a));
+        }
+        else {
+            // BG
+            pixel = (pixel & 0x00ff0000ul) | (0xff000000ul | (a << 8) | (b));
+        }
+    }
+    *pptr = pixel;
+}
+
+// This function takes still input and rescale to output as 720x480 image
+void ip_filter_still_image(uint16_t *inp, uint32_t *outp, int offset) {
+    int y_offset = 5;
+    int x_offset = (CCD_HBLK_LENGTH + CCD_DUMMY_PIX + CCD_DARK_PIX + CCD_BUFFER_PIX + 40) * 2;
+    // 248 lines, drop 8 lines
+    for (int y = 0; y < 480 * 2; y++) {
+        //printf("Black level: %d\n", inp[(y + y_offset) * CCD_PRV_LINE_LENGTH * 2 + x_offset - 80]);
+        // For active 4008 pixels, output is 720 pixels.
+        // Similar to V, where 10 lines are skipped every 11 lines
+        // This means 10 pixels to be skipped every 11 pixels
+        // In our case we use 2 pixels every 11 pixels, though the color would be different
+        int y_odd = y & 0x1;
+        uint16_t *rdptr = &inp[(y / 4 * 11 + y_odd + y_offset) * CCD_LINE_LENGTH * 2 + x_offset];
+        y_odd ^= (y & 0x4) >> 2;
+        for (int x = 0; x < 180; x++) {
+            // Sample the following
+            // x+0: B
+            // x+1: G
+            // x+2: skip
+            // x+3: skip
+            // x+4: skip
+            // x+5: skip
+            // x+6: B
+            // x+7: G
+            // x+8: skip
+            // x+9: skip
+            // x+10:skip
+            // This is slightly skewed
+            uint16_t p0a = ip_scale_pixel(*rdptr++);
+            uint16_t p3b = ip_scale_pixel(*rdptr++);
+            uint16_t p0b = ip_scale_pixel(*rdptr++);
+            uint16_t p3a = ip_scale_pixel(*rdptr++);
+            rdptr += 8;
+            uint16_t p1a = ip_scale_pixel(*rdptr++);
+            uint16_t p2b = ip_scale_pixel(*rdptr++);
+            uint16_t p1b = ip_scale_pixel(*rdptr++);
+            uint16_t p2a = ip_scale_pixel(*rdptr++);
+            rdptr += 6;
+            uint8_t x_odd = x & 0x1;
+            append_pixel(&outp[y / 2 * 720 + (360 - x) * 2 - 1], p0a, p0b, x_odd, y_odd);
+            append_pixel(&outp[y / 2 * 720 + (360 - x) * 2 - 2], p1a, p1b, x_odd, y_odd);;
+            append_pixel(&outp[y / 2 * 720 + x * 2 + 0], p3a, p3b, x_odd, y_odd);
+            append_pixel(&outp[y / 2 * 720 + x * 2 + 1], p2a, p2b, x_odd, y_odd);
+        }
+    }
 }
