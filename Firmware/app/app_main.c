@@ -22,6 +22,7 @@
 //
 #include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include "os_camera.h"
 #include "os_display.h"
@@ -35,6 +36,32 @@ volatile bool shutter_requested = false;
 
 void shutter_release(void) {
     shutter_requested = true;
+}
+
+uint32_t get_save_seq(void) {
+    File *fp = os_fs_open("SEQ.TXT", OM_WRITE);
+    int fsize = os_fs_size(fp);
+    int seq = 0;
+    char buf[7] = "0";
+    if (fsize < 6) {
+        os_fs_read(fp, buf, fsize);
+        buf[fsize] = '\0';
+        seq = atoi(buf);
+    }
+    else {
+        // Invalid, reset
+        os_fs_write(fp, buf, 1);
+    }
+    os_fs_close(fp);
+    return seq;
+}
+
+void update_save_seq(uint32_t seq) {
+    File *fp = os_fs_open("SEQ.TXT", OM_WRITE);
+    char buf[7];
+    snprintf(buf, 7, "%d", seq);
+    os_fs_write(fp, buf, strlen(buf));
+    os_fs_close(fp);
 }
 
 void app_main(void) {
@@ -51,6 +78,8 @@ void app_main(void) {
     gui_show_preview_screen();
 
     uint32_t *disp_buf = os_disp_get_buffer();
+
+    uint32_t seq = get_save_seq();
 
     os_cam_start();
 
@@ -76,10 +105,11 @@ void app_main(void) {
             ip_filter_still_image(cam_buf, disp_buf + 120*720, 0);
             os_disp_return_buffer(disp_buf);
             // Save image here...
-            File *fp = os_fs_open("CAPTURE.RAW", OM_WRITE);
+            char fn[13];
+            snprintf(fn, 13, "SNE%05d.RAW", seq);
+            File *fp = os_fs_open(fn, OM_WRITE);
             size_t filesize = os_cam_get_still_size();
-            uint8_t *wrptr = cam_buf;
-            printf("file size %d bytes\n", filesize);
+            uint8_t *wrptr = (uint8_t *)cam_buf;
             const size_t chunksize = 1048576;
             for (int i = 0; i < (filesize / chunksize); i++) {
                 os_fs_write(fp, wrptr, chunksize);
@@ -94,6 +124,8 @@ void app_main(void) {
                 os_disp_return_buffer(disp_buf);
             }
             os_fs_close(fp);
+            seq++;
+            update_save_seq(seq);
             gui_hide_progress_screen();
             gui_show_preview_screen();
             shutter_requested = false;

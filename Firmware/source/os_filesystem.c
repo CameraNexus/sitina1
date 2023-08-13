@@ -107,7 +107,7 @@ File *os_fs_open(char *path, OpenMode mode) {
         fatfsmode = FA_READ;
         break;
     case OM_WRITE:
-        fatfsmode = FA_CREATE_ALWAYS | FA_WRITE;
+        fatfsmode = FA_CREATE_ALWAYS | FA_READ | FA_WRITE;
         break;
     case OM_RW:
         fatfsmode = FA_READ | FA_WRITE;
