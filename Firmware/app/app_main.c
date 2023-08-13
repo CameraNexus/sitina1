@@ -24,6 +24,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "os_camera.h"
 #include "os_display.h"
 #include "os_filesystem.h"
@@ -39,20 +40,18 @@ void shutter_release(void) {
 }
 
 uint32_t get_save_seq(void) {
-    File *fp = os_fs_open("SEQ.TXT", OM_WRITE);
-    int fsize = os_fs_size(fp);
     int seq = 0;
-    char buf[7] = "0";
-    if (fsize < 6) {
-        os_fs_read(fp, buf, fsize);
-        buf[fsize] = '\0';
-        seq = atoi(buf);
+    File *fp = os_fs_open("SEQ.TXT", OM_READ);
+    if (fp) {
+        int fsize = os_fs_size(fp);
+        char buf[7] = "0";
+        if (fsize < 6) {
+            os_fs_read(fp, buf, fsize);
+            buf[fsize] = '\0';
+            seq = atoi(buf);
+        }
+        os_fs_close(fp);
     }
-    else {
-        // Invalid, reset
-        os_fs_write(fp, buf, 1);
-    }
-    os_fs_close(fp);
     return seq;
 }
 
