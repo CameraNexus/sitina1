@@ -25,6 +25,7 @@
 #include <assert.h>
 #include <SDL.h>
 #include "os_camera.h"
+#include "ccd_timing.h"
 
 #define CAM_STILL_SAMPLE_FILE   "./cam_still_sample.bin"
 #define CAM_DRAFT_SAMPLE_FILE   "./cam_draft_sample.bin"
@@ -112,16 +113,25 @@ void os_cam_stop(void) {
         SDL_RemoveTimer(timer_id);
 }
 
-void os_cam_submit_empty_buffer(uint8_t *buf) {
+void os_cam_submit_empty_buffer(uint16_t *buf) {
     // Nothing
 }
 
-uint8_t *os_cam_get_full_buffer() {
+uint16_t *os_cam_get_full_buffer() {
     if (frame_ready) {
         frame_ready = false;
-        return cam_buf;
+        return (uint16_t *)cam_buf;
     }
     else {
         return NULL;
     }
+}
+
+uint16_t *os_cam_still_capture(void) {
+    SDL_Delay(300);
+    return (uint16_t *)cam_still_buf;
+}
+
+size_t os_cam_get_still_size(void) {
+    return CCD_LINES * CCD_LINE_LENGTH * 2 * 2;
 }

@@ -31,13 +31,15 @@
 #include "gui.h"
 #include "image_processing.h"
 
-void app_tick(void) {
+volatile bool shutter_requested = false;
 
+void shutter_release(void) {
+    shutter_requested = true;
 }
 
 void app_main(void) {
     os_disp_init();
-    //os_fs_init();
+    os_fs_init();
     os_input_init();
     //os_timer_register_systick(10, app_tick);
     os_cam_init();
@@ -45,23 +47,58 @@ void app_main(void) {
 
     gui_init();
     gui_setup_preview_screen();
+    gui_setup_progress_screen();
+    gui_show_preview_screen();
 
-    uint8_t *disp_buf = os_disp_get_buffer();
-
-    //OSA_TimeInit();
+    uint32_t *disp_buf = os_disp_get_buffer();
 
     os_cam_start();
 
-    uint8_t *cam_buf;
+    shutter_requested = false;
+
+    uint16_t *cam_buf;
     while(1) {
         while ((cam_buf = os_cam_get_full_buffer()) == NULL);
         //uint32_t duration = OSA_TimeGetMsec();
-        ip_filter_draft_image(cam_buf, disp_buf + 120*720*4, 0);
+        ip_filter_draft_image(cam_buf, disp_buf + 120*720, 0);
         os_cam_submit_empty_buffer(cam_buf);
         //duration = OSA_TimeGetMsec() - duration;
         //printf("%d ms\n", duration);
         os_input_scan();
         gui_scan_input();
+
+        if (shutter_requested) {
+            gui_hide_preview_screen();
+            // Start still capture
+            cam_buf = os_cam_still_capture();
+            gui_show_progress_screen();
+            gui_set_progress(0);
+            os_disp_return_buffer(disp_buf);
+            // Save image here...
+            File *fp = os_fs_open("CAPTURE.RAW", OM_WRITE);
+            size_t filesize = os_cam_get_still_size();
+            uint8_t *wrptr = cam_buf;
+            printf("file size %d bytes\n", filesize);
+            const size_t chunksize = 1048576;
+            for (int i = 0; i < (filesize / chunksize); i++) {
+                os_fs_write(fp, wrptr, chunksize);
+                wrptr += chunksize;
+                filesize -= chunksize;
+                gui_set_progress(i * chunksize * 100 / filesize);
+                os_disp_return_buffer(disp_buf);
+            }
+            if (filesize != 0) {
+                os_fs_write(fp, wrptr, filesize);
+                gui_set_progress(100);
+                os_disp_return_buffer(disp_buf);
+            }
+            os_fs_close(fp);
+            gui_hide_progress_screen();
+            gui_show_preview_screen();
+            shutter_requested = false;
+            os_cam_submit_empty_buffer(cam_buf);
+            os_cam_start();
+        }
         os_disp_return_buffer(disp_buf);
     }
 

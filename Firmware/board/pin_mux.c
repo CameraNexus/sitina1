@@ -69,6 +69,8 @@ void BOARD_InitPins(void) {
       IOMUXC_GPIO_SD_B1_05_USDHC1_DATA3,      /* GPIO_SD_B1_05 is configured as USDHC1_DATA3 */
       1U);                                    /* Software Input On Field: Force input path of pad GPIO_SD_B1_05 */
 
+  IOMUXC_SetPinConfig(IOMUXC_GPIO_DISP_B1_08_GPIO10_IO29, 0x04U); // Enable pull up on the CD pin
+
   IOMUXC_SetPinConfig(
       IOMUXC_GPIO_SD_B1_00_USDHC1_CMD,        /* GPIO_SD_B1_00 PAD functional properties : */
       0x04U);                                 /* PDRV Field: high drive strength

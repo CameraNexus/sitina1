@@ -29,15 +29,17 @@
 #include "os_input.h"
 #include "gui.h"
 #include "ugui.h"
+#include "app_main.h"
 
 static UG_GUI gui;
 static uint32_t *framebuffer;
 
 #define DEFAULT_FONT FONT_terminus_bold_14X28
+#define LARGE_FONT FONT_terminus_bold_16X32
 
-#define MAX_OBJECTS 10
+#define WND_PREVIEW_MAX_OBJECTS 10
 
-static UG_WINDOW window_1;
+static UG_WINDOW wnd_preview;
 static UG_BUTTON btn_iso_inc;
 static UG_BUTTON btn_iso_dec;
 static UG_BUTTON btn_shutter_inc;
@@ -47,7 +49,7 @@ static UG_TEXTBOX tb_iso;
 static UG_TEXTBOX tb_iso_val;
 static UG_TEXTBOX tb_shutter;
 static UG_TEXTBOX tb_shutter_val;
-static UG_OBJECT obj_buff_wnd_1[MAX_OBJECTS];
+static UG_OBJECT obj_buff_wnd_preview[WND_PREVIEW_MAX_OBJECTS];
 
 #define BTN_ISO_INC_ID      OBJ_ID_0
 #define BTN_ISO_DEC_ID      OBJ_ID_1
@@ -58,6 +60,16 @@ static UG_OBJECT obj_buff_wnd_1[MAX_OBJECTS];
 #define TB_ISO_VAL_ID       OBJ_ID_3
 #define TB_SHUTTER_TITLE_ID OBJ_ID_6
 #define TB_SHUTTER_VAL_ID   OBJ_ID_7
+
+#define WND_PROGRESS_MAX_OBJECTS 3
+
+static UG_WINDOW wnd_progress;
+static UG_TEXTBOX tb_saving_label;
+static UG_PROGRESS pg_saving;
+static UG_OBJECT obj_buff_wnd_progress[WND_PROGRESS_MAX_OBJECTS];
+
+#define TB_SAVING_LABEL_ID  OBJ_ID_0
+#define PG_SAVING_ID        OBJ_ID_1
 
 static uint32_t iso_setpoints[] = {
     100, 200, 400, 800, 1600, 3200, 6400
@@ -136,17 +148,17 @@ void gui_deinit(void) {
 }
 
 static void update_iso() {
-    UG_TextboxSetText(&window_1, TB_ISO_VAL_ID, iso_labels[iso_index]);
+    UG_TextboxSetText(&wnd_preview, TB_ISO_VAL_ID, iso_labels[iso_index]);
     //os_cam_set_gain(iso_setpoints[iso_index]);
 }
 
 static void update_shutter_speed() {
-    UG_TextboxSetText(&window_1, TB_SHUTTER_VAL_ID, shutter_labels[shutter_index]);
+    UG_TextboxSetText(&wnd_preview, TB_SHUTTER_VAL_ID, shutter_labels[shutter_index]);
     uint32_t shutter_ns = 1000000000 / shutter_setpoints[shutter_index];
     os_cam_set_shutter_speed(shutter_ns);
 }
 
-static void window_1_callback(UG_MESSAGE *msg) {
+static void wnd_preview_callback(UG_MESSAGE *msg) {
     //
     if ((msg->type == MSG_TYPE_OBJECT) && (msg->id == OBJ_TYPE_BUTTON) &&
             (msg->event == OBJ_EVENT_RELEASED)) {
@@ -175,6 +187,9 @@ static void window_1_callback(UG_MESSAGE *msg) {
             }
             update_shutter_speed();
             break;
+        case BTN_SHUTTER_REL_ID:
+            shutter_release();
+            break;
         default:
             break;
         }
@@ -183,46 +198,53 @@ static void window_1_callback(UG_MESSAGE *msg) {
 
 static void _gui_create_button(UG_WINDOW* wnd, UG_BUTTON *handle, UG_U8 id,
         char *text, UG_S16 x, UG_S16 y, UG_S16 w, UG_S16 h) {
-    UG_ButtonCreate(wnd, handle, id, x, y, x+w, y+h);
+    UG_ButtonCreate(wnd, handle, id, x, y, x+w-1, y+h-1);
     UG_ButtonSetText(wnd, id, text);
 }
 
 static void _gui_create_textbox(UG_WINDOW* wnd, UG_TEXTBOX *handle, UG_U8 id,
         char *text, UG_S16 x, UG_S16 y, UG_S16 w, UG_S16 h, UG_U8 align) {
-    UG_TextboxCreate(wnd, handle, id, x, y, x+w, y+h);
+    UG_TextboxCreate(wnd, handle, id, x, y, x+w-1, y+h-1);
     UG_TextboxSetText(wnd, id, text);
     UG_TextboxSetAlignment(wnd, id, align);
 }
 
+static void _gui_create_progress(UG_WINDOW* wnd, UG_PROGRESS *handle, UG_U8 id,
+        UG_S16 x, UG_S16 y, UG_S16 w, UG_S16 h) {
+    UG_ProgressCreate(wnd, handle, id, x, y, x+w-1, y+h-1);
+}
+
 void gui_setup_preview_screen(void) {
     // Create the window
-    UG_WindowCreate(&window_1, obj_buff_wnd_1, MAX_OBJECTS, window_1_callback);
+    UG_WindowCreate(&wnd_preview, obj_buff_wnd_preview, WND_PREVIEW_MAX_OBJECTS, wnd_preview_callback);
     // Window Title
-    UG_WindowSetStyle(&window_1, WND_STYLE_2D | WND_STYLE_HIDE_TITLE);
-    UG_WindowSetXStart(&window_1, 0);
-    UG_WindowSetYStart(&window_1, 0);
-    UG_WindowSetXEnd(&window_1, DISP_WIDTH-1);
-    UG_WindowSetYEnd(&window_1, DISP_HEIGHT-1);
+    UG_WindowSetStyle(&wnd_preview, WND_STYLE_2D | WND_STYLE_HIDE_TITLE);
+    UG_WindowSetXStart(&wnd_preview, 0);
+    UG_WindowSetYStart(&wnd_preview, 0);
+    UG_WindowSetXEnd(&wnd_preview, DISP_WIDTH-1);
+    UG_WindowSetYEnd(&wnd_preview, DISP_HEIGHT-1);
 
     // Create Buttons
-    _gui_create_button(&window_1, &btn_iso_inc, BTN_ISO_INC_ID, "+", 250, 650, 50, 50);
-    _gui_create_button(&window_1, &btn_iso_dec, BTN_ISO_DEC_ID, "-", 50, 650, 50, 50);
-    _gui_create_button(&window_1, &btn_shutter_inc, BTN_SHUTTER_INC_ID, "+", 420, 650, 50, 50);
-    _gui_create_button(&window_1, &btn_shutter_dec, BTN_SHUTTER_DEC_ID, "-", 620, 650, 50, 50);
+    _gui_create_button(&wnd_preview, &btn_iso_inc, BTN_ISO_INC_ID, "+", 250, 620, 80, 80);
+    _gui_create_button(&wnd_preview, &btn_iso_dec, BTN_ISO_DEC_ID, "-", 20, 620, 80, 80);
+    _gui_create_button(&wnd_preview, &btn_shutter_inc, BTN_SHUTTER_INC_ID, "+", 390, 620, 80, 80);
+    _gui_create_button(&wnd_preview, &btn_shutter_dec, BTN_SHUTTER_DEC_ID, "-", 620, 620, 80, 80);
 
-    _gui_create_button(&window_1, &btn_shutter_release, BTN_SHUTTER_REL_ID, "REL", 620, 20, 80, 80);
+    _gui_create_button(&wnd_preview, &btn_shutter_release, BTN_SHUTTER_REL_ID, "REL", 620, 20, 80, 80);
 
     // Create Textbox
-    _gui_create_textbox(&window_1, &tb_iso, TB_ISO_TITLE_ID, "ISO", 50, 600, 200, 50, ALIGN_CENTER_LEFT);
-    _gui_create_textbox(&window_1, &tb_iso_val, TB_ISO_VAL_ID, "-", 100, 650, 150, 50, ALIGN_CENTER);
-    _gui_create_textbox(&window_1, &tb_shutter, TB_SHUTTER_TITLE_ID, "Shutter", 420, 600, 200, 50, ALIGN_CENTER_LEFT);
-    _gui_create_textbox(&window_1, &tb_shutter_val, TB_SHUTTER_VAL_ID, "-", 470, 650, 150, 50, ALIGN_CENTER);
+    _gui_create_textbox(&wnd_preview, &tb_iso, TB_ISO_TITLE_ID, "ISO", 110, 620, 140, 40, ALIGN_CENTER_LEFT);
+    _gui_create_textbox(&wnd_preview, &tb_iso_val, TB_ISO_VAL_ID, "-", 100, 650, 150, 40, ALIGN_CENTER);
+    _gui_create_textbox(&wnd_preview, &tb_shutter, TB_SHUTTER_TITLE_ID, "Shutter", 480, 620, 140, 40, ALIGN_CENTER_LEFT);
+    _gui_create_textbox(&wnd_preview, &tb_shutter_val, TB_SHUTTER_VAL_ID, "-", 470, 650, 150, 40, ALIGN_CENTER);
+
+    UG_TextboxSetFont(&wnd_preview, TB_ISO_VAL_ID, LARGE_FONT);
+    UG_TextboxSetFont(&wnd_preview, TB_SHUTTER_VAL_ID, LARGE_FONT);
 
     update_iso();
     update_shutter_speed();
 
-    UG_WindowShow(&window_1);
-    UG_Update();
+    UG_WindowHide(&wnd_preview);
 }
 
 void gui_scan_input(void) {
@@ -234,5 +256,50 @@ void gui_scan_input(void) {
     else {
         UG_TouchUpdate(-1, -1, TOUCH_STATE_RELEASED);
     }
+    UG_Update();
+}
+
+static void wnd_progress_callback(UG_MESSAGE *msg) {
+
+}
+
+void gui_show_preview_screen(void) {
+    UG_WindowShow(&wnd_preview);
+    UG_Update();
+}
+
+void gui_hide_preview_screen(void) {
+    UG_WindowHide(&wnd_preview);
+    UG_Update();
+}
+
+void gui_setup_progress_screen(void) {
+    UG_WindowCreate(&wnd_progress, obj_buff_wnd_progress, WND_PROGRESS_MAX_OBJECTS, wnd_progress_callback);
+    UG_WindowSetStyle(&wnd_progress, WND_STYLE_2D | WND_STYLE_HIDE_TITLE);
+    UG_WindowSetXStart(&wnd_progress, 0);
+    UG_WindowSetYStart(&wnd_progress, 0);
+    UG_WindowSetXEnd(&wnd_progress, DISP_WIDTH-1);
+    UG_WindowSetYEnd(&wnd_progress, DISP_HEIGHT-1);
+
+    _gui_create_textbox(&wnd_progress, &tb_saving_label, TB_SAVING_LABEL_ID, "Image saving in progress...",
+            100, 610, 520, 50, ALIGN_CENTER);
+    
+    _gui_create_progress(&wnd_progress, &pg_saving, PG_SAVING_ID, 100, 670, 520, 30);
+
+    UG_WindowHide(&wnd_progress);
+}
+
+void gui_show_progress_screen(void) {
+    UG_WindowShow(&wnd_progress);
+    UG_Update();
+}
+
+void gui_hide_progress_screen(void) {
+    UG_WindowHide(&wnd_progress);
+    UG_Update();
+}
+
+void gui_set_progress(uint8_t val) {
+    UG_ProgressSetProgress(&wnd_progress, PG_SAVING_ID, val);
     UG_Update();
 }

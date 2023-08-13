@@ -58,7 +58,9 @@
 #include "fsl_debug_console.h"
 #define SDMMC_LOG(...) PRINTF(__VA_ARGS__)
 #else
-#define SDMMC_LOG(format, ...)
+//#define SDMMC_LOG(format, ...)
+#include <stdio.h>
+#define SDMMC_LOG(...) printf(__VA_ARGS__)
 #endif
 
 /*! @brief SD/MMC card API's running status.

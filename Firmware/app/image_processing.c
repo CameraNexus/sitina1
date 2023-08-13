@@ -30,7 +30,7 @@ static uint16_t max = 0;
 static uint16_t min = 65535;
 
 #define BLACK_LEVEL 1800
-#define FULL_LEVEL 46000
+#define FULL_LEVEL 55000
 
 static uint16_t ip_scale_pixel(uint16_t pixel) {
     // if (pixel < min)

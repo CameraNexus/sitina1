@@ -24,5 +24,11 @@
 
 void gui_init(void);
 void gui_deinit(void);
-void gui_setup_preview_screen(void);
 void gui_scan_input(void);
+void gui_setup_preview_screen(void);
+void gui_show_preview_screen(void);
+void gui_hide_preview_screen(void);
+void gui_setup_progress_screen(void);
+void gui_show_progress_screen(void);
+void gui_hide_progress_screen(void);
+void gui_set_progress(uint8_t val);

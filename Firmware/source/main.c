@@ -72,6 +72,8 @@ int main(void)
     memset(0x80000000, 0x00, 64*1024*1024);
     printf("SitinaNe\r\n");
 
+    OSA_TimeInit();
+
     i2c_init();
     power_init();
 

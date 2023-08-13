@@ -1,6 +1,6 @@
 //
-// Project Fobu
-// Copyright 2020 Wenting Zhang
+// Sitina1
+// Copyright 2023 Wenting Zhang
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// File : nt35310.h
-// Brief: Driver for NT35310 LCD controller
-//
 #pragma once
 
-void nt35310_init(void);
+void lcd_init(void);
+void lcd_bl_on(void);
+void lcd_bl_off(void);

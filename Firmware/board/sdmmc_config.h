@@ -36,7 +36,7 @@
 #define BOARD_SDMMC_SD_CD_GPIO_BASE      GPIO10
 #define BOARD_SDMMC_SD_CD_GPIO_PORT      10
 #define BOARD_SDMMC_SD_CD_GPIO_PIN       29U
-#define BOARD_SDMMC_SD_CD_INTTERUPT_TYPE kHAL_GpioInterruptEitherEdge
+#define BOARD_SDMMC_SD_CD_INTTERUPT_TYPE kHAL_GpioInterruptDisable
 #define BOARD_SDMMC_SD_CD_INSERT_LEVEL   (0U)
 /* @brief card detect type
  *
@@ -59,9 +59,9 @@
 /*! @brief SD power reset */
 // Power reset is not supported
 /*! @brief SD IO voltage */
-#define BOARD_SDMMC_SD_IO_VOLTAGE_CONTROL_TYPE kSD_IOVoltageCtrlByHost
+#define BOARD_SDMMC_SD_IO_VOLTAGE_CONTROL_TYPE kSD_IOVoltageCtrlNotSupport
 
-#define BOARD_SDMMC_SD_HOST_SUPPORT_SDR104_FREQ (200000000U)
+#define BOARD_SDMMC_SD_HOST_SUPPORT_SDR104_FREQ (50000000U)
 #define BOARD_SDMMC_MMC_HOST_SUPPORT_HS200_FREQ (200000000U)
 /*! @brief mmc configuration */
 #define BOARD_SDMMC_MMC_VCC_SUPPLY  kMMC_VoltageWindows270to360

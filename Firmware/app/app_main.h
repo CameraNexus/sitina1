@@ -23,3 +23,4 @@
 #pragma once
 
 void app_main(void);
+void shutter_release(void);

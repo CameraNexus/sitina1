@@ -62,7 +62,7 @@
 // FIELD registers are 16 each
 
 // Base settings
-#define AFE_SYNC_CONFIG (0x61) // External sync enable should be set even if using software sync
+#define AFE_SYNC_CONFIG (0x65) // External sync enable should be set even if using software sync
 
 typedef struct {
     uint32_t value;
@@ -175,6 +175,17 @@ void afe_set_draft_shutter_speed(uint32_t lines) {
             (8191 << 13));
 }
 
+void afe_set_still_shutter_speed(uint32_t lines) {
+    afe_set_conf_reg(R_FIELD, 2, 0x03,
+            (0 << 0) |  // Enter sweep mode immediately
+            (CCD_SWEEP_LINES << 13)); // Enter delay mode once sweep is done
+    afe_set_conf_reg(R_FIELD, 2, 0x07,
+            ((CCD_SWEEP_LINES + lines) << 13)); // VD field length
+    afe_set_conf_reg(R_FIELD, 2, 0x08,
+            (8191) | // SG active line
+            (8191 << 13));
+}
+
 void afe_init(void) {
     afe_init_io();
 
@@ -272,21 +283,16 @@ void afe_init(void) {
     // Configure field
     // Field 0: Full resolution readout
     afe_set_conf_reg(R_FIELD, 0, 0x00,
-            (1 << 0) |  // Use seq 1 for region 0 (Dummy readout, 2 lines)
-            (2 << 5) |  // Use seq 2 for region 1 (VSG pulse)
-            (1 << 10)); // Use seq 1 for region 2 (Image readout)
+            (1 << 0));  // Use seq 1 for region 0 (Image readout)
     afe_set_conf_reg(R_FIELD, 0, 0x01, 0);
     afe_set_conf_reg(R_FIELD, 0, 0x02,
             (CCD_LINE_LENGTH)); // Line length of the last line
     afe_set_conf_reg(R_FIELD, 0, 0x03,
-            (0 << 0) |  // Enter Dummy readout mode immediately
-            (CCD_DUMMY_READ_LINES << 13)); // Enter VSG pulse mode
-    afe_set_conf_reg(R_FIELD, 0, 0x04,
-            (CCD_DUMMY_READ_LINES + CCD_VSG_LINES));
+            (0 << 0));  // Enter readout mode immediately
     afe_set_conf_reg(R_FIELD, 0, 0x07,
-            (CCD_FIELD_LINES << 13)); // VD field length
+            (CCD_LINES << 13)); // VD field length
     afe_set_conf_reg(R_FIELD, 0, 0x08,
-            ((CCD_DUMMY_READ_LINES)) | // SG active line
+            (8191) | // SG active line
             (8191 << 13));
 
     afe_set_conf_reg(R_FIELD, 0, 0x0a, 8191); // Disable CLPOB region 1
@@ -773,6 +779,8 @@ void afe_init(void) {
     // Enable External power supply (not enabled until out control = 1)
     //afe_write_reg(0x73,
     //        (7 << 3)); // GP2_PROTOCOL = KEEP ON
+
+    // Set field sequence and GPO settings
     afe_write_reg(0x7a,
             (0x1 << 0) | // GP1 start with high
             (0xff << 8) | // SEL_GPO = 0xff
@@ -855,9 +863,10 @@ void afe_pause(void) {
     GPIO_PinWrite(AFE_SYNC_GPIO, AFE_SYNC_GPIO_PIN, 0);
 }
 
-void afe_capture(uint32_t delay) {
-    afe_write_reg(0x2b, (0 << 0)); // FIELD0 = 1
-    afe_strobe();
-    // TODO: Some way of precise delay
-    GPIO_PinWrite(AFE_SYNC_GPIO, AFE_SYNC_GPIO_PIN, 1);
+void afe_switch_to_still(void) {
+    afe_write_reg(0x2b, (0 << 0)); // FIELD0 = 0
+}
+
+void afe_capture_finish(void) {
+    
 }
