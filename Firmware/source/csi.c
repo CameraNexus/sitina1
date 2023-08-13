@@ -26,6 +26,7 @@
 #include "fsl_iomuxc.h"
 #include "afe.h"
 #include "ccd_timing.h"
+#include "csi.h"
 
 static csi_handle_t csi_handle;
 volatile bool framedone;
@@ -132,7 +133,7 @@ void csi_init() {
     CSI_TransferCreateHandle(CSI, &csi_handle, csi_callback, NULL);
 }
 
-void csi_switch_resultion(uint32_t width, uint32_t height) {
+void csi_switch_resolution(uint32_t width, uint32_t height) {
     csi_config_t config;
 
     CSI_GetDefaultConfig(&config);

@@ -46,4 +46,6 @@ void os_input_get_touch(touch_point *points) {
 
 void os_input_scan(void) {
     ft6336_scan(&touch_state.x, &touch_state.y, &touch_state.touched);
+    touch_state.x = 719 - touch_state.x;
+    touch_state.y = 719 - touch_state.y;
 }

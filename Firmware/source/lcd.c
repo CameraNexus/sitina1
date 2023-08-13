@@ -1,6 +1,6 @@
 //
-// Project Fobu
-// Copyright 2020 Wenting Zhang
+// Sitina1
+// Copyright 2023 Wenting Zhang
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,9 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// File : nt35310.c
-// Brief: Driver for NT35310 LCD controller
-//
 #include "fsl_iomuxc.h"
 #include "fsl_gpio.h"
 #include "fsl_mipi_dsi.h"
@@ -41,7 +38,7 @@
 		vout_dsi_write(d, sizeof(d) / sizeof(uint8_t)); \
 	}
 
-void nt35310_init(void) {
+void lcd_init(void) {
     const gpio_pin_config_t pinConfig = {kGPIO_DigitalOutput, 0, kGPIO_NoIntmode};
 
     IOMUXC_SetPinMux(
@@ -142,4 +139,12 @@ void nt35310_init(void) {
     PRINTF("ID: %02x %02x %02x\r\n", rdid_result[0], rdid_result[1], rdid_result[2]);
 
     GPIO_PinWrite(BOARD_LCD_BL_GPIO, BOARD_LCD_BL_PIN, 1);
+}
+
+void lcd_bl_on(void) {
+	GPIO_PinWrite(BOARD_LCD_BL_GPIO, BOARD_LCD_BL_PIN, 1);
+}
+
+void lcd_bl_off(void) {
+	GPIO_PinWrite(BOARD_LCD_BL_GPIO, BOARD_LCD_BL_PIN, 0);
 }

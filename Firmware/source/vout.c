@@ -23,7 +23,7 @@
 // File : vout.c
 // Brief: Video output driver and low-level services
 //
-#include <st7703.h>
+#include "lcd.h"
 #include "fsl_common.h"
 #include "fsl_soc_src.h"
 #include "fsl_clock.h"
@@ -251,7 +251,7 @@ void vout_init(void) {
             IOMUXC_GPR_GPR62_MIPI_DSI_DPI_SOFT_RESET_N_MASK);
 
     // Configure the panel
-    nt35310_init();
+    lcd_init();
 
 #if USE_LCDIFV2
     // Enable LCDIFv2 interrupt

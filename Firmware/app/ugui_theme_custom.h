@@ -18,10 +18,10 @@
                                        C_WHITE_39,   \
                                        C_WHITE_39,   \
                                        /* Frame 1 */ \
-                                       C_BLACK,   \
-                                       C_BLACK,   \
-                                       C_BLACK,   \
-                                       C_BLACK,   \
+                                       C_WHITE_89,   \
+                                       C_WHITE_89,   \
+                                       C_WHITE_41,   \
+                                       C_WHITE_41,   \
                                        /* Frame 2 */ \
                                        C_BLACK,      \
                                        C_BLACK,      \
@@ -29,15 +29,15 @@
                                        C_BLACK
 
 #define C_PAL_BUTTON_PRESSED           /* Frame 0 */ \
-                                       C_WHITE,   \
-                                       C_WHITE,   \
-                                       C_WHITE,   \
-                                       C_WHITE,   \
+                                       C_WHITE_39,   \
+                                       C_WHITE_39,   \
+                                       C_WHITE_39,   \
+                                       C_WHITE_39,   \
                                        /* Frame 1 */ \
-                                       C_BLACK,   \
-                                       C_BLACK,   \
-                                       C_BLACK,   \
-                                       C_BLACK,   \
+                                       C_WHITE_63,   \
+                                       C_WHITE_63,   \
+                                       C_WHITE_63,   \
+                                       C_WHITE_63,   \
                                        /* Frame 2 */ \
                                        C_BLACK,   \
                                        C_BLACK,   \

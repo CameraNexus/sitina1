@@ -15,6 +15,7 @@
 #include "os_filesystem.h"
 
 AT_NONCACHEABLE_SECTION(static FATFS g_fileSystem); /* File system object */
+AT_NONCACHEABLE_SECTION(static FIL g_file);
 
 static status_t sdcardWaitCardInsert(void)
 {
@@ -97,7 +98,8 @@ int os_fs_init() {
 File *os_fs_open(char *path, OpenMode mode) {
     BYTE fatfsmode;
     // TODO: This should be allocated in uncacheable area?
-    File *file = malloc(sizeof(File));
+    //File *file = malloc(sizeof(File));
+    File *file = &g_file;
     FRESULT result;
     switch (mode)
     {
@@ -105,7 +107,7 @@ File *os_fs_open(char *path, OpenMode mode) {
         fatfsmode = FA_READ;
         break;
     case OM_WRITE:
-        fatfsmode = FA_CREATE_ALWAYS | FA_READ | FA_WRITE;
+        fatfsmode = FA_CREATE_ALWAYS | FA_WRITE;
         break;
     case OM_RW:
         fatfsmode = FA_READ | FA_WRITE;
@@ -114,7 +116,7 @@ File *os_fs_open(char *path, OpenMode mode) {
         fatfsmode = FA_CREATE_NEW | FA_READ | FA_WRITE;
         break;
     case OM_APPEND:
-        fatfsmode = FA_OPEN_APPEND | FA_READ | FA_WRITE;
+        fatfsmode = FA_OPEN_APPEND | FA_WRITE;
         break;
     default:
         printf("Unsupported file open mode!\n");

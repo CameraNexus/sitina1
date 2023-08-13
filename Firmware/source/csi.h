@@ -29,3 +29,4 @@ void csi_stop();
 void csi_submit_empty_buffer(uint8_t *buffer);
 uint8_t *csi_get_full_buffer();
 void csi_wait_framedone();
+void csi_switch_resolution(uint32_t width, uint32_t height);
