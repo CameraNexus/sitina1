@@ -32,6 +32,7 @@
 #define SCR_H (CCD_H/2)
 #define SCR_W (CCD_W/2)
 
+#define SAVE_PNG
 #include <png.h>
 
 #define PNG_WIDTH (SCR_W)
@@ -95,6 +96,7 @@ void write_png(const char* filename, uint16_t* data) {
 
     png_destroy_write_struct(&png, &info);
     fclose(file);
+    printf("%s saved\n",filename);
 }
 
 #include "effusus.h"
@@ -114,10 +116,19 @@ SDL_Rect rdst = {
     .h=SCR_H/2
 };
 
+bool savepng = false;
 int main (int argc, char** argv){
-    if(argc!=2){
-        printf("Usage: %s filename\n",argv[0]);
+    if(argc<2){
+        printf("Usage: %s filename [--savepng]\n",argv[0]);
         return -1;
+    }
+    if(argc>2){
+        for(int i=2;i<argc;i++){
+            if(strcmp(argv[i],"--savepng")==0) {
+                printf("Option: Save PNG Enabled\n");
+                savepng = true;
+            }
+        }
     }
     const char* fn = argv[1];
     long flen = read_binary_file(fn, fbuf, sizeof(fbuf));
@@ -134,65 +145,66 @@ int main (int argc, char** argv){
     // Render to SDL buffer
     
     const long bias = 768;
-    long gapsize  = 176;    // Dirty Hack
+    long gapsize  = 175;    // Dirty Hack
     long gapshift = 1191;
     uint16_t* vram = (uint16_t*)(semu->pixels);
-    uint16_t* raw = (uint16_t*)malloc(2*(SCR_W+1)*SCR_H*3);
-    // memset(raw,0,sizeof(raw));
+    uint16_t* raw = (uint16_t*)malloc(2*(SCR_W+1)*SCR_H*4);
+    memset(raw,0xFF,sizeof(raw));
     
-    // Max-min for debugging
-    long max_l_g, min_l_g;
-    long max_l_r, min_l_r;
-    long max_l_b, min_l_b;
-    long max_r_g, min_r_g;
-    long max_r_r, min_r_r;
-    long max_r_b, min_r_b;
     for(int y=0;y<SCR_H;y++){
         for(int x=0;x<SCR_W;x++){
             uint8_t l, h;
             uint16_t r, g1, g2, g, b;
+            int wrptr;
             r=0;g=0;b=0;
             #define MAKE16(a8) (fbuf[(a8)*2+bias+1]<<8|fbuf[(a8)*2+bias])
+            // Pixel Format:
+            // +----+----+
+            // | B  | G1 |
+            // +----+----+
+            // | G2 | R  |
+            // +----+----+
+            //
             if(x&0x01){
                 b  = MAKE16((y*2+1)*CCD_W+((x+1)*2+1));
-                g2 = MAKE16( y   *2*CCD_W+((x+1)*2+1));
-                r  = MAKE16( y   *2*CCD_W+( x   *2+1));
+                g2 = MAKE16( y*2   *CCD_W+((x+1)*2+1));
+                r  = MAKE16( y*2   *CCD_W+( x   *2+1));
                 g1 = MAKE16((y*2+1)*CCD_W+( x   *2+1));
-                // vram[y*SCR_W+x/2] = (r<<11)&0xF800 | (g<<5)&0x07E0 | b&0x001F;
-                
-                raw[3*(y*SCR_W+x/2)+0] = r;
-                raw[3*(y*SCR_W+x/2)+1] = (g1>>1)+(g2>>1);
-                raw[3*(y*SCR_W+x/2)+2] = b;
+                wrptr = 4*(y*SCR_W+x/2);
                 
             } else {
                 r   = MAKE16( y   *2*CCD_W+( x   *2));
                 g2  = MAKE16( y   *2*CCD_W+((x+1)*2));
                 b   = MAKE16((y*2+1)*CCD_W+((x+1)*2));
                 g1  = MAKE16((y*2+1)*CCD_W+( x   *2));
-                // vram[y*SCR_W+(SCR_W-x/2)] = (r<<11)&0xF800 | (g<<5)&0x07E0 | b&0x001F;
-                
-                raw[3*(y*SCR_W+(SCR_W-x/2))+0] = r;
-                raw[3*(y*SCR_W+(SCR_W-x/2))+1] = (g1>>1)+(g2>>1);
-                raw[3*(y*SCR_W+(SCR_W-x/2))+2] = b;
-                
+                wrptr = 4*(y*SCR_W+(SCR_W-x/2));
             }
+            raw[wrptr+0] = r;
+            raw[wrptr+1] = g1;
+            raw[wrptr+2] = b;
+            raw[wrptr+3] = g2;
         }
     }
+    
+    // Remove the gap from the output image
     
     for(int y=0;y<SCR_H;y++){
         for(int x=0;x<SCR_W;x++){
             if(x>gapshift) {
                 // vram[y*SCR_W+x-gapsize] = vram[y*SCR_W+x];
-                raw[3*(y*SCR_W+x-gapsize)+0] = raw[3*(y*SCR_W+x)+0];
-                raw[3*(y*SCR_W+x-gapsize)+1] = raw[3*(y*SCR_W+x)+1];
-                raw[3*(y*SCR_W+x-gapsize)+2] = raw[3*(y*SCR_W+x)+2];
+                raw[4*(y*SCR_W+x-gapsize)+0] = raw[4*(y*SCR_W+x)+0]; // r
+                raw[4*(y*SCR_W+x-gapsize)+1] = raw[4*(y*SCR_W+x)+1]; // g1
+                raw[4*(y*SCR_W+x-gapsize-1)+2] = raw[4*(y*SCR_W+x)+2]; // b
+                raw[4*(y*SCR_W+x-gapsize-1)+3] = raw[4*(y*SCR_W+x)+3]; // g2
             }
         }
     }
+    
     // Copy to Screen
+    // This is lossy, expect to see banding. (Although the image output shouldn't have any banding)
     for(int y=0;y<SCR_H;y++){
         for(int x=0;x<SCR_W;x++){
-            vram[y*SCR_W+x] = ((raw[3*(y*SCR_W+x)+0]>>(16-5))<<11)&0xF800 | ((raw[3*(y*SCR_W+x)+1]>>(16-5))<<6)&0x07E0 | raw[3*(y*SCR_W+x)+2]>>(16-5)&0x001F;
+            vram[y*SCR_W+x] = ((raw[4*(y*SCR_W+x)+0]>>(16-5))<<11)&0xF800 | ((raw[4*(y*SCR_W+x)+1]>>(16-5))<<6)&0x07E0 | raw[4*(y*SCR_W+x)+2]>>(16-5)&0x001F;
         }
     }
 
@@ -222,11 +234,46 @@ int main (int argc, char** argv){
     SDL_SoftStretch(semu,&rsrc,swin,&rdst);
 	SDL_Flip(swin);
 
+    // Save the four channels as separate PNG files.
+    uint16_t* raw_rgb = (uint16_t*)malloc(2*(SCR_W+1)*SCR_H*3);
+    uint16_t* raw_r   = (uint16_t*)malloc(2*(SCR_W+1)*SCR_H*3);
+    uint16_t* raw_g1  = (uint16_t*)malloc(2*(SCR_W+1)*SCR_H*3);
+    uint16_t* raw_b   = (uint16_t*)malloc(2*(SCR_W+1)*SCR_H*3);
+    uint16_t* raw_g2  = (uint16_t*)malloc(2*(SCR_W+1)*SCR_H*3);
+    memset(raw_r,0,sizeof(raw_r));
+    memset(raw_r,0,sizeof(raw_g1));
+    memset(raw_r,0,sizeof(raw_b));
+    memset(raw_r,0,sizeof(raw_g2));
+    for(int y=0;y<SCR_H;y++){
+        for(int x=0;x<SCR_W;x++){
+                int ptr3 = 3*(y*SCR_W+x);
+                int ptr4 = 4*(y*SCR_W+x);
+                raw_rgb[ptr3+0] = raw[ptr4+0];
+                raw_rgb[ptr3+1] = (raw[ptr4+1]>>1)+(raw[ptr4+3]>>1);
+                raw_rgb[ptr3+2] = raw[ptr4+2];
+                raw_r  [ptr3+0] = raw[ptr4+0];
+                raw_g1 [ptr3+1] = raw[ptr4+1];
+                raw_b  [ptr3+2] = raw[ptr4+2];
+                raw_g2 [ptr3+1] = raw[ptr4+3];
+        }
+    }
 
-    write_png("output.png", raw);
+    if(savepng){
+        printf("Saving PNG...\n");
+        write_png("output.png", raw_rgb);
+        write_png("output_r.png", raw_r);
+        write_png("output_g1.png", raw_g1);
+        write_png("output_b.png", raw_b);
+        write_png("output_g2.png", raw_g2);
+    }
     free(raw);
+    free(raw_rgb);
+    free(raw_r);
+    free(raw_g1);
+    free(raw_b);
+    free(raw_g2);
 	SDL_Quit();
-    printf("Gapsize: %ld, Gapshift: %ld", gapsize, gapshift);
     printf("Done!\n");
+    printf("Gapsize: %ld, Gapshift: %ld\n", gapsize, gapshift);
     return 0;
 }
