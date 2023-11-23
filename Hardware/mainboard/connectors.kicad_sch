@@ -1308,6 +1308,31 @@
     )
   )
 
+  (symbol (lib_id "power:GND") (at 154.94 129.54 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 2066d479-f6e7-413f-a9ba-b021ef01d8da)
+    (property "Reference" "#PWR07" (at 154.94 135.89 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 154.94 134.62 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 154.94 129.54 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 154.94 129.54 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 5fda5e22-0971-40de-bd32-15e2da5b1e76))
+    (instances
+      (project "pcb"
+        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/276f6775-fa51-456c-9efd-4a3857d51911"
+          (reference "#PWR07") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Connector_Generic_MountingPin:Conn_01x30_MountingPin") (at 154.94 86.36 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 41a352c3-f866-46c0-ba91-1c0cdc90fb64)

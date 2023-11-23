@@ -1790,7 +1790,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 29ba8b91-3e9e-4179-a433-275e2c426d32)
   )
-  (text "HC only has 4mA drive. Load capacitance for B/S are ~500pF.\nConsider using LVC with 32mA drive instead?"
+  (text "HC only has 4mA drive. Load capacitance for B/S are ~500pF.\nLVC has 32mA drive, but only up to 5.5V."
     (at 71.12 118.11 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid f7b8462a-fb94-4ce1-8a2e-d21496a5daf6)
