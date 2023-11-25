@@ -3734,7 +3734,7 @@
     (property "Value" "100nF" (at 77.47 153.67 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 86.36 151.4348 0)
+    (property "Footprint" "Capacitor_SMD:C_0402_1005Metric" (at 86.36 151.4348 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 82.55 152.4 0)
