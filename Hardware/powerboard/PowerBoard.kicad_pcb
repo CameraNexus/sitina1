@@ -515,6 +515,11 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model "${KIPRJMOD}/../common/footprints.pretty/FH12-30S-0.5SH.stp"
+      (offset (xyz 14.45 -10.6 -78))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 180 90 0))
+    )
   )
 
   (footprint "Resistor_SMD:R_0402_1005Metric" (layer "F.Cu")
@@ -2661,7 +2666,6 @@
     (fp_line (start 2 2) (end -2 2)
       (stroke (width 0.1) (type solid)) (layer "F.Fab") (tstamp 165004f6-57be-4337-bb92-779eece4bd6c))
     (pad "" smd custom (at -0.4875 -0.4875 90) (size 0.755518 0.755518) (layers "F.Paste")
-      (thermal_bridge_angle 90)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -2678,7 +2682,6 @@
           (width 0.305933) (fill yes))
       ) (tstamp c2f911ca-51d3-4674-ba1f-d1eb4a3be18c))
     (pad "" smd custom (at -0.4875 0.4875 90) (size 0.755518 0.755518) (layers "F.Paste")
-      (thermal_bridge_angle 90)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -2695,7 +2698,6 @@
           (width 0.305933) (fill yes))
       ) (tstamp 068271d1-af35-4866-abc2-9fdc017eba29))
     (pad "" smd custom (at 0.4875 -0.4875 90) (size 0.755518 0.755518) (layers "F.Paste")
-      (thermal_bridge_angle 90)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -2712,7 +2714,6 @@
           (width 0.305933) (fill yes))
       ) (tstamp 1b4c7d57-8044-4865-a444-3fd1bbac6a97))
     (pad "" smd custom (at 0.4875 0.4875 90) (size 0.755518 0.755518) (layers "F.Paste")
-      (thermal_bridge_angle 90)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -3143,6 +3144,11 @@
     (pad "21" thru_hole circle (at 1 1 270) (size 0.6 0.6) (drill 0.3) (layers "*.Cu")
       (net 8 "GND") (pinfunction "AGND") (pintype "power_in") (tstamp eaf876f2-0b6c-4cd9-a863-6915a10928cf))
     (model "${KICAD6_3DMODEL_DIR}/Package_CSP.3dshapes/LFCSP-20-1EP_4x4mm_P0.5mm_EP2.6x2.6mm.wrl"
+      (offset (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+    (model ":KICAD7_3DMODEL_DIR:Package_DFN_QFN.3dshapes/QFN-20-1EP_4x4mm_P0.5mm_EP2.5x2.5mm.wrl"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -4332,7 +4338,6 @@
     (fp_line (start 0.5 0.5) (end -0.5 0.5)
       (stroke (width 0.1) (type solid)) (layer "F.Fab") (tstamp c1796eda-5844-4919-9696-1abab6ae0517))
     (pad "" smd custom (at -0.43 -0.325 270) (size 0.148492 0.148492) (layers "F.Paste")
-      (thermal_bridge_angle 90)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -4346,7 +4351,6 @@
           (width 0) (fill yes))
       ) (tstamp 20d540e2-937e-4f39-a239-c40729d34ec3))
     (pad "" smd custom (at -0.43 -0.325 270) (size 0.148492 0.148492) (layers "F.Mask")
-      (thermal_bridge_angle 90)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -4360,7 +4364,6 @@
           (width 0) (fill yes))
       ) (tstamp 5a6a1429-2d6b-4e3f-852c-2466151ab491))
     (pad "" smd custom (at -0.43 0.325 270) (size 0.148492 0.148492) (layers "F.Paste")
-      (thermal_bridge_angle 90)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -4374,7 +4377,6 @@
           (width 0) (fill yes))
       ) (tstamp 20a2dfd9-1d02-4f6a-8767-ee394147cafb))
     (pad "" smd custom (at -0.43 0.325 270) (size 0.148492 0.148492) (layers "F.Mask")
-      (thermal_bridge_angle 90)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -4388,7 +4390,6 @@
           (width 0) (fill yes))
       ) (tstamp 75deac03-8dcb-43fe-bb93-7a630b997223))
     (pad "" smd custom (at 0.43 -0.325 270) (size 0.148492 0.148492) (layers "F.Paste")
-      (thermal_bridge_angle 90)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -4402,7 +4403,6 @@
           (width 0) (fill yes))
       ) (tstamp 608ac38d-702a-4014-99f7-498e072e160e))
     (pad "" smd custom (at 0.43 -0.325 270) (size 0.148492 0.148492) (layers "F.Mask")
-      (thermal_bridge_angle 90)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -4416,7 +4416,6 @@
           (width 0) (fill yes))
       ) (tstamp 46a2eb71-388d-4c17-a8a2-7ce304c28575))
     (pad "" smd custom (at 0.43 0.325 270) (size 0.148492 0.148492) (layers "F.Paste")
-      (thermal_bridge_angle 90)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -4430,7 +4429,6 @@
           (width 0) (fill yes))
       ) (tstamp a11be4cc-d837-46c5-ad12-c855c7feb180))
     (pad "" smd custom (at 0.43 0.325 270) (size 0.148492 0.148492) (layers "F.Mask")
-      (thermal_bridge_angle 90)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -4444,7 +4442,7 @@
           (width 0) (fill yes))
       ) (tstamp 30fb5bb9-af0b-4d0e-82c1-abc31b15cb74))
     (pad "1" smd custom (at -0.43 -0.325 270) (size 0.148492 0.148492) (layers "F.Cu")
-      (net 2 "/+3VA") (pinfunction "OUT") (pintype "power_out") (zone_connect 2) (thermal_bridge_angle 90)
+      (net 2 "/+3VA") (pinfunction "OUT") (pintype "power_out") (zone_connect 2)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -4458,7 +4456,7 @@
           (width 0) (fill yes))
       ) (tstamp db6ad737-2922-435a-9c73-0ae9b0849a5f))
     (pad "2" smd custom (at -0.43 0.325 270) (size 0.148492 0.148492) (layers "F.Cu")
-      (net 8 "GND") (pinfunction "GND") (pintype "power_in") (zone_connect 2) (thermal_bridge_angle 90)
+      (net 8 "GND") (pinfunction "GND") (pintype "power_in") (zone_connect 2)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -4472,7 +4470,7 @@
           (width 0) (fill yes))
       ) (tstamp a596801d-53b3-4fa6-b70d-2bd2a04383cc))
     (pad "3" smd custom (at 0.43 0.325 270) (size 0.148492 0.148492) (layers "F.Cu")
-      (net 62 "CCD_POWEREN") (pinfunction "EN") (pintype "input") (zone_connect 2) (thermal_bridge_angle 90)
+      (net 62 "CCD_POWEREN") (pinfunction "EN") (pintype "input") (zone_connect 2)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -4486,7 +4484,7 @@
           (width 0) (fill yes))
       ) (tstamp adc3ed25-47ec-42d4-b391-d52a9404f4ef))
     (pad "4" smd custom (at 0.43 -0.325 270) (size 0.148492 0.148492) (layers "F.Cu")
-      (net 7 "+SYS") (pinfunction "IN") (pintype "power_in") (zone_connect 2) (thermal_bridge_angle 90)
+      (net 7 "+SYS") (pinfunction "IN") (pintype "power_in") (zone_connect 2)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -4630,6 +4628,11 @@
     (pad "21" thru_hole circle (at 1 1) (size 0.6 0.6) (drill 0.3) (layers "*.Cu")
       (net 8 "GND") (pinfunction "AGND") (pintype "power_in") (tstamp 7737e5f2-85cb-4217-be8a-34b2e1ac086c))
     (model "${KICAD6_3DMODEL_DIR}/Package_CSP.3dshapes/LFCSP-20-1EP_4x4mm_P0.5mm_EP2.6x2.6mm.wrl"
+      (offset (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+    (model ":KICAD7_3DMODEL_DIR:Package_DFN_QFN.3dshapes/QFN-20-1EP_4x4mm_P0.5mm_EP2.5x2.5mm.wrl"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -4800,7 +4803,6 @@
     (fp_line (start 2 2) (end -2 2)
       (stroke (width 0.1) (type solid)) (layer "F.Fab") (tstamp a4f229f8-46fe-4387-a868-d730888e6d81))
     (pad "" smd custom (at -0.4875 -0.4875 90) (size 0.755518 0.755518) (layers "F.Paste")
-      (thermal_bridge_angle 90)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -4817,7 +4819,6 @@
           (width 0.305933) (fill yes))
       ) (tstamp 077fafd6-016b-4167-aa40-ddfe51e6a25c))
     (pad "" smd custom (at -0.4875 0.4875 90) (size 0.755518 0.755518) (layers "F.Paste")
-      (thermal_bridge_angle 90)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -4834,7 +4835,6 @@
           (width 0.305933) (fill yes))
       ) (tstamp 04dfb2ff-8915-42b5-a7ea-7a18b618e9a1))
     (pad "" smd custom (at 0.4875 -0.4875 90) (size 0.755518 0.755518) (layers "F.Paste")
-      (thermal_bridge_angle 90)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly
@@ -4851,7 +4851,6 @@
           (width 0.305933) (fill yes))
       ) (tstamp 2bb2d182-d61f-48fc-a29b-42ca1297123d))
     (pad "" smd custom (at 0.4875 0.4875 90) (size 0.755518 0.755518) (layers "F.Paste")
-      (thermal_bridge_angle 90)
       (options (clearance outline) (anchor circle))
       (primitives
         (gr_poly

@@ -698,7 +698,7 @@
       "idf": "",
       "netlist": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "PowerBoard.step",
       "vrml": ""
     },
     "page_layout_descr_file": ""
