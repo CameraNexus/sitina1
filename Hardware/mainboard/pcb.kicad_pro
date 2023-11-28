@@ -604,6 +604,10 @@
       {
         "netclass": "SDRAM_A",
         "pattern": "/ddr/SDRAM*"
+      },
+      {
+        "netclass": "USB",
+        "pattern": "*USB_D*"
       }
     ]
   },

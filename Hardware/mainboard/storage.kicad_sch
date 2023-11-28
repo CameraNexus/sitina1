@@ -475,6 +475,9 @@
     (uuid ea6deaeb-64f9-4046-ac85-34ca56721ca0)
   )
 
+  (no_connect (at 104.14 114.3) (uuid 293552f9-a3d3-49a8-961f-0c7709b17284))
+  (no_connect (at 68.58 114.3) (uuid 3288fdf9-d1b3-46a9-b789-7f6800807b56))
+
   (wire (pts (xy 101.6 116.84) (xy 104.14 116.84))
     (stroke (width 0) (type default))
     (uuid 003f1c7b-8182-4797-95c0-1331f4b658ec)
@@ -514,10 +517,6 @@
   (wire (pts (xy 210.82 109.22) (xy 215.9 109.22))
     (stroke (width 0) (type solid))
     (uuid 497180cb-3bdf-4bd6-af61-30079c87683b)
-  )
-  (wire (pts (xy 68.58 114.3) (xy 104.14 114.3))
-    (stroke (width 0) (type default))
-    (uuid 4f021c06-42b4-4dcc-8ecd-fe3487a38941)
   )
   (wire (pts (xy 200.66 116.84) (xy 198.12 116.84))
     (stroke (width 0) (type solid))
@@ -598,6 +597,11 @@
   (wire (pts (xy 101.6 76.2) (xy 101.6 99.06))
     (stroke (width 0) (type default))
     (uuid f8e142c9-7c8e-4354-88d8-3da2242cc099)
+  )
+
+  (text "Can't route CD pin :(" (at 71.12 115.57 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 7ddd114c-2d81-40f9-8606-23a8bf98cb37)
   )
 
   (global_label "QSPI_SS0" (shape input) (at 180.34 104.14 180) (fields_autoplaced)

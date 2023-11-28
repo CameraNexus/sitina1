@@ -1185,10 +1185,10 @@
     (property "Datasheet" "~" (at 66.04 111.76 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid b8cce7ee-2660-4389-8f72-738fa5f38f1a))
-    (pin "2" (uuid 0b4b7d10-1b23-49cb-a85f-f9433edae10e))
-    (pin "3" (uuid 95f0ba78-a718-4c0c-a67f-9c2f4b808806))
-    (pin "4" (uuid 7c5d2cf5-28c6-44db-a519-4f07e74c5cee))
+    (pin "1" (uuid 58f57f09-9347-4ab1-aa8f-76ae15368d7f))
+    (pin "2" (uuid ae0a423b-1eca-42b1-8ee7-c40c9e1d735a))
+    (pin "3" (uuid b6608861-945b-493c-8bcf-74ba184af96a))
+    (pin "4" (uuid 1b64f4a4-f10b-4cfd-ae1b-a743741310f2))
     (instances
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d1a413b"
@@ -1213,8 +1213,8 @@
     (property "Datasheet" "~" (at 88.9 124.46 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 92872c3c-2cee-4a6b-8f63-b41118f3fc8e))
-    (pin "2" (uuid f9c73411-9aee-409e-9c36-0b6290b1b951))
+    (pin "1" (uuid a42b0f12-82ca-469b-9e00-0615b8fbed9e))
+    (pin "2" (uuid e272a44c-89ed-4c02-a0de-969e1cad6933))
     (instances
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d1a413b"
@@ -1264,8 +1264,8 @@
     (property "Datasheet" "~" (at 76.2 124.46 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 3f85cf2d-3fe8-457b-bbaa-5c20f02db9d5))
-    (pin "2" (uuid 06cc275d-9140-4d96-a442-b9723ad7cb82))
+    (pin "1" (uuid edb0abcb-b7d8-446d-a073-5a6f4d6a9fe0))
+    (pin "2" (uuid 410112a9-7144-4cca-97f0-3310653ba555))
     (instances
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d1a413b"
@@ -1315,7 +1315,7 @@
     (property "Datasheet" "" (at 86.36 93.98 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid b6f2517f-6285-4b0a-85fe-917c848427b8))
+    (pin "1" (uuid 82f88580-8894-4a8e-8bf4-79fcbb7586b3))
     (instances
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d1a413b"
@@ -1340,8 +1340,8 @@
     (property "Datasheet" "~" (at 60.96 77.47 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 6b8c66e7-e38a-4dbd-aa29-b277426dd02b))
-    (pin "2" (uuid 38fe4ec9-390f-4262-b7af-c6c359f78db6))
+    (pin "1" (uuid 161fe559-bc60-475c-9345-b6eaac314553))
+    (pin "2" (uuid 03833c14-04c3-49d1-8625-b51baf51edc7))
     (instances
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d1a413b"
@@ -1407,12 +1407,12 @@
     (property "Datasheet" "https://www.st.com/resource/en/datasheet/usblc6-2.pdf" (at 91.44 74.93 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid e70aec8f-d3bc-49ea-a8e4-282666228d46))
-    (pin "2" (uuid 14dafc6a-bbed-461c-8651-ae2512332d23))
-    (pin "3" (uuid 7ec7320d-6614-4218-bd67-308bb313b9e0))
-    (pin "4" (uuid cbd3c36e-256f-4f07-893f-f219a5592f85))
-    (pin "5" (uuid 911e4647-e1d8-4e7f-b74e-954ca04432c3))
-    (pin "6" (uuid ae3bcf20-b873-4e75-8183-95b483feb2d1))
+    (pin "1" (uuid 4e32bfd2-d64b-4821-a7b7-e85d411f98cf))
+    (pin "2" (uuid 92cff9bf-a73a-4541-907c-18900b2f8739))
+    (pin "3" (uuid b66d5394-9184-4c4c-8a97-32189c069714))
+    (pin "4" (uuid 5b4b2a03-3053-41d5-96cc-7ac737d0f40f))
+    (pin "5" (uuid ec8fd512-1bed-4dce-816e-03c63069d217))
+    (pin "6" (uuid 4a899d9a-e090-43df-9bcd-517720ce8128))
     (instances
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d1a413b"
@@ -1463,7 +1463,7 @@
     (property "Datasheet" "" (at 88.9 133.35 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 5eeec2e0-b8bb-4cc3-b585-d6a651248e01))
+    (pin "1" (uuid 66d4f08c-f84a-4b8e-b60c-20b708474a95))
     (instances
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d1a413b"
@@ -1514,7 +1514,7 @@
     (property "Datasheet" "" (at 60.96 71.12 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid a12bbc16-2c62-47ef-a78d-eb34d83b6086))
+    (pin "1" (uuid 1dd0daa3-b55f-4d1c-b521-da56e645a7f6))
     (instances
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d1a413b"
@@ -1539,23 +1539,23 @@
     (property "Datasheet" "https://www.usb.org/sites/default/files/documents/usb_type-c.zip" (at 115.57 110.49 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "A1" (uuid 8479b704-340e-4974-bc95-47246fb3f6b5))
-    (pin "A12" (uuid 49605b88-f313-4706-b870-57533a7d5467))
-    (pin "A4" (uuid 5de64f86-df9c-4f84-b625-a0835c258f96))
-    (pin "A5" (uuid e70a3825-afc6-4fb6-96d7-8533b1a96fb9))
-    (pin "A6" (uuid c3f732b7-f794-44f9-a9f4-c7c08d3bf2df))
-    (pin "A7" (uuid 58e56336-de65-48a5-9736-90008ed63656))
-    (pin "A8" (uuid 3e543515-da4a-4ecd-ba7e-52c2b3f1f4ca))
-    (pin "A9" (uuid 01e43dba-96f8-4c8e-a253-26304185659d))
-    (pin "B1" (uuid bcee8752-3459-4b1e-a294-9750f73df87f))
-    (pin "B12" (uuid 247274e1-287c-4fbb-9027-a40afa586abb))
-    (pin "B4" (uuid f9bcdbd6-ced5-46b0-a47c-bbb85f06ef01))
-    (pin "B5" (uuid d9f4ccc7-7be2-487e-a53d-a7d5b17ccf52))
-    (pin "B6" (uuid 336d9dfd-882f-4e9b-b41a-30d439923638))
-    (pin "B7" (uuid b75545b0-12ab-49c4-aae8-a399f8da765c))
-    (pin "B8" (uuid 00126e36-0664-44e7-b587-a6c33664807e))
-    (pin "B9" (uuid 1b1265d2-bdbb-4048-95aa-2b27da6d8665))
-    (pin "S1" (uuid 52fa8fbf-623d-4a5e-a86b-420be441c5d2))
+    (pin "A1" (uuid f92828a2-4a0f-46bb-a272-de01493c9e93))
+    (pin "A12" (uuid 7af5dbbb-8c26-4618-bd99-3bf191c4553c))
+    (pin "A4" (uuid c5836716-da1f-458b-8dcc-0062eeac0736))
+    (pin "A5" (uuid 78cf7bfc-2bd3-43ed-9cf6-0ace6357c1f7))
+    (pin "A6" (uuid d4fb1c5c-e099-4b12-9d75-0c50b55cb180))
+    (pin "A7" (uuid 3ff36432-a432-4e0b-a4b7-0a4be7d33a90))
+    (pin "A8" (uuid 653bb750-9751-4519-8550-053a34c3b542))
+    (pin "A9" (uuid cb2539eb-597b-44fb-88fd-388d7bd6717a))
+    (pin "B1" (uuid 0ac1eb1a-f25c-4b99-9287-eca35eb0055b))
+    (pin "B12" (uuid f951776e-fbbe-4388-aa98-ed496d9e869b))
+    (pin "B4" (uuid 36eb34f7-28e3-44a9-95ce-90dc3157316f))
+    (pin "B5" (uuid 7976f04a-0131-41e8-a8e2-3432eb506667))
+    (pin "B6" (uuid 8153a3ee-ae46-4c2f-9d9b-64026fa67a80))
+    (pin "B7" (uuid cb3e21d3-6ef5-4da6-93d2-cc192f2f5af3))
+    (pin "B8" (uuid b8c1d0d8-dbc7-40ad-bb1d-4b30c5262621))
+    (pin "B9" (uuid 26573ad2-2391-4ba3-9612-f0ee2a176926))
+    (pin "S1" (uuid 5625b14e-8b4a-4587-9e3b-76bbe65332db))
     (instances
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d1a413b"
@@ -1656,8 +1656,8 @@
     (property "Datasheet" "~" (at 67.31 73.66 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 611034f5-6ec6-463d-af46-2f70288cbc85))
-    (pin "2" (uuid 95b3273e-c42f-4836-999e-a715aee2c47d))
+    (pin "1" (uuid 4ac84b37-0555-4574-86c4-13c9af26091d))
+    (pin "2" (uuid 9964a58b-ea6e-45b4-8881-29666f9ac079))
     (instances
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d1a413b"
@@ -1682,7 +1682,7 @@
     (property "Datasheet" "" (at 119.38 133.35 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 28190e51-33e5-4cfc-9fff-09a949ba0244))
+    (pin "1" (uuid 023edc13-87c2-494c-a6bf-0f87d464a195))
     (instances
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d1a413b"
@@ -1707,7 +1707,7 @@
     (property "Datasheet" "" (at 60.96 81.28 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 42ed33bc-61e6-4104-8f15-7815549391c2))
+    (pin "1" (uuid d3c52844-ec06-42ca-9fd0-4ddbe089573d))
     (instances
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d1a413b"
