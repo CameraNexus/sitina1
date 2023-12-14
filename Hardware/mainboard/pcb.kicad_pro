@@ -593,8 +593,10 @@
       "version": 3
     },
     "net_colors": {
+      "+1V0": "rgb(255, 44, 49)",
       "+1V8": "rgb(0, 132, 0)",
       "+3V3": "rgb(231, 219, 0)",
+      "GND": "rgb(0, 14, 255)",
       "IPSOUT": "rgb(255, 140, 25)",
       "Net-(U2E-RTC_XTALI)": "rgb(0, 194, 194)",
       "Net-(U2E-XTALO)": "rgb(255, 86, 136)"
@@ -607,7 +609,15 @@
       },
       {
         "netclass": "USB",
-        "pattern": "*USB_D*"
+        "pattern": "*USB*_D*"
+      },
+      {
+        "netclass": "DPI",
+        "pattern": "LCD*"
+      },
+      {
+        "netclass": "CSI",
+        "pattern": "CSI*"
       }
     ]
   },

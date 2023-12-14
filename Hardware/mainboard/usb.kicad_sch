@@ -1132,11 +1132,11 @@
     (uuid c613bdeb-b681-4371-88d4-9559882595cb)
   )
 
-  (label "OTG1_DP" (at 78.74 113.03 0) (fields_autoplaced)
+  (label "USB1_DP" (at 78.74 113.03 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 889e4c41-23b5-45ac-9c3e-afb398da4fbe)
   )
-  (label "OTG1_DN" (at 78.74 110.49 0) (fields_autoplaced)
+  (label "USB1_DN" (at 78.74 110.49 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid a370223c-8c30-4ad1-abf3-8c9b19b85641)
   )
