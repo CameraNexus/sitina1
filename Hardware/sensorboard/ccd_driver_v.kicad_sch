@@ -2327,7 +2327,7 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid e24af526-5e36-4ee7-8b05-6c700220856b)
   )
-  (label "V2S" (at 161.29 128.27 0) (fields_autoplaced)
+  (label "V1S" (at 161.29 128.27 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid fb78641d-1b0d-4068-8967-a8bc8a94ed08)
   )
