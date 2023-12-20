@@ -568,11 +568,11 @@
         )
       )
     )
-    (symbol "power:+3V3" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
+    (symbol "power:+3V0" (power) (pin_names (offset 0)) (in_bom yes) (on_board yes)
       (property "Reference" "#PWR" (at 0 -3.81 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "Value" "+3V3" (at 0 3.556 0)
+      (property "Value" "+3V0" (at 0 3.556 0)
         (effects (font (size 1.27 1.27)))
       )
       (property "Footprint" "" (at 0 0 0)
@@ -581,13 +581,13 @@
       (property "Datasheet" "" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "ki_keywords" "power-flag" (at 0 0 0)
+      (property "ki_keywords" "global power" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "ki_description" "Power symbol creates a global label with name \"+3V3\"" (at 0 0 0)
+      (property "ki_description" "Power symbol creates a global label with name \"+3V0\"" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (symbol "+3V3_0_1"
+      (symbol "+3V0_0_1"
         (polyline
           (pts
             (xy -0.762 1.27)
@@ -613,9 +613,9 @@
           (fill (type none))
         )
       )
-      (symbol "+3V3_1_1"
+      (symbol "+3V0_1_1"
         (pin power_in line (at 0 0 90) (length 0) hide
-          (name "+3V3" (effects (font (size 1.27 1.27))))
+          (name "+3V0" (effects (font (size 1.27 1.27))))
           (number "1" (effects (font (size 1.27 1.27))))
         )
       )
@@ -3501,6 +3501,34 @@
     )
   )
 
+  (symbol (lib_id "power:+3V0") (at 33.02 25.4 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 75f91814-e6bf-44c0-a171-2e3bcabc47c6)
+    (property "Reference" "#PWR0555" (at 33.02 29.21 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+3V0" (at 33.02 20.32 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 33.02 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 33.02 25.4 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid e6a9c39d-8b91-4699-bb16-f5e3e4a2b36b))
+    (instances
+      (project "pcb"
+        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/28025b55-6a64-43e1-9d20-34020d299147"
+          (reference "#PWR0555") (unit 1)
+        )
+        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
+          (reference "#PWR0600") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "power:-9V") (at 217.17 92.71 180) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 777298b1-c384-490b-9e8f-73702ccd33a8)
@@ -3711,31 +3739,6 @@
         )
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
           (reference "R548") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "power:+3V3") (at 33.02 25.4 0) (mirror y) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid 91c757f8-d257-4475-a8c6-3bfdc7f1d968)
-    (property "Reference" "#PWR0578" (at 33.02 29.21 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+3V3" (at 33.02 20.32 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 33.02 25.4 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 33.02 25.4 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 60e6ee7a-db7e-493a-8643-c750e9703b66))
-    (instances
-      (project "pcb"
-        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
-          (reference "#PWR0578") (unit 1)
         )
       )
     )
@@ -4040,24 +4043,27 @@
     )
   )
 
-  (symbol (lib_id "power:+3V3") (at 106.68 19.05 0) (unit 1)
+  (symbol (lib_id "power:+3V0") (at 106.68 154.94 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid acbd9953-c8c4-4f7a-b557-2ac4219e017c)
-    (property "Reference" "#PWR0598" (at 106.68 22.86 0)
+    (uuid aab309b9-524e-4123-a76a-9a2eb6b44a16)
+    (property "Reference" "#PWR0555" (at 106.68 158.75 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Value" "+3V3" (at 106.68 13.97 0)
+    (property "Value" "+3V0" (at 106.68 149.86 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "" (at 106.68 19.05 0)
+    (property "Footprint" "" (at 106.68 154.94 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "" (at 106.68 19.05 0)
+    (property "Datasheet" "" (at 106.68 154.94 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 9784806c-87d9-4d48-bc01-e037efcaff91))
+    (pin "1" (uuid 8a45fbd1-4469-4a44-89d0-73d99cd7351b))
     (instances
       (project "pcb"
+        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/28025b55-6a64-43e1-9d20-34020d299147"
+          (reference "#PWR0555") (unit 1)
+        )
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
           (reference "#PWR0598") (unit 1)
         )
@@ -4089,31 +4095,6 @@
         )
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
           (reference "R543") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "power:+3V3") (at 106.68 154.94 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid acfc78f2-0d0f-4295-b589-9a4b62447828)
-    (property "Reference" "#PWR0600" (at 106.68 158.75 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Value" "+3V3" (at 106.68 149.86 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "" (at 106.68 154.94 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "" (at 106.68 154.94 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid d2d43e0f-dbeb-441d-9a26-b73d10aad7d4))
-    (instances
-      (project "pcb"
-        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
-          (reference "#PWR0600") (unit 1)
         )
       )
     )
@@ -4440,6 +4421,34 @@
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
           (reference "#PWR0594") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:+3V0") (at 106.68 19.05 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid c130e00a-48c7-4e0f-9972-5270fc67efac)
+    (property "Reference" "#PWR0555" (at 106.68 22.86 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "+3V0" (at 106.68 13.97 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "" (at 106.68 19.05 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 106.68 19.05 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 2861ed39-c58e-4639-8aab-8db0d750548f))
+    (instances
+      (project "pcb"
+        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/28025b55-6a64-43e1-9d20-34020d299147"
+          (reference "#PWR0555") (unit 1)
+        )
+        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
+          (reference "#PWR0578") (unit 1)
         )
       )
     )

@@ -1410,13 +1410,6 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "DVSS" (shape passive) (at 172.72 138.43 270) (fields_autoplaced)
-    (effects (font (size 1.27 1.27)) (justify right))
-    (uuid d076452e-6256-42e1-b114-7642ae9cd4c7)
-    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 172.72 145.2719 90)
-      (effects (font (size 1.27 1.27)) (justify right) hide)
-    )
-  )
   (global_label "CSI_D13" (shape output) (at 170.18 91.44 180) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid d8b369c1-daa9-49b7-b72a-cc84c726e86d)
@@ -1940,6 +1933,34 @@
       (project "pcb"
         (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/28025b55-6a64-43e1-9d20-34020d299147"
           (reference "J502") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "power:GND") (at 172.72 138.43 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid ff764f50-c790-426b-9109-547b8585748b)
+    (property "Reference" "#PWR0531" (at 172.72 144.78 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Value" "GND" (at 172.847 141.6812 90)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "" (at 172.72 138.43 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 172.72 138.43 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 3644522f-1caa-4c6f-af27-354e950b4737))
+    (instances
+      (project "pcb"
+        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/bbc4a8ed-000d-45bd-b682-5f5fc521899f"
+          (reference "#PWR0531") (unit 1)
+        )
+        (path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/28025b55-6a64-43e1-9d20-34020d299147"
+          (reference "#PWR0653") (unit 1)
         )
       )
     )
