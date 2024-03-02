@@ -2,6 +2,7 @@
 *.bak
 *.dcm
 *.bck
+*.lck
 fp-*
 _autosave*
 *.kicad_pcb-bak
@@ -14,6 +15,15 @@ production/
 
 # Eclipse/ MCUXpresso files
 *.launch
+
+# SolidWorks files
+~$*
+
+# FreeCAD files
+*.FCBak
+
+# Typically, don't check in PDF
+*.pdf
 
 # Xilinx ISE files
 obj_dir/

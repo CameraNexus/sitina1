@@ -632,7 +632,7 @@
       "idf": "",
       "netlist": "",
       "specctra_dsn": "",
-      "step": "pcb.step",
+      "step": "sensorboard.step",
       "vrml": "pcb.wrl"
     },
     "page_layout_descr_file": ""
