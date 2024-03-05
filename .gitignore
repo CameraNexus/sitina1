@@ -12,6 +12,7 @@ gerber/
 pcb.step
 pcb.pdf
 production/
+pcb-backups/
 
 # Eclipse/ MCUXpresso files
 *.launch

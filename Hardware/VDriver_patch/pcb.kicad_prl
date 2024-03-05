@@ -72,19 +72,6 @@
     "version": 3
   },
   "project": {
-    "files": [
-      {
-        "name": "pcb.kicad_pcb",
-        "open": true,
-        "window": {
-          "display": 0,
-          "maximized": false,
-          "pos_x": 840,
-          "pos_y": 25,
-          "size_x": 840,
-          "size_y": 1025
-        }
-      }
-    ]
+    "files": []
   }
 }
