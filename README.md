@@ -8,15 +8,15 @@ The following are preliminary.
 
 ### Hardware
 
-- Processor: NXP i.MX RT1176 (1GHz Cortex-M7F)
-- RAM: 64MB 32-bit LPSDR SDRAM
+- Processor: NXP i.MX RT1052 (600MHz Cortex-M7F)
+- RAM: 32MB 16-bit LPSDR SDRAM
 - AFE: Analog Devices AD9990
 - Sensor: Kodak/ONsemi KAI-11000/KAI-11002M/CM
-- Screen: 4.0" 720x720 DSI TFT LCD
-- User Expansion:
+- Screen: 3.2" 480x480 High-Brightness DPI IPS LCD
+- External Ports:
   - SD slot (UHS-I, 104MB/s)
-  - USB Type-C (USB 2.0 HS, 480Mbps)
-  - USB Micro-B (USB serial debugging)
+  - USB Type-C 1 (USB 2.0 HS, 480Mbps)
+  - USB Type-C 2 (5V3A, power only)
   - Flash sync terminal
 
 ### Camera Features
@@ -26,7 +26,7 @@ The following are possible with hardware, but not necessarily supported by the c
 - Sensor Type: 35mm Interline CCD sensor
 - Sensor Size: 36.0 x 24.0 mm
 - Effective Pixels: 10.7MP
-- Lens Mount: Passive M mount
+- Lens Mount: Active E mount
 - Still Resolutions:
   - 4008x2672 10.7MP 3:2
   - 3563x2672 9.5MP 4:3 1.08X crop
@@ -46,7 +46,7 @@ The following are possible with hardware, but not necessarily supported by the c
 
 ## Status
 
-Harware R0.4 soldered and mostly working. R0.5 working in progress. See schematics for change logs.
+Hardware R0.6 tested and working. Harware R0.8 working in progress. See schematics for change logs.
 
 ## License
 
