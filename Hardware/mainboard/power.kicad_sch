@@ -4038,6 +4038,12 @@
 		(uuid "5a9cbc44-c081-4841-a03f-3ba648fc89e2")
 	)
 	(junction
+		(at 190.5 132.08)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "699a1771-9070-483a-b80d-a54f7aaa2fb1")
+	)
+	(junction
 		(at 60.96 55.88)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4344,6 +4350,10 @@
 		(uuid "f61a883c-30ec-4a7b-aa1d-876a0d70b562")
 	)
 	(no_connect
+		(at 71.12 78.74)
+		(uuid "553902ab-5c8a-4ae1-8b2a-1f0686302a13")
+	)
+	(no_connect
 		(at 71.12 81.28)
 		(uuid "a0637ce8-11f8-4f9a-ae05-337af107c7d7")
 	)
@@ -4474,6 +4484,16 @@
 			(type solid)
 		)
 		(uuid "09da1174-832c-4653-9d76-523581cdfc9c")
+	)
+	(wire
+		(pts
+			(xy 190.5 132.08) (xy 190.5 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0ac9b3d2-836b-475a-91b3-5cd987092c75")
 	)
 	(wire
 		(pts
@@ -5567,16 +5587,6 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 78.74) (xy 68.58 81.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9cc2fcd1-e10b-4ffe-b62e-0fc87b667ffb")
-	)
-	(wire
-		(pts
 			(xy 142.24 53.34) (xy 147.32 53.34)
 		)
 		(stroke
@@ -6327,16 +6337,6 @@
 	)
 	(wire
 		(pts
-			(xy 71.12 78.74) (xy 68.58 78.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e9fc00d0-1d31-4da8-a417-082304b8a048")
-	)
-	(wire
-		(pts
 			(xy 241.3 48.26) (xy 241.3 38.1)
 		)
 		(stroke
@@ -6803,26 +6803,6 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "DCDC_EN"
-		(shape output)
-		(at 68.58 81.28 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "fc3a2510-8b6b-4827-b935-8c3ba1dcb091")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at -2.54 -55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
 				(hide yes)
 			)
 		)
@@ -9626,6 +9606,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 190.5 142.24 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "74ab70fa-61c0-45c0-988b-d6299ed9b626")
+		(property "Reference" "#PWR029"
+			(at 190.5 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 190.5 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 190.5 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 190.5 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 190.5 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "5afd3838-7100-4e3b-8079-d2961a120cff")
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d4c99f9"
+					(reference "#PWR029")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R")
 		(at 226.06 120.65 180)
 		(unit 1)
@@ -11171,6 +11217,74 @@
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d4c99f9"
 					(reference "U10")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 190.5 138.43 0)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "a448bc90-539e-4c9c-b21d-5e75c2900e2f")
+		(property "Reference" "R36"
+			(at 186.69 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "10K"
+			(at 185.42 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 188.722 138.43 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 190.5 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 190.5 138.43 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a44fc217-aefc-4865-a451-64f87fe53297")
+		)
+		(pin "2"
+			(uuid "868fa396-c730-423c-94d0-f0022879308e")
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d4c99f9"
+					(reference "R36")
 					(unit 1)
 				)
 			)

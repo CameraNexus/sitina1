@@ -4246,7 +4246,7 @@
 		(uuid "daa71399-c58a-4caf-9187-b983ccc37a29")
 	)
 	(junction
-		(at 147.32 147.32)
+		(at 147.32 149.86)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "dae9eb28-fdb6-4f4c-bd88-afea769e702f")
@@ -4312,7 +4312,7 @@
 		(uuid "f0b17a3e-baf7-4906-b9ee-25f90fa98dfd")
 	)
 	(junction
-		(at 147.32 144.78)
+		(at 147.32 147.32)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f3b455fc-a8d3-4680-a226-04407502448d")
@@ -4381,7 +4381,7 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 144.78) (xy 147.32 147.32)
+			(xy 147.32 147.32) (xy 147.32 149.86)
 		)
 		(stroke
 			(width 0)
@@ -5251,7 +5251,7 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 147.32) (xy 147.32 149.86)
+			(xy 147.32 149.86) (xy 147.32 152.4)
 		)
 		(stroke
 			(width 0)
@@ -5451,7 +5451,7 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 149.86) (xy 149.86 149.86)
+			(xy 147.32 152.4) (xy 149.86 152.4)
 		)
 		(stroke
 			(width 0)
@@ -6911,6 +6911,16 @@
 	)
 	(wire
 		(pts
+			(xy 142.24 144.78) (xy 149.86 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "adf7aa46-313a-45ff-9b4a-51ccfaf6728a")
+	)
+	(wire
+		(pts
 			(xy 93.98 45.72) (xy 99.06 45.72)
 		)
 		(stroke
@@ -7371,7 +7381,7 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 147.32) (xy 149.86 147.32)
+			(xy 147.32 149.86) (xy 149.86 149.86)
 		)
 		(stroke
 			(width 0)
@@ -7461,7 +7471,7 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 144.78) (xy 149.86 144.78)
+			(xy 147.32 147.32) (xy 149.86 147.32)
 		)
 		(stroke
 			(width 0)
@@ -7661,7 +7671,7 @@
 	)
 	(wire
 		(pts
-			(xy 147.32 142.24) (xy 147.32 144.78)
+			(xy 147.32 139.7) (xy 147.32 147.32)
 		)
 		(stroke
 			(width 0)
@@ -8432,7 +8442,7 @@
 	)
 	(global_label "CCD_POWEREN"
 		(shape input)
-		(at 149.86 152.4 180)
+		(at 142.24 144.78 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -8442,7 +8452,7 @@
 		)
 		(uuid "f24e1f30-c11d-4851-8f21-7187d03d4ddb")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 133.5283 152.3206 0)
+			(at 125.9083 144.7006 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11831,8 +11841,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_02x04_Odd_Even")
-		(at 157.48 147.32 0)
-		(mirror y)
+		(at 154.94 147.32 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11856,7 +11865,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinSocket_2.00mm:PinSocket_2x04_P2.00mm_Vertical_SMD"
-			(at 157.48 147.32 0)
+			(at 154.94 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11865,7 +11874,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 157.48 147.32 0)
+			(at 154.94 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11874,7 +11883,7 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x04, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 157.48 147.32 0)
+			(at 154.94 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13132,7 +13141,7 @@
 	)
 	(symbol
 		(lib_id "symbols:+SYS")
-		(at 147.32 142.24 0)
+		(at 147.32 139.7 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13140,7 +13149,7 @@
 		(dnp no)
 		(uuid "6972726f-4c9e-49ed-8676-fe5e082d68d9")
 		(property "Reference" "#PWR045"
-			(at 147.32 146.05 0)
+			(at 147.32 143.51 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13149,7 +13158,7 @@
 			)
 		)
 		(property "Value" "+SYS"
-			(at 147.32 138.43 0)
+			(at 147.32 135.89 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13157,7 +13166,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 147.32 142.24 0)
+			(at 147.32 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13166,7 +13175,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 147.32 142.24 0)
+			(at 147.32 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13175,7 +13184,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 147.32 142.24 0)
+			(at 147.32 139.7 0)
 			(effects
 				(font
 					(size 1.27 1.27)

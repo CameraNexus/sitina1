@@ -8,7 +8,7 @@
 		(title "Sitina 1 Power Plan")
 		(date "2023-11-24")
 		(rev "R0.1")
-		(company "Copyright 2023 Anhang Li")
+		(company "Copyright 2024 Wenting Z, Anhang Li")
 		(comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
 		(comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
 		(comment 4 "This source describes Open Hardware and is licensed under the CERN-OHL-P v2.")
@@ -226,7 +226,7 @@
 	)
 	(polyline
 		(pts
-			(xy 200.66 54.61) (xy 210.82 54.61)
+			(xy 182.88 54.61) (xy 210.82 54.61)
 		)
 		(stroke
 			(width 0)
@@ -373,16 +373,6 @@
 			(type default)
 		)
 		(uuid "1d06e30d-5355-4ee9-b59c-f23668691d8b")
-	)
-	(polyline
-		(pts
-			(xy 191.77 53.34) (xy 193.04 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1d8b9513-fa30-4cd2-b6fb-39c722111a05")
 	)
 	(polyline
 		(pts
@@ -653,16 +643,6 @@
 			(type default)
 		)
 		(uuid "39a7dc97-f9e5-44d3-9083-14c6bba872a0")
-	)
-	(polyline
-		(pts
-			(xy 191.77 55.88) (xy 193.04 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3e5ab87a-91a4-4abe-97e8-a0b254bfb737")
 	)
 	(polyline
 		(pts
@@ -1036,26 +1016,6 @@
 	)
 	(polyline
 		(pts
-			(xy 182.88 54.61) (xy 193.04 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "63a2680a-4547-495a-9d79-5db237d846cb")
-	)
-	(polyline
-		(pts
-			(xy 20.32 85.09) (xy 26.67 85.09)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "63f0d67c-cfd3-4d63-86bd-15e84c9a69d0")
-	)
-	(polyline
-		(pts
 			(xy 184.15 110.49) (xy 185.42 111.76)
 		)
 		(stroke
@@ -1303,6 +1263,16 @@
 			(type default)
 		)
 		(uuid "7d01489a-f2f0-478f-880a-5f1167744e37")
+	)
+	(polyline
+		(pts
+			(xy 19.05 85.09) (xy 26.67 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7f71345f-712e-4e5e-a2d5-1b54bfeff8ef")
 	)
 	(polyline
 		(pts
@@ -2706,7 +2676,7 @@
 	)
 	(polyline
 		(pts
-			(xy 20.32 63.5) (xy 20.32 85.09)
+			(xy 20.32 63.5) (xy 20.32 77.47)
 		)
 		(stroke
 			(width 0)
@@ -3816,30 +3786,6 @@
 		)
 		(uuid d7eb9232-db63-4751-9d2a-fe95d1c09673)
 	)
-	(circle
-		(center 20.32 85.09)
-		(radius 1.27)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(fill
-			(type none)
-		)
-		(uuid d98ac905-d457-4252-81ab-27c0f3a9c56d)
-	)
-	(rectangle
-		(start 193.04 53.34)
-		(end 200.66 55.88)
-		(stroke
-			(width 0.3)
-			(type default)
-		)
-		(fill
-			(type none)
-		)
-		(uuid dae5a363-3abe-4253-b497-759bda4b19b6)
-	)
 	(rectangle
 		(start 26.67 82.55)
 		(end 46.99 87.63)
@@ -3950,18 +3896,6 @@
 			(type none)
 		)
 		(uuid f1fb22b3-9a55-4841-bb39-1021c00b9576)
-	)
-	(circle
-		(center 20.32 77.47)
-		(radius 1.27)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(fill
-			(type none)
-		)
-		(uuid f51857f9-effb-4c1d-8a7f-2b3a1aa71d6f)
 	)
 	(rectangle
 		(start 210.82 151.13)
@@ -4229,17 +4163,6 @@
 			(justify left bottom)
 		)
 		(uuid "11dfed3e-4117-4697-a467-d64aa4ec9959")
-	)
-	(text "-3.3V"
-		(exclude_from_sim no)
-		(at 185.42 54.61 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "127d5fcb-ef69-4ad4-aa4c-e4478c79ba6f")
 	)
 	(text "1EDN7550B"
 		(exclude_from_sim no)
@@ -4865,17 +4788,6 @@
 		)
 		(uuid "61ba923f-f219-4dc4-b02b-a3ad1747eaae")
 	)
-	(text "RDIV"
-		(exclude_from_sim no)
-		(at 194.31 55.88 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "630ff431-2322-4e4f-a2b3-e1e2cd530668")
-	)
 	(text "IO"
 		(exclude_from_sim no)
 		(at 64.77 106.68 0)
@@ -5234,6 +5146,17 @@
 			(justify left bottom)
 		)
 		(uuid "91166105-6fdf-4d31-bd70-ce21969871e5")
+	)
+	(text "+3V3"
+		(exclude_from_sim no)
+		(at 19.05 85.09 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "91ae968c-0aef-44e6-b798-11703b2aa608")
 	)
 	(text "PULSE"
 		(exclude_from_sim no)
