@@ -11856,7 +11856,7 @@
 				)
 			)
 		)
-		(property "Value" "Conn_02x04_Odd_Even"
+		(property "Value" "FH-00176"
 			(at 156.21 140.97 0)
 			(effects
 				(font
