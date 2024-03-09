@@ -5,18 +5,18 @@
 	(uuid "ba41827b-f176-424d-b6d5-0b0e1ddda097")
 	(paper "A4")
 	(title_block
-		(title "Sitina 1 Mainboard")
-		(date "2023-03-16")
-		(rev "R0.6")
-		(company "Copyright 2023 Wenting Zhang")
+		(title "Sitina 1 IO Board")
+		(date "2024-03-08")
+		(rev "R0.9")
+		(company "Copyright 2024 Wenting Zhang, Anhang Li")
 		(comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
 		(comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
 		(comment 4 "This source describes Open Hardware and is licensed under the CERN-OHL-P v2.")
 	)
 	(lib_symbols)
-	(text "9"
+	(text "5"
 		(exclude_from_sim no)
-		(at 33.02 116.84 0)
+		(at 33.02 76.2 0)
 		(effects
 			(font
 				(size 2.54 2.54)
@@ -25,29 +25,7 @@
 		)
 		(uuid "01310b87-63fd-4f89-87c6-a2e2a1b33cca")
 	)
-	(text "3"
-		(exclude_from_sim no)
-		(at 33.02 55.88 0)
-		(effects
-			(font
-				(size 2.54 2.54)
-			)
-			(justify left bottom)
-		)
-		(uuid "08d5033f-4d30-4afb-b90b-84e65610bec5")
-	)
-	(text "Buttons"
-		(exclude_from_sim no)
-		(at 43.18 76.2 0)
-		(effects
-			(font
-				(size 2.54 2.54)
-			)
-			(justify left bottom)
-		)
-		(uuid "0eb1c1c0-4518-4b4c-8736-5100855a9c52")
-	)
-	(text "CPU"
+	(text "CCD Power Supply"
 		(exclude_from_sim no)
 		(at 43.18 55.88 0)
 		(effects
@@ -56,16 +34,38 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "18a65a78-2495-4fe9-a2d0-6e02e65f36d8")
+		(uuid "0804db26-524f-47c0-b3d2-ec91583aa3c3")
 	)
-	(text "0.8 2024-03"
+	(text "Power Plan"
 		(exclude_from_sim no)
-		(at 127 124.46 0)
+		(at 43.18 116.84 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "19fdd026-4a2d-4a04-8b1c-dee02d16b1d5")
+	)
+	(text "A1"
+		(exclude_from_sim no)
+		(at 33.02 116.84 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "1ac9fdaf-8b29-4ea6-a283-3053981e2a28")
+	)
+	(text "0.8 2024-01"
+		(exclude_from_sim no)
+		(at 127 121.92 0)
 		(effects
 			(font
 				(size 2 2)
 			)
-			(justify left bottom)
+			(justify left top)
 		)
 		(uuid "1d14d575-2490-4217-8b41-aafa85e110fb")
 	)
@@ -80,7 +80,7 @@
 		)
 		(uuid "1f13b7bb-c561-4590-b2d7-6456e47f3509")
 	)
-	(text "Power Supply"
+	(text "System Power Supply"
 		(exclude_from_sim no)
 		(at 43.18 45.72 0)
 		(effects
@@ -126,14 +126,14 @@
 		)
 		(uuid "3fe83452-8f35-4e46-8007-249a8eed789b")
 	)
-	(text "1. Add fan speed control\n2. Add active lens contact\n3. Add flash sync port\n4. Allow tripod mount\n5. Revise power supply design"
+	(text "1. Add fan speed control\n2. Add active lens contact\n3. Add flash sync port\n4. Allow tripod mount\n5. Revise power supply design\n6. Change connector type"
 		(exclude_from_sim no)
-		(at 149.86 137.16 0)
+		(at 149.86 121.92 0)
 		(effects
 			(font
 				(size 2 2)
 			)
-			(justify left bottom)
+			(justify left top)
 		)
 		(uuid "43da1f96-74a6-449f-86f0-8c0ecdb41bd1")
 	)
@@ -161,18 +161,18 @@
 	)
 	(text "1. Switch back to iMXRT1052\n2. New board shape\n3. Use 3.4\" LCD instead of 4\"\n4. Split into 3 boards (MB, PB, SB)\n5. Use individual MOSFETs for V-drivers"
 		(exclude_from_sim no)
-		(at 149.86 120.904 0)
+		(at 149.86 105.41 0)
 		(effects
 			(font
 				(size 2 2)
 			)
-			(justify left bottom)
+			(justify left top)
 		)
 		(uuid "508f1f71-34ed-421f-b539-2f5e65eadedb")
 	)
 	(text "Microcontroller"
 		(exclude_from_sim no)
-		(at 43.18 127 0)
+		(at 43.18 66.04 0)
 		(effects
 			(font
 				(size 2.54 2.54)
@@ -192,6 +192,17 @@
 		)
 		(uuid "69967e43-1c12-4c14-9657-453ca7ddd2d1")
 	)
+	(text "1. Combine MB and PB into IOB\n2. Switch to Zynq 7010 (AGAIN?)\n3. User reactive CCD driver\n4. Use FPGA for timing gen\n5. Remove USB data port"
+		(exclude_from_sim no)
+		(at 149.86 157.48 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "71d97363-b9e6-448c-88d1-a14eafd1978d")
+	)
 	(text "Rev Date      Description "
 		(exclude_from_sim no)
 		(at 127 41.91 0)
@@ -205,12 +216,12 @@
 	)
 	(text "0.7 2023-08"
 		(exclude_from_sim no)
-		(at 127 107.95 0)
+		(at 127 105.41 0)
 		(effects
 			(font
 				(size 2 2)
 			)
-			(justify left bottom)
+			(justify left top)
 		)
 		(uuid "844c6b63-e9d6-48fe-879c-a0eaac14627e")
 	)
@@ -258,6 +269,17 @@
 		)
 		(uuid "9ca56caf-cb53-4240-b60e-972458dbbc8f")
 	)
+	(text "3"
+		(exclude_from_sim no)
+		(at 33.02 55.88 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "a2f32006-294e-4058-81f4-301d71167a06")
+	)
 	(text "Storage"
 		(exclude_from_sim no)
 		(at 43.18 86.36 0)
@@ -280,7 +302,7 @@
 		)
 		(uuid "ae9d795a-cb82-40f8-9c6a-32629c17c33b")
 	)
-	(text "1. Fix AD9990 TEST pin assignment\n2. Minor bug fixes for driver\n3. Fix MPU power supply"
+	(text "1. Fix AD9990 TEST pin connection\n2. Minor bug fixes for driver\n3. Fix MPU power supply"
 		(exclude_from_sim no)
 		(at 149.86 67.31 0)
 		(effects
@@ -302,17 +324,6 @@
 		)
 		(uuid "bdc0dd10-84f5-438d-8d2b-c100a965af49")
 	)
-	(text "5"
-		(exclude_from_sim no)
-		(at 33.02 76.2 0)
-		(effects
-			(font
-				(size 2.54 2.54)
-			)
-			(justify left bottom)
-		)
-		(uuid "c2610333-5f8e-4ac0-98af-8c4fba9f3260")
-	)
 	(text "8"
 		(exclude_from_sim no)
 		(at 33.02 106.68 0)
@@ -324,17 +335,6 @@
 		)
 		(uuid "c527fb06-e48a-4daa-a001-77304521682e")
 	)
-	(text "4"
-		(exclude_from_sim no)
-		(at 33.02 66.04 0)
-		(effects
-			(font
-				(size 2.54 2.54)
-			)
-			(justify left bottom)
-		)
-		(uuid "c8fe0719-177a-4751-bbb9-2c65b075ea36")
-	)
 	(text "1. Redesign H/V driver (again)"
 		(exclude_from_sim no)
 		(at 149.86 71.12 0)
@@ -345,17 +345,6 @@
 			(justify left bottom)
 		)
 		(uuid "d18af7c1-3bb0-4251-b51d-46399d12b5e5")
-	)
-	(text "SDRAM"
-		(exclude_from_sim no)
-		(at 43.18 66.04 0)
-		(effects
-			(font
-				(size 2.54 2.54)
-			)
-			(justify left bottom)
-		)
-		(uuid "d1c12207-b858-4dbf-9fcc-3c8778aeac35")
 	)
 	(text "Revision History"
 		(exclude_from_sim no)
@@ -370,9 +359,9 @@
 		)
 		(uuid "d7e9a161-19c2-47a2-90ea-16aaa3a46b62")
 	)
-	(text "10"
+	(text "4"
 		(exclude_from_sim no)
-		(at 33.02 127 0)
+		(at 33.02 66.04 0)
 		(effects
 			(font
 				(size 2.54 2.54)
@@ -380,6 +369,17 @@
 			(justify left bottom)
 		)
 		(uuid "db502d30-44f7-4a74-b829-9b6137b20bee")
+	)
+	(text "0.9 2024-03"
+		(exclude_from_sim no)
+		(at 127 144.78 0)
+		(effects
+			(font
+				(size 2 2)
+			)
+			(justify left bottom)
+		)
+		(uuid "ddaaa947-fb24-40c0-b5e5-d2e37bd7ab69")
 	)
 	(text "1. Switch from iMXRT1052 to iMX6ULL\n2. Use 4\" 720x720 LCD instead\n3. Add 100M ethernet\n4. Redesigned CCD power supply\n5. Bug fixes for driver level-shifter"
 		(exclude_from_sim no)
@@ -416,7 +416,7 @@
 	)
 	(text "Connectors"
 		(exclude_from_sim no)
-		(at 43.18 116.84 0)
+		(at 43.18 76.2 0)
 		(effects
 			(font
 				(size 2.54 2.54)
@@ -435,43 +435,6 @@
 			(justify left bottom)
 		)
 		(uuid "fba5446f-0d2c-4c28-ae6d-1ca8b16dbe96")
-	)
-	(sheet
-		(at 40.64 50.8)
-		(size 73.66 5.08)
-		(stroke
-			(width 0)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0.0000)
-		)
-		(uuid "00000000-0000-0000-0000-00005d180a01")
-		(property "Sheetname" "cpu"
-			(at 40.64 50.1645 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "cpu.kicad_sch"
-			(at 40.64 56.3885 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(instances
-			(project "pcb"
-				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
-					(page "3")
-				)
-			)
-		)
 	)
 	(sheet
 		(at 40.64 101.6)
@@ -622,44 +585,7 @@
 		)
 	)
 	(sheet
-		(at 40.64 60.96)
-		(size 73.66 5.08)
-		(stroke
-			(width 0)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0.0000)
-		)
-		(uuid "00000000-0000-0000-0000-00005eff0efc")
-		(property "Sheetname" "ddr"
-			(at 40.64 60.3245 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "ddr.kicad_sch"
-			(at 40.64 66.5485 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(instances
-			(project "pcb"
-				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
-					(page "4")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 40.64 111.76)
+		(at 40.64 71.12)
 		(size 73.66 5.08)
 		(fields_autoplaced yes)
 		(stroke
@@ -671,44 +597,6 @@
 		)
 		(uuid "276f6775-fa51-456c-9efd-4a3857d51911")
 		(property "Sheetname" "connectors"
-			(at 40.64 111.0484 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left bottom)
-			)
-		)
-		(property "Sheetfile" "connectors.kicad_sch"
-			(at 40.64 117.4246 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left top)
-			)
-		)
-		(instances
-			(project "pcb"
-				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
-					(page "9")
-				)
-			)
-		)
-	)
-	(sheet
-		(at 40.64 71.12)
-		(size 73.66 5.08)
-		(fields_autoplaced yes)
-		(stroke
-			(width 0.1524)
-			(type solid)
-		)
-		(fill
-			(color 0 0 0 0.0000)
-		)
-		(uuid "6467a980-c5f4-47d1-a664-5a6e7a959891")
-		(property "Sheetname" "button"
 			(at 40.64 70.4084 0)
 			(effects
 				(font
@@ -717,7 +605,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Sheetfile" "button.kicad_sch"
+		(property "Sheetfile" "connectors.kicad_sch"
 			(at 40.64 76.7846 0)
 			(effects
 				(font
@@ -735,7 +623,83 @@
 		)
 	)
 	(sheet
-		(at 40.64 121.92)
+		(at 40.64 111.76)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "29701ff7-982b-4d2f-bdf1-0ba214ff9cfa")
+		(property "Sheetname" "power_plan"
+			(at 40.64 111.0484 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "power_plan.kicad_sch"
+			(at 40.64 117.4246 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "9")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 50.8)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "6fdeef19-357a-4649-9a2f-ba61e11fd25a")
+		(property "Sheetname" "ccd_power"
+			(at 40.64 50.0884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "ccd_power.kicad_sch"
+			(at 40.64 56.4646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 60.96)
 		(size 73.66 5.08)
 		(fields_autoplaced yes)
 		(stroke
@@ -747,7 +711,7 @@
 		)
 		(uuid "b61872a6-746d-4ff9-af68-9ad658cb2408")
 		(property "Sheetname" "mcu"
-			(at 40.64 121.2084 0)
+			(at 40.64 60.2484 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -756,7 +720,7 @@
 			)
 		)
 		(property "Sheetfile" "mcu.kicad_sch"
-			(at 40.64 127.5846 0)
+			(at 40.64 66.6246 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -767,7 +731,7 @@
 		(instances
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
-					(page "11")
+					(page "4")
 				)
 			)
 		)

@@ -5,10 +5,10 @@
 	(uuid "e77fc9cf-1532-4bec-bda4-573fd1547027")
 	(paper "A4")
 	(title_block
-		(title "Sitina 1 Mainboard")
-		(date "2023-03-16")
-		(rev "R0.6")
-		(company "Copyright 2023 Wenting Zhang")
+		(title "Sitina 1 IO Board")
+		(date "2024-03-08")
+		(rev "R0.9")
+		(company "Copyright 2024 Wenting Zhang, Anhang Li")
 		(comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
 		(comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
 		(comment 4 "This source describes Open Hardware and is licensed under the CERN-OHL-P v2.")
@@ -1295,10 +1295,6 @@
 		(at 104.14 114.3)
 		(uuid "293552f9-a3d3-49a8-961f-0c7709b17284")
 	)
-	(no_connect
-		(at 68.58 114.3)
-		(uuid "3288fdf9-d1b3-46a9-b789-7f6800807b56")
-	)
 	(wire
 		(pts
 			(xy 101.6 116.84) (xy 104.14 116.84)
@@ -1599,17 +1595,6 @@
 		)
 		(uuid "f8e142c9-7c8e-4354-88d8-3da2242cc099")
 	)
-	(text "Can't route CD pin :("
-		(exclude_from_sim no)
-		(at 71.12 115.57 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "7ddd114c-2d81-40f9-8606-23a8bf98cb37")
-	)
 	(global_label "QSPI_SS0"
 		(shape input)
 		(at 180.34 104.14 180)
@@ -1676,7 +1661,7 @@
 			)
 		)
 	)
-	(global_label "SD1_DATA2"
+	(global_label "SD_DATA2"
 		(shape bidirectional)
 		(at 68.58 111.76 180)
 		(fields_autoplaced yes)
@@ -1688,7 +1673,7 @@
 		)
 		(uuid "593da186-a639-4405-b717-a6bb927961a0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 55.8859 111.6806 0)
+			(at 55.4123 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1742,7 +1727,7 @@
 			)
 		)
 	)
-	(global_label "SD1_DATA0"
+	(global_label "SD_DATA0"
 		(shape bidirectional)
 		(at 68.58 106.68 180)
 		(fields_autoplaced yes)
@@ -1754,29 +1739,7 @@
 		)
 		(uuid "84c579d9-bbb5-45ec-b2e1-6b66ff82255d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 55.8859 106.6006 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "SD1_CD"
-		(shape output)
-		(at 68.58 114.3 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "8b2b55e4-9f38-405f-8439-484bba5b31ca")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 58.3031 114.3 0)
+			(at 55.4123 106.68 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1808,7 +1771,7 @@
 			)
 		)
 	)
-	(global_label "SD1_DATA3"
+	(global_label "SD_DATA3"
 		(shape bidirectional)
 		(at 68.58 93.98 180)
 		(fields_autoplaced yes)
@@ -1820,7 +1783,7 @@
 		)
 		(uuid "b5d725ad-f53f-4a32-b0b2-0d28858ce812")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 55.8859 93.9006 0)
+			(at 55.4123 93.98 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1830,7 +1793,7 @@
 			)
 		)
 	)
-	(global_label "SD1_DATA1"
+	(global_label "SD_DATA1"
 		(shape bidirectional)
 		(at 68.58 109.22 180)
 		(fields_autoplaced yes)
@@ -1842,7 +1805,7 @@
 		)
 		(uuid "e0f15c5f-c869-4ff9-93b7-079b5a53a222")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 55.8859 109.1406 0)
+			(at 55.4123 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1852,7 +1815,7 @@
 			)
 		)
 	)
-	(global_label "SD1_CLK"
+	(global_label "SD_CLK"
 		(shape input)
 		(at 68.58 104.14 180)
 		(fields_autoplaced yes)
@@ -1864,7 +1827,7 @@
 		)
 		(uuid "ee3b8051-34ca-41b9-a1cf-cc0705dbf69f")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 57.9421 104.0606 0)
+			(at 58.4845 104.14 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1874,7 +1837,7 @@
 			)
 		)
 	)
-	(global_label "SD1_CMD"
+	(global_label "SD_CMD"
 		(shape input)
 		(at 68.58 96.52 180)
 		(fields_autoplaced yes)
@@ -1886,7 +1849,7 @@
 		)
 		(uuid "f5e0bb2d-a3d7-41e1-805b-704d24777fc3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 57.5188 96.4406 0)
+			(at 58.0612 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)

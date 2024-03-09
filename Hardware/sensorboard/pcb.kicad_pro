@@ -191,6 +191,7 @@
         0.15,
         0.2,
         0.3,
+        0.4,
         0.5,
         0.6,
         1.0,
@@ -234,7 +235,7 @@
           "drill": 0.0
         },
         {
-          "diameter": 0.46,
+          "diameter": 0.45,
           "drill": 0.3
         },
         {
@@ -843,6 +844,18 @@
     [
       "d386a9bf-0103-410c-b6e1-cdc61e904cc1",
       "ccd_driver_v"
+    ],
+    [
+      "b64fe68d-aec8-4292-896e-119ca6ece6c8",
+      "fpga_config"
+    ],
+    [
+      "cbfc77f8-d1e2-4799-a485-39d64530b305",
+      "fpga_ddr"
+    ],
+    [
+      "c8f749b7-cbde-4482-9507-8dea52b97a2d",
+      "fpga_io"
     ]
   ],
   "text_variables": {}

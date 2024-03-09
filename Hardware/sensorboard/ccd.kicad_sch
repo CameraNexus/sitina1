@@ -466,6 +466,231 @@
 				)
 			)
 		)
+		(symbol "Sensor_Temperature:TMP1075DGK"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -6.35 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "TMP1075DGK"
+				(at 6.35 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Package_SO:VSSOP-8_3.0x3.0mm_P0.65mm"
+				(at 0 -6.985 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.ti.com/lit/gpn/tmp1075"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "I2C-bus digital temperature sensor and thermal watchdog, VSSOP-8"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "temperature sensor I2C single channel"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "VSSOP*3.0x3.0mm*P0.65mm*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "TMP1075DGK_0_1"
+				(rectangle
+					(start -7.62 5.08)
+					(end 7.62 -5.08)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "TMP1075DGK_1_1"
+				(pin bidirectional line
+					(at 10.16 2.54 180)
+					(length 2.54)
+					(name "SDA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 10.16 0 180)
+					(length 2.54)
+					(name "SCL"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 -2.54 180)
+					(length 2.54)
+					(name "ALERT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -7.62 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 -2.54 0)
+					(length 2.54)
+					(name "A2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 0 0)
+					(length 2.54)
+					(name "A1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 2.54 0)
+					(length 2.54)
+					(name "A0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 7.62 270)
+					(length 2.54)
+					(name "V+"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Sitina:KAI-1100x"
 			(pin_names
 				(offset 1.016)
@@ -1287,6 +1512,126 @@
 				)
 			)
 		)
+		(symbol "power:+3V3"
+			(power)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "#PWR"
+				(at 0 -3.81 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Value" "+3V3"
+				(at 0 3.556 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Power symbol creates a global label with name \"+3V3\""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "+3V3_0_1"
+				(polyline
+					(pts
+						(xy -0.762 1.27) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 2.54) (xy 0.762 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "+3V3_1_1"
+				(pin power_in line
+					(at 0 0 90)
+					(length 0) hide
+					(name "+3V3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "power:-9V"
 			(power)
 			(pin_names
@@ -1878,6 +2223,12 @@
 		(uuid "03580eda-9900-4478-98ab-a752aaf62723")
 	)
 	(junction
+		(at 35.56 134.62)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0cde2a10-6f82-4f6e-96b4-f0123c185c02")
+	)
+	(junction
 		(at 190.5 132.08)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -1908,6 +2259,12 @@
 		(uuid "2d6d43d0-c4e7-46a3-9764-249f8cc124a4")
 	)
 	(junction
+		(at 45.72 142.24)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3402b5d8-cdf6-4b3d-8b7b-52f9258ff2c1")
+	)
+	(junction
 		(at 162.56 78.74)
 		(diameter 0.9144)
 		(color 0 0 0 0)
@@ -1930,6 +2287,12 @@
 		(diameter 0.9144)
 		(color 0 0 0 0)
 		(uuid "737c2e85-62e8-4e58-8cba-72b0bbb8474c")
+	)
+	(junction
+		(at 35.56 137.16)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7f48b76b-5bc2-4deb-8c71-4840b996d41d")
 	)
 	(junction
 		(at 36.83 69.85)
@@ -2051,6 +2414,10 @@
 		(color 0 0 0 0)
 		(uuid "ffd5e706-755b-4c02-b12e-bfd9c27b9cb9")
 	)
+	(no_connect
+		(at 55.88 137.16)
+		(uuid "1aee1f42-7abe-4e97-af40-136b452969ba")
+	)
 	(wire
 		(pts
 			(xy 157.48 78.74) (xy 154.94 78.74)
@@ -2120,6 +2487,16 @@
 			(type default)
 		)
 		(uuid "0a99e8bf-e70a-4a07-9b7f-3e29da71b151")
+	)
+	(wire
+		(pts
+			(xy 35.56 134.62) (xy 35.56 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0b4c9647-c35e-4bce-b1d7-f7a91a917dec")
 	)
 	(wire
 		(pts
@@ -2593,6 +2970,16 @@
 	)
 	(wire
 		(pts
+			(xy 35.56 137.16) (xy 35.56 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "666ce47b-a0e2-40f9-8a48-472b5cf2c845")
+	)
+	(wire
+		(pts
 			(xy 49.53 80.01) (xy 49.53 77.47)
 		)
 		(stroke
@@ -2600,6 +2987,16 @@
 			(type solid)
 		)
 		(uuid "672fcc46-bcbf-4a96-a57b-f01afd0149d9")
+	)
+	(wire
+		(pts
+			(xy 35.56 142.24) (xy 45.72 142.24)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "699b1839-18b0-400d-8fe4-fa3a8dbc5e36")
 	)
 	(wire
 		(pts
@@ -3023,6 +3420,16 @@
 	)
 	(wire
 		(pts
+			(xy 35.56 132.08) (xy 35.56 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c3ac43a7-4100-4202-8712-c68273b4d6e4")
+	)
+	(wire
+		(pts
 			(xy 49.53 77.47) (xy 87.63 77.47)
 		)
 		(stroke
@@ -3123,6 +3530,16 @@
 	)
 	(wire
 		(pts
+			(xy 55.88 132.08) (xy 58.42 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d6c137ec-1f82-4d80-a73f-9ce77917f99c")
+	)
+	(wire
+		(pts
 			(xy 149.86 137.16) (xy 149.86 127)
 		)
 		(stroke
@@ -3200,6 +3617,16 @@
 			(type solid)
 		)
 		(uuid "ee67e09c-618b-40a6-9f17-d7bfe87574fb")
+	)
+	(wire
+		(pts
+			(xy 55.88 134.62) (xy 58.42 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ef424dc9-491b-4ccd-a974-22f30875b1fa")
 	)
 	(wire
 		(pts
@@ -3602,6 +4029,28 @@
 			)
 		)
 	)
+	(global_label "I2C_SCL"
+		(shape output)
+		(at 58.42 134.62 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "8a5144e4-3cbb-440d-be5b-1c3808cd0a0d")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 68.9804 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "H1SR_CCD"
 		(shape input)
 		(at 157.48 137.16 270)
@@ -3642,6 +4091,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "I2C_SDA"
+		(shape bidirectional)
+		(at 58.42 132.08 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "a0aceb38-6317-4e14-bbc0-c4fa819674ed")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 70.1363 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -6602,6 +7073,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3V3")
+		(at 45.72 127 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e7c3260d-6acf-4ed8-b7b7-e8407012361a")
+		(property "Reference" "#PWR0691"
+			(at 45.72 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 45.72 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 45.72 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 45.72 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "aba52003-4e88-4cec-8c45-b775a43e5115")
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d2b12579-7abd-4725-8e52-61afb581d660"
+					(reference "#PWR0691")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:FerriteBead")
 		(at 104.14 45.72 90)
 		(unit 1)
@@ -6738,6 +7274,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 45.72 142.24 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f2fc668c-94a8-4d7d-a241-ce3113e3445b")
+		(property "Reference" "#PWR0689"
+			(at 45.72 148.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 45.847 146.6342 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 45.72 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 45.72 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 45.72 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "a5b59c1b-b766-4ff4-aa71-d873eccae27c")
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d2b12579-7abd-4725-8e52-61afb581d660"
+					(reference "#PWR0689")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 109.22 58.42 0)
 		(unit 1)
@@ -6866,6 +7467,94 @@
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d2b12579-7abd-4725-8e52-61afb581d660"
 					(reference "#PWR0541")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Temperature:TMP1075DGK")
+		(at 45.72 134.62 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ff99b37a-27bb-48f0-b411-632773251210")
+		(property "Reference" "U528"
+			(at 47.9141 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "TMP1075DGK"
+			(at 47.9141 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_SO:VSSOP-8_3.0x3.0mm_P0.65mm"
+			(at 45.72 141.605 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.ti.com/lit/gpn/tmp1075"
+			(at 45.72 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "I2C-bus digital temperature sensor and thermal watchdog, VSSOP-8"
+			(at 45.72 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "468f9a67-0c5f-42e0-9328-2f1d1fa368a6")
+		)
+		(pin "1"
+			(uuid "f1873682-4abc-4f5f-8c8c-1fbd8167483b")
+		)
+		(pin "5"
+			(uuid "73296f73-be72-41ad-b547-512ae8256649")
+		)
+		(pin "6"
+			(uuid "086a237f-5bd6-44bf-9b52-6b2d685c0562")
+		)
+		(pin "7"
+			(uuid "9c12022e-fe69-4c06-a555-d6976f906a99")
+		)
+		(pin "4"
+			(uuid "442ff372-91ce-4077-812e-17e653134211")
+		)
+		(pin "3"
+			(uuid "81366486-3346-4598-bed1-0b085e04d5ca")
+		)
+		(pin "8"
+			(uuid "ed29bb19-077e-4b32-b213-a0d763827071")
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d2b12579-7abd-4725-8e52-61afb581d660"
+					(reference "U528")
 					(unit 1)
 				)
 			)
