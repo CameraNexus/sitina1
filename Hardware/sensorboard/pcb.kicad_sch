@@ -104,6 +104,17 @@
 		)
 		(uuid "39bf547e-c566-4b7b-aa64-538efa010969")
 	)
+	(text "FPGA Power"
+		(exclude_from_sim no)
+		(at 43.18 137.16 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "54678525-692a-4fdd-8bfc-31867b6d68b1")
+	)
 	(text "FPGA Config"
 		(exclude_from_sim no)
 		(at 43.18 106.68 0)
@@ -169,6 +180,17 @@
 			(justify left bottom)
 		)
 		(uuid "9acc6089-e789-4474-abac-9ea670be4698")
+	)
+	(text "11"
+		(exclude_from_sim no)
+		(at 33.02 137.16 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "9ae9974f-ba80-4307-94cf-a4c559cdff95")
 	)
 	(text "9"
 		(exclude_from_sim no)
@@ -354,6 +376,44 @@
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
 					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 132.08)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "6bd93fa5-b04c-403a-8268-88485f724a4c")
+		(property "Sheetname" "fpga_power"
+			(at 40.64 131.3684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "fpga_power.kicad_sch"
+			(at 40.64 137.7446 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "11")
 				)
 			)
 		)
