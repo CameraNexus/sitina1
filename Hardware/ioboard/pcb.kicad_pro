@@ -3,9 +3,9 @@
     "3dviewports": [],
     "design_settings": {
       "defaults": {
-        "apply_defaults_to_fp_fields": false,
+        "apply_defaults_to_fp_fields": true,
         "apply_defaults_to_fp_shapes": false,
-        "apply_defaults_to_fp_text": false,
+        "apply_defaults_to_fp_text": true,
         "board_outline_line_width": 0.05,
         "copper_line_width": 0.2,
         "copper_text_italic": false,
@@ -184,7 +184,6 @@
       ],
       "track_widths": [
         0.0,
-        0.1,
         0.11,
         0.12,
         0.13,
@@ -480,7 +479,7 @@
         "clearance": 0.11,
         "diff_pair_gap": 0.1,
         "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2,
+        "diff_pair_width": 0.12,
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
@@ -653,6 +652,7 @@
       "+1V0": "rgb(255, 44, 49)",
       "+1V8": "rgb(0, 132, 0)",
       "+3V3": "rgb(231, 219, 0)",
+      "+CCDPWR": "rgb(255, 130, 7)",
       "GND": "rgb(0, 14, 255)",
       "IPSOUT": "rgb(255, 140, 25)",
       "Net-(U2E-RTC_XTALI)": "rgb(0, 194, 194)",
@@ -735,7 +735,7 @@
           "show": true
         },
         {
-          "group_by": false,
+          "group_by": true,
           "label": "Footprint",
           "name": "Footprint",
           "show": true

@@ -2414,7 +2414,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "5.1K 1%"
+		(property "Value" "5.1K"
 			(at 124.46 111.76 0)
 			(effects
 				(font
@@ -2684,7 +2684,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "5.1K 1%"
+		(property "Value" "5.1K"
 			(at 111.76 111.76 0)
 			(effects
 				(font

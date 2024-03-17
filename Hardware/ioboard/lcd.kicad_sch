@@ -984,7 +984,7 @@
 					)
 				)
 			)
-			(property "Footprint" "Connector_FFC-FPC:Hirose_FH12-20S-0.5SH_1x20-1MP_P0.50mm_Horizontal"
+			(property "Footprint" "footprints:Hirose_FH12-20S-0.5SH_1x20-1MP_P0.50mm_Horizontal_Reversed"
 				(at 2.54 2.54 0)
 				(effects
 					(font
@@ -3271,7 +3271,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "1uF 25V"
+		(property "Value" "10uF 25V"
 			(at 145.161 96.393 0)
 			(effects
 				(font
@@ -3280,7 +3280,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 141.2748 91.44 0)
 			(effects
 				(font
@@ -3404,7 +3404,7 @@
 				)
 			)
 		)
-		(property "Value" "49.9K 1%"
+		(property "Value" "30K"
 			(at 123.19 116.4336 90)
 			(effects
 				(font
@@ -3618,7 +3618,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Connector_FFC-FPC:Hirose_FH12-20S-0.5SH_1x20-1MP_P0.50mm_Horizontal"
+		(property "Footprint" "footprints:Hirose_FH12-20S-0.5SH_1x20-1MP_P0.50mm_Horizontal_Reversed"
 			(at 203.2 134.62 0)
 			(effects
 				(font

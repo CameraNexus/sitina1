@@ -192,9 +192,9 @@
 		)
 		(uuid "69967e43-1c12-4c14-9657-453ca7ddd2d1")
 	)
-	(text "1. Combine MB and PB into IOB\n2. Switch to Zynq 7010 (AGAIN?)\n3. User reactive CCD driver\n4. Use FPGA for timing gen\n5. Remove USB data port"
+	(text "1. Combine MB and PB into IOB\n2. Switch to Zynq 7010 (AGAIN?)\n3. Use FPGA for timing gen\n4. Remove USB data port"
 		(exclude_from_sim no)
-		(at 149.86 157.48 0)
+		(at 149.8914 154.3598 0)
 		(effects
 			(font
 				(size 2 2)
