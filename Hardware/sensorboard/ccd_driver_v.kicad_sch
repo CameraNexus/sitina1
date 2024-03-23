@@ -1247,11 +1247,11 @@
 				)
 			)
 		)
-		(symbol "power:+3V0"
+		(symbol "power:+3V3"
 			(power)
+			(pin_numbers hide)
 			(pin_names
-				(offset 0)
-			)
+				(offset 0) hide)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1264,7 +1264,7 @@
 					(hide yes)
 				)
 			)
-			(property "Value" "+3V0"
+			(property "Value" "+3V3"
 				(at 0 3.556 0)
 				(effects
 					(font
@@ -1290,7 +1290,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Power symbol creates a global label with name \"+3V0\""
+			(property "Description" "Power symbol creates a global label with name \"+3V3\""
 				(at 0 0 0)
 				(effects
 					(font
@@ -1308,7 +1308,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "+3V0_0_1"
+			(symbol "+3V3_0_1"
 				(polyline
 					(pts
 						(xy -0.762 1.27) (xy 0 2.54)
@@ -1346,11 +1346,11 @@
 					)
 				)
 			)
-			(symbol "+3V0_1_1"
+			(symbol "+3V3_1_1"
 				(pin power_in line
 					(at 0 0 90)
-					(length 0) hide
-					(name "+3V0"
+					(length 0)
+					(name "~"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3342,6 +3342,16 @@
 	)
 	(wire
 		(pts
+			(xy 106.68 25.4) (xy 106.68 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2076cfef-513a-4b67-9681-13ecc3fcccce")
+	)
+	(wire
+		(pts
 			(xy 138.43 173.99) (xy 135.89 173.99)
 		)
 		(stroke
@@ -3522,7 +3532,7 @@
 	)
 	(wire
 		(pts
-			(xy 106.68 19.05) (xy 106.68 21.59)
+			(xy 106.68 17.78) (xy 106.68 20.32)
 		)
 		(stroke
 			(width 0)
@@ -4369,16 +4379,6 @@
 			(type default)
 		)
 		(uuid "97aa144e-4ebe-415d-939c-36d05469ef49")
-	)
-	(wire
-		(pts
-			(xy 106.68 26.67) (xy 106.68 36.83)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "97ce32c7-0274-4499-b9bc-e2c253a60429")
 	)
 	(wire
 		(pts
@@ -5403,7 +5403,7 @@
 			)
 		)
 	)
-	(global_label "AFE_V23"
+	(global_label "TCON_V23"
 		(shape input)
 		(at 85.09 33.02 180)
 		(fields_autoplaced yes)
@@ -5415,7 +5415,7 @@
 		)
 		(uuid "91472c50-0cd4-438b-8dba-4195405d3d44")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 74.685 32.9406 0)
+			(at 72.6359 33.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5447,7 +5447,7 @@
 			)
 		)
 	)
-	(global_label "AFE_V1"
+	(global_label "TCON_V1"
 		(shape input)
 		(at 54.61 124.46 180)
 		(fields_autoplaced yes)
@@ -5459,7 +5459,7 @@
 		)
 		(uuid "a129c860-9c50-4a6f-a1c5-df865ab84bbd")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 45.4145 124.3806 0)
+			(at 43.3654 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5491,7 +5491,7 @@
 			)
 		)
 	)
-	(global_label "AFE_FDG"
+	(global_label "TCON_FDG"
 		(shape input)
 		(at 83.82 168.91 180)
 		(fields_autoplaced yes)
@@ -5503,7 +5503,7 @@
 		)
 		(uuid "d57ee361-a0c7-4115-8a11-bdda777f0de8")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 73.294 168.8306 0)
+			(at 71.2449 168.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5513,7 +5513,7 @@
 			)
 		)
 	)
-	(global_label "AFE_V2"
+	(global_label "TCON_V2"
 		(shape input)
 		(at 54.61 77.47 180)
 		(fields_autoplaced yes)
@@ -5525,7 +5525,7 @@
 		)
 		(uuid "d894132f-c433-4c4a-a8a9-3cf47f983e59")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 45.4145 77.3906 0)
+			(at 43.3654 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5673,15 +5673,15 @@
 	(symbol
 		(lib_id "Device:R_Potentiometer_Trim_US")
 		(at 97.79 132.08 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "09f3e985-7fb6-4c8d-a8a4-f303b6f385c1")
 		(property "Reference" "RV6"
-			(at 95.25 131.445 0)
+			(at 95.25 130.81 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5690,7 +5690,7 @@
 			)
 		)
 		(property "Value" "10K"
-			(at 95.25 133.985 0)
+			(at 95.25 133.35 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5698,7 +5698,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Potentiometer_SMD:Potentiometer_Bourns_TC33X_Vertical"
+		(property "Footprint" "footprints:Potentiometer_Bourns_TC33X_Vertical"
 			(at 97.79 132.08 0)
 			(effects
 				(font
@@ -6538,15 +6538,15 @@
 	(symbol
 		(lib_id "Device:R_Potentiometer_Trim_US")
 		(at 106.68 40.64 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "2e794e65-c7f2-404f-a357-5ceb26af9b57")
 		(property "Reference" "RV7"
-			(at 104.14 40.005 0)
+			(at 104.14 39.37 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6555,7 +6555,7 @@
 			)
 		)
 		(property "Value" "10K"
-			(at 104.14 42.545 0)
+			(at 104.14 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6563,7 +6563,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Potentiometer_SMD:Potentiometer_Bourns_TC33X_Vertical"
+		(property "Footprint" "footprints:Potentiometer_Bourns_TC33X_Vertical"
 			(at 106.68 40.64 0)
 			(effects
 				(font
@@ -7504,6 +7504,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3V3")
+		(at 33.02 25.4 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "53d5a80c-1344-4255-b228-5cade847e44e")
+		(property "Reference" "#PWR0165"
+			(at 33.02 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 33.02 20.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 33.02 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 33.02 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "aeb68c45-9bda-4a03-aeb4-2d97ffa2ab25")
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
+					(reference "#PWR0165")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 220.98 49.53 0)
 		(mirror y)
@@ -7972,6 +8037,71 @@
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
 					(reference "C90")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 106.68 154.94 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6a3e6e2f-e01d-4302-b550-5d9aa3e73dc9")
+		(property "Reference" "#PWR0187"
+			(at 106.68 158.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 106.68 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 106.68 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 106.68 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 106.68 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4881da7d-5ea9-45d5-b1fd-1691461847e4")
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
+					(reference "#PWR0187")
 					(unit 1)
 				)
 			)
@@ -8476,72 +8606,6 @@
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
 					(reference "D17")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3V0")
-		(at 33.02 25.4 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "75f91814-e6bf-44c0-a171-2e3bcabc47c6")
-		(property "Reference" "#PWR0165"
-			(at 33.02 29.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V0"
-			(at 33.02 20.32 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 33.02 25.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 33.02 25.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 33.02 25.4 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "e6a9c39d-8b91-4699-bb16-f5e3e4a2b36b")
-		)
-		(instances
-			(project "pcb"
-				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
-					(reference "#PWR0165")
 					(unit 1)
 				)
 			)
@@ -9229,6 +9293,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+3V3")
+		(at 106.68 17.78 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "990b9520-1bb5-4cf3-9bbd-9ceaed862d4b")
+		(property "Reference" "#PWR0185"
+			(at 106.68 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 106.68 13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 106.68 17.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 106.68 17.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 106.68 17.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4dfcfbe3-b468-45bc-a39f-75e2cbc539bf")
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
+					(reference "#PWR0185")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 144.78 74.93 180)
 		(unit 1)
@@ -9740,15 +9869,15 @@
 	(symbol
 		(lib_id "Device:R_Potentiometer_Trim_US")
 		(at 97.79 85.09 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "a5a46ef3-70fa-4944-87de-b171ad51e560")
 		(property "Reference" "RV5"
-			(at 95.25 84.455 0)
+			(at 95.25 83.82 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9757,7 +9886,7 @@
 			)
 		)
 		(property "Value" "10K"
-			(at 95.25 86.995 0)
+			(at 95.25 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9765,7 +9894,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Potentiometer_SMD:Potentiometer_Bourns_TC33X_Vertical"
+		(property "Footprint" "footprints:Potentiometer_Bourns_TC33X_Vertical"
 			(at 97.79 85.09 0)
 			(effects
 				(font
@@ -9871,72 +10000,6 @@
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
 					(reference "#PWR0195")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3V0")
-		(at 106.68 154.94 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "aab309b9-524e-4123-a76a-9a2eb6b44a16")
-		(property "Reference" "#PWR0187"
-			(at 106.68 158.75 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V0"
-			(at 106.68 149.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 106.68 154.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 106.68 154.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 106.68 154.94 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "8a45fbd1-4469-4a44-89d0-73d99cd7351b")
-		)
-		(instances
-			(project "pcb"
-				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
-					(reference "#PWR0187")
 					(unit 1)
 				)
 			)
@@ -10645,7 +10708,7 @@
 	)
 	(symbol
 		(lib_id "Device:R_Small_US")
-		(at 106.68 24.13 0)
+		(at 106.68 22.86 0)
 		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
@@ -10654,7 +10717,7 @@
 		(dnp no)
 		(uuid "bde9406b-f220-47d5-9da1-792d42b1c089")
 		(property "Reference" "R85"
-			(at 107.95 26.67 90)
+			(at 107.95 25.4 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10663,7 +10726,7 @@
 			)
 		)
 		(property "Value" "5.1K"
-			(at 107.95 19.05 90)
+			(at 107.95 17.78 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10672,7 +10735,7 @@
 			)
 		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 106.68 24.13 0)
+			(at 106.68 22.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10681,7 +10744,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 106.68 24.13 0)
+			(at 106.68 22.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10690,7 +10753,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 106.68 24.13 0)
+			(at 106.68 22.86 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10845,83 +10908,17 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3V0")
-		(at 106.68 19.05 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c130e00a-48c7-4e0f-9972-5270fc67efac")
-		(property "Reference" "#PWR0185"
-			(at 106.68 22.86 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3V0"
-			(at 106.68 13.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 106.68 19.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 106.68 19.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 106.68 19.05 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2861ed39-c58e-4639-8aab-8db0d750548f")
-		)
-		(instances
-			(project "pcb"
-				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
-					(reference "#PWR0185")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R_Potentiometer_Trim_US")
 		(at 106.68 176.53 0)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "c2fa7e5d-818b-49e6-b5eb-c1af89f68bb3")
 		(property "Reference" "RV8"
-			(at 104.14 175.895 0)
+			(at 104.14 175.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10930,7 +10927,7 @@
 			)
 		)
 		(property "Value" "10K"
-			(at 104.14 178.435 0)
+			(at 104.14 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10938,7 +10935,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Potentiometer_SMD:Potentiometer_Bourns_TC33X_Vertical"
+		(property "Footprint" "footprints:Potentiometer_Bourns_TC33X_Vertical"
 			(at 106.68 176.53 0)
 			(effects
 				(font

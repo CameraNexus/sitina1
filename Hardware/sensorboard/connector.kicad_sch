@@ -2950,7 +2950,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 129.54) (xy 157.48 129.54)
+			(xy 152.4 132.08) (xy 157.48 132.08)
 		)
 		(stroke
 			(width 0)
@@ -3000,7 +3000,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 124.46) (xy 157.48 124.46)
+			(xy 152.4 127) (xy 157.48 127)
 		)
 		(stroke
 			(width 0)
@@ -3310,7 +3310,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 121.92) (xy 157.48 121.92)
+			(xy 152.4 119.38) (xy 157.48 119.38)
 		)
 		(stroke
 			(width 0)
@@ -3420,7 +3420,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 119.38) (xy 157.48 119.38)
+			(xy 152.4 121.92) (xy 157.48 121.92)
 		)
 		(stroke
 			(width 0)
@@ -3470,7 +3470,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 132.08) (xy 157.48 132.08)
+			(xy 152.4 129.54) (xy 157.48 129.54)
 		)
 		(stroke
 			(width 0)
@@ -3740,7 +3740,7 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 127) (xy 157.48 127)
+			(xy 152.4 124.46) (xy 157.48 124.46)
 		)
 		(stroke
 			(width 0)
@@ -4248,7 +4248,7 @@
 			)
 		)
 	)
-	(global_label "MIPI_D0P"
+	(global_label "MIPI_D1P"
 		(shape output)
 		(at 234.95 96.52 0)
 		(fields_autoplaced yes)
@@ -4260,7 +4260,7 @@
 		)
 		(uuid "35552383-d3f1-4f5c-b7a2-4c2e6e9332c9")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 245.9291 96.52 0)
+			(at 246.6784 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4378,7 +4378,7 @@
 	)
 	(global_label "MIPI_D1N"
 		(shape input)
-		(at 152.4 132.08 180)
+		(at 152.4 129.54 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4388,7 +4388,7 @@
 		)
 		(uuid "6788d4a8-05af-4922-bed9-45349312c33d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 140.6111 132.08 0)
+			(at 140.6111 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4400,7 +4400,7 @@
 	)
 	(global_label "MIPI_D0N"
 		(shape input)
-		(at 152.4 127 180)
+		(at 152.4 124.46 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4410,7 +4410,7 @@
 		)
 		(uuid "6ac56ba9-a432-47b6-8d89-63cca450a96c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 141.3604 127 0)
+			(at 141.3604 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4484,7 +4484,7 @@
 			)
 		)
 	)
-	(global_label "MIPI_D0N"
+	(global_label "MIPI_D1N"
 		(shape output)
 		(at 234.95 99.06 0)
 		(fields_autoplaced yes)
@@ -4496,7 +4496,7 @@
 		)
 		(uuid "6d6ae295-6024-49c9-af8e-9de2f40fe0d2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 245.9896 99.06 0)
+			(at 246.7389 99.06 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4616,7 +4616,7 @@
 	)
 	(global_label "MIPI_D0P"
 		(shape input)
-		(at 152.4 124.46 180)
+		(at 152.4 127 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4626,7 +4626,7 @@
 		)
 		(uuid "98c1ce42-5fcc-4910-b3d1-a652e35a4ce0")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 141.4209 124.46 0)
+			(at 141.4209 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4746,7 +4746,7 @@
 	)
 	(global_label "MIPI_CKP"
 		(shape input)
-		(at 152.4 119.38 180)
+		(at 152.4 121.92 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4756,7 +4756,7 @@
 		)
 		(uuid "b07e8eee-fe98-43ea-bc42-8316d58b7b67")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 141.3604 119.38 0)
+			(at 141.3604 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4876,7 +4876,7 @@
 	)
 	(global_label "MIPI_D1P"
 		(shape input)
-		(at 152.4 129.54 180)
+		(at 152.4 132.08 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4886,7 +4886,7 @@
 		)
 		(uuid "eb94d3cd-3d9c-4912-a541-80134ec06686")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 140.6716 129.54 0)
+			(at 140.6716 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4964,7 +4964,7 @@
 	)
 	(global_label "MIPI_CKN"
 		(shape input)
-		(at 152.4 121.92 180)
+		(at 152.4 119.38 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4974,7 +4974,7 @@
 		)
 		(uuid "f8c15e72-92ab-48ba-ba05-c05e7a22a0cb")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 141.2999 121.92 0)
+			(at 141.2999 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)

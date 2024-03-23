@@ -376,4 +376,15 @@
 		(layers "F.Cu" "F.Paste" "F.Mask")
 		(uuid "214caa63-a0b6-4203-8702-5cf9fd93b177")
 	)
+	(model "${KICAD8_3DMODEL_DIR}/Package_CSP.3dshapes/DiodesInc_GEA20_WLCSP-20_1.70x2.10mm_Layout4x5_P0.4mm.wrl"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
 )

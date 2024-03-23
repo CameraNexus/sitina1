@@ -4497,7 +4497,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10uF"
+		(property "Value" "22uF 25V"
 			(at 111.379 124.333 0)
 			(effects
 				(font
@@ -8250,7 +8250,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "+1V8"
+		(property "Value" "+1V8A"
 			(at 134.62 30.48 0)
 			(effects
 				(font
@@ -8316,7 +8316,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10uF"
+		(property "Value" "22uF 25V"
 			(at 111.379 70.993 0)
 			(effects
 				(font
