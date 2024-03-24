@@ -3,7 +3,7 @@
     "3dviewports": [],
     "design_settings": {
       "defaults": {
-        "apply_defaults_to_fp_fields": false,
+        "apply_defaults_to_fp_fields": true,
         "apply_defaults_to_fp_shapes": false,
         "apply_defaults_to_fp_text": true,
         "board_outline_line_width": 0.05,
@@ -510,7 +510,7 @@
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
         "name": "CSI",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "pcb_color": "rgb(147, 187, 53)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.11,
         "via_diameter": 0.45,
@@ -561,7 +561,7 @@
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
         "name": "SD",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "pcb_color": "rgb(82, 108, 191)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
         "track_width": 0.11,
         "via_diameter": 0.45,
@@ -608,9 +608,13 @@
     },
     "net_colors": {
       "+15VL": "rgb(255, 140, 25)",
+      "+1V0_PL": "rgb(0, 255, 225)",
+      "+1V0_PS": "rgb(0, 154, 255)",
+      "+1V35": "rgb(255, 100, 13)",
       "+1V5": "rgb(255, 86, 136)",
       "+1V8": "rgb(0, 132, 0)",
       "+3V3": "rgb(231, 219, 0)",
+      "GND": "rgb(0, 23, 255)",
       "Net-(U506-REFT_B)": "rgb(0, 194, 194)"
     },
     "netclass_assignments": null,

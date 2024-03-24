@@ -9281,6 +9281,12 @@
 		(uuid "1ba36427-1418-44f7-8bb6-9f79951be239")
 	)
 	(junction
+		(at 248.92 124.46)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1eebd32e-b41f-41b7-8485-93c70cb5c6bb")
+	)
+	(junction
 		(at 147.32 96.52)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -9327,6 +9333,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3b7df8c0-aa45-4bbc-9547-fdbe3fb08161")
+	)
+	(junction
+		(at 248.92 144.78)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "43665dad-0eeb-4170-b3a2-4ce90517b497")
 	)
 	(junction
 		(at 220.98 78.74)
@@ -9503,6 +9515,12 @@
 		(uuid "be58c66c-0abf-4ad9-b355-e18899e2937c")
 	)
 	(junction
+		(at 248.92 116.84)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c1278eec-5fe3-424f-b34b-71d499d9c566")
+	)
+	(junction
 		(at 81.28 96.52)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -9549,6 +9567,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ebd05791-4216-4aea-965c-4f17343d4d8d")
+	)
+	(junction
+		(at 248.92 137.16)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ec30eab9-6334-4cd0-9c0c-fb09036ed80a")
 	)
 	(junction
 		(at 205.74 137.16)
@@ -9819,6 +9843,16 @@
 			(type default)
 		)
 		(uuid "399a1e70-0bf3-493b-b3b9-ef2d876dab5d")
+	)
+	(wire
+		(pts
+			(xy 248.92 124.46) (xy 259.08 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3ae7fa09-36ee-44b5-8348-2e25c0b6cf02")
 	)
 	(wire
 		(pts
@@ -10152,6 +10186,16 @@
 	)
 	(wire
 		(pts
+			(xy 248.92 144.78) (xy 259.08 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "764d889f-45cf-4d22-b84c-ce5d0cfb7fdd")
+	)
+	(wire
+		(pts
 			(xy 137.16 60.96) (xy 147.32 60.96)
 		)
 		(stroke
@@ -10352,6 +10396,16 @@
 	)
 	(wire
 		(pts
+			(xy 248.92 137.16) (xy 259.08 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a97f5759-4aa5-43fa-92d7-7e610757892f")
+	)
+	(wire
+		(pts
 			(xy 71.12 96.52) (xy 81.28 96.52)
 		)
 		(stroke
@@ -10389,6 +10443,16 @@
 			(type default)
 		)
 		(uuid "b4ebb01d-69be-445e-9b4d-1355561d8c08")
+	)
+	(wire
+		(pts
+			(xy 248.92 116.84) (xy 259.08 116.84)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b80dd75c-86fd-4f9d-8fd7-24f67c1965d7")
 	)
 	(wire
 		(pts
@@ -11086,6 +11150,75 @@
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
 					(reference "C114")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 259.08 120.65 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "1a6d3010-d560-400b-8fe4-5e1b590a0760")
+		(property "Reference" "C184"
+			(at 262.001 119.4816 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "47uF"
+			(at 262.001 121.793 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 260.0452 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 259.08 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 259.08 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "8f9d0ac7-188d-451b-b3d8-ca31d1a47a6b")
+		)
+		(pin "2"
+			(uuid "28a9e3ce-37d0-4e13-bc2f-fc50de124cb9")
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
+					(reference "C184")
 					(unit 1)
 				)
 			)
@@ -13854,7 +13987,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100uF"
+		(property "Value" "47uF"
 			(at 251.841 142.113 0)
 			(effects
 				(font
@@ -13863,7 +13996,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 249.8852 144.78 0)
 			(effects
 				(font
@@ -15408,6 +15541,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 248.92 120.65 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "afc3a4e4-fbdb-43e3-a705-d43281f1a3a6")
+		(property "Reference" "C132"
+			(at 251.841 119.4816 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "47uF"
+			(at 251.841 121.793 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 249.8852 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 248.92 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 248.92 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "25b37600-7353-4fe5-8bb9-5123d5c30fac")
+		)
+		(pin "2"
+			(uuid "18434127-c291-46ff-b8a7-b1d46a93925e")
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
+					(reference "C132")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 223.52 60.96 90)
 		(unit 1)
@@ -15948,15 +16150,15 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 248.92 120.65 0)
+		(at 259.08 140.97 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d5ed54a5-9336-4328-a598-ec735cc513bf")
-		(property "Reference" "C132"
-			(at 251.841 119.4816 0)
+		(uuid "d6f87a98-8672-4819-8c5e-1f59ecb0d352")
+		(property "Reference" "C185"
+			(at 262.001 139.8016 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15964,8 +16166,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "100uF"
-			(at 251.841 121.793 0)
+		(property "Value" "47uF"
+			(at 262.001 142.113 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15973,8 +16175,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
-			(at 249.8852 124.46 0)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 260.0452 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15983,7 +16185,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 248.92 120.65 0)
+			(at 259.08 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15992,7 +16194,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 248.92 120.65 0)
+			(at 259.08 140.97 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16001,15 +16203,15 @@
 			)
 		)
 		(pin "1"
-			(uuid "845cf3a8-31d4-410a-b9bd-75736c1bcba9")
+			(uuid "29727972-3b86-41d2-8dfd-f70776ba6cfe")
 		)
 		(pin "2"
-			(uuid "44fd3c2d-9c97-4ef1-82cd-da7dc73139b8")
+			(uuid "4cc11f2b-717d-42bb-b07e-7ae08b9520e9")
 		)
 		(instances
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
-					(reference "C132")
+					(reference "C185")
 					(unit 1)
 				)
 			)
