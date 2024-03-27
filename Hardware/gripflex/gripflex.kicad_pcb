@@ -7,6 +7,12 @@
 		(legacy_teardrops no)
 	)
 	(paper "A4")
+	(title_block
+		(title "Sitina 1 Grip Flex")
+		(date "2024-03-25")
+		(rev "R0.9")
+		(company "Copyright 2024 Wenting Zhang")
+	)
 	(layers
 		(0 "F.Cu" signal)
 		(31 "B.Cu" signal)
@@ -114,7 +120,7 @@
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C3"
-			(at 0 -1.16 360)
+			(at 0 -1.16 0)
 			(layer "F.SilkS")
 			(uuid "c43dd38a-f9bd-4e68-8455-a2867312804b")
 			(effects
@@ -125,7 +131,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 0 1.16 360)
+			(at 0 1.16 0)
 			(layer "F.Fab")
 			(uuid "5167db32-a344-4358-a187-596f5f316c69")
 			(effects
@@ -277,7 +283,7 @@
 			(uuid "10996b9b-7b64-4c96-9714-a30ba349db80")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(uuid "4fec9563-76a1-4bf3-94e7-554e1d630ab1")
 			(effects
@@ -5797,6 +5803,47 @@
 			(uuid "bff1fb50-33c4-4410-a99b-3ea9625d75b7")
 		)
 	)
+	(gr_rect
+		(start 105.25 121.7)
+		(end 111.75 126.1)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill none)
+		(layer "Cmts.User")
+		(uuid "207502dd-cf57-460c-93c1-34feb0997858")
+	)
+	(gr_line
+		(start 104 123)
+		(end 102 121)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "Cmts.User")
+		(uuid "57e6615f-8728-46d7-9650-afe80867412a")
+	)
+	(gr_line
+		(start 97 123)
+		(end 104 123)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "Cmts.User")
+		(uuid "b59d3a98-24c2-41ea-a3b6-07c2923a071e")
+	)
+	(gr_line
+		(start 104 123)
+		(end 102 125)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "Cmts.User")
+		(uuid "e883e9c5-c256-4261-8f62-5a12ee980604")
+	)
 	(gr_circle
 		(center 170.75 108.65)
 		(end 171.4 108.65)
@@ -6096,50 +6143,9 @@
 		(layer "Edge.Cuts")
 		(uuid "fd4ab21a-88c9-473a-81b9-1d20c4bebcb7")
 	)
-	(gr_rect
-		(start 105.25 121.7)
-		(end 111.75 126.1)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(fill none)
-		(layer "User.1")
-		(uuid "207502dd-cf57-460c-93c1-34feb0997858")
-	)
-	(gr_line
-		(start 104 123)
-		(end 102 121)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(layer "User.1")
-		(uuid "57e6615f-8728-46d7-9650-afe80867412a")
-	)
-	(gr_line
-		(start 97 123)
-		(end 104 123)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(layer "User.1")
-		(uuid "b59d3a98-24c2-41ea-a3b6-07c2923a071e")
-	)
-	(gr_line
-		(start 104 123)
-		(end 102 125)
-		(stroke
-			(width 0.1)
-			(type default)
-		)
-		(layer "User.1")
-		(uuid "e883e9c5-c256-4261-8f62-5a12ee980604")
-	)
 	(gr_text "0.2mm\npolyimide\nstiffener"
 		(at 89 125 0)
-		(layer "User.1")
+		(layer "Cmts.User")
 		(uuid "e4c6b0d7-77e3-4be0-8730-308f8227c663")
 		(effects
 			(font

@@ -4,6 +4,12 @@
 	(generator_version "8.0")
 	(uuid "efe87ae6-442a-4420-bdca-8cde1a2ce528")
 	(paper "A4")
+	(title_block
+		(title "Sitina 1 Sensor Board")
+		(date "2024-03-25")
+		(rev "R0.9")
+		(company "Copyright 2024 Wenting Zhang")
+	)
 	(lib_symbols
 		(symbol "Device:C"
 			(pin_numbers hide)
@@ -14877,7 +14883,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "470nF"
 			(at 74.041 96.393 0)
 			(effects
 				(font
@@ -15015,7 +15021,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7uF"
+		(property "Value" "10uF"
 			(at 107.061 172.593 0)
 			(effects
 				(font
@@ -16754,7 +16760,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "470nF"
 			(at 53.721 119.253 0)
 			(effects
 				(font
@@ -16823,7 +16829,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "470nF"
 			(at 53.721 96.393 0)
 			(effects
 				(font
@@ -16956,7 +16962,7 @@
 				)
 			)
 		)
-		(property "Value" "80R"
+		(property "Value" "82R"
 			(at 59.69 64.77 90)
 			(effects
 				(font
@@ -17499,7 +17505,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "470nF"
 			(at 84.201 119.253 0)
 			(effects
 				(font
@@ -17703,7 +17709,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "470nF"
 			(at 63.881 119.253 0)
 			(effects
 				(font
@@ -17772,7 +17778,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "470nF"
 			(at 33.401 96.393 0)
 			(effects
 				(font
@@ -17841,7 +17847,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "470nF"
 			(at 74.041 119.253 0)
 			(effects
 				(font
@@ -18241,7 +18247,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "470nF"
 			(at 43.561 96.393 0)
 			(effects
 				(font
@@ -19113,7 +19119,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "470nF"
 			(at 63.881 96.393 0)
 			(effects
 				(font
@@ -19181,7 +19187,7 @@
 				)
 			)
 		)
-		(property "Value" "80R"
+		(property "Value" "82R"
 			(at 62.23 64.77 90)
 			(effects
 				(font
@@ -19379,7 +19385,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7uF"
+		(property "Value" "10uF"
 			(at 74.041 159.893 0)
 			(effects
 				(font

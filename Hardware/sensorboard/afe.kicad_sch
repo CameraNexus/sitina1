@@ -5,10 +5,10 @@
 	(uuid "28759281-de30-4c16-846f-62ff1d0ecd88")
 	(paper "A4")
 	(title_block
-		(title "Sitina 1 Mainboard")
-		(date "2023-03-16")
-		(rev "R0.6")
-		(company "Copyright 2023 Wenting Zhang")
+		(title "Sitina 1 Sensor Board")
+		(date "2024-03-25")
+		(rev "R0.9")
+		(company "Copyright 2024 Wenting Zhang")
 		(comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
 		(comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
 		(comment 4 "This source describes Open Hardware and is licensed under the CERN-OHL-P v2.")
@@ -9763,7 +9763,7 @@
 				)
 			)
 		)
-		(property "Value" "FerriteBead"
+		(property "Value" "120R"
 			(at 194.31 109.1692 90)
 			(effects
 				(font
@@ -9831,7 +9831,7 @@
 				)
 			)
 		)
-		(property "Value" "49.9"
+		(property "Value" "51"
 			(at 265.43 128.27 90)
 			(effects
 				(font
@@ -9916,7 +9916,7 @@
 				)
 			)
 		)
-		(property "Value" "FerriteBead"
+		(property "Value" "120R"
 			(at 207.01 110.4392 90)
 			(effects
 				(font
@@ -10251,7 +10251,7 @@
 				)
 			)
 		)
-		(property "Value" "FerriteBead"
+		(property "Value" "120R"
 			(at 200.66 109.1692 90)
 			(effects
 				(font
@@ -11672,7 +11672,7 @@
 				)
 			)
 		)
-		(property "Value" "FerriteBead"
+		(property "Value" "120R"
 			(at 173.99 21.6408 90)
 			(effects
 				(font
@@ -11879,7 +11879,7 @@
 				)
 			)
 		)
-		(property "Value" "49.9"
+		(property "Value" "51"
 			(at 265.43 118.11 90)
 			(effects
 				(font
@@ -12571,7 +12571,7 @@
 				)
 			)
 		)
-		(property "Value" "49.9"
+		(property "Value" "51"
 			(at 265.43 148.59 90)
 			(effects
 				(font
@@ -13481,7 +13481,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "49.9"
+		(property "Value" "51"
 			(at 264.16 160.02 90)
 			(effects
 				(font
@@ -13616,7 +13616,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "28MHz"
+		(property "Value" "27MHz"
 			(at 95.25 168.91 0)
 			(effects
 				(font
@@ -14025,7 +14025,7 @@
 				)
 			)
 		)
-		(property "Value" "49.9"
+		(property "Value" "51"
 			(at 265.43 138.43 90)
 			(effects
 				(font

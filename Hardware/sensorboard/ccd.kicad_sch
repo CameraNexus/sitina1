@@ -5,10 +5,10 @@
 	(uuid "4900bddc-0d21-477b-9df9-6c9bf2cc147d")
 	(paper "A4")
 	(title_block
-		(title "Sitina 1 Mainboard")
-		(date "2023-03-16")
-		(rev "R0.6")
-		(company "Copyright 2023 Wenting Zhang")
+		(title "Sitina 1 Sensor Board")
+		(date "2024-03-25")
+		(rev "R0.9")
+		(company "Copyright 2024 Wenting Zhang")
 		(comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
 		(comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
 		(comment 4 "This source describes Open Hardware and is licensed under the CERN-OHL-P v2.")
@@ -5419,7 +5419,7 @@
 				)
 			)
 		)
-		(property "Value" "FerriteBead"
+		(property "Value" "120R"
 			(at 209.55 125.6792 90)
 			(effects
 				(font
@@ -6167,7 +6167,7 @@
 				)
 			)
 		)
-		(property "Value" "FerriteBead"
+		(property "Value" "120R"
 			(at 104.0892 36.83 90)
 			(effects
 				(font
@@ -6975,7 +6975,7 @@
 				)
 			)
 		)
-		(property "Value" "FerriteBead"
+		(property "Value" "120R"
 			(at 100.33 125.6792 90)
 			(effects
 				(font
@@ -7313,7 +7313,7 @@
 				)
 			)
 		)
-		(property "Value" "FerriteBead"
+		(property "Value" "120R"
 			(at 104.0892 31.75 90)
 			(effects
 				(font
@@ -7446,7 +7446,7 @@
 				)
 			)
 		)
-		(property "Value" "FerriteBead"
+		(property "Value" "120R"
 			(at 104.0892 41.91 90)
 			(effects
 				(font
@@ -7514,7 +7514,7 @@
 				)
 			)
 		)
-		(property "Value" "FerriteBead"
+		(property "Value" "120R"
 			(at 104.0892 46.99 90)
 			(effects
 				(font

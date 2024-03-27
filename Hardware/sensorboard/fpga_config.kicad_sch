@@ -4,6 +4,12 @@
 	(generator_version "8.0")
 	(uuid "a2543d0d-780b-4465-a1be-3e91d32abe2c")
 	(paper "A4")
+	(title_block
+		(title "Sitina 1 Sensor Board")
+		(date "2024-03-25")
+		(rev "R0.9")
+		(company "Copyright 2024 Wenting Zhang")
+	)
 	(lib_symbols
 		(symbol "Device:C"
 			(pin_numbers hide)
@@ -14941,7 +14947,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7uF"
+		(property "Value" "10uF"
 			(at 111.76 151.13 90)
 			(effects
 				(font

@@ -5,10 +5,10 @@
 	(uuid "1c44a9d6-76bb-4afa-b2a0-adea9fe52ab5")
 	(paper "A4")
 	(title_block
-		(title "Sitina 1 Mainboard")
-		(date "2023-03-16")
-		(rev "R0.6")
-		(company "Copyright 2023 Wenting Zhang")
+		(title "Sitina 1 Sensor Board")
+		(date "2024-03-25")
+		(rev "R0.9")
+		(company "Copyright 2024 Wenting Zhang")
 	)
 	(lib_symbols
 		(symbol "Device:C"
@@ -13918,7 +13918,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7uF"
+		(property "Value" "10uF"
 			(at 241.681 101.473 0)
 			(effects
 				(font
@@ -14742,7 +14742,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "Inductor_SMD:L_0402_1005Metric"
 			(at 238.76 77.978 90)
 			(effects
 				(font
@@ -15422,7 +15422,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7uF"
+		(property "Value" "10uF"
 			(at 208.661 142.113 0)
 			(effects
 				(font
@@ -16369,7 +16369,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7uF"
+		(property "Value" "10uF"
 			(at 241.681 121.793 0)
 			(effects
 				(font
@@ -17084,7 +17084,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7uF"
+		(property "Value" "10uF"
 			(at 241.681 142.113 0)
 			(effects
 				(font
@@ -17287,7 +17287,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7uF"
+		(property "Value" "10uF"
 			(at 208.661 101.473 0)
 			(effects
 				(font

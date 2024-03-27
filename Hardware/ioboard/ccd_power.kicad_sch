@@ -6358,7 +6358,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "470nF"
 			(at 135.89 123.19 0)
 			(effects
 				(font
@@ -6477,6 +6477,7 @@
 		)
 	)
 	(symbol
+		(lib_name "symbols:ADP5071ACPZ")
 		(lib_id "symbols:ADP5071ACPZ")
 		(at 64.77 43.18 0)
 		(unit 1)
@@ -7254,7 +7255,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7uH"
+		(property "Value" "YHNR3015-4R7M"
 			(at 81.28 93.98 90)
 			(effects
 				(font
@@ -7523,7 +7524,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7uH"
+		(property "Value" "YHNR3015-4R7M"
 			(at 92.71 63.5 0)
 			(effects
 				(font
@@ -7591,7 +7592,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "470nF"
 			(at 135.89 63.5 0)
 			(effects
 				(font
@@ -7912,6 +7913,7 @@
 		)
 	)
 	(symbol
+		(lib_name "symbols:ADP5071ACPZ")
 		(lib_id "symbols:ADP5071ACPZ")
 		(at 64.77 111.76 0)
 		(unit 1)
@@ -8390,7 +8392,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7uH"
+		(property "Value" "YHNR3015-4R7M"
 			(at 185.42 120.65 0)
 			(effects
 				(font
@@ -9408,7 +9410,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "22pF"
+		(property "Value" "18pF"
 			(at 269.24 62.23 0)
 			(effects
 				(font
@@ -10220,7 +10222,7 @@
 				)
 			)
 		)
-		(property "Value" "B0540W"
+		(property "Value" "B0540WS"
 			(at 100.33 93.98 0)
 			(effects
 				(font
@@ -11557,7 +11559,7 @@
 				)
 			)
 		)
-		(property "Value" "B0540W"
+		(property "Value" "B0540WS"
 			(at 165.1 22.86 0)
 			(effects
 				(font
@@ -11892,7 +11894,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "22pF"
+		(property "Value" "18pF"
 			(at 184.15 27.94 0)
 			(effects
 				(font
@@ -11961,7 +11963,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7uH"
+		(property "Value" "YHNR3015-4R7M"
 			(at 142.24 82.55 90)
 			(effects
 				(font
@@ -12232,7 +12234,7 @@
 				)
 			)
 		)
-		(property "Value" "B0540W"
+		(property "Value" "B0540WS"
 			(at 165.1 82.55 0)
 			(effects
 				(font
@@ -12699,7 +12701,7 @@
 				)
 			)
 		)
-		(property "Value" "B0540W"
+		(property "Value" "B0540WS"
 			(at 186.69 55.88 0)
 			(effects
 				(font
@@ -12766,7 +12768,7 @@
 				)
 			)
 		)
-		(property "Value" "B0540W"
+		(property "Value" "B0540WS"
 			(at 97.79 59.69 0)
 			(effects
 				(font
@@ -12901,7 +12903,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "470nF"
 			(at 179.07 39.37 90)
 			(effects
 				(font
@@ -12969,7 +12971,7 @@
 				)
 			)
 		)
-		(property "Value" "B0540W"
+		(property "Value" "B0540WS"
 			(at 100.33 25.4 0)
 			(effects
 				(font
@@ -13443,7 +13445,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7uH"
+		(property "Value" "YHNR3015-4R7M"
 			(at 185.42 60.96 0)
 			(effects
 				(font
@@ -14198,7 +14200,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "22pF"
+		(property "Value" "18pF"
 			(at 184.15 87.63 0)
 			(effects
 				(font
@@ -14268,7 +14270,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "470nF"
 			(at 179.07 99.06 90)
 			(effects
 				(font
@@ -14886,7 +14888,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7uH"
+		(property "Value" "YHNR3015-4R7M"
 			(at 142.24 22.86 90)
 			(effects
 				(font
@@ -14955,7 +14957,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "4.7uH"
+		(property "Value" "YHNR3015-4R7M"
 			(at 81.28 25.4 90)
 			(effects
 				(font
@@ -15752,7 +15754,7 @@
 				)
 			)
 		)
-		(property "Value" "B0540W"
+		(property "Value" "B0540WS"
 			(at 97.79 128.27 0)
 			(effects
 				(font
@@ -16084,7 +16086,7 @@
 				)
 			)
 		)
-		(property "Value" "B0540W"
+		(property "Value" "B0540WS"
 			(at 186.69 115.57 0)
 			(effects
 				(font
@@ -16353,7 +16355,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7uH"
+		(property "Value" "YHNR3015-4R7M"
 			(at 92.71 132.08 0)
 			(effects
 				(font

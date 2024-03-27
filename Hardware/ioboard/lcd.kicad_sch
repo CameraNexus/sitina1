@@ -2535,7 +2535,7 @@
 				)
 			)
 		)
-		(property "Value" "22uH"
+		(property "Value" "YHNR3015-220M"
 			(at 116.84 86.3854 90)
 			(effects
 				(font
@@ -2673,7 +2673,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "470nF"
 			(at 132.461 126.873 0)
 			(effects
 				(font
@@ -3998,7 +3998,7 @@
 				)
 			)
 		)
-		(property "Value" "B0540W"
+		(property "Value" "B0540WS"
 			(at 130.81 86.36 0)
 			(effects
 				(font

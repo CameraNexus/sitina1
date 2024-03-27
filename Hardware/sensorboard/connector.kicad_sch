@@ -4,6 +4,12 @@
 	(generator_version "8.0")
 	(uuid "478bac2a-e969-454d-a9ea-7d9e020a8a9d")
 	(paper "A4")
+	(title_block
+		(title "Sitina 1 Sensor Board")
+		(date "2024-03-25")
+		(rev "R0.9")
+		(company "Copyright 2024 Wenting Zhang")
+	)
 	(lib_symbols
 		(symbol "Connector_Generic:Conn_01x30"
 			(pin_names
@@ -5573,7 +5579,7 @@
 				)
 			)
 		)
-		(property "Value" "60R"
+		(property "Value" "62R"
 			(at 217.17 92.71 90)
 			(effects
 				(font
@@ -5706,7 +5712,7 @@
 				)
 			)
 		)
-		(property "Value" "60R"
+		(property "Value" "62R"
 			(at 217.17 69.85 90)
 			(effects
 				(font
@@ -5839,7 +5845,7 @@
 				)
 			)
 		)
-		(property "Value" "60R"
+		(property "Value" "62R"
 			(at 217.17 62.23 90)
 			(effects
 				(font
@@ -6235,7 +6241,7 @@
 				)
 			)
 		)
-		(property "Value" "60R"
+		(property "Value" "62R"
 			(at 217.17 77.47 90)
 			(effects
 				(font
@@ -7119,7 +7125,7 @@
 				)
 			)
 		)
-		(property "Value" "60R"
+		(property "Value" "62R"
 			(at 217.17 100.33 90)
 			(effects
 				(font
@@ -7186,7 +7192,7 @@
 				)
 			)
 		)
-		(property "Value" "60R"
+		(property "Value" "62R"
 			(at 217.17 85.09 90)
 			(effects
 				(font

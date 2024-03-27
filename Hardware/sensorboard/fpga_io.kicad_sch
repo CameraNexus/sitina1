@@ -4,6 +4,12 @@
 	(generator_version "8.0")
 	(uuid "b6cb39cd-9915-4711-bfda-124b7f419a9c")
 	(paper "A4")
+	(title_block
+		(title "Sitina 1 Sensor Board")
+		(date "2024-03-25")
+		(rev "R0.9")
+		(company "Copyright 2024 Wenting Zhang")
+	)
 	(lib_symbols
 		(symbol "+3V3_1"
 			(power)
@@ -12303,7 +12309,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7uF"
+		(property "Value" "10uF"
 			(at 78.74 171.45 90)
 			(effects
 				(font
@@ -13914,7 +13920,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7uF"
+		(property "Value" "10uF"
 			(at 165.1 171.45 90)
 			(effects
 				(font
@@ -15588,7 +15594,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7uF"
+		(property "Value" "10uF"
 			(at 265.43 146.05 90)
 			(effects
 				(font

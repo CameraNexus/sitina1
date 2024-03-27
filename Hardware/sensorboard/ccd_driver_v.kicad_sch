@@ -5,10 +5,10 @@
 	(uuid "1b26b649-31c0-4845-a70f-9187aef93430")
 	(paper "A4")
 	(title_block
-		(title "Sitina 1 CCD V Clock Drivers")
-		(date "2023-08-17")
-		(rev "R0.7")
-		(company "Copyright 2023 AL")
+		(title "Sitina 1 Sensor Board")
+		(date "2024-03-25")
+		(rev "R0.9")
+		(company "Copyright 2024 Wenting Zhang")
 		(comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
 		(comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
 		(comment 4 "This source describes Open Hardware and is licensed under the CERN-OHL-P v2.")
@@ -6266,7 +6266,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "B0540W"
+		(property "Value" "B0540WS"
 			(at 72.39 85.725 90)
 			(effects
 				(font
@@ -8542,7 +8542,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "B0540W"
+		(property "Value" "B0540WS"
 			(at 72.39 132.715 90)
 			(effects
 				(font

@@ -5,10 +5,10 @@
 	(uuid "a486bc16-30f5-4073-ac98-aff81113640c")
 	(paper "A4")
 	(title_block
-		(title "Sitina 1 Mainboard")
-		(date "2023-03-16")
-		(rev "R0.6")
-		(company "Copyright 2023 Wenting Zhang")
+		(title "Sitina 1 Sensor Board")
+		(date "2024-03-25")
+		(rev "R0.9")
+		(company "Copyright 2024 Wenting Zhang")
 		(comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
 		(comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
 		(comment 4 "This source describes Open Hardware and is licensed under the CERN-OHL-P v2.")
@@ -4937,7 +4937,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_0603_1608Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 242.57 116.84 0)
 			(effects
 				(font
@@ -5097,7 +5097,7 @@
 				)
 			)
 		)
-		(property "Value" "500"
+		(property "Value" "510"
 			(at 233.68 125.73 90)
 			(effects
 				(font
@@ -5373,7 +5373,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_0603_1608Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 242.57 127 0)
 			(effects
 				(font
@@ -5508,7 +5508,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_0603_1608Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 242.57 111.76 0)
 			(effects
 				(font
@@ -6111,7 +6111,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "30.1K"
+		(property "Value" "30K"
 			(at 141.478 134.493 0)
 			(effects
 				(font
@@ -6320,7 +6320,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_0603_1608Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 242.57 81.28 0)
 			(effects
 				(font
@@ -6849,7 +6849,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_0603_1608Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 242.57 96.52 0)
 			(effects
 				(font
@@ -7189,7 +7189,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_0603_1608Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 242.57 86.36 0)
 			(effects
 				(font
@@ -7459,7 +7459,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_0603_1608Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 242.57 91.44 0)
 			(effects
 				(font
@@ -7723,7 +7723,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_0603_1608Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 242.57 121.92 0)
 			(effects
 				(font
@@ -7791,7 +7791,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_0603_1608Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 242.57 106.68 0)
 			(effects
 				(font
@@ -8826,7 +8826,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_0603_1608Metric"
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 242.57 101.6 0)
 			(effects
 				(font
@@ -9022,7 +9022,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "30.1K"
+		(property "Value" "30K"
 			(at 141.478 81.153 0)
 			(effects
 				(font

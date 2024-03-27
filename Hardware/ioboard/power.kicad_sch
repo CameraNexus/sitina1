@@ -8120,7 +8120,7 @@
 				)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "470nF"
 			(at 48.26 100.33 90)
 			(effects
 				(font
@@ -10126,7 +10126,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "220nF"
+		(property "Value" "470nF"
 			(at 226.441 157.353 0)
 			(effects
 				(font
@@ -14073,7 +14073,7 @@
 				)
 			)
 		)
-		(property "Value" "B0530WS"
+		(property "Value" "B0540WS"
 			(at 247.65 63.5 0)
 			(effects
 				(font
