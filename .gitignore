@@ -3,7 +3,7 @@
 *.dcm
 *.bck
 *.lck
-fp-*
+fp-info-cache
 _autosave*
 *.kicad_pcb-bak
 *.kicad_sch-bak

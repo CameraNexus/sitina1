@@ -3239,7 +3239,7 @@
 			(pintype "passive")
 			(uuid "5e672510-706f-4bd1-aedc-b8637ba7eeab")
 		)
-		(model "${KIPRJMOD}/../common/footprints.pretty/PJ-210A.step"
+		(model "${KIPRJMOD}/../pcb_common/footprints.pretty/PJ-210A.step"
 			(offset
 				(xyz -2.55 0 0)
 			)
@@ -7314,7 +7314,7 @@
 			(pintype "passive")
 			(uuid "75d95657-f032-4a73-9357-287994af5a17")
 		)
-		(model "${KIPRJMOD}/../common/footprints.pretty/HY-TF1007B.STEP"
+		(model "${KIPRJMOD}/../pcb_common/footprints.pretty/HY-TF1007B.STEP"
 			(offset
 				(xyz -7.25 -7.35 0)
 			)
@@ -20706,7 +20706,7 @@
 			(remove_unused_layers no)
 			(uuid "24bdea7d-5e52-4933-b1c9-dc994bb36737")
 		)
-		(model "${KIPRJMOD}/../common/footprints.pretty/TM-007-D1-A-X.stp"
+		(model "${KIPRJMOD}/../pcb_common/footprints.pretty/TM-007-D1-A-X.stp"
 			(offset
 				(xyz 0 -0.35 0)
 			)
@@ -21638,7 +21638,7 @@
 				(xyz 0 0 0)
 			)
 		)
-		(model "${KIPRJMOD}/../common/footprints.pretty/FH12-12S-0.5SH.stp"
+		(model "${KIPRJMOD}/../pcb_common/footprints.pretty/FH12-12S-0.5SH.stp"
 			(offset
 				(xyz 18.95 -10.6 -218)
 			)
@@ -26789,7 +26789,7 @@
 				(xyz 0 0 0)
 			)
 		)
-		(model "${KIPRJMOD}/../common/footprints.pretty/HRO  TYPE-C-31-M-12.step"
+		(model "${KIPRJMOD}/../pcb_common/footprints.pretty/HRO  TYPE-C-31-M-12.step"
 			(offset
 				(xyz -4.47 -3.65 0)
 			)
@@ -41286,7 +41286,7 @@
 				(xyz 0 0 0)
 			)
 		)
-		(model "${KIPRJMOD}/../common/footprints.pretty/FH12-30S-0.5SH.stp"
+		(model "${KIPRJMOD}/../pcb_common/footprints.pretty/FH12-30S-0.5SH.stp"
 			(offset
 				(xyz 14.45 -10.6 -78)
 			)
