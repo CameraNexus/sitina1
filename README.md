@@ -8,15 +8,14 @@ The following are preliminary.
 
 ### Hardware
 
-- Processor: NXP i.MX RT1052 (600MHz Cortex-M7F)
-- RAM: 32MB 16-bit LPSDR SDRAM
+- SoC: Xilinx Zynq 7010 (2x667MHz Cortex-A9, 28K logic cells FPGA)
+- RAM: 512MB 16-bit DDR3 SDRAM
 - AFE: Analog Devices AD9990
 - Sensor: Kodak/ONsemi KAI-11000/KAI-11002M/CM
-- Screen: 3.2" 480x480 High-Brightness DPI IPS LCD
+- Screen: 3.4" 480x480 High-Brightness DPI IPS LCD
 - External Ports:
-  - SD slot (UHS-I, 104MB/s)
-  - USB Type-C 1 (USB 2.0 HS, 480Mbps)
-  - USB Type-C 2 (5V3A, power only)
+  - SD slot (HS, 50MB/s)
+  - USB Type-C (5V3A power supply + debugger access)
   - Flash sync terminal
 
 ### Camera Features
@@ -38,15 +37,15 @@ The following are possible with hardware, but not necessarily supported by the c
   - DNG (10/12/14-bit lossless compressed RAW)
   - JPEG
 - Readout Speed:
-  - 4008x2672 at 5FPS (can be reduced to 2.5FPS)
-  - 4008x480 at 28FPS (line skipping live view, rescaled to 720x480 for output)
-- Movie recording is not supported.
+  - 4008x2672 up to 5FPS
+  - 4008x480 at 28FPS (line skipping live view, rescaled to 480x320 for output)
+- Video recording is not supported
 - ISO:
   - TBD
 
 ## Status
 
-Hardware R0.6 tested and working. Harware R0.8 working in progress. See schematics for change logs.
+Hardware R0.6 tested and working. Harware R0.9 bringing up in progress. See schematics for change logs.
 
 ## License
 
