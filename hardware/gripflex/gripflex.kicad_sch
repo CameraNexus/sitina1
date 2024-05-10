@@ -7231,7 +7231,7 @@
 				)
 			)
 		)
-		(property "Footprint" "footprints:SIQ-02FVS3"
+		(property "Footprint" "footprints:SIQ-02FVS3_L"
 			(at 81.28 95.25 0)
 			(effects
 				(font
