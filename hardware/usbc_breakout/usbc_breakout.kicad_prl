@@ -2,7 +2,7 @@
   "board": {
     "active_layer": 0,
     "active_layer_preset": "",
-    "auto_track_width": true,
+    "auto_track_width": false,
     "hidden_netclasses": [],
     "hidden_nets": [],
     "high_contrast_mode": 0,
@@ -16,15 +16,15 @@
     },
     "selection_filter": {
       "dimensions": false,
-      "footprints": false,
-      "graphics": false,
+      "footprints": true,
+      "graphics": true,
       "keepouts": false,
       "lockedItems": false,
       "otherItems": false,
       "pads": false,
       "text": true,
-      "tracks": false,
-      "vias": false,
+      "tracks": true,
+      "vias": true,
       "zones": false
     },
     "visible_items": [
@@ -74,7 +74,7 @@
     "ssh_key": ""
   },
   "meta": {
-    "filename": "gripflex.kicad_prl",
+    "filename": "usbc_breakout.kicad_prl",
     "version": 3
   },
   "project": {

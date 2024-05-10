@@ -43,9 +43,9 @@
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
-        "silk_text_size_h": 0.8,
-        "silk_text_size_v": 0.8,
-        "silk_text_thickness": 0.12,
+        "silk_text_size_h": 1.0,
+        "silk_text_size_v": 1.0,
+        "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
           "min_clearance": 0.25
@@ -181,6 +181,7 @@
         0.15,
         0.2,
         0.3,
+        0.5,
         1.0
       ],
       "tuning_pattern_settings": {
@@ -447,7 +448,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "gripflex.kicad_pro",
+    "filename": "usbc_breakout.kicad_pro",
     "version": 1
   },
   "net_settings": {
