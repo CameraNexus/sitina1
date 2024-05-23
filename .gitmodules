@@ -1,3 +1,6 @@
 [submodule "hardware/pcb_common"]
 	path = hardware/pcb_common
 	url = git@gitlab.com:zephray/pcb_common
+[submodule "gateware/rtl/mulib"]
+	path = gateware/rtl/mulib
+	url = git@gitlab.com:zephray/mulib
