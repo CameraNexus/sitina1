@@ -14,6 +14,9 @@ pcb.pdf
 production/
 pcb-backups/
 
+# RTL simulator
+gateware/sim/sim
+
 # Eclipse/ MCUXpresso files
 *.launch
 
@@ -42,6 +45,8 @@ Debug/
 Release/
 
 *.zip
+
+*.bin
 
 *.map
 *.obj
