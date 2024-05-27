@@ -4,3 +4,6 @@
 [submodule "gateware/rtl/mulib"]
 	path = gateware/rtl/mulib
 	url = git@gitlab.com:zephray/mulib
+[submodule "gateware/rtl/verilog-axi"]
+	path = gateware/rtl/verilog-axi
+	url = https://github.com/alexforencich/verilog-axi
