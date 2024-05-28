@@ -186,6 +186,50 @@ void TIM2_IRQHandler(void) {
         TIM2->CR1 &= ~TIM_CR1_CEN;
 }
 
+void jtag_shift_loop() {
+//#pragma GCC push_options
+//#pragma GCC optimize ("O3")
+    size_t bytes_fast = num_bits / 8;
+    size_t bits_left = num_bits - bytes_fast * 8;
+
+    uint32_t gpio_state = JTAG_GPIO->ODR & ~(TMS_PIN | TDI_PIN | TCK_PIN);
+    for (size_t i = 0; i < bytes_fast; i++) {
+        uint8_t readin_val = 0x00;
+        for (uint8_t msk = 0x01; msk != 0; msk <<= 1) {
+            uint32_t new_gpio_state = gpio_state;
+            if (tms_vector[i] & msk) new_gpio_state |= TMS_PIN;
+            if (tdx_vector[i] & msk) new_gpio_state |= TDI_PIN;
+            JTAG_GPIO->ODR = new_gpio_state;
+            readin_val >>=1;
+            asm("nop");
+            JTAG_GPIO->BSRR = TCK_PIN;
+            readin_val |= (JTAG_GPIO->IDR & TDO_PIN) >> 1; // TDO needs to be Px8!
+        }
+        tdx_vector[i] = readin_val;
+    }
+
+    // Last few bits
+    if (bits_left != 0) {
+        size_t i = bytes_fast;
+        uint8_t readin_val = 0x00;
+        uint8_t msk = 0x01;
+        for (int j = 0; j < bits_left; j++) {
+            uint32_t new_gpio_state = gpio_state;
+            if (tms_vector[i] & msk) new_gpio_state |= TMS_PIN;
+            if (tdx_vector[i] & msk) new_gpio_state |= TDI_PIN;
+            JTAG_GPIO->ODR = new_gpio_state;
+            asm("nop");
+            asm("nop");
+            JTAG_GPIO->BSRR = TCK_PIN;
+            if (JTAG_GPIO->IDR & TDO_PIN)
+                readin_val |= msk;
+            msk <<= 1;
+        }
+        tdx_vector[i] = readin_val;
+    }
+//#pragma GCC pop_options
+}
+
 void xvc_tick(void) {
     static uint32_t val;
     static int i;
@@ -250,8 +294,10 @@ void xvc_tick(void) {
                 num_bits = val;
                 num_bytes = (num_bits + 7) / 8;
                 if (num_bytes > JTAGBUF_SIZE) {
-                    // Too large, discard
-                    state = ST_DISCARD;
+                    // Too large, can't handle
+                    tok = TOK_NONE;
+                    state = ST_IDLE;
+                    LED_ON();
                 }
                 else {
                     state = ST_RX_TMS;
@@ -259,53 +305,33 @@ void xvc_tick(void) {
                 i = 0;
             }
         }
-        if (state == ST_DISCARD) {
-            uint8_t discard;
-            while ((i < num_bytes * 2) && xvc_usb_pop(&discard, 1))
-                i++;
-            if (i == num_bytes * 2) {
-                // DONE, send some garbage back
-                state = ST_TX_TDO;
-                i = 0;
-            }
-        }
         if (state == ST_RX_TMS) {
-            while ((i < num_bytes) && xvc_usb_pop(&tms_vector[i], 1))
-                i++;
-            if (i == num_bytes) {
+            if (xvc_usb_pop(tms_vector, num_bytes)) {
                 state = ST_RX_TDI;
                 i = 0;
             }
         }
         if (state == ST_RX_TDI) {
-            while ((i < num_bytes) && xvc_usb_pop(&tdx_vector[i], 1))
-                i++;
-            if (i == num_bytes) {
+            if (xvc_usb_pop(tdx_vector, num_bytes)) {
                 state = ST_WAIT_JTAG;
                 shift_count = 0;
-                TIM2->CR1 |= TIM_CR1_CEN;
+                //TIM2->CR1 |= TIM_CR1_CEN;
             }
         }
         if (state == ST_WAIT_JTAG) {
-            if (!(TIM2->CR1 & TIM_CR1_CEN)) {
+            //if (!(TIM2->CR1 & TIM_CR1_CEN)) {
+            jtag_shift_loop();
                 // Shift done
                 state = ST_TX_TDO;
                 i = 0;
-            }
+            //}
         }
         if (state == ST_TX_TDO) {
-            if ((num_bytes - i) > APP_TX_DATA_SIZE) {
-                if (xvc_usb_send(&tdx_vector[i], APP_TX_DATA_SIZE)) {
-                    i += APP_TX_DATA_SIZE;
-                }
-            }
-            else {
-                if (xvc_usb_send(&tdx_vector[i], num_bytes - i)) {
-                    // Done
-                    tok = TOK_NONE;
-                    state = ST_IDLE;
-                    LED_ON();
-                }
+            if (xvc_usb_send(&tdx_vector[i], num_bytes - i)) {
+                // Done
+                tok = TOK_NONE;
+                state = ST_IDLE;
+                LED_ON();
             }
         }
         break;

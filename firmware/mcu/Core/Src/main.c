@@ -22,7 +22,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdbool.h>
 #include "xvc.h"
+#include "power.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -108,6 +110,8 @@ int main(void)
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
   xvc_init();
+  power_init();
+  HAL_Delay(10);
   GPIOA->BSRR = GPIO_PIN_0; // Release FPGA from reset
   /* USER CODE END 2 */
 
