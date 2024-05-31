@@ -27,8 +27,8 @@
 #define RXBUF_SIZE	    2048
 #define JTAGBUF_SIZE    APP_TX_DATA_SIZE
 
-#define TCK_MIN_PREIOD  300     // 3.3MHz
-#define TCK_MAX_PERIOD  10000   // 100KHz
+#define TCK_MIN_PREIOD  10000     // 3.3MHz
+#define TCK_MAX_PERIOD  100000   // 100KHz
 
 #define TIM2_FREQ_MHZ   48
 
@@ -315,16 +315,16 @@ void xvc_tick(void) {
             if (xvc_usb_pop(tdx_vector, num_bytes)) {
                 state = ST_WAIT_JTAG;
                 shift_count = 0;
-                //TIM2->CR1 |= TIM_CR1_CEN;
+                TIM2->CR1 |= TIM_CR1_CEN;
             }
         }
         if (state == ST_WAIT_JTAG) {
-            //if (!(TIM2->CR1 & TIM_CR1_CEN)) {
-            jtag_shift_loop();
+            if (!(TIM2->CR1 & TIM_CR1_CEN)) {
+            //jtag_shift_loop();
                 // Shift done
                 state = ST_TX_TDO;
                 i = 0;
-            //}
+            }
         }
         if (state == ST_TX_TDO) {
             if (xvc_usb_send(&tdx_vector[i], num_bytes - i)) {

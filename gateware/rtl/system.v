@@ -24,35 +24,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-module system (
+module system #(
+    parameter AXI_AW = 32,
+    parameter AXI_DW = 64,
+    parameter AXI_IDW = 2
+) (
     input  wire         clk,        // Clock
     input  wire         clk_pix,    // Pixel clock
-    input  wire         rst_n,      // Asynchronous reset active low
+    input  wire         rst,
+    input  wire         rst_pix,
     // DVP from AD9990
     input  wire [13:0]  dvp_d,
-    input  wire	        dvp_hsync,
+    input  wire         dvp_hsync,
     input  wire         dvp_vsync,
-    input  wire	        dvp_pclk,
+    input  wire         dvp_pclk,
     // AD9990 control
     output wire         afe_rst,
     output wire         afe_sync,
-    output wire	        afe_sdata,
-    output wire	        afe_sl,
+    output wire         afe_sdata,
+    output wire         afe_sl,
     output wire         afe_sck,
     // MIPI DSI for LCD
-    output wire	        dsi_lp_cp,
-    output wire	        dsi_lp_cn,
+    output wire         dsi_lp_cp,
+    output wire         dsi_lp_cn,
     output wire [1:0]   dsi_lp_dp,
     output wire [1:0]   dsi_lp_dn,
-    output wire	        dsi_hs_cp,
-    output wire	        dsi_hs_cn,
-    output wire [1:0]   dsi_hs_dp,
-    output wire [1:0]   dsi_hs_dn,
-    // Bypass DPI LCD
-    output wire         dpi_vsync,
-    output wire         dpi_hsync,
-    output wire         dpi_enable,
-    output wire [23:0]  dpi_data,
+    output wire         dsi_lp_sel,
     // TCON for CCD
     output wire         tcon_v1,
     output wire         tcon_v2,
@@ -63,17 +60,15 @@ module system (
     output wire         tcon_h2,
     output wire         tcon_rg,
     // Power control
-    output wire 		vab_pwm,
+    output wire         vab_pwm,
     // APB device port for register access
-    `APB_SLAVE_IF
+    `APB_SLAVE_IF,
     // AXI host port for memory access
-    `AXI_MASTER_IF(1) // IDW = 1
-    // Additional Debug Output
-    output wire         debug
+    `AXI_MASTER_IF(AXI_AW, AXI_DW, AXI_IDW)
 );
 
     // Number of APB devices
-    localparam APB_N = 3;
+    localparam APB_N = 1;
 
     // Internal APB for register access
     wire regbus_pwrite;
@@ -110,9 +105,9 @@ module system (
     wire [31:0] gpio_oe;
     mu_gpio mu_gpio (
         .clk(clk),
-        .rst_n(rst_n),
+        .rst(rst),
         // APB device port for register access
-        `APB_SLAVE_CONN(regbus_, 0)
+        `APB_SLAVE_CONN(regbus_, 0),
         // GPIO
         .gpio_out(gpio_out),
         .gpio_in(gpio_in),
@@ -125,51 +120,12 @@ module system (
     assign afe_sl = gpio_out[3];
     assign afe_sck = gpio_out[4];
 
-    wire dpi_ext_vsync = 1'b0;
-    wire dpi_pixclk; // Ignored
-    // wire dpi_vsync;
-    // wire dpi_hsync;
-    // wire dpi_enable;
-    // wire [23:0] dpi_data;
-    mu_ddif mu_ddif (
-        .clk(clk),
-        .clk_pix(clk_pix),
-        .rst_n(rst_n),
-        // APB device port for register access
-        `APB_SLAVE_CONN(regbus_, 1)
-        // AXI host port for direct memory access
-        `AXI_CONN(m_, m_)
-        // Display interface
-        .dpi_ext_vsync(dpi_ext_vsync),
-        .dpi_pixclk(dpi_pixclk),
-        .dpi_vsync(dpi_vsync),
-        .dpi_hsync(dpi_hsync),
-        .dpi_enable(dpi_enable),
-        .dpi_data(dpi_data)
-    );
+    assign dsi_lp_sel = gpio_out[5];
+    assign dsi_lp_cp = gpio_out[6];
+    assign dsi_lp_cn = gpio_out[7];
+    assign dsi_lp_dp = gpio_out[9:8];
+    assign dsi_lp_dn = gpio_out[11:10];
 
-    mu_dsitx mu_dsitx (
-        .clk(clk),
-        .clk_pix(clk_pix),
-        .rst_n(rst_n),
-        // APB device port for register access
-        `APB_SLAVE_CONN(regbus_, 2)
-        // Display input interface
-        .dpi_vsync(dpi_vsync),
-        .dpi_hsync(dpi_hsync),
-        .dpi_enable(dpi_enable),
-        .dpi_data(dpi_data),
-        // MIPI DSI output interface
-        .dsi_lp_cp(dsi_lp_cp),
-        .dsi_lp_cn(dsi_lp_cn),
-        .dsi_lp_dp(dsi_lp_dp),
-        .dsi_lp_dn(dsi_lp_dn),
-        .dsi_hs_cp(dsi_hs_cp),
-        .dsi_hs_cn(dsi_hs_cn),
-        .dsi_hs_dp(dsi_hs_dp),
-        .dsi_hs_dn(dsi_hs_dn)
-    );
-
-endmodule : system
+endmodule
 
 `default_nettype wire

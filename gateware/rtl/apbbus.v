@@ -59,7 +59,7 @@ module apbbus #(
         up_pready = 1'b1;
         up_prdata = 32'hdeadbeef;
         down_psel_vec = 'd0;
-        for (i = 0; i < N; i++) begin
+        for (i = 0; i < N; i = i + 1) begin
             if ((dec_addr == i[1:0]) && up_psel) begin
                 down_psel_vec[i] = 1'b1;
                 up_pready = down_pready_vec[i];
@@ -68,6 +68,6 @@ module apbbus #(
         end
     end
 
-endmodule : apbbus
+endmodule
 
 `default_nettype wire
