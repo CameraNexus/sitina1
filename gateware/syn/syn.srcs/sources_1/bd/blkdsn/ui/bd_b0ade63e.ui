@@ -1,0 +1,52 @@
+{
+   "ActiveEmotionalView":"Default View",
+   "Default View_ScaleFactor":"0.717936",
+   "Default View_TopLeft":"475,-63",
+   "ExpandedHierarchyInLayout":"",
+   "guistr":"# # String gsaved with Nlview 7.5.8 2022-09-21 7111 VDI=41 GEI=38 GUI=JA:10.0 TLS
+#  -string -flagsOSRD
+preplace port DDR -pg 1 -lvl 5 -x 1740 -y 620 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -lvl 5 -x 1740 -y 650 -defaultsOSRD
+preplace port APB_M_0 -pg 1 -lvl 5 -x 1740 -y 480 -defaultsOSRD
+preplace port S_AXI_HP0_0 -pg 1 -lvl 0 -x 0 -y 590 -defaultsOSRD
+preplace port mipi_phy_if_0 -pg 1 -lvl 5 -x 1740 -y 60 -defaultsOSRD
+preplace port port-id_FCLK_CLK0 -pg 1 -lvl 5 -x 1740 -y 680 -defaultsOSRD
+preplace port port-id_FCLK_CLK1 -pg 1 -lvl 5 -x 1740 -y 710 -defaultsOSRD
+preplace portBus peripheral_aresetn -pg 1 -lvl 5 -x 1740 -y 810 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 4 -x 1480 -y 690 -defaultsOSRD
+preplace inst axi_protocol_convert_0 -pg 1 -lvl 3 -x 1030 -y 460 -defaultsOSRD
+preplace inst axi_apb_bridge_0 -pg 1 -lvl 4 -x 1480 -y 480 -defaultsOSRD
+preplace inst rst_ps7_0_50M -pg 1 -lvl 3 -x 1030 -y 690 -defaultsOSRD
+preplace inst mipi_dsi_tx_subsystem_0 -pg 1 -lvl 4 -x 1480 -y 140 -defaultsOSRD
+preplace inst v_frmbuf_rd_0 -pg 1 -lvl 2 -x 610 -y 180 -defaultsOSRD
+preplace inst axi_mem_intercon -pg 1 -lvl 3 -x 1030 -y 220 -defaultsOSRD
+preplace inst axi_interconnect_0 -pg 1 -lvl 2 -x 610 -y 420 -defaultsOSRD
+preplace inst rst_ps7_0_200M -pg 1 -lvl 1 -x 200 -y 690 -defaultsOSRD
+preplace netloc processing_system7_0_FCLK_CLK0 1 1 4 410 90 840 80 1250 810 1710
+preplace netloc processing_system7_0_FCLK_CLK1 1 4 1 NJ 710
+preplace netloc processing_system7_0_FCLK_CLK2 1 0 5 20 580 390 600 850J 570 1240 560 1700
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 5 20 790 NJ 790 820 820 NJ 820 1690
+preplace netloc rst_ps7_0_200M_peripheral_aresetn 1 1 1 400 480n
+preplace netloc rst_ps7_0_50M_peripheral_aresetn 1 1 4 420 100 790 70 1220 830 1720J
+preplace netloc S_AXI_HP0_0_1 1 0 4 NJ 590 NJ 590 NJ 590 1210J
+preplace netloc axi_apb_bridge_0_APB_M 1 4 1 NJ 480
+preplace netloc axi_interconnect_0_M00_AXI 1 1 2 430 260 800
+preplace netloc axi_interconnect_0_M01_AXI 1 2 2 850 90 1270J
+preplace netloc axi_interconnect_0_M02_AXI 1 2 1 N 440
+preplace netloc axi_mem_intercon_M00_AXI 1 3 1 1230 220n
+preplace netloc axi_protocol_convert_0_M_AXI 1 3 1 N 460
+preplace netloc mipi_dsi_tx_subsystem_0_mipi_phy_if 1 4 1 NJ 60
+preplace netloc processing_system7_0_DDR 1 4 1 1710J 620n
+preplace netloc processing_system7_0_FIXED_IO 1 4 1 NJ 650
+preplace netloc processing_system7_0_M_AXI_GP0 1 1 4 430 580 NJ 580 1270J 570 1690
+preplace netloc v_frmbuf_rd_0_m_axi_mm_video 1 2 1 N 160
+preplace netloc v_frmbuf_rd_0_m_axis_video 1 2 2 810 100 1260J
+levelinfo -pg 1 0 200 610 1030 1480 1740
+pagesize -pg 1 -db -bbox -sgen -140 0 1960 840
+"
+}
+{
+   "da_axi4_cnt":"1",
+   "da_clkrst_cnt":"7",
+   "da_ps7_cnt":"1"
+}
