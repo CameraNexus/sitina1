@@ -30,13 +30,15 @@ module system #(
     parameter AXI_IDW = 2
 ) (
     input  wire         clk,        // Clock
-    input  wire         clk_pix,    // Pixel clock
+    input  wire         clk_ccd,    // CCD 4X pixel clock
+    input  wire         clk_lcd,    // LCD pixel clock
     input  wire         rst,
-    input  wire         rst_pix,
+    input  wire         rst_ccd,
+    input  wire         rst_lcd,
     // DVP from AD9990
     input  wire [13:0]  dvp_d,
-    input  wire         dvp_hsync,
-    input  wire         dvp_vsync,
+    output wire         dvp_hsync,
+    output wire         dvp_vsync,
     input  wire         dvp_pclk,
     // AD9990 control
     output wire         afe_rst,
@@ -68,7 +70,7 @@ module system #(
 );
 
     // Number of APB devices
-    localparam APB_N = 1;
+    localparam APB_N = 2;
 
     // Internal APB for register access
     wire regbus_pwrite;
@@ -100,9 +102,11 @@ module system #(
         .down_prdata_vec(regbus_prdata_vec)
     );
 
+    /* verilator lint_off UNUSEDSIGNAL */
     wire [31:0] gpio_out;
     wire [31:0] gpio_in;
     wire [31:0] gpio_oe;
+    /* verilator lint_on UNUSEDSIGNAL */
     mu_gpio mu_gpio (
         .clk(clk),
         .rst(rst),
@@ -125,6 +129,29 @@ module system #(
     assign dsi_lp_cn = gpio_out[7];
     assign dsi_lp_dp = gpio_out[9:8];
     assign dsi_lp_dn = gpio_out[11:10];
+
+    assign gpio_in = 32'd0;
+
+    ccdtimgen ccdtimgen (
+        .clk(clk),
+        .clk_ccd(clk_ccd),
+        .rst(rst),
+        .rst_ccd(rst_ccd),
+        // APB device port for register access
+        `APB_SLAVE_CONN(regbus_, 1),
+        // To AFE
+        .dvp_hsync(dvp_hsync),
+        .dvp_vsync(dvp_vsync),
+        // To CCD driver
+        .tcon_v1(tcon_v1),
+        .tcon_v2(tcon_v2),
+        .tcon_v23(tcon_v23),
+        .tcon_fdg(tcon_fdg),
+        .tcon_strobe(tcon_strobe),
+        .tcon_h1(tcon_h1),
+        .tcon_h2(tcon_h2),
+        .tcon_rg(tcon_rg)
+    );
 
 endmodule
 
