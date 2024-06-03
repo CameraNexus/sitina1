@@ -1,0 +1,7 @@
+.vscode/
+
+# QSPICE generated files
+*.dll
+V*.cpp
+V*.h
+*.qopraw
