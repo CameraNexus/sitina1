@@ -6477,7 +6477,6 @@
 		)
 	)
 	(symbol
-		(lib_name "symbols:ADP5071ACPZ")
 		(lib_id "symbols:ADP5071ACPZ")
 		(at 64.77 43.18 0)
 		(unit 1)
@@ -7264,7 +7263,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "footprints:L_1212"
+		(property "Footprint" "Inductor_SMD:L_Changjiang_FNR3015S"
 			(at 86.36 96.52 0)
 			(effects
 				(font
@@ -7532,7 +7531,7 @@
 				)
 			)
 		)
-		(property "Footprint" "footprints:L_1212"
+		(property "Footprint" "Inductor_SMD:L_Changjiang_FNR3015S"
 			(at 88.9 62.23 0)
 			(effects
 				(font
@@ -7913,7 +7912,6 @@
 		)
 	)
 	(symbol
-		(lib_name "symbols:ADP5071ACPZ")
 		(lib_id "symbols:ADP5071ACPZ")
 		(at 64.77 111.76 0)
 		(unit 1)
@@ -8400,7 +8398,7 @@
 				)
 			)
 		)
-		(property "Footprint" "footprints:L_1212"
+		(property "Footprint" "Inductor_SMD:L_Changjiang_FNR3015S"
 			(at 181.61 119.38 0)
 			(effects
 				(font
@@ -11971,7 +11969,7 @@
 				)
 			)
 		)
-		(property "Footprint" "footprints:L_1212"
+		(property "Footprint" "Inductor_SMD:L_Changjiang_FNR3015S"
 			(at 137.16 83.82 0)
 			(effects
 				(font
@@ -13453,7 +13451,7 @@
 				)
 			)
 		)
-		(property "Footprint" "footprints:L_1212"
+		(property "Footprint" "Inductor_SMD:L_Changjiang_FNR3015S"
 			(at 181.61 59.69 0)
 			(effects
 				(font
@@ -14896,7 +14894,7 @@
 				)
 			)
 		)
-		(property "Footprint" "footprints:L_1212"
+		(property "Footprint" "Inductor_SMD:L_Changjiang_FNR3015S"
 			(at 137.16 24.13 0)
 			(effects
 				(font
@@ -14966,7 +14964,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "footprints:L_1212"
+		(property "Footprint" "Inductor_SMD:L_Changjiang_FNR3015S"
 			(at 86.36 27.94 0)
 			(effects
 				(font
@@ -16363,7 +16361,7 @@
 				)
 			)
 		)
-		(property "Footprint" "footprints:L_1212"
+		(property "Footprint" "Inductor_SMD:L_Changjiang_FNR3015S"
 			(at 88.9 130.81 0)
 			(effects
 				(font

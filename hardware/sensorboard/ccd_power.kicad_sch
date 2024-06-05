@@ -573,322 +573,6 @@
 				)
 			)
 		)
-		(symbol "Regulator_Linear:LT3045xMSE"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "U"
-				(at -6.35 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" "LT3045xMSE"
-				(at 1.27 6.35 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" "Package_SO:MSOP-12-1EP_3x4mm_P0.65mm_EP1.65x2.85mm"
-				(at 0 8.255 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/3045fa.pdf"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "500mA, Adjustable, Ultralow Noise, Ultrahigh PSRR Linear Regulator, MSOP-12"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "linear voltage regulator low-noise"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "MSOP*1EP*3x4mm*P0.65mm*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "LT3045xMSE_0_1"
-				(rectangle
-					(start -7.62 5.08)
-					(end 7.62 -7.62)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(symbol "LT3045xMSE_1_1"
-				(pin power_in line
-					(at -10.16 2.54 0)
-					(length 2.54)
-					(name "IN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 10.16 0 180)
-					(length 2.54)
-					(name "OUTS"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "10"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 10.16 2.54 180)
-					(length 2.54)
-					(name "OUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "11"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 10.16 2.54 180)
-					(length 2.54) hide
-					(name "OUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "12"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 0 -10.16 90)
-					(length 2.54) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "13"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -10.16 2.54 0)
-					(length 2.54) hide
-					(name "IN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -10.16 2.54 0)
-					(length 2.54) hide
-					(name "IN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 0 0)
-					(length 2.54)
-					(name "EN/UV"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin open_collector line
-					(at 10.16 -5.08 180)
-					(length 2.54)
-					(name "PG"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -10.16 -2.54 0)
-					(length 2.54)
-					(name "ILIM"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at 10.16 -2.54 180)
-					(length 2.54)
-					(name "PGFB"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -10.16 -5.08 0)
-					(length 2.54)
-					(name "SET"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 0 -10.16 90)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "9"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "Regulator_Linear:XC6206PxxxMR"
 			(pin_names
 				(offset 0.254)
@@ -2364,6 +2048,286 @@
 						)
 					)
 					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
+		(symbol "symbols:LT3045xDD"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "U"
+				(at -6.35 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "LT3045xDD"
+				(at 1.27 6.35 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" "Package_DFN_QFN:DFN-10-1EP_3x3mm_P0.5mm_EP1.65x2.38mm_ThermalVias"
+				(at 0 8.255 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/3045fa.pdf"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "500mA, Adjustable, Ultralow Noise, Ultrahigh PSRR Linear Regulator, DFN-10"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "linear voltage regulator low-noise"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "MSOP*1EP*3x4mm*P0.65mm*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "LT3045xDD_0_1"
+				(rectangle
+					(start -7.62 5.08)
+					(end 7.62 -7.62)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "LT3045xDD_1_1"
+				(pin power_in line
+					(at -10.16 2.54 0)
+					(length 2.54)
+					(name "IN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 10.16 2.54 180)
+					(length 2.54)
+					(name "OUT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -10.16 90)
+					(length 2.54) hide
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -10.16 2.54 0)
+					(length 2.54) hide
+					(name "IN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -10.16 0 0)
+					(length 2.54)
+					(name "EN/UV"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin open_collector line
+					(at 10.16 -5.08 180)
+					(length 2.54)
+					(name "PG"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -10.16 -2.54 0)
+					(length 2.54)
+					(name "ILIM"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 10.16 -2.54 180)
+					(length 2.54)
+					(name "PGFB"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -10.16 -5.08 0)
+					(length 2.54)
+					(name "SET"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -10.16 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at 10.16 0 180)
+					(length 2.54)
+					(name "OUTS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -4980,107 +4944,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Regulator_Linear:LT3045xMSE")
-		(at 152.4 68.58 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "47e6a70d-e4da-4fe2-b62c-d66632e76bce")
-		(property "Reference" "U2"
-			(at 152.4 58.42 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "LT3045xMSE"
-			(at 152.4 60.96 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_SO:MSOP-12-1EP_3x4mm_P0.65mm_EP1.65x2.85mm"
-			(at 152.4 60.325 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/3045fa.pdf"
-			(at 152.4 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 152.4 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "85de5541-3daa-4b9a-b04d-bf87077ee6d9")
-		)
-		(pin "10"
-			(uuid "f81720ca-ee94-4744-b109-b8f3272aa0d2")
-		)
-		(pin "11"
-			(uuid "1927a9b0-f9ca-40a4-a19f-9e861f458ab9")
-		)
-		(pin "12"
-			(uuid "82aa1cdf-48a7-4589-bdee-2ef8d1881882")
-		)
-		(pin "13"
-			(uuid "74d45c28-c288-4ced-8567-80a3b4c7ae31")
-		)
-		(pin "2"
-			(uuid "e696327b-d127-4ac7-9abd-885b8179e71d")
-		)
-		(pin "3"
-			(uuid "70927cf6-e23f-46c4-8e51-1d672e0cd990")
-		)
-		(pin "4"
-			(uuid "5a4f0c47-8f1f-4369-abcf-3fd5944154fa")
-		)
-		(pin "5"
-			(uuid "fed3123d-dfe1-4bca-aa63-865600438323")
-		)
-		(pin "6"
-			(uuid "2d629f9f-97d9-449f-87d0-67c19afceea3")
-		)
-		(pin "7"
-			(uuid "5dc9476b-ef33-4ce6-9f07-bbd77ab6c8d1")
-		)
-		(pin "8"
-			(uuid "dd2ea0a2-f14d-4f91-8f75-58a28ea7193f")
-		)
-		(pin "9"
-			(uuid "1df7855d-cced-4532-897e-a74add95a922")
-		)
-		(instances
-			(project "pcb"
-				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
-					(reference "U2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R_Small_US")
 		(at 231.14 127 270)
 		(unit 1)
@@ -5545,6 +5408,101 @@
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
 					(reference "D7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "symbols:LT3045xDD")
+		(at 152.4 68.58 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "5c9494a7-0a2f-4703-af8f-ffc70e7d8e95")
+		(property "Reference" "U2"
+			(at 152.4 58.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LT3045xDD"
+			(at 152.4 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_DFN_QFN:DFN-10-1EP_3x3mm_P0.5mm_EP1.65x2.38mm_ThermalVias"
+			(at 152.4 60.325 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/3045fa.pdf"
+			(at 152.4 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "500mA, Adjustable, Ultralow Noise, Ultrahigh PSRR Linear Regulator, DFN-10"
+			(at 152.4 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "4"
+			(uuid "f1c0c49f-e044-4211-9652-06c14889b9c0")
+		)
+		(pin "6"
+			(uuid "1bd24919-2b3c-4ac2-922f-121131d63d6f")
+		)
+		(pin "11"
+			(uuid "8500973d-9103-47f9-a1b4-e30fcd41a151")
+		)
+		(pin "5"
+			(uuid "d1873807-3d2f-404b-9980-13c8eb4585b9")
+		)
+		(pin "3"
+			(uuid "c3666326-ff7c-4015-a759-3b7b6ab1c706")
+		)
+		(pin "2"
+			(uuid "fb203b74-9670-4253-bdfc-4de6f8041bee")
+		)
+		(pin "7"
+			(uuid "cea66d31-4764-45bd-a5f3-9b628d021c37")
+		)
+		(pin "8"
+			(uuid "ce58dd2e-9542-40ea-b75f-e343d1c401b9")
+		)
+		(pin "1"
+			(uuid "cb7f14db-a985-427e-b3a1-2610a654163b")
+		)
+		(pin "9"
+			(uuid "fe25cf63-ba1b-40b2-83df-77ab52e93ff3")
+		)
+		(pin "10"
+			(uuid "a4e2bf00-5d1c-4755-b090-529dea640b86")
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
+					(reference "U2")
 					(unit 1)
 				)
 			)
@@ -6424,6 +6382,101 @@
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
 					(reference "R9")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "symbols:LT3045xDD")
+		(at 152.4 121.92 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7dbe81f8-8116-485b-b5dc-fe63b4ea585c")
+		(property "Reference" "U3"
+			(at 152.4 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "LT3045xDD"
+			(at 152.4 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_DFN_QFN:DFN-10-1EP_3x3mm_P0.5mm_EP1.65x2.38mm_ThermalVias"
+			(at 152.4 113.665 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/3045fa.pdf"
+			(at 152.4 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "500mA, Adjustable, Ultralow Noise, Ultrahigh PSRR Linear Regulator, DFN-10"
+			(at 152.4 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "11"
+			(uuid "e88c8575-62aa-4096-9764-a71022ecf88a")
+		)
+		(pin "2"
+			(uuid "2e460494-b9e4-442c-87a1-588472ab2ec2")
+		)
+		(pin "1"
+			(uuid "85042d02-d7b0-4c5f-b325-f1ecc0cde02c")
+		)
+		(pin "10"
+			(uuid "0c8f49ac-e49e-4905-9fb2-39934944a8b6")
+		)
+		(pin "6"
+			(uuid "524ab67d-2bd6-4686-81dd-75909ebe6c4d")
+		)
+		(pin "7"
+			(uuid "2a8d38f6-e627-44a1-9ff2-8d985b294f2f")
+		)
+		(pin "8"
+			(uuid "7aa6bf8b-f4ff-4259-8691-ab439d333976")
+		)
+		(pin "9"
+			(uuid "0db7bba5-1d09-4503-a8ca-8bfe4d0ce40f")
+		)
+		(pin "3"
+			(uuid "3c8eaca9-38f1-4c4b-a560-b68163e0c531")
+		)
+		(pin "4"
+			(uuid "31702024-13eb-4453-9d46-9f1032f56729")
+		)
+		(pin "5"
+			(uuid "9502dda1-2061-4b2e-908e-02f332d39c7a")
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
+					(reference "U3")
 					(unit 1)
 				)
 			)
@@ -8361,107 +8414,6 @@
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
 					(reference "#PWR09")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Regulator_Linear:LT3045xMSE")
-		(at 152.4 121.92 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "d63acc83-12a3-4389-828f-ed51b20490b3")
-		(property "Reference" "U3"
-			(at 152.4 111.76 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "LT3045xMSE"
-			(at 152.4 114.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Package_SO:MSOP-12-1EP_3x4mm_P0.65mm_EP1.65x2.85mm"
-			(at 152.4 113.665 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.analog.com/media/en/technical-documentation/data-sheets/3045fa.pdf"
-			(at 152.4 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 152.4 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "38765509-96b2-4a57-8b67-769d05592760")
-		)
-		(pin "10"
-			(uuid "25c207ee-8c2f-4b8c-8a8e-423fbbfae086")
-		)
-		(pin "11"
-			(uuid "0c670698-6dcb-4f99-965f-259f15983482")
-		)
-		(pin "12"
-			(uuid "0233a87e-c2c6-4dc4-9fab-db35bbe475bf")
-		)
-		(pin "13"
-			(uuid "f217874d-70b7-4de4-9e05-ce1a375ef457")
-		)
-		(pin "2"
-			(uuid "8795ec65-a229-4971-9fa9-21f3014ae3d3")
-		)
-		(pin "3"
-			(uuid "a836b9fe-3fa8-4db7-9ca6-20ceadff3bed")
-		)
-		(pin "4"
-			(uuid "c95cea03-6fa5-4971-8a8d-1e1bd91b49e0")
-		)
-		(pin "5"
-			(uuid "0c039553-edd3-4c40-bb25-ba04e7fb6dfa")
-		)
-		(pin "6"
-			(uuid "656578f7-fae2-4e3b-9584-0663a8021b91")
-		)
-		(pin "7"
-			(uuid "36ea8ba6-9853-4656-a8b6-0fee3c1ff394")
-		)
-		(pin "8"
-			(uuid "6230a9ce-efdf-4a3d-a0d3-523955bf77b0")
-		)
-		(pin "9"
-			(uuid "efaabe33-bb62-49f2-9dbb-ab95243d2b18")
-		)
-		(instances
-			(project "pcb"
-				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/a00c2049-0a3f-4994-b4b1-e2d67645b8de"
-					(reference "U3")
 					(unit 1)
 				)
 			)

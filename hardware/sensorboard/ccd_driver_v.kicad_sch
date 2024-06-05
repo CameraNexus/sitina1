@@ -6123,7 +6123,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6_Handsoldering"
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
 			(at 113.03 72.39 0)
 			(effects
 				(font
@@ -8403,7 +8403,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6_Handsoldering"
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
 			(at 113.03 27.94 0)
 			(effects
 				(font
@@ -9452,7 +9452,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6_Handsoldering"
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
 			(at 113.03 163.83 0)
 			(effects
 				(font
@@ -12430,7 +12430,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6_Handsoldering"
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
 			(at 113.03 119.38 0)
 			(effects
 				(font

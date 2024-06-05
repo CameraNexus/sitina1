@@ -2543,7 +2543,7 @@
 				)
 			)
 		)
-		(property "Footprint" "footprints:L_1212"
+		(property "Footprint" "Inductor_SMD:L_Changjiang_FNR3015S"
 			(at 116.84 88.9 0)
 			(effects
 				(font
@@ -4132,7 +4132,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10K"
+		(property "Value" "5.1K"
 			(at 131.318 114.173 0)
 			(effects
 				(font

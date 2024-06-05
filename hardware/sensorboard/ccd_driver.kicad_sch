@@ -5838,7 +5838,7 @@
 				)
 			)
 		)
-		(property "Value" "74HC2G17"
+		(property "Value" "74HC2G17GW"
 			(at 176.53 93.98 0)
 			(effects
 				(font
@@ -5917,7 +5917,7 @@
 				)
 			)
 		)
-		(property "Value" "74HC2G17"
+		(property "Value" "74HC2G17GW"
 			(at 176.53 113.03 0)
 			(effects
 				(font
@@ -7827,7 +7827,7 @@
 				)
 			)
 		)
-		(property "Value" "74HC2G17"
+		(property "Value" "74HC2G17GW"
 			(at 176.53 39.37 0)
 			(effects
 				(font
@@ -10152,7 +10152,7 @@
 				)
 			)
 		)
-		(property "Value" "74HC2G17"
+		(property "Value" "74HC2G17GW"
 			(at 176.53 21.59 0)
 			(effects
 				(font
@@ -11446,7 +11446,7 @@
 				)
 			)
 		)
-		(property "Value" "74HC2G17"
+		(property "Value" "74HC2G17GW"
 			(at 176.53 57.15 0)
 			(effects
 				(font
@@ -12412,7 +12412,7 @@
 				)
 			)
 		)
-		(property "Value" "74HC2G17"
+		(property "Value" "74HC2G17GW"
 			(at 176.53 74.93 0)
 			(effects
 				(font

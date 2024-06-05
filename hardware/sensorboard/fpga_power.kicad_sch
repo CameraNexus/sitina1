@@ -573,6 +573,85 @@
 				)
 			)
 		)
+		(symbol "Mechanical:Fiducial"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "FID"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "Fiducial"
+				(at 0 3.175 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Fiducial Marker"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "fiducial marker"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Fiducial*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "Fiducial_0_1"
+				(circle
+					(center 0 0)
+					(radius 1.27)
+					(stroke
+						(width 0.508)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+		)
 		(symbol "power:+1V0"
 			(power)
 			(pin_numbers hide)
@@ -1260,12 +1339,12 @@
 				)
 			)
 		)
-		(symbol "symbols:SY8120"
+		(symbol "symbols:SY8008"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "U"
-				(at -7.62 10.16 0)
+				(at -7.62 5.715 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1273,8 +1352,8 @@
 					(justify left)
 				)
 			)
-			(property "Value" "SY8120"
-				(at -10.16 7.62 0)
+			(property "Value" "SY8008"
+				(at 0 5.715 0)
 				(effects
 					(font
 						(size 1.27 1.27)
@@ -1282,7 +1361,7 @@
 					(justify left)
 				)
 			)
-			(property "Footprint" "Package_TO_SOT_SMD:TSOT-23-6"
+			(property "Footprint" "Package_TO_SOT_SMD:TSOT-23-5"
 				(at 0.635 -6.35 0)
 				(effects
 					(font
@@ -1302,7 +1381,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "High Efficiency, Fast Response, 2.0A, 18V Input Synchronous Step Down Regulator"
+			(property "Description" "High Efficiency 1.5MHz, 0.6A/1A/1.2A Synchronous Step Down Regulator"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1320,9 +1399,9 @@
 					(hide yes)
 				)
 			)
-			(symbol "SY8120_0_1"
+			(symbol "SY8008_0_1"
 				(rectangle
-					(start -7.62 5.08)
+					(start -7.62 4.445)
 					(end 7.62 -5.08)
 					(stroke
 						(width 0.254)
@@ -1333,11 +1412,11 @@
 					)
 				)
 			)
-			(symbol "SY8120_1_1"
-				(pin passive line
-					(at 0 7.62 270)
+			(symbol "SY8008_1_1"
+				(pin input line
+					(at -10.16 -2.54 0)
 					(length 2.54)
-					(name "BS"
+					(name "~{SHDN}"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1370,10 +1449,10 @@
 						)
 					)
 				)
-				(pin input line
-					(at 10.16 -2.54 180)
+				(pin passive line
+					(at 10.16 2.54 180)
 					(length 2.54)
-					(name "FB"
+					(name "SW"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1381,24 +1460,6 @@
 						)
 					)
 					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -10.16 -2.54 0)
-					(length 2.54)
-					(name "~{SHDN}"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1416,7 +1477,7 @@
 							)
 						)
 					)
-					(number "5"
+					(number "4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -1424,17 +1485,17 @@
 						)
 					)
 				)
-				(pin passive line
-					(at 10.16 2.54 180)
+				(pin input line
+					(at 10.16 -2.54 180)
 					(length 2.54)
-					(name "SW"
+					(name "FB"
 						(effects
 							(font
 								(size 1.27 1.27)
 							)
 						)
 					)
-					(number "6"
+					(number "5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -9317,12 +9378,6 @@
 		(uuid "2d05d0e8-6135-451d-b09c-783c9cc91c92")
 	)
 	(junction
-		(at 116.84 132.08)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "2f90d209-4063-4ba8-a205-77f1449ce84c")
-	)
-	(junction
 		(at 195.58 96.52)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -9696,16 +9751,6 @@
 	)
 	(wire
 		(pts
-			(xy 114.3 127) (xy 116.84 127)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1903bdac-aaf9-442f-8cfd-b4d41095593b")
-	)
-	(wire
-		(pts
 			(xy 220.98 68.58) (xy 223.52 68.58)
 		)
 		(stroke
@@ -9813,16 +9858,6 @@
 			(type solid)
 		)
 		(uuid "35da6b31-bb13-4635-968a-a92a9b289c0c")
-	)
-	(wire
-		(pts
-			(xy 116.84 127) (xy 116.84 132.08)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "366ee837-59e0-47c6-9459-14b346f54bf2")
 	)
 	(wire
 		(pts
@@ -10063,16 +10098,6 @@
 			(type solid)
 		)
 		(uuid "5cab5c03-681e-46f4-a4bc-9f8d7a8bb808")
-	)
-	(wire
-		(pts
-			(xy 104.14 127) (xy 106.68 127)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5f618463-9567-4f37-9bd0-162e18cf96ed")
 	)
 	(wire
 		(pts
@@ -10951,73 +10976,6 @@
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
 					(reference "L1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 110.49 127 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "0a4dcafa-5e40-4736-bd40-44d62dc71cbc")
-		(property "Reference" "C174"
-			(at 106.68 125.73 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Value" "100nF"
-			(at 114.3 125.73 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 106.68 127.9652 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 110.49 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 110.49 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "25e58fb1-74fe-4cbb-9278-f65efb4a420b")
-		)
-		(pin "2"
-			(uuid "a0a35b7b-e4fb-4a64-9536-729bfcc672de")
-		)
-		(instances
-			(project "pcb"
-				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
-					(reference "C174")
 					(unit 1)
 				)
 			)
@@ -11952,6 +11910,70 @@
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
 					(reference "#PWR0284")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:Fiducial")
+		(at 157.48 170.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "38c6e2a1-85b4-454c-b019-0862719857a6")
+		(property "Reference" "IV　　"
+			(at 160.02 168.9099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Fiducial"
+			(at 160.02 171.4499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Fiducial:Fiducial_0.75mm_Mask1.5mm"
+			(at 157.48 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 157.48 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Fiducial Marker"
+			(at 157.48 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
+					(reference "IV　　")
 					(unit 1)
 				)
 			)
@@ -13498,6 +13520,85 @@
 		)
 	)
 	(symbol
+		(lib_id "symbols:SY8008")
+		(at 104.14 134.62 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4b9af0c1-fd3a-4c6e-935f-d2826ec34b4a")
+		(property "Reference" "U33"
+			(at 104.14 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "SY8008"
+			(at 104.14 128.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:TSOT-23-5"
+			(at 104.775 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 104.14 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "High Efficiency 1.5MHz, 0.6A/1A/1.2A Synchronous Step Down Regulator"
+			(at 104.14 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "5"
+			(uuid "e8c53b5a-da3a-4f7b-b415-8413f1115839")
+		)
+		(pin "2"
+			(uuid "538d1145-d8b9-41f8-b710-02bcae3055a7")
+		)
+		(pin "3"
+			(uuid "44eaa04c-271a-4685-9dad-7f6da0f6c5c2")
+		)
+		(pin "4"
+			(uuid "f2aa1018-35d3-46fa-8d58-4bd779fd5045")
+		)
+		(pin "1"
+			(uuid "7ac85768-5c61-4ace-bd62-e98ce244e03c")
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
+					(reference "U33")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 81.28 100.33 0)
 		(mirror y)
@@ -14329,7 +14430,7 @@
 				)
 			)
 		)
-		(property "Value" "47pF"
+		(property "Value" "18pF"
 			(at 142.24 137.16 0)
 			(effects
 				(font
@@ -14785,6 +14886,70 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:Fiducial")
+		(at 139.7 170.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "89684702-1390-451f-91e1-cdb7b0cdd8ff")
+		(property "Reference" "I"
+			(at 142.24 168.9099 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Fiducial"
+			(at 142.24 171.4499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Fiducial:Fiducial_0.75mm_Mask1.5mm"
+			(at 139.7 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 139.7 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Fiducial Marker"
+			(at 139.7 170.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
+					(reference "I")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 195.58 100.33 0)
 		(unit 1)
@@ -15052,16 +15217,17 @@
 		)
 	)
 	(symbol
-		(lib_id "symbols:SY8120")
-		(at 104.14 134.62 0)
+		(lib_id "Mechanical:Fiducial")
+		(at 139.7 185.42 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "9311dce2-35b2-4a45-b144-d3af224415d0")
-		(property "Reference" "U32"
-			(at 96.52 124.46 0)
+		(fields_autoplaced yes)
+		(uuid "9100d2d5-884f-43f2-9ce0-ed0badc36af2")
+		(property "Reference" "III"
+			(at 142.24 184.1499 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15069,8 +15235,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "SY8120"
-			(at 96.52 127 0)
+		(property "Value" "Fiducial"
+			(at 142.24 186.6899 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15078,19 +15244,8 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:TSOT-23-6"
-			(at 104.775 140.97 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-					(italic yes)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 104.14 134.62 0)
+		(property "Footprint" "Fiducial:Fiducial_0.75mm_Mask1.5mm"
+			(at 139.7 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15098,8 +15253,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
-			(at 104.14 134.62 0)
+		(property "Datasheet" "~"
+			(at 139.7 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15107,28 +15262,19 @@
 				(hide yes)
 			)
 		)
-		(pin "1"
-			(uuid "c760c6b7-b182-4427-b8c7-8dab12aa11c1")
-		)
-		(pin "2"
-			(uuid "842d291d-be1f-4e73-b155-15806c022025")
-		)
-		(pin "3"
-			(uuid "677c5397-e50c-45ce-8bf5-2fa619fe09e3")
-		)
-		(pin "4"
-			(uuid "320eff65-c89c-446c-95a0-d15fb3aa4985")
-		)
-		(pin "5"
-			(uuid "4958716b-5167-4aa4-a751-89254efa079d")
-		)
-		(pin "6"
-			(uuid "2f7d922b-0dcf-4c92-b314-82fdff7cb374")
+		(property "Description" "Fiducial Marker"
+			(at 139.7 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
 		)
 		(instances
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
-					(reference "U32")
+					(reference "III")
 					(unit 1)
 				)
 			)
@@ -16015,6 +16161,70 @@
 		)
 	)
 	(symbol
+		(lib_id "Mechanical:Fiducial")
+		(at 139.7 177.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "cae50168-c70d-4f4e-8651-f151dab88c11")
+		(property "Reference" "II"
+			(at 142.24 176.5299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Fiducial"
+			(at 142.24 179.0699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Fiducial:Fiducial_0.75mm_Mask1.5mm"
+			(at 139.7 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 139.7 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Fiducial Marker"
+			(at 139.7 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
+					(reference "II")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 147.32 68.58 0)
 		(mirror y)
@@ -16480,6 +16690,70 @@
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
 					(reference "#PWR0229")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:Fiducial")
+		(at 157.48 185.42 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ec7510d6-6534-490c-bb78-4f4f96bed3f5")
+		(property "Reference" "VI"
+			(at 160.02 184.1499 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Fiducial"
+			(at 160.02 186.6899 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Fiducial:Fiducial_0.75mm_Mask1.5mm"
+			(at 157.48 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 157.48 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Fiducial Marker"
+			(at 157.48 185.42 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
+					(reference "VI")
 					(unit 1)
 				)
 			)
@@ -17130,6 +17404,70 @@
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
 					(reference "C130")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:Fiducial")
+		(at 157.48 177.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f8acfae5-0621-4bf6-9f54-83132cbd3cc3")
+		(property "Reference" "V"
+			(at 160.02 176.5299 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "Fiducial"
+			(at 160.02 179.0699 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Fiducial:Fiducial_0.75mm_Mask1.5mm"
+			(at 157.48 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 157.48 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Fiducial Marker"
+			(at 157.48 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
+					(reference "V")
 					(unit 1)
 				)
 			)

@@ -2978,24 +2978,8 @@
 		(uuid "212f3fa9-52cc-46b6-8114-a41dea45eac0")
 	)
 	(no_connect
-		(at 127 147.32)
-		(uuid "2a2de825-a0f6-4435-9fae-7dcb5af48630")
-	)
-	(no_connect
-		(at 111.76 149.86)
-		(uuid "2d56e6d0-a645-4ca7-b4f4-38f500573fa8")
-	)
-	(no_connect
-		(at 111.76 147.32)
-		(uuid "d0bf7ee7-f73e-4570-9887-d3151b502b8b")
-	)
-	(no_connect
 		(at 152.4 132.08)
 		(uuid "d962739e-a5f3-4087-9df1-777180687d0c")
-	)
-	(no_connect
-		(at 127 149.86)
-		(uuid "dc92b391-9ba6-47e3-8d68-6f195fbceee6")
 	)
 	(wire
 		(pts
@@ -3226,6 +3210,16 @@
 			(type default)
 		)
 		(uuid "2f91af6c-19d1-4258-be70-f04bb4eb5f64")
+	)
+	(wire
+		(pts
+			(xy 111.76 147.32) (xy 127 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2f9dbc92-8acf-486b-943d-3165515d5c16")
 	)
 	(wire
 		(pts
@@ -4119,6 +4113,16 @@
 	)
 	(wire
 		(pts
+			(xy 111.76 149.86) (xy 127 149.86)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d769832d-cfc6-41ee-862e-248102150318")
+	)
+	(wire
+		(pts
 			(xy 99.06 137.16) (xy 101.6 137.16)
 		)
 		(stroke
@@ -4585,6 +4589,28 @@
 		)
 		(uuid "f645d544-45f9-45e7-9360-fc9a95fccacf")
 	)
+	(global_label "SPI_CS"
+		(shape input)
+		(at 58.42 154.94 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "01afcf03-2b73-44d3-b101-106d1415d952")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 48.9034 154.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "SPI_SCLK"
 		(shape input)
 		(at 121.92 160.02 180)
@@ -4796,28 +4822,6 @@
 		(uuid "8e46b113-a3fb-42bc-b888-1ca3f371f07c")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 224.5867 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "KEY_LOAD"
-		(shape input)
-		(at 58.42 154.94 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "eaf581eb-2476-4ee3-9da9-aca41b2cc66e")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 46.2424 154.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
