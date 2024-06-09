@@ -5903,7 +5903,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "7.5"
+		(property "Value" "0"
 			(at 162.56 61.595 0)
 			(effects
 				(font
@@ -6558,7 +6558,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "-9VA"
+		(property "Value" "-8VA"
 			(at 26.67 49.53 0)
 			(effects
 				(font

@@ -148,17 +148,6 @@
 		)
 		(uuid "69967e43-1c12-4c14-9657-453ca7ddd2d1")
 	)
-	(text "Rev  Date      Description "
-		(exclude_from_sim no)
-		(at 199.39 41.91 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "77fd0bea-14ec-49a3-b22b-a475cbb74a31")
-	)
 	(text "7"
 		(exclude_from_sim no)
 		(at 33.02 96.52 0)
@@ -236,19 +225,6 @@
 		)
 		(uuid "c14e782f-5d16-405f-8aca-66a78070368e")
 	)
-	(text "Revision History"
-		(exclude_from_sim no)
-		(at 199.39 35.56 0)
-		(effects
-			(font
-				(size 2.9972 2.9972)
-				(thickness 0.508)
-				(bold yes)
-			)
-			(justify left bottom)
-		)
-		(uuid "d7e9a161-19c2-47a2-90ea-16aaa3a46b62")
-	)
 	(text "2"
 		(exclude_from_sim no)
 		(at 33.02 45.72 0)
@@ -281,28 +257,6 @@
 			(justify left bottom)
 		)
 		(uuid "dd28bcb8-5695-46d2-bee3-ebe22b87a9a3")
-	)
-	(text "S0.1 2023-08"
-		(exclude_from_sim no)
-		(at 199.39 46.99 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "f1e31366-0aac-4db6-a867-7ca56031f2e0")
-	)
-	(text "1. Initial release"
-		(exclude_from_sim no)
-		(at 223.52 46.99 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "f3851be8-a7b2-4b01-ae8e-7a9c7a1e6f91")
 	)
 	(sheet
 		(at 40.64 71.12)

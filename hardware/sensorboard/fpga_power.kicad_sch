@@ -11925,7 +11925,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "38c6e2a1-85b4-454c-b019-0862719857a6")
-		(property "Reference" "IV　　"
+		(property "Reference" "FID4"
 			(at 160.02 168.9099 0)
 			(effects
 				(font
@@ -11973,7 +11973,7 @@
 		(instances
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
-					(reference "IV　　")
+					(reference "FID4")
 					(unit 1)
 				)
 			)
@@ -14895,7 +14895,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "89684702-1390-451f-91e1-cdb7b0cdd8ff")
-		(property "Reference" "I"
+		(property "Reference" "FID1"
 			(at 142.24 168.9099 0)
 			(effects
 				(font
@@ -14943,7 +14943,7 @@
 		(instances
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
-					(reference "I")
+					(reference "FID1")
 					(unit 1)
 				)
 			)
@@ -15226,7 +15226,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "9100d2d5-884f-43f2-9ce0-ed0badc36af2")
-		(property "Reference" "III"
+		(property "Reference" "FID3"
 			(at 142.24 184.1499 0)
 			(effects
 				(font
@@ -15274,7 +15274,7 @@
 		(instances
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
-					(reference "III")
+					(reference "FID3")
 					(unit 1)
 				)
 			)
@@ -16170,7 +16170,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cae50168-c70d-4f4e-8651-f151dab88c11")
-		(property "Reference" "II"
+		(property "Reference" "FID2"
 			(at 142.24 176.5299 0)
 			(effects
 				(font
@@ -16218,7 +16218,7 @@
 		(instances
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
-					(reference "II")
+					(reference "FID2")
 					(unit 1)
 				)
 			)
@@ -16705,7 +16705,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "ec7510d6-6534-490c-bb78-4f4f96bed3f5")
-		(property "Reference" "VI"
+		(property "Reference" "FID6"
 			(at 160.02 184.1499 0)
 			(effects
 				(font
@@ -16753,7 +16753,7 @@
 		(instances
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
-					(reference "VI")
+					(reference "FID6")
 					(unit 1)
 				)
 			)
@@ -17419,7 +17419,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "f8acfae5-0621-4bf6-9f54-83132cbd3cc3")
-		(property "Reference" "V"
+		(property "Reference" "FID5"
 			(at 160.02 176.5299 0)
 			(effects
 				(font
@@ -17467,7 +17467,7 @@
 		(instances
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/6bd93fa5-b04c-403a-8268-88485f724a4c"
-					(reference "V")
+					(reference "FID5")
 					(unit 1)
 				)
 			)

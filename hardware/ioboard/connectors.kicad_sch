@@ -3764,12 +3764,6 @@
 		(uuid "2935a393-046d-45ab-9209-3fb1708ca2b2")
 	)
 	(junction
-		(at 137.16 33.02)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "2d42240d-59fe-4a26-be56-a829303e653b")
-	)
-	(junction
 		(at 99.06 182.88)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3930,16 +3924,6 @@
 			(type default)
 		)
 		(uuid "0258c405-1055-471e-9214-d0755d652a81")
-	)
-	(wire
-		(pts
-			(xy 139.7 35.56) (xy 137.16 35.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "02f61b8c-4b3a-4565-92bd-a8b947dd2caf")
 	)
 	(wire
 		(pts
@@ -4713,16 +4697,6 @@
 	)
 	(wire
 		(pts
-			(xy 137.16 35.56) (xy 137.16 33.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "98731163-b5e7-49de-9a8b-4ceb6835538e")
-	)
-	(wire
-		(pts
 			(xy 93.98 104.14) (xy 101.6 104.14)
 		)
 		(stroke
@@ -4933,16 +4907,6 @@
 	)
 	(wire
 		(pts
-			(xy 137.16 33.02) (xy 139.7 33.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b132540d-a9f7-4da4-bbaf-338df8027dda")
-	)
-	(wire
-		(pts
 			(xy 147.32 111.76) (xy 152.4 111.76)
 		)
 		(stroke
@@ -5120,16 +5084,6 @@
 			(type default)
 		)
 		(uuid "d55e8e72-e94a-48f5-bc76-0b690c842d70")
-	)
-	(wire
-		(pts
-			(xy 124.46 33.02) (xy 137.16 33.02)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "dafd6c5a-d0e5-4d18-a53a-1afb24546a45")
 	)
 	(wire
 		(pts
@@ -5547,7 +5501,7 @@
 		)
 		(uuid "7244770b-8fd2-4167-98e9-376d786637ad")
 	)
-	(label "-9VA"
+	(label "-8VA"
 		(at 87.63 101.6 0)
 		(fields_autoplaced yes)
 		(effects
@@ -5604,7 +5558,7 @@
 	)
 	(global_label "FPGA_TCK"
 		(shape output)
-		(at 119.38 177.8 0)
+		(at 119.38 185.42 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5614,7 +5568,7 @@
 		)
 		(uuid "052fcbc4-bfd2-4eff-9dae-29d146a87875")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 131.6527 177.8 0)
+			(at 131.6527 185.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5734,7 +5688,7 @@
 	)
 	(global_label "FPGA_TMS"
 		(shape output)
-		(at 119.38 185.42 0)
+		(at 119.38 177.8 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -5744,7 +5698,7 @@
 		)
 		(uuid "2d2c4416-e623-4079-a490-7d530adade61")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 131.7736 185.42 0)
+			(at 131.7736 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5772,28 +5726,6 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "LCD_RST"
-		(shape output)
-		(at 139.7 35.56 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "31f67190-485c-43bb-8ba4-1e60e1042706")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 150.7631 35.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 				(hide yes)
 			)
 		)
@@ -6104,7 +6036,7 @@
 	)
 	(global_label "FPGA_TDI"
 		(shape output)
-		(at 119.38 180.34 0)
+		(at 119.38 182.88 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6114,7 +6046,7 @@
 		)
 		(uuid "a894183d-5e54-4fb2-ab9a-bf0985196c5d")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 130.9875 180.34 0)
+			(at 130.9875 182.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6126,7 +6058,7 @@
 	)
 	(global_label "FPGA_TDO"
 		(shape input)
-		(at 119.38 182.88 0)
+		(at 119.38 180.34 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -6136,7 +6068,7 @@
 		)
 		(uuid "a8fea90c-74e5-4347-bbe2-6733198b84e3")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 131.7132 182.88 0)
+			(at 131.7132 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6228,28 +6160,6 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "LCD_EN"
-		(shape output)
-		(at 139.7 33.02 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "be8787fc-d41c-4bb4-9a26-ffac738b8697")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 149.7955 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 				(hide yes)
 			)
 		)
@@ -6674,7 +6584,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "footprints:YTC1P-4520"
+		(property "Footprint" "footprints:YZP0652-15072-01"
 			(at 259.08 68.58 0)
 			(effects
 				(font
@@ -6941,7 +6851,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "footprints:YTC1P-4520"
+		(property "Footprint" "footprints:YZP0652-15072-01"
 			(at 259.08 83.82 0)
 			(effects
 				(font
@@ -7311,13 +7221,13 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_02x06_Odd_Even")
-		(at 106.68 177.8 0)
+		(at 109.22 177.8 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "3f4d1f6d-800f-43a9-a56a-b22efd93ee54")
 		(property "Reference" "J9"
 			(at 107.95 166.37 0)
@@ -7336,7 +7246,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_1.27mm:PinHeader_2x06_P1.27mm_Horizontal"
-			(at 106.68 177.8 0)
+			(at 109.22 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7345,7 +7255,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 106.68 177.8 0)
+			(at 109.22 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7354,7 +7264,7 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x06, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 106.68 177.8 0)
+			(at 109.22 177.8 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7834,7 +7744,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "6c878059-77f8-401e-97f6-1abaf34d0cec")
 		(property "Reference" "#PWR0110"
 			(at 90.17 101.6 0)
@@ -7845,13 +7754,12 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "-9VA"
-			(at 82.55 101.5999 90)
+		(property "Value" "-8VA"
+			(at 80.01 101.6 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Footprint" ""
@@ -8066,7 +7974,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "footprints:YTC1P-4520"
+		(property "Footprint" "footprints:YZP0652-15072-01"
 			(at 259.08 73.66 0)
 			(effects
 				(font
@@ -8466,7 +8374,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "footprints:YTC1P-4520"
+		(property "Footprint" "footprints:YZP0652-15072-01"
 			(at 259.08 63.5 0)
 			(effects
 				(font
@@ -8666,7 +8574,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "footprints:YTC1P-4520"
+		(property "Footprint" "footprints:YZP0652-15072-01"
 			(at 259.08 86.36 0)
 			(effects
 				(font
@@ -8799,7 +8707,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "footprints:YTC1P-4520"
+		(property "Footprint" "footprints:YZP0652-15072-01"
 			(at 259.08 78.74 0)
 			(effects
 				(font
@@ -8867,7 +8775,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "footprints:YTC1P-4520"
+		(property "Footprint" "footprints:YZP0652-15072-01"
 			(at 259.08 66.04 0)
 			(effects
 				(font
@@ -9260,7 +9168,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "footprints:YTC1P-4520"
+		(property "Footprint" "footprints:YZP0652-15072-01"
 			(at 259.08 76.2 0)
 			(effects
 				(font
@@ -9459,7 +9367,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "footprints:YTC1P-4520"
+		(property "Footprint" "footprints:YZP0652-15072-01"
 			(at 259.08 71.12 0)
 			(effects
 				(font
@@ -9527,7 +9435,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "footprints:YTC1P-4520"
+		(property "Footprint" "footprints:YZP0652-15072-01"
 			(at 259.08 81.28 0)
 			(effects
 				(font

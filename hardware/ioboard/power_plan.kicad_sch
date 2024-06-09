@@ -2293,7 +2293,7 @@
 	)
 	(polyline
 		(pts
-			(xy 158.75 67.31) (xy 158.75 82.55)
+			(xy 158.75 67.31) (xy 158.75 77.47)
 		)
 		(stroke
 			(width 0)
@@ -3512,7 +3512,7 @@
 		(uuid b6ac9cf0-3bc8-4082-ac0e-73137c5ca62f)
 	)
 	(circle
-		(center 158.75 82.55)
+		(center 158.75 77.47)
 		(radius 1.27)
 		(stroke
 			(width 0)

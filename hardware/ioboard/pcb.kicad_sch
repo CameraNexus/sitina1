@@ -58,17 +58,6 @@
 		)
 		(uuid "1ac9fdaf-8b29-4ea6-a283-3053981e2a28")
 	)
-	(text "0.8 2024-01"
-		(exclude_from_sim no)
-		(at 127 121.92 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left top)
-		)
-		(uuid "1d14d575-2490-4217-8b41-aafa85e110fb")
-	)
 	(text "7"
 		(exclude_from_sim no)
 		(at 33.02 96.52 0)
@@ -90,17 +79,6 @@
 			(justify left bottom)
 		)
 		(uuid "1f40dc14-a320-4374-bb27-46d3f5c897ef")
-	)
-	(text "1. Use AD9990 for ADC/ AFE/ TG\n2. Remove FPGA\n3. Redesigned H/V driver"
-		(exclude_from_sim no)
-		(at 149.86 57.15 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "25a1e88a-5155-4fa2-9fa5-7bb51198ac4e")
 	)
 	(text "Table of Contents"
 		(exclude_from_sim no)
@@ -126,50 +104,6 @@
 		)
 		(uuid "3fe83452-8f35-4e46-8007-249a8eed789b")
 	)
-	(text "1. Add fan speed control\n2. Add active lens contact\n3. Add flash sync port\n4. Allow tripod mount\n5. Revise power supply design\n6. Change connector type"
-		(exclude_from_sim no)
-		(at 149.86 121.92 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left top)
-		)
-		(uuid "43da1f96-74a6-449f-86f0-8c0ecdb41bd1")
-	)
-	(text "1. Switch from iMX6ULL to iMXRT1176\n2. Shrink board size\n3. Removed builtin ethernet\n4. CCD power supply bug fixes\n5. Use MIPI DSI LCD instead of DPI"
-		(exclude_from_sim no)
-		(at 149.86 104.14 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "49c72e7e-6eb6-44d3-b557-73616adf5625")
-	)
-	(text "0.4 2022-03"
-		(exclude_from_sim no)
-		(at 127 71.12 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "505768e5-4faf-4c3a-ad60-084f21426a87")
-	)
-	(text "1. Switch back to iMXRT1052\n2. New board shape\n3. Use 3.4\" LCD instead of 4\"\n4. Split into 3 boards (MB, PB, SB)\n5. Use individual MOSFETs for V-drivers"
-		(exclude_from_sim no)
-		(at 149.86 105.41 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left top)
-		)
-		(uuid "508f1f71-34ed-421f-b539-2f5e65eadedb")
-	)
 	(text "Microcontroller"
 		(exclude_from_sim no)
 		(at 43.18 66.04 0)
@@ -192,39 +126,6 @@
 		)
 		(uuid "69967e43-1c12-4c14-9657-453ca7ddd2d1")
 	)
-	(text "1. Combine MB and PB into IOB\n2. Switch to Zynq 7010 (AGAIN?)\n3. Use FPGA for timing gen\n4. Remove USB data port"
-		(exclude_from_sim no)
-		(at 149.8914 154.3598 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "71d97363-b9e6-448c-88d1-a14eafd1978d")
-	)
-	(text "Rev Date      Description "
-		(exclude_from_sim no)
-		(at 127 41.91 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "77fd0bea-14ec-49a3-b22b-a475cbb74a31")
-	)
-	(text "0.7 2023-08"
-		(exclude_from_sim no)
-		(at 127 105.41 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left top)
-		)
-		(uuid "844c6b63-e9d6-48fe-879c-a0eaac14627e")
-	)
 	(text "6"
 		(exclude_from_sim no)
 		(at 33.02 86.36 0)
@@ -236,17 +137,6 @@
 		)
 		(uuid "8510375c-0e11-4bd6-a302-0354edb6fdeb")
 	)
-	(text "0.2 2021-03"
-		(exclude_from_sim no)
-		(at 127 50.8 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "98f671a2-e5a6-4f41-91bc-4c3984ff9d50")
-	)
 	(text "Display"
 		(exclude_from_sim no)
 		(at 43.18 96.52 0)
@@ -257,17 +147,6 @@
 			(justify left bottom)
 		)
 		(uuid "9a1c8ec0-d8e8-48f7-9b9a-73d36cfb311f")
-	)
-	(text "0.6 2023-03"
-		(exclude_from_sim no)
-		(at 127 91.44 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "9ca56caf-cb53-4240-b60e-972458dbbc8f")
 	)
 	(text "3"
 		(exclude_from_sim no)
@@ -302,28 +181,6 @@
 		)
 		(uuid "ae9d795a-cb82-40f8-9c6a-32629c17c33b")
 	)
-	(text "1. Fix AD9990 TEST pin connection\n2. Minor bug fixes for driver\n3. Fix MPU power supply"
-		(exclude_from_sim no)
-		(at 149.86 67.31 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "b0abae04-ff24-40c6-981d-694e7627d4fa")
-	)
-	(text "0.5 2022-04"
-		(exclude_from_sim no)
-		(at 127 74.93 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "bdc0dd10-84f5-438d-8d2b-c100a965af49")
-	)
 	(text "8"
 		(exclude_from_sim no)
 		(at 33.02 106.68 0)
@@ -334,30 +191,6 @@
 			(justify left bottom)
 		)
 		(uuid "c527fb06-e48a-4daa-a001-77304521682e")
-	)
-	(text "1. Redesign H/V driver (again)"
-		(exclude_from_sim no)
-		(at 149.86 71.12 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "d18af7c1-3bb0-4251-b51d-46399d12b5e5")
-	)
-	(text "Revision History"
-		(exclude_from_sim no)
-		(at 127 35.56 0)
-		(effects
-			(font
-				(size 2.9972 2.9972)
-				(thickness 0.508)
-				(bold yes)
-			)
-			(justify left bottom)
-		)
-		(uuid "d7e9a161-19c2-47a2-90ea-16aaa3a46b62")
 	)
 	(text "4"
 		(exclude_from_sim no)
@@ -370,50 +203,6 @@
 		)
 		(uuid "db502d30-44f7-4a74-b829-9b6137b20bee")
 	)
-	(text "0.9 2024-03"
-		(exclude_from_sim no)
-		(at 127 144.78 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "ddaaa947-fb24-40c0-b5e5-d2e37bd7ab69")
-	)
-	(text "1. Switch from iMXRT1052 to iMX6ULL\n2. Use 4\" 720x720 LCD instead\n3. Add 100M ethernet\n4. Redesigned CCD power supply\n5. Bug fixes for driver level-shifter"
-		(exclude_from_sim no)
-		(at 149.86 87.63 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "e82a3702-3cb8-4849-ad3d-cbd8d5aef326")
-	)
-	(text "0.1 2017-12"
-		(exclude_from_sim no)
-		(at 127 46.99 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "f1e31366-0aac-4db6-a867-7ca56031f2e0")
-	)
-	(text "1. Initial release"
-		(exclude_from_sim no)
-		(at 149.86 46.99 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "f3851be8-a7b2-4b01-ae8e-7a9c7a1e6f91")
-	)
 	(text "Connectors"
 		(exclude_from_sim no)
 		(at 43.18 76.2 0)
@@ -424,17 +213,6 @@
 			(justify left bottom)
 		)
 		(uuid "f68f85ce-7e21-4644-97b5-745cbdcc5c1c")
-	)
-	(text "0.3 2021-12"
-		(exclude_from_sim no)
-		(at 127 60.96 0)
-		(effects
-			(font
-				(size 2 2)
-			)
-			(justify left bottom)
-		)
-		(uuid "fba5446f-0d2c-4c28-ae6d-1ca8b16dbe96")
 	)
 	(sheet
 		(at 40.64 101.6)
