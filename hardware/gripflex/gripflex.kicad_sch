@@ -6,8 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "Sitina 1 Grip Flex")
-		(date "2024-03-25")
-		(rev "R0.9")
+		(date "2024-06-09")
+		(rev "R0.10")
 		(company "Copyright 2024 Wenting Zhang")
 	)
 	(lib_symbols

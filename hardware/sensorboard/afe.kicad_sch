@@ -5,10 +5,10 @@
 	(uuid "28759281-de30-4c16-846f-62ff1d0ecd88")
 	(paper "A4")
 	(title_block
-		(title "Sitina 1 Sensor Board")
-		(date "2024-03-25")
-		(rev "R0.9")
-		(company "Copyright 2024 Wenting Zhang")
+		(title "AFE")
+		(date "2024-06-09")
+		(rev "R0.10")
+		(company "Copyright 2024 Anhang Li, Wenting Zhang")
 		(comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
 		(comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
 		(comment 4 "This source describes Open Hardware and is licensed under the CERN-OHL-P v2.")
@@ -13481,7 +13481,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "51"
+		(property "Value" "62R"
 			(at 264.16 160.02 90)
 			(effects
 				(font

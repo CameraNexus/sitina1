@@ -5,10 +5,10 @@
 	(uuid "1b26b649-31c0-4845-a70f-9187aef93430")
 	(paper "A4")
 	(title_block
-		(title "Sitina 1 Sensor Board")
-		(date "2024-03-25")
-		(rev "R0.9")
-		(company "Copyright 2024 Wenting Zhang")
+		(title "CCD V Drivers")
+		(date "2024-06-09")
+		(rev "R0.10")
+		(company "Copyright 2024 Anhang Li, Wenting Zhang")
 		(comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
 		(comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
 		(comment 4 "This source describes Open Hardware and is licensed under the CERN-OHL-P v2.")
@@ -2905,6 +2905,12 @@
 		(uuid "b9f7c68a-b892-41cf-bb16-1ad72b98b383")
 	)
 	(junction
+		(at 88.9 33.02)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "bb0ee7f7-7bae-4c71-ac95-5b7b11e54eca")
+	)
+	(junction
 		(at 217.17 90.17)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3482,7 +3488,7 @@
 	)
 	(wire
 		(pts
-			(xy 85.09 33.02) (xy 91.44 33.02)
+			(xy 85.09 33.02) (xy 88.9 33.02)
 		)
 		(stroke
 			(width 0)
@@ -3549,6 +3555,16 @@
 			(type default)
 		)
 		(uuid "41b916e0-f0c8-4142-90ac-04a4519142d7")
+	)
+	(wire
+		(pts
+			(xy 88.9 25.4) (xy 88.9 33.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "42f72073-49b2-4960-9837-de7565dfb617")
 	)
 	(wire
 		(pts
@@ -3729,6 +3745,16 @@
 			(type default)
 		)
 		(uuid "524a1f83-1a51-413f-90db-2775db400cd0")
+	)
+	(wire
+		(pts
+			(xy 88.9 17.78) (xy 88.9 20.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5297c735-01f3-4f7f-8d07-75af469ddea5")
 	)
 	(wire
 		(pts
@@ -4459,6 +4485,16 @@
 			(type default)
 		)
 		(uuid "a2f18170-287b-4f34-80b1-60dda38cfc6f")
+	)
+	(wire
+		(pts
+			(xy 88.9 33.02) (xy 91.44 33.02)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a300acd9-cc62-49f6-9ae3-e112ebcaee78")
 	)
 	(wire
 		(pts
@@ -7505,6 +7541,71 @@
 	)
 	(symbol
 		(lib_id "power:+3V3")
+		(at 88.9 17.78 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "52e6ed43-f5b6-4155-9fc8-9681c874afb9")
+		(property "Reference" "#PWR0296"
+			(at 88.9 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 88.9 13.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 88.9 17.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 88.9 17.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 88.9 17.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2b5121b8-5d31-4ae8-9b63-abc775a71d44")
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
+					(reference "#PWR0296")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
 		(at 33.02 25.4 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -7899,6 +8000,76 @@
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
 					(reference "C77")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_Small_US")
+		(at 88.9 22.86 0)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "645a675a-d84b-4992-a097-98784736fba9")
+		(property "Reference" "R118"
+			(at 90.17 25.4 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "5.1K"
+			(at 90.17 17.78 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 88.9 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 88.9 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 88.9 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f6190dcc-ed1e-4d27-bbc7-18afa9f50220")
+		)
+		(pin "2"
+			(uuid "5c7bd509-bfc4-43c5-84ed-e538bef02c43")
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/d386a9bf-0103-410c-b6e1-cdc61e904cc1"
+					(reference "R118")
 					(unit 1)
 				)
 			)

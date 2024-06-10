@@ -5,10 +5,13 @@
 	(uuid "478bac2a-e969-454d-a9ea-7d9e020a8a9d")
 	(paper "A4")
 	(title_block
-		(title "Sitina 1 Sensor Board")
-		(date "2024-03-25")
-		(rev "R0.9")
-		(company "Copyright 2024 Wenting Zhang")
+		(title "IOB Connectors")
+		(date "2024-06-09")
+		(rev "R0.10")
+		(company "Copyright 2024 Anhang Li, Wenting Zhang")
+		(comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
+		(comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
+		(comment 4 "This source describes Open Hardware and is licensed under the CERN-OHL-P v2.")
 	)
 	(lib_symbols
 		(symbol "Connector_Generic:Conn_01x30"
@@ -5318,7 +5321,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "-9VA"
+		(property "Value" "-8VA"
 			(at 82.55 106.68 90)
 			(effects
 				(font

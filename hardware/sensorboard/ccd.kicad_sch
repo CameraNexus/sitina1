@@ -5,10 +5,10 @@
 	(uuid "4900bddc-0d21-477b-9df9-6c9bf2cc147d")
 	(paper "A4")
 	(title_block
-		(title "Sitina 1 Sensor Board")
-		(date "2024-03-25")
-		(rev "R0.9")
-		(company "Copyright 2024 Wenting Zhang")
+		(title "CCD")
+		(date "2024-06-09")
+		(rev "R0.10")
+		(company "Copyright 2024 Anhang Li, Wenting Zhang")
 		(comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
 		(comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
 		(comment 4 "This source describes Open Hardware and is licensed under the CERN-OHL-P v2.")
@@ -5903,7 +5903,7 @@
 				(justify right)
 			)
 		)
-		(property "Value" "7.5"
+		(property "Value" "0"
 			(at 162.56 61.595 0)
 			(effects
 				(font
@@ -6558,7 +6558,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "-9VA"
+		(property "Value" "-8VA"
 			(at 26.67 49.53 0)
 			(effects
 				(font
