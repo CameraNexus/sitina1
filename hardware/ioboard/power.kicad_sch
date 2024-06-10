@@ -5,10 +5,10 @@
 	(uuid "6f3a5447-6846-4591-ae1a-c20042feac36")
 	(paper "A4")
 	(title_block
-		(title "Sitina 1 IO Board")
-		(date "2024-03-08")
-		(rev "R0.9")
-		(company "Copyright 2024 Wenting Zhang, Anhang Li")
+		(title "System Power Supply")
+		(date "2024-06-09")
+		(rev "R0.10")
+		(company "Copyright 2024 Anhang Li, Wenting Zhang")
 		(comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
 		(comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
 		(comment 4 "This source describes Open Hardware and is licensed under the CERN-OHL-P v2.")
@@ -2120,117 +2120,6 @@
 				)
 			)
 		)
-		(symbol "symbols:+VCCIO_SD"
-			(power)
-			(pin_names
-				(offset 0)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "#PWR"
-				(at 0 -3.81 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Value" "+VCCIO_SD"
-				(at 0 3.556 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "+VCCIO_SD_0_1"
-				(polyline
-					(pts
-						(xy -0.762 1.27) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 0) (xy 0 2.54)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 0 2.54) (xy 0.762 1.27)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(symbol "+VCCIO_SD_1_1"
-				(pin power_in line
-					(at 0 0 90)
-					(length 0) hide
-					(name "+VCCIO_SD"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "symbols:+VSD"
 			(power)
 			(pin_names
@@ -3818,12 +3707,6 @@
 		(uuid "80280fc8-d3db-4cbf-9ef1-00e55e6e4fd4")
 	)
 	(junction
-		(at 132.08 96.52)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "80a5d67a-0a57-43f6-9688-6bf149d69e2c")
-	)
-	(junction
 		(at 41.91 71.12)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4519,23 +4402,13 @@
 	)
 	(wire
 		(pts
-			(xy 111.76 96.52) (xy 132.08 96.52)
+			(xy 111.76 96.52) (xy 134.62 96.52)
 		)
 		(stroke
 			(width 0)
 			(type solid)
 		)
 		(uuid "30933620-c72b-4b57-aebb-a7c34436e041")
-	)
-	(wire
-		(pts
-			(xy 132.08 96.52) (xy 134.62 96.52)
-		)
-		(stroke
-			(width 0)
-			(type solid)
-		)
-		(uuid "30933620-c72b-4b57-aebb-a7c34436e042")
 	)
 	(wire
 		(pts
@@ -8584,71 +8457,6 @@
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d4c99f9"
 					(reference "#PWR0128")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "symbols:+VCCIO_SD")
-		(at 132.08 96.52 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "4ca9efc0-367b-42d3-9cf1-1a0198c5dc50")
-		(property "Reference" "#PWR017"
-			(at 132.08 100.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+VCCIO_SD"
-			(at 125.73 95.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 132.08 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 132.08 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 132.08 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "f5dd9551-76cd-4125-88f6-d7cd8b3ac535")
-		)
-		(instances
-			(project "pcb"
-				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097/00000000-0000-0000-0000-00005d4c99f9"
-					(reference "#PWR017")
 					(unit 1)
 				)
 			)
