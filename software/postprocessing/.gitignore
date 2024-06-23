@@ -2,3 +2,6 @@ test/
 obj/
 debug/
 bin/
+
+*.png
+*.xmp

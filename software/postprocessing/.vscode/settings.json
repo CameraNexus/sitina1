@@ -1,5 +1,18 @@
 {
     "files.associations": {
-        "effusus_rawio.h": "c"
-    }
+        "effusus_rawio.h": "c",
+        "chrono": "c",
+        "random": "c",
+        "limits": "c",
+        "algorithm": "c"
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true
+    },
+    "hide-files.files": []
 }
