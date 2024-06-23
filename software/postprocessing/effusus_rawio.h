@@ -36,7 +36,6 @@
 #include <stdio.h>
 #include <stdint.h>
 
-
 long read_binary_file(const char* fn, uint8_t* buffer, long length_limit);
 
 #endif /* _EFFUSUS_RAWIO_H_ */

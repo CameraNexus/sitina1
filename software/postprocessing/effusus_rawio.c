@@ -51,6 +51,3 @@ long read_binary_file(const char* fn, uint8_t* buf, long length_limit){
     fclose(fp);
     return flen;
 };
-
-// int write_binary_file();
-// int write_sdcard_file();

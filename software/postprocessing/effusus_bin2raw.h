@@ -20,7 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// File : effusus.c
-// Brief: Raw CCD Data Post-Processing - Top
+// File : effusus_bin2raw.h
+// Brief: Raw CCD Data Post-Processing - binary data to raw
 
+#include "stdint.h"
 #include "effusus.h"
+
+uint16_t* effusus_bin2raw(uint16_t* rawbuf, uint8_t* binbuf, int CCD_W, int CCD_H, int SCR_W, int SCR_H);
+
+uint8_t* effusus_raw2bayer(uint16_t* rawbuf, uint8_t* bayerbuf, int SCR_W, int SCR_H);

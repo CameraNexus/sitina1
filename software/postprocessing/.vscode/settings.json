@@ -4,7 +4,13 @@
         "chrono": "c",
         "random": "c",
         "limits": "c",
-        "algorithm": "c"
+        "algorithm": "c",
+        "libraw.h": "c",
+        "*.old": "c",
+        "effusus.h": "c",
+        "array": "c",
+        "string": "c",
+        "string_view": "c"
     },
     "files.exclude": {
         "**/.git": true,

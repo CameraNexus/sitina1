@@ -32,63 +32,9 @@
 #define EFFUSUS_G export
 #endif /* EFFUSUS_TOP */
 
-// Standard Library
-#include <stdbool.h>
-#include <stdint.h>
-
-// Effusus Library
-#include "effusus_rawio.h"
-
-// Read this from "ccd_timing.h"
-typedef struct {
-    bool         interleaved;   // Use interleaved ADC readout
-    // Timing for normal readout
-    unsigned int tvccd_pix;
-    unsigned int thd_pix;
-    unsigned int dummy_pix;
-    unsigned int dark_pix;
-    unsigned int buffer_pix;
-    unsigned int active_pix;
-    unsigned int t3p_pix;
-    unsigned int tv3rd_pix;
-    unsigned int t3d_pix;
-    unsigned int line_length;
-    unsigned int hblk_length;
-    unsigned int vsg_length;
-    unsigned int clpob_begin;
-    unsigned int clpob_end;
-    // Timing for fast line dumping
-    unsigned int tfd_pix;
-    unsigned int dump_vtog;
-    unsigned int dump_length;
-
-    unsigned int sweep_lines;
-    unsigned int dump_lines;
-    unsigned int dummy_read_lines;
-    unsigned int vsg_lines;
-
-    unsigned int dark_lines_u;
-    unsigned int buf_lines_u;
-    unsigned int active_lines;
-    unsigned int buf_lines_d;
-    unsigned int dark_lines_d;
-    unsigned int lines;
-    unsigned int field_lines;
-} ccd_info_t;
-
-typedef struct {
-    bool     enable;
-    float    downscale;
-    uint8_t* vram_p;
-} ccd2vram_config_t;
-
-typedef struct {
-    ccd_info_t*        ccdinfo_p;
-    void*              exif_p;
-    uint8_t*           ccd_buffer_p;
-    ccd2vram_config_t* ccd2vram_p;
-} effusus_db_t;
-
+#define PRINTINFO(msg,...) \
+    fprintf(stderr, "[INFO %s:%d] ", __FILE__, __LINE__); \
+    fprintf(stderr, msg, ##__VA_ARGS__);
 
 
 #endif /* _EFFUSUS_H_ */
