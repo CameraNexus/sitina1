@@ -80,16 +80,16 @@ uint8_t* effusus_raw2bayer(uint16_t* rawbuf, uint8_t* bayerbuf, int SCR_W, int S
 
     for (int y = 0; y < SCR_H; y++) {
         for (int x = 0; x < SCR_W; x++) {
-            bayerbuf[4*((2*y)*SCR_W+x)+0] = r_raw [y*SCR_W+x]>>8;
-            bayerbuf[4*((2*y)*SCR_W+x)+1] = r_raw [y*SCR_W+x]&0xFF;
-            bayerbuf[4*((2*y)*SCR_W+x)+2] = g1_raw[y*SCR_W+x]>>8;
-            bayerbuf[4*((2*y)*SCR_W+x)+3] = g1_raw[y*SCR_W+x]&0xFF;
+            bayerbuf[4*((2*y)*SCR_W+x)+1] = r_raw [y*SCR_W+x]>>8;
+            bayerbuf[4*((2*y)*SCR_W+x)+0] = r_raw [y*SCR_W+x]&0xFF;
+            bayerbuf[4*((2*y)*SCR_W+x)+3] = g2_raw[y*SCR_W+x]>>8;
+            bayerbuf[4*((2*y)*SCR_W+x)+2] = g2_raw[y*SCR_W+x]&0xFF;
         }
         for (int x = 0; x < SCR_W; x++) {
-            bayerbuf[4*((2*y+1)*SCR_W+x)+0] = g2_raw[y*SCR_W+x]>>8;
-            bayerbuf[4*((2*y+1)*SCR_W+x)+1] = g2_raw[y*SCR_W+x]&0xFF;
-            bayerbuf[4*((2*y+1)*SCR_W+x)+2] = b_raw [y*SCR_W+x]>>8;
-            bayerbuf[4*((2*y+1)*SCR_W+x)+3] = b_raw [y*SCR_W+x]&0xFF;
+            bayerbuf[4*((2*y+1)*SCR_W+x)+1] = g1_raw[y*SCR_W+x]>>8;
+            bayerbuf[4*((2*y+1)*SCR_W+x)+0] = g1_raw[y*SCR_W+x]&0xFF;
+            bayerbuf[4*((2*y+1)*SCR_W+x)+3] = b_raw [y*SCR_W+x]>>8;
+            bayerbuf[4*((2*y+1)*SCR_W+x)+2] = b_raw [y*SCR_W+x]&0xFF;
         }
     }
 

@@ -4,5 +4,7 @@ debug/
 bin/
 
 *.png
+*.tif
+*.tiff
 *.xmp
 *.raw

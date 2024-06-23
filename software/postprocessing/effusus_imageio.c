@@ -167,3 +167,5 @@ void effusus_writepng(const char* fn, uint16_t* raw, int SCR_W, int SCR_H){
     fclose(file);
     PRINTINFO("PNG written to %s\n", fn);
 }
+
+void effusus_writetiff();

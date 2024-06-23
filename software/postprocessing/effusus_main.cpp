@@ -29,7 +29,6 @@
 #include <cstdlib>
 #include <cmath>
 #include <SDL/SDL.h>
-#include <libraw/libraw.h>
 
 #include "effusus.h"
 #include "effusus_rawio.h"
@@ -41,7 +40,7 @@
 #define SCR_H (CCD_H/2)
 #define SCR_W (CCD_W/2)
 
-#include <png.h>
+#include <tiffio.h>
 
 #define PNG_WIDTH (SCR_W)
 #define PNG_HEIGHT (SCR_H)
@@ -63,11 +62,12 @@ SDL_Rect rdst = {
 
 int main(int argc, char** argv) {
     double gamma = 1.0;
+    bool   gui = false;
     bool   savepng = false;
     bool   savebayer = false;
     
     if(argc<2){
-        printf("Usage: %s filename [--savepng] [--savebayer] [--gamma=1.0]\n",argv[0]);
+        printf("Usage: %s filename [--gui] [--savepng] [--savebayer] [--gamma=1.0]\n",argv[0]);
         return -1;
     }
     for(int i=2;i<argc;i++){
@@ -75,6 +75,9 @@ int main(int argc, char** argv) {
             savepng = true;
         }
         if(strcmp(argv[i],"--savebayer")==0){
+            savebayer = true;
+        }
+        if(strcmp(argv[i],"--gui")==0){
             savebayer = true;
         }
         if(strncmp(argv[i],"--gamma=",8)==0) {
@@ -85,6 +88,7 @@ int main(int argc, char** argv) {
 
     fprintf(stdout,"--------------------EFFUSUS--------------------\n");
     fprintf(stdout,"Gamma:    \t %f\n",gamma);
+    fprintf(stdout,"GUI:      \t %s\n",gui?"true":"false");
     fprintf(stdout,"Save PNG: \t %s\n",savepng?"true":"false");
     fprintf(stdout,"Save Bayer:\t %s\n",savebayer?"true":"false");
     fprintf(stdout,"Filename: \t %s\n",fn);
@@ -103,41 +107,43 @@ int main(int argc, char** argv) {
     memset(raw,0xFF,sizeof(raw));
     effusus_bin2raw(raw, fbuf, CCD_W, CCD_H, SCR_W, SCR_H);
 
-    // Init SDL
-	SDL_Init(SDL_INIT_VIDEO);
-	swin = SDL_SetVideoMode(SCR_W/2, SCR_H/2, 16, false);
-    semu = SDL_CreateRGBSurface(SDL_SWSURFACE,SCR_W, SCR_H,16,0,0,0,0);
-    if ((semu == NULL) || (swin == NULL)) {
-        fprintf(stderr, "could not create surface: %s\n", SDL_GetError());
-        return -1;
-    }
-    uint16_t* vram = (uint16_t*)(semu->pixels);
+    if(gui) {
+        // Init SDL
+        SDL_Init(SDL_INIT_VIDEO);
+        swin = SDL_SetVideoMode(SCR_W/2, SCR_H/2, 16, false);
+        semu = SDL_CreateRGBSurface(SDL_SWSURFACE,SCR_W, SCR_H,16,0,0,0,0);
+        if ((semu == NULL) || (swin == NULL)) {
+            fprintf(stderr, "could not create surface: %s\n", SDL_GetError());
+            return -1;
+        }
+        uint16_t* vram = (uint16_t*)(semu->pixels);
 
-    // Dither to VRAM
-    effusus_dither_to_vram(vram, raw, gamma, SCR_W, SCR_H, EFFUSUS_DITHER_FS);
-    
-    SDL_Event event;
-	bool running = true;
-    
-    while(running){
-		while(SDL_PollEvent(&event)){
-			running = event.type != SDL_QUIT;
-		}
-        switch( event.type ){
-            case SDL_KEYDOWN:
-                switch( event.key.keysym.sym ){
-                case SDLK_ESCAPE:
-                    running = false;
-                    break;
-                default:
-                    break;
+        // Dither to VRAM
+        effusus_dither_to_vram(vram, raw, gamma, SCR_W, SCR_H, EFFUSUS_DITHER_FS);
+        
+        SDL_Event event;
+        bool running = true;
+        
+        while(running){
+            while(SDL_PollEvent(&event)){
+                running = event.type != SDL_QUIT;
             }
+            switch( event.type ){
+                case SDL_KEYDOWN:
+                    switch( event.key.keysym.sym ){
+                    case SDLK_ESCAPE:
+                        running = false;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            SDL_SoftStretch(semu,&rsrc,swin,&rdst);
+            SDL_Flip(swin);
         }
         SDL_SoftStretch(semu,&rsrc,swin,&rdst);
-		SDL_Flip(swin);
-	}
-    SDL_SoftStretch(semu,&rsrc,swin,&rdst);
-	SDL_Flip(swin);
+        SDL_Flip(swin);
+    }
 
     unsigned bayerbuf_size = SCR_W*SCR_H*4*2;
     uint8_t* bayerbuf;
@@ -149,7 +155,7 @@ int main(int argc, char** argv) {
         // This will result in the following image format:
         // 4416 x 2726 RGGB(2x2)
         // Row-Stride = 8832, Pixel-Stride = 4 
-        // 16-bit per pixel, Big-Endian
+        // 16-bit per pixel, Little-Endian
         //
         // The file can be opened by GIMP, RawTherapee, or LibRaw
         FILE* fbayer = fopen("bayer.raw","wb");
@@ -163,33 +169,64 @@ int main(int argc, char** argv) {
         effusus_writepng("output.png", raw, SCR_W, SCR_H);
     }
 
-    // Init libraw    
-    LibRaw rp;
-    rp.imgdata.params.output_tiff = 1;
-    rp.imgdata.params.output_bps  = 16;
-    int ret = rp.open_bayer(\
-        bayerbuf, bayerbuf_size, 
-        SCR_W, SCR_H, 
-        0, 0, 0, 0, 
-        1, LIBRAW_OPENBAYER_RGGB, 0, 0, 1400);
-        
-    if (ret != LIBRAW_SUCCESS) return -1;
-    if ((ret = rp.unpack()) != LIBRAW_SUCCESS)
-        printf("Unpack error: %d\n", ret);
+    // Write to mosaic tiff
+    // print libtiff version
+    printf("LIBTIFF %s\n", TIFFGetVersion());
+    TIFF* tiff = TIFFOpen("output.tiff","w");
+    if(!tiff){
+        fprintf(stderr,"Failed to open output.tiff for writing\n");
+        return -1;
+    }
+    // Set TIFF tags
+    TIFFSetField(tiff, TIFFTAG_IMAGEWIDTH,  SCR_W*2);
+    TIFFSetField(tiff, TIFFTAG_IMAGELENGTH, SCR_H*2);
+    TIFFSetField(tiff, TIFFTAG_SAMPLESPERPIXEL, 1);
+    TIFFSetField(tiff, TIFFTAG_ROWSPERSTRIP, 1);
+    TIFFSetField(tiff, TIFFTAG_BITSPERSAMPLE, 16);
+    TIFFSetField(tiff, TIFFTAG_SAMPLEFORMAT, SAMPLEFORMAT_UINT);
+    TIFFSetField(tiff, TIFFTAG_ORIENTATION, ORIENTATION_TOPLEFT);
+    TIFFSetField(tiff, TIFFTAG_PLANARCONFIG, PLANARCONFIG_CONTIG);
+    TIFFSetField(tiff, TIFFTAG_PHOTOMETRIC, PHOTOMETRIC_CFA);
 
-    if ((ret = rp.dcraw_process()) != LIBRAW_SUCCESS)
-        printf("Processing error: %d\n", ret);
+    TIFFSetField(tiff, TIFFTAG_MAKE, "DummyMake");
+    TIFFSetField(tiff, TIFFTAG_MODEL, "DummyModel");
+    TIFFSetField(tiff, TIFFTAG_SOFTWARE, "DummySoftware");
+    TIFFSetField(tiff, TIFFTAG_ORIGINALRAWFILENAME, 1, "DummyName.dng");
+    TIFFSetField(tiff, TIFFTAG_UNIQUECAMERAMODEL, "DummyUniqueModel");
+    TIFFSetField(tiff, TIFFTAG_IMAGEDESCRIPTION, "DummyImageDescription");
+    TIFFSetField(tiff, TIFFTAG_COPYRIGHT, "DummyCopyright");
+    TIFFSetField(tiff, TIFFTAG_DATETIME, "2016:06:30 11:11:15");
+    TIFFSetField(tiff, TIFFTAG_DNGVERSION, "\01\01\00\00");
+    TIFFSetField(tiff, TIFFTAG_SUBFILETYPE, 0);
+    TIFFSetField(tiff, TIFFTAG_COMPRESSION, COMPRESSION_NONE);
+    TIFFSetField(tiff, TIFFTAG_DNGBACKWARDVERSION, "\01\00\00\00");
+    
+    // Custom TIFF tag for CFA pattern
+    TIFFSetField(tiff, TIFFTAG_CFAPATTERN, 4, "\000\001\001\002"); // RGGB
 
-    char outfn[256];
-    sprintf(outfn, "%s.tif", fn);
-    if (LIBRAW_SUCCESS != (ret = rp.dcraw_ppm_tiff_writer(outfn)))
-        printf("Cannot write %s: %s\n", outfn, libraw_strerror(ret));
-    else
-        printf("Created %s\n", outfn);
+    // Write bayer data
+    tsize_t linebytes = SCR_W*4 * sizeof(uint8_t);
+    uint8_t *buf = (uint8_t*)_TIFFmalloc(linebytes);
+    for (uint32_t row = 0; row < SCR_H*2; row++) {
+        // Copy data from bayerbuf to buf, big endian
+        for (uint32_t col = 0; col < SCR_W*4; col+=2) {
+            buf[col]   = bayerbuf[row*SCR_W*4+col];
+            buf[col+1] = bayerbuf[row*SCR_W*4+col+1];
+        }
+        if (TIFFWriteScanline(tiff, buf, row, 0) < 0) {
+            fprintf(stderr, "Failed to write TIFF scanline\n");
+            break;
+        }
+    }
+    _TIFFfree(buf);
+    //
 
-quit:
+    // Close TIFF
+    TIFFClose(tiff);
+
+    free(bayerbuf);
     free(raw);
-	SDL_Quit();
+    if(gui)	SDL_Quit();
     printf("Done!\n");
     
     return 0;
