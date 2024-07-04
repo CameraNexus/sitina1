@@ -9,8 +9,8 @@
 	(paper "A4")
 	(title_block
 		(title "Sitina 1 IO Board")
-		(date "2024-03-25")
-		(rev "R0.9")
+		(date "2024-06-09")
+		(rev "R0.10")
 		(company "Copyright 2024 Wenting Zhang")
 		(comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
 		(comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
@@ -10105,7 +10105,7 @@
 		)
 		(fp_arc
 			(start 2.64922 -3.8481)
-			(mid 2.50734 -3.906869)
+			(mid 2.507314 -3.906854)
 			(end 2.44856 -4.04876)
 			(stroke
 				(width 0.127)

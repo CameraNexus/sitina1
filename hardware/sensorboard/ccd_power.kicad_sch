@@ -5637,7 +5637,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_DFN_QFN:DFN-10-1EP_3x3mm_P0.5mm_EP1.65x2.38mm_ThermalVias"
+		(property "Footprint" "footprints:DFN-10-1EP_3x3mm_P0.5mm_EP1.65x2.38mm_LargeThermalVias"
 			(at 152.4 60.325 0)
 			(effects
 				(font
@@ -6480,7 +6480,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "-9VA"
+		(property "Value" "-8VA"
 			(at 214.63 101.6 90)
 			(effects
 				(font
@@ -6791,7 +6791,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Package_DFN_QFN:DFN-10-1EP_3x3mm_P0.5mm_EP1.65x2.38mm_ThermalVias"
+		(property "Footprint" "footprints:DFN-10-1EP_3x3mm_P0.5mm_EP1.65x2.38mm_LargeThermalVias"
 			(at 152.4 113.665 0)
 			(effects
 				(font
