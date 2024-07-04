@@ -13,6 +13,7 @@ pcb.step
 pcb.pdf
 production/
 pcb-backups/
+fabrication-toolkit-options.json
 
 # RTL simulator
 gateware/sim/sim

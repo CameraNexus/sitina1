@@ -832,16 +832,16 @@
       "ccd"
     ],
     [
-      "28025b55-6a64-43e1-9d20-34020d299147",
-      "connector"
+      "c4b300a2-c980-4078-9834-be2e73d06ecc",
+      "ccd_sampler"
     ],
     [
       "568a197d-3d07-4ce3-9dad-204d21f52839",
       "ccd_driver"
     ],
     [
-      "d386a9bf-0103-410c-b6e1-cdc61e904cc1",
-      "ccd_driver_v"
+      "f48ccb69-77e1-4ab7-8932-7c5d4f6b2f51",
+      "ccd_driver_v_adiabatic"
     ],
     [
       "b64fe68d-aec8-4292-896e-119ca6ece6c8",
@@ -858,6 +858,10 @@
     [
       "6bd93fa5-b04c-403a-8268-88485f724a4c",
       "fpga_power"
+    ],
+    [
+      "28025b55-6a64-43e1-9d20-34020d299147",
+      "connector"
     ]
   ],
   "text_variables": {}

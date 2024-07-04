@@ -6,8 +6,8 @@
 	(paper "A4")
 	(title_block
 		(title "Sitina 1 Sensor Board")
-		(date "2024-06-09")
-		(rev "R0.10")
+		(date "2024-03-25")
+		(rev "R0.11")
 		(company "Copyright 2024 Anhang Li, Wenting Zhang")
 		(comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
 		(comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
@@ -47,6 +47,17 @@
 		)
 		(uuid "2a7b977b-1bce-42a4-8eb2-97fb3f6c57f9")
 	)
+	(text "5"
+		(exclude_from_sim no)
+		(at 33.02 76.2 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "347a9ca4-b93b-4508-8273-9be5fc6cb588")
+	)
 	(text "6"
 		(exclude_from_sim no)
 		(at 33.02 86.36 0)
@@ -58,7 +69,7 @@
 		)
 		(uuid "348322e2-ddf1-490f-9279-9812a946030a")
 	)
-	(text "CCD Driver - V Clocks"
+	(text "CCD V Driver"
 		(exclude_from_sim no)
 		(at 43.18 96.52 0)
 		(effects
@@ -95,7 +106,7 @@
 	)
 	(text "Connector"
 		(exclude_from_sim no)
-		(at 43.18 76.2 0)
+		(at 43.18 147.32 0)
 		(effects
 			(font
 				(size 2.54 2.54)
@@ -126,9 +137,9 @@
 		)
 		(uuid "55aab0bd-298c-4857-a81f-bbee9391fc54")
 	)
-	(text "5"
+	(text "12"
 		(exclude_from_sim no)
-		(at 33.02 76.2 0)
+		(at 33.02 147.32 0)
 		(effects
 			(font
 				(size 2.54 2.54)
@@ -159,7 +170,7 @@
 		)
 		(uuid "96db472b-2173-4973-9a84-b9f6f8f5b5d6")
 	)
-	(text "CCD Driver"
+	(text "CCD H Driver"
 		(exclude_from_sim no)
 		(at 43.18 86.36 0)
 		(effects
@@ -214,6 +225,17 @@
 		)
 		(uuid "adc28392-60d8-460e-b8ac-6c42bbf0ad49")
 	)
+	(text "CCD V Signal Sampler"
+		(exclude_from_sim no)
+		(at 43.18 76.2 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "b6cd10df-427c-46da-aee0-fb755a929bf8")
+	)
 	(text "10"
 		(exclude_from_sim no)
 		(at 33.02 127 0)
@@ -259,7 +281,7 @@
 		(uuid "dd28bcb8-5695-46d2-bee3-ebe22b87a9a3")
 	)
 	(sheet
-		(at 40.64 71.12)
+		(at 40.64 142.24)
 		(size 73.66 5.08)
 		(fields_autoplaced yes)
 		(stroke
@@ -271,7 +293,7 @@
 		)
 		(uuid "28025b55-6a64-43e1-9d20-34020d299147")
 		(property "Sheetname" "connector"
-			(at 40.64 70.4084 0)
+			(at 40.64 141.5284 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -280,7 +302,7 @@
 			)
 		)
 		(property "Sheetfile" "connector.kicad_sch"
-			(at 40.64 76.7846 0)
+			(at 40.64 147.9046 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -291,7 +313,7 @@
 		(instances
 			(project "pcb"
 				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
-					(page "5")
+					(page "12")
 				)
 			)
 		)
@@ -487,6 +509,44 @@
 		)
 	)
 	(sheet
+		(at 40.64 71.12)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "c4b300a2-c980-4078-9834-be2e73d06ecc")
+		(property "Sheetname" "ccd_sampler"
+			(at 40.64 70.4084 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "ccd_sampler.kicad_sch"
+			(at 40.64 76.7846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
 		(at 40.64 121.92)
 		(size 73.66 5.08)
 		(fields_autoplaced yes)
@@ -611,8 +671,8 @@
 		(fill
 			(color 0 0 0 0.0000)
 		)
-		(uuid "d386a9bf-0103-410c-b6e1-cdc61e904cc1")
-		(property "Sheetname" "ccd_driver_v"
+		(uuid "f48ccb69-77e1-4ab7-8932-7c5d4f6b2f51")
+		(property "Sheetname" "ccd_driver_v_adiabatic"
 			(at 40.64 90.7284 0)
 			(effects
 				(font
@@ -621,7 +681,7 @@
 				(justify left bottom)
 			)
 		)
-		(property "Sheetfile" "ccd_driver_v.kicad_sch"
+		(property "Sheetfile" "ccd_driver_v_adiabatic.kicad_sch"
 			(at 40.64 97.1046 0)
 			(effects
 				(font
