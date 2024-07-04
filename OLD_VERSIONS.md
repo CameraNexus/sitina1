@@ -115,7 +115,8 @@ Main changes:
 
 Turned out the video went quite popular, getting 300K views on Bilibili and YouTube combined. To a point where don't want to claim that that questionable camera is the best I can do. So I continued.
 
-- I have several complains about the previous design:
+I have several complains about the previous design:
+
 - Bad image quality
 - Problematic power supply design (noise issues, unable to supply current needed by the inefficient clock line driver)
 - Problematic clock line driver (no slew control, ramp too slow, inefficient)
@@ -203,7 +204,7 @@ On r0.9, the MCU has been replaced by an SoC FPGA (Xilinx Zynq 7010) + small MCU
 
 ![r0p9_bd](/assets/r0p9_bd.jpeg)
 
-I have been tempted to use FPGA in this project, but didn't find enough reason to do so back then. On the other hand I have pretty good reason against it: it just makes things complicated. But this time I have a real reason to do so: the resonant driver. But this requires more timing control than what AD9990 can provide (or at least, what I would like to program). I have complained in the video that AD9990 is just hard to program. To generate even more elaborate waveform, FPGA is the way to go. Instead of adding another glue FPGA into the equation, I decided to simply replace the original MCU with a Zynq device. Which should also provide better CPU performance as well. But, to not test too many new thing at one time, I am still using the traditional driver for this revision (R0.9). If everything goes well I can switch to the new driver in the future and compare how much it improves.
+I have been tempted to use FPGA in this project, but didn't find enough reason to do so back then. On the other hand I have pretty good reason against it: it just makes things complicated. But this time I have a real reason to do so: the resonant driver. This requires more timing control than what AD9990 can provide (or at least, what I would like to program). I have complained in the video that AD9990 is just hard to program for. To generate even more elaborate waveform, FPGA is the way to go. Instead of adding another glue FPGA into the equation, I decided to simply replace the original MCU with a Zynq device. Which should also provide better CPU performance as well. But, to not test too many new thing at one time, I am still using the traditional driver for this revision (R0.9). If everything goes well I can switch to the new driver in the future and compare how much it improves.
 
 I have also got the entire thing assembled:
 
