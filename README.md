@@ -14,8 +14,8 @@ The following are preliminary.
 - Sensor: Kodak/ONsemi KAI-11000/KAI-11002M/CM
 - Screen: 3.4" 480x480 High-Brightness DPI IPS LCD
 - External Ports:
-  - SD slot (HS, 50MB/s)
-  - USB Type-C (5V3A power supply + debugger access)
+  - SD slot (HS, 25MB/s)
+  - USB Type-C (5V3A power supply)
   - Flash sync terminal
 
 ### Camera Features
@@ -45,7 +45,11 @@ The following are possible with hardware, but not necessarily supported by the c
 
 ## Status
 
-Hardware R0.6 tested and working. Harware R0.9 bringing up in progress. See schematics for change logs.
+Hardware R0.6 tested and working. Harware R0.9 bringing up in progress.
+
+## Revision History
+
+See [old-versions.md](/OLD_VERSIONS.md) for change logs, stories, and photos of old revisions!
 
 ## License
 
