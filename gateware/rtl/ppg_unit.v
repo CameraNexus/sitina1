@@ -1,7 +1,5 @@
-`timescale 1ns / 1ps
-`default_nettype none
 //
-// pulsegen_simple.v: Simple Pulse Generator
+// ppg_unit.v: Simple Pulse Generator
 //
 // Copyright 2024 Anhang Li <thelithcore@gmail.com>
 //
@@ -24,7 +22,10 @@
 // SOFTWARE.
 //
 
-module pulsegen_simple #(
+`timescale 1ns / 1ps
+`default_nettype none
+
+module ppg_unit #(
     parameter WIDTH = 16
 )(
     input  wire              clk,
@@ -51,4 +52,6 @@ module pulsegen_simple #(
       else if(counter>0) counter <= counter + 1;
    end
 
-endmodule
+endmodule /* ppg_unit */
+
+`default_nettype wire

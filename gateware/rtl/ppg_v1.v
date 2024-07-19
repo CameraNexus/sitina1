@@ -1,7 +1,5 @@
-`timescale 1ns / 1ps
-`default_nettype none
 //
-// pulsegen_v1.v: Pulse Generator for CCD V1 control 
+// ppg_v1.v: Pulse Generator for CCD V1 control 
 //
 // Copyright 2024 Anhang Li <thelithcore@gmail.com>
 //
@@ -42,9 +40,12 @@
 // PDN-   ‾‾‾‾‾‾‾‾‾‾‾‾\_.__________________________._/‾‾‾‾‾‾‾‾‾‾‾‾
 // PLO-   ____________._/‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\_.____________
 // SELL-  ____________/‾\__________________________/‾\____________
-//                    
+//           
 
-module pulsegen_v1 #(
+`timescale 1ns / 1ps
+`default_nettype none
+
+module ppg_v1 #(
     parameter WIDTH = 16
 )(
     input wire                     clk,
@@ -88,25 +89,25 @@ module pulsegen_v1 #(
     wire q_pdn1;
     wire q_plo1;
 
-    pulsegen_simple #(.WIDTH(WIDTH)) u_pg_sell1(
+    ppg_unit #(.WIDTH(WIDTH)) u_pg_sell1(
         .clk(clk),.rstn(rstn),.trig(trig),
         .tdelay(xt_sell1),.tpulse(t_pel),
         .q(q_sell1),.qbar()
     );
 
-    pulsegen_simple #(.WIDTH(WIDTH)) u_pg_sell2(
+    ppg_unit #(.WIDTH(WIDTH)) u_pg_sell2(
         .clk(clk),.rstn(rstn),.trig(trig),
         .tdelay(xt_sell2),.tpulse(t_nel),
         .q(q_sell2),.qbar()
     );
 
-    pulsegen_simple #(.WIDTH(WIDTH)) u_pg_pdn1(
+    ppg_unit #(.WIDTH(WIDTH)) u_pg_pdn1(
         .clk(clk),.rstn(rstn),.trig(trig),
         .tdelay(xt_pdn),.tpulse(t_pel),
         .q(),.qbar(q_pdn1)
     );
 
-    pulsegen_simple #(.WIDTH(WIDTH)) u_pg_plo1(
+    ppg_unit #(.WIDTH(WIDTH)) u_pg_plo1(
         .clk(clk),.rstn(rstn),.trig(trig),
         .tdelay(xt_plo),.tpulse(t_lh),
         .q(q_plo1),.qbar()
@@ -123,6 +124,6 @@ module pulsegen_v1 #(
             q_plo  <= q_plo1;
         end
     end
+endmodule /* ppg_v1 */
 
-
-endmodule
+`default_nettype wire
