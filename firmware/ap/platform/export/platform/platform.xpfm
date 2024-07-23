@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<sdx:platform xmlns:sdx="http://www.xilinx.com/sdx" sdx:library="sdx" sdx:name="platform" sdx:vendor="xilinx.com" sdx:version="1.0">
+    <sdx:description/>
+    <sdx:hardwarePlatforms>
+        <sdx:hardwarePlatform sdx:name="top.xsa" sdx:path="hw"/>
+    </sdx:hardwarePlatforms>
+    <sdx:softwarePlatforms>
+        <sdx:softwarePlatform sdx:name="platform.spfm" sdx:path="sw"/>
+    </sdx:softwarePlatforms>
+</sdx:platform>

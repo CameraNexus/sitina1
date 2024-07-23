@@ -21,7 +21,6 @@
 #ifndef GPIO_LP_H
 #define GPIO_LP_H
 
-
 int gpio_lp_init(void);
 void gpio_lp_setup(void);
 void gpio_lp_lcd_reset(void);

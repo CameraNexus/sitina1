@@ -1,0 +1,3 @@
+/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/build/CMakeFiles/fsbl.elf.dir
+/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/build/CMakeFiles/edit_cache.dir
+/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/build/CMakeFiles/rebuild_cache.dir

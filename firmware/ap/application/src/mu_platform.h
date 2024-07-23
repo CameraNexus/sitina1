@@ -21,6 +21,8 @@
 //
 #pragma once
 
+#define IOREG       (volatile uint32_t *)
+
 // Common definition
 #define GPIO_PIN_0  0x00000001
 #define GPIO_PIN_1  0x00000002
@@ -64,10 +66,17 @@ typedef struct {
 } mu_gpio_inst_t;
 
 // Platform specific definition
-#define GPIO0_BASE  0x40000000
+#define GPIO0_BASE          0x40000000
+#define CCDTG_BASE	        0x40010000
+#define DSILITE_BASE        0x40020000
 
-#define GPIO0_ODR   (volatile uint32_t *)(GPIO0_BASE + 0x00)
-#define GPIO0_IDR   (volatile uint32_t *)(GPIO0_BASE + 0x04)
-#define GPIO0_BSR   (volatile uint32_t *)(GPIO0_BASE + 0x08)
-#define GPIO0_BCR   (volatile uint32_t *)(GPIO0_BASE + 0x0C)
-#define GPIO0_OER   (volatile uint32_t *)(GPIO0_BASE + 0x10)
+#define GPIO0_ODR           (IOREG(GPIO0_BASE + 0x00))
+#define GPIO0_IDR           (IOREG(GPIO0_BASE + 0x04))
+#define GPIO0_BSR           (IOREG(GPIO0_BASE + 0x08))
+#define GPIO0_BCR           (IOREG(GPIO0_BASE + 0x0C))
+#define GPIO0_OER           (IOREG(GPIO0_BASE + 0x10))
+
+#define DSILITE_PCTL        (IOREG(DSILITE_BASE + 0x00))
+#define DSILITE_DMACTL      (IOREG(DSILITE_BASE + 0x04))
+#define DSILITE_STARTADDR   (IOREG(DSILITE_BASE + 0x20))
+#define DSILITE_ENDADDR     (IOREG(DSILITE_BASE + 0x28))

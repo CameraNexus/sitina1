@@ -3,7 +3,7 @@
 
 cmake_minimum_required(VERSION 3.15)
 
-set(APP_NAME zynq_fsbl)
+set(APP_NAME fsbl)
 project(${APP_NAME})
 
 include_directories(${CMAKE_BINARY_DIR}/include)
@@ -12,7 +12,9 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/UserConfig.cmake)
 find_package(common)
 enable_language(C ASM)
 
-collect(PROJECT_LIB_DEPS xiltimer)
+collect(PROJECT_LIB_DEPS xiltimer;xilffs;xilrsa)
+
+
 collect(PROJECT_LIB_DEPS xilffs)
 collect(PROJECT_LIB_DEPS xilrsa)
 collect(PROJECT_LIB_DEPS xil)

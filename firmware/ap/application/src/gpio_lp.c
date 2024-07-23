@@ -22,10 +22,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include "xil_printf.h"
-#include "xil_cache.h"
-
-#include "xparameters.h"
+#include <stdint.h>
 #include "mu_platform.h"
 
 #define GPIO_ENABLE_MASK    GPIO_PIN_5
@@ -194,12 +191,12 @@ static uint16_t gpio_lpdt_compute_crc(uint8_t *pkt_pd, uint16_t len) {
     return result;
 }
 
-int gpio_lp_write_dcs(uint8_t command, uint8_t *param, uint16_t param_length) {
+void gpio_lp_write_dcs(uint8_t command, uint8_t *param, uint16_t param_length) {
 	if (param_length > 1) {
 		// Compose a long write
 		uint16_t packet_length = param_length + 7; // DI + WC0 + WC1 + ECC + CMD + CRC0 + CRC1
 		uint8_t *packet_buffer = malloc(packet_length);
-		if(!packet_buffer) return -1;
+		if (!packet_buffer) return;
 
 		packet_buffer[0] = 0x39; // DCS long write command
 		packet_buffer[1] = (param_length + 1) & 0xFFU; // WC0
@@ -235,6 +232,4 @@ int gpio_lp_write_dcs(uint8_t command, uint8_t *param, uint16_t param_length) {
 		// Shift the packet out.
 		gpio_lpdt(packet_buffer, 0x04);
 	}
-
-	return 0;
 }
