@@ -107,24 +107,46 @@ int main(void)
   MX_I2C2_Init();
   MX_RTC_Init();
   MX_SPI2_Init();
-  MX_TIM1_Init();
+  //MX_TIM1_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-  //xvc_init();
+  SPI2->CR1 |= (1<<6); // Enable SPI
   power_init();
   HAL_Delay(10);
-  GPIOA->BSRR = GPIO_PIN_0; // Release FPGA from reset
   lcd_init();
+  GPIOA->BSRR = GPIO_PIN_0; // Release FPGA from reset
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  uint8_t txbuf[2] = {0x00, 0x00};
+  uint8_t rxbuf[2];
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    //xvc_tick();
+      // Try get some keys
+
+      GPIOB->BSRR = GPIO_PIN_12;
+      HAL_SPI_TransmitReceive(&hspi2, txbuf, rxbuf, 2, HAL_MAX_DELAY);
+      GPIOB->BRR = GPIO_PIN_12;
+
+      lcd_fill_rect(0, 0, 128, 24, 0);
+      for (int i = 0; i < 2; i++) {
+          int y = i * 12;
+          uint8_t b = rxbuf[i];
+          for (int j = 0; j < 8; j++) {
+              int x = j * 14;
+              if (b & 0x80)
+                  lcd_disp_char(x, y, '1');
+              else
+                  lcd_disp_char(x, y, '0');
+              b <<= 1;
+          }
+      }
+      lcd_update();
   }
   /* USER CODE END 3 */
 }
@@ -265,7 +287,7 @@ static void MX_SPI2_Init(void)
   hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi2.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi2.Init.NSS = SPI_NSS_SOFT;
-  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
+  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_32;
   hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -395,8 +417,20 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PB6 PB7 PB8 PB9 */
-  GPIO_InitStruct.Pin = GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9;
+  /*Configure GPIO pin : PB6 */
+  GPIO_InitStruct.Pin = GPIO_PIN_6;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PB7 PB9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_7|GPIO_PIN_9;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PB8 */
+  GPIO_InitStruct.Pin = GPIO_PIN_8;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);

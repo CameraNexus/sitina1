@@ -26,3 +26,8 @@
 #pragma once
 
 void lcd_init(void);
+void lcd_set_pixel(int x, int y, int c);
+void lcd_disp_char(int x, int y, char c);
+void lcd_disp_string(int x, int y, char *str);
+void lcd_fill_rect(int x0, int y0, int x1, int y1, int c);
+void lcd_update(void);
