@@ -21,13 +21,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-
-// Terminology:
-//                                                    fCLKFast = 336M~224M Hz 
-// KAI11002 Datasheet Names:                          tCLKFast = 2.98~4.46 ns
-//  V2...      ______/‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\______
-//                    .   .               .   .
-//                    .   .               .   .
+//------------------------------------------------------------------------------
+// V1 TIMING DIAGRAM
+// 
 //  VDDL(0V)-  ‾‾‾‾‾‾‾^\  .               .  /^‾‾‾‾‾‾‾
 //             - - - -.-\-.- - - - - - - -.-/-.- - - -
 //  VLO(-9V)-  _ _ _ _._ \v_______________v/ _._ _ _ _
@@ -38,20 +34,47 @@
 //             .      .   |<------------->| Hold VDDL (LH1)
 //             .      .   .               .|-| Negedge VLO (NEL)
 //             .      .   .               .   |<-- Low (LO)
-//             .      .   .               .   .           Default Value @ 336MHz
-//             |<---->| PDN Lead          .   .           = 0
-//             .      |<--------------------->| PDN Hold  = 6800
+//             |<---->| PDN Lead          .   .           = 20
+//             .      |<--------------------->| PDN Hold  = 1816
 //             |<-------->| PLO Lead      .   .           = 340
-//             .      .   |<------------->| PLO Hold      = 6000
-//             |<----->| SELL0 Lead       .   .           = 20
+//             .      .   |<------------->| PLO Hold      = 1176
+//             |<----->| SELL0 Lead       .   .           = 30
 //             .      .|-| SELL0 Hold     .   .           = 300
-//             |<------------------------->| SELL1 Lead   = 6360
+//             |<------------------------->| SELL1 Lead   = 1526
 //             .      .   .                |-| SELL1 Hold = 300
 // PDN-   ‾‾‾‾‾‾‾‾‾‾‾‾\___._______________.___/‾‾‾‾‾‾‾‾‾‾‾‾
 // PLO-   _____.______.___/‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾\___.____________
 // SELL-  _____.______./‾\._______________./‾\.____________
-//           
-
+//       
+// To implement tV3RD, the alternative timing control data need to be deposited 
+// before the trigger signal is asserted. 
+//
+//------------------------------------------------------------------------------
+//
+// Calculate the parameters for the CCD V1 control:
+//
+// fCLKFast = 336M~224M Hz 
+// tCLKFast = 2.98~4.46 ns
+//
+// txxx: Pulse Width, txxx_yyy: Dead Time Control (Can be < 0)
+// 
+// pdn_lead   = tLead   
+// pdn_hold   =         tLO_PE + tPE + tPE_LH + tLH1 + tLH1_NE + tNE + tNE_LO
+// plo_lead   = tLead + tLO_PE + tPE + tPE_LH
+// plo_hold   =                                 tLH1
+// sell0_lead = tLead + tLO_PE
+// sell0_hold =                  tPE
+// sell1_lead = tLead + tLO_PE + tPE + tPE_LH + tLH1 + tLH1_NE
+// sell1_hold =                                                  tNE
+// Typ. val   = 20      20       300   20       836    20        300   20
+//              59.5ns   59.5ns   893ns 59.5ns   2.49us 59.5ns    893ns 59.5ns
+//                                |<---------- 3.5us ----------->|
+// Typ. val   = 20      .        .     .        3020   .         .     .
+// (V3RD)       59.5ns  .        .     .        10.0us .         .     .
+//                                |<---------- 10.0us ---------->|
+//              ^ To align with the V2 posedge (t3P) in V3RD mode
+//
+//------------------------------------------------------------------------------
 `timescale 1ns / 1ps
 `default_nettype none
 
@@ -102,25 +125,25 @@ module ppg_v1r #(
     assign q_sell = q_sell1 | q_sell0;
 
     ppg_unit #(.WIDTH(DW)) u_pdn(
-        .clk(clk_fast),.rstn(rstn),.trig(trig_capture_r),
+        .clk(clk_fast),.rstn,.trig(trig_capture_r),
         .t_lead(t_pdn_lead),.t_hold(t_pdn_hold),
         .q(),.qbar(q_pdn)
     );
 
     ppg_unit #(.WIDTH(DW)) u_plo(
-        .clk(clk_fast),.rstn(rstn),.trig(trig_capture_r),
+        .clk(clk_fast),.rstn,.trig(trig_capture_r),
         .t_lead(t_plo_lead),.t_hold(t_plo_hold),
         .q(q_plo),.qbar()
     );
 
     ppg_unit #(.WIDTH(DW)) u_sell0(
-        .clk(clk_fast),.rstn(rstn),.trig(trig_capture_r),
+        .clk(clk_fast),.rstn,.trig(trig_capture_r),
         .t_lead(t_sell0_lead),.t_hold(t_sell0_hold),
         .q(q_sell0),.qbar()
     );
 
     ppg_unit #(.WIDTH(DW)) u_sell1(
-        .clk(clk_fast),.rstn(rstn),.trig(trig_capture_r),
+        .clk(clk_fast),.rstn,.trig(trig_capture_r),
         .t_lead(t_sell1_lead),.t_hold(t_sell1_hold),
         .q(q_sell1),.qbar()
     );
