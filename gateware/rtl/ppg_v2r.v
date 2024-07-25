@@ -91,6 +91,8 @@
 // Typ. val      |  20 |  20 |  20 |  20
 //               0     300   876   300
 //               
+//                            v
+//                            v
 //               tLeadl      tLH1        tHH         tLH2
 //               |  tLO_PEL  |  tLH1_PEH |  tHH_NEH  |  tLH2_NEL
 //               |  |  tPEL  |  |  tPEH  |  |  tNEH  |  |  tNEL
@@ -99,14 +101,17 @@
 // pdn        =  L  H  H  H  x  x  x  x  x  x  x  x  x  x  x  x
 // sell0      =  L  L  H  .  .  .  .  .  .  .  .  .  .  .  .  .
 // plo0       =  L  L  L  L  H  .  .  .  .  .  .  .  .  .  .  .
-// selh0      =  L  L  L  L  L  L  H  .  .  .  .  .  .  .  .  .
-// phi        =  L  L  L  L  L  L  L  L  H  .  .  .  .  .  .  .
-// selh1      =  L  L  L  L  L  L  L  L  L  L  H  .  .  .  .  .
-// plo1       =  L  L  L  L  L  L  L  L  L  L  L  L  H  .  .  .
-// sell1      =  L  L  L  L  L  L  L  L  L  L  L  L  L  L  H  .
+// selh0      =  .  .  .  .  .  L  H  .  .  .  .  .  .  .  .  .
+// phi        =  .  .  .  .  .  L  L  L  H  .  .  .  .  .  .  .
+// selh1      =  .  .  .  .  .  L  L  L  L  L  H  .  .  .  .  .
+// plo1       =  .  .  .  .  .  L  L  L  L  L  L  L  H  .  .  .
+// sell1      =  .  .  .  .  .  .  .  .  .  .  L  L  L  L  H  .
+// pdn1       =  .  .  .  .  .  .  .  .  .  .  H  H  H  H  H  H
 //               |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
 // Typ. val      |  20 |  19 |  20 |  20 |  20 |  20 |  20 |  20 
 // (V3RD)        0     300   >=1   300   3020  300   6380  300
+//                             ^
+//                             ^ TRIG_H
 //------------------------------------------------------------------------------
 
 
@@ -123,24 +128,24 @@ module ppg_v2r #(
     input wire              trig_h,
     input wire              v3mode,
 
-    input wire [DW-1:0]     t_pdn_lead,
-    input wire [DW-1:0]     t_pdn_hold,
+    input wire [DW-1:0]     t_pdn0_lead,
+    input wire [DW-1:0]     t_pdn0_hold,
     input wire [DW-1:0]     t_sell0_lead,
     input wire [DW-1:0]     t_sell0_hold,
-    input wire [DW-1:0]     t_sell1_lead,
-    input wire [DW-1:0]     t_sell1_hold,
     input wire [DW-1:0]     t_plo0_lead,
     input wire [DW-1:0]     t_plo0_hold,
-    input wire [DW-1:0]     t_plo1_lead,
-    input wire [DW-1:0]     t_plo1_hold,
-    input wire [DW-1:0]     t_selh_guard_lead,
-    input wire [DW-1:0]     t_selh_guard_hold,
     input wire [DW-1:0]     t_selh0_lead,
     input wire [DW-1:0]     t_selh0_hold,
-    input wire [DW-1:0]     t_selh1_lead,
-    input wire [DW-1:0]     t_selh1_hold,
     input wire [DW-1:0]     t_phi_lead,
     input wire [DW-1:0]     t_phi_hold,
+    input wire [DW-1:0]     t_selh1_lead,
+    input wire [DW-1:0]     t_selh1_hold,
+    input wire [DW-1:0]     t_plo1_lead,
+    input wire [DW-1:0]     t_plo1_hold,
+    input wire [DW-1:0]     t_pdn1_lead,
+    input wire [DW-1:0]     t_pdn1_hold,
+    input wire [DW-1:0]     t_sell1_lead,
+    input wire [DW-1:0]     t_sell1_hold,
 
     output wire             q_sell,
     output wire             q_pdn,
@@ -151,100 +156,110 @@ module ppg_v2r #(
 );
 
     // Trig Capture
-    reg trig_l_capture_r;
-    reg trig_h_capture_r;
-    if (CAPTURE) begin
-        always @(posedge clk_fast or negedge rstn) begin
-            if(~rstn) begin
-                trig_l_capture_r <= 1'b0;
-                trig_h_capture_r <= 1'b0;
-            end else begin
-                if(~trig_l_capture_r&trig_l) begin
-                    trig_l_capture_r <= 1'b1;
-                end else begin
-                    trig_l_capture_r <= 1'b0;
-                end
-
-                if(~trig_h_capture_r&trig_h) begin
-                    trig_h_capture_r <= 1'b1;
-                end else begin
-                    trig_h_capture_r <= 1'b0;
-                end
-            end
-        end
-    end else begin
-        always @* begin
-            trig_l_capture_r = trig_l;
-            trig_h_capture_r = trig_h;
+    reg trig_internal_plo1_r;
+    wire trig_l_capture;
+    wire trig_h_capture;
+    wire trig_plo1_capture;
+    reg trig_l_dly_r;
+    reg trig_h_dly_r;
+    reg trig_plo1_dly_r;
+    always @(posedge clk_fast or negedge rstn) begin
+        if(~rstn) begin
+            trig_l_dly_r <= 0;
+            trig_h_dly_r <= 0;
+            trig_plo1_dly_r <= 0;
+        end else begin
+            trig_l_dly_r <= trig_l;
+            trig_h_dly_r <= trig_h;
+            trig_plo1_dly_r <= trig_internal_plo1_r;
         end
     end
+    assign trig_plo1_capture = ~trig_plo1_dly_r & trig_internal_plo1_r;
+    if (CAPTURE) begin
+        assign trig_l_capture    = ~trig_l_dly_r & trig_l;
+        assign trig_h_capture    = ~trig_h_dly_r & trig_h;
+    end else begin
+        assign trig_l_capture    = trig_l;
+        assign trig_h_capture    = trig_h;
+    end
     
-
+    wire q_pdn0, q_pdn1;
     wire q_sell0, q_sell1;
     wire q_selh0, q_selh1;
     wire q_plo0, q_plo1;
+
     
     reg lh1_holder_r;
     assign q_sell = q_sell1 | q_sell0;
     assign q_plo  = q_plo1  | q_plo0 | lh1_holder_r;
     assign q_selh = q_selh1 | q_selh0;
-    assign q_selh_guard = lh1_holder_r;
+    // assign q_selh_guard = lh1_holder_r;
+    assign q_selh_guard = q_plo;
+    assign q_pdn  = ~(q_pdn0 | q_pdn1 | lh1_holder_r);
 
     always @(posedge clk_fast or negedge rstn) begin
         if (~rstn) begin
-            lh1_holder_r <= 1'b0;
+            lh1_holder_r         <= 1'b0;
+            trig_internal_plo1_r <= 1'b0;
         end else begin
-            if(q_plo1)      lh1_holder_r <= 1'b0;
-            else if(q_plo0) lh1_holder_r <= 1'b1;
+            if(q_plo1)              lh1_holder_r <= 1'b0;
+            else if(q_plo0&&v3mode) lh1_holder_r <= 1'b1;
+            if(q_pdn)               trig_internal_plo1_r <= 1'b0;
+            else if(q_selh1)         trig_internal_plo1_r <= 1'b1;
         end
     end
 
     ppg_unit #(.WIDTH(DW)) u_pdn(
-        .clk(clk_fast),.rstn,.trig(trig_l_capture_r),
-        .t_lead(t_pdn_lead),.t_hold(t_pdn_hold),
-        .q(),.qbar(q_pdn)
+        .clk(clk_fast),.rstn,.trig(trig_l_capture),
+        .t_lead(t_pdn0_lead),.t_hold(t_pdn0_hold),
+        .q(q_pdn0),.qbar()
     );
 
     ppg_unit #(.WIDTH(DW)) u_sell0(
-        .clk(clk_fast),.rstn,.trig(trig_l_capture_r),
+        .clk(clk_fast),.rstn,.trig(trig_l_capture),
         .t_lead(t_sell0_lead),.t_hold(t_sell0_hold),
         .q(q_sell0),.qbar()
     );
 
     ppg_unit #(.WIDTH(DW)) u_plo0(
-        .clk(clk_fast),.rstn,.trig(trig_l_capture_r),
+        .clk(clk_fast),.rstn,.trig(trig_l_capture),
         .t_lead(t_plo0_lead),.t_hold(t_plo0_hold),
         .q(q_plo0),.qbar()
     );
 
     ppg_unit #(.WIDTH(DW)) u_selh0(
-        .clk(clk_fast),.rstn,.trig(trig_h_capture_r),
+        .clk(clk_fast),.rstn,.trig(trig_h_capture),
         .t_lead(t_selh0_lead),.t_hold(t_selh0_hold),
         .q(q_selh0),.qbar()
     );
 
     ppg_unit #(.WIDTH(DW)) u_phi(
-        .clk(clk_fast),.rstn,.trig(trig_h_capture_r),
+        .clk(clk_fast),.rstn,.trig(trig_h_capture),
         .t_lead(t_phi_lead),.t_hold(t_phi_hold),
         .q(q_phi),.qbar()
     );
 
     ppg_unit #(.WIDTH(DW)) u_selh1(
-        .clk(clk_fast),.rstn,.trig(trig_h_capture_r),
+        .clk(clk_fast),.rstn,.trig(trig_h_capture),
         .t_lead(t_selh1_lead),.t_hold(t_selh1_hold),
         .q(q_selh1),.qbar()
     );
 
     ppg_unit #(.WIDTH(DW)) u_plo1(
-        .clk(clk_fast),.rstn,.trig(trig_h_capture_r),
+        .clk(clk_fast),.rstn,.trig(trig_h_capture),
         .t_lead(t_plo1_lead),.t_hold(t_plo1_hold),
         .q(q_plo1),.qbar()
     );
 
     ppg_unit #(.WIDTH(DW)) u_sell1(
-        .clk(clk_fast),.rstn,.trig(v3mode?trig_h_capture_r:trig_l_capture_r),
+        .clk(clk_fast),.rstn,.trig(v3mode?trig_plo1_capture:trig_l_capture),
         .t_lead(t_sell1_lead),.t_hold(t_sell1_hold),
         .q(q_sell1),.qbar()
+    );
+    ppg_unit #(.WIDTH(DW)) u_pdn1(
+        .clk(clk_fast),.rstn,.trig(trig_plo1_capture),
+        .t_lead(t_pdn1_lead),.t_hold(t_pdn1_hold),
+        .q(q_pdn1),.qbar()
     );
 
 endmodule /* ppg_v1r */
