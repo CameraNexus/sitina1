@@ -190,24 +190,6 @@
             },
             "V3": {
                 "VT": "AC",
-                "BA": "0x0000",
-                "HA": "0xFFFF",
-                "BP": "C_BASEADDR",
-                "HP": "C_HIGHADDR",
-                "MA": "s_axi",
-                "MX": "/mipi_dsi_tx_subsystem_0",
-                "MI": "s_axi",
-                "MS": "mipi_dsi_tx_ctrl_0",
-                "MV": "xilinx.com:ip:mipi_dsi_tx_subsystem:2.3",
-                "SX": "/mipi_dsi_tx_subsystem_0/mipi_dsi_tx_ctrl_0",
-                "SI": "s_axi",
-                "SS": "reg0",
-                "SV": "xilinx.com:ip:mipi_dsi_tx_ctrl:1.0",
-                "TM": "data",
-                "TU": "register"
-            },
-            "V4": {
-                "VT": "AC",
                 "BA": "0x00000000",
                 "HA": "0x1FFFFFFF",
                 "BP": "C_BASEADDR",
@@ -224,25 +206,7 @@
                 "TM": "both",
                 "TU": "memory"
             },
-            "V5": {
-                "VT": "AC",
-                "BA": "0x00000000",
-                "HA": "0x1FFFFFFF",
-                "BP": "C_BASEADDR",
-                "HP": "C_HIGHADDR",
-                "MA": "Data_m_axi_mm_video",
-                "MX": "/v_frmbuf_rd_0",
-                "MI": "m_axi_mm_video",
-                "MS": "SEG_processing_system7_0_HP1_DDR_LOWOCM",
-                "MV": "xilinx.com:ip:v_frmbuf_rd:2.5",
-                "SX": "/processing_system7_0",
-                "SI": "S_AXI_HP1",
-                "SS": "HP1_DDR_LOWOCM",
-                "SV": "xilinx.com:ip:processing_system7:5.5",
-                "TM": "both",
-                "TU": "memory"
-            },
-            "V6": {
+            "V4": {
                 "VT": "AC",
                 "BA": "0x40000000",
                 "HA": "0x40FFFFFF",
@@ -257,42 +221,6 @@
                 "SI": "APB_M_0",
                 "SS": "Reg",
                 "SV": "::blkdsn_imp:",
-                "TM": "both",
-                "TU": "register"
-            },
-            "V7": {
-                "VT": "AC",
-                "BA": "0x43000000",
-                "HA": "0x43FFFFFF",
-                "BP": "C_BASEADDR",
-                "HP": "C_HIGHADDR",
-                "MA": "Data",
-                "MX": "/processing_system7_0",
-                "MI": "M_AXI_GP0",
-                "MS": "SEG_mipi_dsi_tx_subsystem_0_Reg",
-                "MV": "xilinx.com:ip:processing_system7:5.5",
-                "SX": "/mipi_dsi_tx_subsystem_0",
-                "SI": "s_axi",
-                "SS": "Reg",
-                "SV": "xilinx.com:ip:mipi_dsi_tx_subsystem:2.3",
-                "TM": "both",
-                "TU": "register"
-            },
-            "V8": {
-                "VT": "AC",
-                "BA": "0x44000000",
-                "HA": "0x44FFFFFF",
-                "BP": "C_S_AXI_CTRL_BASEADDR",
-                "HP": "C_S_AXI_CTRL_HIGHADDR",
-                "MA": "Data",
-                "MX": "/processing_system7_0",
-                "MI": "M_AXI_GP0",
-                "MS": "SEG_v_frmbuf_rd_0_Reg",
-                "MV": "xilinx.com:ip:processing_system7:5.5",
-                "SX": "/v_frmbuf_rd_0",
-                "SI": "s_axi_CTRL",
-                "SS": "Reg",
-                "SV": "xilinx.com:ip:v_frmbuf_rd:2.5",
                 "TM": "both",
                 "TU": "register"
             }
@@ -313,26 +241,6 @@
             },
             {
                 "src": "V4",
-                "trg": "V2",
-                "EH": "2"
-            },
-            {
-                "src": "V5",
-                "trg": "V2",
-                "EH": "2"
-            },
-            {
-                "src": "V6",
-                "trg": "V2",
-                "EH": "2"
-            },
-            {
-                "src": "V7",
-                "trg": "V2",
-                "EH": "2"
-            },
-            {
-                "src": "V8",
                 "trg": "V2",
                 "EH": "2"
             }

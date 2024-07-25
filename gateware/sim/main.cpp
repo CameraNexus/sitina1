@@ -37,8 +37,8 @@
 #include "memmap.h" // AXI memmap, only use for RAM
 
 #define GPIO_BASE               0x00000
-#define DDIF_BASE               0x10000
-#define DSITX_BASE              0x20000
+#define CCDTG_BASE              0x10000
+#define DSILITE_BASE            0x20000
 
 #define GPIO_REG_ODR            0x0000
 #define GPIO_REG_IDR            0x0004
@@ -46,24 +46,12 @@
 #define GPIO_REG_BCR            0x000C
 #define GPIO_REG_OER            0x0010
 
-#define DDIF_REG_DCCTL          0x0000
-#define DDIF_REG_DMACTL         0x0004
-#define DDIF_REG_VPORCH         0x0010
-#define DDIF_REG_VACT           0x0014
-#define DDIF_REG_HPORCH         0x0018
-#define DDIF_REG_HACT           0x001C
-#define DDIF_REG_STARTADDR_L    0x0020
-#define DDIF_REG_STARTADDR_H    0x0024
-#define DDIF_REG_ENDADDR_L      0x0028
-#define DDIF_REG_ENDADDR_H      0x002C
+#define DSILITE_REG_PCTL        0x0000
+#define DSILITE_REG_DMACTL      0x0004
+#define DSILITE_REG_STARTADDR   0x0020
+#define DSILITE_REG_ENDADDR     0x0028
 
-#define LCD_VFP                 10
-#define LCD_VSYNC               2
-#define LCD_VBP                 8
 #define LCD_VACT                120
-#define LCD_HFP                 10
-#define LCD_HSYNC               2
-#define LCD_HBP                 8
 #define LCD_HACT                160
 
 #define FRAMEBUF_BASE           0x1000000
@@ -103,16 +91,10 @@ void testmain(void) {
     case 0:
         apbsim_write(GPIO_BASE | GPIO_REG_OER, 0x01);
         apbsim_write(GPIO_BASE | GPIO_REG_ODR, 0x01);
-        apbsim_write(DDIF_BASE | DDIF_REG_VPORCH, (LCD_VBP << 16) | (LCD_VSYNC << 8) | (LCD_VFP));
-        apbsim_write(DDIF_BASE | DDIF_REG_VACT, (LCD_VACT));
-        apbsim_write(DDIF_BASE | DDIF_REG_HPORCH, (LCD_HBP << 16) | (LCD_HSYNC << 8) | (LCD_HFP));
-        apbsim_write(DDIF_BASE | DDIF_REG_HACT, (LCD_HACT));
-        apbsim_write(DDIF_BASE | DDIF_REG_STARTADDR_L, FRAMEBUF_BASE);
-        apbsim_write(DDIF_BASE | DDIF_REG_STARTADDR_H, 0);
-        apbsim_write(DDIF_BASE | DDIF_REG_ENDADDR_L, FRAMEBUF_END);
-        apbsim_write(DDIF_BASE | DDIF_REG_ENDADDR_H, 0);
-        apbsim_write(DDIF_BASE | DDIF_REG_DMACTL, (DMACTL_MAXINFLIGHT << 8) | DMACTL_BURSTLEN);
-        apbsim_write(DDIF_BASE | DDIF_REG_DCCTL, 0x1);
+        apbsim_write(DSILITE_BASE | DSILITE_REG_STARTADDR, FRAMEBUF_BASE);
+        apbsim_write(DSILITE_BASE | DSILITE_REG_ENDADDR, FRAMEBUF_END);
+        apbsim_write(DSILITE_BASE | DSILITE_REG_DMACTL, (DMACTL_MAXINFLIGHT << 8) | DMACTL_BURSTLEN);
+        apbsim_write(DSILITE_BASE | DSILITE_REG_PCTL, 0x1);
         step = 1;
         break;
     case 1:
@@ -186,17 +168,18 @@ void tick(void) {
         core->s_apb_prdata
     );
 
-    dispsim_apply(
-        (uint32_t *)screen->pixels,
-        core->dpi_vsync,
-        core->dpi_hsync,
-        core->dpi_enable,
-        core->dpi_data
-    );
+    // dispsim_apply(
+    //     (uint32_t *)screen->pixels,
+    //     core->dpi_vsync,
+    //     core->dpi_hsync,
+    //     core->dpi_enable,
+    //     core->dpi_data
+    // );
 
     // Posedge
     core->clk = 1;
-    core->clk_pix = 1;
+    core->clk_lcd = 1;
+    core->clk_ccd = 1;
     core->eval();
 
     // Apply changed input signals after clock edge
@@ -225,7 +208,8 @@ void tick(void) {
 
     // Negedge
     core->clk = 0;
-    core->clk_pix = 0;
+    core->clk_lcd = 0;
+    core->clk_ccd = 0;
     core->eval();
     if (enable_trace)
         trace->dump(tickcount * 10 + 5);
@@ -237,17 +221,24 @@ void tick(void) {
 
 void reset(void) {
     reset_done = false;
-    core->rst_n = 0;
+    core->rst = 1;
+    core->rst_ccd = 1;
+    core->rst_lcd = 1;
     tick();
     tick();
-    core->rst_n = 1;
+    core->rst = 0;
+    core->rst_ccd = 0;
+    core->rst_lcd = 0;
     reset_done = true;
     apbsim_reset();
     axiep_reset();
     camsim_reset();
     dispsim_reset();
     memmap_reset();
-    memmap_load("test_image.bin", FRAMEBUF_BASE - RAM_BASE);
+    //memmap_load("test_image.bin", FRAMEBUF_BASE - RAM_BASE);
+    for (uint64_t i = FRAMEBUF_BASE; i < FRAMEBUF_END; i += 8) {
+        memmap_write(i, 0x0123456789abcdefull, 0xff);
+    }
 }
 
 void render_copy(void) {

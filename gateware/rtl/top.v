@@ -61,7 +61,16 @@ module top (
     output wire 		DSI_HS_CP,
     output wire 		DSI_HS_CN,
     output wire [1:0]	DSI_HS_DP,
-    output wire [1:0]	DSI_HS_DN
+    output wire [1:0]	DSI_HS_DN,
+    // TCON for CCD
+    output wire         TCON_V1,
+    output wire         TCON_V2,
+    output wire         TCON_V23,
+    output wire         TCON_FDG,
+    output wire         TCON_STROBE,
+    output wire         TCON_H1,
+    output wire         TCON_H2,
+    output wire         TCON_RG
 );
 
     parameter AXI_DW = 64;
@@ -69,9 +78,9 @@ module top (
     parameter AXI_IDW = 2;
 
     wire clk;
-    wire clk_pix;
+    wire clk_lcd;
     wire rst;
-    wire rst_pix;
+    wire rst_lcd;
     wire aresetn;
 
     wire apb_pwrite;
@@ -120,10 +129,6 @@ module top (
     wire axi_rlast;
     wire axi_rvalid;
     wire axi_rready;
-    wire mipi_phy_if_0_clk_lp_n;
-    wire mipi_phy_if_0_clk_lp_p;
-    wire [1:0] mipi_phy_if_0_data_lp_n;
-    wire [1:0] mipi_phy_if_0_data_lp_p;
     
     // TODO: AXI4 does not have WID. If more than 1 masters are present in the system,
     // Consider add a AXI3-AXI4 converter in the block diagram
@@ -155,7 +160,7 @@ module top (
         .DDR_reset_n(DDR_reset_n),
         .DDR_we_n(DDR_we_n),
         .FCLK_CLK0(clk),
-        .FCLK_CLK1(clk_pix),
+        .FCLK_CLK1(clk_lcd),
         .FIXED_IO_ddr_vrn(FIXED_IO_ddr_vrn),
         .FIXED_IO_ddr_vrp(FIXED_IO_ddr_vrp),
         .FIXED_IO_mio(FIXED_IO_mio),
@@ -200,14 +205,6 @@ module top (
         .S_AXI_HP0_0_wready(axi_wready),
         .S_AXI_HP0_0_wstrb(axi_wstrb),
         .S_AXI_HP0_0_wvalid(axi_wvalid),
-    	.mipi_phy_if_0_clk_hs_n(DSI_HS_CN),
-    	.mipi_phy_if_0_clk_hs_p(DSI_HS_CP),
-    	.mipi_phy_if_0_clk_lp_n(mipi_phy_if_0_clk_lp_n),
-    	.mipi_phy_if_0_clk_lp_p(mipi_phy_if_0_clk_lp_p),
-    	.mipi_phy_if_0_data_hs_n(DSI_HS_DN),
-    	.mipi_phy_if_0_data_hs_p(DSI_HS_DP),
-    	.mipi_phy_if_0_data_lp_n(mipi_phy_if_0_data_lp_n),
-    	.mipi_phy_if_0_data_lp_p(mipi_phy_if_0_data_lp_p),
         .peripheral_aresetn(aresetn)
 	);
 
@@ -221,39 +218,49 @@ module top (
         .out(rst_n_sync)
     );
 
-    wire rst_n_pix;
-    assign rst_pix = !rst_n_pix;
-    mu_drsync pix_rst_sync (
-        .clk(clk_pix),
+    wire rst_n_lcd;
+    assign rst_lcd = !rst_n_lcd;
+    mu_drsync lcd_rst_sync (
+        .clk(clk_lcd),
         .in(1'b1),
         .nreset(aresetn),
-        .out(rst_n_pix)
+        .out(rst_n_lcd)
     );
 
-    wire dsi_lp_cp;
-    wire dsi_lp_cn;
-    wire [1:0] dsi_lp_dp;
-    wire [1:0] dsi_lp_dn;
-    wire dsi_lp_sel;
+    wire [15:0]  dsi_hs_dat;
+    wire         dsi_hsck_ten;
+    wire         dsi_hsdat_ten;
     system #(
         .AXI_AW (AXI_AW),
         .AXI_DW(AXI_DW),
         .AXI_IDW(AXI_IDW)
     ) system (
         .clk(clk),
-        .clk_pix(clk_pix),
+        .clk_lcd(clk_lcd),
+        .clk_ccd(clk), // TODO
         .rst(rst),
-        .rst_pix(rst_pix),
+        .rst_lcd(rst_lcd),
+        .rst_ccd(rst), // TODO
         .afe_rst(AFE_RST),
         .afe_sync(AFE_SYNC),
         .afe_sdata(AFE_SDATA),
         .afe_sl(AFE_SL),
         .afe_sck(AFE_SCK),
-    	.dsi_lp_cp(dsi_lp_cp),
-    	.dsi_lp_cn(dsi_lp_cn),
-    	.dsi_lp_dp(dsi_lp_dp),
-    	.dsi_lp_dn(dsi_lp_dn),
-    	.dsi_lp_sel(dsi_lp_sel),
+        .dsi_lp_cp(DSI_LP_CP),
+        .dsi_lp_cn(DSI_LP_CN),
+        .dsi_lp_dp(DSI_LP_DP),
+        .dsi_lp_dn(DSI_LP_DN),
+        .dsi_hs_dat(dsi_hs_dat),
+        .dsi_hsck_ten(dsi_hsck_ten),
+        .dsi_hsdat_ten(dsi_hsdat_ten),
+        .tcon_v1(TCON_V1),
+        .tcon_v2(TCON_V2),
+        .tcon_v23(TCON_V23),
+        .tcon_fdg(TCON_FDG),
+        .tcon_strobe(TCON_STROBE),
+        .tcon_h1(TCON_H1),
+        .tcon_h2(TCON_H2),
+        .tcon_rg(TCON_RG),
         .s_apb_pwrite(apb_pwrite),
         .s_apb_pwdata(apb_pwdata),
         .s_apb_paddr(apb_paddr),
@@ -292,10 +299,17 @@ module top (
         .m_axi_rready(axi_rready)
     );
 
-    assign DSI_LP_CP = dsi_lp_sel ? dsi_lp_cp : mipi_phy_if_0_clk_lp_p;
-    assign DSI_LP_CN = dsi_lp_sel ? dsi_lp_cn : mipi_phy_if_0_clk_lp_n;
-    assign DSI_LP_DP = dsi_lp_sel ? dsi_lp_dp : mipi_phy_if_0_data_lp_p;
-    assign DSI_LP_DN = dsi_lp_sel ? dsi_lp_dn : mipi_phy_if_0_data_lp_n;
+    mu_dphy_7series #(.LANES(2)) dphy (
+        .clk(clk_lcd),
+        .rst(rst_lcd),
+        .hsck_ten(dsi_hsck_ten),
+        .hsdat_ten(dsi_hsdat_ten),
+        .dat(dsi_hs_dat),
+        .dsi_hs_cp(DSI_HS_CP),
+        .dsi_hs_cn(DSI_HS_CN),
+        .dsi_hs_dp(DSI_HS_DP),
+        .dsi_hs_dn(DSI_HS_DN)
+    );
 
 endmodule
 

@@ -1,3 +1,6 @@
+`timescale 1ns / 1ps
+`default_nettype none
+`include "mu_defines.vh"
 //
 // ccdtimgen.v: CCD Timing Generator
 //
@@ -21,8 +24,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-`default_nettype none
-`timescale 1ns / 1ps
 
 module ccdtimgen(
     input  wire         clk,
@@ -52,14 +53,14 @@ module ccdtimgen(
     localparam CNTW = 15; // Width of counters
 
     // These should be registers, just wires for now
-    wire tgen_en = 1'b1;
+    wire tgen_en = 1'b0;
     wire tgen_rst = 1'b0;
     wire tgen_embed_eshut = 1'b1;
     wire tgen_start_eshut = 1'b0;
     wire [CNTW-1:0] delay_htime = 10; // Start delay line time 
     wire [CNTW-1:0] delay_vtime = 10; // Start delay line count
-    wire [3:0] vskip = 0; // Line skipping factor
-    wire [CNTW-1:0] eshut_line = 100;
+    wire [3:0] vskip = 6; // Line skipping factor, need to be even for color
+    wire [CNTW-1:0] eshut_line = 98;
 
     // These can be synthesize-time constants
     // See pg. 26 for values, comment labed as min-nom-max
@@ -176,6 +177,7 @@ module ccdtimgen(
                     dvp_vsync <= 1'b0;
                 end
                 else begin
+                    v_cnt <= 'd0;
                     if (tgen_en) begin
                         state <= STATE_1STLINE;
                     end
@@ -195,6 +197,7 @@ module ccdtimgen(
         end
         STATE_LINESKIP: begin
             // Line skipping is a bit involved... it needs to wait additional TFD time
+            h_cnt <= h_cnt + 'd1;
             if (v_cnt_sub == 'd0) begin
                 // First line is just TFD
                 if (h_cnt == (tfd - 'd1)) begin
@@ -205,17 +208,15 @@ module ccdtimgen(
             else begin
                 // Normal counting
                 if (h_cnt == (tvccd + thd - 'd1)) begin
+                    h_cnt <= 'd0;
                     v_cnt_sub <= v_cnt_sub + 'd1;
                     if (v_cnt_sub == vskip) begin
                         v_cnt_sub <= 'd0;
-                        state <= STATE_1STLINE;
+                        state <= STATE_HFP;
                     end
                     v_cnt <= v_cnt + 'd1;
                 end
             end
-
-            // H counter always counts
-            h_cnt <= h_cnt + 'd1;
         end
         endcase
 
@@ -289,24 +290,24 @@ module ccdtimgen(
     end
 
     always @(posedge clk) begin
-        tcon_v1 <= v1;
-        tcon_v2 <= v2;
-        tcon_v23 <= v23;
-        tcon_fdg <= fdg;
+        tcon_v1 <= !v1;
+        tcon_v2 <= !v2;
+        tcon_v23 <= !v23;
+        tcon_fdg <= !fdg;
         tcon_h1 <= h1;
         tcon_h2 <= h2;
         tcon_rg <= rg;
-        tcon_strobe <= strobe;
+        tcon_strobe <= !strobe;
 
         if (rst_ccd) begin
-            tcon_v1 <= 1'b1;
-            tcon_v2 <= 1'b0;
-            tcon_v23 <= 1'b0;
-            tcon_fdg <= 1'b0;
+            tcon_v1 <= 1'b0;
+            tcon_v2 <= 1'b1;
+            tcon_v23 <= 1'b1;
+            tcon_fdg <= 1'b1;
             tcon_h1 <= 1'b1;
             tcon_h2 <= 1'b0;
             tcon_rg <= 1'b0;
-            tcon_strobe <= 1'b0;
+            tcon_strobe <= 1'b1;
         end
     end
 

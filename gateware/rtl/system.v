@@ -27,7 +27,7 @@
 module system #(
     parameter AXI_AW = 32,
     parameter AXI_DW = 64,
-    parameter AXI_IDW = 2
+    parameter AXI_IDW = 1
 ) (
     input  wire         clk,        // Clock
     input  wire         clk_ccd,    // CCD 4X pixel clock
@@ -51,7 +51,9 @@ module system #(
     output wire         dsi_lp_cn,
     output wire [1:0]   dsi_lp_dp,
     output wire [1:0]   dsi_lp_dn,
-    output wire         dsi_lp_sel,
+    output wire [15:0]  dsi_hs_dat,
+    output wire         dsi_hsck_ten,
+    output wire         dsi_hsdat_ten,
     // TCON for CCD
     output wire         tcon_v1,
     output wire         tcon_v2,
@@ -70,7 +72,7 @@ module system #(
 );
 
     // Number of APB devices
-    localparam APB_N = 2;
+    localparam APB_N = 3;
 
     // Internal APB for register access
     wire regbus_pwrite;
@@ -124,11 +126,11 @@ module system #(
     assign afe_sl = gpio_out[3];
     assign afe_sck = gpio_out[4];
 
-    assign dsi_lp_sel = gpio_out[5];
-    assign dsi_lp_cp = gpio_out[6];
-    assign dsi_lp_cn = gpio_out[7];
-    assign dsi_lp_dp = gpio_out[9:8];
-    assign dsi_lp_dn = gpio_out[11:10];
+    wire dsi_lp_sel = gpio_out[5];
+    wire dsi_lp_gpio_cp = gpio_out[6];
+    wire dsi_lp_gpio_cn = gpio_out[7];
+    wire [1:0] dsi_lp_gpio_dp = gpio_out[9:8];
+    wire [1:0] dsi_lp_gpio_dn = gpio_out[11:10];
 
     assign gpio_in = 32'd0;
 
@@ -152,6 +154,51 @@ module system #(
         .tcon_h2(tcon_h2),
         .tcon_rg(tcon_rg)
     );
+
+//    assign tcon_v1 = 1'b0;
+//    assign tcon_v2 = 1'b0;
+//    assign tcon_v23 = 1'b0;
+//    assign tcon_fdg = 1'b0;
+//    assign tcon_strobe = 1'b0;
+//    assign tcon_h1 = 1'b0;
+//    assign tcon_h2 = 1'b0;
+//    assign tcon_rg = 1'b0;
+
+    wire dsi_lp_ctl_cp;
+    wire dsi_lp_ctl_cn;
+    wire [1:0] dsi_lp_ctl_dp;
+    wire [1:0] dsi_lp_ctl_dn;
+    mu_dsilite #(
+        .AXI_AW(AXI_AW),
+        .AXI_DW(AXI_DW)
+    ) mu_dsilite (
+        .clk(clk),
+        .clk_pix(clk_lcd),
+        .rst(rst),
+        .rst_pix(rst_lcd),
+        // APB device port for register access
+        `APB_SLAVE_CONN(regbus_, 2),
+	    // AXI host port for direct memory access
+        `AXI_CONN(m_, m_),
+	    // Display interface
+        .dpi_ext_vsync(1'b0),
+        // DSI LP, to IO mux
+        .dsi_lp_cp(dsi_lp_ctl_cp),
+        .dsi_lp_cn(dsi_lp_ctl_cn),
+        .dsi_lp_dp(dsi_lp_ctl_dp),
+        .dsi_lp_dn(dsi_lp_ctl_dn),
+        // DSI HS, to HS serializer / PHY
+        .dsi_hs_dat(dsi_hs_dat),
+        .dsi_hsck_ten(dsi_hsck_ten),
+        .dsi_hsdat_ten(dsi_hsdat_ten)
+    );
+
+    // Mux between GPIO LP and controller LP signal
+    assign dsi_lp_cp = dsi_lp_sel ? dsi_lp_gpio_cp : dsi_lp_ctl_cp;
+    assign dsi_lp_cn = dsi_lp_sel ? dsi_lp_gpio_cn : dsi_lp_ctl_cn;
+    assign dsi_lp_dp = dsi_lp_sel ? dsi_lp_gpio_dp : dsi_lp_ctl_dp;
+    assign dsi_lp_dn = dsi_lp_sel ? dsi_lp_gpio_dn : dsi_lp_ctl_dn;
+
 
 endmodule
 

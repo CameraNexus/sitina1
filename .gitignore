@@ -14,6 +14,7 @@ pcb.pdf
 production/
 pcb-backups/
 fabrication-toolkit-options.json
+*_old/
 
 # RTL simulator
 gateware/sim/sim
@@ -96,6 +97,79 @@ Release/
 *.csv
 *.xbcd
 *.xmsgs
+
+# Xilinx Vivado Files
+
+# [home]
+*.jou
+*.log
+*.debug
+*.str
+*.zip
+*.tmp
+*.rst
+*.os
+*.js
+*.pb
+*.dcp
+*.hwdef
+*.vds
+*.veo
+*.wdf
+*.vdi
+*.dmp
+*.rpx
+*.rpt
+*_stub.v
+*_stub.vhdl
+*_funcsim.v
+*_funcsim.vhdl
+.project
+
+# [dir]
+*.cache
+.metadata
+*.data
+*.ipdefs
+.Xil
+*.sdk
+*.hw
+*.ip_user_files
+
+### IP synth
+*_synth_*
+
+.jobs
+
+### project synth
+*.runs
+*.gen
+
+### block design
+*/*/bd/*/hdl
+*/*/*/bd/*/hdl
+
+*/*/bd/*/*.xdc
+*/*/*/bd/*/*.xdc
+
+*/*/bd/*/ip/*/*.xdc
+*/*/*/bd/*/ip/*/*.xdc
+
+*/*/bd/*/ip/*/*/
+*/*/*/bd/*/ip/*/*/
+
+*/*/bd/*/ip/*/*.vhd
+*/*/*/bd/*/ip/*/*.vhd
+
+*/*/bd/*/ip/*/*.xml
+*/*/*/bd/*/ip/*/*.xml
+
+*.vho
+*.html
+*/*/bd/*/ip/*/*.tcl
+*/*/*/bd/*/ip/*/*.tcl
+hw_handoff
+ipshared
 
 # PCB temp files
 *.asc
