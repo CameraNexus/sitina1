@@ -52,9 +52,14 @@ module ppg_unit #(
                 2'b00: begin // Idle
                     if (trig) begin
                         if (t_lead == 0) begin
-                            state <= 2'b10;
-                            cnt_r <= t_hold;
-                            q_r <= 1;
+                            if (t_hold == 0) begin
+                                state <= 2'b00;
+                                q_r <= 0;
+                            end else begin
+                                state <= 2'b10;
+                                cnt_r <= t_hold;
+                                q_r <= 1;
+                            end
                         end else begin
                             state <= 2'b01;
                             cnt_r <= t_lead;

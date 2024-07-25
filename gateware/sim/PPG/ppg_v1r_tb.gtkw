@@ -1,0 +1,56 @@
+[*]
+[*] GTKWave Analyzer v3.3.116 (w)1999-2023 BSI
+[*] Thu Jul 25 00:31:00 2024
+[*]
+[dumpfile] "/home/andylithia/github/sitina1/gateware/rtl/tmp/ppg_v1r_tb.vcd"
+[dumpfile_mtime] "Thu Jul 25 00:30:45 2024"
+[dumpfile_size] 3196084
+[savefile] "/home/andylithia/github/sitina1/gateware/rtl/tmp/ppg_v1r_tb.gtkw"
+[timestart] 0
+[size] 1536 976
+[pos] 365 0
+*-25.590727 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] ppg_v1r_tb.
+[treeopen] ppg_v1r_tb.u_dut.
+[sst_width] 217
+[signals_width] 190
+[sst_expanded] 1
+[sst_vpaned_height] 280
+@28
+ppg_v1r_tb.clk_fast
+ppg_v1r_tb.rstn
+ppg_v1r_tb.trig_l
+ppg_v1r_tb.trig_h
+ppg_v1r_tb.u_dut.trig_l_capture
+ppg_v1r_tb.u_dut.trig_h_capture
+ppg_v1r_tb.u_dut.trig_plo1_capture
+ppg_v1r_tb.u_dut.v3mode
+@29
+ppg_v1r_tb.arm
+@200
+-
+@28
+ppg_v1r_tb.u_dut.q_phi
+ppg_v1r_tb.u_dut.q_selh
+ppg_v1r_tb.q_plo
+ppg_v1r_tb.q_sell
+ppg_v1r_tb.q_pdn
+ppg_v1r_tb.q_selhl
+ppg_v1r_tb.q_selhm
+ppg_v1r_tb.q_selhh
+@200
+-DG412
+@28
+ppg_v1r_tb.dg412_selh_h
+ppg_v1r_tb.dg412_selh_m
+ppg_v1r_tb.dg412_selh_l
+ppg_v1r_tb.dg412_sell_p
+ppg_v1r_tb.dg412_sell_n
+ppg_v1r_tb.dg412_plo_p
+ppg_v1r_tb.dg412_plo_n
+ppg_v1r_tb.dg412_phi_p
+ppg_v1r_tb.dg412_phi_n
+ppg_v1r_tb.dg412_pdn_p
+ppg_v1r_tb.dg412_pdn_n
+[pattern_trace] 1
+[pattern_trace] 0
