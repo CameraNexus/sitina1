@@ -25,5 +25,15 @@
 //
 #pragma once
 
-void power_init(void);
+bool power_is_power_on(void);
+void power_pmic_init(void);
 void power_set_sd_iovcc(bool en1v8);
+void power_power_on_ccd(void);
+void power_power_off_ccd(void);
+void power_power_on_lens(void);
+void power_power_off_lens(void);
+void power_release_fpga_reset(void);
+void power_fpga_reset(void);
+void power_lcd_on(void);
+void power_lcd_set_brightness(uint8_t val);
+void power_lcd_off(void);

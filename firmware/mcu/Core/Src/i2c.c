@@ -23,7 +23,7 @@
 // File : i2c.c
 // Brief: I2C board level driver
 //
-#include "stm32f1xx_hal.h"
+#include "stm32g0xx_hal.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>

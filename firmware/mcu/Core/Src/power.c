@@ -23,7 +23,7 @@
 // File : power.h
 // Brief: Board power control
 //
-#include "stm32f1xx_hal.h"
+#include "stm32g0xx_hal.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include "i2c.h"
@@ -57,9 +57,28 @@ static const int axp_ldo4volts[] = {1250, 1300, 1400, 1500, 1600, 1700,
         1800, 1900, 2000, 2500, 2700, 2800, 3000, 3100, 3200, 3300};
 
 extern I2C_HandleTypeDef hi2c2;
+extern TIM_HandleTypeDef htim3;
 
 #define AXP_I2C_HOST    &hi2c2
 #define AXP_I2C_ADDR    0x34
+
+#define PWROK_GPIO      GPIOA
+#define PWROK_PIN       GPIO_PIN_15
+
+#define CCDLOADSW_GPIO  GPIOB
+#define CCDLOADSW_PIN   GPIO_PIN_1
+
+#define CCDDCDCEN_GPIO  GPIOB
+#define CCDDCDCEN_PIN   GPIO_PIN_2
+
+#define FPGARST_GPIO    GPIOB
+#define FPGARST_PIN     GPIO_PIN_6
+
+#define LENSPWREN_GPIO  GPIOA
+#define LENSPWREN_PIN   GPIO_PIN_1
+
+#define LCD_BL_GPIO     GPIOB
+#define LCD_BL_PIN      GPIO_PIN_7
 
 void axp_read_volt(AXP_RAIL rail) {
     uint8_t val;
@@ -110,7 +129,12 @@ void axp_set_gpio(int gpio, int val) {
     i2c_write_reg(AXP_I2C_HOST, AXP_I2C_ADDR, reg, val ? 0x01 : 0x00);
 }
 
-void power_init(void) {
+bool power_is_power_on(void) {
+    return ((PWROK_GPIO->IDR & PWROK_PIN) != 0);
+}
+
+// PMIC
+void power_pmic_init(void) {
     axp_set_volt(AXP_DCDC2, 1800); // FPGA AUX supply
     axp_set_volt(AXP_DCDC3, 3300); // Main 3.3V supply
     axp_set_volt(AXP_LDO2, 3300); // SD card supply
@@ -124,9 +148,69 @@ void power_init(void) {
     axp_read_volt(AXP_LDO2);
     axp_read_volt(AXP_LDO3);
     axp_read_volt(AXP_LDO4);
-
 }
 
 void power_set_sd_iovcc(bool en1v8) {
     axp_set_volt(AXP_LDO3, en1v8 ? 1800 : 3300);
+}
+
+// Power switches
+void power_power_on_ccd(void) {
+    CCDLOADSW_GPIO->BSRR = CCDLOADSW_PIN;
+    HAL_Delay(100);
+    CCDDCDCEN_GPIO->BSRR = CCDDCDCEN_PIN;
+}
+
+void power_power_off_ccd(void) {
+    CCDDCDCEN_GPIO->BRR = CCDDCDCEN_PIN;
+    HAL_Delay(10);
+    CCDLOADSW_GPIO->BRR = CCDLOADSW_PIN;
+}
+
+void power_power_on_lens(void) {
+    LENSPWREN_GPIO->BSRR = LENSPWREN_PIN;
+}
+
+void power_power_off_lens(void) {
+    LENSPWREN_GPIO->BRR = LENSPWREN_PIN;
+}
+
+void power_release_fpga_reset(void) {
+    FPGARST_GPIO->BSRR = FPGARST_PIN;
+}
+
+void power_fpga_reset(void) {
+    FPGARST_GPIO->BRR = FPGARST_PIN;
+}
+
+// LCD
+static void power_lcd_bl_on(void) {
+    LCD_BL_GPIO->BSRR = LCD_BL_PIN;
+}
+
+static void power_lcd_bl_off(void) {
+    LCD_BL_GPIO->BRR = LCD_BL_PIN;
+}
+
+void power_lcd_on(void) {
+    // LCD BL and RST shares the same pin
+    // Set the brightness to minimum first, do the reset sequence
+    // Then set to desired brightness
+    power_lcd_set_brightness(0);
+    HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
+    power_lcd_bl_on();
+    HAL_Delay(100);
+    power_lcd_bl_off();
+    HAL_Delay(100);
+    power_lcd_bl_on();
+    power_lcd_set_brightness(200);
+}
+
+void power_lcd_set_brightness(uint8_t val) {
+    TIM3->CCR1 = 255 - val;
+}
+
+void power_lcd_off(void) {
+    power_lcd_bl_off();
+    HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_1);
 }
