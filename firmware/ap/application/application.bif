@@ -1,0 +1,7 @@
+//arch = zynq; split = false; format = BIN
+the_ROM_image:
+{
+	[bootloader]/home/wenting/Sitina1/firmware/ap/platform/export/platform/sw/boot/fsbl.elf
+	/home/wenting/Sitina1/gateware/syn/syn.runs/impl_1/top.bit
+	/home/wenting/Sitina1/firmware/ap/application/build/application.elf
+}

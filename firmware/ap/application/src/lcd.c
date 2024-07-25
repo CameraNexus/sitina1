@@ -22,6 +22,8 @@
 //
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
+#include "xil_cache.h"
 #include "lcd.h"
 #include "gpio_lp.h"
 #include "mu_platform.h"
@@ -33,7 +35,10 @@
 #define DMACTL_BURSTLEN         8   // in 64-bit words
 #define DMACTL_MAXINFLIGHT      4   // Max number of outstanding requests
 
-//extern const unsigned char gImage_image480480[921600];
+#define DCCTL_SWAP_32B          0x4
+#define DCCTL_TGEN_EN           0x1
+
+extern const unsigned char gImage_image480480[921600];
 
 #define FRAMEBUF_SIZE   IMAGE_WIDTH * IMAGE_HEIGHT * IMAGE_PIXEL_SIZE
 uint8_t __aligned(64) framebuffer[FRAMEBUF_SIZE];
@@ -96,6 +101,8 @@ static void dsi_initseq(void) {
 	usleep(25 * 1000);
 
 	gpio_lp_write_dcs(0x35, NULL, 0x00);
+
+    //gpio_lp_write_dcs(0x22, NULL, 0x00);
 }
 
 void lcd_init(void) {
@@ -109,8 +116,22 @@ void lcd_init(void) {
 
 	gpio_lp_release();
 
+    memcpy(framebuffer, gImage_image480480, FRAMEBUF_SIZE);
+
+    memset(framebuffer, 0, 480*4*10);
+    memset(framebuffer, 0xff, 480*4);
+    memset(framebuffer[480*4*2], 0xff, 480*4);
+    for (int i = 0; i < 240; i++) {
+        framebuffer[480*4*4+i*2*4 + 0] = 0xff;
+        framebuffer[480*4*4+i*2*4 + 1] = 0xff;
+        framebuffer[480*4*4+i*2*4 + 2] = 0xff;
+        framebuffer[480*4*4+i*2*4 + 3] = 0xff;
+    }
+
+    Xil_DCacheFlushRange((intptr_t)framebuffer, FRAMEBUF_SIZE);
+
     *DSILITE_STARTADDR = (uint32_t)framebuffer;
     *DSILITE_ENDADDR = (uint32_t)framebuffer + FRAMEBUF_SIZE;
     *DSILITE_DMACTL = (DMACTL_MAXINFLIGHT << 8) | DMACTL_BURSTLEN;
-    *DSILITE_PCTL = 0x1;
+    *DSILITE_PCTL = DCCTL_TGEN_EN;
 }
