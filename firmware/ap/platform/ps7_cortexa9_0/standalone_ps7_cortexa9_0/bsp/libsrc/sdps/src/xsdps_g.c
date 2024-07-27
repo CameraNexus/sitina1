@@ -19,7 +19,8 @@ XSdPs_Config XSdPs_ConfigTable[] __attribute__ ((section (".drvcfg_sec"))) = {
 		0x0, /* xlnx,clk-50-ddr-itap-dly */
 		0x0, /* xlnx,clk-50-ddr-otap-dly */
 		0x0, /* xlnx,clk-100-sdr-otap-dly */
-		0x0 /* xlnx,clk-200-sdr-otap-dly */
+		0x0, /* xlnx,clk-200-sdr-otap-dly */
+		0x0 /* xlnx,clk-200-ddr-otap-dly */
 	},
 	 {
 		 NULL

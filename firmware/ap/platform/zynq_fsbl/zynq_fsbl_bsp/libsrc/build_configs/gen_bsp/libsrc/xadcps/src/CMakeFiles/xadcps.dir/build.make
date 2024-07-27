@@ -47,10 +47,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake
+CMAKE_COMMAND = /tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake
 
 # The command to remove a file.
-RM = /tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -E rm -f
+RM = /tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -76,71 +76,71 @@ libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps.c.obj: libsrc/xadcps/src/CMakeFil
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps.c
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps.c.obj: libsrc/xadcps/src/CMakeFiles/xadcps.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps.c.obj"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps.c.obj -MF CMakeFiles/xadcps.dir/xadcps.c.obj.d -o CMakeFiles/xadcps.dir/xadcps.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps.c
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps.c.obj -MF CMakeFiles/xadcps.dir/xadcps.c.obj.d -o CMakeFiles/xadcps.dir/xadcps.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps.c
 
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/xadcps.dir/xadcps.c.i"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps.c > CMakeFiles/xadcps.dir/xadcps.c.i
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps.c > CMakeFiles/xadcps.dir/xadcps.c.i
 
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/xadcps.dir/xadcps.c.s"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps.c -o CMakeFiles/xadcps.dir/xadcps.c.s
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps.c -o CMakeFiles/xadcps.dir/xadcps.c.s
 
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_g.c.obj: libsrc/xadcps/src/CMakeFiles/xadcps.dir/flags.make
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_g.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_g.c
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_g.c.obj: libsrc/xadcps/src/CMakeFiles/xadcps.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_g.c.obj"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_g.c.obj -MF CMakeFiles/xadcps.dir/xadcps_g.c.obj.d -o CMakeFiles/xadcps.dir/xadcps_g.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_g.c
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_g.c.obj -MF CMakeFiles/xadcps.dir/xadcps_g.c.obj.d -o CMakeFiles/xadcps.dir/xadcps_g.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_g.c
 
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_g.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/xadcps.dir/xadcps_g.c.i"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_g.c > CMakeFiles/xadcps.dir/xadcps_g.c.i
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_g.c > CMakeFiles/xadcps.dir/xadcps_g.c.i
 
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_g.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/xadcps.dir/xadcps_g.c.s"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_g.c -o CMakeFiles/xadcps.dir/xadcps_g.c.s
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_g.c -o CMakeFiles/xadcps.dir/xadcps_g.c.s
 
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_intr.c.obj: libsrc/xadcps/src/CMakeFiles/xadcps.dir/flags.make
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_intr.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_intr.c
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_intr.c.obj: libsrc/xadcps/src/CMakeFiles/xadcps.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_intr.c.obj"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_intr.c.obj -MF CMakeFiles/xadcps.dir/xadcps_intr.c.obj.d -o CMakeFiles/xadcps.dir/xadcps_intr.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_intr.c
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_intr.c.obj -MF CMakeFiles/xadcps.dir/xadcps_intr.c.obj.d -o CMakeFiles/xadcps.dir/xadcps_intr.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_intr.c
 
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_intr.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/xadcps.dir/xadcps_intr.c.i"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_intr.c > CMakeFiles/xadcps.dir/xadcps_intr.c.i
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_intr.c > CMakeFiles/xadcps.dir/xadcps_intr.c.i
 
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_intr.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/xadcps.dir/xadcps_intr.c.s"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_intr.c -o CMakeFiles/xadcps.dir/xadcps_intr.c.s
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_intr.c -o CMakeFiles/xadcps.dir/xadcps_intr.c.s
 
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_selftest.c.obj: libsrc/xadcps/src/CMakeFiles/xadcps.dir/flags.make
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_selftest.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_selftest.c
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_selftest.c.obj: libsrc/xadcps/src/CMakeFiles/xadcps.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_selftest.c.obj"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_selftest.c.obj -MF CMakeFiles/xadcps.dir/xadcps_selftest.c.obj.d -o CMakeFiles/xadcps.dir/xadcps_selftest.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_selftest.c
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_selftest.c.obj -MF CMakeFiles/xadcps.dir/xadcps_selftest.c.obj.d -o CMakeFiles/xadcps.dir/xadcps_selftest.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_selftest.c
 
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_selftest.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/xadcps.dir/xadcps_selftest.c.i"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_selftest.c > CMakeFiles/xadcps.dir/xadcps_selftest.c.i
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_selftest.c > CMakeFiles/xadcps.dir/xadcps_selftest.c.i
 
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_selftest.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/xadcps.dir/xadcps_selftest.c.s"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_selftest.c -o CMakeFiles/xadcps.dir/xadcps_selftest.c.s
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_selftest.c -o CMakeFiles/xadcps.dir/xadcps_selftest.c.s
 
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_sinit.c.obj: libsrc/xadcps/src/CMakeFiles/xadcps.dir/flags.make
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_sinit.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_sinit.c
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_sinit.c.obj: libsrc/xadcps/src/CMakeFiles/xadcps.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_sinit.c.obj"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_sinit.c.obj -MF CMakeFiles/xadcps.dir/xadcps_sinit.c.obj.d -o CMakeFiles/xadcps.dir/xadcps_sinit.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_sinit.c
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_sinit.c.obj -MF CMakeFiles/xadcps.dir/xadcps_sinit.c.obj.d -o CMakeFiles/xadcps.dir/xadcps_sinit.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_sinit.c
 
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_sinit.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/xadcps.dir/xadcps_sinit.c.i"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_sinit.c > CMakeFiles/xadcps.dir/xadcps_sinit.c.i
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_sinit.c > CMakeFiles/xadcps.dir/xadcps_sinit.c.i
 
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/xadcps_sinit.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/xadcps.dir/xadcps_sinit.c.s"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_sinit.c -o CMakeFiles/xadcps.dir/xadcps_sinit.c.s
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xadcps/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xadcps/src/xadcps_sinit.c -o CMakeFiles/xadcps.dir/xadcps_sinit.c.s
 
 # Object files for target xadcps
 xadcps_OBJECTS = \

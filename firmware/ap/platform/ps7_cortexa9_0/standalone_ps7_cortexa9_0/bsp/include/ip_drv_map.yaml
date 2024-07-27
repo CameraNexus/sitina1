@@ -1,3 +1,6 @@
+APB_M_0:
+- APB_M_0
+- None
 ps7_afi_0:
 - ps7_afi
 - None
@@ -58,9 +61,6 @@ ps7_pmu_0:
 ps7_qspi_0:
 - ps7_qspi
 - qspips
-ps7_qspi_linear_0:
-- ps7_qspi_linear
-- None
 ps7_scuc_0:
 - ps7_scuc
 - None

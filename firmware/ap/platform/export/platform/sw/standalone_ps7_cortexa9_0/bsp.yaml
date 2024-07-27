@@ -1,12 +1,70 @@
 sdt: hw_artifacts/ps7_cortexa9_0_baremetal.dts
 family: Zynq
 path: /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp
+config: None
 os: standalone
 os_info:
   standalone:
-    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/bsp/standalone_v9_0
+    path: /tools/Xilinx/Vitis/2024.1/data/embeddedsw/lib/bsp/standalone_v9_1
 os_config:
   standalone:
+    standalone_clocking:
+      name: standalone_clocking
+      permission: read_write
+      type: string
+      value: None
+      default: None
+      options:
+      - None
+      description: This option is not supported in the Unified Vitis IDE in this version.
+        Change to the classic IDE if you want to use this option.
+    standalone_enable_sw_intrusive_profiling:
+      name: standalone_enable_sw_intrusive_profiling
+      permission: read_write
+      type: string
+      value: None
+      default: None
+      options:
+      - None
+      description: This option is not supported in the Unified Vitis IDE in this version.
+        Change to the classic IDE if you want to use this option
+    standalone_microblaze_exceptions:
+      name: standalone_microblaze_exceptions
+      permission: read_write
+      type: string
+      value: None
+      default: None
+      options:
+      - None
+      description: Unused option and deprecated
+    standalone_pmu_sleep_timer:
+      name: standalone_pmu_sleep_timer
+      permission: read_write
+      type: string
+      value: None
+      default: None
+      options:
+      - None
+      description: Deprecated in favor of xiltimer
+    standalone_profile_timer:
+      name: standalone_profile_timer
+      permission: read_write
+      type: string
+      value: None
+      default: None
+      options:
+      - None
+      description: This option is not supported in the Unified Vitis IDE in this version.
+        Change to the classic IDE if you want to use this option
+    standalone_sleep_timer:
+      name: standalone_sleep_timer
+      permission: read_write
+      type: string
+      value: None
+      default: None
+      options:
+      - None
+      description: Deprecated in favor of xiltimer
     standalone_stdin:
       name: standalone_stdin
       permission: read_write
@@ -27,6 +85,34 @@ os_config:
       - None
       - ps7_coresight_comp_0
       description: stdout peripheral
+    standalone_ttc_select_cntr:
+      name: standalone_ttc_select_cntr
+      permission: read_write
+      type: string
+      value: None
+      default: None
+      options:
+      - None
+      description: Deprecated in favor of xiltimer
+    standalone_xpm_support:
+      name: standalone_xpm_support
+      permission: read_write
+      type: string
+      value: None
+      default: None
+      options:
+      - None
+      description: This option is not supported in the Unified Vitis IDE in this version.
+        Change to the classic IDE if you want to use this option.
+    standalone_zynqmp_fsbl_bsp:
+      name: standalone_zynqmp_fsbl_bsp
+      permission: read_write
+      type: string
+      value: None
+      default: None
+      options:
+      - None
+      description: Not needed any more in Unified Vitis
 toolchain_file: cortexa9_toolchain.cmake
 specs_file: Xilinx.spec
 proc: ps7_cortexa9_0
@@ -78,6 +164,7 @@ include_folder: include
 lib_folder: lib
 libsrc_folder: libsrc
 drv_info:
+  APB_M_0: None
   ps7_afi_0: None
   ps7_afi_1: None
   ps7_afi_2: None
@@ -85,35 +172,35 @@ drv_info:
   ps7_coresight_comp_0:
     driver: coresightps_dcc
     ip_name: ps7_coresight_comp
-    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/coresightps_dcc_v1_9
+    path: /tools/Xilinx/Vitis/2024.1/data/embeddedsw/XilinxProcessorIPLib/drivers/coresightps_dcc_v1_10
   ps7_ddrc_0: None
   ps7_dev_cfg_0:
     driver: devcfg
     ip_name: ps7_dev_cfg
-    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/devcfg_v3_8
+    path: /tools/Xilinx/Vitis/2024.1/data/embeddedsw/XilinxProcessorIPLib/drivers/devcfg_v3_8
   ps7_dma_ns: None
   ps7_dma_s:
     driver: dmaps
     ip_name: ps7_dma
-    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dmaps_v2_9
+    path: /tools/Xilinx/Vitis/2024.1/data/embeddedsw/XilinxProcessorIPLib/drivers/dmaps_v2_10
   ps7_globaltimer_0: None
   ps7_gpio_0:
     driver: gpiops
     ip_name: ps7_gpio
-    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/gpiops_v3_12
+    path: /tools/Xilinx/Vitis/2024.1/data/embeddedsw/XilinxProcessorIPLib/drivers/gpiops_v3_13
   ps7_gpv_0: None
   ps7_i2c_0:
     driver: iicps
     ip_name: ps7_i2c
-    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/iicps_v3_18
+    path: /tools/Xilinx/Vitis/2024.1/data/embeddedsw/XilinxProcessorIPLib/drivers/iicps_v3_19
   ps7_i2c_1:
     driver: iicps
     ip_name: ps7_i2c
-    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/iicps_v3_18
+    path: /tools/Xilinx/Vitis/2024.1/data/embeddedsw/XilinxProcessorIPLib/drivers/iicps_v3_19
   ps7_intc_dist_0:
     driver: scugic
     ip_name: ps7_intc_dist
-    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/scugic_v5_2
+    path: /tools/Xilinx/Vitis/2024.1/data/embeddedsw/XilinxProcessorIPLib/drivers/scugic_v5_3
   ps7_iop_bus_config_0: None
   ps7_ocmc_0: None
   ps7_pl310_0: None
@@ -121,29 +208,28 @@ drv_info:
   ps7_qspi_0:
     driver: qspips
     ip_name: ps7_qspi
-    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/qspips_v3_11
-  ps7_qspi_linear_0: None
+    path: /tools/Xilinx/Vitis/2024.1/data/embeddedsw/XilinxProcessorIPLib/drivers/qspips_v3_12
   ps7_scuc_0: None
   ps7_scutimer_0:
     driver: scutimer
     ip_name: ps7_scutimer
-    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/scutimer_v2_5
+    path: /tools/Xilinx/Vitis/2024.1/data/embeddedsw/XilinxProcessorIPLib/drivers/scutimer_v2_6
   ps7_scuwdt_0:
     driver: scuwdt
     ip_name: ps7_scuwdt
-    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/scuwdt_v2_5
+    path: /tools/Xilinx/Vitis/2024.1/data/embeddedsw/XilinxProcessorIPLib/drivers/scuwdt_v2_5
   ps7_sd_0:
     driver: sdps
     ip_name: ps7_sdio
-    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/sdps_v4_2
+    path: /tools/Xilinx/Vitis/2024.1/data/embeddedsw/XilinxProcessorIPLib/drivers/sdps_v4_3
   ps7_slcr_0: None
   ps7_xadc_0:
     driver: xadcps
     ip_name: ps7_xadc
-    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/xadcps_v2_7
+    path: /tools/Xilinx/Vitis/2024.1/data/embeddedsw/XilinxProcessorIPLib/drivers/xadcps_v2_7
 lib_info:
   xiltimer:
-    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xiltimer_v1_3
+    path: /tools/Xilinx/Vitis/2024.1/data/embeddedsw/lib/sw_services/xiltimer_v2_0
 lib_config:
   xiltimer:
     XILTIMER_en_interval_timer:

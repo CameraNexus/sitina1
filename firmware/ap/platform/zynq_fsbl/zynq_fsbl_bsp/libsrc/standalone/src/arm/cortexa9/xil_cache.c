@@ -1,6 +1,6 @@
 /******************************************************************************
 * Copyright (c) 2010 - 2022 Xilinx, Inc.  All rights reserved.
-* Copyright (c) 2022 - 2023 Advanced Micro Devices, Inc. All rights reserved.
+* Copyright (c) 2022 - 2024 Advanced Micro Devices, Inc. All rights reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
@@ -92,6 +92,15 @@
 * 9.0    ml  03/03/23 Added description to fix doxygen warnings.
 *        mus 09/21/23 Fix infinite loop in Xil_DCacheInvalidateRange when
 *                     USE_AMP=1.
+* 9.1    asa 01/12/24 Fix issues in Xil_DCacheInvalidateRange.
+* 9.1    asa 01/29/24 In an unlikely scenario where the start address
+*                     passed is 0x0 and length is less than 0x20 (cache line),
+*                     the XilDCacheInvalidateRange API will result in
+*                     a probable crash as it will try to invalidate the
+*                     complete 4 GB address range.
+*                     Changes are made to fix the same.
+* 9.1   asa  31/01/24 Fix overflow issues under corner cases for various
+*                     cache maintenance APIs.
 * </pre>
 *
 ******************************************************************************/
@@ -113,6 +122,8 @@
 /************************** Variable Definitions *****************************/
 
 #define IRQ_FIQ_MASK 0xC0U	/**< Mask IRQ and FIQ interrupts in cpsr */
+#define MAX_ADDR 				0xFFFFFFFFU
+#define LAST_CACHELINE_START	0xFFFFFFE0U
 
 #ifdef __GNUC__
 	extern s32  _stack_end;
@@ -312,6 +323,7 @@ void Xil_DCacheInvalidateRange(INTPTR adr, u32 len)
 	INTPTR opendaddr;
 	INTPTR endaddr;
 	u32 currmask;
+	u32 unalignedstart = 0x0;
 	volatile u32 *L2CCOffset = (volatile u32 *)(XPS_L2CC_BASEADDR +
 				    XPS_L2CC_CACHE_INVLD_PA_OFFSET);
 
@@ -319,11 +331,12 @@ void Xil_DCacheInvalidateRange(INTPTR adr, u32 len)
 	mtcpsr(currmask | IRQ_FIQ_MASK);
 
 	if (len != 0U) {
-		opendaddr = adr + len;
+		((MAX_ADDR - (u32)adr) < len) ? (opendaddr = MAX_ADDR) : (opendaddr = adr + len);
 		endaddr = opendaddr;
 
 		if ((adr & (cacheline-1U)) != 0U) {
 			adr &= (~(cacheline - 1U));
+			unalignedstart = 1;
 
 			Xil_L1DCacheFlushLine(adr);
 #ifndef USE_AMP
@@ -334,12 +347,13 @@ void Xil_DCacheInvalidateRange(INTPTR adr, u32 len)
 			Xil_L2WriteDebugCtrl(0x0U);
 			Xil_L2CacheSync();
 #endif
-			adr += cacheline;
+			tempadr = adr;
+			(u32)adr >= LAST_CACHELINE_START ? (adr = endaddr) : (adr += cacheline);
 		}
 		if ((opendaddr & (cacheline-1U)) != 0U) {
 			opendaddr &= (~(cacheline - 1U));
 
-			if (opendaddr != adr) {
+			if ((opendaddr != tempadr) || (unalignedstart == 0x0U)) {
 				Xil_L1DCacheFlushLine(opendaddr);
 #ifndef USE_AMP
 				/* Disable Write-back and line fills */
@@ -348,6 +362,7 @@ void Xil_DCacheInvalidateRange(INTPTR adr, u32 len)
 				/* Enable Write-back and line fills */
 				Xil_L2WriteDebugCtrl(0x0U);
 				Xil_L2CacheSync();
+				(u32)endaddr >= cacheline ? (endaddr -= cacheline) : (endaddr = 0);
 #endif
 			}
 		}
@@ -359,7 +374,7 @@ void Xil_DCacheInvalidateRange(INTPTR adr, u32 len)
 			/* Invalidate L2 cache line */
 			*L2CCOffset = tempadr;
 			Xil_L2CacheSync();
-			tempadr += cacheline;
+			((MAX_ADDR - (u32)tempadr) < cacheline) ? (tempadr = MAX_ADDR) : (tempadr += cacheline) ;
 		}
 #endif
 
@@ -372,7 +387,7 @@ void Xil_DCacheInvalidateRange(INTPTR adr, u32 len)
 				__asm(XREG_CP15_INVAL_DC_LINE_MVA_POC);
 			  Reg = adr; }
 #endif
-			adr += cacheline;
+			((MAX_ADDR - (u32)adr) < cacheline) ? (adr = MAX_ADDR) : (adr += cacheline) ;
 		}
 		/* Wait for L1 cache invalidation to complete */
 		dsb();
@@ -463,7 +478,7 @@ void Xil_DCacheFlushRange(INTPTR adr, u32 len)
 	mtcpsr(currmask | IRQ_FIQ_MASK);
 
 	if (len != 0U) {
-		opendadr = adr + len;
+		((MAX_ADDR - (u32)adr) < len) ? (opendadr = MAX_ADDR) : (opendadr = adr + len);
 		adr &= ~(cacheline - 1U);
 
 		tempadr = adr;
@@ -477,7 +492,7 @@ void Xil_DCacheFlushRange(INTPTR adr, u32 len)
 				__asm(XREG_CP15_CLEAN_INVAL_DC_LINE_MVA_POC);
 			  Reg = tempadr; }
 #endif
-			tempadr += cacheline;
+			((MAX_ADDR - (u32)tempadr) < cacheline) ? (tempadr = MAX_ADDR) : (tempadr += cacheline);
 		}
 		/* Wait for L1 cache clean and invalidation to complete */
 		dsb();
@@ -489,7 +504,7 @@ void Xil_DCacheFlushRange(INTPTR adr, u32 len)
 			/* Flush L2 cache line */
 			*L2CCOffset = adr;
 			Xil_L2CacheSync();
-			adr += cacheline;
+			((MAX_ADDR - (u32)adr) < cacheline) ? (adr = MAX_ADDR) : (adr += cacheline);
 		}
 		Xil_L2WriteDebugCtrl(0x0U);
 #endif
@@ -632,7 +647,7 @@ void Xil_ICacheInvalidateRange(INTPTR adr, u32 len)
 		/* Back the starting address up to the start of a cache line
 		 * perform cache operations until adr+len
 		 */
-		end = LocalAddr + len;
+		((MAX_ADDR - LocalAddr) < len) ? (end = MAX_ADDR) : (end = LocalAddr + len);
 		LocalAddr = LocalAddr & ~(cacheline - 1U);
 
 		while (LocalAddr < end) {
@@ -650,7 +665,7 @@ void Xil_ICacheInvalidateRange(INTPTR adr, u32 len)
 				__asm(XREG_CP15_INVAL_IC_LINE_MVA_POU);
 			  Reg = LocalAddr; }
 #endif
-			LocalAddr += cacheline;
+			((MAX_ADDR - LocalAddr) < cacheline) ? (LocalAddr = MAX_ADDR) : (LocalAddr += cacheline) ;
 		}
 		/* Wait for L1 I cache invalidation to complete */
 		dsb();
@@ -865,7 +880,7 @@ void Xil_L1DCacheInvalidateRange(u32 adr, u32 len)
 		/* Back the starting address up to the start of a cache line
 		 * perform cache operations until adr+len
 		 */
-		end = LocalAddr + len;
+		((MAX_ADDR - LocalAddr) < len) ? (end = MAX_ADDR) : (end = LocalAddr + len);
 		LocalAddr = LocalAddr & ~(cacheline - 1U);
 
 		while (LocalAddr < end) {
@@ -877,7 +892,7 @@ void Xil_L1DCacheInvalidateRange(u32 adr, u32 len)
 				__asm(XREG_CP15_INVAL_DC_LINE_MVA_POC);
 			  Reg = LocalAddr; }
 #endif
-			LocalAddr += cacheline;
+			((MAX_ADDR - LocalAddr) < cacheline) ? (LocalAddr = MAX_ADDR) : (LocalAddr += cacheline);
 		}
 
 		/* Wait for L1 cache invalidation to complete */
@@ -1011,7 +1026,7 @@ void Xil_L1DCacheFlushRange(u32 adr, u32 len)
 		/* Back the starting address up to the start of a cache line
 		 * perform cache operations until adr+len
 		 */
-		end = LocalAddr + len;
+		((MAX_ADDR - LocalAddr) < len) ? (end = MAX_ADDR) : (end = LocalAddr + len);
 		LocalAddr = LocalAddr & ~(cacheline - 1U);
 
 		while (LocalAddr < end) {
@@ -1023,7 +1038,7 @@ void Xil_L1DCacheFlushRange(u32 adr, u32 len)
 				__asm(XREG_CP15_CLEAN_INVAL_DC_LINE_MVA_POC);
 			  Reg = LocalAddr; }
 #endif
-			LocalAddr += cacheline;
+			((MAX_ADDR - LocalAddr) < cacheline) ? (LocalAddr = MAX_ADDR) : (LocalAddr += cacheline);
 		}
 
 		/* Wait for L1 cache clean and invalidation to complete */
@@ -1187,7 +1202,7 @@ void Xil_L1ICacheInvalidateRange(u32 adr, u32 len)
 		/* Back the starting address up to the start of a cache line
 		 * perform cache operations until adr+len
 		 */
-		end = LocalAddr + len;
+		((MAX_ADDR - LocalAddr) < len) ? (end = MAX_ADDR) : (end = LocalAddr + len);
 		LocalAddr = LocalAddr & ~(cacheline - 1U);
 
 		while (LocalAddr < end) {
@@ -1199,7 +1214,7 @@ void Xil_L1ICacheInvalidateRange(u32 adr, u32 len)
 				__asm(XREG_CP15_INVAL_IC_LINE_MVA_POU);
 			  Reg = LocalAddr; }
 #endif
-			LocalAddr += cacheline;
+			((MAX_ADDR - LocalAddr) < cacheline) ? (LocalAddr = MAX_ADDR) : (LocalAddr += cacheline);
 		}
 
 		/* Wait for L1 cache invalidation to complete */
@@ -1383,7 +1398,7 @@ void Xil_L2CacheInvalidateRange(u32 adr, u32 len)
 		/* Back the starting address up to the start of a cache line
 		 * perform cache operations until adr+len
 		 */
-		end = LocalAddr + len;
+		((MAX_ADDR - LocalAddr) < len) ? (end = MAX_ADDR) : (end = LocalAddr + len);
 		LocalAddr = LocalAddr & ~(cacheline - 1U);
 
 		/* Disable Write-back and line fills */
@@ -1392,7 +1407,7 @@ void Xil_L2CacheInvalidateRange(u32 adr, u32 len)
 		while (LocalAddr < end) {
 			*L2CCOffset = LocalAddr;
 			Xil_L2CacheSync();
-			LocalAddr += cacheline;
+			((MAX_ADDR - LocalAddr) < cacheline) ? (LocalAddr = MAX_ADDR) : (LocalAddr += cacheline);
 		}
 
 		/* Enable Write-back and line fills */
@@ -1494,7 +1509,7 @@ void Xil_L2CacheFlushRange(u32 adr, u32 len)
 		/* Back the starting address up to the start of a cache line
 		 * perform cache operations until adr+len
 		 */
-		end = LocalAddr + len;
+		((MAX_ADDR - LocalAddr) < len) ? (end = MAX_ADDR) : (end = LocalAddr + len);
 		LocalAddr = LocalAddr & ~(cacheline - 1U);
 
 		/* Disable Write-back and line fills */
@@ -1503,7 +1518,7 @@ void Xil_L2CacheFlushRange(u32 adr, u32 len)
 		while (LocalAddr < end) {
 			*L2CCOffset = LocalAddr;
 			Xil_L2CacheSync();
-			LocalAddr += cacheline;
+			((MAX_ADDR - LocalAddr) < cacheline) ? (LocalAddr = MAX_ADDR) : (LocalAddr += cacheline);
 		}
 
 		/* Enable Write-back and line fills */

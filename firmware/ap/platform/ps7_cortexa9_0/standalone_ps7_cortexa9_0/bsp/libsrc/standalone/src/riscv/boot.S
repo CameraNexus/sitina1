@@ -1,5 +1,5 @@
 /******************************************************************************
-* Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
+* Copyright (c) 2023 - 2024 Advanced Micro Devices, Inc. All rights reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 /*****************************************************************************/
@@ -28,6 +28,15 @@
 * Ver   Who  Date     Changes
 * ----- ---- -------- ---------------------------------------------------
 * 9.0   sa   12/11/22 Initial version
+* 9.1   mj   22/12/23 Disable relaxation before initializing stack pointer
+* 9.1   mus  22/12/23 Trap vector base address must be 4 byte aligned, it
+*                     is initialized to .Ldone label which is not 4 byte
+*       	      aligned. Updated boot code to make .Ldone labe 4 byte
+*                     aligned explicitly.
+* 9.1  mus   25/01/24 Temporarily set mtvec with _trap_handler at start of
+*                     boot code. It will be reverted once triggering of
+*                     constructor is fixed.
+* 9.1  mus   25/03/24 Use correct macro for checking FPU enablement.
 * </pre>
 *
 ******************************************************************************/
@@ -41,8 +50,8 @@
 
 _boot:
 
-/* Initialize mtvec CSR to .Ldone */
-	la	t0, .Ldone
+/* FIXME: Initialize mtvec CSR to _trap_handler */
+	la	t0, _trap_handler
 	csrw	mtvec, t0
 
 /* Initialize processor registers to 0 */
@@ -78,10 +87,13 @@ _boot:
 	addi	x31,x0,0
 
 /* Initialize stack pointer */
-	la	sp,__stack
+	.option push
+	.option norelax
+	la	sp, __stack
+	.option pop
 
 /* Clear the floating point registers */
-#if defined(XPAR_MICROBLAZE_RISCV_USE_FPU) && (XPAR_MICROBLAZE_USE_FPU == 2)
+#if defined(XPAR_MICROBLAZE_RISCV_USE_FPU) && (XPAR_MICROBLAZE_RISCV_USE_FPU == 2)
 	fmv.d.x	f0, x0
 	fmv.d.x	f1, x0
 	fmv.d.x	f2, x0
@@ -115,7 +127,7 @@ _boot:
 	fmv.d.x	f30, x0
 	fmv.d.x	f31, x0
 #endif
-#if defined(XPAR_MICROBLAZE_RISCV_USE_FPU) && (XPAR_MICROBLAZE_USE_FPU == 1)
+#if defined(XPAR_MICROBLAZE_RISCV_USE_FPU) && (XPAR_MICROBLAZE_RISCV_USE_FPU == 1)
 	fmv.w.x	f0, x0
 	fmv.w.x	f1, x0
 	fmv.w.x	f2, x0
@@ -152,6 +164,7 @@ _boot:
 	sw	zero,0(sp)	/* Initialize argc to zero */
 	j 	_start		/* jump to C startup code */
 
+.align 2
 .Ldone:	j	.Ldone		/* We should only get here for unhandled traps*/
 
 .end

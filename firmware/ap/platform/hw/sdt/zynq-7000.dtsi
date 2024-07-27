@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0+
 /*
  * Copyright (C) 2011-2022 Xilinx, Inc.
- * Copyright (C) 2022 Advanced Micro Devices, Inc. All Rights Reserved.
+ * Copyright (C) 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
  *
  * This software is licensed under the terms of the GNU General Public
  * License version 2, as published by the Free Software Foundation, and
@@ -17,7 +17,14 @@
 	#address-cells = <1>;
 	#size-cells = <1>;
 	compatible = "xlnx,zynq-7000";
-    model = "Xilinx Zynq";
+	model = "Xilinx Zynq";
+
+	options {
+		u-boot {
+			compatible = "u-boot,config";
+			bootscr-address = /bits/ 64 <0x3000000>;
+		};
+	};
 
 	cpus_a9: cpus-a9@0 {
 		#address-cells = <1>;
@@ -102,7 +109,7 @@
 	};
 
 	amba: axi {
-		u-boot,dm-pre-reloc;
+		bootph-all;
 		compatible = "simple-bus";
 		#address-cells = <1>;
 		#size-cells = <1>;
@@ -262,7 +269,7 @@
 		};
 
 		gem0: ethernet@e000b000 {
-            compatible = "xlnx,zynq-gem", "cdns,gem";
+			compatible = "xlnx,zynq-gem", "cdns,gem";
 			reg = <0xe000b000 0x1000>;
 			status = "disabled";
 			interrupts = <0 22 4>;
@@ -274,7 +281,7 @@
 		};
 
 		gem1: ethernet@e000c000 {
-            compatible = "xlnx,zynq-gem", "cdns,gem";
+			compatible = "xlnx,zynq-gem", "cdns,gem";
 			reg = <0xe000c000 0x1000>;
 			status = "disabled";
 			interrupts = <0 45 4>;
@@ -335,14 +342,14 @@
 		};
 
 		slcr: slcr@f8000000 {
-			u-boot,dm-pre-reloc;
+			bootph-all;
 			#address-cells = <1>;
 			#size-cells = <1>;
 			compatible = "xlnx,zynq-slcr", "syscon", "simple-mfd";
 			reg = <0xF8000000 0x1000>;
 			ranges;
 			clkc: clkc@100 {
-				u-boot,dm-pre-reloc;
+				bootph-all;
 				#clock-cells = <1>;
 				compatible = "xlnx,ps7-clkc";
 				fclk-enable = <0xf>;
@@ -374,11 +381,11 @@
 			};
 		};
 
-        dmac_s: dma-controller@f8003000 {
+		dmac_s: dma-controller@f8003000 {
 			compatible = "arm,pl330", "arm,primecell";
 			reg = <0xf8003000 0x1000>;
 			interrupt-parent = <&intc>;
-            /*
+			/*
 			 * interrupt-names = "abort", "dma0", "dma1", "dma2", "dma3",
 			 * "dma4", "dma5", "dma6", "dma7";
 			 */
@@ -432,6 +439,7 @@
 		};
 
 		scutimer: timer@f8f00600 {
+			bootph-all;
 			interrupt-parent = <&intc>;
 			interrupts = <1 13 0x301>;
 			compatible = "arm,cortex-a9-twd-timer";
@@ -476,9 +484,9 @@
 		};
 
 		coresight: coresight@f8800000 {
-		    compatible = "xlnx,ps7-coresight-comp-1.00.a";
-		    status = "disabled";
-		    reg = <0xf8800000 0x100000>;
+			compatible = "xlnx,ps7-coresight-comp-1.00.a";
+			status = "disabled";
+			reg = <0xf8800000 0x100000>;
 		};
 
 		etb@f8801000 {

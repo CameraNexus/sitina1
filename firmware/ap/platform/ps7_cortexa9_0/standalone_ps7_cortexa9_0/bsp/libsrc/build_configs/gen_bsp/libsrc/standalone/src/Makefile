@@ -51,10 +51,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake
+CMAKE_COMMAND = /tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake
 
 # The command to remove a file.
-RM = /tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -E rm -f
+RM = /tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -71,7 +71,7 @@ CMAKE_BINARY_DIR = /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/sta
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -81,7 +81,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -100,37 +100,37 @@ list_install_components/fast: list_install_components
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -P cmake_install.cmake
+	/tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -P cmake_install.cmake
+	/tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	/tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
 install/local/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	/tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	/tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip
 
 # Special rule for the target install/strip
 install/strip/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	/tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
 # The main all target
@@ -706,6 +706,30 @@ arm/common/xil_spinlock.c.s:
 	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp && $(MAKE) $(MAKESILENT) -f libsrc/standalone/src/CMakeFiles/xilstandalone.dir/build.make libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/xil_spinlock.c.s
 .PHONY : arm/common/xil_spinlock.c.s
 
+arm/common/xpm_counter.obj: arm/common/xpm_counter.c.obj
+.PHONY : arm/common/xpm_counter.obj
+
+# target to build an object file
+arm/common/xpm_counter.c.obj:
+	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp && $(MAKE) $(MAKESILENT) -f libsrc/standalone/src/CMakeFiles/xilstandalone.dir/build.make libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/xpm_counter.c.obj
+.PHONY : arm/common/xpm_counter.c.obj
+
+arm/common/xpm_counter.i: arm/common/xpm_counter.c.i
+.PHONY : arm/common/xpm_counter.i
+
+# target to preprocess a source file
+arm/common/xpm_counter.c.i:
+	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp && $(MAKE) $(MAKESILENT) -f libsrc/standalone/src/CMakeFiles/xilstandalone.dir/build.make libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/xpm_counter.c.i
+.PHONY : arm/common/xpm_counter.c.i
+
+arm/common/xpm_counter.s: arm/common/xpm_counter.c.s
+.PHONY : arm/common/xpm_counter.s
+
+# target to generate assembly for a file
+arm/common/xpm_counter.c.s:
+	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp && $(MAKE) $(MAKESILENT) -f libsrc/standalone/src/CMakeFiles/xilstandalone.dir/build.make libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/xpm_counter.c.s
+.PHONY : arm/common/xpm_counter.c.s
+
 arm/cortexa9/gcc/asm_vectors.obj: arm/cortexa9/gcc/asm_vectors.S.obj
 .PHONY : arm/cortexa9/gcc/asm_vectors.obj
 
@@ -1233,6 +1257,9 @@ help:
 	@echo "... arm/common/xil_spinlock.obj"
 	@echo "... arm/common/xil_spinlock.i"
 	@echo "... arm/common/xil_spinlock.s"
+	@echo "... arm/common/xpm_counter.obj"
+	@echo "... arm/common/xpm_counter.i"
+	@echo "... arm/common/xpm_counter.s"
 	@echo "... arm/cortexa9/gcc/asm_vectors.obj"
 	@echo "... arm/cortexa9/gcc/boot.obj"
 	@echo "... arm/cortexa9/gcc/cpu_init.obj"

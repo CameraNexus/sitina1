@@ -1,4 +1,4 @@
-# Copyright (c) 2023 Advanced Micro Devices, Inc. All Rights Reserved.
+# Copyright (c) 2023 - 2024 Advanced Micro Devices, Inc. All Rights Reserved.
 # SPDX-License-Identifier: MIT
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/common/StandaloneExample.cmake NO_POLICY_SCOPE)
@@ -19,10 +19,29 @@ endif()
 
 if("${CMAKE_MACHINE}" STREQUAL "Versal")
     set(versal " ")
+    set(VERSAL " ")
 elseif("${CMAKE_MACHINE}" STREQUAL "ZynqMP")
     set(PLATFORM_ZYNQMP " ")
 elseif("${CMAKE_MACHINE}" STREQUAL "Zynq")
     set(PLATFORM_ZYNQ " ")
+endif()
+
+if ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "cortexr5")
+	option(standalone_lockstep_mode_debug "Enable debug logic in non-JTAG boot mode, when Cortex R5 is configured in lockstep mode" OFF)
+    if(standalone_lockstep_mode_debug)
+	ADD_DEFINITIONS(-DLOCKSTEP_MODE_DEBUG=1)
+    else()
+	ADD_DEFINITIONS(-DLOCKSTEP_MODE_DEBUG=0)
+    endif()
+
+endif()
+
+if(("${CMAKE_MACHINE}" STREQUAL "VersalNet") AND
+   ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "cortexa78"))
+    option(standalone_enable_minimal_xlat_tbl "Configures translation table only for initial 4 TB address space. Translation table size will be reduced by ~1 MB. It is applicable only for CortexA78 BSP. Enable it by default to fit executable in OCM memory, If users want to access peripheral/Memory mapped beyond 4 TB, it must be disabled." ON)
+    if(standalone_enable_minimal_xlat_tbl)
+        ADD_DEFINITIONS(-DENABLE_MINIMAL_XLAT_TBL)
+    endif()
 endif()
 
 if(("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "cortexr5")
@@ -53,12 +72,19 @@ if (${has_flto} EQUAL -1)
     set(XIL_INTERRUPT " ")
 endif()
 
+if (DEFINED XPAR_CPU_ID)
+    set(CPU_ID_VAL ${XPAR_CPU_ID})
+else()
+    set(CPU_ID_VAL 0)
+endif()
 list(APPEND TOTAL_UART_INSTANCES ${UARTLITE_NUM_DRIVER_INSTANCES})
 list(APPEND TOTAL_UART_INSTANCES ${UARTNS550_NUM_DRIVER_INSTANCES})
 list(APPEND TOTAL_UART_INSTANCES ${UARTPS_NUM_DRIVER_INSTANCES})
 list(APPEND TOTAL_UART_INSTANCES ${UARTPSV_NUM_DRIVER_INSTANCES})
 list(APPEND TOTAL_UART_INSTANCES ${CORESIGHTPS_DCC_NUM_DRIVER_INSTANCES})
 
+if (YOCTO OR
+    (NOT "${CMAKE_SYSTEM_NAME}" STREQUAL "FreeRTOS"))
 set(standalone_stdin "None;" CACHE STRING "stdin peripheral")
 SET_PROPERTY(CACHE standalone_stdin PROPERTY STRINGS "None;${TOTAL_UART_INSTANCES}")
 set(standalone_stdout "None;" CACHE STRING "stdout peripheral")
@@ -109,7 +135,28 @@ elseif (standalone_stdin IN_LIST CORESIGHTPS_DCC_NUM_DRIVER_INSTANCES)
     set(STDOUT_BASEADDRESS  ${${reg}})
     set(XPAR_STDIN_IS_CORESIGHTPS_DCC " ")
 endif()
+else()
+    set(FREERTOS_UARTCONFIG_INCLUDE "#include \"FreeRTOSUARTConfig.h\"")
+endif()
 
+set(standalone_zynqmp_fsbl_bsp "None" CACHE STRING "Not needed any more in Unified Vitis")
+SET_PROPERTY(CACHE standalone_zynqmp_fsbl_bsp PROPERTY STRINGS "None")
+set(standalone_microblaze_exceptions "None" CACHE STRING "Unused option and deprecated")
+SET_PROPERTY(CACHE standalone_microblaze_exceptions PROPERTY STRINGS "None")
+set(standalone_sleep_timer "None" CACHE STRING "Deprecated in favor of xiltimer")
+SET_PROPERTY(CACHE standalone_sleep_timer PROPERTY STRINGS "None")
+set(standalone_ttc_select_cntr "None" CACHE STRING "Deprecated in favor of xiltimer")
+SET_PROPERTY(CACHE standalone_ttc_select_cntr PROPERTY STRINGS "None")
+set(standalone_pmu_sleep_timer "None" CACHE STRING "Deprecated in favor of xiltimer")
+SET_PROPERTY(CACHE standalone_pmu_sleep_timer PROPERTY STRINGS "None")
+set(standalone_enable_sw_intrusive_profiling "None" CACHE STRING "This option is not supported in the Unified Vitis IDE in this version. Change to the classic IDE if you want to use this option")
+SET_PROPERTY(CACHE standalone_enable_sw_intrusive_profiling PROPERTY STRINGS "None")
+set(standalone_profile_timer "None" CACHE STRING "This option is not supported in the Unified Vitis IDE in this version. Change to the classic IDE if you want to use this option")
+SET_PROPERTY(CACHE standalone_profile_timer PROPERTY STRINGS "None")
+set(standalone_clocking "None" CACHE STRING "This option is not supported in the Unified Vitis IDE in this version. Change to the classic IDE if you want to use this option.")
+SET_PROPERTY(CACHE standalone_clocking PROPERTY STRINGS "None")
+set(standalone_xpm_support "None" CACHE STRING "This option is not supported in the Unified Vitis IDE in this version. Change to the classic IDE if you want to use this option.")
+SET_PROPERTY(CACHE standalone_xpm_support PROPERTY STRINGS "None")
 # Processor CMake Cache entires
 cmake_path(GET CMAKE_C_COMPILER_AR FILENAME compiler_ar)
 set(proc_archiver ${compiler_ar} CACHE STRING "Archiver")
@@ -120,4 +167,6 @@ set(proc_compiler ${compiler} CACHE STRING "Compiler")
 set(proc_compiler_flags ${TOOLCHAIN_C_FLAGS} "-c" CACHE STRING "Compiler Flags")
 set(proc_extra_compiler_flags ${TOOLCHAIN_EXTRA_C_FLAGS} CACHE STRING "Extra Compiler Flags")
 
+# If the PG flag is present, remove any references to it as BSP doesn't support the mcount API.
+remove_pg()
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/bspconfig.h.in ${CMAKE_BINARY_DIR}/include/bspconfig.h)

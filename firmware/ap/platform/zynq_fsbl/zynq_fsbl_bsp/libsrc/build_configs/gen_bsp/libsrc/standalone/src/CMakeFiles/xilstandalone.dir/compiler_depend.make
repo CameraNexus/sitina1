@@ -156,6 +156,18 @@ libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/xil_spinlock.c.obj
   include/xil_types.h \
   include/xil_assert.h
 
+libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/xpm_counter.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/common/xpm_counter.c \
+  include/xpm_counter.h \
+  include/xpseudo_asm.h \
+  include/xreg_cortexa9.h \
+  include/xpseudo_asm_gcc.h \
+  include/xil_types.h \
+  include/bspconfig.h \
+  include/xmem_config.h \
+  include/xparameters_ps.h \
+  include/xstatus.h \
+  include/xil_assert.h
+
 libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/cortexa9/xil_cache.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/cortexa9/xil_cache.c \
   /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/cortexa9/xil_cache.h \
   include/xil_types.h \
@@ -401,6 +413,10 @@ include/xparameters_ps.h:
 
 include/xpseudo_asm.h:
 
+include/xil_spinlock.h:
+
+/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/common/gcc/sbrk.c:
+
 include/xil_printf.h:
 
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/common/xil_mem.h:
@@ -412,10 +428,6 @@ include/bspconfig.h:
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/common/gcc/unlink.c:
 
 include/xil_types.h:
-
-/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/common/gcc/sbrk.c:
-
-include/xil_spinlock.h:
 
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/common/gcc/isatty.c:
 
@@ -440,8 +452,6 @@ include/xil_assert.h:
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/common/xil_spinlock.c:
 
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/common/gcc/cpputest_time.c:
-
-/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/common/gcc/errno.c:
 
 include/xpseudo_asm_gcc.h:
 
@@ -483,6 +493,14 @@ include/xscugic.h:
 
 include/xstatus.h:
 
+/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/common/xpm_counter.c:
+
+/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/common/gcc/errno.c:
+
+include/xpm_counter.h:
+
+/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/cortexa9/xil_mmu.h:
+
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/common/gcc/close.c:
 
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/cortexa9/xil_cache_l.h:
@@ -506,8 +524,6 @@ include/xscugic_hw.h:
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/cortexa9/xreg_cortexa9.h:
 
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/cortexa9/xil_misc_psreset_api.c:
-
-/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/cortexa9/xil_mmu.h:
 
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/cortexa9/xl2cc_counter.c:
 

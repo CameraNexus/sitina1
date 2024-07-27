@@ -1,6 +1,6 @@
 /******************************************************************************
 * Copyright (C) 2013 - 2022 Xilinx, Inc.  All rights reserved.
-* Copyright (c) 2022 - 2023 Advanced Micro Devices, Inc. All Rights Reserved.
+* Copyright (c) 2022 - 2024 Advanced Micro Devices, Inc. All Rights Reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
@@ -8,7 +8,7 @@
 /**
 *
 * @file xsdps.c
-* @addtogroup sdps Overview
+* @addtogroup sdps_api SDPS APIs
 * @{
 *
 * Contains the interface functions of the XSdPs driver.
@@ -91,6 +91,7 @@
 *       sk     04/07/22 Add support to read custom tap delay values from design
 *                       for SD/eMMC.
 * 4.2   ro     06/12/23 Added support for system device-tree flow.
+* 4.3   ap     11/29/23 Add support for Sanitize feature.
 *
 * </pre>
 *
@@ -110,21 +111,21 @@
 /**
 *
 * @brief
-* Initializes a specific XSdPs instance such that the driver is ready to use.
+* Initializes a specific XSdPs instance so that the driver is ready to use.
 *
 *
-* @param	InstancePtr is a pointer to the XSdPs instance.
-* @param	ConfigPtr is a reference to a structure containing information
+* @param	InstancePtr Pointer to the XSdPs instance.
+* @param	ConfigPtr Reference to a structure containing information
 *		about a specific SD device. This function initializes an
 *		InstancePtr object for a specific device specified by the
-*		contents of Config.
-* @param	EffectiveAddr is the device base address in the virtual memory
+*		contents of Configuration.
+* @param	EffectiveAddr Device base address in the virtual memory
 *		address space. The caller is responsible for keeping the address
 *		mapping from EffectiveAddr to the device physical base address
 *		unchanged once this function is invoked. Unexpected errors may
 *		occur if the address mapping changes after this function is
 *		called. If address translation is not used, use
-*		ConfigPtr->Config.BaseAddress for this device.
+*		ConfigPtr->Config. BaseAddress for this device.
 *
 * @return
 *		- XST_SUCCESS if successful.
@@ -132,8 +133,8 @@
 *		It must be stopped to re-initialize.
 *
 * @note		This function initializes the host controller.
-*		Initial clock of 400KHz is set.
-*		Voltage of 3.3V is selected as that is supported by host.
+*		Initial clock of 400 KHz is set.
+*		Voltage of 3.3 V is selected as that is supported by host.
 *		Interrupts status is enabled and signal disabled by default.
 *		Default data direction is card to host and
 *		32 bit ADMA2 is selected. Default Block size is 512 bytes.
@@ -176,6 +177,7 @@ s32 XSdPs_CfgInitialize(XSdPs *InstancePtr, XSdPs_Config *ConfigPtr,
 	InstancePtr->Config.OTapDly_DDR_Clk50 = ConfigPtr->OTapDly_DDR_Clk50;
 	InstancePtr->Config.OTapDly_SDR_Clk100 = ConfigPtr->OTapDly_SDR_Clk100;
 	InstancePtr->Config.OTapDly_SDR_Clk200 = ConfigPtr->OTapDly_SDR_Clk200;
+	InstancePtr->Config.OTapDly_DDR_Clk200 = ConfigPtr->OTapDly_DDR_Clk200;
 	InstancePtr->SectorCount = 0U;
 	InstancePtr->Mode = XSDPS_DEFAULT_SPEED_MODE;
 	InstancePtr->OTapDelay = 0U;
@@ -222,10 +224,10 @@ RETURN_PATH:
 /**
 *
 * @brief
-* Initialize Card with Identification mode sequence
+* Initializes Card with Identification mode sequence
 *
 *
-* @param	InstancePtr is a pointer to the instance to be worked on.
+* @param	InstancePtr Pointer to the instance to be worked on.
 *
 * @return
 * 		- XST_SUCCESS if initialization was successful
@@ -294,13 +296,13 @@ RETURN_PATH:
 /*****************************************************************************/
 /**
 * @brief
-* This function performs SD read in polled mode.
+* Performs SD read in polled mode.
 *
-* @param	InstancePtr is a pointer to the instance to be worked on.
-* @param	Arg is the address passed by the user that is to be sent as
+* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	Arg Address passed by the user that is to be sent as
 * 		argument along with the command.
-* @param	BlkCnt - Block count passed by the user.
-* @param	Buff - Pointer to the data buffer for a DMA transfer.
+* @param	BlkCnt Block count passed by the user.
+* @param	Buff Pointer to the data buffer for a DMA transfer.
 *
 * @return
 * 		- XST_SUCCESS if initialization was successful
@@ -360,13 +362,13 @@ RETURN_PATH:
 /*****************************************************************************/
 /**
 * @brief
-* This function performs SD write in polled mode.
+* Performs SD write in polled mode.
 *
-* @param	InstancePtr is a pointer to the instance to be worked on.
-* @param	Arg is the address passed by the user that is to be sent as
+* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	Arg Address passed by the user that is to be sent as
 * 		argument along with the command.
-* @param	BlkCnt - Block count passed by the user.
-* @param	Buff - Pointer to the data buffer for a DMA transfer.
+* @param	BlkCnt Block count passed by the user.
+* @param	Buff Pointer to the data buffer for a DMA transfer.
 *
 * @return
 * 		- XST_SUCCESS if initialization was successful
@@ -422,14 +424,13 @@ RETURN_PATH:
 /**
 *
 * @brief
-* API to idle the SDIO Interface
+* API to idle the SDIO Interface.
 *
 *
-* @param	InstancePtr is a pointer to the XSdPs instance.
+* @param	InstancePtr Pointer to the XSdPs instance.
 *
 * @return	None
 *
-* @note		None.
 *
 ******************************************************************************/
 s32 XSdPs_Idle(XSdPs *InstancePtr)
@@ -473,11 +474,11 @@ RETURN_PATH:
 /*****************************************************************************/
 /**
 * @brief
-* This function performs Erase operation on the given address range.
+* Performs Erase operation on the given address range.
 *
-* @param	InstancePtr is a pointer to the instance to be worked on.
-* @param	StartAddr is the address of the first write block to be erased.
-* @param	EndAddr is the address of the last write block of the continuous
+* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	StartAddr Address of the first write block to be erased.
+* @param	EndAddr Address of the last write block of the continuous
 *           range to be erased.
 *
 * @return
@@ -549,4 +550,45 @@ RETURN_PATH:
 	return Status;
 }
 
+/*****************************************************************************/
+/**
+* @brief
+* Performs Sanitize operation on the unmapped user address range.
+*
+* @param        InstancePtr Pointer to the instance to be worked on.
+*
+* @return
+*               - XST_SUCCESS if Sanitize is successful
+*               - XST_FAILURE if failure - could be because another transfer
+*               is in progress or card not present or Sanitize operation failure.
+*
+******************************************************************************/
+s32 XSdPs_Sanitize(XSdPs *InstancePtr)
+{
+	s32 Status;
+
+	Xil_AssertNonvoid(InstancePtr != NULL);
+	Xil_AssertNonvoid(InstancePtr->IsReady == XIL_COMPONENT_IS_READY);
+
+#if defined  (XCLOCKING)
+	Xil_ClockEnable(InstancePtr->Config.RefClk);
+#endif
+
+	if (InstancePtr->IsBusy == TRUE) {
+		Status = XST_FAILURE;
+		goto RETURN_PATH;
+	}
+
+	Status = XSdPs_Set_Mmc_ExtCsd(InstancePtr, XSDPS_MMC_START_SANITIZE_ARG);
+	if (Status != XST_SUCCESS) {
+		Status = XST_FAILURE;
+		goto RETURN_PATH;
+	}
+
+RETURN_PATH:
+#if defined  (XCLOCKING)
+	Xil_ClockDisable(InstancePtr->Config.RefClk);
+#endif
+	return Status;
+}
 /** @} */

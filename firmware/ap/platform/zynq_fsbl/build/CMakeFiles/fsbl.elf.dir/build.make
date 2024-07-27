@@ -47,10 +47,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake
+CMAKE_COMMAND = /tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake
 
 # The command to remove a file.
-RM = /tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -E rm -f
+RM = /tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -75,180 +75,224 @@ include CMakeFiles/fsbl.elf.dir/flags.make
 CMakeFiles/fsbl.elf.dir/fsbl_handoff.S.obj: CMakeFiles/fsbl.elf.dir/flags.make
 CMakeFiles/fsbl.elf.dir/fsbl_handoff.S.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/fsbl_handoff.S
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building ASM object CMakeFiles/fsbl.elf.dir/fsbl_handoff.S.obj"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/fsbl.elf.dir/fsbl_handoff.S.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/fsbl_handoff.S
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/fsbl.elf.dir/fsbl_handoff.S.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/fsbl_handoff.S
 
 CMakeFiles/fsbl.elf.dir/fsbl_handoff.S.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing ASM source to CMakeFiles/fsbl.elf.dir/fsbl_handoff.S.i"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/fsbl_handoff.S > CMakeFiles/fsbl.elf.dir/fsbl_handoff.S.i
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/fsbl_handoff.S > CMakeFiles/fsbl.elf.dir/fsbl_handoff.S.i
 
 CMakeFiles/fsbl.elf.dir/fsbl_handoff.S.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling ASM source to assembly CMakeFiles/fsbl.elf.dir/fsbl_handoff.S.s"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/fsbl_handoff.S -o CMakeFiles/fsbl.elf.dir/fsbl_handoff.S.s
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/fsbl_handoff.S -o CMakeFiles/fsbl.elf.dir/fsbl_handoff.S.s
 
 CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.obj: CMakeFiles/fsbl.elf.dir/flags.make
 CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/fsbl_hooks.c
-CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/*.a
+CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxil.a
+CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilffs.a
+CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilrsa.a
+CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilstandalone.a
+CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxiltimer.a
 CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.obj: CMakeFiles/fsbl.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.obj"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.obj -MF CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.obj.d -o CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/fsbl_hooks.c
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.obj -MF CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.obj.d -o CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/fsbl_hooks.c
 
 CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.i"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/fsbl_hooks.c > CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.i
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/fsbl_hooks.c > CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.i
 
 CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.s"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/fsbl_hooks.c -o CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.s
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/fsbl_hooks.c -o CMakeFiles/fsbl.elf.dir/fsbl_hooks.c.s
 
 CMakeFiles/fsbl.elf.dir/image_mover.c.obj: CMakeFiles/fsbl.elf.dir/flags.make
 CMakeFiles/fsbl.elf.dir/image_mover.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/image_mover.c
-CMakeFiles/fsbl.elf.dir/image_mover.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/*.a
+CMakeFiles/fsbl.elf.dir/image_mover.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxil.a
+CMakeFiles/fsbl.elf.dir/image_mover.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilffs.a
+CMakeFiles/fsbl.elf.dir/image_mover.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilrsa.a
+CMakeFiles/fsbl.elf.dir/image_mover.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilstandalone.a
+CMakeFiles/fsbl.elf.dir/image_mover.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxiltimer.a
 CMakeFiles/fsbl.elf.dir/image_mover.c.obj: CMakeFiles/fsbl.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/fsbl.elf.dir/image_mover.c.obj"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/image_mover.c.obj -MF CMakeFiles/fsbl.elf.dir/image_mover.c.obj.d -o CMakeFiles/fsbl.elf.dir/image_mover.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/image_mover.c
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/image_mover.c.obj -MF CMakeFiles/fsbl.elf.dir/image_mover.c.obj.d -o CMakeFiles/fsbl.elf.dir/image_mover.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/image_mover.c
 
 CMakeFiles/fsbl.elf.dir/image_mover.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/fsbl.elf.dir/image_mover.c.i"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/image_mover.c > CMakeFiles/fsbl.elf.dir/image_mover.c.i
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/image_mover.c > CMakeFiles/fsbl.elf.dir/image_mover.c.i
 
 CMakeFiles/fsbl.elf.dir/image_mover.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/fsbl.elf.dir/image_mover.c.s"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/image_mover.c -o CMakeFiles/fsbl.elf.dir/image_mover.c.s
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/image_mover.c -o CMakeFiles/fsbl.elf.dir/image_mover.c.s
 
 CMakeFiles/fsbl.elf.dir/main.c.obj: CMakeFiles/fsbl.elf.dir/flags.make
 CMakeFiles/fsbl.elf.dir/main.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/main.c
-CMakeFiles/fsbl.elf.dir/main.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/*.a
+CMakeFiles/fsbl.elf.dir/main.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxil.a
+CMakeFiles/fsbl.elf.dir/main.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilffs.a
+CMakeFiles/fsbl.elf.dir/main.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilrsa.a
+CMakeFiles/fsbl.elf.dir/main.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilstandalone.a
+CMakeFiles/fsbl.elf.dir/main.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxiltimer.a
 CMakeFiles/fsbl.elf.dir/main.c.obj: CMakeFiles/fsbl.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/fsbl.elf.dir/main.c.obj"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/main.c.obj -MF CMakeFiles/fsbl.elf.dir/main.c.obj.d -o CMakeFiles/fsbl.elf.dir/main.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/main.c
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/main.c.obj -MF CMakeFiles/fsbl.elf.dir/main.c.obj.d -o CMakeFiles/fsbl.elf.dir/main.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/main.c
 
 CMakeFiles/fsbl.elf.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/fsbl.elf.dir/main.c.i"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/main.c > CMakeFiles/fsbl.elf.dir/main.c.i
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/main.c > CMakeFiles/fsbl.elf.dir/main.c.i
 
 CMakeFiles/fsbl.elf.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/fsbl.elf.dir/main.c.s"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/main.c -o CMakeFiles/fsbl.elf.dir/main.c.s
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/main.c -o CMakeFiles/fsbl.elf.dir/main.c.s
 
 CMakeFiles/fsbl.elf.dir/md5.c.obj: CMakeFiles/fsbl.elf.dir/flags.make
 CMakeFiles/fsbl.elf.dir/md5.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/md5.c
-CMakeFiles/fsbl.elf.dir/md5.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/*.a
+CMakeFiles/fsbl.elf.dir/md5.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxil.a
+CMakeFiles/fsbl.elf.dir/md5.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilffs.a
+CMakeFiles/fsbl.elf.dir/md5.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilrsa.a
+CMakeFiles/fsbl.elf.dir/md5.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilstandalone.a
+CMakeFiles/fsbl.elf.dir/md5.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxiltimer.a
 CMakeFiles/fsbl.elf.dir/md5.c.obj: CMakeFiles/fsbl.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/fsbl.elf.dir/md5.c.obj"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/md5.c.obj -MF CMakeFiles/fsbl.elf.dir/md5.c.obj.d -o CMakeFiles/fsbl.elf.dir/md5.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/md5.c
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/md5.c.obj -MF CMakeFiles/fsbl.elf.dir/md5.c.obj.d -o CMakeFiles/fsbl.elf.dir/md5.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/md5.c
 
 CMakeFiles/fsbl.elf.dir/md5.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/fsbl.elf.dir/md5.c.i"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/md5.c > CMakeFiles/fsbl.elf.dir/md5.c.i
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/md5.c > CMakeFiles/fsbl.elf.dir/md5.c.i
 
 CMakeFiles/fsbl.elf.dir/md5.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/fsbl.elf.dir/md5.c.s"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/md5.c -o CMakeFiles/fsbl.elf.dir/md5.c.s
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/md5.c -o CMakeFiles/fsbl.elf.dir/md5.c.s
 
 CMakeFiles/fsbl.elf.dir/nand.c.obj: CMakeFiles/fsbl.elf.dir/flags.make
 CMakeFiles/fsbl.elf.dir/nand.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/nand.c
-CMakeFiles/fsbl.elf.dir/nand.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/*.a
+CMakeFiles/fsbl.elf.dir/nand.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxil.a
+CMakeFiles/fsbl.elf.dir/nand.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilffs.a
+CMakeFiles/fsbl.elf.dir/nand.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilrsa.a
+CMakeFiles/fsbl.elf.dir/nand.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilstandalone.a
+CMakeFiles/fsbl.elf.dir/nand.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxiltimer.a
 CMakeFiles/fsbl.elf.dir/nand.c.obj: CMakeFiles/fsbl.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/fsbl.elf.dir/nand.c.obj"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/nand.c.obj -MF CMakeFiles/fsbl.elf.dir/nand.c.obj.d -o CMakeFiles/fsbl.elf.dir/nand.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/nand.c
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/nand.c.obj -MF CMakeFiles/fsbl.elf.dir/nand.c.obj.d -o CMakeFiles/fsbl.elf.dir/nand.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/nand.c
 
 CMakeFiles/fsbl.elf.dir/nand.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/fsbl.elf.dir/nand.c.i"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/nand.c > CMakeFiles/fsbl.elf.dir/nand.c.i
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/nand.c > CMakeFiles/fsbl.elf.dir/nand.c.i
 
 CMakeFiles/fsbl.elf.dir/nand.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/fsbl.elf.dir/nand.c.s"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/nand.c -o CMakeFiles/fsbl.elf.dir/nand.c.s
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/nand.c -o CMakeFiles/fsbl.elf.dir/nand.c.s
 
 CMakeFiles/fsbl.elf.dir/nor.c.obj: CMakeFiles/fsbl.elf.dir/flags.make
 CMakeFiles/fsbl.elf.dir/nor.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/nor.c
-CMakeFiles/fsbl.elf.dir/nor.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/*.a
+CMakeFiles/fsbl.elf.dir/nor.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxil.a
+CMakeFiles/fsbl.elf.dir/nor.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilffs.a
+CMakeFiles/fsbl.elf.dir/nor.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilrsa.a
+CMakeFiles/fsbl.elf.dir/nor.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilstandalone.a
+CMakeFiles/fsbl.elf.dir/nor.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxiltimer.a
 CMakeFiles/fsbl.elf.dir/nor.c.obj: CMakeFiles/fsbl.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/fsbl.elf.dir/nor.c.obj"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/nor.c.obj -MF CMakeFiles/fsbl.elf.dir/nor.c.obj.d -o CMakeFiles/fsbl.elf.dir/nor.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/nor.c
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/nor.c.obj -MF CMakeFiles/fsbl.elf.dir/nor.c.obj.d -o CMakeFiles/fsbl.elf.dir/nor.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/nor.c
 
 CMakeFiles/fsbl.elf.dir/nor.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/fsbl.elf.dir/nor.c.i"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/nor.c > CMakeFiles/fsbl.elf.dir/nor.c.i
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/nor.c > CMakeFiles/fsbl.elf.dir/nor.c.i
 
 CMakeFiles/fsbl.elf.dir/nor.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/fsbl.elf.dir/nor.c.s"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/nor.c -o CMakeFiles/fsbl.elf.dir/nor.c.s
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/nor.c -o CMakeFiles/fsbl.elf.dir/nor.c.s
 
 CMakeFiles/fsbl.elf.dir/pcap.c.obj: CMakeFiles/fsbl.elf.dir/flags.make
 CMakeFiles/fsbl.elf.dir/pcap.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/pcap.c
-CMakeFiles/fsbl.elf.dir/pcap.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/*.a
+CMakeFiles/fsbl.elf.dir/pcap.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxil.a
+CMakeFiles/fsbl.elf.dir/pcap.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilffs.a
+CMakeFiles/fsbl.elf.dir/pcap.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilrsa.a
+CMakeFiles/fsbl.elf.dir/pcap.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilstandalone.a
+CMakeFiles/fsbl.elf.dir/pcap.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxiltimer.a
 CMakeFiles/fsbl.elf.dir/pcap.c.obj: CMakeFiles/fsbl.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/fsbl.elf.dir/pcap.c.obj"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/pcap.c.obj -MF CMakeFiles/fsbl.elf.dir/pcap.c.obj.d -o CMakeFiles/fsbl.elf.dir/pcap.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/pcap.c
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/pcap.c.obj -MF CMakeFiles/fsbl.elf.dir/pcap.c.obj.d -o CMakeFiles/fsbl.elf.dir/pcap.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/pcap.c
 
 CMakeFiles/fsbl.elf.dir/pcap.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/fsbl.elf.dir/pcap.c.i"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/pcap.c > CMakeFiles/fsbl.elf.dir/pcap.c.i
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/pcap.c > CMakeFiles/fsbl.elf.dir/pcap.c.i
 
 CMakeFiles/fsbl.elf.dir/pcap.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/fsbl.elf.dir/pcap.c.s"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/pcap.c -o CMakeFiles/fsbl.elf.dir/pcap.c.s
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/pcap.c -o CMakeFiles/fsbl.elf.dir/pcap.c.s
 
 CMakeFiles/fsbl.elf.dir/qspi.c.obj: CMakeFiles/fsbl.elf.dir/flags.make
 CMakeFiles/fsbl.elf.dir/qspi.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/qspi.c
-CMakeFiles/fsbl.elf.dir/qspi.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/*.a
+CMakeFiles/fsbl.elf.dir/qspi.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxil.a
+CMakeFiles/fsbl.elf.dir/qspi.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilffs.a
+CMakeFiles/fsbl.elf.dir/qspi.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilrsa.a
+CMakeFiles/fsbl.elf.dir/qspi.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilstandalone.a
+CMakeFiles/fsbl.elf.dir/qspi.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxiltimer.a
 CMakeFiles/fsbl.elf.dir/qspi.c.obj: CMakeFiles/fsbl.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/fsbl.elf.dir/qspi.c.obj"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/qspi.c.obj -MF CMakeFiles/fsbl.elf.dir/qspi.c.obj.d -o CMakeFiles/fsbl.elf.dir/qspi.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/qspi.c
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/qspi.c.obj -MF CMakeFiles/fsbl.elf.dir/qspi.c.obj.d -o CMakeFiles/fsbl.elf.dir/qspi.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/qspi.c
 
 CMakeFiles/fsbl.elf.dir/qspi.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/fsbl.elf.dir/qspi.c.i"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/qspi.c > CMakeFiles/fsbl.elf.dir/qspi.c.i
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/qspi.c > CMakeFiles/fsbl.elf.dir/qspi.c.i
 
 CMakeFiles/fsbl.elf.dir/qspi.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/fsbl.elf.dir/qspi.c.s"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/qspi.c -o CMakeFiles/fsbl.elf.dir/qspi.c.s
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/qspi.c -o CMakeFiles/fsbl.elf.dir/qspi.c.s
 
 CMakeFiles/fsbl.elf.dir/rsa.c.obj: CMakeFiles/fsbl.elf.dir/flags.make
 CMakeFiles/fsbl.elf.dir/rsa.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/rsa.c
-CMakeFiles/fsbl.elf.dir/rsa.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/*.a
+CMakeFiles/fsbl.elf.dir/rsa.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxil.a
+CMakeFiles/fsbl.elf.dir/rsa.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilffs.a
+CMakeFiles/fsbl.elf.dir/rsa.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilrsa.a
+CMakeFiles/fsbl.elf.dir/rsa.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilstandalone.a
+CMakeFiles/fsbl.elf.dir/rsa.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxiltimer.a
 CMakeFiles/fsbl.elf.dir/rsa.c.obj: CMakeFiles/fsbl.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/fsbl.elf.dir/rsa.c.obj"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/rsa.c.obj -MF CMakeFiles/fsbl.elf.dir/rsa.c.obj.d -o CMakeFiles/fsbl.elf.dir/rsa.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/rsa.c
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/rsa.c.obj -MF CMakeFiles/fsbl.elf.dir/rsa.c.obj.d -o CMakeFiles/fsbl.elf.dir/rsa.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/rsa.c
 
 CMakeFiles/fsbl.elf.dir/rsa.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/fsbl.elf.dir/rsa.c.i"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/rsa.c > CMakeFiles/fsbl.elf.dir/rsa.c.i
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/rsa.c > CMakeFiles/fsbl.elf.dir/rsa.c.i
 
 CMakeFiles/fsbl.elf.dir/rsa.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/fsbl.elf.dir/rsa.c.s"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/rsa.c -o CMakeFiles/fsbl.elf.dir/rsa.c.s
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/rsa.c -o CMakeFiles/fsbl.elf.dir/rsa.c.s
 
 CMakeFiles/fsbl.elf.dir/sd.c.obj: CMakeFiles/fsbl.elf.dir/flags.make
 CMakeFiles/fsbl.elf.dir/sd.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/sd.c
-CMakeFiles/fsbl.elf.dir/sd.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/*.a
+CMakeFiles/fsbl.elf.dir/sd.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxil.a
+CMakeFiles/fsbl.elf.dir/sd.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilffs.a
+CMakeFiles/fsbl.elf.dir/sd.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilrsa.a
+CMakeFiles/fsbl.elf.dir/sd.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilstandalone.a
+CMakeFiles/fsbl.elf.dir/sd.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxiltimer.a
 CMakeFiles/fsbl.elf.dir/sd.c.obj: CMakeFiles/fsbl.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/fsbl.elf.dir/sd.c.obj"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/sd.c.obj -MF CMakeFiles/fsbl.elf.dir/sd.c.obj.d -o CMakeFiles/fsbl.elf.dir/sd.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/sd.c
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/sd.c.obj -MF CMakeFiles/fsbl.elf.dir/sd.c.obj.d -o CMakeFiles/fsbl.elf.dir/sd.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/sd.c
 
 CMakeFiles/fsbl.elf.dir/sd.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/fsbl.elf.dir/sd.c.i"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/sd.c > CMakeFiles/fsbl.elf.dir/sd.c.i
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/sd.c > CMakeFiles/fsbl.elf.dir/sd.c.i
 
 CMakeFiles/fsbl.elf.dir/sd.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/fsbl.elf.dir/sd.c.s"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/sd.c -o CMakeFiles/fsbl.elf.dir/sd.c.s
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/sd.c -o CMakeFiles/fsbl.elf.dir/sd.c.s
 
 CMakeFiles/fsbl.elf.dir/ps7_init.c.obj: CMakeFiles/fsbl.elf.dir/flags.make
 CMakeFiles/fsbl.elf.dir/ps7_init.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/ps7_init.c
-CMakeFiles/fsbl.elf.dir/ps7_init.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/*.a
+CMakeFiles/fsbl.elf.dir/ps7_init.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxil.a
+CMakeFiles/fsbl.elf.dir/ps7_init.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilffs.a
+CMakeFiles/fsbl.elf.dir/ps7_init.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilrsa.a
+CMakeFiles/fsbl.elf.dir/ps7_init.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilstandalone.a
+CMakeFiles/fsbl.elf.dir/ps7_init.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxiltimer.a
 CMakeFiles/fsbl.elf.dir/ps7_init.c.obj: CMakeFiles/fsbl.elf.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/fsbl.elf.dir/ps7_init.c.obj"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/ps7_init.c.obj -MF CMakeFiles/fsbl.elf.dir/ps7_init.c.obj.d -o CMakeFiles/fsbl.elf.dir/ps7_init.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/ps7_init.c
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/fsbl.elf.dir/ps7_init.c.obj -MF CMakeFiles/fsbl.elf.dir/ps7_init.c.obj.d -o CMakeFiles/fsbl.elf.dir/ps7_init.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/ps7_init.c
 
 CMakeFiles/fsbl.elf.dir/ps7_init.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/fsbl.elf.dir/ps7_init.c.i"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/ps7_init.c > CMakeFiles/fsbl.elf.dir/ps7_init.c.i
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/ps7_init.c > CMakeFiles/fsbl.elf.dir/ps7_init.c.i
 
 CMakeFiles/fsbl.elf.dir/ps7_init.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/fsbl.elf.dir/ps7_init.c.s"
-	/tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/ps7_init.c -o CMakeFiles/fsbl.elf.dir/ps7_init.c.s
+	/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/ps7_init.c -o CMakeFiles/fsbl.elf.dir/ps7_init.c.s
 
 # Object files for target fsbl.elf
 fsbl_elf_OBJECTS = \

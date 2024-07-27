@@ -966,15 +966,6 @@
 			xlnx,pmu1-s-axi-baseaddr = <0xF8893000>;
 			xlnx,name = "ps7_pmu_0";
 		};
-		ps7_qspi_linear_0: ps7_qspi_linear@fc000000 {
-			xlnx,rable = <0>;
-			compatible = "xlnx,ps7-qspi-linear-1.00.a";
-			status = "okay";
-			xlnx,interconnect-s-axi-masters = "ps7_cortexa9_0.M_AXI_DP , & , ps7_cortexa9_1.M_AXI_DP";
-			xlnx,ip-name = "ps7_qspi_linear";
-			reg = <0xfc000000 0x1000000>;
-			xlnx,name = "ps7_qspi_linear_0";
-		};
 		ps7_ddr_0: ps7_ddr@100000 {
 			compatible = "xlnx,ps7-ddr-1.00.a";
 			xlnx,s-axi-hp1-baseaddr = <0x0fffffff>;
@@ -1098,8 +1089,19 @@
 			status = "okay";
 			xlnx,interconnect-s-axi-masters = "ps7_cortexa9_0.M_AXI_DP , & , ps7_cortexa9_1.M_AXI_DP";
 			xlnx,ip-name = "ps7_m_axi_gp";
+			xlnx,is-hierarchy;
 			reg = <0x40000000 0x40000000>;
 			xlnx,name = "ps7_m_axi_gp0";
+		};
+		ps7_qspi_linear_0: ps7_qspi_linear@fc000000 {
+			reg = <0xfc000000 0x1000000>;
+		};
+		APB_M_0: APB_M_0@40000000 {
+			status = "okay";
+			compatible = "APB_M_0";
+			xlnx,ip-name = "APB_M_0";
+			reg = <0x40000000 0x1000000>;
+			xlnx,name = "APB_M_0";
 		};
 	};
 	&qspi {

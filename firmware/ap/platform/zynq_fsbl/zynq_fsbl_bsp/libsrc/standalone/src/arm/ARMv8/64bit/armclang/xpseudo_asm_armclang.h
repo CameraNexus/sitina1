@@ -1,4 +1,5 @@
 /******************************************************************************
+* Copyright (C) 2022 - 2024 Advanced Micro Devices, Inc. All Rights Reserved.
 * Copyright (c) 2019 - 2022 Xilinx, Inc.  All rights reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
@@ -20,6 +21,7 @@
 * 8.0   mus  06/20/22 Added mfcpnotoken and mtcpnotoken macros to fix
 *                     linking errors observed while building application
 *                     with armclang compiler. It fixes CR#1132642.
+* 9.1   ml   11/16/23 Fix compilation errors reported with -std=c2x compiler flag
 * </pre>
 *
 ******************************************************************************/
@@ -50,9 +52,9 @@ extern "C" {
 
 /* pseudo assembler instructions */
 #define mfcpsr()	({u32 rval = 0U; \
-			    asm volatile("mrs %x0, DAIF" : "=r" (rval)); \
-			    rval; \
-			})
+		__asm volatile("mrs %x0, DAIF" : "=r" (rval)); \
+		rval; \
+	})
 
 #define mtcpsr(v) 	__asm__ __volatile__ ("msr DAIF, %x0" : : "r" (v))
 
@@ -74,39 +76,39 @@ extern "C" {
 
 /* Memory Operations */
 #define ldr(adr)	({u64 rval; \
-			    __asm__ __volatile__( \
-			    "ldr %x0, [%x1]" \
-			    : "=r" (rval) : "r" (adr) \
-			    ); \
-			    rval; \
-			})
+		__asm__ __volatile__( \
+				      "ldr %x0, [%x1]" \
+				      : "=r" (rval) : "r" (adr) \
+				    ); \
+		rval; \
+	})
 
 #define ldrb(adr)	({u8 rval; \
-			    __asm__ __volatile__( \
-			    "ldrb %x0, [%x1]" \
-			    : "=r" (rval) : "r" (adr) \
-			    ); \
-			    rval; \
-			})
+		__asm__ __volatile__( \
+				      "ldrb %x0, [%x1]" \
+				      : "=r" (rval) : "r" (adr) \
+				    ); \
+		rval; \
+	})
 
 #define strw(adr, val)	__asm__ __volatile__( \
-			"str %x0, [%x1]\n" \
-			: : "r" (val), "r" (adr) \
-			)
+	"str %x0, [%x1]\n" \
+	: : "r" (val), "r" (adr) \
+					   )
 
 #define strb(adr, val)	__asm__ __volatile__(\
-			  "strb	%x0,[%x1]\n"\
-			  : : "r" (val), "r" (adr)\
-			)
+	"strb	%x0,[%x1]\n"\
+	: : "r" (val), "r" (adr)\
+					   )
 
 /* Count leading zeroes (clz) */
 #define clz(arg)	({u8 rval; \
-			    __asm__ __volatile__( \
-			    "clz %x0, %x1" \
-			    : "=r" (rval) : "r" (arg) \
-			    ); \
-			    rval; \
-			})
+		__asm__ __volatile__( \
+				      "clz %x0, %x1" \
+				      : "=r" (rval) : "r" (arg) \
+				    ); \
+		rval; \
+	})
 
 #define mtcpdc(reg,val)	__asm__ __volatile__("dc " #reg ",%x0" : : "r" (val))
 #define mtcpic(reg,val)	__asm__ __volatile__("ic " #reg ",%x0" : : "r" (val))
@@ -117,15 +119,15 @@ extern "C" {
 
 /* CP15 operations */
 #define mfcp(reg)	({u64 rval = 0U; \
-			    __asm__ __volatile__( \
-			    "mrs %x0, " #reg : "=r" (rval)); \
-			    rval;\
-			})
+		__asm__ __volatile__( \
+				      "mrs %x0, " #reg : "=r" (rval)); \
+		rval;\
+	})
 
 #define mfcpnotoken(reg)       ({u64 rval = 0U;\
-                        __asm__ __volatile__("mrs       %0, " reg : "=r" (rval));\
-                        rval;\
-                        })
+		__asm__ __volatile__("mrs       %0, " reg : "=r" (rval));\
+		rval;\
+	})
 
 #define mtcp(reg,val)	__asm__ __volatile__("msr " #reg ",%x0" : : "r" (val))
 

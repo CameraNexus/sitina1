@@ -1,6 +1,6 @@
 /******************************************************************************
 * Copyright (c) 2006 - 2022 Xilinx, Inc.  All rights reserved.
-* Copyright (c) 2022 - 2023 Advanced Micro Devices, Inc.  All rights reserved.
+* Copyright (c) 2022 - 2024 Advanced Micro Devices, Inc.  All rights reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
@@ -48,18 +48,16 @@
 extern "C" {
 #endif
 
-
 /* Defs */
 typedef struct pvr_s {
 #ifdef MICROBLAZE_PVR_FULL
-  u32  pvr[16];
+	u32  pvr[16];
 #else
-  u32  pvr[1];
+	u32  pvr[1];
 #endif
 } pvr_t;
 
-
-#define getpvr(pvrid, val)      asm volatile ("mfs\t%0,rpvr" stringify(pvrid) "\n\t" : "=d" (val))
+#define getpvr(pvrid, val)      __asm volatile ("mfs\t%0,rpvr" stringify(pvrid) "\n\t" : "=d" (val))
 
 /* Basic PVR mask */
 #define MICROBLAZE_PVR0_PVR_FULL_MASK               0x80000000U
@@ -453,7 +451,6 @@ Return the size of the D-cache in bytes.
 @param _pvr     pvr data structure
 */
 #define MICROBLAZE_PVR_DCACHE_BYTE_SIZE(_pvr)        (1 << ((_pvr.pvr[5] & MICROBLAZE_PVR5_DCACHE_BYTE_SIZE_MASK) >> 16))
-
 
 #define MICROBLAZE_PVR_DCACHE_ALWAYS_USED(_pvr)      (_pvr.pvr[5] & MICROBLAZE_PVR5_DCACHE_ALWAYS_USED_MASK)
 #define MICROBLAZE_PVR_DCACHE_USE_WRITEBACK(_pvr)    (_pvr.pvr[5] & MICROBLAZE_PVR5_DCACHE_USE_WRITEBACK_MASK)

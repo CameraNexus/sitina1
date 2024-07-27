@@ -1,5 +1,6 @@
 /******************************************************************************
 * Copyright (c) 2009 - 2022 Xilinx, Inc.  All rights reserved.
+* Copyright (C) 2022 - 2024 Advanced Micro Devices, Inc. All Rights Reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
@@ -34,6 +35,10 @@
 * 		      21_2 violation.
 * 7.7	sk   01/10/22 Remove arithematic operations on pointer varaible to fix
 * 		      misra_c_2012_rule_18_4 violation.
+* 9.0   ml   08/30/23 Update Memory tests API in BSP, to not to stress test by
+                      default.
+* 9.1   ml   02/02/23 Fix compilation warnings report with
+*                     XIL_ENABLE_MEMORY_STRESS_TEST
 * </pre>
 *
 *****************************************************************************/
@@ -46,7 +51,9 @@
 /************************** Constant Definitions ****************************/
 /************************** Function Prototypes *****************************/
 
+#ifdef XIL_ENABLE_MEMORY_STRESS_TEST
 static u32 RotateLeft(u32 Input, u8 Width);
+#endif
 
 /* define ROTATE_RIGHT to give access to this functionality */
 #ifdef ROTATE_RIGHT
@@ -86,11 +93,15 @@ static u32 RotateRight(u32 Input, u8 Width);
 s32 Xil_TestMem8(u32 Addrlow, u32 Addrhigh, u32 Words, u8 Pattern, u8 Subtest)
 {
 	u32 I;
-	u32 j;
 	u8 Val;
 	u8 WordMem8;
 	s32 Status = 0;
 	u64  Addr = (Addrlow + ((u64)Addrhigh << 32));
+#ifdef XIL_ENABLE_MEMORY_STRESS_TEST
+	u32 j;
+#else
+	(void)Pattern;
+#endif
 
 	Xil_AssertNonvoid(Words != (u32)0);
 	Xil_AssertNonvoid(Subtest <= XIL_TESTMEM_MAXTEST);
@@ -104,14 +115,14 @@ s32 Xil_TestMem8(u32 Addrlow, u32 Addrhigh, u32 Words, u8 Pattern, u8 Subtest)
 	 * select the proper Subtest(s)
 	 */
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INCREMENT)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INCREMENT)) {
 		/*
 		 * Fill the memory with incrementing
 		 * values starting from XIL_TESTMEM_INIT_VALUE
 		 */
 		for (I = 0U; I < Words; I++) {
 			/* write memory location */
-			sbea(Addr+I, Val);
+			sbea(Addr + I, Val);
 			Val++;
 		}
 		/*
@@ -128,7 +139,7 @@ s32 Xil_TestMem8(u32 Addrlow, u32 Addrhigh, u32 Words, u8 Pattern, u8 Subtest)
 
 		for (I = 0U; I < Words; I++) {
 			/* read memory location */
-			WordMem8 = lbuea(Addr+I);
+			WordMem8 = lbuea(Addr + I);
 			if (WordMem8 != Val) {
 				Status = -1;
 				goto End_Label;
@@ -136,8 +147,8 @@ s32 Xil_TestMem8(u32 Addrlow, u32 Addrhigh, u32 Words, u8 Pattern, u8 Subtest)
 			Val++;
 		}
 	}
-
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKONES)) {
+#ifdef XIL_ENABLE_MEMORY_STRESS_TEST
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKONES)) {
 		/*
 		 * set up to cycle through all possible initial
 		 * test Patterns for walking ones test
@@ -155,7 +166,7 @@ s32 Xil_TestMem8(u32 Addrlow, u32 Addrhigh, u32 Words, u8 Pattern, u8 Subtest)
 			 */
 			for (I = 0U; I < NUM_OF_BITS_IN_BYTE; I++) {
 				/* write memory location */
-				sbea(Addr+I, Val);
+				sbea(Addr + I, Val);
 				Val = (u8)RotateLeft(Val, 8U);
 			}
 			/*
@@ -166,7 +177,7 @@ s32 Xil_TestMem8(u32 Addrlow, u32 Addrhigh, u32 Words, u8 Pattern, u8 Subtest)
 			/* Read the values from each location that was written */
 			for (I = 0U; I < NUM_OF_BITS_IN_BYTE; I++) {
 				/* read memory location */
-				WordMem8 = lbuea(Addr+I);
+				WordMem8 = lbuea(Addr + I);
 				if (WordMem8 != Val) {
 					Status = -1;
 					goto End_Label;
@@ -176,7 +187,7 @@ s32 Xil_TestMem8(u32 Addrlow, u32 Addrhigh, u32 Words, u8 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKZEROS)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKZEROS)) {
 		/*
 		 * set up to cycle through all possible initial test
 		 * Patterns for walking zeros test
@@ -194,7 +205,7 @@ s32 Xil_TestMem8(u32 Addrlow, u32 Addrhigh, u32 Words, u8 Pattern, u8 Subtest)
 			 */
 			for (I = 0U; I < NUM_OF_BITS_IN_BYTE; I++) {
 				/* write memory location */
-				sbea(Addr+I, Val);
+				sbea(Addr + I, Val);
 				Val = ~((u8)RotateLeft(~Val, NUM_OF_BITS_IN_BYTE));
 			}
 			/*
@@ -205,7 +216,7 @@ s32 Xil_TestMem8(u32 Addrlow, u32 Addrhigh, u32 Words, u8 Pattern, u8 Subtest)
 			/* Read the values from each location that was written */
 			for (I = 0U; I < NUM_OF_BITS_IN_BYTE; I++) {
 				/* read memory location */
-				WordMem8 = lbuea(Addr+I);
+				WordMem8 = lbuea(Addr + I);
 				if (WordMem8 != Val) {
 					Status = -1;
 					goto End_Label;
@@ -216,12 +227,12 @@ s32 Xil_TestMem8(u32 Addrlow, u32 Addrhigh, u32 Words, u8 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INVERSEADDR)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INVERSEADDR)) {
 		/* Fill the memory with inverse of address */
 		for (I = 0U; I < Words; I++) {
 			/* write memory location */
 			Val = (u8) (~((INTPTR) (Addr + I)));
-			sbea(Addr+I, Val);
+			sbea(Addr + I, Val);
 		}
 
 		/*
@@ -231,8 +242,8 @@ s32 Xil_TestMem8(u32 Addrlow, u32 Addrhigh, u32 Words, u8 Pattern, u8 Subtest)
 
 		for (I = 0U; I < Words; I++) {
 			/* read memory location */
-			WordMem8 = lbuea(Addr+I);
-			Val = (u8) (~((INTPTR) (Addr+I)));
+			WordMem8 = lbuea(Addr + I);
+			Val = (u8) (~((INTPTR) (Addr + I)));
 			if ((WordMem8 ^ Val) != 0x00U) {
 				Status = -1;
 				goto End_Label;
@@ -240,7 +251,7 @@ s32 Xil_TestMem8(u32 Addrlow, u32 Addrhigh, u32 Words, u8 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_FIXEDPATTERN)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_FIXEDPATTERN)) {
 		/*
 		 * Generate an initial value for
 		 * memory testing
@@ -248,8 +259,7 @@ s32 Xil_TestMem8(u32 Addrlow, u32 Addrhigh, u32 Words, u8 Pattern, u8 Subtest)
 
 		if (Pattern == (u8)0) {
 			Val = 0xA5U;
-		}
-		else {
+		} else {
 			Val = Pattern;
 		}
 		/*
@@ -257,7 +267,7 @@ s32 Xil_TestMem8(u32 Addrlow, u32 Addrhigh, u32 Words, u8 Pattern, u8 Subtest)
 		 */
 		for (I = 0U; I < Words; I++) {
 			/* write memory location */
-			sbea(Addr+I, Val);
+			sbea(Addr + I, Val);
 		}
 		/*
 		 * Check every word within the words
@@ -267,14 +277,14 @@ s32 Xil_TestMem8(u32 Addrlow, u32 Addrhigh, u32 Words, u8 Pattern, u8 Subtest)
 
 		for (I = 0U; I < Words; I++) {
 			/* read memory location */
-			WordMem8 = lbuea(Addr+I);
+			WordMem8 = lbuea(Addr + I);
 			if (WordMem8 != Val) {
 				Status = -1;
 				goto End_Label;
 			}
 		}
 	}
-
+#endif
 End_Label:
 	return Status;
 }
@@ -308,14 +318,18 @@ End_Label:
 * patterns used not to repeat over the region tested.
 *
 *****************************************************************************/
-s32 Xil_TestMem16(u32 Addrlow,u32 Addrhigh, u32 Words, u16 Pattern, u8 Subtest)
+s32 Xil_TestMem16(u32 Addrlow, u32 Addrhigh, u32 Words, u16 Pattern, u8 Subtest)
 {
 	u32 I;
-	u32 j;
 	u16 Val;
 	u16 WordMem16;
 	s32 Status = 0;
 	u64  Addr = (Addrlow + ((u64)Addrhigh << 32));
+#ifdef XIL_ENABLE_MEMORY_STRESS_TEST
+	u32 j;
+#else
+	(void)Pattern;
+#endif
 
 	Xil_AssertNonvoid(Words != (u32)0);
 	Xil_AssertNonvoid(Subtest <= XIL_TESTMEM_MAXTEST);
@@ -329,14 +343,14 @@ s32 Xil_TestMem16(u32 Addrlow,u32 Addrhigh, u32 Words, u16 Pattern, u8 Subtest)
 	 * selectthe proper Subtest(s)
 	 */
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INCREMENT)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INCREMENT)) {
 		/*
 		 * Fill the memory with incrementing
 		 * values starting from 'XIL_TESTMEM_INIT_VALUE'
 		 */
 		for (I = 0U; I < (NUM_OF_BYTES_IN_HW * Words);) {
 			/* write memory location */
-			shea(Addr+I, Val);
+			shea(Addr + I, Val);
 			Val++;
 			I = I + NUM_OF_BYTES_IN_HW;
 		}
@@ -355,7 +369,7 @@ s32 Xil_TestMem16(u32 Addrlow,u32 Addrhigh, u32 Words, u16 Pattern, u8 Subtest)
 
 		for (I = 0U; I < (NUM_OF_BYTES_IN_HW * Words);) {
 			/* read memory location */
-			WordMem16 = lhuea(Addr+I);
+			WordMem16 = lhuea(Addr + I);
 			if (WordMem16 != Val) {
 				Status = -1;
 				goto End_Label;
@@ -364,8 +378,8 @@ s32 Xil_TestMem16(u32 Addrlow,u32 Addrhigh, u32 Words, u16 Pattern, u8 Subtest)
 			I = I + NUM_OF_BYTES_IN_HW;
 		}
 	}
-
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKONES)) {
+#ifdef XIL_ENABLE_MEMORY_STRESS_TEST
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKONES)) {
 		/*
 		 * set up to cycle through all possible initial test
 		 * Patterns for walking ones test
@@ -385,7 +399,7 @@ s32 Xil_TestMem16(u32 Addrlow,u32 Addrhigh, u32 Words, u16 Pattern, u8 Subtest)
 
 			for (I = 0U; I < (NUM_OF_BYTES_IN_HW * NUM_OF_BITS_IN_HW); ) {
 				/* write memory location */
-				shea(Addr+I,Val);
+				shea(Addr + I, Val);
 				Val = (u16)RotateLeft(Val, 16U);
 				I = I + NUM_OF_BYTES_IN_HW;
 			}
@@ -397,7 +411,7 @@ s32 Xil_TestMem16(u32 Addrlow,u32 Addrhigh, u32 Words, u16 Pattern, u8 Subtest)
 			/* Read the values from each location that was written */
 			for (I = 0U; I < (NUM_OF_BYTES_IN_HW * NUM_OF_BITS_IN_HW); ) {
 				/* read memory location */
-				WordMem16 = lhuea(Addr+I);
+				WordMem16 = lhuea(Addr + I);
 				if (WordMem16 != Val) {
 					Status = -1;
 					goto End_Label;
@@ -408,7 +422,7 @@ s32 Xil_TestMem16(u32 Addrlow,u32 Addrhigh, u32 Words, u16 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKZEROS)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKZEROS)) {
 		/*
 		 * set up to cycle through all possible initial
 		 * test Patterns for walking zeros test
@@ -428,7 +442,7 @@ s32 Xil_TestMem16(u32 Addrlow,u32 Addrhigh, u32 Words, u16 Pattern, u8 Subtest)
 			 */
 
 			for (I = 0U; I < (NUM_OF_BYTES_IN_HW * NUM_OF_BITS_IN_HW);) {
-				shea(Addr+I, Val);
+				shea(Addr + I, Val);
 				Val = ~((u16)RotateLeft(~Val, 16U));
 				I = I + NUM_OF_BYTES_IN_HW;
 			}
@@ -439,7 +453,7 @@ s32 Xil_TestMem16(u32 Addrlow,u32 Addrhigh, u32 Words, u16 Pattern, u8 Subtest)
 			Val = ~(1U << j);
 			/* Read the values from each location that was written */
 			for (I = 0U; I < (NUM_OF_BYTES_IN_HW * NUM_OF_BITS_IN_HW); ) {
-				WordMem16= lhuea(Addr+I);
+				WordMem16 = lhuea(Addr + I);
 				if (WordMem16 != Val) {
 					Status = -1;
 					goto End_Label;
@@ -451,12 +465,12 @@ s32 Xil_TestMem16(u32 Addrlow,u32 Addrhigh, u32 Words, u16 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INVERSEADDR)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INVERSEADDR)) {
 		/* Fill the memory with inverse of address */
 		for (I = 0U; I < (NUM_OF_BYTES_IN_HW * Words);) {
 			/* write memory location */
-			Val = (u16) (~((INTPTR)((Addr+I))));
-			shea(Addr+I, Val);
+			Val = (u16) (~((INTPTR)((Addr + I))));
+			shea(Addr + I, Val);
 			I = I + NUM_OF_BYTES_IN_HW;
 		}
 		/*
@@ -464,10 +478,10 @@ s32 Xil_TestMem16(u32 Addrlow,u32 Addrhigh, u32 Words, u16 Pattern, u8 Subtest)
 		 * of tested memory
 		 */
 
-		for (I = 0U; I < (NUM_OF_BYTES_IN_HW*Words); ) {
+		for (I = 0U; I < (NUM_OF_BYTES_IN_HW * Words); ) {
 			/* read memory location */
-			WordMem16 = lhuea(Addr+I);
-			Val = (u16) (~((INTPTR) ((Addr+I))));
+			WordMem16 = lhuea(Addr + I);
+			Val = (u16) (~((INTPTR) ((Addr + I))));
 			if ((WordMem16 ^ Val) != 0x0000U) {
 				Status = -1;
 				goto End_Label;
@@ -476,15 +490,14 @@ s32 Xil_TestMem16(u32 Addrlow,u32 Addrhigh, u32 Words, u16 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_FIXEDPATTERN)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_FIXEDPATTERN)) {
 		/*
 		 * Generate an initial value for
 		 * memory testing
 		 */
 		if (Pattern == (u16)0) {
 			Val = 0xDEADU;
-		}
-		else {
+		} else {
 			Val = Pattern;
 		}
 
@@ -492,9 +505,9 @@ s32 Xil_TestMem16(u32 Addrlow,u32 Addrhigh, u32 Words, u16 Pattern, u8 Subtest)
 		 * Fill the memory with fixed pattern
 		 */
 
-		for (I = 0U; I < (2*Words);) {
+		for (I = 0U; I < (2 * Words);) {
 			/* write memory location */
-			shea(Addr+I, Val);
+			shea(Addr + I, Val);
 			I = I + NUM_OF_BYTES_IN_HW;
 		}
 
@@ -506,7 +519,7 @@ s32 Xil_TestMem16(u32 Addrlow,u32 Addrhigh, u32 Words, u16 Pattern, u8 Subtest)
 
 		for (I = 0U; I < (NUM_OF_BYTES_IN_HW * Words);) {
 			/* read memory location */
-			WordMem16=lhuea(Addr+I);
+			WordMem16 = lhuea(Addr + I);
 			if (WordMem16 != Val) {
 				Status = -1;
 				goto End_Label;
@@ -514,6 +527,7 @@ s32 Xil_TestMem16(u32 Addrlow,u32 Addrhigh, u32 Words, u16 Pattern, u8 Subtest)
 			I = I + NUM_OF_BYTES_IN_HW;
 		}
 	}
+#endif
 End_Label:
 	return Status;
 }
@@ -549,11 +563,15 @@ End_Label:
 s32 Xil_TestMem32(u32 Addrlow, u32 Addrhigh, u32 Words, u32 Pattern, u8 Subtest)
 {
 	u32 I;
-	u32 j;
 	u32 Val;
 	u32 WordMem32;
 	s32 Status = 0;
 	u64  Addr = (Addrlow + ((u64)Addrhigh << 32));
+#ifdef XIL_ENABLE_MEMORY_STRESS_TEST
+	u32 j;
+#else
+	(void)Pattern;
+#endif
 
 	Xil_AssertNonvoid(Words != (u32)0);
 	Xil_AssertNonvoid(Subtest <= (u8)XIL_TESTMEM_MAXTEST);
@@ -564,13 +582,13 @@ s32 Xil_TestMem32(u32 Addrlow, u32 Addrhigh, u32 Words, u32 Pattern, u8 Subtest)
 	Val = XIL_TESTMEM_INIT_VALUE;
 
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INCREMENT)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INCREMENT)) {
 		/*
 		 * Fill the memory with incrementing
 		 * values starting from 'XIL_TESTMEM_INIT_VALUE'
 		 */
-		for (I = 0U; I <(NUM_OF_BYTES_IN_WORD * Words);) {
-			swea(Addr+I, Val);
+		for (I = 0U; I < (NUM_OF_BYTES_IN_WORD * Words);) {
+			swea(Addr + I, Val);
 			Val++;
 			I = I + NUM_OF_BYTES_IN_WORD;
 		}
@@ -589,7 +607,7 @@ s32 Xil_TestMem32(u32 Addrlow, u32 Addrhigh, u32 Words, u32 Pattern, u8 Subtest)
 		 */
 
 		for (I = 0U; I < ( NUM_OF_BYTES_IN_WORD * Words);) {
-			WordMem32 = lwea(Addr+I);
+			WordMem32 = lwea(Addr + I);
 
 			if (WordMem32 != Val) {
 				Status = -1;
@@ -600,8 +618,8 @@ s32 Xil_TestMem32(u32 Addrlow, u32 Addrhigh, u32 Words, u32 Pattern, u8 Subtest)
 			I = I + NUM_OF_BYTES_IN_WORD;
 		}
 	}
-
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKONES)) {
+#ifdef XIL_ENABLE_MEMORY_STRESS_TEST
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKONES)) {
 		/*
 		 * set up to cycle through all possible initial
 		 * test Patterns for walking ones test
@@ -622,7 +640,7 @@ s32 Xil_TestMem32(u32 Addrlow, u32 Addrhigh, u32 Words, u32 Pattern, u8 Subtest)
 
 			for (I = 0U; I < (NUM_OF_BYTES_IN_WORD * NUM_OF_BITS_IN_WORD);) {
 				/* write memory location */
-				swea(Addr+I, Val);
+				swea(Addr + I, Val);
 				Val = (u32) RotateLeft(Val, NUM_OF_BITS_IN_WORD);
 				I = I + NUM_OF_BYTES_IN_WORD;
 			}
@@ -638,7 +656,7 @@ s32 Xil_TestMem32(u32 Addrlow, u32 Addrhigh, u32 Words, u32 Pattern, u8 Subtest)
 			for (I = 0U; I < ((u32)32 * NUM_OF_BYTES_IN_WORD);) {
 				/* read memory location */
 
-				WordMem32 = lwea(Addr+I);
+				WordMem32 = lwea(Addr + I);
 
 				if (WordMem32 != Val) {
 					Status = -1;
@@ -651,7 +669,7 @@ s32 Xil_TestMem32(u32 Addrlow, u32 Addrhigh, u32 Words, u32 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKZEROS)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKZEROS)) {
 		/*
 		 * set up to cycle through all possible
 		 * initial test Patterns for walking zeros test
@@ -673,7 +691,7 @@ s32 Xil_TestMem32(u32 Addrlow, u32 Addrhigh, u32 Words, u32 Pattern, u8 Subtest)
 
 			for (I = 0U; I < (NUM_OF_BITS_IN_WORD * NUM_OF_BYTES_IN_WORD);) {
 				/* write memory location */
-				swea(Addr+I, Val);
+				swea(Addr + I, Val);
 				Val = ~((u32)RotateLeft(~Val, NUM_OF_BITS_IN_WORD));
 				I = I + NUM_OF_BYTES_IN_WORD;
 			}
@@ -689,7 +707,7 @@ s32 Xil_TestMem32(u32 Addrlow, u32 Addrhigh, u32 Words, u32 Pattern, u8 Subtest)
 			 * written */
 			for (I = 0U; I < (NUM_OF_BITS_IN_WORD * NUM_OF_BYTES_IN_WORD);) {
 				/* read memory location */
-				WordMem32 = lwea(Addr+I);
+				WordMem32 = lwea(Addr + I);
 				if (WordMem32 != Val) {
 					Status = -1;
 					goto End_Label;
@@ -701,12 +719,12 @@ s32 Xil_TestMem32(u32 Addrlow, u32 Addrhigh, u32 Words, u32 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INVERSEADDR)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INVERSEADDR)) {
 		/* Fill the memory with inverse of address */
 		for (I = 0U; I < (NUM_OF_BYTES_IN_WORD * Words);) {
 			/* write memory location */
-			Val = (u32) (~((INTPTR) (Addr+I)));
-			swea(Addr+I, Val);
+			Val = (u32) (~((INTPTR) (Addr + I)));
+			swea(Addr + I, Val);
 			I = I + NUM_OF_BYTES_IN_WORD;
 		}
 
@@ -717,8 +735,8 @@ s32 Xil_TestMem32(u32 Addrlow, u32 Addrhigh, u32 Words, u32 Pattern, u8 Subtest)
 
 		for (I = 0U; I < (NUM_OF_BYTES_IN_WORD * Words);) {
 			/* Read the location */
-			WordMem32 = lwea(Addr+I);
-			Val = (u32) (~((INTPTR) (Addr+I)));
+			WordMem32 = lwea(Addr + I);
+			Val = (u32) (~((INTPTR) (Addr + I)));
 
 			if ((WordMem32 ^ Val) != 0x00000000U) {
 				Status = -1;
@@ -728,7 +746,7 @@ s32 Xil_TestMem32(u32 Addrlow, u32 Addrhigh, u32 Words, u32 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_FIXEDPATTERN)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_FIXEDPATTERN)) {
 		/*
 		 * Generate an initial value for
 		 * memory testing
@@ -736,8 +754,7 @@ s32 Xil_TestMem32(u32 Addrlow, u32 Addrhigh, u32 Words, u32 Pattern, u8 Subtest)
 
 		if (Pattern == (u32)0) {
 			Val = 0xDEADBEEFU;
-		}
-		else {
+		} else {
 			Val = Pattern;
 		}
 
@@ -747,7 +764,7 @@ s32 Xil_TestMem32(u32 Addrlow, u32 Addrhigh, u32 Words, u32 Pattern, u8 Subtest)
 
 		for (I = 0U; I < (NUM_OF_BYTES_IN_WORD * Words);) {
 			/* write memory location */
-			swea(Addr+I, Val);
+			swea(Addr + I, Val);
 			I = I + NUM_OF_BYTES_IN_WORD;
 		}
 
@@ -761,7 +778,7 @@ s32 Xil_TestMem32(u32 Addrlow, u32 Addrhigh, u32 Words, u32 Pattern, u8 Subtest)
 
 			/* read memory location */
 
-			WordMem32 = lwea(Addr+I);
+			WordMem32 = lwea(Addr + I);
 			if (WordMem32 != Val) {
 				Status = -1;
 				goto End_Label;
@@ -769,7 +786,7 @@ s32 Xil_TestMem32(u32 Addrlow, u32 Addrhigh, u32 Words, u32 Pattern, u8 Subtest)
 			I = I + NUM_OF_BYTES_IN_WORD;
 		}
 	}
-
+#endif
 End_Label:
 	return Status;
 }
@@ -805,11 +822,15 @@ End_Label:
 s32 Xil_TestMem32(u32 *Addr, u32 Words, u32 Pattern, u8 Subtest)
 {
 	u32 i;
-	u32 j;
 	u32 Val;
 	u32 FirtVal;
 	u32 WordMem32;
 	s32 Status = 0;
+#ifdef XIL_ENABLE_MEMORY_STRESS_TEST
+	u32 j;
+#else
+	(void)Pattern;
+#endif
 
 	Xil_AssertNonvoid(Words != (u32)0);
 	Xil_AssertNonvoid(Subtest <= (u8)XIL_TESTMEM_MAXTEST);
@@ -821,7 +842,7 @@ s32 Xil_TestMem32(u32 *Addr, u32 Words, u32 Pattern, u8 Subtest)
 	FirtVal = XIL_TESTMEM_INIT_VALUE;
 
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INCREMENT)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INCREMENT)) {
 		/*
 		 * Fill the memory with incrementing
 		 * values starting from 'FirtVal'
@@ -855,8 +876,8 @@ s32 Xil_TestMem32(u32 *Addr, u32 Words, u32 Pattern, u8 Subtest)
 			Val++;
 		}
 	}
-
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKONES)) {
+#ifdef XIL_ENABLE_MEMORY_STRESS_TEST
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKONES)) {
 		/*
 		 * set up to cycle through all possible initial
 		 * test Patterns for walking ones test
@@ -904,7 +925,7 @@ s32 Xil_TestMem32(u32 *Addr, u32 Words, u32 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKZEROS)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKZEROS)) {
 		/*
 		 * set up to cycle through all possible
 		 * initial test Patterns for walking zeros test
@@ -952,7 +973,7 @@ s32 Xil_TestMem32(u32 *Addr, u32 Words, u32 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INVERSEADDR)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INVERSEADDR)) {
 		/* Fill the memory with inverse of address */
 		for (i = 0U; i < Words; i++) {
 			/* write memory location */
@@ -977,7 +998,7 @@ s32 Xil_TestMem32(u32 *Addr, u32 Words, u32 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_FIXEDPATTERN)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_FIXEDPATTERN)) {
 		/*
 		 * Generate an initial value for
 		 * memory testing
@@ -985,8 +1006,7 @@ s32 Xil_TestMem32(u32 *Addr, u32 Words, u32 Pattern, u8 Subtest)
 
 		if (Pattern == (u32)0) {
 			Val = 0xDEADBEEFU;
-		}
-		else {
+		} else {
 			Val = Pattern;
 		}
 
@@ -1016,7 +1036,7 @@ s32 Xil_TestMem32(u32 *Addr, u32 Words, u32 Pattern, u8 Subtest)
 			}
 		}
 	}
-
+#endif
 End_Label:
 	return Status;
 }
@@ -1051,11 +1071,15 @@ End_Label:
 s32 Xil_TestMem16(u16 *Addr, u32 Words, u16 Pattern, u8 Subtest)
 {
 	u32 i;
-	u32 j;
 	u16 Val;
 	u16 FirtVal;
 	u16 WordMem16;
 	s32 Status = 0;
+#ifdef XIL_ENABLE_MEMORY_STRESS_TEST
+	u32 j;
+#else
+	(void)Pattern;
+#endif
 
 	Xil_AssertNonvoid(Words != (u32)0);
 	Xil_AssertNonvoid(Subtest <= XIL_TESTMEM_MAXTEST);
@@ -1070,7 +1094,7 @@ s32 Xil_TestMem16(u16 *Addr, u32 Words, u16 Pattern, u8 Subtest)
 	 * selectthe proper Subtest(s)
 	 */
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INCREMENT)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INCREMENT)) {
 		/*
 		 * Fill the memory with incrementing
 		 * values starting from 'FirtVal'
@@ -1102,8 +1126,8 @@ s32 Xil_TestMem16(u16 *Addr, u32 Words, u16 Pattern, u8 Subtest)
 			Val++;
 		}
 	}
-
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKONES)) {
+#ifdef XIL_ENABLE_MEMORY_STRESS_TEST
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKONES)) {
 		/*
 		 * set up to cycle through all possible initial test
 		 * Patterns for walking ones test
@@ -1144,7 +1168,7 @@ s32 Xil_TestMem16(u16 *Addr, u32 Words, u16 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKZEROS)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKZEROS)) {
 		/*
 		 * set up to cycle through all possible initial
 		 * test Patterns for walking zeros test
@@ -1187,7 +1211,7 @@ s32 Xil_TestMem16(u16 *Addr, u32 Words, u16 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INVERSEADDR)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INVERSEADDR)) {
 		/* Fill the memory with inverse of address */
 		for (i = 0U; i < Words; i++) {
 			/* write memory location */
@@ -1210,15 +1234,14 @@ s32 Xil_TestMem16(u16 *Addr, u32 Words, u16 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_FIXEDPATTERN)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_FIXEDPATTERN)) {
 		/*
 		 * Generate an initial value for
 		 * memory testing
 		 */
 		if (Pattern == (u16)0) {
 			Val = 0xDEADU;
-		}
-		else {
+		} else {
 			Val = Pattern;
 		}
 
@@ -1246,7 +1269,7 @@ s32 Xil_TestMem16(u16 *Addr, u32 Words, u16 Pattern, u8 Subtest)
 			}
 		}
 	}
-
+#endif
 End_Label:
 	return Status;
 }
@@ -1282,11 +1305,15 @@ End_Label:
 s32 Xil_TestMem8(u8 *Addr, u32 Words, u8 Pattern, u8 Subtest)
 {
 	u32 i;
-	u32 j;
 	u8 Val;
 	u8 FirtVal;
 	u8 WordMem8;
 	s32 Status = 0;
+#ifdef XIL_ENABLE_MEMORY_STRESS_TEST
+	u32 j;
+#else
+	(void)Pattern;
+#endif
 
 	Xil_AssertNonvoid(Words != (u32)0);
 	Xil_AssertNonvoid(Subtest <= XIL_TESTMEM_MAXTEST);
@@ -1301,7 +1328,7 @@ s32 Xil_TestMem8(u8 *Addr, u32 Words, u8 Pattern, u8 Subtest)
 	 * select the proper Subtest(s)
 	 */
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INCREMENT)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INCREMENT)) {
 		/*
 		 * Fill the memory with incrementing
 		 * values starting from 'FirtVal'
@@ -1333,8 +1360,8 @@ s32 Xil_TestMem8(u8 *Addr, u32 Words, u8 Pattern, u8 Subtest)
 			Val++;
 		}
 	}
-
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKONES)) {
+#ifdef XIL_ENABLE_MEMORY_STRESS_TEST
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKONES)) {
 		/*
 		 * set up to cycle through all possible initial
 		 * test Patterns for walking ones test
@@ -1373,7 +1400,7 @@ s32 Xil_TestMem8(u8 *Addr, u32 Words, u8 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKZEROS)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_WALKZEROS)) {
 		/*
 		 * set up to cycle through all possible initial test
 		 * Patterns for walking zeros test
@@ -1413,7 +1440,7 @@ s32 Xil_TestMem8(u8 *Addr, u32 Words, u8 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INVERSEADDR)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_INVERSEADDR)) {
 		/* Fill the memory with inverse of address */
 		for (i = 0U; i < Words; i++) {
 			/* write memory location */
@@ -1437,7 +1464,7 @@ s32 Xil_TestMem8(u8 *Addr, u32 Words, u8 Pattern, u8 Subtest)
 		}
 	}
 
-	if((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_FIXEDPATTERN)) {
+	if ((Subtest == XIL_TESTMEM_ALLMEMTESTS) || (Subtest == XIL_TESTMEM_FIXEDPATTERN)) {
 		/*
 		 * Generate an initial value for
 		 * memory testing
@@ -1445,8 +1472,7 @@ s32 Xil_TestMem8(u8 *Addr, u32 Words, u8 Pattern, u8 Subtest)
 
 		if (Pattern == (u8)0) {
 			Val = 0xA5U;
-		}
-		else {
+		} else {
 			Val = Pattern;
 		}
 		/*
@@ -1471,7 +1497,7 @@ s32 Xil_TestMem8(u8 *Addr, u32 Words, u8 Pattern, u8 Subtest)
 			}
 		}
 	}
-
+#endif
 End_Label:
 	return Status;
 }
@@ -1489,6 +1515,7 @@ End_Label:
 *
 *
 *****************************************************************************/
+#ifdef XIL_ENABLE_MEMORY_STRESS_TEST
 static u32 RotateLeft(u32 Input, u8 Width)
 {
 	u32 Msb;
@@ -1524,6 +1551,7 @@ static u32 RotateLeft(u32 Input, u8 Width)
 	return ReturnVal;
 
 }
+#endif
 
 #ifdef ROTATE_RIGHT
 /*****************************************************************************/

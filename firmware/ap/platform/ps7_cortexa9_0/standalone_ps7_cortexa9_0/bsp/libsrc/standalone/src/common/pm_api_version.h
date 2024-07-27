@@ -32,9 +32,10 @@
  * | ^				| ^	| ^		| ^	 | V2 - Added support of event management functionality			     |
  * | ^				| ^	| ^		| ^	 | Note: V2 is supported in Versal but ZynqMP supports only V1		     |
  * | PM_REQUEST_SUSPEND		| 0x6	| Both		| 1	 | The API is used to send suspend request to another subsystem		     |
- * | PM_SELF_SUSPEND		| 0x7	| Both		| 2	 | V1 - The API is used to suspend a child subsystem			     |
+ * | PM_SELF_SUSPEND		| 0x7	| Both		| 3	 | V1 - The API is used to suspend a child subsystem			     |
  * | ^				| ^	| ^		| ^	 | V2 - Added support of cpu idle functionality during force powerdown	     |
- * | ^				| ^	| ^		| ^	 | Note: V2 is supported in Versal but ZynqMP supports only V1		     |
+ * | ^				| ^	| ^		| ^	 | V3 - Added support of CPU off state					     |
+ * | ^				| ^	| ^		| ^	 | Note: V3 is supported in Versal and Versal NET but ZynqMP supports only V1|
  * | PM_FORCE_POWERDOWN		| 0x8	| Both		| 2	 | V1 - The API is used to Powerdown other processor or node		     |
  * | ^				| ^	| ^		| ^	 | V2 - Added support of cpu idle functionality	during force powerdown	     |
  * | ^				| ^	| ^		| ^	 | Note: V2 is supported in Versal but ZynqMP supports only V1		     |
@@ -105,7 +106,6 @@
  * | IOCTL_RPU_BOOT_ADDR_CONFIG		| 2	| Both		| RPU boot address config		|
  * | IOCTL_TCM_COMB_CONFIG		| 3	| Both		| TCM config				|
  * | IOCTL_SET_TAPDELAY_BYPASS		| 4	| Both		| TAP delay bypass			|
- * | IOCTL_SET_SGMII_MODE		| 5	| ZynqMP	| SGMII mode				|
  * | IOCTL_SD_DLL_RESET			| 6	| Both		| SD DLL reset				|
  * | IOCTL_SET_SD_TAPDELAY		| 7	| Both		| SD TAP delay				|
  * | IOCTL_SET_PLL_FRAC_MODE		| 8	| Both		| Set PLL frac mode			|
@@ -119,8 +119,6 @@
  * | IOCTL_ULPI_RESET			| 16	| ZynqMP	| ULPI reset				|
  * | IOCTL_SET_BOOT_HEALTH_STATUS	| 17	| Both		| Set boot status			|
  * | IOCTL_AFI				| 18	| ZynqMP	| AFI					|
- * | IOCTL_PROBE_COUNTER_READ		| 19	| Versal	| Probe counter read			|
- * | IOCTL_PROBE_COUNTER_WRITE		| 20	| Versal	| Probe counter write			|
  * | IOCTL_OSPI_MUX_SELECT		| 21	| Versal	| OSPI mux select			|
  * | IOCTL_USB_SET_STATE		| 22	| Versal	| USB set state				|
  * | IOCTL_GET_LAST_RESET_REASON	| 23	| Versal	| Get last reset reason			|
@@ -231,7 +229,8 @@ typedef enum {
 	PM_CLOCK_SETDIVIDER,				/**< 0x27 */
 	PM_CLOCK_GETDIVIDER,				/**< 0x28 */
 	PM_CLOCK_SETRATE,				/**< 0x29 */
-	PM_CLOCK_GETRATE,				/**< 0x2A */
+	/* PM_CLOCK_GETRATE API is deprecated */
+	PM_RESERVE_ID,					/**< 0x2A */
 	PM_CLOCK_SETPARENT,				/**< 0x2B */
 	PM_CLOCK_GETPARENT,				/**< 0x2C */
 	PM_SECURE_IMAGE,				/**< 0x2D */

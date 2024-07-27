@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/diskio.h"
   "/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/ff.h"
   "/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/ffconf.h"
+  "/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/xilffs.h"
   "/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/xilffs_config.h"
   "/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/lib/libxilffs.a"
   "CMakeFiles/xilffs.dir/diskio.c.obj"

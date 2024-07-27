@@ -156,6 +156,18 @@ libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/xil_spinlock.c.obj
   include/xil_types.h \
   include/xil_assert.h
 
+libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/xpm_counter.c.obj: /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/arm/common/xpm_counter.c \
+  include/xpm_counter.h \
+  include/xpseudo_asm.h \
+  include/xreg_cortexa9.h \
+  include/xpseudo_asm_gcc.h \
+  include/xil_types.h \
+  include/bspconfig.h \
+  include/xmem_config.h \
+  include/xparameters_ps.h \
+  include/xstatus.h \
+  include/xil_assert.h
+
 libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/cortexa9/xil_cache.c.obj: /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/arm/cortexa9/xil_cache.c \
   /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/arm/cortexa9/xil_cache.h \
   include/xil_types.h \
@@ -387,6 +399,10 @@ include/xcortexa9.h:
 
 /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/common/xil_types.h:
 
+/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/common/xil_mem.c:
+
+include/xil_spinlock.h:
+
 /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/arm/common/putnum.c:
 
 /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/arm/common/gcc/read.c:
@@ -417,10 +433,6 @@ include/xscugic_hw.h:
 
 include/xil_types.h:
 
-/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/common/xil_mem.c:
-
-include/xil_spinlock.h:
-
 /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/common/xil_printf.c:
 
 /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/arm/common/gcc/fstat.c:
@@ -445,15 +457,13 @@ include/xil_spinlock.h:
 
 include/xmem_config.h:
 
+include/xpm_counter.h:
+
 /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/arm/common/gcc/_open.c:
 
 /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/arm/cortexa9/xil_mmu.h:
 
 include/xparameters_ps.h:
-
-include/xil_io.h:
-
-include/xpseudo_asm_gcc.h:
 
 /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/arm/common/xil_exception.h:
 
@@ -476,6 +486,12 @@ include/xil_printf.h:
 /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/arm/common/vectors.h:
 
 include/xil_assert.h:
+
+include/xil_io.h:
+
+include/xpseudo_asm_gcc.h:
+
+/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/arm/common/xpm_counter.c:
 
 /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/arm/cortexa9/xl2cc.h:
 

@@ -15,6 +15,7 @@ libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep
   include/xpseudo_asm.h \
   include/xreg_cortexa9.h \
   include/xpseudo_asm_gcc.h \
+  include/xil_util.h \
   include/xscutimer.h \
   include/xscutimer_hw.h
 
@@ -32,6 +33,7 @@ libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.obj: /home/
   include/xpseudo_asm.h \
   include/xreg_cortexa9.h \
   include/xpseudo_asm_gcc.h \
+  include/xil_util.h \
   include/xscutimer.h \
   include/xscutimer_hw.h \
   include/xscutimer.h \
@@ -62,20 +64,23 @@ libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/xiltimer.c.obj: /home/wenting/Sitina
   include/xil_printf.h \
   include/xstatus.h \
   include/bspconfig.h \
+  include/xil_util.h \
+  include/xil_io.h \
   include/xscutimer.h \
-  include/xscutimer_hw.h \
-  include/xil_io.h
+  include/xscutimer_hw.h
 
 
 include/xscugic.h:
 
 include/xcommon_drv_config.h:
 
-/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/core/scutimer/scutimer.c:
-
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/xiltimer.h:
 
 include/xscutimer.h:
+
+/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/core/scutimer/scutimer.c:
+
+include/xil_util.h:
 
 include/xpseudo_asm_gcc.h:
 
