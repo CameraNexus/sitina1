@@ -21,14 +21,28 @@
 // SOFTWARE.
 //
 #include <stdio.h>
+#include <stdbool.h>
+#include "i2c.h"
+#include "mcusvc.h"
 #include "xil_printf.h"
 #include "xil_cache.h"
 #include "xparameters.h"
 #include "xscugic.h"
 
+extern uint8_t framebuffer[];
+
+void lcd_set_color(uint32_t color) {
+    uint32_t *wrptr = framebuffer;
+    for (int i = 0; i < 480*480; i++) {
+        *wrptr++ = color;
+    }
+    Xil_DCacheFlushRange((intptr_t)framebuffer, 480*480*4);
+}
+
 int main()
 {
-
+    i2c_init();
+    mcusvc_init();
     lcd_init();
     //memset(s_image_buffer, 0xFF, IMAGE_WIDTH * IMAGE_HEIGHT * IMAGE_PIXEL_SIZE);
 
@@ -37,6 +51,23 @@ int main()
 
     for(;;) {
     	sleep(1);
+        mcusvc_set_led(true);
+        lcd_set_color(0xffff0000);
+        sleep(1);
+        mcusvc_set_led(false);
+        lcd_set_color(0xff00ff00);
+        sleep(1);
+        lcd_set_color(0xff0000ff);
+    // memset(framebuffer, 0xff, 480*4);
+    // memset(framebuffer[480*4*2], 0xff, 480*4);
+    // for (int i = 0; i < 240; i++) {
+    //     framebuffer[480*4*4+i*2*4 + 0] = 0xff;
+    //     framebuffer[480*4*4+i*2*4 + 1] = 0xff;
+    //     framebuffer[480*4*4+i*2*4 + 2] = 0xff;
+    //     framebuffer[480*4*4+i*2*4 + 3] = 0xff;
+    // }
+
+    
     }
 
     return 0;

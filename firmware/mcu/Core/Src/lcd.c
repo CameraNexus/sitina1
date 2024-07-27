@@ -141,7 +141,6 @@ void lcd_update(void) {
         txsize = 43*18+2-2;
         lcd_chunk2_pending = false;
         lcd_chunk3_pending = true;
-        GPIOB->BRR = GPIO_PIN_8;
     }
     else if (lcd_chunk3_pending) {
         txbuf = &framebuffer[86*18];

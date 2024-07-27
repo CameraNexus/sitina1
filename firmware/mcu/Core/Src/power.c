@@ -193,17 +193,9 @@ static void power_lcd_bl_off(void) {
 }
 
 void power_lcd_on(void) {
-    // LCD BL and RST shares the same pin
-    // Set the brightness to minimum first, do the reset sequence
-    // Then set to desired brightness
-    power_lcd_set_brightness(0);
+    // Doesn't actually turn ON the LCD, just prepare it to be turned on by Zynq
     HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
     power_lcd_bl_on();
-    HAL_Delay(100);
-    power_lcd_bl_off();
-    HAL_Delay(100);
-    power_lcd_bl_on();
-    power_lcd_set_brightness(200);
 }
 
 void power_lcd_set_brightness(uint8_t val) {

@@ -23,10 +23,12 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
+#include <stdbool.h>
 #include "xil_cache.h"
 #include "lcd.h"
 #include "gpio_lp.h"
 #include "mu_platform.h"
+#include "mcusvc.h"
 
 #define IMAGE_WIDTH  	 480
 #define IMAGE_HEIGHT 	 480
@@ -100,35 +102,46 @@ static void dsi_initseq(void) {
 
 	usleep(25 * 1000);
 
-	gpio_lp_write_dcs(0x35, NULL, 0x00);
+	//gpio_lp_write_dcs(0x35, NULL, 0x00);
+    //gpio_lp_write_dcs(0x13, NULL, 0x00);
+
+    usleep(25 * 1000);
 
     //gpio_lp_write_dcs(0x22, NULL, 0x00);
 }
 
 void lcd_init(void) {
+
 	gpio_lp_init();
 	gpio_lp_setup();
-
 	// Return all lanes to LP-11 state
+
+    mcusvc_set_lcd_power(false);
+
 	usleep(200 * 1000);
+
+    mcusvc_set_lcd_bl(120);
+    mcusvc_set_lcd_power(true);
+
+    usleep(200 * 1000);
 
 	dsi_initseq();
 
 	gpio_lp_release();
 
-    memcpy(framebuffer, gImage_image480480, FRAMEBUF_SIZE);
+    //memcpy(framebuffer, gImage_image480480, FRAMEBUF_SIZE);
 
-    memset(framebuffer, 0, 480*4*10);
-    memset(framebuffer, 0xff, 480*4);
-    memset(framebuffer[480*4*2], 0xff, 480*4);
-    for (int i = 0; i < 240; i++) {
-        framebuffer[480*4*4+i*2*4 + 0] = 0xff;
-        framebuffer[480*4*4+i*2*4 + 1] = 0xff;
-        framebuffer[480*4*4+i*2*4 + 2] = 0xff;
-        framebuffer[480*4*4+i*2*4 + 3] = 0xff;
-    }
+    // memset(framebuffer, 0, 480*4*10);
+    // memset(framebuffer, 0xff, 480*4);
+    // memset(framebuffer[480*4*2], 0xff, 480*4);
+    // for (int i = 0; i < 240; i++) {
+    //     framebuffer[480*4*4+i*2*4 + 0] = 0xff;
+    //     framebuffer[480*4*4+i*2*4 + 1] = 0xff;
+    //     framebuffer[480*4*4+i*2*4 + 2] = 0xff;
+    //     framebuffer[480*4*4+i*2*4 + 3] = 0xff;
+    // }
 
-    Xil_DCacheFlushRange((intptr_t)framebuffer, FRAMEBUF_SIZE);
+    //Xil_DCacheFlushRange((intptr_t)framebuffer, FRAMEBUF_SIZE);
 
     *DSILITE_STARTADDR = (uint32_t)framebuffer;
     *DSILITE_ENDADDR = (uint32_t)framebuffer + FRAMEBUF_SIZE;

@@ -31,6 +31,7 @@
 #include "power.h"
 #include "lcd.h"
 #include "key.h"
+#include "mcusvc.h"
 
 static bool power_on = false;
 static volatile bool lcd_vcom_update_req = false;
@@ -63,10 +64,11 @@ void app_init(void) {
     // First booting up
     // Initialize always ON sections
     lcd_init();
-    key_init();
     lcd_disp_string(0, 0, "Sitina 1");
     lcd_disp_string(0, 12, "EC VER 1.0");
     lcd_stby_update();
+    key_init();
+    mcusvc_init();
 }
 
 void app_tick(void) {
@@ -137,6 +139,9 @@ void app_tick(void) {
             lcd_update(); // This also scans the key
         }
 
+        // Handle command from Zynq
+        mcusvc_tick();
+
         // Detect power down
         if (!power_is_power_on()) {
             // Reset all GPIOs
@@ -174,8 +179,6 @@ void app_tick(void) {
             power_power_on_ccd();
             // Wait
             HAL_Delay(100);
-            // Power ON LCD
-            power_lcd_on();
             // Release FPGA
             power_release_fpga_reset();
         }
