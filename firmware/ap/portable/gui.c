@@ -1,0 +1,451 @@
+//
+// Sitina1
+// Copyright 2024 Wenting Zhang
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#include "os_power.h"
+#include "uilib.h"
+#include "gui.h"
+#include "assets/assets.h"
+
+#define COLOR_FOCUSED   COLOR_WHITE
+#define COLOR_DIM       COLOR_GREY41
+#define COLOR_NORMAL    COLOR_WHITE
+#define COLOR_BG        COLOR_BLACK
+
+UICOMP label_run = {
+    .type = COMP_LABEL,
+    .x = 10,
+    .y = 10,
+    .w = 50,
+    .h = 20,
+    .specifics.label = {
+        .transparent = false,
+        .fgcl = COLOR_GREEN,
+        .bgcl = COLOR_BG,
+        .font = &font_12x20,
+        .align = ALIGN_LEFT,
+        .string = "RUN"
+    }
+};
+
+UICOMP bmp_shutter = {
+    .type = COMP_BITMAP,
+    .x = 400,
+    .y = 0,
+    .w = 80,
+    .h = 80,
+    .specifics.bitmap = {
+        .pixelformat = PIXFMT_Y8,
+        .buf_width = 80,
+        .buf_height = 80,
+        .pbuf = (uint8_t *)image_shutter
+    }
+};
+
+UICOMP label_mode = {
+    .type = COMP_LABEL,
+    .x = 10,
+    .y = 30,
+    .w = 30,
+    .h = 40,
+    .specifics.label = {
+        .transparent = false,
+        .fgcl = COLOR_NORMAL,
+        .bgcl = COLOR_BG,
+        .font = &font_24x40,
+        .align = ALIGN_LEFT,
+        .string = "M"
+    }
+};
+
+UICOMP label_fn1 = {
+    .type = COMP_LABEL,
+    .x = 320,
+    .y = 60,
+    .w = 80,
+    .h = 40,
+    .specifics.label = {
+        .transparent = true,
+        .fgcl = COLOR_NORMAL,
+        .bgcl = COLOR_BG,
+        .font = &font_12x20,
+        .align = ALIGN_RIGHT,
+        .string = "Aper"
+    }
+};
+
+UICOMP label_fn2 = {
+    .type = COMP_LABEL,
+    .x = 315,
+    .y = 40,
+    .w = 80,
+    .h = 40,
+    .specifics.label = {
+        .transparent = true,
+        .fgcl = COLOR_NORMAL,
+        .bgcl = COLOR_BG,
+        .font = &font_12x20,
+        .align = ALIGN_RIGHT,
+        .string = "ISO"
+    }
+};
+
+UICOMP label_fn3 = {
+    .type = COMP_LABEL,
+    .x = 325,
+    .y = 20,
+    .w = 80,
+    .h = 40,
+    .specifics.label = {
+        .transparent = true,
+        .fgcl = COLOR_NORMAL,
+        .bgcl = COLOR_BG,
+        .font = &font_12x20,
+        .align = ALIGN_RIGHT,
+        .string = "Exp"
+    }
+};
+
+UICOMP label_fn4 = {
+    .type = COMP_LABEL,
+    .x = 345,
+    .y = 0,
+    .w = 80,
+    .h = 40,
+    .specifics.label = {
+        .transparent = true,
+        .fgcl = COLOR_NORMAL,
+        .bgcl = COLOR_BG,
+        .font = &font_12x20,
+        .align = ALIGN_RIGHT,
+        .string = "Mode"
+    }
+};
+
+UICOMP label_logo = {
+    .type = COMP_LABEL,
+    .x = 394,
+    .y = 44,
+    .w = 80,
+    .h = 40,
+    .specifics.label = {
+        .transparent = true,
+        .fgcl = COLOR_NORMAL,
+        .bgcl = COLOR_BG,
+        .font = &font_8x14,
+        .align = ALIGN_RIGHT,
+        .string = "Sitina"
+    }
+};
+
+UICOMP bmp_dpad1 = {
+    .type = COMP_BITMAP,
+    .x = 400,
+    .y = 400,
+    .w = 80,
+    .h = 80,
+    .specifics.bitmap = {
+        .pixelformat = PIXFMT_Y8,
+        .buf_width = 80,
+        .buf_height = 80,
+        .pbuf = (uint8_t *)image_dpad1
+    }
+};
+
+UICOMP label_dpad = {
+    .type = COMP_LABEL,
+    .x = 400,
+    .y = 421,
+    .w = 80,
+    .h = 40,
+    .specifics.label = {
+        .transparent = true,
+        .fgcl = COLOR_NORMAL,
+        .bgcl = COLOR_BG,
+        .font = &font_12x20,
+        .align = ALIGN_CENTER,
+        .string = "Zoom"
+    }
+};
+
+UICOMP label_shutter = {
+    .type = COMP_LABEL,
+    .x = 10,
+    .y = 445,
+    .w = 7*16,
+    .h = 26,
+    .specifics.label = {
+        .transparent = false,
+        .fgcl = COLOR_NORMAL,
+        .bgcl = COLOR_BG,
+        .font = &font_16x26,
+        .align = ALIGN_LEFT,
+        .string = "1/8000s"
+    }
+};
+
+UICOMP label_aperture = {
+    .type = COMP_LABEL,
+    .x = 150,
+    .y = 445,
+    .w = 5*16,
+    .h = 26,
+    .specifics.label = {
+        .transparent = false,
+        .fgcl = COLOR_NORMAL,
+        .bgcl = COLOR_BG,
+        .font = &font_16x26,
+        .align = ALIGN_LEFT,
+        .string = "f/5.6"
+    }
+};
+
+UICOMP label_iso = {
+    .type = COMP_LABEL,
+    .x = 260,
+    .y = 445,
+    .w = 5*16,
+    .h = 26,
+    .specifics.label = {
+        .transparent = false,
+        .fgcl = COLOR_NORMAL,
+        .bgcl = COLOR_BG,
+        .font = &font_16x26,
+        .align = ALIGN_LEFT,
+        .string = "ISO-6400"
+    }
+};
+
+void gui_draw_battery(void *ptr);
+
+UICOMP custom_battery = {
+    .type = COMP_CUSTOM,
+    .x = 330,
+    .y = 410,
+    .w = 60,
+    .h = 20,
+    .specifics.custom = {
+        .user = 0, // unused
+        .drawfunc = gui_draw_battery
+    }
+};
+
+UICOMP label_remaining = {
+    .type = COMP_LABEL,
+    .x = 260,
+    .y = 410,
+    .w = 12 * 5,
+    .h = 20,
+    .specifics.label = {
+        .transparent = false,
+        .fgcl = COLOR_NORMAL,
+        .bgcl = COLOR_BG,
+        .font = &font_12x20,
+        .align = ALIGN_LEFT,
+        .string = "[999]"
+    }
+};
+
+UICOMP label_focus = {
+    .type = COMP_LABEL,
+    .x = 230,
+    .y = 410,
+    .w = 12 * 2,
+    .h = 20,
+    .specifics.label = {
+        .transparent = false,
+        .fgcl = COLOR_NORMAL,
+        .bgcl = COLOR_BG,
+        .font = &font_12x20,
+        .align = ALIGN_LEFT,
+        .string = "MF"
+    }
+};
+
+void gui_draw_exposure(void *ptr);
+
+UICOMP custom_exposure = {
+    .type = COMP_CUSTOM,
+    .x = 10,
+    .y = 405,
+    .w = 200,
+    .h = 30,
+    .specifics.custom = {
+        .user = 0, // unused
+        .drawfunc = gui_draw_exposure
+    }
+};
+
+void gui_draw_histogram(void *ptr);
+
+UICOMP custom_histogram = {
+    .type = COMP_CUSTOM,
+    .x = 70,
+    .y = 9,
+    .w = 258,
+    .h = 65,
+    .specifics.custom = {
+        .user = 0, // unused
+        .drawfunc = gui_draw_histogram
+    }
+};
+
+UIDRAWLIST capture_screen_drawlist = {
+    .ncomp = 18,
+    .comp = {
+        &label_run,
+        &label_mode,
+        &label_focus,
+        &bmp_shutter,
+        &label_fn1,
+        &label_fn2,
+        &label_fn3,
+        &label_fn4,
+        &label_logo,
+        &bmp_dpad1,
+        &label_dpad,
+        &label_shutter,
+        &label_aperture,
+        &label_iso,
+        &custom_battery,
+        &label_remaining,
+        &custom_exposure,
+        &custom_histogram
+    }
+};
+
+void gui_draw_battery(void *ptr) {
+    UICOMP *uicomp = (UICOMP *)ptr;
+    uint32_t x = uicomp->x;
+    uint32_t y = uicomp->y;
+    uint32_t w = uicomp->w;
+    uint32_t h = uicomp->h;
+    uilib_fill_rect(x, y, w, h, COLOR_BG);
+    const uint32_t W = 2; // Width of shell
+    const uint32_t T = 4; // Width of tab
+    const uint32_t TD = 4; // Distance from edge to tab vertically
+    const uint32_t S = 1; // Spacing between battery inner and outer shell
+    const uint32_t CL = COLOR_NORMAL;
+    uilib_fill_rect(x, y, w - T, W, CL);
+    uilib_fill_rect(x, y + h - W, w - T, W, CL);
+    uilib_fill_rect(x, y + 2, W, h - 2 * W, CL);
+    uilib_fill_rect(x + w - T - W, y + 2, W, h - 2 * W, CL);
+    uilib_fill_rect(x + w - T, y + TD, T, h - 2 * TD, CL);
+    uint8_t bat_pct = os_pwr_get_battery_percent();
+    bool bat_charging = os_pwr_is_battery_charging();
+    uint32_t bat_w = w - TD - W * 2 - S * 2;
+    bat_w = bat_w * bat_pct / 100;
+    uilib_fill_rect(x + W + S, y + W + S, bat_w, h - 2 * W - 2 * S,
+        (bat_charging) ? COLOR_GREEN :
+        (bat_pct > 20) ? COLOR_NORMAL : COLOR_RED);
+}
+
+void gui_draw_exposure(void *ptr) {
+    UICOMP *uicomp = (UICOMP *)ptr;
+    uint32_t x = uicomp->x;
+    uint32_t y = uicomp->y;
+    uint32_t w = uicomp->w;
+    uint32_t h = uicomp->h;
+    uilib_fill_rect(x, y, w, h, COLOR_BG);
+    uint32_t vcenter = y + h / 2;
+    uint32_t hcenter = x + w / 2;
+    for (int i = 0; i < 6*3+1; i++) {
+        uint32_t xx = x + 18 + i * 9;
+        uint32_t yy;
+        uint32_t hh;
+        bool draw_bar; // based on current exposure
+        if (i < 3*3) {
+            hh = ((i % 3) == 0) ? 10 : 5;
+            yy = vcenter - hh;
+            // TODO
+            draw_bar = false;
+        }
+        else if (i == 3*3) {
+            hh = 18;
+            yy = vcenter - hh + 5;
+            draw_bar = true;
+        }
+        else {
+            hh = ((i % 3) == 0) ? 10 : 5;
+            yy = vcenter - hh;
+            // TODO
+            draw_bar = false;
+        }
+        if (draw_bar)
+            uilib_fill_rect(xx, vcenter + 4, 4, h / 2 - 4, COLOR_NORMAL);
+        uilib_fill_rect(xx, yy, 4, hh, COLOR_NORMAL);
+    }
+    uilib_fill_rect(x, vcenter-1, 13, 3, COLOR_NORMAL);
+    uilib_fill_rect(x + 188, vcenter-1, 13, 3, COLOR_NORMAL);
+    uilib_fill_rect(x + 193, vcenter-6, 3, 13, COLOR_NORMAL);
+}
+
+void gui_draw_histogram(void *ptr) {
+    UICOMP *uicomp = (UICOMP *)ptr;
+    uint32_t x = uicomp->x;
+    uint32_t y = uicomp->y;
+    uint32_t w = uicomp->w;
+    uint32_t h = uicomp->h;
+    //uilib_fill_rect(x, y, w, h, COLOR_BLUE);
+    uilib_fill_rect(x, y, w, 1, COLOR_NORMAL);
+    uilib_fill_rect(x, y + h - 1, w, 1, COLOR_NORMAL);
+    uilib_fill_rect(x, y + 1, 1, h - 2, COLOR_NORMAL);
+    uilib_fill_rect(x + w - 1, y + 1, 1, h - 2, COLOR_NORMAL);
+    // TODO: Feed source from actual histogram
+    for (int i = 0; i < 256; i++) {
+        uint8_t level = rand() & 0xff;
+        level /= 4; // 0-63
+        if (level != 63)
+            uilib_fill_rect(x + 1 + i, y + 1, 1, 63-level, COLOR_BG);
+        uilib_fill_rect(x + 1 + i, y + (63-level) + 1, 1, level, COLOR_NORMAL);
+    }
+}
+
+void gui_init(void) {
+
+}
+
+CAP_ACT gui_run_capture_screen(bool redraw) {
+    bool update_needed = false;
+
+    // TODO: GUI logic!
+
+    if (redraw || update_needed) {
+        uilib_mark_update();
+    }
+    // Draw need to be called
+    uilib_draw(&capture_screen_drawlist);
+
+    return CAP_ACT_NOTHING;
+}
+
+PB_ACT gui_run_playback_screen(bool redraw) {
+    return PB_ACT_NOTHING;
+}
+
+SET_ACT gui_run_setting_screen(bool redraw) {
+    return SET_ACT_NOTHING;
+}
