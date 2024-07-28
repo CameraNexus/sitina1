@@ -1,5 +1,5 @@
 /******************************************************************************
-* Copyright (c) 2023 - 2024 Advanced Micro Devices, Inc. All rights reserved.
+* Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
@@ -20,8 +20,7 @@
 * 9.0   sa   08/27/22 Initial release
 * 9.0   sa   07/20/23 Update Xil_ExceptionInit to access MEDELEG and MIDELEG
 *                     CSRs only when supervisory mode is implemented.
-* 9.2   ml   17/01/24 Modified description and code for Xil_ExceptionRegisterHandler and
-*                     Xil_ExceptionRemoveHandler API's to fix doxygen warnings.
+*
 * </pre>
 *
 * @note
@@ -62,6 +61,8 @@ static void Xil_ExceptionNullHandler(void *Data)
 * @brief   Initialize exception handling for the processor. The exception
 *          vector table is setup with the stub handler for all exceptions.
 *
+* @param    None.
+*
 * @return   None.
 *
 *****************************************************************************/
@@ -73,20 +74,6 @@ void Xil_ExceptionInit(void)
 	csrwi(XREG_MIDELEG, 0);
 #endif
 	csrw(XREG_MTVEC, &_trap_handler);
-}
-
-/****************************************************************************/
-/**
-* @brief   Initialize mtvec with valid trap handler address
-*
-* @param    None.
-*
-* @return   None.
-*
-*****************************************************************************/
-void __attribute__ ((constructor)) Xil_RegMtvecInit(void)
-{
-        csrw(XREG_MTVEC, &_trap_handler);
 }
 
 /****************************************************************************/
@@ -106,6 +93,8 @@ void Xil_ExceptionEnable(void)
 /**
 * @brief    Disable external, timer, and software interrupts.
 *
+* @param    None.
+*
 * @return   None.
 *
 ******************************************************************************/
@@ -122,25 +111,25 @@ void Xil_ExceptionDisable(void)
 *           The argument provided in this call as the DataPtr is used as the
 *           argument for the handler when it is called.
 *
-* @param    Exception_id : contains the 32 bit ID of the exception source and should be
+* @param    Id: contains the 32 bit ID of the exception source and should be
 *           XIL_EXCEPTION_ID_INT or be in the range 0 to XIL_EXCEPTION_ID_LAST.
 *           See xil_exception.h for further information.
-* @param    Handler : handler function to be registered for exception
-* @param    Data : a reference to data that will be passed to the handler
+* @param    Handler: handler function to be registered for exception
+* @param    Data: a reference to data that will be passed to the handler
 *           when it gets called.
 *
 ****************************************************************************/
-void Xil_ExceptionRegisterHandler(u32 Exception_id, Xil_ExceptionHandler Handler,
+void Xil_ExceptionRegisterHandler(u32 Id, Xil_ExceptionHandler Handler,
 				  void *Data)
 {
-	if (Exception_id >= XIL_INTERRUPT_ID_FIRST) {
-		RISCV_InterruptVectorTable[Exception_id - XIL_INTERRUPT_ID_FIRST].
+	if (Id >= XIL_INTERRUPT_ID_FIRST) {
+		RISCV_InterruptVectorTable[Id - XIL_INTERRUPT_ID_FIRST].
 		Handler = Handler;
-		RISCV_InterruptVectorTable[Exception_id - XIL_INTERRUPT_ID_FIRST].
+		RISCV_InterruptVectorTable[Id - XIL_INTERRUPT_ID_FIRST].
 		CallBackRef = Data;
 	} else {
-		RISCV_ExceptionVectorTable[Exception_id].Handler = Handler;
-		RISCV_ExceptionVectorTable[Exception_id].CallBackRef = Data;
+		RISCV_ExceptionVectorTable[Id].Handler = Handler;
+		RISCV_ExceptionVectorTable[Id].CallBackRef = Data;
 	}
 }
 
@@ -150,22 +139,22 @@ void Xil_ExceptionRegisterHandler(u32 Exception_id, Xil_ExceptionHandler Handler
 * @brief    Removes the handler for a specific exception Id. The stub handler
 *           is then registered for this exception Id.
 *
-* @param    Exception_id : contains the 32 bit ID of the exception source and should be
+* @param    Id: contains the 32 bit ID of the exception source and should be
 *           XIL_EXCEPTION_ID_INT or in the range 0 to XIL_EXCEPTION_ID_LAST.
 *           See xil_exception.h for further information.
 *
 ****************************************************************************/
-void Xil_ExceptionRemoveHandler(u32 Exception_id)
+void Xil_ExceptionRemoveHandler(u32 Id)
 {
-	if (Exception_id >= XIL_INTERRUPT_ID_FIRST) {
-		RISCV_InterruptVectorTable[Exception_id - XIL_INTERRUPT_ID_FIRST].
+	if (Id >= XIL_INTERRUPT_ID_FIRST) {
+		RISCV_InterruptVectorTable[Id - XIL_INTERRUPT_ID_FIRST].
 		Handler = Xil_ExceptionNullHandler;
-		RISCV_InterruptVectorTable[Exception_id - XIL_EXCEPTION_ID_FIRST].
+		RISCV_InterruptVectorTable[Id - XIL_EXCEPTION_ID_FIRST].
 		CallBackRef = NULL;
 	} else {
-		RISCV_ExceptionVectorTable[Exception_id].Handler =
+		RISCV_ExceptionVectorTable[Id].Handler =
 			Xil_ExceptionNullHandler;
-		RISCV_ExceptionVectorTable[Exception_id].CallBackRef = NULL;
+		RISCV_ExceptionVectorTable[Id].CallBackRef = NULL;
 	}
 }
 /**

@@ -15,7 +15,6 @@
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xqspips_hw.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xscugic_hw.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xreg_cortexa9.h
-/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xilffs.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xscutimer.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xpseudo_asm.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xil_mem.h
@@ -89,7 +88,6 @@
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xqspips_hw.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xscugic_hw.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xreg_cortexa9.h
-/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xilffs.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xscutimer.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xpseudo_asm.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xil_mem.h
@@ -163,7 +161,6 @@
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xqspips_hw.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xscugic_hw.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xreg_cortexa9.h
-/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xilffs.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xscutimer.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xpseudo_asm.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xil_mem.h
@@ -237,7 +234,6 @@
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xqspips_hw.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xscugic_hw.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xreg_cortexa9.h
-/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xilffs.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xscutimer.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xpseudo_asm.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/../include/xil_mem.h

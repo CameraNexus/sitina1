@@ -30,9 +30,6 @@
 *                     in case they are not exported by linker script.
 * 9.0   ml   09/14/23 Added U to numericals to fix MISRA-C violation for Rule
 *                     10.1 and 10.4
-* 9.1   asa  03/09/24 Defining the weak _TCM_*_REGION in this header file creates
-*                     redefinition issues when someone includes this header
-*                     in a C source file and define _TCM_*_REGION in it.
 * </pre>
 *
 ******************************************************************************/
@@ -159,10 +156,9 @@ extern "C" {
 
 
 #if defined (ARMR52)
-extern u32  _TCM_A_REGION;
-extern u32  _TCM_B_REGION;
-extern u32  _TCM_C_REGION;
-
+__attribute__((weak)) u32  _TCM_A_REGION  __attribute__((__section__(".bootdata"))) = 0;
+__attribute__((weak)) u32 _TCM_B_REGION  __attribute__((__section__(".bootdata"))) = 0;
+__attribute__((weak)) u32 _TCM_C_REGION  __attribute__((__section__(".bootdata"))) = 0;
 /*
  * 0th bit: XN
  * bits [2:1]: Access permission bits

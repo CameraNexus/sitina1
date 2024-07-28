@@ -1,6 +1,5 @@
 /******************************************************************************
 * Copyright (c) 2017 - 2022 Xilinx, Inc.  All rights reserved.
-* Copyright (C) 2022 - 2023 Advanced Micro Devices, Inc. All Rights Reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
@@ -22,7 +21,6 @@
 * 			  violation.
 * 8.0	sk	 03/02/22 Update usleep argument type to fix misra_c_2012_
 * 			  directive_4_6 violation.
-* 9.1   mus      10/24/23 Add support for RISC-V.
 * </pre>
 ******************************************************************************/
 
@@ -54,8 +52,6 @@
 	sleep_A53(seconds);
 #elif defined (__MICROBLAZE__)
 	sleep_MB(seconds);
-#elif defined (__riscv)
-	sleep_riscv(seconds);
 #else
 	sleep_A9(seconds);
 #endif
@@ -82,8 +78,6 @@
 	usleep_A53(useconds);
 #elif defined (__MICROBLAZE__)
 	usleep_MB(useconds);
-#elif defined (__riscv)
-	usleep_riscv(useconds);
 #else
 	usleep_A9(useconds);
 #endif

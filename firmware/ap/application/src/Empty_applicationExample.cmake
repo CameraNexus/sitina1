@@ -6,7 +6,6 @@ set(TOTAL_MEM_CONTROLLERS "ps7_ddr_0;ps7_ram_0;ps7_ram_1")
 set(MEMORY_SECTION "MEMORY
 {
 	ps7_ddr_0 : ORIGIN = 0x100000, LENGTH = 0x1ff00000
-	ps7_qspi_linear_0 : ORIGIN = 0xfc000000, LENGTH = 0x1000000
 	ps7_ram_0 : ORIGIN = 0x0, LENGTH = 0x30000
 	ps7_ram_1 : ORIGIN = 0xffff0000, LENGTH = 0xfe00
 }")

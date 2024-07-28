@@ -47,10 +47,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake
+CMAKE_COMMAND = /tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake
 
 # The command to remove a file.
-RM = /tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -E rm -f
+RM = /tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -76,57 +76,57 @@ libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt.c.obj: libsrc/scuwdt/src/CMakeFi
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt.c.obj: /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt.c
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt.c.obj: libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt.c.obj"
-	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt.c.obj -MF CMakeFiles/scuwdt.dir/xscuwdt.c.obj.d -o CMakeFiles/scuwdt.dir/xscuwdt.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt.c
+	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt.c.obj -MF CMakeFiles/scuwdt.dir/xscuwdt.c.obj.d -o CMakeFiles/scuwdt.dir/xscuwdt.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt.c
 
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/scuwdt.dir/xscuwdt.c.i"
-	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt.c > CMakeFiles/scuwdt.dir/xscuwdt.c.i
+	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt.c > CMakeFiles/scuwdt.dir/xscuwdt.c.i
 
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/scuwdt.dir/xscuwdt.c.s"
-	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt.c -o CMakeFiles/scuwdt.dir/xscuwdt.c.s
+	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt.c -o CMakeFiles/scuwdt.dir/xscuwdt.c.s
 
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_g.c.obj: libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/flags.make
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_g.c.obj: /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_g.c
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_g.c.obj: libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_g.c.obj"
-	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_g.c.obj -MF CMakeFiles/scuwdt.dir/xscuwdt_g.c.obj.d -o CMakeFiles/scuwdt.dir/xscuwdt_g.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_g.c
+	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_g.c.obj -MF CMakeFiles/scuwdt.dir/xscuwdt_g.c.obj.d -o CMakeFiles/scuwdt.dir/xscuwdt_g.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_g.c
 
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_g.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/scuwdt.dir/xscuwdt_g.c.i"
-	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_g.c > CMakeFiles/scuwdt.dir/xscuwdt_g.c.i
+	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_g.c > CMakeFiles/scuwdt.dir/xscuwdt_g.c.i
 
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_g.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/scuwdt.dir/xscuwdt_g.c.s"
-	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_g.c -o CMakeFiles/scuwdt.dir/xscuwdt_g.c.s
+	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_g.c -o CMakeFiles/scuwdt.dir/xscuwdt_g.c.s
 
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.obj: libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/flags.make
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.obj: /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_selftest.c
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.obj: libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.obj"
-	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.obj -MF CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.obj.d -o CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_selftest.c
+	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.obj -MF CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.obj.d -o CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_selftest.c
 
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.i"
-	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_selftest.c > CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.i
+	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_selftest.c > CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.i
 
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.s"
-	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_selftest.c -o CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.s
+	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_selftest.c -o CMakeFiles/scuwdt.dir/xscuwdt_selftest.c.s
 
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.obj: libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/flags.make
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.obj: /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_sinit.c
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.obj: libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.obj"
-	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.obj -MF CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.obj.d -o CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_sinit.c
+	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.obj -MF CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.obj.d -o CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_sinit.c
 
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.i"
-	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_sinit.c > CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.i
+	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_sinit.c > CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.i
 
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.s"
-	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_sinit.c -o CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.s
+	cd /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/scuwdt/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/scuwdt/src/xscuwdt_sinit.c -o CMakeFiles/scuwdt.dir/xscuwdt_sinit.c.s
 
 # Object files for target scuwdt
 scuwdt_OBJECTS = \

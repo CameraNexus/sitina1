@@ -1,6 +1,5 @@
 /******************************************************************************
 * Copyright (c) 2015 - 2021 Xilinx, Inc.  All rights reserved.
-* Copyright (c) 2022 - 2024 Advanced Micro Devices, Inc. All Rights Reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
@@ -17,9 +16,6 @@
 * Ver   Who  Date     Changes
 * ----- ---- -------- ---------------------------------------------------
 * 5.2	pkp  28/05/15 First release
-* 9.1   bl   10/11/23 Add API Xil_MemMap
-* 9.2   ml   17/01/24 Modified description and code for Xil_MemMap API
-*                     to fix doxygen warnings.
 * </pre>
 *
 ******************************************************************************/
@@ -31,13 +27,8 @@
 #include "xil_types.h"
 #include "xil_mmu.h"
 
+
 /***************** Macros (Inline Functions) Definitions *********************/
-#ifdef __GNUC__
-#define u32overflow(a, b) ({typeof(a) s; __builtin_uadd_overflow(a, b, &s); })
-#else
-#define u32overflow(a, b) ((a) > ((a) + (b))) /**< u32 overflow is defined for
-                                               *   readability and __GNUC__ */
-#endif /* __GNUC__ */
 
 /**************************** Type Definitions *******************************/
 
@@ -73,7 +64,7 @@ void Xil_SetTlbAttributes(UINTPTR Addr, u32 attrib)
 	section = Addr / 0x100000U;
 	ptr = &MMUTable;
 	ptr += section;
-	if (ptr != NULL) {
+	if(ptr != NULL) {
 		*ptr = (Addr & 0xFFF00000U) | attrib;
 	}
 
@@ -84,63 +75,7 @@ void Xil_SetTlbAttributes(UINTPTR Addr, u32 attrib)
 	mtcp(XREG_CP15_INVAL_BRANCH_ARRAY, 0U);
 
 	dsb(); /* ensure completion of the BP and TLB invalidation */
-	isb(); /* synchronize context on this processor */
-}
-
-/*****************************************************************************/
-/**
-* @brief    Memory mapping for ARMv8 based processors. If successful, the
-*	    mapped region will include all of the memory requested, but
-*	    may include more. Specifically, it will be a power of 2 in
-*           size, aligned on a boundary of that size.
-*
-* @param       PhysAddr is base physical address at which to start mapping.
-*                   NULL in Physaddr masks possible mapping errors.
-* @param       size of region to be mapped.
-* @param       flags used to set translation table.
-*
-* @return      Physaddr on success, NULL on error. Ambiguous if Physaddr==NULL
-*
-* @cond Xil_MemMap_internal
-* @note:    u32overflow() is defined for readability and (for __GNUC__) to
-*           - force the type of the check to be the same as the first argument
-*           - hide the otherwise unused third argument of the builtin
-*           - improve safety by choosing the explicit _uadd_ version.
-*           Consider __builtin_add_overflow_p() when available.
-*           Use an alternative (less optimal?) for compilers w/o the builtin.
-* @endcond
-******************************************************************************/
-void *Xil_MemMap(UINTPTR PhysAddr, size_t size, u32 flags)
-{
-	UINTPTR section_offset;
-	UINTPTR ttb_addr;
-	UINTPTR ttb_size = 1024UL * 1024UL;
-
-	if (flags == 0U) {
-		return (void *)PhysAddr;
-	}
-	if (u32overflow(PhysAddr, size)) {
-		return NULL;
-	}
-
-	/* Ensure alignment on a section boundary */
-	ttb_addr = PhysAddr & ~(ttb_size - 1UL);
-
-	/*
-	 * Loop through entire region of memory (one MMU section at a time).
-	 * Each section requires a TTB entry.
-	 */
-	for (section_offset = 0; section_offset < size; ) {
-		/* Calculate translation table entry for this memory section */
-		ttb_addr += section_offset;
-
-		/* Write translation table entry value to entry address */
-		Xil_SetTlbAttributes(ttb_addr, flags);
-
-		section_offset += ttb_size;
-	}
-
-	return PhysAddr;
+    isb(); /* synchronize context on this processor */
 }
 
 /*****************************************************************************/

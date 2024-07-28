@@ -43,8 +43,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/xilstandalone.dir/arm/common/xil_exception.c.obj.d"
   "CMakeFiles/xilstandalone.dir/arm/common/xil_spinlock.c.obj"
   "CMakeFiles/xilstandalone.dir/arm/common/xil_spinlock.c.obj.d"
-  "CMakeFiles/xilstandalone.dir/arm/common/xpm_counter.c.obj"
-  "CMakeFiles/xilstandalone.dir/arm/common/xpm_counter.c.obj.d"
   "CMakeFiles/xilstandalone.dir/arm/cortexa9/gcc/asm_vectors.S.obj"
   "CMakeFiles/xilstandalone.dir/arm/cortexa9/gcc/boot.S.obj"
   "CMakeFiles/xilstandalone.dir/arm/cortexa9/gcc/cpu_init.S.obj"

@@ -38,17 +38,14 @@ if(("${CMAKE_MACHINE}" STREQUAL "Versal") OR
 collect (PROJECT_LIB_HEADERS pm_api_version.h)
 endif()
 string(FIND "${CMAKE_C_FLAGS}" "-flto" has_flto)
-if ((${has_flto} EQUAL -1) AND
-    ("${CMAKE_MACHINE}" STREQUAL "ZynqMP"))
-if (NOT ${YOCTO})
+if ((${has_flto} EQUAL -1))
+if(("${CMAKE_MACHINE}" STREQUAL "ZynqMP"))
 add_subdirectory(clocking)
 endif()
 endif()
-if (NOT ${YOCTO})
 add_subdirectory(intr)
-else()
+if (NOT ${NON_YOCTO})
 collect (PROJECT_LIB_HEADERS sleep.h)
-collect (PROJECT_LIB_HEADERS xparameters.h)
 endif()
 if(("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "microblaze") OR
    ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "microblazeel") OR
@@ -70,10 +67,6 @@ endif()
 
 if("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "cortexa9")
 	collect (PROJECT_LIB_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/../xcortexa9_g.c)
-endif()
-
-if("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "microblaze_riscv")
-	collect (PROJECT_LIB_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/../xmicroblaze_riscv_g.c)
 endif()
 
 if("${CMAKE_MACHINE}" STREQUAL "Versal")

@@ -3,7 +3,7 @@
 /*-----------------------------------------------------------------------*/
 /******************************************************************************
 * Copyright (c) 2015 - 2022 Xilinx, Inc.  All rights reserved.
-* Copyright (c) 2022 - 2024 Advanced Micro Devices, Inc. All Rights Reserved.
+* Copyright (c) 2022 Advanced Micro Devices, Inc. All Rights Reserved.
 ******************************************************************************/
 
 /*****************************************************************************/
@@ -68,8 +68,6 @@
 * 4.6   sk   07/20/21 Fixed compilation warning in RAM interface.
 * 4.8   sk   05/05/22 Replace standard lib functions with Xilinx functions.
 * 5.1   ro   06/12/23 Added support for system device-tree flow.
-* 5.2   ap   12/05/23 Add SDT check to fix bug in disk_initialize.
-*       ap   01/11/24 Fix Doxygen warnings.
 *
 * </pre>
 *
@@ -92,8 +90,8 @@
 #include "xil_printf.h"
 #include "xil_util.h"
 
-#define SD_CD_DELAY		10000U		/**< SD card detection delay */
-#define XSDPS_NUM_INSTANCES	2		/**< Number of SD instances */
+#define SD_CD_DELAY		10000U
+#define XSDPS_NUM_INSTANCES	2
 
 #ifdef FILE_SYSTEM_INTERFACE_RAM
 #include "xparameters.h"
@@ -118,7 +116,7 @@ static DSTATUS Stat[XSDPS_NUM_INSTANCES] = {STA_NOINIT, STA_NOINIT};	/* Disk sta
 
 #ifdef FILE_SYSTEM_INTERFACE_SD
 static XSdPs SdInstance[XSDPS_NUM_INSTANCES];
-static UINTPTR BaseAddress[XSDPS_NUM_INSTANCES];
+static u32 BaseAddress[XSDPS_NUM_INSTANCES];
 static u32 CardDetect[XSDPS_NUM_INSTANCES];
 static u32 WriteProtect[XSDPS_NUM_INSTANCES];
 static u32 SlotType[XSDPS_NUM_INSTANCES];
@@ -190,12 +188,12 @@ DSTATUS disk_status (
 	}
 
 	/* If SD is not powered up then mark it as not initialized */
-	if ((XSdPs_ReadReg8(BaseAddress[pdrv], XSDPS_POWER_CTRL_OFFSET) &
+	if ((XSdPs_ReadReg8((u32)BaseAddress[pdrv], XSDPS_POWER_CTRL_OFFSET) &
 	     XSDPS_PC_BUS_PWR_MASK) == 0U) {
 		s |= STA_NOINIT;
 	}
 
-	StatusReg = XSdPs_GetPresentStatusReg(BaseAddress[pdrv]);
+	StatusReg = XSdPs_GetPresentStatusReg((u32)BaseAddress[pdrv]);
 	if (SlotType[pdrv] != XSDPS_CAPS_EMB_SLOT) {
 		if (CardDetect[pdrv]) {
 			while ((StatusReg & XSDPS_PSR_CARD_INSRT_MASK) == 0U) {
@@ -207,7 +205,7 @@ DSTATUS disk_status (
 					/* Wait for 10 msec */
 					usleep(SD_CD_DELAY);
 					DelayCount++;
-					StatusReg = XSdPs_GetPresentStatusReg(BaseAddress[pdrv]);
+					StatusReg = XSdPs_GetPresentStatusReg((u32)BaseAddress[pdrv]);
 				}
 			}
 		}
@@ -283,7 +281,7 @@ DSTATUS disk_initialize (
 		while (!((XSDPS_PSR_CARD_DPL_MASK |
 			  XSDPS_PSR_CARD_STABLE_MASK |
 			  XSDPS_PSR_CARD_INSRT_MASK) ==
-			 (XSdPs_GetPresentStatusReg(BaseAddress[pdrv]) &
+			 (XSdPs_GetPresentStatusReg((u32)BaseAddress[pdrv]) &
 			  (XSDPS_PSR_CARD_DPL_MASK |
 			   XSDPS_PSR_CARD_STABLE_MASK |
 			   XSDPS_PSR_CARD_INSRT_MASK))));
@@ -292,15 +290,7 @@ DSTATUS disk_initialize (
 	/*
 	 * Initialize the host controller
 	 */
-#ifndef SDT
 	SdConfig = XSdPs_LookupConfig((u16)pdrv);
-#else
-	if (pdrv < XPAR_XSDPS_NUM_INSTANCES) {
-		SdConfig = XSdPs_LookupConfig(XSdPs_ConfigTable[pdrv].BaseAddress);
-	} else {
-		SdConfig = NULL;
-	}
-#endif
 	if (NULL == SdConfig) {
 		s |= STA_NOINIT;
 		return s;
@@ -354,7 +344,7 @@ DSTATUS disk_initialize (
 * In case of SD, it reads the SD card using ADMA2 in polled mode.
 *
 * @param	pdrv - Drive number
-* @param	buff - Pointer to the data buffer to store read data
+* @param	*buff - Pointer to the data buffer to store read data
 * @param	sector - Start sector number
 * @param	count - Sector count
 *
@@ -417,25 +407,6 @@ DRESULT disk_read (
 /* Miscellaneous Functions						*/
 /*-----------------------------------------------------------------------*/
 
-/*****************************************************************************/
-/**
-*
-* List specific features and do miscellaneous functions on device.
-* In case of SD, it control device specific features and miscellaneous functions other than generic read/write.
-*
-* @param	pdrv - Drive number
-* @param	cmd - Command code
-* @param	buff - Pointer to the parameter depends on the command code.
-*
-* @return
-*		RES_OK		Command successful
-*		RES_PARERR	Command is invalid
-*		RES_NOTRDY	Drive not initialized
-*		RES_ERROR	Error occured
-*
-* @note
-*
-******************************************************************************/
 DRESULT disk_ioctl (
 	BYTE pdrv,				/* Physical drive number (0) */
 	BYTE cmd,				/* Control code */
@@ -543,7 +514,7 @@ DWORD get_fattime (void)
 * In case of SD, it reads the SD card using ADMA2 in polled mode.
 *
 * @param	pdrv - Drive number
-* @param	buff - Pointer to the data to be written
+* @param	*buff - Pointer to the data to be written
 * @param	sector - Sector address
 * @param	count - Sector count
 *

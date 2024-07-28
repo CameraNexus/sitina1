@@ -6,8 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include/xparameters.h
-
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/cortexa9/gcc/asm_vectors.S
 xil_errata.h
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/cortexa9/gcc/xil_errata.h

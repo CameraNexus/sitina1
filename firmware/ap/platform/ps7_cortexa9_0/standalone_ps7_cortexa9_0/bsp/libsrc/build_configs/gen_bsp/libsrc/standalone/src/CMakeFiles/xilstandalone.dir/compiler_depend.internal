@@ -178,19 +178,6 @@ libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/xil_spinlock.c.obj
  /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/include/xil_types.h
  /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/include/xil_assert.h
 
-libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/xpm_counter.c.obj
- /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/arm/common/xpm_counter.c
- /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/include/xpm_counter.h
- /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/include/xpseudo_asm.h
- /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/include/xreg_cortexa9.h
- /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/include/xpseudo_asm_gcc.h
- /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/include/xil_types.h
- /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/include/bspconfig.h
- /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/include/xmem_config.h
- /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/include/xparameters_ps.h
- /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/include/xstatus.h
- /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/include/xil_assert.h
-
 libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/cortexa9/xil_cache.c.obj
  /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/arm/cortexa9/xil_cache.c
  /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/standalone/src/arm/cortexa9/xil_cache.h

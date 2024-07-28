@@ -1,6 +1,6 @@
 /******************************************************************************
 * Copyright (c) 2014 - 2022 Xilinx, Inc.  All rights reserved.
-* Copyright (c) 2022 - 2024 Advanced Micro Devices, Inc. All rights reserved.
+* Copyright (c) 2022 - 2023 Advanced Micro Devices, Inc. All rights reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
@@ -29,23 +29,6 @@
 *                     scenarios. Changes are made to fix the same.
 * 9.0    ml  03/03/23 Added description to fix doxygen warnings.
 * 9.0    ml  07/12/23 fixed compilation warnings.
-* 9.1    asa 12/01/24 Fix issues in Xil_DCacheInvalidateRange.
-* 9.1    asa 27/01/24 The fix for the above change (on 12/01/24) has
-*                     created issues for Cortex-R52. Because of the
-*                     bug previously present (before the last fix) R52
-*                     somehow worked. With the bux fixed through the
-*                     patch in 12/01/24, it exposed issues in the
-*                     DCacheInvalidate API for R52 that was there
-*                     from the beginning.
-*                     Also in an unlikely scenario where the start address
-*                     passed is 0x0 and length is less than 0x20 (cache line),
-*                     the XilDCacheInvalidateRange API will result in
-*                     a probable crash as it will try to invalidate the
-*                     complete 4 GB address range.
-*                     The changes are made to fix the same.
-* 9.1   asa  31/01/24 Fix overflow issues under corner cases for various
-*                     cache maintenance APIs.
-*
 * </pre>
 *
 ******************************************************************************/
@@ -65,8 +48,6 @@
 /************************** Variable Definitions *****************************/
 
 #define IRQ_FIQ_MASK 0xC0U	/**< Mask IRQ and FIQ interrupts in cpsr */
-#define MAX_ADDR 				0xFFFFFFFFU
-#define LAST_CACHELINE_START	0xFFFFFFE0U
 
 #if defined (__clang__)
 extern s32  Image$$ARM_LIB_STACK$$Limit;
@@ -266,67 +247,45 @@ void Xil_DCacheInvalidateLine(INTPTR adr)
 ****************************************************************************/
 void Xil_DCacheInvalidateRange(INTPTR adr, u32 len)
 {
-#if !defined(ARMR52)
 	const u32 cacheline = 32U;
 	u32 end;
-	u32 tempadr;
+	u32 tempadr = adr;
 	u32 tempend;
 	u32 currmask;
-	u32 unalignedstart = 0x0;
 
 	currmask = mfcpsr();
 	mtcpsr(currmask | IRQ_FIQ_MASK);
 
 	if (len != 0U) {
-		tempadr = adr & (~(cacheline - 1U));
-		((MAX_ADDR - (u32)adr) < len) ? (end = MAX_ADDR) : (end = adr + len);
-		tempend = end & (~(cacheline - 1U));
-
+		end = tempadr + len;
+		tempend = end;
 		/* Select L1 Data cache in CSSR */
 		mtcp(XREG_CP15_CACHE_SIZE_SEL, 0U);
 
-		if (tempadr != (u32)adr) {
-			unalignedstart = 1;
+		if ((tempadr & (cacheline - 1U)) != 0U) {
+			tempadr &= (~(cacheline - 1U));
+
 			Xil_DCacheFlushLine(tempadr);
-			tempadr >= LAST_CACHELINE_START ? (adr = end) : (adr = tempadr + cacheline);
 		}
-		if ((tempend != end) && ((tempend != tempadr) || (unalignedstart == 0x0U))) {
-			Xil_DCacheFlushLine(tempend);
-			end >= cacheline ? (end -= cacheline) : (end = 0);
+		if ((tempend & (cacheline - 1U)) != 0U) {
+			tempend &= (~(cacheline - 1U));
+
+			if (tempend != tempadr) {
+				Xil_DCacheFlushLine(tempend);
+			}
 		}
 
-		while (adr < (INTPTR)end) {
-			/* Invalidate Data cache line */
-			asm_inval_dc_line_mva_poc(adr);
-			((MAX_ADDR - (u32)adr) < cacheline) ? (adr = MAX_ADDR) : (adr += cacheline);
-		}
-	}
-
-	dsb();
-	mtcpsr(currmask);
-#else
-	const u32 cacheline = 32U;
-	u32 currmask;
-	u32 tempadr = adr & (~(cacheline - 1U));
-	u32 end;
-
-	((MAX_ADDR - adr) < len) ? (end = MAX_ADDR) : (end = adr + len);
-
-	currmask = mfcpsr();
-	mtcpsr(currmask | IRQ_FIQ_MASK);
-
-	if (len != 0U) {
 		while (tempadr < end) {
+
 			/* Invalidate Data cache line */
 			asm_inval_dc_line_mva_poc(tempadr);
-			((MAX_ADDR - tempadr) < cacheline) ? (tempadr = MAX_ADDR) : (tempadr += cacheline);
+
+			tempadr += cacheline;
 		}
 	}
 
 	dsb();
 	mtcpsr(currmask);
-
-#endif
 }
 
 /****************************************************************************/
@@ -462,13 +421,14 @@ void Xil_DCacheFlushRange(INTPTR adr, u32 len)
 		/* Back the starting address up to the start of a cache line
 		 * perform cache operations until adr+len
 		 */
-		((MAX_ADDR - LocalAddr) < len) ? (end = MAX_ADDR) : (end = LocalAddr + len);
+		end = LocalAddr + len;
 		LocalAddr &= ~(cacheline - 1U);
 
 		while (LocalAddr < end) {
 			/* Flush Data cache line */
 			asm_clean_inval_dc_line_mva_poc(LocalAddr);
-			((MAX_ADDR - LocalAddr) < cacheline) ? (LocalAddr = MAX_ADDR) : (LocalAddr += cacheline) ;
+
+			LocalAddr += cacheline;
 		}
 	}
 	dsb();
@@ -643,7 +603,7 @@ void Xil_ICacheInvalidateRange(INTPTR adr, u32 len)
 		/* Back the starting address up to the start of a cache line
 		 * perform cache operations until adr+len
 		 */
-		((MAX_ADDR - LocalAddr) < len) ? (end = MAX_ADDR) : (end = LocalAddr + len);
+		end = LocalAddr + len;
 		LocalAddr = LocalAddr & ~(cacheline - 1U);
 
 		/* Select cache L0 I-cache in CSSR */
@@ -653,7 +613,8 @@ void Xil_ICacheInvalidateRange(INTPTR adr, u32 len)
 
 			/* Invalidate L1 I-cache line */
 			asm_inval_ic_line_mva_pou(LocalAddr);
-			((MAX_ADDR - LocalAddr) < cacheline) ? (LocalAddr = MAX_ADDR) : (LocalAddr += cacheline) ;
+
+			LocalAddr += cacheline;
 		}
 	}
 

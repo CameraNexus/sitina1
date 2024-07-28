@@ -1,6 +1,6 @@
 /******************************************************************************
 * Copyright (C) 2013 - 2022 Xilinx, Inc.  All rights reserved.
-* Copyright (c) 2022 - 2024 Advanced Micro Devices, Inc. All Rights Reserved.
+* Copyright (c) 2022 - 2023 Advanced Micro Devices, Inc. All Rights Reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
@@ -8,7 +8,7 @@
 /**
 *
 * @file xsdps_hw.h
-* @addtogroup sdps_api SDPS APIs
+* @addtogroup sdps Overview
 * @{{
 *
 * The xsdps_hw.h header file contains the identifiers and basic HW access driver
@@ -46,8 +46,6 @@
 *       sk     04/07/22 Fix typo in 'XSDPS_MMC_1_BIT_BUS_ARG' macro definition.
 * 4.1   sk     11/10/22 Add SD/eMMC Tap delay support for Versal Net.
 * 4.2   ro     06/12/23 Added support for system device-tree flow.
-* 4.3   ap     11/29/23 Add support for Sanitize feature.
-* 4.3   ap     12/22/23 Add support to read custom HS400 tap delay value from design for eMMC.
 *
 * </pre>
 *
@@ -932,24 +930,18 @@ extern "C" {
 #define EXT_CSD_PART_CONFIG_ACC_BOOT1   (0x2U)
 #define EXT_CSD_PART_CONFIG_ACC_RPMB    (0x3U)
 #define EXT_CSD_PART_CONFIG_ACC_GP0     (0x4U)
-#define EXT_CSD_SANITIZE_START		(0x1U)
 #define EXT_CSD_PART_CONFIG_BYTE	(179U)
-#define EXT_CSD_SANIT_CONFIG_BYTE	(165U)
 #define XSDPS_MMC_PART_CFG_0_ARG		(((u32)XSDPS_EXT_CSD_WRITE_BYTE << 24U) \
-	| ((u32)EXT_CSD_PART_CONFIG_BYTE << 16U) \
-	| ((u32)(0U) << 8U))
+		| ((u32)EXT_CSD_PART_CONFIG_BYTE << 16U) \
+		| ((u32)(0U) << 8U))
 
 #define XSDPS_MMC_PART_CFG_1_ARG		(((u32)XSDPS_EXT_CSD_WRITE_BYTE << 24U) \
-	| ((u32)EXT_CSD_PART_CONFIG_BYTE << 16U) \
-	| ((u32)EXT_CSD_PART_CONFIG_ACC_BOOT0 << 8U))
+		| ((u32)EXT_CSD_PART_CONFIG_BYTE << 16U) \
+		| ((u32)EXT_CSD_PART_CONFIG_ACC_BOOT0 << 8U))
 
 #define XSDPS_MMC_PART_CFG_2_ARG		(((u32)XSDPS_EXT_CSD_WRITE_BYTE << 24U) \
-	| ((u32)EXT_CSD_PART_CONFIG_BYTE << 16U) \
-	| ((u32)EXT_CSD_PART_CONFIG_ACC_BOOT1 << 8U))
-
-#define XSDPS_MMC_START_SANITIZE_ARG		(((u32)XSDPS_EXT_CSD_WRITE_BYTE << 24U) \
-	| ((u32)EXT_CSD_SANIT_CONFIG_BYTE << 16U) \
-	| ((u32)EXT_CSD_SANITIZE_START << 8U))
+		| ((u32)EXT_CSD_PART_CONFIG_BYTE << 16U) \
+		| ((u32)EXT_CSD_PART_CONFIG_ACC_BOOT1 << 8U))
 
 #define EXT_CSD_PART_SUPPORT_PART_EN    (0x1U)
 
@@ -965,7 +957,7 @@ extern "C" {
 #define EXT_CSD_CARD_TYPE_DDR_1_2V	(1U<<3)   /* Card can run at 52MHz */
 /* DDR mode @1.2V I/O */
 #define EXT_CSD_CARD_TYPE_DDR_52	(EXT_CSD_CARD_TYPE_DDR_1_8V  \
-	| EXT_CSD_CARD_TYPE_DDR_1_2V)
+		| EXT_CSD_CARD_TYPE_DDR_1_2V)
 #define EXT_CSD_CARD_TYPE_SDR_1_8V      (1U<<4)  /* Card can run at 200MHz */
 #define EXT_CSD_CARD_TYPE_SDR_1_2V      (1U<<5)  /* Card can run at 200MHz */
 /* SDR mode @1.2V I/O */
@@ -1001,44 +993,44 @@ extern "C" {
  * SD/MMC Arguments for Bus Speed and Bus Width.
  */
 #define XSDPS_MMC_DEF_SPEED_ARG		(((u32)XSDPS_EXT_CSD_WRITE_BYTE << 24) \
-	| ((u32)EXT_CSD_HS_TIMING_BYTE << 16) \
-	| ((u32)EXT_CSD_HS_TIMING_DEF << 8))
+		| ((u32)EXT_CSD_HS_TIMING_BYTE << 16) \
+		| ((u32)EXT_CSD_HS_TIMING_DEF << 8))
 
 #define XSDPS_MMC_HIGH_SPEED_ARG	(((u32)XSDPS_EXT_CSD_WRITE_BYTE << 24) \
-	| ((u32)EXT_CSD_HS_TIMING_BYTE << 16) \
-	| ((u32)EXT_CSD_HS_TIMING_HIGH << 8))
+		| ((u32)EXT_CSD_HS_TIMING_BYTE << 16) \
+		| ((u32)EXT_CSD_HS_TIMING_HIGH << 8))
 
 #define XSDPS_MMC_HS200_ARG		(((u32)XSDPS_EXT_CSD_WRITE_BYTE << 24) \
-	| ((u32)EXT_CSD_HS_TIMING_BYTE << 16) \
-	| ((u32)EXT_CSD_HS_TIMING_HS200 << 8))
+		| ((u32)EXT_CSD_HS_TIMING_BYTE << 16) \
+		| ((u32)EXT_CSD_HS_TIMING_HS200 << 8))
 
 #define XSDPS_MMC_HS400_ARG		(((u32)XSDPS_EXT_CSD_WRITE_BYTE << 24) \
-	| ((u32)EXT_CSD_HS_TIMING_BYTE << 16) \
-	| ((u32)EXT_CSD_HS_TIMING_HS400 << 8))
+		| ((u32)EXT_CSD_HS_TIMING_BYTE << 16) \
+		| ((u32)EXT_CSD_HS_TIMING_HS400 << 8))
 
 #define XSDPS_MMC_1_BIT_BUS_ARG		(((u32)XSDPS_EXT_CSD_WRITE_BYTE << 24) \
-	| ((u32)EXT_CSD_BUS_WIDTH_BYTE << 16) \
-	| ((u32)EXT_CSD_BUS_WIDTH_1_BIT << 8))
+		| ((u32)EXT_CSD_BUS_WIDTH_BYTE << 16) \
+		| ((u32)EXT_CSD_BUS_WIDTH_1_BIT << 8))
 
 #define XSDPS_MMC_4_BIT_BUS_ARG		(((u32)XSDPS_EXT_CSD_WRITE_BYTE << 24) \
-	| ((u32)EXT_CSD_BUS_WIDTH_BYTE << 16) \
-	| ((u32)EXT_CSD_BUS_WIDTH_4_BIT << 8))
+		| ((u32)EXT_CSD_BUS_WIDTH_BYTE << 16) \
+		| ((u32)EXT_CSD_BUS_WIDTH_4_BIT << 8))
 
 #define XSDPS_MMC_8_BIT_BUS_ARG		(((u32)XSDPS_EXT_CSD_WRITE_BYTE << 24) \
-	| ((u32)EXT_CSD_BUS_WIDTH_BYTE << 16) \
-	| ((u32)EXT_CSD_BUS_WIDTH_8_BIT << 8))
+		| ((u32)EXT_CSD_BUS_WIDTH_BYTE << 16) \
+		| ((u32)EXT_CSD_BUS_WIDTH_8_BIT << 8))
 
 #define XSDPS_MMC_DDR_4_BIT_BUS_ARG		(((u32)XSDPS_EXT_CSD_WRITE_BYTE << 24) \
-	| ((u32)EXT_CSD_BUS_WIDTH_BYTE << 16) \
-	| ((u32)EXT_CSD_BUS_WIDTH_DDR_4_BIT << 8))
+		| ((u32)EXT_CSD_BUS_WIDTH_BYTE << 16) \
+		| ((u32)EXT_CSD_BUS_WIDTH_DDR_4_BIT << 8))
 
 #define XSDPS_MMC_DDR_8_BIT_BUS_ARG		(((u32)XSDPS_EXT_CSD_WRITE_BYTE << 24) \
-	| ((u32)EXT_CSD_BUS_WIDTH_BYTE << 16) \
-	| ((u32)EXT_CSD_BUS_WIDTH_DDR_8_BIT << 8))
+		| ((u32)EXT_CSD_BUS_WIDTH_BYTE << 16) \
+		| ((u32)EXT_CSD_BUS_WIDTH_DDR_8_BIT << 8))
 
 #define XSDPS_MMC_RST_FUN_EN_ARG		(((u32)XSDPS_EXT_CSD_WRITE_BYTE << 24) \
-	| ((u32)EXT_CSD_RST_N_FUN_BYTE << 16) \
-	| ((u32)EXT_CSD_RST_N_FUN_PERM_EN << 8))
+		| ((u32)EXT_CSD_RST_N_FUN_BYTE << 16) \
+		| ((u32)EXT_CSD_RST_N_FUN_PERM_EN << 8))
 
 #define XSDPS_MMC_DELAY_FOR_SWITCH	1000U
 
@@ -1205,8 +1197,6 @@ extern "C" {
 #define SD_ITAPCHGWIN			0x00000200U
 #define SD_ITAPDLYENA			0x00000100U
 #define SD_OTAPDLYENA			0x00000040U
-#define SD_OTAPDLYSEL_SD104_B0		0x00000002U
-#define SD_OTAPDLYSEL_SD104_B2		0x00000002U
 #define SD_OTAPDLYSEL_HS200_B0		0x00000007U
 #define SD_OTAPDLYSEL_HS200_B2		0x00000007U
 #define SD_OTAPDLYSEL_HS400		0x00000004U
@@ -1235,8 +1225,6 @@ extern "C" {
 #define SD_ITAPCHGWIN				0x00000200U
 #define SD_ITAPDLYENA				0x00000100U
 #define SD_OTAPDLYENA				0x00000040U
-#define SD_OTAPDLYSEL_SD104_B0		0x00000002U
-#define SD_OTAPDLYSEL_SD104_B2		0x00000002U
 #define SD_OTAPDLYSEL_HS200_B0		0x00000002U
 #define SD_OTAPDLYSEL_HS200_B2		0x00000002U
 #define SD_ITAPDLYSEL_SD50			0x0000000EU
@@ -1268,8 +1256,6 @@ extern "C" {
 #define SD1_ITAPCHGWIN				0x02000000U
 #define SD1_ITAPDLYENA				0x01000000U
 #define SD1_OTAPDLYENA				0x00400000U
-#define SD_OTAPDLYSEL_SD104_B0		0x00000003U
-#define SD_OTAPDLYSEL_SD104_B2		0x00000002U
 #define SD_OTAPDLYSEL_HS200_B0		0x00000003U
 #define SD_OTAPDLYSEL_HS200_B2		0x00000002U
 #define SD_ITAPDLYSEL_SD50			0x00000014U
@@ -1288,7 +1274,7 @@ extern "C" {
 #endif
 /** @} */
 
-#if defined (__MICROBLAZE__) || defined (__riscv)
+#ifdef __MICROBLAZE__
 #define XPS_SYS_CTRL_BASEADDR	0xFF180000U	/**< System controller Baseaddress */
 #endif
 
@@ -1309,16 +1295,16 @@ extern "C" {
 
 /****************************************************************************/
 /**
-* Reads a register.
+* Read a register.
 *
-* @param	InstancePtr Pointer to the sdps instance.
-* @param	RegOffset Contains the offset from the 1st register of the
+* @param	InstancePtr is the pointer to the sdps instance.
+* @param	RegOffset contains the offset from the 1st register of the
 *		device to the target register.
 *
 * @return	The value read from the register.
 *
 * @note		C-Style signature:
-*		    u32 XSdPs_ReadReg(XSdPs *InstancePtr. s32 RegOffset)
+*		u32 XSdPs_ReadReg(XSdPs *InstancePtr. s32 RegOffset)
 *
 ******************************************************************************/
 #define XSdPs_ReadReg64(InstancePtr, RegOffset) \
@@ -1326,18 +1312,18 @@ extern "C" {
 
 /***************************************************************************/
 /**
-* Writes to a register.
+* Write to a register.
 *
-* @param	InstancePtr Pointer to the sdps instance.
-* @param	RegOffset Contains the offset from the 1st register of the
+* @param	InstancePtr is the pointer to the sdps instance.
+* @param	RegOffset contains the offset from the 1st register of the
 *		device to target register.
-* @param	RegisterValue Value to be written to the register.
+* @param	RegisterValue is the value to be written to the register.
 *
 * @return	None.
 *
 * @note		C-Style signature:
-*		    void XSdPs_WriteReg(XSdPs *InstancePtr, s32 RegOffset,
-*		    u64 RegisterValue)
+*		void XSdPs_WriteReg(XSdPs *InstancePtr, s32 RegOffset,
+*		u64 RegisterValue)
 *
 ******************************************************************************/
 #define XSdPs_WriteReg64(InstancePtr, RegOffset, RegisterValue) \
@@ -1346,16 +1332,16 @@ extern "C" {
 
 /****************************************************************************/
 /**
-* Reads a register.
+* Read a register.
 *
-* @param	BaseAddress Contains the base address of the device.
-* @param	RegOffset Contains the offset from the 1st register of the
+* @param	BaseAddress contains the base address of the device.
+* @param	RegOffset contains the offset from the 1st register of the
 *		device to the target register.
 *
 * @return	The value read from the register.
 *
 * @note		C-Style signature:
-*		    u32 XSdPs_ReadReg(UINTPTR BaseAddress. int RegOffset)
+*		u32 XSdPs_ReadReg(UINTPTR BaseAddress. int RegOffset)
 *
 ******************************************************************************/
 #define XSdPs_ReadReg(BaseAddress, RegOffset) \
@@ -1363,18 +1349,18 @@ extern "C" {
 
 /***************************************************************************/
 /**
-* Writes to a register.
+* Write to a register.
 *
-* @param	BaseAddress Contains the base address of the device.
-* @param	RegOffset Contains the offset from the 1st register of the
+* @param	BaseAddress contains the base address of the device.
+* @param	RegOffset contains the offset from the 1st register of the
 *		device to target register.
-* @param	RegisterValue Value to be written to the register.
+* @param	RegisterValue is the value to be written to the register.
 *
 * @return	None.
 *
 * @note		C-Style signature:
-*		    void XSdPs_WriteReg(UINTPTR BaseAddress, int RegOffset,
-*		    u32 RegisterValue)
+*		void XSdPs_WriteReg(UINTPTR BaseAddress, int RegOffset,
+*		u32 RegisterValue)
 *
 ******************************************************************************/
 #define XSdPs_WriteReg(BaseAddress, RegOffset, RegisterValue) \
@@ -1382,21 +1368,21 @@ extern "C" {
 
 /****************************************************************************/
 /**
-* Reads a register.
+* Read a register.
 *
-* @param	BaseAddress Contains the base address of the device.
-* @param	RegOffset Contains the offset from the 1st register of the
+* @param	BaseAddress contains the base address of the device.
+* @param	RegOffset contains the offset from the 1st register of the
 *		device to the target register.
 *
 * @return	The value read from the register.
 *
 * @note		C-Style signature:
-*		    u16 XSdPs_ReadReg(UINTPTR BaseAddress. int RegOffset)
+*		u16 XSdPs_ReadReg(UINTPTR BaseAddress. int RegOffset)
 *
 ******************************************************************************/
 static INLINE u16 XSdPs_ReadReg16(UINTPTR BaseAddress, u8 RegOffset)
 {
-#if defined (__MICROBLAZE__) || defined (__riscv)
+#if defined (__MICROBLAZE__)
 	u32 Reg;
 	BaseAddress += RegOffset & 0xFC;
 	Reg = XSdPs_In32(BaseAddress);
@@ -1409,24 +1395,24 @@ static INLINE u16 XSdPs_ReadReg16(UINTPTR BaseAddress, u8 RegOffset)
 
 /***************************************************************************/
 /**
-* Writes to a register.
+* Write to a register.
 *
-* @param	BaseAddress Contains the base address of the device.
-* @param	RegOffset Contains the offset from the 1st register of the
+* @param	BaseAddress contains the base address of the device.
+* @param	RegOffset contains the offset from the 1st register of the
 *		device to target register.
-* @param	RegisterValue Value to be written to the register.
+* @param	RegisterValue is the value to be written to the register.
 *
 * @return	None.
 *
 * @note		C-Style signature:
-*		    void XSdPs_WriteReg(UINTPTR BaseAddress, int RegOffset,
-*		    u16 RegisterValue)
+*		void XSdPs_WriteReg(UINTPTR BaseAddress, int RegOffset,
+*		u16 RegisterValue)
 *
 ******************************************************************************/
 
 static INLINE void XSdPs_WriteReg16(UINTPTR BaseAddress, u8 RegOffset, u16 RegisterValue)
 {
-#if defined (__MICROBLAZE__) || defined (__riscv)
+#if defined (__MICROBLAZE__)
 	u32 Reg;
 	BaseAddress += RegOffset & 0xFC;
 	Reg = XSdPs_In32(BaseAddress);
@@ -1440,21 +1426,21 @@ static INLINE void XSdPs_WriteReg16(UINTPTR BaseAddress, u8 RegOffset, u16 Regis
 
 /****************************************************************************/
 /**
-* Reads a register.
+* Read a register.
 *
-* @param	BaseAddress Contains the base address of the device.
-* @param	RegOffset Contains the offset from the 1st register of the
+* @param	BaseAddress contains the base address of the device.
+* @param	RegOffset contains the offset from the 1st register of the
 *		device to the target register.
 *
 * @return	The value read from the register.
 *
 * @note		C-Style signature:
-*		    u8 XSdPs_ReadReg(UINTPTR BaseAddress. int RegOffset)
+*		u8 XSdPs_ReadReg(UINTPTR BaseAddress. int RegOffset)
 *
 ******************************************************************************/
 static INLINE u8 XSdPs_ReadReg8(UINTPTR BaseAddress, u8 RegOffset)
 {
-#if defined (__MICROBLAZE__) || defined (__riscv)
+#if defined (__MICROBLAZE__)
 	u32 Reg;
 	BaseAddress += RegOffset & 0xFC;
 	Reg = XSdPs_In32(BaseAddress);
@@ -1466,23 +1452,23 @@ static INLINE u8 XSdPs_ReadReg8(UINTPTR BaseAddress, u8 RegOffset)
 }
 /***************************************************************************/
 /**
-* Writes to a register.
+* Write to a register.
 *
-* @param	BaseAddress Contains the base address of the device.
-* @param	RegOffset Contains the offset from the 1st register of the
+* @param	BaseAddress contains the base address of the device.
+* @param	RegOffset contains the offset from the 1st register of the
 *		device to target register.
-* @param	RegisterValue Value to be written to the register.
+* @param	RegisterValue is the value to be written to the register.
 *
 * @return	None.
 *
 * @note		C-Style signature:
-*		    void XSdPs_WriteReg(UINTPTR BaseAddress, int RegOffset,
-*		    u8 RegisterValue)
+*		void XSdPs_WriteReg(UINTPTR BaseAddress, int RegOffset,
+*		u8 RegisterValue)
 *
 ******************************************************************************/
 static INLINE void XSdPs_WriteReg8(UINTPTR BaseAddress, u8 RegOffset, u8 RegisterValue)
 {
-#if defined (__MICROBLAZE__) || defined (__riscv)
+#if defined (__MICROBLAZE__)
 	u32 Reg;
 	BaseAddress += RegOffset & 0xFC;
 	Reg = XSdPs_In32(BaseAddress);
@@ -1495,15 +1481,15 @@ static INLINE void XSdPs_WriteReg8(UINTPTR BaseAddress, u8 RegOffset, u8 Registe
 }
 /***************************************************************************/
 /**
-* Macro to get present status register.
+* Macro to get present status register
 *
-* @param	BaseAddress Contains the base address of the device.
+* @param	BaseAddress contains the base address of the device.
 *
 * @return	None.
 *
 * @note		C-Style signature:
-*		    void XSdPs_WriteReg(UINTPTR BaseAddress, int RegOffset,
-*		    u8 RegisterValue)
+*		void XSdPs_WriteReg(UINTPTR BaseAddress, int RegOffset,
+*		u8 RegisterValue)
 *
 ******************************************************************************/
 #define XSdPs_GetPresentStatusReg(BaseAddress) \

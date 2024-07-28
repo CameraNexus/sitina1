@@ -1,6 +1,6 @@
 /******************************************************************************
 * Copyright (C) 2013 - 2022 Xilinx, Inc.  All rights reserved.
-* Copyright (c) 2022 - 2024 Advanced Micro Devices, Inc. All Rights Reserved.
+* Copyright (c) 2022 - 2023 Advanced Micro Devices, Inc. All Rights Reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
@@ -8,7 +8,7 @@
 /**
 *
 * @file xsdps_host.c
-* @addtogroup sdps_api SDPS APIs
+* @addtogroup sdps Overview
 * @{
 *
 * The xsdps_host.c file contains the interface functions of the XSdPs driver.
@@ -40,7 +40,6 @@
 * 			Xil_WaitForEvents API.
 * 	sa     01/25/23 Use instance structure to store DMA descriptor tables.
 * 4.2   ap     08/09/23 Restructured XSdPs_FrameCmd API
-* 4.3   ap     12/22/23 Add support to read custom HS400 tap delay value from design for eMMC.
 * </pre>
 *
 ******************************************************************************/
@@ -68,9 +67,9 @@ void XSdps_Smc(XSdPs *InstancePtr, u32 RegOffset, u32 Mask, u32 Val)
 /*****************************************************************************/
 /**
 * @brief
-* Sets the tap delay for SDR104 uhs mode.
+* This function set the tap delay for SDR104 uhs mode.
 *
-* @param        InstancePtr Pointer to the instance to be worked on.
+* @param        InstancePtr is a pointer to the instance to be worked on.
 *
 * @return       None
 *
@@ -80,18 +79,18 @@ void XSdPs_SetTapDelay_SDR104(XSdPs *InstancePtr)
 	if (InstancePtr->Config.OTapDly_SDR_Clk200 != 0U) {
 		InstancePtr->OTapDelay = InstancePtr->Config.OTapDly_SDR_Clk200;
 	} else if (InstancePtr->Config.BankNumber == 2U) {
-		InstancePtr->OTapDelay = SD_OTAPDLYSEL_SD104_B2;
+		InstancePtr->OTapDelay = SD_OTAPDLYSEL_HS200_B2;
 	} else {
-		InstancePtr->OTapDelay = SD_OTAPDLYSEL_SD104_B0;
+		InstancePtr->OTapDelay = SD_OTAPDLYSEL_HS200_B0;
 	}
 }
 
 /*****************************************************************************/
 /**
 * @brief
-* Sets the tap delay for SDR50 uhs mode.
+* This function set the tap delay for SDR50 uhs mode.
 *
-* @param        InstancePtr Pointer to the instance to be worked on.
+* @param        InstancePtr is a pointer to the instance to be worked on.
 *
 * @return       None
 *
@@ -108,9 +107,9 @@ void XSdPs_SetTapDelay_SDR50(XSdPs *InstancePtr)
 /*****************************************************************************/
 /**
 * @brief
-* Sets the tap delay for DDR50 uhs mode.
+* This function set the tap delay for DDR50 uhs mode.
 *
-* @param        InstancePtr Pointer to the instance to be worked on.
+* @param        InstancePtr is a pointer to the instance to be worked on.
 *
 * @return       None
 *
@@ -137,9 +136,9 @@ void XSdPs_SetTapDelay_DDR50(XSdPs *InstancePtr)
 /*****************************************************************************/
 /**
 * @brief
-* Sets the tap delay for SDR25 uhs mode.
+* This function set the tap delay for SDR25 uhs mode.
 *
-* @param        InstancePtr Pointer to the instance to be worked on.
+* @param        InstancePtr is a pointer to the instance to be worked on.
 *
 * @return       None
 *
@@ -170,7 +169,7 @@ void XSdPs_SetTapDelay_SDR25(XSdPs *InstancePtr)
 * Switches the SD card voltage from 3v3 to 1v8
 *
 *
-* @param	InstancePtr Pointer to the XSdPs instance.
+* @param	InstancePtr is a pointer to the XSdPs instance.
 *
 ******************************************************************************/
 s32 XSdPs_Switch_Voltage(XSdPs *InstancePtr)
@@ -204,9 +203,9 @@ RETURN_PATH:
 /*****************************************************************************/
 /**
 * @brief
-* Initiates the transfer to or from SD card.
+* This function initiates the transfer to or from SD card.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return
 * 		- XST_SUCCESS if initialization was successful
@@ -253,10 +252,10 @@ RETURN_PATH:
 /*****************************************************************************/
 /**
 * @brief
-* Resets the SD card.
+* This function resets the SD card.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
-* @param	Value Type of reset
+* @param	InstancePtr is a pointer to the instance to be worked on.
+* @param	Value is the type of reset
 *
 * @return
 * 		- XST_SUCCESS if initialization was successful
@@ -284,9 +283,9 @@ RETURN_PATH:
 /*****************************************************************************/
 /**
 * @brief
-* Sets bit to start execution of tuning.
+* This function sets bit to start execution of tuning.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return	None
 *
@@ -305,9 +304,9 @@ void XSdPs_SetExecTuning(XSdPs *InstancePtr)
 /*****************************************************************************/
 /**
 * @brief
-* Initializes SD mode.
+* This function does SD mode initialization.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return
 * 		- XST_SUCCESS if initialization is successful
@@ -425,9 +424,9 @@ RETURN_PATH:
 /*****************************************************************************/
 /**
 * @brief
-* Initializes MMC mode.
+* This function does MMC mode initialization.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return
 * 		- XST_SUCCESS if initialization is successful
@@ -493,9 +492,9 @@ RETURN_PATH:
 /*****************************************************************************/
 /**
 * @brief
-* Initializes eMMC mode.
+* This function does eMMC mode initialization.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return
 * 		- XST_SUCCESS if initialization is successful
@@ -585,9 +584,9 @@ RETURN_PATH:
 /*****************************************************************************/
 /**
 * @brief
-* Disables the bus power.
+* This function disables the bus power.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return	None
 *
@@ -610,9 +609,9 @@ void XSdPs_DisableBusPower(XSdPs *InstancePtr)
 /*****************************************************************************/
 /**
 * @brief
-* Enables the bus power.
+* This function enables the bus power.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return	None
 *
@@ -638,9 +637,9 @@ void XSdPs_EnableBusPower(XSdPs *InstancePtr)
 /*****************************************************************************/
 /**
 * @brief
-* Enumerates the SD card.
+* This function enumerates the SD card.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return	None
 *
@@ -724,9 +723,9 @@ RETURN_PATH:
 /*****************************************************************************/
 /**
 * @brief
-* Enumerates the MMC card.
+* This function enumerates the MMC card.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return	None
 *
@@ -794,9 +793,9 @@ RETURN_PATH:
 /*****************************************************************************/
 /**
 * @brief
-* Performs SD tuning.
+* This function performs SD tuning.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return	None
 *
@@ -842,10 +841,10 @@ RETURN_PATH:
 /*****************************************************************************/
 /**
 * @brief
-* Enables the clock.
+* This function is used to enable the clock.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
-* @param	ClockReg Clock value to be set.
+* @param	InstancePtr is a pointer to the instance to be worked on.
+* @param	ClockReg is the clock value to be set.
 *
 * @return
 * 		- XST_SUCCESS if success
@@ -884,10 +883,10 @@ RETURN_PATH:
 /*****************************************************************************/
 /**
 * @brief
-* Calculates the bus speed.
+* This function is used to calculate the bus speed.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
-* @param	Arg Argument to be sent along with the command.
+* @param	InstancePtr is a pointer to the instance to be worked on.
+* @param	Arg is the argument to be sent along with the command.
 * 		This could be address or any other information
 *
 * @return
@@ -967,10 +966,10 @@ s32 XSdPs_CalcBusSpeed(XSdPs *InstancePtr, u32 *Arg)
 * @brief
 * This function is used to do the DMA transfer to or from SD card.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
-* @param	BlkCnt  Block count passed by the user.
-* @param	BlkSize  Block size passed by the user.
-* @param	Buff  Pointer to the data buffer for a DMA transfer.
+* @param	InstancePtr is a pointer to the instance to be worked on.
+* @param	BlkCnt - Block count passed by the user.
+* @param	BlkSize - Block size passed by the user.
+* @param	Buff - Pointer to the data buffer for a DMA transfer.
 *
 * @return
 * 		- XST_SUCCESS if initialization was successful
@@ -1010,10 +1009,10 @@ void XSdPs_SetupReadDma(XSdPs *InstancePtr, u16 BlkCnt, u16 BlkSize, u8 *Buff)
 * @brief
 * This function is used to do the DMA transfer to or from SD card.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
-* @param	BlkCnt  Block count passed by the user.
-* @param	BlkSize  Block size passed by the user.
-* @param	Buff  Pointer to the data buffer for a DMA transfer.
+* @param	InstancePtr is a pointer to the instance to be worked on.
+* @param	BlkCnt - Block count passed by the user.
+* @param	BlkSize - Block size passed by the user.
+* @param	Buff - Pointer to the data buffer for a DMA transfer.
 *
 * @return
 * 		- XST_SUCCESS if initialization was successful
@@ -1052,15 +1051,16 @@ void XSdPs_SetupWriteDma(XSdPs *InstancePtr, u16 BlkCnt, u16 BlkSize, const u8 *
 /**
 *
 * @brief
-* API to setup ADMA2 descriptor table for 32-bit DMA.
+* API to setup ADMA2 descriptor table for 32-bit DMA
 *
 *
-* @param	InstancePtr Pointer to the XSdPs instance.
-* @param	BlkCnt Block count.
-* @param	Buff Pointer to data buffer.
+* @param	InstancePtr is a pointer to the XSdPs instance.
+* @param	BlkCnt - block count.
+* @param	Buff pointer to data buffer.
 *
 * @return	None
 *
+* @note		None.
 *
 ******************************************************************************/
 void XSdPs_Setup32ADMA2DescTbl(XSdPs *InstancePtr, u32 BlkCnt, const u8 *Buff)
@@ -1113,14 +1113,16 @@ void XSdPs_Setup32ADMA2DescTbl(XSdPs *InstancePtr, u32 BlkCnt, const u8 *Buff)
 /**
 *
 * @brief
-* API to setup ADMA2 descriptor table for 64-bit DMA.
+* API to setup ADMA2 descriptor table for 64-bit DMA
 *
 *
-* @param	InstancePtr Pointer to the XSdPs instance.
-* @param	BlkCnt Block count.
-* @param	Buff  Pointer to data buffer.
+* @param	InstancePtr is a pointer to the XSdPs instance.
+* @param	BlkCnt - block count.
+* @param	Buff pointer to data buffer.
 *
 * @return	None
+*
+* @note		None.
 *
 ******************************************************************************/
 void XSdPs_Setup64ADMA2DescTbl(XSdPs *InstancePtr, u32 BlkCnt, const u8 *Buff)
@@ -1177,10 +1179,10 @@ void XSdPs_Setup64ADMA2DescTbl(XSdPs *InstancePtr, u32 BlkCnt, const u8 *Buff)
 /*****************************************************************************/
 /**
 * @brief
-* Calculates the clock divisor value.
+* This function is used calculate the clock divisor value.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
-* @param	SelFreq Selected frequency
+* @param	InstancePtr is a pointer to the instance to be worked on.
+* @param	SelFreq is the selected frequency
 *
 * @return	Clock divisor value
 *
@@ -1223,11 +1225,11 @@ u32 XSdPs_CalcClock(XSdPs *InstancePtr, u32 SelFreq)
 /**
 *
 * @brief
-* API to Set or Reset the DLL.
+* API to Set or Reset the DLL
 *
 *
-* @param	InstancePtr Pointer to the XSdPs instance.
-* @param	EnRst Flag indicating whether to Assert or De-assert Reset.
+* @param	InstancePtr is a pointer to the XSdPs instance.
+* @param	EnRst is a flag indicating whether to Assert or De-assert Reset.
 *
 * @return	None
 *
@@ -1283,10 +1285,11 @@ void XSdPs_DllRstCtrl(XSdPs *InstancePtr, u8 EnRst)
 * Function to configure the Tap Delays.
 *
 *
-* @param	InstancePtr Pointer to the XSdPs instance.
+* @param	InstancePtr is a pointer to the XSdPs instance.
 *
 * @return	None
 *
+* @note		None.
 *
 ******************************************************************************/
 void XSdPs_ConfigTapDelay(XSdPs *InstancePtr)
@@ -1427,9 +1430,9 @@ void XSdPs_ConfigTapDelay(XSdPs *InstancePtr)
 /*****************************************************************************/
 /**
 * @brief
-* Sets voltage to 1.8 V.
+* This function is used to set voltage to 1.8V.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return
 * 		- XST_SUCCESS if successful
@@ -1463,9 +1466,9 @@ s32 XSdPs_SetVoltage18(XSdPs *InstancePtr)
 /*****************************************************************************/
 /**
 * @brief
-* Configures the Power Level.
+* This function is used configure the Power Level.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return	None
 *
@@ -1493,9 +1496,9 @@ void XSdPs_ConfigPower(XSdPs *InstancePtr)
 /*****************************************************************************/
 /**
 * @brief
-* Configures the DMA.
+* This function is used configure the DMA.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return	None
 *
@@ -1518,9 +1521,9 @@ void XSdPs_ConfigDma(XSdPs *InstancePtr)
 /*****************************************************************************/
 /**
 * @brief
-* Configures the Interrupts.
+* This function is used configure the Interrupts.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return	None
 *
@@ -1546,13 +1549,13 @@ void XSdPs_ConfigInterrupt(XSdPs *InstancePtr)
 
 /*****************************************************************************/
 /**
-* Generates SD command.
+* This function does SD command generation.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
-* @param	Cmd Command to be sent.
-* @param	Arg Argument to be sent along with the command.
+* @param	InstancePtr is a pointer to the instance to be worked on.
+* @param	Cmd is the command to be sent.
+* @param	Arg is the argument to be sent along with the command.
 * 		This could be address or any other information
-* @param	BlkCnt Block count passed by the user.
+* @param	BlkCnt - Block count passed by the user.
 *
 * @return
 * 		- XST_SUCCESS if initialization was successful
@@ -1623,9 +1626,9 @@ RETURN_PATH:
 
 /*****************************************************************************/
 /**
-* Checks if the transfer is completed successfully.
+* This function is used to check if the transfer is completed successfully.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return	None
 *
@@ -1671,10 +1674,10 @@ RETURN_PATH:
 /*****************************************************************************/
 /**
 * @brief
-* Checks if the CMD/DATA bus is idle or not.
+* This function is used to check if the CMD/DATA bus is idle or not.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
-* @param	Value Value to be selected Cmd bus or Dat bus.
+* @param	InstancePtr is a pointer to the instance to be worked on.
+* @param	Value is to selct Cmd bus or Dat bus
 *
 * @return	None
 *
@@ -1707,18 +1710,16 @@ RETURN_PATH:
 /**
 * @brief
 * This function frames the Command register for a particular command.
-*
-*
-* @param	InstancePtr Pointer to the instance to be worked on.
-* @param	Cmd Command to be sent.
-*
-* @return	Command register value complete with response type and
-* 		data, CRC and index related flags.
-*
-* @note This generates only the command register value i.e.
+* Note that this generates only the command register value i.e.
 * the upper 16 bits of the transfer mode and command register.
 * This value is already shifted to be upper 16 bits and can be directly
 * OR'ed with transfer mode register value.
+*
+* @param	InstancePtr is a pointer to the instance to be worked on.
+* @param	Cmd is the Command to be sent.
+*
+* @return	Command register value complete with response type and
+* 		data, CRC and index related flags.
 *
 ******************************************************************************/
 u32 XSdPs_FrameCmd(XSdPs *InstancePtr, u32 Cmd)
@@ -1806,9 +1807,9 @@ u32 XSdPs_FrameCmd(XSdPs *InstancePtr, u32 Cmd)
 /*****************************************************************************/
 /**
 * @brief
-* Selects the HS400 timing mode.
+* This function selects the HS400 timing mode.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return	- XST_SUCCESS if successful
 * 			- XST_FAILURE if failure occurred.
@@ -1846,11 +1847,7 @@ u32 XSdPs_Select_HS400(XSdPs *InstancePtr)
 		goto RETURN_PATH;
 	}
 
-	if (InstancePtr->Config.OTapDly_DDR_Clk200 != 0U){
-		InstancePtr->OTapDelay = InstancePtr->Config.OTapDly_DDR_Clk200;
-	} else {
-		InstancePtr->OTapDelay = SD_OTAPDLYSEL_HS400;
-	}
+	InstancePtr->OTapDelay = SD_OTAPDLYSEL_HS400;
 	Status = XSdPs_Change_ClkFreq(InstancePtr, InstancePtr->BusSpeed);
 	if (Status != XST_SUCCESS) {
 		Status = XST_FAILURE;

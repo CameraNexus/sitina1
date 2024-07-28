@@ -30,9 +30,7 @@
 /***************************** Include Files *********************************/
 #include "xiltimer.h"
 #include "xpm_counter.h"
-#if defined(SDT) && defined (ARMR52)
-#include "xcortexr52_config.h"
-#elif defined(SDT)
+#ifdef SDT
 #include "xcortexr5_config.h"
 #endif
 
@@ -43,11 +41,7 @@
 #define XIOU_SCNTRS_CNT_CNTRL_REG_EN_MASK 0x1U
 #define XIOU_SCNTRS_CNT_CNTRL_REG_EN 0x1U
 #define XIOU_SCNTRS_FREQ_REG_OFFSET 0x20U
-#ifdef SDT
-#define XIOU_SCNTRS_FREQ XPAR_CPU_TIMESTAMP_CLK_FREQ
-#else
 #define XIOU_SCNTRS_FREQ XPAR_CPU_CORTEXR52_0_TIMESTAMP_CLK_FREQ
-#endif
 #endif
 
 #ifdef XTIMER_IS_DEFAULT_TIMER

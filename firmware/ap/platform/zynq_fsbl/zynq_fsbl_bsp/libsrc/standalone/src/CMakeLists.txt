@@ -1,6 +1,6 @@
-# Copyright (c) 2023-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+# Copyright (c) 2023 Advanced Micro Devices, Inc. All Rights Reserved.
 # SPDX-License-Identifier: MIT
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.14.7)
 project(xilstandalone)
 
 set(Mem_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
@@ -33,8 +33,6 @@ if(("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "microblaze") OR
    ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "plm_microblaze") OR
    ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "pmu_microblaze"))
 add_subdirectory(microblaze)
-elseif("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "microblaze_riscv")
-add_subdirectory(riscv)
 else()
 add_subdirectory(arm)
 endif()
@@ -48,12 +46,14 @@ endif()
 if("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "cortexr52")
 file(RENAME ${CMAKE_BINARY_DIR}/include/xil_mpu_r52.h ${CMAKE_BINARY_DIR}/include/xil_mpu.h)
 endif()
-if (NOT ${YOCTO})
+if (${NON_YOCTO})
 file(COPY ${CMAKE_BINARY_DIR}/include/bspconfig.h DESTINATION ${CMAKE_INCLUDE_PATH}/)
 endif()
 
 #Compile it as a static library
-if (("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "plm_microblaze") OR
+if(("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "microblaze") OR
+   ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "microblazeel") OR
+   ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "plm_microblaze") OR
    ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "pmu_microblaze"))
 string(REPLACE "-Os -flto -ffat-lto-objects" "" CUSTOM_FLAGS ${CMAKE_C_FLAGS})
 # Split the flags into a cmake list (; separated)
@@ -74,7 +74,7 @@ endif()
 else()
 add_library(xilstandalone STATIC ${_sources})
 endif()
-if (NOT ${YOCTO}
+if (${NON_YOCTO}
     AND ("${CMAKE_SYSTEM_NAME}" STREQUAL "FreeRTOS"))
     target_compile_definitions(xilstandalone PRIVATE FREERTOS_BSP)
 endif()

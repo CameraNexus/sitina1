@@ -1,6 +1,6 @@
 /******************************************************************************
 * Copyright (C) 2010 - 2022 Xilinx, Inc.  All rights reserved.
-* Copyright (C) 2023 - 2024 Advanced Micro Devices, Inc. All Rights Reserved.
+* Copyright (C) 2023 Advanced Micro Devices, Inc. All Rights Reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
@@ -272,7 +272,6 @@
 *			data when RX buffer is not NULL.
 * 3.8	akm 09/02/20 Updated the Makefile to support parallel make execution.
 * 3.11	akm 07/10/23 Update the driver to support for system device-tree flow.
-* 3.12	sb  02/20/24 Add missing parenthesis for macro expansions.
 *
 * </pre>
 *
@@ -638,7 +637,7 @@ typedef struct {
 *
 *****************************************************************************/
 #define XQspiPs_GetTXWatermark(InstancePtr)				\
-	XQspiPs_In32(((InstancePtr)->Config.BaseAddress) + XQSPIPS_TXWR_OFFSET)
+	XQspiPs_In32((InstancePtr->Config.BaseAddress) + XQSPIPS_TXWR_OFFSET)
 
 /****************************************************************************/
 /**
@@ -674,7 +673,7 @@ typedef struct {
 *
 *****************************************************************************/
 #define XQspiPs_GetRXWatermark(InstancePtr)				\
-	XQspiPs_In32(((InstancePtr)->Config.BaseAddress) + XQSPIPS_RXWR_OFFSET)
+	XQspiPs_In32((InstancePtr->Config.BaseAddress) + XQSPIPS_RXWR_OFFSET)
 
 /****************************************************************************/
 /**
@@ -690,7 +689,7 @@ typedef struct {
 *
 *****************************************************************************/
 #define XQspiPs_Enable(InstancePtr)					\
-	XQspiPs_Out32(((InstancePtr)->Config.BaseAddress) + XQSPIPS_ER_OFFSET, \
+	XQspiPs_Out32((InstancePtr->Config.BaseAddress) + XQSPIPS_ER_OFFSET, \
 		      XQSPIPS_ER_ENABLE_MASK)
 
 /****************************************************************************/
@@ -707,7 +706,7 @@ typedef struct {
 *
 *****************************************************************************/
 #define XQspiPs_Disable(InstancePtr)					\
-	XQspiPs_Out32(((InstancePtr)->Config.BaseAddress) + XQSPIPS_ER_OFFSET, 0)
+	XQspiPs_Out32((InstancePtr->Config.BaseAddress) + XQSPIPS_ER_OFFSET, 0)
 
 /****************************************************************************/
 /**
@@ -744,7 +743,7 @@ typedef struct {
 *
 *****************************************************************************/
 #define XQspiPs_GetLqspiConfigReg(InstancePtr)				\
-	XQspiPs_In32(((InstancePtr)->Config.BaseAddress) +		\
+	XQspiPs_In32((InstancePtr->Config.BaseAddress) +		\
 		     XQSPIPS_LQSPI_CR_OFFSET)
 
 /************************** Function Prototypes ******************************/

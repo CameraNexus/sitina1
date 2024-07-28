@@ -16,6 +16,7 @@
       "ps7_cortexa9_1": "ps7_cortexa9"
     },
     "supportedFamily": "zynq",
+    "outOfSync": false,
     "componentType": "PLATFORM",
     "domains": [
       {
@@ -45,8 +46,25 @@
         "qemuArgsFile": "/home/wenting/Sitina1/firmware/ap/platform/resources/standalone_ps7_cortexa9_0/qemu/qemu_args.txt",
         "pmcQemuArgsFile": "",
         "isBSPGenReq": false
+      },
+      {
+        "name": "jtag_fsbl_domain",
+        "displayName": "jtag_fsbl_domain",
+        "processor": "ps7_cortexa9_0",
+        "cpuType": "cortex-a9",
+        "cpuInstance": "ps7_cortexa9_0",
+        "os": "standalone",
+        "appTemplate": "zynq_fsbl",
+        "isBootDomain": false,
+        "qemuData": "/home/wenting/Sitina1/firmware/ap/platform/resources/jtag_fsbl_domain/qemu",
+        "qemuArgsFile": "/home/wenting/Sitina1/firmware/ap/platform/resources/jtag_fsbl_domain/qemu/qemu_args.txt",
+        "pmcQemuArgsFile": "",
+        "isBSPGenReq": false
       }
     ],
     "emptyToolchainConfiguration": []
+  },
+  "previousBuildStatusMap": {
+    "export": "SUCCESS"
   }
 }

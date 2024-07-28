@@ -51,10 +51,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake
+CMAKE_COMMAND = /tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake
 
 # The command to remove a file.
-RM = /tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -E rm -f
+RM = /tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -71,7 +71,7 @@ CMAKE_BINARY_DIR = /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsb
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -81,7 +81,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -100,37 +100,37 @@ list_install_components/fast: list_install_components
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -P cmake_install.cmake
+	/tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -P cmake_install.cmake
 .PHONY : install
 
 # Special rule for the target install
 install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -P cmake_install.cmake
+	/tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	/tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local
 
 # Special rule for the target install/local
 install/local/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
-	/tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+	/tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
 # Special rule for the target install/strip
 install/strip: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	/tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip
 
 # Special rule for the target install/strip
 install/strip/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+	/tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
 .PHONY : install/strip/fast
 
 # The main all target
@@ -164,20 +164,6 @@ depend:
 	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-# Convenience name for target.
-libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/rule:
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/rule
-.PHONY : libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/rule
-
-# Convenience name for target.
-xilrsa: libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/rule
-.PHONY : xilrsa
-
-# fast build rule for target.
-xilrsa/fast:
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp && $(MAKE) $(MAKESILENT) -f libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/build.make libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/build
-.PHONY : xilrsa/fast
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -190,7 +176,6 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... xilrsa"
 .PHONY : help
 
 

@@ -1,6 +1,6 @@
 /******************************************************************************
 * Copyright (C) 2010 - 2022 Xilinx, Inc.  All rights reserved.
-* Copyright (C) 2022 - 2024 Advanced Micro Devices, Inc. All Rights Reserved.
+* Copyright (C) 2022 - 2023 Advanced Micro Devices, Inc. All Rights Reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
@@ -8,10 +8,56 @@
 /**
 *
 * @file xscugic.h
-* @addtogroup scugic_api SCUGIC APIs
+* @addtogroup scugic Overview
 * @{
 * @details
 *
+* The generic interrupt controller driver component.
+*
+* The interrupt controller driver uses the idea of priority for the various
+* handlers. Priority is an integer within the range of 1 and 31 inclusive with
+* default of 1 being the highest priority interrupt source. The priorities
+* of the various sources can be dynamically altered as needed through
+* hardware configuration.
+*
+* The generic interrupt controller supports the following
+* features:
+*
+*   - specific individual interrupt enabling/disabling
+*   - specific individual interrupt acknowledging
+*   - attaching specific callback function to handle interrupt source
+*   - assigning desired priority to interrupt source if default is not
+*     acceptable.
+*
+* Details about connecting the interrupt handler of the driver are contained
+* in the source file specific to interrupt processing, xscugic_intr.c.
+*
+* This driver is intended to be RTOS and processor independent.  It works with
+* physical addresses only.  Any needs for dynamic memory management, threads
+* or thread mutual exclusion, virtual memory, or cache control must be
+* satisfied by the layer above this driver.
+*
+* <b>Interrupt Vector Tables</b>
+*
+* The device ID of the interrupt controller device is used by the driver as a
+* direct index into the configuration data table. The user should populate the
+* vector table with handlers and callbacks at run-time using the
+* XScuGic_Connect() and XScuGic_Disconnect() functions.
+*
+* Each vector table entry corresponds to a device that can generate an
+* interrupt. Each entry contains an interrupt handler function and an
+* argument to be passed to the handler when an interrupt occurs.  The
+* user must use XScuGic_Connect() when the interrupt handler takes an
+* argument other than the base address.
+*
+* <b>Nested Interrupts Processing</b>
+*
+* Nested interrupts are not supported by this driver.
+*
+* NOTE:
+* The generic interrupt controller is not a part of the snoop control unit
+* as indicated by the prefix "scu" in the name of the driver.
+* It is an independent module in APU.
 *
 * <pre>
 * MODIFICATION HISTORY:
@@ -261,16 +307,17 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 /****************************************************************************/
 /**
 *
-* Writes the given CPU Interface register.
+* Write the given CPU Interface register
 *
-* @param    InstancePtr Pointer to the instance to be worked on.
-* @param    RegOffset Register offset to be written.
-* @param    Data 32-bit value to write to the register.
+* @param    InstancePtr is a pointer to the instance to be worked on.
+* @param    RegOffset is the register offset to be written
+* @param    Data is the 32-bit value to write to the register
 *
 * @return   None.
 *
-* @note  C-style signature:
-*        void XScuGic_CPUWriteReg(XScuGic *InstancePtr, u32 RegOffset, u32 Data)
+* @note
+* C-style signature:
+*    void XScuGic_CPUWriteReg(XScuGic *InstancePtr, u32 RegOffset, u32 Data)
 *
 *****************************************************************************/
 #define XScuGic_CPUWriteReg(InstancePtr, RegOffset, Data) \
@@ -280,15 +327,16 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 /****************************************************************************/
 /**
 *
-* Reads the given CPU Interface register.
+* Read the given CPU Interface register
 *
-* @param    InstancePtr Pointer to the instance to be worked on.
-* @param    RegOffset Rregister offset to be read.
+* @param    InstancePtr is a pointer to the instance to be worked on.
+* @param    RegOffset is the register offset to be read
 *
-* @return   32-bit value of the register
+* @return   The 32-bit value of the register
 *
-* @note  C-style signature:
-*        u32 XScuGic_CPUReadReg(XScuGic *InstancePtr, u32 RegOffset)
+* @note
+* C-style signature:
+*    u32 XScuGic_CPUReadReg(XScuGic *InstancePtr, u32 RegOffset)
 *
 *****************************************************************************/
 #define XScuGic_CPUReadReg(InstancePtr, RegOffset) \
@@ -297,16 +345,17 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 /****************************************************************************/
 /**
 *
-* Writes the given Distributor Interface register.
+* Write the given Distributor Interface register
 *
-* @param    InstancePtr Pointer to the instance to be worked on.
-* @param    RegOffset Register offset to be written.
-* @param    Data 32-bit value to write to the register.
+* @param    InstancePtr is a pointer to the instance to be worked on.
+* @param    RegOffset is the register offset to be written
+* @param    Data is the 32-bit value to write to the register
 *
 * @return   None.
 *
-* @note  C-style signature:
-*        void XScuGic_DistWriteReg(XScuGic *InstancePtr, u32 RegOffset, u32 Data)
+* @note
+* C-style signature:
+*    void XScuGic_DistWriteReg(XScuGic *InstancePtr, u32 RegOffset, u32 Data)
 *
 *****************************************************************************/
 #define XScuGic_DistWriteReg(InstancePtr, RegOffset, Data) \
@@ -316,15 +365,16 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 /****************************************************************************/
 /**
 *
-* Reads the given Distributor Interface register
+* Read the given Distributor Interface register
 *
-* @param    InstancePtr Pointer to the instance to be worked on.
-* @param    RegOffset Register offset to be read.
+* @param    InstancePtr is a pointer to the instance to be worked on.
+* @param    RegOffset is the register offset to be read
 *
-* @return   The 32-bit value of the register.
+* @return   The 32-bit value of the register
 *
-* @note  C-style signature:
-*        u32 XScuGic_DistReadReg(XScuGic *InstancePtr, u32 RegOffset)
+* @note
+* C-style signature:
+*    u32 XScuGic_DistReadReg(XScuGic *InstancePtr, u32 RegOffset)
 *
 *****************************************************************************/
 #define XScuGic_DistReadReg(InstancePtr, RegOffset) \
@@ -334,16 +384,17 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 /****************************************************************************/
 /**
 *
-* Writes the given ReDistributor Interface register.
+* Write the given ReDistributor Interface register
 *
-* @param    InstancePtr Pointer to the instance to be worked on.
-* @param    RegOffset Register offset to be written.
-* @param    Data 32-bit value to write to the register.
+* @param    InstancePtr is a pointer to the instance to be worked on.
+* @param    RegOffset is the register offset to be written
+* @param    Data is the 32-bit value to write to the register
 *
 * @return   None.
 *
-* @note  C-style signature:
-*        void XScuGic_DistWriteReg(XScuGic *InstancePtr, u32 RegOffset, u32 Data)
+* @note
+* C-style signature:
+*    void XScuGic_DistWriteReg(XScuGic *InstancePtr, u32 RegOffset, u32 Data)
 *
 *****************************************************************************/
 #define XScuGic_ReDistWriteReg(InstancePtr, RegOffset, Data) \
@@ -352,15 +403,16 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 /****************************************************************************/
 /**
 *
-* Reads the given ReDistributor Interface register.
+* Read the given ReDistributor Interface register
 *
-* @param    InstancePtr Pointer to the instance to be worked on.
-* @param    RegOffset Register offset to be read.
+* @param    InstancePtr is a pointer to the instance to be worked on.
+* @param    RegOffset is the register offset to be read
 *
-* @return   32-bit value of the register.
+* @return   The 32-bit value of the register
 *
-* @note   C-style signature:
-*         u32 XScuGic_DistReadReg(XScuGic *InstancePtr, u32 RegOffset)
+* @note
+* C-style signature:
+*    u32 XScuGic_DistReadReg(XScuGic *InstancePtr, u32 RegOffset)
 *
 *****************************************************************************/
 #define XScuGic_ReDistReadReg(InstancePtr, RegOffset) \
@@ -369,16 +421,17 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 /****************************************************************************/
 /**
 *
-* Writes the given ReDistributor SGI PPI Interface register.
+* Write the given ReDistributor SGI PPI Interface register
 *
-* @param    InstancePtr Pointer to the instance to be worked on.
-* @param    RegOffset Register offset to be written.
-* @param    Data 32-bit value to write to the register.
+* @param    InstancePtr is a pointer to the instance to be worked on.
+* @param    RegOffset is the register offset to be written
+* @param    Data is the 32-bit value to write to the register
 *
 * @return   None.
 *
-* @note  C-style signature:
-*        void XScuGic_DistWriteReg(XScuGic *InstancePtr, u32 RegOffset, u32 Data)
+* @note
+* C-style signature:
+*    void XScuGic_DistWriteReg(XScuGic *InstancePtr, u32 RegOffset, u32 Data)
 *
 *****************************************************************************/
 #define XScuGic_ReDistSGIPPIWriteReg(InstancePtr, RegOffset, Data) \
@@ -388,15 +441,16 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 /****************************************************************************/
 /**
 *
-* Reads the given ReDistributor SGI PPI Interface register
+* Read the given ReDistributor SGI PPI Interface register
 *
-* @param    InstancePtr Pointer to the instance to be worked on.
-* @param    RegOffset Register offset to be read.
+* @param    InstancePtr is a pointer to the instance to be worked on.
+* @param    RegOffset is the register offset to be read
 *
 * @return   The 32-bit value of the register
 *
-* @note  C-style signature:
-*        u32 XScuGic_DistReadReg(XScuGic *InstancePtr, u32 RegOffset)
+* @note
+* C-style signature:
+*    u32 XScuGic_DistReadReg(XScuGic *InstancePtr, u32 RegOffset)
 *
 *****************************************************************************/
 #define XScuGic_ReDistSGIPPIReadReg(InstancePtr, RegOffset) \
@@ -434,12 +488,13 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 #endif
 /****************************************************************************/
 /**
-* Enables system register interface for GIC CPU Interface.
+* This function enables system register interface for GIC CPU Interface
 *
-* @param	value Value to be written.
+* @param	value to be written
 *
 * @return	None.
 *
+* @note        None.
 *
 *****************************************************************************/
 #if defined (__aarch64__)
@@ -450,12 +505,13 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 #endif
 /****************************************************************************/
 /**
-* Enable Grou0 interrupts.
+* This function enables Grou0 interrupts
 *
 * @param	None.
 *
 * @return	None.
 *
+* @note        None.
 *
 *****************************************************************************/
 #if defined(ARMR52)
@@ -471,6 +527,7 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 *
 * @return	None.
 *
+* @note        None.
 *
 *****************************************************************************/
 #if defined (ARMR52)
@@ -486,12 +543,13 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 #endif
 /****************************************************************************/
 /**
-* Writes to ICC_SGI0R_EL1.
+* This function writes to ICC_SGI0R_EL1
 *
-* @param	value Value to be written.
+* @param	value to be written
 *
 * @return	None.
 *
+* @note     None.
 *
 *****************************************************************************/
 #if defined(ARMR52)
@@ -502,12 +560,13 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 
 /****************************************************************************/
 /**
-* Writes to ICC_SGI1R_EL1.
+* This function writes to ICC_SGI1R_EL1
 *
-* @param	value Value to be written.
+* @param	value to be written
 *
 * @return	None.
 *
+* @note        None.
 *
 *****************************************************************************/
 #if defined(ARMR52)
@@ -518,12 +577,13 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 
 /****************************************************************************/
 /**
-* Reads ICC_SGI1R_EL1 register.
+* This function reads ICC_SGI1R_EL1 register
 *
 * @param	None
 *
 * @return	Value of ICC_SGI1R_EL1 register
 *
+* @note        None.
 *
 *****************************************************************************/
 #if defined (ARMR52)
@@ -533,12 +593,13 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 #endif
 /****************************************************************************/
 /**
-* Sets interrupt priority filter.
+* This function sets interrupt priority filter
 *
 * @param	None.
 *
 * @return	None.
 *
+* @note        None.
 *
 *****************************************************************************/
 #if defined (ARMR52)
@@ -548,12 +609,13 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 #endif
 /****************************************************************************/
 /**
-* Returns interrupt ID of highest priority pending interrupt.
+* This function returns interrupt id of highest priority pending interrupt
 *
 * @param	None.
 *
 * @return	None.
 *
+* @note        None.
 *
 *****************************************************************************/
 #if defined(ARMR52)
@@ -565,12 +627,13 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 #endif
 /****************************************************************************/
 /**
-* Acknowledges the interrupt.
+* This function acks the interrupt
 *
 * @param	None.
 *
 * @return	None.
 *
+* @note        None.
 *
 *****************************************************************************/
 #if defined(ARMR52)
@@ -589,6 +652,7 @@ extern XScuGic_Config XScuGic_ConfigTable[];	/**< Config table */
 *
 * @return	None.
 *
+* @note        None.
 *
 *****************************************************************************/
 #define XScuGic_Get_Rdist_Int_Trigger_Index(IntrId)  ((Int_Id%16) * 2U)
@@ -657,6 +721,5 @@ void XScuGic_MarkCoreAwake(XScuGic *InstancePtr);
 }
 #endif
 
-#endif
-/* end of protection macro */
+#endif            /* end of protection macro */
 /** @} */

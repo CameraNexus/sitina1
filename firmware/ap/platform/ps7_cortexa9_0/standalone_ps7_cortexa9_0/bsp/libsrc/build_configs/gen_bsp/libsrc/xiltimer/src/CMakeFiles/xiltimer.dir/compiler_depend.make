@@ -15,7 +15,6 @@ libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep
   include/xpseudo_asm.h \
   include/xreg_cortexa9.h \
   include/xpseudo_asm_gcc.h \
-  include/xil_util.h \
   include/xscutimer.h \
   include/xscutimer_hw.h
 
@@ -33,7 +32,6 @@ libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.obj: /home/
   include/xpseudo_asm.h \
   include/xreg_cortexa9.h \
   include/xpseudo_asm_gcc.h \
-  include/xil_util.h \
   include/xscutimer.h \
   include/xscutimer_hw.h \
   include/xscutimer.h \
@@ -64,10 +62,9 @@ libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/xiltimer.c.obj: /home/wenting/Sitina
   include/xil_printf.h \
   include/xstatus.h \
   include/bspconfig.h \
-  include/xil_util.h \
-  include/xil_io.h \
   include/xscutimer.h \
-  include/xscutimer_hw.h
+  include/xscutimer_hw.h \
+  include/xil_io.h
 
 
 /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/xiltimer/src/xiltimer.h:
@@ -81,8 +78,6 @@ include/xscugic.h:
 include/xcommon_drv_config.h:
 
 include/xscutimer.h:
-
-include/xil_util.h:
 
 include/xpseudo_asm_gcc.h:
 

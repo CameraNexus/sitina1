@@ -47,10 +47,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake
+CMAKE_COMMAND = /tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake
 
 # The command to remove a file.
-RM = /tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -E rm -f
+RM = /tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -76,43 +76,43 @@ libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep
 libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/core/default_timer/globaltimer_sleep_zynq.c
 libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.obj: libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.obj"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.obj -MF CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.obj.d -o CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/core/default_timer/globaltimer_sleep_zynq.c
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.obj -MF CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.obj.d -o CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/core/default_timer/globaltimer_sleep_zynq.c
 
 libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.i"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/core/default_timer/globaltimer_sleep_zynq.c > CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.i
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/core/default_timer/globaltimer_sleep_zynq.c > CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.i
 
 libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.s"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/core/default_timer/globaltimer_sleep_zynq.c -o CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.s
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/core/default_timer/globaltimer_sleep_zynq.c -o CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep_zynq.c.s
 
 libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.obj: libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/flags.make
 libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/core/scutimer/scutimer.c
 libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.obj: libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.obj"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.obj -MF CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.obj.d -o CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/core/scutimer/scutimer.c
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.obj -MF CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.obj.d -o CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/core/scutimer/scutimer.c
 
 libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.i"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/core/scutimer/scutimer.c > CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.i
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/core/scutimer/scutimer.c > CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.i
 
 libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.s"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/core/scutimer/scutimer.c -o CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.s
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/core/scutimer/scutimer.c -o CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.s
 
 libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/xiltimer.c.obj: libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/flags.make
 libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/xiltimer.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/xiltimer.c
 libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/xiltimer.c.obj: libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/xiltimer.c.obj"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/xiltimer.c.obj -MF CMakeFiles/xiltimer.dir/xiltimer.c.obj.d -o CMakeFiles/xiltimer.dir/xiltimer.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/xiltimer.c
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/xiltimer.c.obj -MF CMakeFiles/xiltimer.dir/xiltimer.c.obj.d -o CMakeFiles/xiltimer.dir/xiltimer.c.obj -c /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/xiltimer.c
 
 libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/xiltimer.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/xiltimer.dir/xiltimer.c.i"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/xiltimer.c > CMakeFiles/xiltimer.dir/xiltimer.c.i
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/xiltimer.c > CMakeFiles/xiltimer.dir/xiltimer.c.i
 
 libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/xiltimer.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/xiltimer.dir/xiltimer.c.s"
-	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/xiltimer.c -o CMakeFiles/xiltimer.dir/xiltimer.c.s
+	cd /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src && /tools/Xilinx/Vitis/2023.2/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xiltimer/src/xiltimer.c -o CMakeFiles/xiltimer.dir/xiltimer.c.s
 
 # Object files for target xiltimer
 xiltimer_OBJECTS = \

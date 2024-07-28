@@ -1,6 +1,6 @@
 /******************************************************************************
 * Copyright (C) 2014 - 2022 Xilinx, Inc.  All rights reserved.
-* Copyright (c) 2023 - 2024 Advanced Micro Devices, Inc. All Rights Reserved.
+* Copyright (c) 2023 Advanced Micro Devices, Inc. All Rights Reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 /*****************************************************************************/
@@ -31,11 +31,7 @@
 * 8.0   mus  06/27/22 Enabled PMU counter.
 * 8.2   asa  02/23/23 Add instruction barrier after updating PMCR_EL0.
 * 9.0   mus  02/23/23 Skip BSS clearing logic in case of warm boot. It
-* 9.1   dp   01/24/24 Dont invoke XTime_StartTTCTimer when xiltimer is enabled
 *                     fixes CR#1157817.
-* 9.1   asa  03/06/23 Clear the PMCR_EL0 C and D bits only if the E bit in
-*                     PMCR_EL0 is 0 indicating that the event counters in PMU
-*                     are disabled.
 * </pre>
 *
 * @note
@@ -113,7 +109,7 @@ _startup:
 	bl __libc_init_array
 
 	/* Reset and start Triple Timer Counter */
-	#if defined (SLEEP_TIMER_BASEADDR) && !defined(XPAR_XILTIMER_ENABLED)
+	#if defined (SLEEP_TIMER_BASEADDR)
 	bl XTime_StartTTCTimer
 	#endif
 
@@ -143,23 +139,14 @@ _startup:
          bl XPVXenConsole_Init
 	.endif
 
-	/*
-	 * Set E, C and D bits only if E bit in PMCR_EL0 says that the counters are disabled.
-	 * There is no need to write to C and D bits if E bit is already enabled as that will
-	 * reset the PMU counters which could be undesirable.
-	 */
+	/* Set E, C and D bits */
 	mrs x1, PMCR_EL0
-	mov x2,x1
-	and x1, x1, #(0x1 << 0)
-	cbnz x1, .jmptomain
-	mov x1,x2
 	orr x1, x1, #(0x1 << 0)
 	orr x1, x1, #(0x1 << 2)
 	orr x1, x1, #(0x1 << 3)
 	msr PMCR_EL0, x1
 	isb
 
-.jmptomain:
 	/* make sure argc and argv are valid */
 	mov	x0, #0
 	mov	x1, #0

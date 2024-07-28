@@ -1,5 +1,5 @@
 /******************************************************************************
-* Copyright (c) 2023 - 2024 Advanced Micro Devices, Inc. All Rights Reserved.
+* Copyright (c) 2023 Advanced Micro Devices, Inc. All Rights Reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 #ifndef BSPCONFIG_H
@@ -9,7 +9,6 @@
 #define XPAR_XILTIMER_ENABLED
 #include "xparameters_ps.h"
 
-
 #if defined (__aarch64__)
 #define EL3  0
 #define EL1_NONSECURE  0
@@ -17,7 +16,6 @@
 #endif
 
 /* #undef versal */
-/* #undef VERSAL */
 /* #undef PSU_PMU */
 /* #undef PLATFORM_ZYNQMP */
 #define PLATFORM_ZYNQ  

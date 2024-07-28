@@ -16,7 +16,6 @@ libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/default_timer/globaltimer_sleep
  /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xpseudo_asm.h
  /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xreg_cortexa9.h
  /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xpseudo_asm_gcc.h
- /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xil_util.h
  /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xscutimer.h
  /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xscutimer_hw.h
 
@@ -35,7 +34,6 @@ libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/core/scutimer/scutimer.c.obj
  /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xpseudo_asm.h
  /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xreg_cortexa9.h
  /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xpseudo_asm_gcc.h
- /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xil_util.h
  /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xscutimer.h
  /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xscutimer_hw.h
  /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xscutimer.h
@@ -67,8 +65,7 @@ libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/xiltimer.c.obj
  /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xil_printf.h
  /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xstatus.h
  /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/bspconfig.h
- /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xil_util.h
- /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xil_io.h
  /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xscutimer.h
  /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xscutimer_hw.h
+ /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/include/xil_io.h
 

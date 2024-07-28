@@ -1,5 +1,5 @@
 /******************************************************************************
-* Copyright (c) 2023 - 2024 Advanced Micro Devices, Inc. All rights reserved.
+* Copyright (c) 2023 Advanced Micro Devices, Inc. All rights reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
@@ -16,9 +16,6 @@
 * Ver   Who  Date     Changes
 * ----- ---- -------- ---------------------------------------------------
 * 9.0   mus  04/19/23 Initial version
-* 9.1   ml   11/16/23 Fix compilation errors reported with -std=c2x compiler flag
-* 9.2   ml   17/01/24 Modified description and code for Xil_SetTlbAttributesR52 and
-*                     Xil_SetTlbAttributes API's to fix doxygen warnings.
 * </pre>
 *
 *
@@ -40,7 +37,7 @@
  * It contains parameters required to fix overlapping created
  * by requested MPU region.
  */
-struct XRequestMpuConfig {
+struct XRequestMpuConfig{
 	UINTPTR BaseAddress;/* MPU region base address */
 	u32 Size;/* MPU region size address */
 	u32 Attribute;/* MPU region size attribute */
@@ -51,7 +48,7 @@ struct XRequestMpuConfig {
 };
 
 /***************** Static functions declarations *********************/
-static u32 Xil_SetTlbAttributesR52(UINTPTR Addr, u32 Size, u32 Attrib)__attribute__((__section__(".boot")));
+static u32 Xil_SetTlbAttributesR52(UINTPTR addr, u32 Size, u32 Attrib)__attribute__((__section__(".boot")));
 static void Xil_AddEntryToMPUConfig(XMpu_Config MpuConfig, struct XMpuConfig NewEntry);
 static u32 Xil_RemoveEntryFromMPUConfig(XMpu_Config MpuConfig, UINTPTR RemovedEntry);
 static void Xil_SetMPUConfig(XMpu_Config MpuConfigNew);
@@ -64,8 +61,7 @@ static u32 Xil_AdjustOverlappedRegions(struct XRequestMpuConfig ReqMPUConfig );
 XMpu_Config Mpu_Config __attribute__((section(".bootdata")));
 
 /************************** Function Prototypes ******************************/
-void Xil_SetAttributeBasedOnConfig(u32 IsSortingNedded)  __attribute__((
-		__section__(".boot"))); /* To be used by only mpu_r52.c and xil_mpu_r52.c */
+ void Xil_SetAttributeBasedOnConfig(u32 IsSortingNedded)  __attribute__((__section__(".boot"))); /* To be used by only mpu_r52.c and xil_mpu_r52.c */
 
 /*****************************************************************************/
 /**
@@ -77,11 +73,10 @@ void Xil_SetAttributeBasedOnConfig(u32 IsSortingNedded)  __attribute__((
 *
 *
 ******************************************************************************/
-static void Xil_SetMPUConfig(XMpu_Config MpuConfigNew)
-{
+static void Xil_SetMPUConfig(XMpu_Config MpuConfigNew) {
 	u32 Cnt;
 
-	for (Cnt = 0; Cnt < MAX_POSSIBLE_MPU_REGS; Cnt++) {
+	for (Cnt=0; Cnt<MAX_POSSIBLE_MPU_REGS; Cnt++) {
 		Mpu_Config[Cnt] = MpuConfigNew[Cnt];
 	}
 }
@@ -98,8 +93,7 @@ static void Xil_SetMPUConfig(XMpu_Config MpuConfigNew)
 *
 *
 ******************************************************************************/
-static u32 Xil_GetNumOfFreeRegionsInReqConfig (XMpu_Config MpuConfig)
-{
+static u32 Xil_GetNumOfFreeRegionsInReqConfig (XMpu_Config MpuConfig) {
 	u32 Index = 0U;
 	u32 NumofFreeRegs = 0U;
 
@@ -114,62 +108,76 @@ static u32 Xil_GetNumOfFreeRegionsInReqConfig (XMpu_Config MpuConfig)
 
 static void Xil_AddEntryToMPUConfig(XMpu_Config MpuConfig, struct XMpuConfig NewEntry)
 {
-	s32 RegNum, NewEntryIndex = 0, LastValidIndex = 0;
+	s32 RegNum, NewEntryIndex=0, LastValidIndex=0;
 	u32 LastValidAddr = 0;
 
 	/* Find last valid region base address */
-	for (RegNum = 0; (RegNum < (s32)MAX_POSSIBLE_MPU_REGS) && (MpuConfig[RegNum].flags & XMPU_VALID_REGION); RegNum++) {
+	for (RegNum = 0; (RegNum < (s32)MAX_POSSIBLE_MPU_REGS) && (MpuConfig[RegNum].flags & XMPU_VALID_REGION); RegNum++)
+	{
 		LastValidAddr =  MpuConfig[RegNum].BaseAddress;
 		LastValidIndex = RegNum;
 	}
 
-	if (NewEntry.BaseAddress > LastValidAddr) {
+	if (NewEntry.BaseAddress > LastValidAddr)
+	{
 		MpuConfig[RegNum] = NewEntry;
 	} else {
 
-		for (RegNum = 0; (RegNum < (s32)MAX_POSSIBLE_MPU_REGS) && (MpuConfig[RegNum].flags & XMPU_VALID_REGION); RegNum++) {
-			if (NewEntry.BaseAddress < MpuConfig[RegNum].BaseAddress) {
-				NewEntryIndex = RegNum;
-				break;
-			}
+		for (RegNum = 0; (RegNum < (s32)MAX_POSSIBLE_MPU_REGS) && (MpuConfig[RegNum].flags & XMPU_VALID_REGION); RegNum++)
+		{
+			if (NewEntry.BaseAddress < MpuConfig[RegNum].BaseAddress)
+			{
+			NewEntryIndex = RegNum;
+		break;
+		}
 		}
 
-		for (RegNum = LastValidIndex + 1; RegNum >= NewEntryIndex; RegNum--) {
-			MpuConfig[RegNum] = MpuConfig[RegNum - 1];
-		}
+		for (RegNum = LastValidIndex+1; RegNum >= NewEntryIndex; RegNum--)
+        {
+			MpuConfig[RegNum] = MpuConfig[RegNum-1];
+        }
 
-		MpuConfig[NewEntryIndex] = NewEntry;
+
+        MpuConfig[NewEntryIndex] = NewEntry;
 	}
 
 }
 
+
 static u32 Xil_RemoveEntryFromMPUConfig(XMpu_Config MpuConfig, UINTPTR RemovedEntry)
 {
-	u32 RegNum, RemovedEntryIndex = 0xFF;
+	u32 RegNum, RemovedEntryIndex=0xFF;
 	u32 Status = XST_FAILURE;
 
-	for (RegNum = 0; (RegNum < MAX_POSSIBLE_MPU_REGS) && (Mpu_Config[RegNum].flags & XMPU_VALID_REGION); RegNum++) {
-		if (RemovedEntry == MpuConfig[RegNum].BaseAddress) {
+
+	for (RegNum = 0; (RegNum < MAX_POSSIBLE_MPU_REGS) && (Mpu_Config[RegNum].flags & XMPU_VALID_REGION); RegNum++)
+	{
+		if (RemovedEntry == MpuConfig[RegNum].BaseAddress)
+		{
 			RemovedEntryIndex = RegNum;
 			break;
 		}
 	}
 
-	if (0xFF == RemovedEntryIndex) {
+	if (0xFF == RemovedEntryIndex)
+	{
 		return Status;
 	}
 
-	if (RemovedEntryIndex != (MAX_POSSIBLE_MPU_REGS - 1)) {
-		for (RegNum = 0; RegNum < (MAX_POSSIBLE_MPU_REGS - 1 - RemovedEntryIndex); RegNum++) {
+
+	if(RemovedEntryIndex != (MAX_POSSIBLE_MPU_REGS - 1))
+	{
+		for (RegNum = 0; RegNum < (MAX_POSSIBLE_MPU_REGS-1-RemovedEntryIndex); RegNum++)
+		{
 			MpuConfig[RemovedEntryIndex + RegNum ] = MpuConfig[RemovedEntryIndex + RegNum + 1];
 		}
 	}
 
-	MpuConfig[MAX_POSSIBLE_MPU_REGS - 1].BaseAddress = 0;
-	MpuConfig[MAX_POSSIBLE_MPU_REGS - 1].RegionStatus = 0;
-	MpuConfig[MAX_POSSIBLE_MPU_REGS - 1].Size = 0;
-	MpuConfig[MAX_POSSIBLE_MPU_REGS - 1].Attribute = 0;
-	MpuConfig[MAX_POSSIBLE_MPU_REGS - 1].flags = 0;
+	MpuConfig[MAX_POSSIBLE_MPU_REGS-1].BaseAddress = 0;
+	MpuConfig[MAX_POSSIBLE_MPU_REGS-1].RegionStatus = 0;
+	MpuConfig[MAX_POSSIBLE_MPU_REGS-1].Size = 0;
+	MpuConfig[MAX_POSSIBLE_MPU_REGS-1].Attribute = 0;
+	MpuConfig[MAX_POSSIBLE_MPU_REGS-1].flags = 0;
 
 	Status = XST_SUCCESS;
 
@@ -191,7 +199,7 @@ static u32 Xil_RemoveEntryFromMPUConfig(XMpu_Config MpuConfig, UINTPTR RemovedEn
 *
 *
 ******************************************************************************/
-void Xil_SetAttributeBasedOnConfig(u32 IsSortingNedded)
+ void Xil_SetAttributeBasedOnConfig(u32 IsSortingNedded)
 {
 	u32 Cnt, Cnt2;
 	struct XMpuConfig Temp;
@@ -200,57 +208,62 @@ void Xil_SetAttributeBasedOnConfig(u32 IsSortingNedded)
 
 	if (IsSortingNedded) {
 		/* Sort MPU region from low to high base address */
-		for (Cnt = 0; (Cnt < MAX_POSSIBLE_MPU_REGS) && (Mpu_Config[Cnt].flags & XMPU_VALID_REGION); Cnt++) {
-			for (Cnt2 = Cnt + 1; (Cnt2 < MAX_POSSIBLE_MPU_REGS) && (Mpu_Config[Cnt2].flags & XMPU_VALID_REGION); Cnt2++) {
+		for (Cnt=0; (Cnt<MAX_POSSIBLE_MPU_REGS) && (Mpu_Config[Cnt].flags & XMPU_VALID_REGION); Cnt++)
+	{
+			for (Cnt2=Cnt+1; (Cnt2<MAX_POSSIBLE_MPU_REGS) && (Mpu_Config[Cnt2].flags & XMPU_VALID_REGION); Cnt2++)
+			{
 
-				if (Mpu_Config[Cnt2].BaseAddress < Mpu_Config[Cnt].BaseAddress) {
-					Temp = Mpu_Config[Cnt];
+			if (Mpu_Config[Cnt2].BaseAddress < Mpu_Config[Cnt].BaseAddress)
+		{
+			Temp = Mpu_Config[Cnt];
 					Mpu_Config[Cnt] = Mpu_Config[Cnt2];
 					Mpu_Config[Cnt2] = Temp;
-				}
-			}
+		}
+		}
 		}
 	}
 
 	/* Program MPU regions based on regions listed in Mpu_Config */
-	for (Cnt = 0; (Cnt < MAX_POSSIBLE_MPU_REGS) && (Mpu_Config[Cnt].flags & XMPU_VALID_REGION); Cnt++) {
+	for (Cnt=0; (Cnt<MAX_POSSIBLE_MPU_REGS) && (Mpu_Config[Cnt].flags & XMPU_VALID_REGION); Cnt++)
+	{
 
 		LocalAddr = (Mpu_Config[Cnt].BaseAddress & XMPU_PBAR_REG_BASEADDR_MASK);
 
 		Local_reg_size = (Mpu_Config[Cnt].Size + LocalAddr);
-		Local_reg_size &= XMPU_PRLAR_REG_ENDADDR_MASK;
-		Local_reg_size |= ((Mpu_Config[Cnt].Attribute >> XMPU_PRLAR_ATTRIBUTE_SHIFT) & XMPU_PRLAR_REG_ATTRIBUTE_MASK);
+	Local_reg_size &= XMPU_PRLAR_REG_ENDADDR_MASK;
+	Local_reg_size |= ((Mpu_Config[Cnt].Attribute >> XMPU_PRLAR_ATTRIBUTE_SHIFT) & XMPU_PRLAR_REG_ATTRIBUTE_MASK);
 		Local_reg_size |= REGION_EN;
 		dsb();
 
-		mtcp(XREG_CP15_MPU_MEMORY_REG_NUMBER, Cnt);
+		mtcp(XREG_CP15_MPU_MEMORY_REG_NUMBER,Cnt);
 		isb();
 
-		mtcp(XREG_CP15_MPU_REG_BASEADDR, (LocalAddr | (Mpu_Config[Cnt].Attribute &
-						  XMPU_PBAR_REG_ATTRIBUTE_MASK))); /* Set base address of a region */
-		mtcp(XREG_CP15_MPU_REG_SIZE_EN, Local_reg_size);	/* set the region size and enable it*/
+		mtcp(XREG_CP15_MPU_REG_BASEADDR,(LocalAddr | (Mpu_Config[Cnt].Attribute & XMPU_PBAR_REG_ATTRIBUTE_MASK))); /* Set base address of a region */
+		mtcp(XREG_CP15_MPU_REG_SIZE_EN,Local_reg_size);	/* set the region size and enable it*/
 		dsb();
 		isb();	/* synchronize context on this processor */
 	}
 }
 
-static u32 Xil_SetTlbAttributesR52(UINTPTR Addr, u32 Size, u32 Attrib)
+static u32 Xil_SetTlbAttributesR52(UINTPTR addr, u32 Size, u32 Attrib)
 {
-	u32 Cnt, AttrChange = 0, NumFreeRegion = 0, Status = XST_FAILURE ;
-	u32 StartRegNum = 0xFF, EndRegNum = 0xFF;
-	u32 Redundant_RegNum[16], RedundantRegCnt = 0;
+	u32 Cnt,AttrChange = 0, NumFreeRegion = 0, Status = XST_FAILURE ;
+    u32 StartRegNum = 0xFF, EndRegNum = 0xFF;
+	u32 Redundant_RegNum[16], RedundantRegCnt=0;
 	u32 Endaddr, ReqEndAddr;
 	XMpu_Config MpuConfig, MpuConfigNew;
 	struct XRequestMpuConfig ReqMPUConfig;
 	struct XMpuConfig Temp;
-	u32 Localaddr = Addr;
+	u32 Localaddr = addr;
 
 	Xil_GetMPUConfig(MpuConfig);
 	Xil_GetMPUConfig(MpuConfigNew);
 
-	ReqEndAddr =  (((Addr & XMPU_PBAR_REG_BASEADDR_MASK) + Size) | 0x3F);
+	ReqEndAddr =  (((addr & XMPU_PBAR_REG_BASEADDR_MASK) + Size) | 0x3F);
 
-	for (Cnt = 0; (Cnt < MAX_POSSIBLE_MPU_REGS) && (MpuConfig[Cnt].flags & XMPU_VALID_REGION); Cnt++) {
+
+	for (Cnt=0; (Cnt<MAX_POSSIBLE_MPU_REGS) && (MpuConfig[Cnt].flags & XMPU_VALID_REGION); Cnt++)
+    {
 		Endaddr =  MpuConfig[Cnt].Size + MpuConfig[Cnt].BaseAddress;
 		Endaddr |=  0x3F;
 
@@ -280,24 +293,30 @@ static u32 Xil_SetTlbAttributesR52(UINTPTR Addr, u32 Size, u32 Attrib)
 		 *
 		 */
 
-		if ( ((MpuConfig[Cnt].BaseAddress <= Addr) && (Endaddr >= Addr))) {
+		if ( ((MpuConfig[Cnt].BaseAddress <= addr) && (Endaddr >= addr)))
+		{
 
 			StartRegNum = Cnt;
 		}
 
-		if ( ((MpuConfig[Cnt].BaseAddress <= ReqEndAddr) && (Endaddr >= ReqEndAddr))) {
-			EndRegNum = Cnt;
-			if (StartRegNum == EndRegNum) {
-				if ((MpuConfig[Cnt].BaseAddress == (Addr & XMPU_PBAR_REG_BASEADDR_MASK)) && (ReqEndAddr == Endaddr) ) {
-					AttrChange = 1;
-				}
-			}
 
-			break;
+		if ( ((MpuConfig[Cnt].BaseAddress <= ReqEndAddr) && (Endaddr >= ReqEndAddr)))
+        {
+				EndRegNum = Cnt;
+				if (StartRegNum == EndRegNum)
+                {
+			if ((MpuConfig[Cnt].BaseAddress == (addr & XMPU_PBAR_REG_BASEADDR_MASK)) && (ReqEndAddr == Endaddr) )
+                    {
+                        AttrChange = 1;
+                    }
+                }
+
+				break;
 		}
 
 		/* Check for scenario4 */
-		if (StartRegNum != 0xFF && StartRegNum != Cnt) {
+		if (StartRegNum != 0xFF && StartRegNum != Cnt)
+		{
 			/*
 			 * MPU regions other than StartRegNum and EndRegNum in scenario4
 			 * will be included in Redundant_RegNum array.
@@ -306,12 +325,14 @@ static u32 Xil_SetTlbAttributesR52(UINTPTR Addr, u32 Size, u32 Attrib)
 			RedundantRegCnt++;
 		}
 
-	}
+
+    }
 
 	if (AttrChange) {
 		/* Requested region size and base address is same as that of one of the existig MPU region */
 		Status = Xil_RemoveEntryFromMPUConfig(MpuConfigNew, MpuConfig[StartRegNum].BaseAddress);
-		if (Status != XST_SUCCESS) {
+		if (Status != XST_SUCCESS)
+		{
 			return Status;
 		}
 
@@ -323,12 +344,11 @@ static u32 Xil_SetTlbAttributesR52(UINTPTR Addr, u32 Size, u32 Attrib)
 		Xil_AddEntryToMPUConfig(MpuConfigNew, Temp);
 		Xil_SetMPUConfig(MpuConfigNew);
 
-	} else if (StartRegNum == 0xFF && EndRegNum == 0xFF) {
+	}else if (StartRegNum == 0xFF && EndRegNum == 0xFF) {
 		/* No overlapping, new region has been requested*/
 		NumFreeRegion = Xil_GetNumOfFreeRegionsInReqConfig (MpuConfigNew);
-		if (NumFreeRegion == 0) {
+		if (NumFreeRegion == 0)
 			return XST_FAILURE;
-		}
 
 		Temp.BaseAddress = (Localaddr & XMPU_PBAR_REG_BASEADDR_MASK);
 		Temp.Size = (Size - 1);
@@ -345,14 +365,14 @@ static u32 Xil_SetTlbAttributesR52(UINTPTR Addr, u32 Size, u32 Attrib)
 		ReqMPUConfig.StartRegNum = StartRegNum;
 		ReqMPUConfig.EndRegNum = EndRegNum;
 		ReqMPUConfig.RedundantRegCnt = RedundantRegCnt;
-		for (Cnt = 0 ; Cnt < RedundantRegCnt; Cnt++) {
+		for (Cnt =0 ; Cnt < RedundantRegCnt; Cnt++)
+		{
 			ReqMPUConfig.Redundant_RegNum[Cnt] = Redundant_RegNum[Cnt];
 		}
 
 		Status = Xil_AdjustOverlappedRegions(ReqMPUConfig);
-		if (Status != XST_SUCCESS) {
+		if (Status != XST_SUCCESS)
 			return XST_FAILURE;
-		}
 
 	}
 	dsb();
@@ -378,22 +398,26 @@ u32 Xil_AdjustOverlappedRegions(struct XRequestMpuConfig ReqMPUConfig )
 	Xil_GetMPUConfig(MpuConfigNew);
 
 	Status = Xil_RemoveEntryFromMPUConfig(MpuConfigNew, MpuConfig[StartRegNum].BaseAddress);
-	if (Status != XST_SUCCESS) {
+	if (Status != XST_SUCCESS)
+	{
 		return Status;
 	}
 
 	if (StartRegNum != EndRegNum) {
 		/* More than one region impacted */
 
-		for (Cnt = 0; Cnt < ReqMPUConfig.RedundantRegCnt; Cnt++) {
+		for (Cnt = 0; Cnt < ReqMPUConfig.RedundantRegCnt; Cnt++)
+		{
 			Status = Xil_RemoveEntryFromMPUConfig(MpuConfigNew, MpuConfig[ReqMPUConfig.Redundant_RegNum[Cnt]].BaseAddress);
-			if (Status != XST_SUCCESS) {
+			if (Status != XST_SUCCESS)
+			{
 				return Status;
 			}
 		}
 
 		Status = Xil_RemoveEntryFromMPUConfig(MpuConfigNew, MpuConfig[EndRegNum].BaseAddress);
-		if (Status != XST_SUCCESS) {
+		if (Status != XST_SUCCESS)
+		{
 			return Status;
 		}
 	}
@@ -402,8 +426,9 @@ u32 Xil_AdjustOverlappedRegions(struct XRequestMpuConfig ReqMPUConfig )
 	Endaddr =  MpuConfig[EndRegNum].Size + MpuConfig[EndRegNum].BaseAddress;
 	Endaddr |=  0x3F;
 	if ( (StartRegNum != EndRegNum) && \
-	     (MpuConfig[StartRegNum].BaseAddress == (ReqMPUConfig.BaseAddress & XMPU_PBAR_REG_BASEADDR_MASK))  && \
-	     ((MpuConfig[EndRegNum].BaseAddress + MpuConfig[EndRegNum].Size) | 0x3F) == ReqEndAddr) {
+		 (MpuConfig[StartRegNum].BaseAddress == (ReqMPUConfig.BaseAddress & XMPU_PBAR_REG_BASEADDR_MASK))  && \
+		   ((MpuConfig[EndRegNum].BaseAddress + MpuConfig[EndRegNum].Size) | 0x3F) == ReqEndAddr)
+	{
 		/* 1 free region needed */
 		Temp.BaseAddress = MpuConfig[StartRegNum].BaseAddress;
 		Temp.Size = (Size - 1);
@@ -416,7 +441,8 @@ u32 Xil_AdjustOverlappedRegions(struct XRequestMpuConfig ReqMPUConfig )
 	} else if ( MpuConfig[StartRegNum].BaseAddress == (Localaddr & XMPU_PBAR_REG_BASEADDR_MASK)) {
 		/* 2 free regions needed */
 		NumFreeRegion = Xil_GetNumOfFreeRegionsInReqConfig (MpuConfigNew);
-		if (NumFreeRegion < 2) {
+		if (NumFreeRegion < 2)
+		{
 			return XST_FAILURE;
 		}
 
@@ -441,68 +467,69 @@ u32 Xil_AdjustOverlappedRegions(struct XRequestMpuConfig ReqMPUConfig )
 
 		Xil_AddEntryToMPUConfig(MpuConfigNew, Temp);
 	} else if  (Endaddr == ReqEndAddr) {
-		/* 2 free regions needed */
-		NumFreeRegion = Xil_GetNumOfFreeRegionsInReqConfig (MpuConfigNew);
-		if (NumFreeRegion < 2) {
-			return XST_FAILURE;
-		}
+			/* 2 free regions needed */
+			NumFreeRegion = Xil_GetNumOfFreeRegionsInReqConfig (MpuConfigNew);
+			if (NumFreeRegion < 2)
+			{
+				return XST_FAILURE;
+			}
 
-		Temp.BaseAddress = MpuConfig[StartRegNum].BaseAddress;
-		Temp.Size = ((MpuConfig[StartRegNum].BaseAddress + MpuConfig[StartRegNum].Size) | 0x3F) -
-			    (Localaddr & XMPU_PBAR_REG_BASEADDR_MASK) - 1;
-		Temp.RegionStatus = MPU_REG_ENABLED;
-		Temp.Attribute = MpuConfig[StartRegNum].Attribute;
-		Temp.flags = XMPU_VALID_REGION;
+			Temp.BaseAddress = MpuConfig[StartRegNum].BaseAddress;
+			Temp.Size = ((MpuConfig[StartRegNum].BaseAddress + MpuConfig[StartRegNum].Size) | 0x3F) - (Localaddr & XMPU_PBAR_REG_BASEADDR_MASK) - 1;
+			Temp.RegionStatus = MPU_REG_ENABLED;
+			Temp.Attribute = MpuConfig[StartRegNum].Attribute;
+			Temp.flags = XMPU_VALID_REGION;
 
-		Xil_AddEntryToMPUConfig(MpuConfigNew, Temp);
+			Xil_AddEntryToMPUConfig(MpuConfigNew, Temp);
 
-		Temp.BaseAddress = (ReqMPUConfig.BaseAddress & XMPU_PBAR_REG_BASEADDR_MASK);
-		Temp.Size = (Size - 1);
-		Temp.RegionStatus = MPU_REG_ENABLED;
-		Temp.Attribute = Attrib;
-		Temp.flags = XMPU_VALID_REGION;
+			Temp.BaseAddress = (ReqMPUConfig.BaseAddress & XMPU_PBAR_REG_BASEADDR_MASK);
+			Temp.Size = (Size - 1);
+			Temp.RegionStatus = MPU_REG_ENABLED;
+			Temp.Attribute = Attrib;
+			Temp.flags = XMPU_VALID_REGION;
 
-		Xil_AddEntryToMPUConfig(MpuConfigNew, Temp);
+			Xil_AddEntryToMPUConfig(MpuConfigNew, Temp);
 	} else {
-		/* 3 free regions needed */
-		NumFreeRegion = Xil_GetNumOfFreeRegionsInReqConfig (MpuConfigNew);
-		if (NumFreeRegion < 3) {
-			return XST_FAILURE;
+			/* 3 free regions needed */
+			NumFreeRegion = Xil_GetNumOfFreeRegionsInReqConfig (MpuConfigNew);
+			if (NumFreeRegion < 3)
+			{
+				return XST_FAILURE;
+			}
+
+			Temp.BaseAddress = MpuConfig[StartRegNum].BaseAddress;
+			Temp.Size = (ReqMPUConfig.BaseAddress & XMPU_PBAR_REG_BASEADDR_MASK) - Temp.BaseAddress - 1;
+			Temp.RegionStatus = MPU_REG_ENABLED;
+			Temp.Attribute = MpuConfig[StartRegNum].Attribute;
+			Temp.flags = XMPU_VALID_REGION;
+
+			Xil_AddEntryToMPUConfig(MpuConfigNew, Temp);
+
+			Temp.BaseAddress = (ReqMPUConfig.BaseAddress & XMPU_PBAR_REG_BASEADDR_MASK);
+			Temp.Size = (Size - 1);
+			Temp.RegionStatus = MPU_REG_ENABLED;
+			Temp.Attribute = Attrib;
+			Temp.flags = XMPU_VALID_REGION;
+
+			Xil_AddEntryToMPUConfig(MpuConfigNew, Temp);
+
+			if (StartRegNum != EndRegNum) {
+				RegNum = EndRegNum;
+			} else {
+				RegNum = StartRegNum;
+			}
+
+			Temp.BaseAddress = (((Temp.BaseAddress + Temp.Size) | 0x3F) + 1) & XMPU_PBAR_REG_BASEADDR_MASK;
+			Temp.Size =  ((MpuConfig[RegNum].BaseAddress + MpuConfig[RegNum].Size) | 0x3F) - Temp.BaseAddress - 1 ;
+			Temp.RegionStatus = MPU_REG_ENABLED;
+			Temp.Attribute =  MpuConfig[RegNum].Attribute;
+			Temp.flags = XMPU_VALID_REGION;
+
+			Xil_AddEntryToMPUConfig(MpuConfigNew, Temp);
 		}
+		Xil_SetMPUConfig(MpuConfigNew);
 
-		Temp.BaseAddress = MpuConfig[StartRegNum].BaseAddress;
-		Temp.Size = (ReqMPUConfig.BaseAddress & XMPU_PBAR_REG_BASEADDR_MASK) - Temp.BaseAddress - 1;
-		Temp.RegionStatus = MPU_REG_ENABLED;
-		Temp.Attribute = MpuConfig[StartRegNum].Attribute;
-		Temp.flags = XMPU_VALID_REGION;
-
-		Xil_AddEntryToMPUConfig(MpuConfigNew, Temp);
-
-		Temp.BaseAddress = (ReqMPUConfig.BaseAddress & XMPU_PBAR_REG_BASEADDR_MASK);
-		Temp.Size = (Size - 1);
-		Temp.RegionStatus = MPU_REG_ENABLED;
-		Temp.Attribute = Attrib;
-		Temp.flags = XMPU_VALID_REGION;
-
-		Xil_AddEntryToMPUConfig(MpuConfigNew, Temp);
-
-		if (StartRegNum != EndRegNum) {
-			RegNum = EndRegNum;
-		} else {
-			RegNum = StartRegNum;
-		}
-
-		Temp.BaseAddress = (((Temp.BaseAddress + Temp.Size) | 0x3F) + 1) & XMPU_PBAR_REG_BASEADDR_MASK;
-		Temp.Size =  ((MpuConfig[RegNum].BaseAddress + MpuConfig[RegNum].Size) | 0x3F) - Temp.BaseAddress - 1 ;
-		Temp.RegionStatus = MPU_REG_ENABLED;
-		Temp.Attribute =  MpuConfig[RegNum].Attribute;
-		Temp.flags = XMPU_VALID_REGION;
-
-		Xil_AddEntryToMPUConfig(MpuConfigNew, Temp);
-	}
-	Xil_SetMPUConfig(MpuConfigNew);
-
-	return XST_SUCCESS;
+		return XST_SUCCESS;
 }
 
 /*****************************************************************************/
@@ -517,14 +544,14 @@ u32 Xil_AdjustOverlappedRegions(struct XRequestMpuConfig ReqMPUConfig )
 *           scheduler and interrupts.
 *
 ******************************************************************************/
-u32 Xil_SetTlbAttributes(UINTPTR Addr, u32 attrib)
+u32 Xil_SetTlbAttributes(UINTPTR addr, u32 attrib)
 {
 	/*
 	 * Sets attribute of section of 1 MB memory, if user wants to set it
 	 * for different size of memory section, Xil_SetMPURegion API needs
 	 * to be used.
 	 */
-	return (Xil_SetTlbAttributesR52(Addr, 0x100000, attrib));
+	return (Xil_SetTlbAttributesR52(addr, 0x100000, attrib));
 }
 
 /*****************************************************************************/
@@ -542,8 +569,9 @@ u32 Xil_SetTlbAttributes(UINTPTR Addr, u32 attrib)
 ******************************************************************************/
 u32 Xil_SetMPURegion(UINTPTR addr, u64 size, u32 attrib)
 {
-	return (Xil_SetTlbAttributesR52(addr, size, attrib));
+    return (Xil_SetTlbAttributesR52(addr, size, attrib));
 }
+
 
 /*****************************************************************************/
 /**
@@ -556,21 +584,21 @@ u32 Xil_SetMPURegion(UINTPTR addr, u64 size, u32 attrib)
 void Xil_EnableMPU(void)
 {
 	u32 CtrlReg, Reg;
-	s32 DCacheStatus = 0, ICacheStatus = 0;
+	s32 DCacheStatus=0, ICacheStatus=0;
 	/* enable caches only if they are disabled */
 	CtrlReg = mfcp(XREG_CP15_SYS_CONTROL);
 
 	if ((CtrlReg & XREG_CP15_CONTROL_C_BIT) != 0x00000000U) {
-		DCacheStatus = 1;
+		DCacheStatus=1;
 	}
 	if ((CtrlReg & XREG_CP15_CONTROL_I_BIT) != 0x00000000U) {
-		ICacheStatus = 1;
+		ICacheStatus=1;
 	}
 
-	if (DCacheStatus != 0) {
+	if(DCacheStatus != 0) {
 		Xil_DCacheDisable();
 	}
-	if (ICacheStatus != 0) {
+	if(ICacheStatus != 0){
 		Xil_ICacheDisable();
 	}
 
@@ -581,10 +609,10 @@ void Xil_EnableMPU(void)
 	mtcp(XREG_CP15_SYS_CONTROL, Reg);
 	isb();
 	/* enable caches only if they are disabled in routine*/
-	if (DCacheStatus != 0) {
+	if(DCacheStatus != 0) {
 		Xil_DCacheEnable();
 	}
-	if (ICacheStatus != 0) {
+	if(ICacheStatus != 0) {
 		Xil_ICacheEnable();
 	}
 }
@@ -600,20 +628,20 @@ void Xil_EnableMPU(void)
 void Xil_DisableMPU(void)
 {
 	u32 CtrlReg, Reg;
-	s32 DCacheStatus = 0, ICacheStatus = 0;
+	s32 DCacheStatus=0, ICacheStatus=0;
 	/* enable caches only if they are disabled */
 	CtrlReg = mfcp(XREG_CP15_SYS_CONTROL);
 	if ((CtrlReg & XREG_CP15_CONTROL_C_BIT) != 0x00000000U) {
-		DCacheStatus = 1;
+		DCacheStatus=1;
 	}
 	if ((CtrlReg & XREG_CP15_CONTROL_I_BIT) != 0x00000000U) {
-		ICacheStatus = 1;
+		ICacheStatus=1;
 	}
 
-	if (DCacheStatus != 0) {
+	if(DCacheStatus != 0) {
 		Xil_DCacheDisable();
 	}
-	if (ICacheStatus != 0) {
+	if(ICacheStatus != 0){
 		Xil_ICacheDisable();
 	}
 
@@ -624,13 +652,14 @@ void Xil_DisableMPU(void)
 	mtcp(XREG_CP15_SYS_CONTROL, Reg);
 	isb();
 	/* enable caches only if they are disabled in routine*/
-	if (DCacheStatus != 0) {
+	if(DCacheStatus != 0) {
 		Xil_DCacheEnable();
 	}
-	if (ICacheStatus != 0) {
+	if(ICacheStatus != 0) {
 		Xil_ICacheEnable();
 	}
 }
+
 
 /*****************************************************************************/
 /**
@@ -642,8 +671,7 @@ void Xil_DisableMPU(void)
 *
 *
 ******************************************************************************/
-void Xil_GetMPUConfig (XMpu_Config mpuconfig)
-{
+void Xil_GetMPUConfig (XMpu_Config mpuconfig) {
 	u32 Index = 0U;
 
 	while (Index < MAX_POSSIBLE_MPU_REGS) {
@@ -660,8 +688,7 @@ void Xil_GetMPUConfig (XMpu_Config mpuconfig)
 *
 *
 ******************************************************************************/
-u32 Xil_GetNumOfFreeRegions (void)
-{
+u32 Xil_GetNumOfFreeRegions (void) {
 	u32 Index = 0U;
 	u32 NumofFreeRegs = 0U;
 
@@ -686,8 +713,7 @@ u32 Xil_GetNumOfFreeRegions (void)
 *
 *
 ******************************************************************************/
-u16 Xil_GetMPUFreeRegMask (void)
-{
+u16 Xil_GetMPUFreeRegMask (void) {
 	u32 Index = 0U;
 	u16 FreeRegMask = 0U;
 
@@ -710,8 +736,7 @@ u16 Xil_GetMPUFreeRegMask (void)
 *
 *
 ******************************************************************************/
-u32 Xil_DisableMPURegionByRegNum (u32 reg_num)
-{
+u32 Xil_DisableMPURegionByRegNum (u32 reg_num) {
 	u32 ReturnVal = XST_FAILURE;
 	u32 Status;
 	XMpu_Config MpuConfig;
@@ -724,10 +749,11 @@ u32 Xil_DisableMPURegionByRegNum (u32 reg_num)
 	Xil_GetMPUConfig(MpuConfig);
 
 	Status = Xil_RemoveEntryFromMPUConfig(MpuConfig, MpuConfig[reg_num].BaseAddress);
-	ReturnVal = Status;
+    ReturnVal = Status;
 
-	if (XST_SUCCESS != ReturnVal) {
-		return ReturnVal;
+    if (XST_SUCCESS != ReturnVal)
+    {
+	return ReturnVal;
 	}
 	Xil_SetMPUConfig(MpuConfig);
 	dsb();
@@ -736,6 +762,7 @@ u32 Xil_DisableMPURegionByRegNum (u32 reg_num)
 	Xil_DisableMPURegions();
 	Xil_SetAttributeBasedOnConfig(0x0);
 	Xil_EnableMPU();
+
 
 exit1:
 	return ReturnVal;
@@ -763,7 +790,7 @@ u32 Xil_GetNextMPURegion(void)
 	return NextAvailableReg;
 }
 
-#define u32overflow(a, b) ({__typeof__(a) s; __builtin_uadd_overflow(a, b, &s); })
+#define u32overflow(a, b) ({typeof(a) s; __builtin_uadd_overflow(a, b, &s); })
 
 /*****************************************************************************/
 /**
@@ -799,6 +826,6 @@ void *Xil_MemMap(UINTPTR PhysAddr, size_t size, u32 flags)
 	}
 
 	return ((Xil_SetMPURegion(PhysAddr,
-				  size, flags) == XST_SUCCESS) ?
-		(void *)(PhysAddr & XMPU_PBAR_REG_BASEADDR_MASK) : NULL);
+                                        size, flags) == XST_SUCCESS) ?
+                                        (void *)(PhysAddr & XMPU_PBAR_REG_BASEADDR_MASK) : NULL);
 }

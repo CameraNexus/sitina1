@@ -14,7 +14,7 @@
 			"autoAttachProcessChildren": false,
 			"target": {
 				"targetConnectionId": "Local",
-				"peersIniPath": "../../../.wsdata/.peers.ini",
+				"peersIniPath": "../../../.peers.ini",
 				"context": "zynq"
 			},
 			"targetSetup": {

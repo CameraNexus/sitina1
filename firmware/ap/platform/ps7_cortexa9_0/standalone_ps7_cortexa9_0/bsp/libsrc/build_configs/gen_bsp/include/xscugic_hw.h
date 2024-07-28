@@ -1,6 +1,6 @@
 /******************************************************************************
 * Copyright (C) 2010 - 2022 Xilinx, Inc.  All rights reserved.
-* Copyright (C) 2022 - 2024 Advanced Micro Devices, Inc. All Rights Reserved.
+* Copyright (C) 2022 - 2023 Advanced Micro Devices, Inc. All Rights Reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
@@ -8,11 +8,11 @@
 /**
 *
 * @file xscugic_hw.h
-* @addtogroup scugic_api SCUGIC APIs
+* @addtogroup scugic Overview
 * @{
 *
-* The xscugic_hw.h header file contains identifiers and hardware access functions (or
-* macros) that can be used to access the device. The user should refer to the
+* This header file contains identifiers and HW access functions (or
+* macros) that can be used to access the device.  The user should refer to the
 * hardware device specification for more details of the device operation.
 * The driver functions/APIs are defined in xscugic.h.
 *
@@ -560,12 +560,13 @@ extern "C" {
 /****************************************************************************/
 /**
 *
-* Reads the Interrupt Configuration Register offset for an interrupt ID.
+* Read the Interrupt Configuration Register offset for an interrupt id.
 *
-* @param	InterruptID Interrupt number.
+* @param	InterruptID is the interrupt number.
 *
 * @return	The 32-bit value of the offset
 *
+* @note
 *
 *****************************************************************************/
 #define XSCUGIC_INT_CFG_OFFSET_CALC(InterruptID) \
@@ -574,12 +575,13 @@ extern "C" {
 /****************************************************************************/
 /**
 *
-* Reads the Interrupt Priority Register offset for an interrupt ID.
+* Read the Interrupt Priority Register offset for an interrupt id.
 *
-* @param	InterruptID Interrupt number.
+* @param	InterruptID is the interrupt number.
 *
 * @return	The 32-bit value of the offset
 *
+* @note
 *
 *****************************************************************************/
 #define XSCUGIC_PRIORITY_OFFSET_CALC(InterruptID) \
@@ -588,12 +590,13 @@ extern "C" {
 /****************************************************************************/
 /**
 *
-* Reads the Interrupt Routing Register offset for an interrupt ID.
+* Read the Interrupt Routing Register offset for an interrupt id.
 *
-* @param	InterruptID Interrupt number.
+* @param	InterruptID is the interrupt number.
 *
 * @return	The 32-bit value of the offset
 *
+* @note
 *
 *****************************************************************************/
 #define XSCUGIC_IROUTER_OFFSET_CALC(InterruptID) \
@@ -602,12 +605,13 @@ extern "C" {
 /****************************************************************************/
 /**
 *
-* Reads the SPI Target Register offset for an interrupt ID.
+* Read the SPI Target Register offset for an interrupt id.
 *
-* @param	InterruptID Interrupt number.
+* @param	InterruptID is the interrupt number.
 *
-* @return	The 32-bit value of the offset.
+* @return	The 32-bit value of the offset
 *
+* @note
 *
 *****************************************************************************/
 #define XSCUGIC_SPI_TARGET_OFFSET_CALC(InterruptID) \
@@ -615,12 +619,13 @@ extern "C" {
 /****************************************************************************/
 /**
 *
-* Reads the SPI Target Register offset for an interrupt ID.
+* Read the SPI Target Register offset for an interrupt id.
 *
-* @param	InterruptID Interrupt number.
+* @param	InterruptID is the interrupt number.
 *
 * @return	The 32-bit value of the offset
 *
+* @note
 *
 *****************************************************************************/
 #define XSCUGIC_SECURITY_TARGET_OFFSET_CALC(InterruptID) \
@@ -629,12 +634,13 @@ extern "C" {
 /****************************************************************************/
 /**
 *
-* Reads the Re-distributor Interrupt configuration register offset.
+* Read the Re-distributor Interrupt configuration register offset
 *
-* @param	InterruptID Interrupt number.
+* @param	InterruptID is the interrupt number.
 *
 * @return	The 32-bit value of the offset
 *
+* @note
 *
 *****************************************************************************/
 #define XSCUGIC_RDIST_INT_CONFIG_OFFSET_CALC(InterruptID) \
@@ -643,12 +649,13 @@ extern "C" {
 /****************************************************************************/
 /**
 *
-* Reads the Re-distributor Interrupt Priority register offset.
+* Read the Re-distributor Interrupt Priority register offset
 *
-* @param	InterruptID Interrupt number.
+* @param	InterruptID is the interrupt number.
 *
 * @return	The 32-bit value of the offset
 *
+* @note
 *
 *****************************************************************************/
 #define XSCUGIC_RDIST_INT_PRIORITY_OFFSET_CALC(InterruptID) \
@@ -656,13 +663,14 @@ extern "C" {
 /****************************************************************************/
 /**
 *
-* Reads the Interrupt Clear-Enable Register offset for an interrupt ID.
+* Read the Interrupt Clear-Enable Register offset for an interrupt ID
 *
-* @param	Register Register offset for the clear/enable bank.
-* @param	InterruptID Interrupt number.
+* @param	Register is the register offset for the clear/enable bank.
+* @param	InterruptID is the interrupt number.
 *
 * @return	The 32-bit value of the offset
 *
+* @note
 *
 *****************************************************************************/
 #define XSCUGIC_EN_DIS_OFFSET_CALC(Register, InterruptID) \
@@ -671,15 +679,16 @@ extern "C" {
 /****************************************************************************/
 /**
 *
-* Reads the given Intc register.
+* Read the given Intc register.
 *
-* @param	BaseAddress Base address of the device.
-* @param	RegOffset Register offset to be read.
+* @param	BaseAddress is the base address of the device.
+* @param	RegOffset is the register offset to be read
 *
 * @return	The 32-bit value of the register
 *
-* @note  C-style signature:
-*        u32 XScuGic_ReadReg(u32 BaseAddress, u32 RegOffset)
+* @note
+* C-style signature:
+*    u32 XScuGic_ReadReg(u32 BaseAddress, u32 RegOffset)
 *
 *****************************************************************************/
 #define XScuGic_ReadReg(BaseAddress, RegOffset) \
@@ -688,15 +697,16 @@ extern "C" {
 /****************************************************************************/
 /**
 *
-* Reads the given Intc register.
+* Read the given Intc register.
 *
-* @param        BaseAddress Base address of the device.
-* @param        RegOffset Register offset to be read.
+* @param        BaseAddress is the base address of the device.
+* @param        RegOffset is the register offset to be read
 *
 * @return       The 64-bit value of the register
 *
-* @note  C-style signature:
-*        u32 XScuGic_ReadReg64(UINTPTR BaseAddress, u32 RegOffset)
+* @note
+* C-style signature:
+*    u32 XScuGic_ReadReg64(UINTPTR BaseAddress, u32 RegOffset)
 *
 *****************************************************************************/
 #define XScuGic_ReadReg64(BaseAddress, RegOffset) \
@@ -705,16 +715,17 @@ extern "C" {
 /****************************************************************************/
 /**
 *
-* Writes the given Intc register.
+* Write the given Intc register.
 *
-* @param	BaseAddress Base address of the device.
-* @param	RegOffset Register offset to be written
-* @param	Data 32-bit value to write to the register
+* @param	BaseAddress is the base address of the device.
+* @param	RegOffset is the register offset to be written
+* @param	Data is the 32-bit value to write to the register
 *
 * @return	None.
 *
-* @note  C-style signature:
-*        void XScuGic_WriteReg(u32 BaseAddress, u32 RegOffset, u32 Data)
+* @note
+* C-style signature:
+*    void XScuGic_WriteReg(u32 BaseAddress, u32 RegOffset, u32 Data)
 *
 *****************************************************************************/
 #define XScuGic_WriteReg(BaseAddress, RegOffset, Data) \

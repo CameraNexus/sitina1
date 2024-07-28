@@ -4,28 +4,26 @@
 libsrc/xilffs/src/CMakeFiles/xilffs.dir/diskio.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xilffs/src/diskio.c \
   include/diskio.h \
   include/ff.h \
-  include/ffconf.h \
-  include/xilffs_config.h \
-  include/xilffs.h \
-  include/xil_util.h \
   include/xil_types.h \
   include/bspconfig.h \
   include/xmem_config.h \
   include/xparameters_ps.h \
-  include/xil_io.h \
-  include/xil_printf.h \
-  include/xstatus.h \
-  include/xil_assert.h \
-  include/xpseudo_asm.h \
-  include/xreg_cortexa9.h \
-  include/xpseudo_asm_gcc.h \
+  include/ffconf.h \
+  include/xilffs_config.h \
   include/ff.h \
   include/xil_types.h \
   include/xstatus.h \
+  include/xil_assert.h \
   include/xilffs_config.h \
   include/xsdps.h \
+  include/xil_printf.h \
   include/xil_cache.h \
+  include/xstatus.h \
   include/xsdps_hw.h \
+  include/xil_io.h \
+  include/xpseudo_asm.h \
+  include/xreg_cortexa9.h \
+  include/xpseudo_asm_gcc.h \
   include/xplatform_info.h \
   include/sleep.h \
   include/sleep.h \
@@ -43,14 +41,6 @@ libsrc/xilffs/src/CMakeFiles/xilffs.dir/ff.c.obj: /home/wenting/Sitina1/firmware
   include/ff.h \
   include/ffconf.h \
   include/xilffs_config.h \
-  include/xilffs.h \
-  include/xil_util.h \
-  include/xil_io.h \
-  include/xil_printf.h \
-  include/xstatus.h \
-  include/xpseudo_asm.h \
-  include/xreg_cortexa9.h \
-  include/xpseudo_asm_gcc.h \
   include/diskio.h \
   include/ff.h \
   include/xil_printf.h \
@@ -58,56 +48,36 @@ libsrc/xilffs/src/CMakeFiles/xilffs.dir/ff.c.obj: /home/wenting/Sitina1/firmware
 
 libsrc/xilffs/src/CMakeFiles/xilffs.dir/ffsystem.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xilffs/src/ffsystem.c \
   include/ff.h \
-  include/ffconf.h \
-  include/xilffs_config.h \
-  include/xilffs.h \
-  include/xil_util.h \
   include/xil_types.h \
   include/bspconfig.h \
   include/xmem_config.h \
   include/xparameters_ps.h \
-  include/xil_io.h \
-  include/xil_printf.h \
-  include/xstatus.h \
-  include/xil_assert.h \
-  include/xpseudo_asm.h \
-  include/xreg_cortexa9.h \
-  include/xpseudo_asm_gcc.h
+  include/ffconf.h \
+  include/xilffs_config.h
 
 libsrc/xilffs/src/CMakeFiles/xilffs.dir/ffunicode.c.obj: /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xilffs/src/ffunicode.c \
   include/ff.h \
-  include/ffconf.h \
-  include/xilffs_config.h \
-  include/xilffs.h \
-  include/xil_util.h \
   include/xil_types.h \
   include/bspconfig.h \
   include/xmem_config.h \
   include/xparameters_ps.h \
-  include/xil_io.h \
-  include/xil_printf.h \
-  include/xstatus.h \
-  include/xil_assert.h \
-  include/xpseudo_asm.h \
-  include/xreg_cortexa9.h \
-  include/xpseudo_asm_gcc.h
+  include/ffconf.h \
+  include/xilffs_config.h
 
 
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xilffs/src/ffsystem.c:
 
+include/xil_util.h:
+
 include/sleep.h:
+
+include/xpseudo_asm_gcc.h:
+
+include/xpseudo_asm.h:
 
 include/xsdps_hw.h:
 
 include/xil_cache.h:
-
-include/xsdps.h:
-
-include/xpseudo_asm.h:
-
-include/xil_assert.h:
-
-include/xstatus.h:
 
 /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xilffs/src/diskio.c:
 
@@ -115,23 +85,9 @@ include/diskio.h:
 
 include/xmem_config.h:
 
-include/xil_util.h:
-
-/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xilffs/src/ff.c:
-
-include/xilffs_config.h:
-
-include/xpseudo_asm_gcc.h:
-
-include/xilffs.h:
-
 include/ff.h:
 
 include/xil_types.h:
-
-include/xparameters_ps.h:
-
-include/xil_io.h:
 
 include/xplatform_info.h:
 
@@ -144,3 +100,17 @@ include/bspconfig.h:
 include/ffconf.h:
 
 include/xil_printf.h:
+
+include/xil_io.h:
+
+include/xparameters_ps.h:
+
+include/xsdps.h:
+
+/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/xilffs/src/ff.c:
+
+include/xilffs_config.h:
+
+include/xstatus.h:
+
+include/xil_assert.h:

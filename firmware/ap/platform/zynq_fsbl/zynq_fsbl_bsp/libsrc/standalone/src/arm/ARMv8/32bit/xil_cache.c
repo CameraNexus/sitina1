@@ -27,14 +27,6 @@
  * 			Xil_DCacheFlush that got introduced in the optimization
  * 			changes done in the previous patch for this file.
  * 9.0  ml   03/03/23 Add description to fix doxygen warnings.
- * 9.1  asa  01/02/24 Optimize Xil_DCacheInvalidateRange API to avoid
- *                    cache ranges being invalidated again that are
- *                    already cleaned.
- *                    Optimize Xil_DCacheFlushRange API to avoid flushing
- *                    of unaligned cache line for start address and end
- *                    addresses.
- *                    Fix overflow scenarios in Xil_ICacheInvalidateRange.
- *
  * </pre>
  *
  ******************************************************************************/
@@ -53,8 +45,6 @@
 /************************** Variable Definitions *****************************/
 
 #define IRQ_FIQ_MASK 0xC0U	/**< Mask IRQ and FIQ interrupts in cpsr */
-#define MAX_ADDR 				0xFFFFFFFFU
-#define LAST_CACHELINE_START	0xFFFFFFE0U
 
 extern s32  _stack_end;
 extern s32  __undef_stack;
@@ -261,27 +251,24 @@ void Xil_DCacheInvalidateRange(INTPTR adr, u32 len)
 	u32 tempadr = adr;
 	u32 tempend;
 	u32 currmask;
-	u32 unalignedstart = 0x0;
 
 	currmask = mfcpsr();
 	mtcpsr(currmask | IRQ_FIQ_MASK);
 	if (len != 0U) {
-		tempadr = adr & (~(cacheline - 1U));
-		((MAX_ADDR - (u32)adr) < len) ? (end = MAX_ADDR) : (end = adr + len);
-		tempend = end & (~(cacheline - 1U));
+		end = tempadr + len;
+		tempend = end;
 
-		if (tempadr != (u32)adr) {
-			unalignedstart = 1;
+		if ((tempadr & (cacheline-1U)) != 0U) {
+			tempadr &= (~(cacheline - 1U));
 			Xil_DCacheFlushLine(tempadr);
-			tempadr >= LAST_CACHELINE_START ? adr : (adr = tempadr + cacheline);
+			tempadr += cacheline;
 		}
-
-		if ((tempend != end) && ((tempend != tempadr) || (unalignedstart == 0x0U))) {
+		if ((tempend & (cacheline-1U)) != 0U) {
+			tempend &= (~(cacheline - 1U));
 			Xil_DCacheFlushLine(tempend);
-			end >= cacheline ? (end -= cacheline) : (end = 0);
 		}
 
-		while (adr < (INTPTR)end) {
+		while (tempadr < tempend) {
 			/* Select cache level 0 and D cache in CSSR */
 			mtcp(XREG_CP15_CACHE_SIZE_SEL, 0x0);
 			/* Invalidate Data cache line */
@@ -296,7 +283,7 @@ void Xil_DCacheInvalidateRange(INTPTR adr, u32 len)
 				(tempadr & (~0x3F)));
 			/* Wait for invalidate to complete */
 			dsb();
-			((MAX_ADDR - (u32)adr) < cacheline) ? (adr = MAX_ADDR) : (adr += cacheline);
+			tempadr += cacheline;
 		}
 	}
 	mtcpsr(currmask);
@@ -425,40 +412,46 @@ void Xil_DCacheFlushLine(u32 adr)
  ****************************************************************************/
 void Xil_DCacheFlushRange(INTPTR adr, u32 len)
 {
-	u32 LocalAddr = adr;
 	const u32 cacheline = 64U;
 	u32 end;
+	u32 tempadr = adr;
+	u32 tempend;
 	u32 currmask;
 
 	currmask = mfcpsr();
 	mtcpsr(currmask | IRQ_FIQ_MASK);
+	if (len != 0U) {
+		end = tempadr + len;
+		tempend = end;
 
-	if (len != 0x00000000U) {
-		/* Back the starting address up to the start of a cache line
-		 * perform cache operations until adr+len
-		 */
-		((MAX_ADDR - LocalAddr) < len) ? (end = MAX_ADDR) : (end = LocalAddr + len);
-		LocalAddr &= ~(cacheline - 1U);
+		if ((tempadr & (cacheline-1U)) != 0U) {
+			tempadr &= (~(cacheline - 1U));
+			Xil_DCacheFlushLine(tempadr);
+			tempadr += cacheline;
+		}
+		if ((tempend & (cacheline-1U)) != 0U) {
+			tempend &= (~(cacheline - 1U));
+			Xil_DCacheFlushLine(tempend);
+		}
 
-		while (LocalAddr < end) {
+		while (tempadr < tempend) {
 			/* Select cache level 0 and D cache in CSSR */
 			mtcp(XREG_CP15_CACHE_SIZE_SEL, 0x0);
-			/* Clean and Invalidate Data cache line */
+			/* Invalidate Data cache line */
 			mtcp(XREG_CP15_CLEAN_INVAL_DC_LINE_MVA_POC,
-				(LocalAddr & (~0x3F)));
+				(tempadr & (~0x3F)));
 			/* Wait for invalidate to complete */
 			dsb();
 			/* Select cache level 0 and D cache in CSSR */
 			mtcp(XREG_CP15_CACHE_SIZE_SEL, 0x2);
-			/* Clean and Invalidate Data cache line */
+			/* Invalidate Data cache line */
 			mtcp(XREG_CP15_CLEAN_INVAL_DC_LINE_MVA_POC,
-				(LocalAddr & (~0x3F)));
+				(tempadr & (~0x3F)));
 			/* Wait for invalidate to complete */
 			dsb();
-			((MAX_ADDR - LocalAddr) < cacheline) ? (LocalAddr = MAX_ADDR) : (LocalAddr += cacheline) ;
+			tempadr += cacheline;
 		}
 	}
-	dsb();
 	mtcpsr(currmask);
 }
 
@@ -578,7 +571,7 @@ void Xil_ICacheInvalidateRange(INTPTR adr, u32 len)
 	mtcpsr(currmask | IRQ_FIQ_MASK);
 
 	if (len != 0x00000000U) {
-		((MAX_ADDR - tempadr) < len) ? (end = MAX_ADDR) : (end = tempadr + len);
+		end = tempadr + len;
 		tempend = end;
 		tempadr &= ~(cacheline - 0x00000001U);
 
@@ -587,7 +580,8 @@ void Xil_ICacheInvalidateRange(INTPTR adr, u32 len)
 		while (tempadr < tempend) {
 			/*Invalidate I Cache line*/
 			mtcp(XREG_CP15_INVAL_IC_LINE_MVA_POU, adr & (~0x3F));
-			((MAX_ADDR - tempadr) < cacheline) ? (tempadr = MAX_ADDR) : (tempadr += cacheline) ;
+
+			tempadr += cacheline;
 		}
 	}
 /* Wait for invalidate to complete */

@@ -19,7 +19,6 @@ set(CMAKE_ASM_COMPILER_ID "GNU")
 # The include file search paths:
 set(CMAKE_ASM_TARGET_INCLUDE_PATH
   "include"
-  "/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/include"
   )
 
 # The set of dependency files which are needed:
@@ -46,7 +45,6 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/common/vectors.c" "libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/vectors.c.obj" "gcc" "libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/vectors.c.obj.d"
   "/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/common/xil_exception.c" "libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/xil_exception.c.obj" "gcc" "libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/xil_exception.c.obj.d"
   "/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/common/xil_spinlock.c" "libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/xil_spinlock.c.obj" "gcc" "libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/xil_spinlock.c.obj.d"
-  "/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/common/xpm_counter.c" "libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/xpm_counter.c.obj" "gcc" "libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/common/xpm_counter.c.obj.d"
   "/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/cortexa9/xil_cache.c" "libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/cortexa9/xil_cache.c.obj" "gcc" "libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/cortexa9/xil_cache.c.obj.d"
   "/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/cortexa9/xil_misc_psreset_api.c" "libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/cortexa9/xil_misc_psreset_api.c.obj" "gcc" "libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/cortexa9/xil_misc_psreset_api.c.obj.d"
   "/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/standalone/src/arm/cortexa9/xil_mmu.c" "libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/cortexa9/xil_mmu.c.obj" "gcc" "libsrc/standalone/src/CMakeFiles/xilstandalone.dir/arm/cortexa9/xil_mmu.c.obj.d"

@@ -48,10 +48,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake
+CMAKE_COMMAND = /tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake
 
 # The command to remove a file.
-RM = /tools/Xilinx/Vitis/2024.1/tps/lnx64/cmake-3.24.2/bin/cmake -E rm -f
+RM = /tools/Xilinx/Vitis/2023.2/tps/lnx64/cmake-3.24.2/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -483,7 +483,7 @@ libsrc/xilffs/src/include/clean:
 # Directory level rules for directory libsrc/xilrsa/src
 
 # Recursive "all" directory target.
-libsrc/xilrsa/src/all: libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/all
+libsrc/xilrsa/src/all:
 .PHONY : libsrc/xilrsa/src/all
 
 # Recursive "preinstall" directory target.
@@ -491,7 +491,7 @@ libsrc/xilrsa/src/preinstall:
 .PHONY : libsrc/xilrsa/src/preinstall
 
 # Recursive "clean" directory target.
-libsrc/xilrsa/src/clean: libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/clean
+libsrc/xilrsa/src/clean:
 .PHONY : libsrc/xilrsa/src/clean
 
 #=============================================================================
@@ -581,7 +581,7 @@ libsrc/CMakeFiles/combined.dir/all: libsrc/xadcps/src/CMakeFiles/xadcps.dir/all
 
 # Build rule for subdir invocation for target.
 libsrc/CMakeFiles/combined.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 55
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 56
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libsrc/CMakeFiles/combined.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 0
 .PHONY : libsrc/CMakeFiles/combined.dir/rule
@@ -654,12 +654,12 @@ libsrc/devcfg/src/CMakeFiles/devcfg.dir/clean:
 libsrc/dmaps/src/CMakeFiles/dmaps.dir/all:
 	$(MAKE) $(MAKESILENT) -f libsrc/dmaps/src/CMakeFiles/dmaps.dir/build.make libsrc/dmaps/src/CMakeFiles/dmaps.dir/depend
 	$(MAKE) $(MAKESILENT) -f libsrc/dmaps/src/CMakeFiles/dmaps.dir/build.make libsrc/dmaps/src/CMakeFiles/dmaps.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=8,9,10,11 "Built target dmaps"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=8,9,10,11,12 "Built target dmaps"
 .PHONY : libsrc/dmaps/src/CMakeFiles/dmaps.dir/all
 
 # Build rule for subdir invocation for target.
 libsrc/dmaps/src/CMakeFiles/dmaps.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libsrc/dmaps/src/CMakeFiles/dmaps.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 0
 .PHONY : libsrc/dmaps/src/CMakeFiles/dmaps.dir/rule
@@ -680,12 +680,12 @@ libsrc/dmaps/src/CMakeFiles/dmaps.dir/clean:
 libsrc/gpiops/src/CMakeFiles/gpiops.dir/all:
 	$(MAKE) $(MAKESILENT) -f libsrc/gpiops/src/CMakeFiles/gpiops.dir/build.make libsrc/gpiops/src/CMakeFiles/gpiops.dir/depend
 	$(MAKE) $(MAKESILENT) -f libsrc/gpiops/src/CMakeFiles/gpiops.dir/build.make libsrc/gpiops/src/CMakeFiles/gpiops.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=12,13,14,15,16,17 "Built target gpiops"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=13,14,15,16,17 "Built target gpiops"
 .PHONY : libsrc/gpiops/src/CMakeFiles/gpiops.dir/all
 
 # Build rule for subdir invocation for target.
 libsrc/gpiops/src/CMakeFiles/gpiops.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libsrc/gpiops/src/CMakeFiles/gpiops.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 0
 .PHONY : libsrc/gpiops/src/CMakeFiles/gpiops.dir/rule
@@ -732,12 +732,12 @@ libsrc/iicps/src/CMakeFiles/iicps.dir/clean:
 libsrc/qspips/src/CMakeFiles/qspips.dir/all:
 	$(MAKE) $(MAKESILENT) -f libsrc/qspips/src/CMakeFiles/qspips.dir/build.make libsrc/qspips/src/CMakeFiles/qspips.dir/depend
 	$(MAKE) $(MAKESILENT) -f libsrc/qspips/src/CMakeFiles/qspips.dir/build.make libsrc/qspips/src/CMakeFiles/qspips.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=27,28,29,30,31 "Built target qspips"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=27,28,29,30,31,32 "Built target qspips"
 .PHONY : libsrc/qspips/src/CMakeFiles/qspips.dir/all
 
 # Build rule for subdir invocation for target.
 libsrc/qspips/src/CMakeFiles/qspips.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libsrc/qspips/src/CMakeFiles/qspips.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 0
 .PHONY : libsrc/qspips/src/CMakeFiles/qspips.dir/rule
@@ -758,12 +758,12 @@ libsrc/qspips/src/CMakeFiles/qspips.dir/clean:
 libsrc/scugic/src/CMakeFiles/scugic.dir/all:
 	$(MAKE) $(MAKESILENT) -f libsrc/scugic/src/CMakeFiles/scugic.dir/build.make libsrc/scugic/src/CMakeFiles/scugic.dir/depend
 	$(MAKE) $(MAKESILENT) -f libsrc/scugic/src/CMakeFiles/scugic.dir/build.make libsrc/scugic/src/CMakeFiles/scugic.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=32,33,34,35,36,37 "Built target scugic"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=33,34,35,36,37 "Built target scugic"
 .PHONY : libsrc/scugic/src/CMakeFiles/scugic.dir/all
 
 # Build rule for subdir invocation for target.
 libsrc/scugic/src/CMakeFiles/scugic.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libsrc/scugic/src/CMakeFiles/scugic.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 0
 .PHONY : libsrc/scugic/src/CMakeFiles/scugic.dir/rule
@@ -836,12 +836,12 @@ libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/clean:
 libsrc/sdps/src/CMakeFiles/sdps.dir/all:
 	$(MAKE) $(MAKESILENT) -f libsrc/sdps/src/CMakeFiles/sdps.dir/build.make libsrc/sdps/src/CMakeFiles/sdps.dir/depend
 	$(MAKE) $(MAKESILENT) -f libsrc/sdps/src/CMakeFiles/sdps.dir/build.make libsrc/sdps/src/CMakeFiles/sdps.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=46,47,48,49,50 "Built target sdps"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=46,47,48,49,50,51 "Built target sdps"
 .PHONY : libsrc/sdps/src/CMakeFiles/sdps.dir/all
 
 # Build rule for subdir invocation for target.
 libsrc/sdps/src/CMakeFiles/sdps.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 5
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libsrc/sdps/src/CMakeFiles/sdps.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 0
 .PHONY : libsrc/sdps/src/CMakeFiles/sdps.dir/rule
@@ -862,7 +862,7 @@ libsrc/sdps/src/CMakeFiles/sdps.dir/clean:
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/all:
 	$(MAKE) $(MAKESILENT) -f libsrc/xadcps/src/CMakeFiles/xadcps.dir/build.make libsrc/xadcps/src/CMakeFiles/xadcps.dir/depend
 	$(MAKE) $(MAKESILENT) -f libsrc/xadcps/src/CMakeFiles/xadcps.dir/build.make libsrc/xadcps/src/CMakeFiles/xadcps.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=51,52,53,54,55 "Built target xadcps"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=52,53,54,55,56 "Built target xadcps"
 .PHONY : libsrc/xadcps/src/CMakeFiles/xadcps.dir/all
 
 # Build rule for subdir invocation for target.
@@ -940,7 +940,7 @@ libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/clean:
 libsrc/xilffs/src/CMakeFiles/xilffs.dir/all:
 	$(MAKE) $(MAKESILENT) -f libsrc/xilffs/src/CMakeFiles/xilffs.dir/build.make libsrc/xilffs/src/CMakeFiles/xilffs.dir/depend
 	$(MAKE) $(MAKESILENT) -f libsrc/xilffs/src/CMakeFiles/xilffs.dir/build.make libsrc/xilffs/src/CMakeFiles/xilffs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=56,57,58,59 "Built target xilffs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=57,58,59,60 "Built target xilffs"
 .PHONY : libsrc/xilffs/src/CMakeFiles/xilffs.dir/all
 
 # Build rule for subdir invocation for target.
@@ -958,32 +958,6 @@ xilffs: libsrc/xilffs/src/CMakeFiles/xilffs.dir/rule
 libsrc/xilffs/src/CMakeFiles/xilffs.dir/clean:
 	$(MAKE) $(MAKESILENT) -f libsrc/xilffs/src/CMakeFiles/xilffs.dir/build.make libsrc/xilffs/src/CMakeFiles/xilffs.dir/clean
 .PHONY : libsrc/xilffs/src/CMakeFiles/xilffs.dir/clean
-
-#=============================================================================
-# Target rules for target libsrc/xilrsa/src/CMakeFiles/xilrsa.dir
-
-# All Build rule for target.
-libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/all:
-	$(MAKE) $(MAKESILENT) -f libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/build.make libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/depend
-	$(MAKE) $(MAKESILENT) -f libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/build.make libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=60 "Built target xilrsa"
-.PHONY : libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/all
-
-# Build rule for subdir invocation for target.
-libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 1
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/zynq_fsbl/zynq_fsbl_bsp/libsrc/build_configs/gen_bsp/CMakeFiles 0
-.PHONY : libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/rule
-
-# Convenience name for target.
-xilrsa: libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/rule
-.PHONY : xilrsa
-
-# clean rule for target.
-libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/clean:
-	$(MAKE) $(MAKESILENT) -f libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/build.make libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/clean
-.PHONY : libsrc/xilrsa/src/CMakeFiles/xilrsa.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

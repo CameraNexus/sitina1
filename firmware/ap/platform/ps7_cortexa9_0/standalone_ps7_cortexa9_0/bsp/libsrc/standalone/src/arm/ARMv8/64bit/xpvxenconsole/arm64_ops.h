@@ -1,5 +1,4 @@
 /*
-Copyright (C) 2022 - 2024 Advanced Micro Devices, Inc. All Rights Reserved.
 Copyright DornerWorks 2016
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
@@ -20,17 +19,17 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define _ARM64_OPS_H_
 #include <stdint.h>
 
-#define BUG() while(1){__asm volatile (".word 0xe7f000f0\n");} /* Undefined instruction; will call our fault handler. */
+#define BUG() while(1){asm volatile (".word 0xe7f000f0\n");} /* Undefined instruction; will call our fault handler. */
 #define ASSERT(x)                                              \
-	do {                                                           \
-		if (!(x)) {                                                \
-			printk("ASSERTION FAILED: %s at %s:%d.\n",             \
-			       # x ,                                           \
-			       __FILE__,                                       \
-			       __LINE__);                                      \
-			BUG();                                                 \
-		}                                                          \
-	} while(0)
+do {                                                           \
+	if (!(x)) {                                                \
+		printk("ASSERTION FAILED: %s at %s:%d.\n",             \
+			   # x ,                                           \
+			   __FILE__,                                       \
+			   __LINE__);                                      \
+        BUG();                                                 \
+	}                                                          \
+} while(0)
 
 #define BUG_ON(x) ASSERT(!(x))
 
@@ -39,37 +38,34 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define barrier() __asm__ __volatile__("": : :"memory")
 
 // disable interrupts
-static inline void local_irq_disable(void)
-{
-	__asm__ __volatile__("cpsid i":::"memory");
+static inline void local_irq_disable(void) {
+    __asm__ __volatile__("cpsid i":::"memory");
 }
 
 // enable interrupts
-static inline void local_irq_enable(void)
-{
-	__asm__ __volatile__("cpsie i":::"memory");
+static inline void local_irq_enable(void) {
+    __asm__ __volatile__("cpsie i":::"memory");
 }
 
 #define local_irq_save(x) { \
-		__asm__ __volatile__("mrs %0, cpsr;cpsid i":"=r"(x)::"memory");    \
-	}
-
-#define local_irq_restore(x) {    \
-		__asm__ __volatile__("msr cpsr_c, %0"::"r"(x):"memory");    \
-	}
-
-#define local_save_flags(x)    { \
-		__asm__ __volatile__("mrs %0, cpsr":"=r"(x)::"memory");    \
-	}
-
-static inline int irqs_disabled(void)
-{
-	int x;
-	local_save_flags(x);
-	return x & 0x80;
+    __asm__ __volatile__("mrs %0, cpsr;cpsid i":"=r"(x)::"memory");    \
 }
 
-#define dsb(scope)      __asm volatile("dsb " #scope : : : "memory")
+#define local_irq_restore(x) {    \
+    __asm__ __volatile__("msr cpsr_c, %0"::"r"(x):"memory");    \
+}
+
+#define local_save_flags(x)    { \
+    __asm__ __volatile__("mrs %0, cpsr":"=r"(x)::"memory");    \
+}
+
+static inline int irqs_disabled(void) {
+    int x;
+    local_save_flags(x);
+    return x & 0x80;
+}
+
+#define dsb(scope)      asm volatile("dsb " #scope : : : "memory")
 
 /* We probably only need "dmb" here, but we'll start by being paranoid. */
 #define mb()  dsb(sy)
@@ -89,15 +85,15 @@ static inline int irqs_disabled(void)
  * This operation is atomic.
  * If you need a memory barrier, use synch_test_and_clear_bit instead.
  */
-static __inline__ int test_and_clear_bit(int nr, volatile void *addr)
+static __inline__ int test_and_clear_bit(int nr, volatile void * addr)
 {
-	uint8_t *byte = ((uint8_t *)addr) + (nr >> 3);
-	uint8_t bit = 1 << (nr & 7);
-	uint8_t orig;
+    uint8_t *byte = ((uint8_t *)addr) + (nr >> 3);
+    uint8_t bit = 1 << (nr & 7);
+    uint8_t orig;
 
-	orig = __atomic_fetch_and(byte, ~bit, __ATOMIC_RELAXED);
+    orig = __atomic_fetch_and(byte, ~bit, __ATOMIC_RELAXED);
 
-	return (orig & bit) != 0;
+    return (orig & bit) != 0;
 }
 
 /**
@@ -106,21 +102,21 @@ static __inline__ int test_and_clear_bit(int nr, volatile void *addr)
  */
 static __inline__ int test_and_set_bit(int nr, volatile void *base)
 {
-	uint8_t *byte = ((uint8_t *)base) + (nr >> 3);
-	uint8_t bit = 1 << (nr & 7);
-	uint8_t orig;
+    uint8_t *byte = ((uint8_t *)base) + (nr >> 3);
+    uint8_t bit = 1 << (nr & 7);
+    uint8_t orig;
 
-	orig = __atomic_fetch_or(byte, bit, __ATOMIC_RELAXED);
+    orig = __atomic_fetch_or(byte, bit, __ATOMIC_RELAXED);
 
-	return (orig & bit) != 0;
+    return (orig & bit) != 0;
 }
 
 /**
  * Test whether a bit is set. */
 static __inline__ int test_bit(int nr, const volatile unsigned long *addr)
 {
-	const uint8_t *ptr = (const uint8_t *) addr;
-	return ((1 << (nr & 7)) & (ptr[nr >> 3])) != 0;
+    const uint8_t *ptr = (const uint8_t *) addr;
+    return ((1 << (nr & 7)) & (ptr[nr >> 3])) != 0;
 }
 
 /**
@@ -128,7 +124,7 @@ static __inline__ int test_bit(int nr, const volatile unsigned long *addr)
  */
 static __inline__ void set_bit(int nr, volatile unsigned long *addr)
 {
-	test_and_set_bit(nr, addr);
+    test_and_set_bit(nr, addr);
 }
 
 /**
@@ -136,7 +132,7 @@ static __inline__ void set_bit(int nr, volatile unsigned long *addr)
  */
 static __inline__ void clear_bit(int nr, volatile unsigned long *addr)
 {
-	test_and_clear_bit(nr, addr);
+    test_and_clear_bit(nr, addr);
 }
 
 /**
@@ -147,8 +143,10 @@ static __inline__ void clear_bit(int nr, volatile unsigned long *addr)
  */
 static __inline__ unsigned long __ffs(unsigned long word)
 {
-	return __builtin_ctzl(word);
+        return __builtin_ctzl(word);
 }
+
+
 
 /********************* common arm32 and arm64  ****************************/
 
@@ -156,52 +154,52 @@ static __inline__ unsigned long __ffs(unsigned long word)
  * Otherwise, return the old value.
  * Atomic. */
 #define synch_cmpxchg(ptr, old, new) \
-	({ __typeof__(*ptr) stored = old; \
-		__atomic_compare_exchange_n(ptr, &stored, new, 0, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST) ? new : old; \
-	})
+({ __typeof__(*ptr) stored = old; \
+   __atomic_compare_exchange_n(ptr, &stored, new, 0, __ATOMIC_SEQ_CST, __ATOMIC_SEQ_CST) ? new : old; \
+})
 
 /* As test_and_clear_bit, but using __ATOMIC_SEQ_CST */
 static __inline__ int synch_test_and_clear_bit(int nr, volatile void *addr)
 {
-	uint8_t *byte = ((uint8_t *)addr) + (nr >> 3);
-	uint8_t bit = 1 << (nr & 7);
-	uint8_t orig;
+    uint8_t *byte = ((uint8_t *)addr) + (nr >> 3);
+    uint8_t bit = 1 << (nr & 7);
+    uint8_t orig;
 
-	orig = __atomic_fetch_and(byte, ~bit, __ATOMIC_SEQ_CST);
+    orig = __atomic_fetch_and(byte, ~bit, __ATOMIC_SEQ_CST);
 
-	return (orig & bit) != 0;
+    return (orig & bit) != 0;
 }
 
 /* As test_and_set_bit, but using __ATOMIC_SEQ_CST */
 static __inline__ int synch_test_and_set_bit(int nr, volatile void *base)
 {
-	uint8_t *byte = ((uint8_t *)base) + (nr >> 3);
-	uint8_t bit = 1 << (nr & 7);
-	uint8_t orig;
+    uint8_t *byte = ((uint8_t *)base) + (nr >> 3);
+    uint8_t bit = 1 << (nr & 7);
+    uint8_t orig;
 
-	orig = __atomic_fetch_or(byte, bit, __ATOMIC_SEQ_CST);
+    orig = __atomic_fetch_or(byte, bit, __ATOMIC_SEQ_CST);
 
-	return (orig & bit) != 0;
+    return (orig & bit) != 0;
 }
 
 /* As set_bit, but using __ATOMIC_SEQ_CST */
 static __inline__ void synch_set_bit(int nr, volatile void *addr)
 {
-	synch_test_and_set_bit(nr, addr);
+    synch_test_and_set_bit(nr, addr);
 }
 
 /* As clear_bit, but using __ATOMIC_SEQ_CST */
 static __inline__ void synch_clear_bit(int nr, volatile void *addr)
 {
-	synch_test_and_clear_bit(nr, addr);
+    synch_test_and_clear_bit(nr, addr);
 }
 
 /* As test_bit, but with a following memory barrier. */
 static __inline__ int synch_test_bit(int nr, volatile void *addr)
 {
-	int result;
-	result = test_bit(nr, addr);
-	barrier();
-	return result;
+    int result;
+    result = test_bit(nr, addr);
+    barrier();
+    return result;
 }
 #endif

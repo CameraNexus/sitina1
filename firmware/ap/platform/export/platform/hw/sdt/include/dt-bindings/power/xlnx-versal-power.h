@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: GPL-2.0 */
 /*
  * Copyright (C) 2019-2022 Xilinx, Inc.
- * Copyright (C) 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+ * Copyright (C) 2022 Advanced Micro Devices, Inc. All Rights Reserved.
  */
 
 #ifndef _DT_BINDINGS_VERSAL_POWER_H
@@ -34,7 +34,6 @@
 #define PM_DEV_TTC_1				(0x18224025U)
 #define PM_DEV_TTC_2				(0x18224026U)
 #define PM_DEV_TTC_3				(0x18224027U)
-#define PM_DEV_SWDT_LPD				(0x18224028U)
 #define PM_DEV_SWDT_FPD				(0x18224029U)
 #define PM_DEV_OSPI				(0x1822402aU)
 #define PM_DEV_QSPI				(0x1822402bU)

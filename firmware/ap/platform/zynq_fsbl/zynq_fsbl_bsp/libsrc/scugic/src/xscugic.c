@@ -1,6 +1,6 @@
 /******************************************************************************
 * Copyright (C) 2010 - 2022 Xilinx, Inc.  All rights reserved.
-* Copyright (C) 2022 - 2024 Advanced Micro Devices, Inc. All Rights Reserved.
+* Copyright (C) 2022 - 2023 Advanced Micro Devices, Inc. All Rights Reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
@@ -8,11 +8,11 @@
 /**
 *
 * @file xscugic.c
-* @addtogroup scugic_api SCUGIC APIs
+* @addtogroup scugic Overview
 * @{
 *
-* The xscugic.c file contains required functions for the XScuGic driver for the Interrupt
-* Controller.
+* Contains required functions for the XScuGic driver for the Interrupt
+* Controller. See xscugic.h for a detailed description of the driver.
 *
 * <pre>
 * MODIFICATION HISTORY:
@@ -212,10 +212,11 @@ static void StubHandler(void *CallBackRef);
 * - All interrupt sources are disabled
 * - Enable the distributor
 *
-* @param	InstancePtr Pointer to the XScuGic instance.
+* @param	InstancePtr is a pointer to the XScuGic instance.
 *
 * @return	None
 *
+* @note		None.
 *
 ******************************************************************************/
 static void DoDistributorInit(const XScuGic *InstancePtr)
@@ -329,10 +330,11 @@ static void DoDistributorInit(const XScuGic *InstancePtr)
 * DistributorInit initializes the distributor of the GIC. It calls
 * DoDistributorInit to finish the initialization.
 *
-* @param	InstancePtr Pointer to the XScuGic instance.
+* @param	InstancePtr is a pointer to the XScuGic instance.
 *
 * @return	None
 *
+* @note		None.
 *
 ******************************************************************************/
 static void DistributorInit(XScuGic *InstancePtr)
@@ -366,10 +368,11 @@ static void DistributorInit(XScuGic *InstancePtr)
 *	- Set the priority of the CPU
 *	- Enable the CPU interface
 *
-* @param	InstancePtr Pointer to the XScuGic instance.
+* @param	InstancePtr is a pointer to the XScuGic instance.
 *
 * @return	None
 *
+* @note		None.
 *
 ******************************************************************************/
 static void CPUInitialize(const XScuGic *InstancePtr)
@@ -413,10 +416,10 @@ static void CPUInitialize(const XScuGic *InstancePtr)
 * - Initial vector table with stub function calls
 * - All interrupt sources are disabled
 *
-* @param	InstancePtr Pointer to the XScuGic instance.
-* @param	ConfigPtr Pointer to a config table for the particular
+* @param	InstancePtr is a pointer to the XScuGic instance.
+* @param	ConfigPtr is a pointer to a config table for the particular
 *		device this driver is associated with.
-* @param	EffectiveAddr Device base address in the virtual memory
+* @param	EffectiveAddr is the device base address in the virtual memory
 *		address space. The caller is responsible for keeping the address
 *		mapping from EffectiveAddr to the device physical base address
 *		unchanged once this function is invoked. Unexpected errors may
@@ -428,6 +431,7 @@ static void CPUInitialize(const XScuGic *InstancePtr)
 * @return
 *		- XST_SUCCESS if initialization was successful
 *
+* @note		None.
 *
 ******************************************************************************/
 s32  XScuGic_CfgInitialize(XScuGic *InstancePtr,
@@ -530,16 +534,18 @@ s32  XScuGic_CfgInitialize(XScuGic *InstancePtr,
 * argument provided in this call as the Callbackref is used as the argument
 * for the handler when it is called.
 *
-* @param	InstancePtr Pointer to the XScuGic instance.
+* @param	InstancePtr is a pointer to the XScuGic instance.
 * @param	Int_Id contains the ID of the interrupt source and should be
 *		in the range of 0 to XSCUGIC_MAX_NUM_INTR_INPUTS - 1
-* @param	Handler Handler for interrupt.
-* @param	CallBackRef Instance pointer of the connecting driver.
+* @param	Handler to the handler for that interrupt.
+* @param	CallBackRef is the callback reference, usually the instance
+*		pointer of the connecting driver.
 *
 * @return
 *
 *		- XST_SUCCESS if the handler was connected correctly.
 *
+* @note
 *
 * WARNING: The handler provided as an argument will overwrite any handler
 * that was previously connected.
@@ -579,12 +585,13 @@ s32  XScuGic_Connect(XScuGic *InstancePtr, u32 Int_Id,
 * location pointed at by the Int_Id. This effectively disconnects that interrupt
 * source from any handler. The interrupt is disabled also.
 *
-* @param	InstancePtr Pointer to the XScuGic instance to be worked on.
-* @param	Int_Id Contains the ID of the interrupt source and should
+* @param	InstancePtr is a pointer to the XScuGic instance to be worked on.
+* @param	Int_Id contains the ID of the interrupt source and should
 *		be in the range of 0 to XSCUGIC_MAX_NUM_INTR_INPUTS - 1
 *
 * @return	None.
 *
+* @note		None.
 *
 ****************************************************************************/
 void XScuGic_Disconnect(XScuGic *InstancePtr, u32 Int_Id)
@@ -642,12 +649,13 @@ void XScuGic_Disconnect(XScuGic *InstancePtr, u32 Int_Id)
 * called.
 * This API also maps the interrupt to the requesting CPU.
 *
-* @param	InstancePtr Pointer to the XScuGic instance.
-* @param	Int_Id Contains the ID of the interrupt source and should be
+* @param	InstancePtr is a pointer to the XScuGic instance.
+* @param	Int_Id contains the ID of the interrupt source and should be
 *		in the range of 0 to XSCUGIC_MAX_NUM_INTR_INPUTS - 1
 *
 * @return	None.
 *
+* @note		None.
 *
 ****************************************************************************/
 void XScuGic_Enable(XScuGic *InstancePtr, u32 Int_Id)
@@ -721,12 +729,13 @@ void XScuGic_Enable(XScuGic *InstancePtr, u32 Int_Id)
 * Int_Id, but will not cause an interrupt.
 * This API also unmaps the interrupt for the requesting CPU.
 *
-* @param	InstancePtr Pointer to the XScuGic instance.
-* @param	Int_Id Contains the ID of the interrupt source and should be
+* @param	InstancePtr is a pointer to the XScuGic instance.
+* @param	Int_Id contains the ID of the interrupt source and should be
 *		in the range of 0 to XSCUGIC_MAX_NUM_INTR_INPUTS - 1
 *
 * @return	None.
 *
+* @note		None.
 *
 ****************************************************************************/
 void XScuGic_Disable(XScuGic *InstancePtr, u32 Int_Id)
@@ -797,16 +806,16 @@ void XScuGic_Disable(XScuGic *InstancePtr, u32 Int_Id)
 /*****************************************************************************/
 /**
 *
-* Allows software to simulate an interrupt in the interrupt controller. This
+* Allows software to simulate an interrupt in the interrupt controller.  This
 * function will only be successful when the interrupt controller has been
-* started in simulation mode. A simulated interrupt allows the interrupt
+* started in simulation mode.  A simulated interrupt allows the interrupt
 * controller to be tested without any device to drive an interrupt input
 * signal into it.
 *
-* @param	InstancePtr Pointer to the XScuGic instance.
-* @param	Int_Id Software interrupt ID to simulate an interrupt.
-* @param	Cpu_Identifier List of CPUs to send the interrupt.
-*               For VERSAL_NET bits 0-7 specifies core ID to send the interrupt.
+* @param	InstancePtr is a pointer to the XScuGic instance.
+* @param	Int_Id is the software interrupt ID to simulate an interrupt.
+* @param	Cpu_Identifier is the list of CPUs to send the interrupt.
+*               For VERSAL_NET bits 0-7 specifies core id to send the interrupt.
 *               bits 8-15 specifies the cluster id.
 *
 * @return
@@ -814,6 +823,7 @@ void XScuGic_Disable(XScuGic *InstancePtr, u32 Int_Id)
 * XST_SUCCESS if successful, or XST_FAILURE if the interrupt could not be
 * simulated
 *
+* @note		None.
 *
 ******************************************************************************/
 s32  XScuGic_SoftwareIntr(XScuGic *InstancePtr, u32 Int_Id, u32 Cpu_Identifier)
@@ -898,10 +908,11 @@ s32  XScuGic_SoftwareIntr(XScuGic *InstancePtr, u32 Int_Id, u32 Cpu_Identifier)
 * A stub for the asynchronous callback. The stub is here in case the upper
 * layers forget to set the handler.
 *
-* @param	CallBackRef Pointer to the upper layer callback reference.
+* @param	CallBackRef is a pointer to the upper layer callback reference
 *
 * @return	None.
 *
+* @note		None.
 *
 ******************************************************************************/
 static void StubHandler(void *CallBackRef)
@@ -921,13 +932,13 @@ static void StubHandler(void *CallBackRef)
 /**
 * Sets the interrupt priority and trigger type for the specificd IRQ source.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
-* @param	Int_Id IRQ source number to modify.
-* @param	Priority New priority for the IRQ source. 0 is highest
+* @param	InstancePtr is a pointer to the instance to be worked on.
+* @param	Int_Id is the IRQ source number to modify
+* @param	Priority is the new priority for the IRQ source. 0 is highest
 *           priority, 0xF8(248) is lowest. There are 32 priority levels
 *           supported with a step of 8. Hence the supported priorities are
 *           0, 8, 16, 32, 40 ..., 248.
-* @param	Trigger New trigger type for the IRQ source.
+* @param	Trigger is the new trigger type for the IRQ source.
 * Each bit pair describes the configuration for an INT_ID.
 * SFI    Read Only    b10 always
 * PPI    Read Only    depending on how the PPIs are configured.
@@ -939,6 +950,7 @@ static void StubHandler(void *CallBackRef)
 *
 * @return	None.
 *
+* @note		None.
 *
 *****************************************************************************/
 void XScuGic_SetPriorityTriggerType(XScuGic *InstancePtr, u32 Int_Id,
@@ -1030,16 +1042,16 @@ void XScuGic_SetPriorityTriggerType(XScuGic *InstancePtr, u32 Int_Id,
 /**
 * Gets the interrupt priority and trigger type for the specificd IRQ source.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
-* @param	Int_Id IRQ source number to modify.
-* @param	Priority Pointer to the value of the priority of the IRQ
+* @param	InstancePtr is a pointer to the instance to be worked on.
+* @param	Int_Id is the IRQ source number to modify
+* @param	Priority is a pointer to the value of the priority of the IRQ
 *		source. This is a return value.
-* @param	Trigger Pointer to the value of the trigger of the IRQ
-*		source.
+* @param	Trigger is pointer to the value of the trigger of the IRQ
+*		source. This is a return value.
 *
-* @return	Pointer to the value of the trigger of the IRQ
-*		source.
+* @return	None.
 *
+* @note		None
 *
 *****************************************************************************/
 void XScuGic_GetPriorityTriggerType(XScuGic *InstancePtr, u32 Int_Id,
@@ -1103,16 +1115,17 @@ void XScuGic_GetPriorityTriggerType(XScuGic *InstancePtr, u32 Int_Id,
 }
 /****************************************************************************/
 /**
-* Sets the target CPU for the interrupt of a peripheral.
+* Sets the target CPU for the interrupt of a peripheral
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
-* @param	Cpu_Identifier CPU number for which the interrupt has to be targeted
+* @param	InstancePtr is a pointer to the instance to be worked on.
+* @param	Cpu_Identifier is a CPU number for which the interrupt has to be targeted
 *               For VERSAL_NET APU: 0 t0 3 bits sepcifies core id and 4 to 7 bits specifies
 *               cluster id of the targeted core.
-* @param	Int_Id IRQ source number to modify.
+* @param	Int_Id is the IRQ source number to modify
 *
 * @return	None.
 *
+* @note		None
 *
 *****************************************************************************/
 void XScuGic_InterruptMaptoCpu(XScuGic *InstancePtr, u8 Cpu_Identifier, u32 Int_Id)
@@ -1175,17 +1188,18 @@ void XScuGic_InterruptMaptoCpu(XScuGic *InstancePtr, u8 Cpu_Identifier, u32 Int_
 }
 /****************************************************************************/
 /**
-* Unmaps specific SPI interrupt from the target CPU.
+* Unmaps specific SPI interrupt from the target CPU
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
-* @param	Cpu_Identifier CPU number from which the interrupt has to be
-*			unmapped.
+* @param	InstancePtr is a pointer to the instance to be worked on.
+* @param	Cpu_Identifier is a CPU number from which the interrupt has to be
+*			unmapped
 *               For VERSAL_NET APU: 0 t0 3 bits sepcifies core id and 4 to 7
 *               bits specifies cluster id of the targeted core.
-* @param	Int_Id IRQ source number to modify
+* @param	Int_Id is the IRQ source number to modify
 *
 * @return	None.
 *
+* @note		None
 *
 *****************************************************************************/
 void XScuGic_InterruptUnmapFromCpu(XScuGic *InstancePtr, u8 Cpu_Identifier, u32 Int_Id)
@@ -1258,14 +1272,15 @@ void XScuGic_InterruptUnmapFromCpu(XScuGic *InstancePtr, u8 Cpu_Identifier, u32 
 }
 /****************************************************************************/
 /**
-* Unmaps all SPI interrupts from the target CPU.
+* Unmaps all SPI interrupts from the target CPU
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
-* @param	Cpu_Identifier CPU number from which the interrupts has to be
-*			unmapped.
+* @param	InstancePtr is a pointer to the instance to be worked on.
+* @param	Cpu_Identifier is a CPU number from which the interrupts has to be
+*			unmapped
 *
 * @return	None.
 *
+* @note		None
 *
 *****************************************************************************/
 void XScuGic_UnmapAllInterruptsFromCpu(XScuGic *InstancePtr, u8 Cpu_Identifier)
@@ -1307,16 +1322,17 @@ void XScuGic_UnmapAllInterruptsFromCpu(XScuGic *InstancePtr, u8 Cpu_Identifier)
 }
 /****************************************************************************/
 /**
-* Checks if the interrupt target register contains all interrupts to be
+* It checks if the interrupt target register contains all interrupts to be
 * targeted for current CPU. If they are programmed to be forwarded to current
 * cpu, this API disable all interrupts and disable GIC distributor.
 * This API also removes current CPU from interrupt target registers for all
 * interrupt.
 *
-* @param	InstancePtr Pointer to the instance to be worked on.
+* @param	InstancePtr is a pointer to the instance to be worked on.
 *
 * @return	None.
 *
+* @note		None
 *
 *****************************************************************************/
 void XScuGic_Stop(XScuGic *InstancePtr)
@@ -1442,12 +1458,13 @@ void XScuGic_Stop(XScuGic *InstancePtr)
 
 /****************************************************************************/
 /**
-* Updates the CpuId global variable.
+* This updates the CpuId global variable.
 *
-* @param	CpuCoreId CPU core number.
+* @param	CpuCoreId is the CPU core number.
 *
 * @return	None.
 *
+* @note		None
 *
 *****************************************************************************/
 void XScuGic_SetCpuID(u32 CpuCoreId)
@@ -1462,10 +1479,11 @@ void XScuGic_SetCpuID(u32 CpuCoreId)
 
 /****************************************************************************/
 /**
-* Returns the CpuId variable.
+* This function returns the CpuId variable.
 *
 * @return	The CPU core number.
 *
+* @note        None.
 *
 *****************************************************************************/
 u32 XScuGic_GetCpuID(void)
@@ -1475,12 +1493,13 @@ u32 XScuGic_GetCpuID(void)
 
 /****************************************************************************/
 /**
-* Checks whether the XScGic is initialized or not given the device ID.
+* It checks whether the XScGic is initialized or not given the device id.
 *
-* @param	DeviceId ID of the XScuGic device.
+* @param	DeviceId the XScuGic device.
 *
 * @return	Returns 1 if initialized otherwise 0.
 *
+* @note		None
 *
 *****************************************************************************/
 #ifndef SDT
@@ -1517,14 +1536,14 @@ u8 XScuGic_IsInitialized(u32 BaseAddress)
 #if defined (GICv3)
 /****************************************************************************/
 /**
-* Marks processor core which calls this API as asleep.
+* It marks processor core which calls this API as asleep
 *
 * @return	None.
 *
 * @note 	It should be called before suspending processor core. Once this
 * 			API is invoked, pending interrupts for processor core asserts
 * 			WakeRequest, to indicate that the PE is to have its power
-* 			restored. In case of Versal SoC, WakeRequest will be consumed by
+* 			restored  In case of Versal SoC, WakeRequest will be consumed by
 * 			psv_psm processor and psmfw will wake up APU processor core.
 *
 *****************************************************************************/
@@ -1540,10 +1559,11 @@ void XScuGic_MarkCoreAsleep(XScuGic *InstancePtr)
 
 /****************************************************************************/
 /**
-* Marks processor core which calls this API as awake.
+* It marks processor core which calls this API as awake
 *
 * @return	None.
 *
+* @note 	None
 *
 *****************************************************************************/
 void XScuGic_MarkCoreAwake(XScuGic *InstancePtr)

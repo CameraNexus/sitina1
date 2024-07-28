@@ -1,6 +1,6 @@
 /******************************************************************************
 * Copyright (C) 2010 - 2021 Xilinx, Inc.  All rights reserved.
-* Copyright (C) 2022 - 2024 Advanced Micro Devices, Inc. All Rights Reserved.
+* Copyright (C) 2022 - 2023 Advanced Micro Devices, Inc. All Rights Reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
 
@@ -8,7 +8,7 @@
 /**
 *
 * @file xiicps.c
-* @addtogroup iicps_api IICPS APIs
+* @addtogroup iicps Overview
 * @{
 *
 * This section contains implementation of required functions for
@@ -60,18 +60,18 @@ static INLINE void StubHandler(void *CallBackRef, u32 StatusEvent);
 /**
 *
 * @brief
-* Initializes a specific XIicPs instance so that the driver is ready to use.
+* Initializes a specific XIicPs instance such that the driver is ready to use.
 *
 * The state of the device after initialization is:
 *   - Device is disabled
 *   - Slave mode
 *
-* @param	InstancePtr Pointer to the XIicPs instance.
-* @param	ConfigPtr Reference to a structure containing information
+* @param	InstancePtr is a pointer to the XIicPs instance.
+* @param	ConfigPtr is a reference to a structure containing information
 *		about a specific IIC device. This function initializes an
 *		InstancePtr object for a specific device specified by the
 *		contents of Config.
-* @param	EffectiveAddr Device base address in the virtual memory
+* @param	EffectiveAddr is the device base address in the virtual memory
 *		address space. The caller is responsible for keeping the address
 *		mapping from EffectiveAddr to the device physical base address
 *		unchanged once this function is invoked. Unexpected errors may
@@ -82,6 +82,7 @@ static INLINE void StubHandler(void *CallBackRef, u32 StatusEvent);
 *
 * @return	The return value is XST_SUCCESS if successful.
 *
+* @note		None.
 *
 ******************************************************************************/
 s32 XIicPs_CfgInitialize(XIicPs *InstancePtr, XIicPs_Config *ConfigPtr,
@@ -132,14 +133,15 @@ s32 XIicPs_CfgInitialize(XIicPs *InstancePtr, XIicPs_Config *ConfigPtr,
 /*****************************************************************************/
 /**
 * @brief
-* Checks the availability of the I2C bus.
+* Check whether the I2C bus is busy
 *
-* @param	InstancePtr Pointer to the XIicPs instance.
+* @param	InstancePtr is a pointer to the XIicPs instance.
 *
 * @return
 * 		- TRUE if the bus is busy.
 *		- FALSE if the bus is not busy.
 *
+* @note		None.
 *
 ******************************************************************************/
 s32 XIicPs_BusIsBusy(XIicPs *InstancePtr)
@@ -171,14 +173,15 @@ s32 XIicPs_BusIsBusy(XIicPs *InstancePtr)
 /*****************************************************************************/
 /**
 *
-* Stub for the status callback. The stub is here in case the upper
+* This is a stub for the status callback. The stub is here in case the upper
 * layers forget to set the handler.
 *
-* @param	CallBackRef Pointer to the upper layer callback reference.
-* @param	StatusEvent Event that just occurred.
+* @param	CallBackRef is a pointer to the upper layer callback reference.
+* @param	StatusEvent is the event that just occurred.
 *
 * @return	None.
 *
+* @note		None.
 *
 ******************************************************************************/
 static INLINE void StubHandler(void *CallBackRef, u32 StatusEvent)
@@ -195,10 +198,11 @@ static INLINE void StubHandler(void *CallBackRef, u32 StatusEvent)
 * Aborts a transfer in progress by resetting the FIFOs. The byte counts are
 * cleared.
 *
-* @param	InstancePtr Pointer to the XIicPs instance.
+* @param	InstancePtr is a pointer to the XIicPs instance.
 *
 * @return	None.
 *
+* @note		None.
 *
 ******************************************************************************/
 void XIicPs_Abort(XIicPs *InstancePtr)
@@ -244,14 +248,15 @@ void XIicPs_Abort(XIicPs *InstancePtr)
 
 /*****************************************************************************/
 /**
-* Puts more data into the transmit FIFO. The number of bytes is either the expected
-* number of bytes for this transfer or available space in FIFO, which ever is less.
+* Put more data into the transmit FIFO, number of bytes is ether expected
+* number of bytes for this transfer or available space in FIFO, which ever
+* is less.
 *
-* @param	InstancePtr Pointer to the XIicPs instance.
+* @param	InstancePtr is a pointer to the XIicPs instance.
 *
 * @return	Number of bytes left for this instance.
 *
-* @note		This is function is shared by the master and slave.
+* @note		This is function is shared by master and slave.
 *
 ******************************************************************************/
 s32 TransmitFifoFill(XIicPs *InstancePtr)
@@ -285,14 +290,15 @@ s32 TransmitFifoFill(XIicPs *InstancePtr)
 
 /*****************************************************************************/
 /**
-* Enables/Disables clock stretching (SCL HOLD).
+* Function to Enable/Disable Clock Stretching (SCL HOLD)
 *
-* @param	InstancePtr	Pointer to the XIicPs instance.
+* @param	InstancePtr	pointer to the XIicPs instance.
 *
-* @param	Enable	Value to enable/disable clock stretching (SCL HOLD).
+* @param	Enable	value to Enable/Disable Clock Stretching (SCL HOLD)
 * 			1 to Enable
 * 			0 to Disable
 *
+* @note	None
 *
 ******************************************************************************/
 
@@ -321,12 +327,13 @@ void XIicPsSclHold(XIicPs *InstancePtr, u8 Enable)
 
 /*****************************************************************************/
 /**
-* Sets the timeout value.
+* Function to set TimeOut value
 *
-* @param	InstancePtr	Pointer to the XIicPs instance.
+* @param	InstancePtr	pointer to the XIicPs instance.
 *
 * @param	Value	Timeout value.
 *
+* @note	None
 *
 ******************************************************************************/
 

@@ -1,6 +1,6 @@
 # Ignore build output directory
 /build
-/export
+
 
 # Ignore object files and dependent files
 .o
@@ -15,6 +15,3 @@
 
 .bin
 .pdi
-.peers.ini
-.repo.yaml
-.vitisWorkspace.json

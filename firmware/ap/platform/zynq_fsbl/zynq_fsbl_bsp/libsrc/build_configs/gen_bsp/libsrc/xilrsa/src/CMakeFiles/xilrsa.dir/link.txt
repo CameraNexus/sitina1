@@ -1,2 +1,0 @@
-arm-none-eabi-ar qc libxilrsa.a 
-/tools/Xilinx/Vitis/2024.1/gnu/aarch32/lin/gcc-arm-none-eabi/bin/arm-none-eabi-ranlib libxilrsa.a
