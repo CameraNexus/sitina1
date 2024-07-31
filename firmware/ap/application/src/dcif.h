@@ -1,7 +1,7 @@
 //
-// afe.h: AD9990 AFE driver
+// dcif.h: Digital camera I/F peripheral driver
 //
-// Copyright 2021 Wenting Zhang <zephray@outlook.com>
+// Copyright 2024 Wenting Zhang <zephray@outlook.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,10 +23,18 @@
 //
 #pragma once
 
-void afe_init(void);
-void afe_start(void);
-void afe_stop(void);
-void afe_switch_to_draft(void);
-void afe_switch_to_still(void);
-void afe_pause(void);
+#include "ccd_timing.h"
 
+#define CAM_DMA_BURSTLEN         8   // in 64-bit words
+#define CAM_DMA_MAXINFLIGHT      4   // Max number of outstanding requests            
+#define CAM_VACT        (CCD_LINES - 1)
+#define CAM_HACT        ((CCD_LINE_PIXCNT - 8) * 2) // TODO
+#define CAM_BUFSIZE     (CAM_VACT * CAM_HACT * 2)
+#define CAM_BUFALIGN    (CAM_DMA_BURSTLEN * 8)
+#if ((CAM_BUFSIZE % CAM_BUFALIGN) != 0)
+#error "Buffer not aligned"
+#endif
+
+void dcif_init(void);
+void dcif_engage(void);
+uint8_t *dcif_waitnextbuffer(void);

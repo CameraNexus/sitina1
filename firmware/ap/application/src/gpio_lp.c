@@ -1,4 +1,5 @@
 // Copyright (c) 2023 Embedded_Projects
+// Copyright (c) 2024 Wenting Zhang 
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -38,27 +39,18 @@ uint32_t gpio_odr_val;
 #define GPIO_WRITE(val)     *GPIO0_ODR = val
 #define GPIO_READ()         *GPIO0_IDR
 // CK+- 11 D1+- 11 D0+- 11
-#define GPIO_LP_11() GPIO_WRITE(gpio_odr_val | GPIO_ENABLE_MASK | \
-			   	   	   	   	   	GPIO_LP_CKP_MASK | GPIO_LP_CKN_MASK | \
-								GPIO_LP_L0P_MASK | GPIO_LP_L0N_MASK | \
-								GPIO_LP_L1P_MASK | GPIO_LP_L1N_MASK)
+#define GPIO_LP_11()        *GPIO0_BSR = GPIO_LP_L0P_MASK | GPIO_LP_L0N_MASK;
 
 // CK+- 11 D1+- 11 D0+- 10
-#define GPIO_LP_10() GPIO_WRITE(gpio_odr_val | GPIO_ENABLE_MASK | \
-			   	   	   	   	   	GPIO_LP_CKP_MASK | GPIO_LP_CKN_MASK | \
-								GPIO_LP_L0P_MASK | \
-								GPIO_LP_L1P_MASK | GPIO_LP_L1N_MASK)
+#define GPIO_LP_10()        *GPIO0_BSR = GPIO_LP_L0P_MASK; \
+                            *GPIO0_BCR = GPIO_LP_L0N_MASK;
 
 // CK+- 11 D1+- 11 D0+- 01
-#define GPIO_LP_01() GPIO_WRITE(gpio_odr_val | GPIO_ENABLE_MASK | \
-			   	   	   	   	   	GPIO_LP_CKP_MASK | GPIO_LP_CKN_MASK | \
-								GPIO_LP_L0N_MASK | \
-								GPIO_LP_L1P_MASK | GPIO_LP_L1N_MASK)
+#define GPIO_LP_01()        *GPIO0_BSR = GPIO_LP_L0N_MASK; \
+                            *GPIO0_BCR = GPIO_LP_L0P_MASK;
 
 // CK+- 11 D1+- 11 D0+- 00
-#define GPIO_LP_00() GPIO_WRITE(gpio_odr_val | GPIO_ENABLE_MASK | \
-			   	   	   	   	   	GPIO_LP_CKP_MASK | GPIO_LP_CKN_MASK | \
-								GPIO_LP_L1P_MASK | GPIO_LP_L1N_MASK)
+#define GPIO_LP_00()        *GPIO0_BCR = GPIO_LP_L0P_MASK | GPIO_LP_L0N_MASK;
 
 #define DELAY_TXS()	usleep(2)
 
@@ -77,12 +69,12 @@ static uint32_t MIPI_ECC_TABLE[] = {
 };
 
 int gpio_lp_init(void) {
-	gpio_odr_val = *GPIO0_ODR;
-	GPIO_LP_11();
-    *GPIO0_OER |= GPIO_ENABLE_MASK |
+    uint32_t gpio_mask = GPIO_ENABLE_MASK |
         GPIO_LP_CKP_MASK | GPIO_LP_CKN_MASK |
         GPIO_LP_L0P_MASK | GPIO_LP_L0N_MASK |
 		GPIO_LP_L1P_MASK | GPIO_LP_L1N_MASK;
+	*GPIO0_BSR = gpio_mask;
+    *GPIO0_OER |= gpio_mask;
 }
 
 int gpio_lp_release(void) {

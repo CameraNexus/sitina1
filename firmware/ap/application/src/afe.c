@@ -27,11 +27,11 @@
 #include "afe.h"
 #include "ccd_timing.h"
 
-#define AFE_MOSI_GPIO_PIN   2
-#define AFE_SCK_GPIO_PIN    4
-#define AFE_CS_GPIO_PIN     3
-#define AFE_RST_GPIO_PIN    0
-#define AFE_SYNC_GPIO_PIN   1
+#define AFE_MOSI_GPIO_PIN   GPIO_PIN_2
+#define AFE_SCK_GPIO_PIN    GPIO_PIN_4
+#define AFE_CS_GPIO_PIN     GPIO_PIN_3
+#define AFE_RST_GPIO_PIN    GPIO_PIN_0
+#define AFE_SYNC_GPIO_PIN   GPIO_PIN_1
 
 // This is the active field count. Programmed numbers can be higher
 #define AFE_FIELD_COUNT (1)
@@ -46,7 +46,7 @@
 // FIELD registers are 16 each
 
 // Base settings
-#define AFE_SYNC_CONFIG (0x65) // External sync enable should be set even if using software sync
+#define AFE_SYNC_CONFIG (0x62) // External sync disabled
 
 typedef struct {
     uint32_t value;
@@ -62,14 +62,14 @@ typedef enum {
 static uint32_t gpo_status;
 
 void afe_init_io(void) {
-	*GPIO0_BSR |= AFE_MOSI_GPIO_PIN | AFE_SCK_GPIO_PIN | AFE_CS_GPIO_PIN |
+	*GPIO0_BSR = AFE_MOSI_GPIO_PIN | AFE_SCK_GPIO_PIN | AFE_CS_GPIO_PIN |
 			AFE_RST_GPIO_PIN | AFE_SYNC_GPIO_PIN;
 	*GPIO0_OER |= AFE_MOSI_GPIO_PIN | AFE_SCK_GPIO_PIN | AFE_CS_GPIO_PIN |
 			AFE_RST_GPIO_PIN | AFE_SYNC_GPIO_PIN;
 }
 
 static void afe_delay() {
-    volatile int x = 5;
+    volatile int x = 20;
     while (x--);
 }
 
@@ -129,9 +129,9 @@ void afe_init(void) {
     afe_write_reg(0x1c, 0xff8000); // VSGSELECT
 
     // Place the AFE into normal operation
-    afe_write_reg(0x00, 0x04); // Standby
+    afe_write_reg(0x00, 0x24); // Standby
 
-    // Divide clock by 2
+    // Don't divide clock by 2
     afe_write_reg(0x0d, 0x00);
 
     // Mode setup
@@ -151,7 +151,7 @@ void afe_init(void) {
             (1 << 16) | // HLBDRV = 4.3mA
             (1 << 20)); // RGBDRV = 4.3mA
 
-    afe_write_reg(0x23, 0x0e); // 3.3V IO
+    afe_write_reg(0x23, 0x00); // 1.8V IO
 
     // HCLK mode 1: H1A = H1B, H2A = H2B = inverse of H1
     // HCLK mode 2: H1A = H1B, H2A = H2B, individually programmable
@@ -180,15 +180,19 @@ void afe_init(void) {
     afe_write_reg(0x35, 0x00); // Disable retime for H1, H2, HLA, HLB
 
     afe_write_reg(0x38,
-            (31 << 0) | // SHDLOC
-            (51 << 8) | // SHPLOC
+            (0 << 0) | // SHDLOC
+            (32 << 8) | // SHPLOC
             (10 << 16)); // SHPWIDTH
 
     // Data output
+    // afe_write_reg(0x39,
+    //         (0 << 0) | // DOUTPHASEP = 0
+    //         (16 << 8) | // DOUTPHASEN = 16, in SDR mode, must be P+16
+    //         (3 << 20)); // SDR output
     afe_write_reg(0x39,
             (0 << 0) | // DOUTPHASEP = 0
-            (16 << 8) | // DOUTPHASEN = 16, in SDR mode, must be P+16
-            (3 << 20)); // SDR output
+            (32 << 8) | // DOUTPHASEN = 32
+            (0 << 20)); // DDR output
 
     afe_write_reg(0x28,
             (AFE_VPAT_COUNT << 0) | // VPATNUM
@@ -196,7 +200,7 @@ void afe_init(void) {
     afe_write_reg(0x2a,
             (AFE_FIELD_COUNT << 0)); // MODE
     afe_write_reg(0x2b,
-            (1 << 0)); // FIELD0 = 1 // Boot up in preview mode
+            (0 << 0)); // FIELD0 = 0 // Boot up in field 0
     afe_write_reg(0x2c, 0);
 
     // Configure timing
@@ -204,7 +208,7 @@ void afe_init(void) {
     // Configure field
     // Field 0: Full resolution readout
     afe_set_conf_reg(R_FIELD, 0, 0x00,
-            (1 << 0));  // Use seq 1 for region 0 (Image readout)
+            (0 << 0));  // Use seq 0 for region 0 (Image readout)
     afe_set_conf_reg(R_FIELD, 0, 0x01, 0);
     afe_set_conf_reg(R_FIELD, 0, 0x02,
             (CCD_LINE_LENGTH)); // Line length of the last line
@@ -289,9 +293,6 @@ void afe_init(void) {
     afe_set_conf_reg(R_VSEQ, 0, 0x22,
             (CCD_CLPOB_BEGIN << 0) | // CLPOB toggle position 1
             (CCD_CLPOB_END << 13)); // CLPOB toggle position 2
-//    afe_set_conf_reg(R_VSEQ, 1, 0x22,
-//            (CCD_CLPOB_BEGIN << 0) | // CLPOB toggle position 1
-//            (CCD_CLPOB_END << 13)); // CLPOB toggle position 2
     afe_set_conf_reg(R_VSEQ, 0, 0x23,
             (CCD_HBLK_LENGTH << 0) | // PBLK toggle position 1
             (8191 << 13)); // PBLK toggle position 2
@@ -320,7 +321,11 @@ void afe_init(void) {
     afe_write_reg(0x11, 0x1);
 
     // Enable master mode operation
-    afe_write_reg(0x20, 0x1);
+    //afe_write_reg(0x20, 0x1);
+    afe_write_reg(0x20, 0x0);
+
+    // Enable slave mode operation
+    afe_write_reg(0x0e, 0x100);
 }
 
 void afe_start(void) {
@@ -342,11 +347,11 @@ void afe_power_down(void) {
 }
 
 void afe_switch_to_draft(void) {
-    afe_write_reg(0x2b, (1 << 0)); // FIELD0 = 1
+
 }
 
 void afe_switch_to_still(void) {
-    afe_write_reg(0x2b, (0 << 0)); // FIELD0 = 0
+
 }
 
 void afe_capture_finish(void) {

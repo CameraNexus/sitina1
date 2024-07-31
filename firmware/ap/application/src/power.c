@@ -1,7 +1,7 @@
 //
-// afe.h: AD9990 AFE driver
+// power.c: Power management related functions
 //
-// Copyright 2021 Wenting Zhang <zephray@outlook.com>
+// Copyright 2024 Wenting Zhang <zephray@outlook.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,12 +21,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-#pragma once
+#include <stdint.h>
+#include <stdbool.h>
+#include "mu_platform.h"
+#include "power.h"
 
-void afe_init(void);
-void afe_start(void);
-void afe_stop(void);
-void afe_switch_to_draft(void);
-void afe_switch_to_still(void);
-void afe_pause(void);
+void power_init(void) {
+    *PWMLITE_PSC = 1;
+    *PWMLITE_CNT = 255;
+    *PWMLITE_CMP = 127;
+    *PWMLITE_CTL = 1;
+}
 
+void power_set_vab(uint8_t val) {
+    // 5-16V
+    *PWMLITE_CMP = val;
+}

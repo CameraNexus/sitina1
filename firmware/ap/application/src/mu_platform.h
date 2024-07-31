@@ -57,18 +57,12 @@
 #define GPIO_PIN_30 0x40000000
 #define GPIO_PIN_31 0x80000000
 
-typedef struct {
-    volatile uint32_t REG_ODR;
-    volatile uint32_t REG_IDR;
-    volatile uint32_t REG_BSR;
-    volatile uint32_t REG_BCR;
-    volatile uint32_t REG_OER;
-} mu_gpio_inst_t;
-
 // Platform specific definition
 #define GPIO0_BASE          0x40000000
 #define CCDTG_BASE	        0x40010000
 #define DSILITE_BASE        0x40020000
+#define PWMLITE_BASE        0x40030000
+#define DCIF_BASE           0x40040000
 
 #define GPIO0_ODR           (IOREG(GPIO0_BASE + 0x00))
 #define GPIO0_IDR           (IOREG(GPIO0_BASE + 0x04))
@@ -76,7 +70,42 @@ typedef struct {
 #define GPIO0_BCR           (IOREG(GPIO0_BASE + 0x0C))
 #define GPIO0_OER           (IOREG(GPIO0_BASE + 0x10))
 
+#define CCDTG_CTRL          (IOREG(CCDTG_BASE + 0x00))
+#define CCDTG_DELAY_HTIME   (IOREG(CCDTG_BASE + 0x04))
+#define CCDTG_DELAY_VTIME   (IOREG(CCDTG_BASE + 0x08))
+#define CCDTG_ESHUT_LINE    (IOREG(CCDTG_BASE + 0x0C))
+
+#define CCDTG_CTRL_EN_OFFSET            0
+#define CCDTG_CTRL_EMBED_ESHUT_OFFSET   2
+#define CCDTG_CTRL_START_ESHUT_OFFSET   3
+#define CCDTG_CTRL_VSKIP_OFFSET         4
+#define CCDTG_CTRL_CCD_OEN_OFFSET       8
+#define CCDTG_CTRL_SYNC_OEN_OFFSET      9
+
 #define DSILITE_PCTL        (IOREG(DSILITE_BASE + 0x00))
 #define DSILITE_DMACTL      (IOREG(DSILITE_BASE + 0x04))
 #define DSILITE_STARTADDR   (IOREG(DSILITE_BASE + 0x20))
 #define DSILITE_ENDADDR     (IOREG(DSILITE_BASE + 0x28))
+
+#define PWMLITE_CTL         (IOREG(PWMLITE_BASE + 0x00))
+#define PWMLITE_PSC         (IOREG(PWMLITE_BASE + 0x04))
+#define PWMLITE_CNT         (IOREG(PWMLITE_BASE + 0x08))
+#define PWMLITE_CMP         (IOREG(PWMLITE_BASE + 0x0C))
+
+#define DCIF_PCTL           (IOREG(DCIF_BASE + 0x00))
+#define DCIF_DMACTL         (IOREG(DCIF_BASE + 0x04))
+#define DCIF_FBSWAP         (IOREG(DCIF_BASE + 0x08))
+#define DCIF_VBLK           (IOREG(DCIF_BASE + 0x10))
+#define DCIF_VACT           (IOREG(DCIF_BASE + 0x14))
+#define DCIF_HBLK           (IOREG(DCIF_BASE + 0x18))
+#define DCIF_HACT           (IOREG(DCIF_BASE + 0x1C))
+#define DCIF_STARTADDR0_L   (IOREG(DCIF_BASE + 0x20))
+#define DCIF_ENDADDR0_L     (IOREG(DCIF_BASE + 0x28))
+#define DCIF_STARTADDR1_L   (IOREG(DCIF_BASE + 0x30))
+#define DCIF_ENDADDR1_L     (IOREG(DCIF_BASE + 0x38))
+
+#define DCIF_CTRL_EN_OFFSET             0
+#define DCIF_CTRL_USE_VSYNC_OFFSET      1
+#define DCIF_CTRL_USE_HSYNC_OFFSET      2
+#define DCIF_CTRL_VSYNC_POL_OFFSET      16
+#define DCIF_CTRL_HSYNC_POL_OFFSET      17

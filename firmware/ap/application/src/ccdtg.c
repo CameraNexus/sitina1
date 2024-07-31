@@ -1,7 +1,5 @@
 //
-// afe.h: AD9990 AFE driver
-//
-// Copyright 2021 Wenting Zhang <zephray@outlook.com>
+// Copyright (c) 2024 Wenting Zhang
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,12 +19,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-#pragma once
+#include <stdint.h>
+#include <stdbool.h>
+#include "mu_platform.h"
+#include "ccdtg.h"
 
-void afe_init(void);
-void afe_start(void);
-void afe_stop(void);
-void afe_switch_to_draft(void);
-void afe_switch_to_still(void);
-void afe_pause(void);
+static uint32_t ctrl_val;
 
+void ccdtg_init() {
+    ctrl_val =
+        (1 << CCDTG_CTRL_EMBED_ESHUT_OFFSET) |
+        (0 << CCDTG_CTRL_VSKIP_OFFSET) |
+        (1 << CCDTG_CTRL_CCD_OEN_OFFSET) |
+        (1 << CCDTG_CTRL_SYNC_OEN_OFFSET);
+    *CCDTG_CTRL = ctrl_val;
+    *CCDTG_ESHUT_LINE = 0;
+}
+
+void ccdtg_start() {
+    *CCDTG_CTRL = ctrl_val | 0x1;
+}
+
+void ccdtg_stop() {
+    *CCDTG_CTRL = ctrl_val;
+}

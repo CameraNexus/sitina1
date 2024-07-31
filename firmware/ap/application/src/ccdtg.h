@@ -1,7 +1,5 @@
 //
-// afe.h: AD9990 AFE driver
-//
-// Copyright 2021 Wenting Zhang <zephray@outlook.com>
+// Copyright (c) 2024 Wenting Zhang
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,10 +21,6 @@
 //
 #pragma once
 
-void afe_init(void);
-void afe_start(void);
-void afe_stop(void);
-void afe_switch_to_draft(void);
-void afe_switch_to_still(void);
-void afe_pause(void);
-
+void ccdtg_init();
+void ccdtg_start();
+void ccdtg_stop();

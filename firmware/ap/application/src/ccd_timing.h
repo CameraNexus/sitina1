@@ -22,18 +22,21 @@
 //
 #pragma once
 
+// Pixel time:
+// 24MHz - 41.67ns
+// 27MHz - 37ns (used on hardware)
+// 30MHz - 33.33ns
+
 // Timing for normal readout
-#define CCD_TVCCD_PIX       84 // 3.5 us
-#define CCD_THD_PIX         84 // 3.5 us
+#define CCD_TVCCD_PIX       98 // 3.5 us
+#define CCD_THD_PIX         98 // 3.5 us
 #define CCD_DUMMY_PIX       4
 #define CCD_DARK_PIX        19
 #define CCD_BUFFER_PIX      13
 #define CCD_ACTIVE_PIX      2004
-#define CCD_T3P_PIX         2880 // 120 us
-#define CCD_TV3RD_PIX       240 // 10 us
-#define CCD_TV3RD_COMP1     30 // Compensate for slow turn on
-#define CCD_TV3RD_COMP2     2
-#define CCD_T3D_PIX         480 // 20 us
+#define CCD_T3P_PIX         3333 // 120 us
+#define CCD_TV3RD_PIX       278 // 10 us
+#define CCD_T3D_PIX         556 // 20 us
 #define CCD_LINE_PIXCNT     (CCD_DUMMY_PIX + CCD_DARK_PIX + CCD_BUFFER_PIX + CCD_ACTIVE_PIX)
 #define CCD_HBLK_LENGTH     (CCD_TVCCD_PIX + CCD_THD_PIX)
 #define CCD_LINE_LENGTH     (CCD_HBLK_LENGTH + CCD_LINE_PIXCNT)

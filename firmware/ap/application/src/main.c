@@ -22,8 +22,13 @@
 //
 #include <stdio.h>
 #include <stdbool.h>
+#include "afe.h"
+#include "dcif.h"
 #include "i2c.h"
+#include "lcd.h"
+#include "ccdtg.h"
 #include "mcusvc.h"
+#include "power.h"
 #include "xil_printf.h"
 #include "xil_cache.h"
 #include "xparameters.h"
@@ -43,21 +48,36 @@ int main()
 {
     i2c_init();
     mcusvc_init();
+    power_init();
     lcd_init();
+    afe_init();
+    dcif_init();
+    ccdtg_init();
+    
+    power_set_vab(127);
+
+    //afe_start();
+    dcif_engage();
+    ccdtg_start();
     //memset(s_image_buffer, 0xFF, IMAGE_WIDTH * IMAGE_HEIGHT * IMAGE_PIXEL_SIZE);
 
     //memcpy(s_image_buffer, gImage_image480480, IMAGE_WIDTH * IMAGE_HEIGHT * IMAGE_PIXEL_SIZE);
     //Xil_DCacheFlushRange((UINTPTR)s_image_buffer, IMAGE_WIDTH * IMAGE_HEIGHT * IMAGE_PIXEL_SIZE);
 
     for(;;) {
+        uint16_t *cambuf = (uint16_t *)dcif_waitnextbuffer();
         mcusvc_set_led(true);
-        lcd_set_color(0xffff0000);
-        sleep(1);
+        uint32_t *scrbuf = framebuffer;
+        
+        for (int y = 0; y < 337; y++) {
+            for (int x = 0; x < 480; x++) {
+                uint16_t pix = cambuf[y * 8 * CAM_HACT + x * 8];
+                uint32_t rgb = pix;
+                *scrbuf++ = rgb;
+            }
+        }
+        Xil_DCacheFlushRange((intptr_t)framebuffer, 480*480*4);
         mcusvc_set_led(false);
-        lcd_set_color(0xff00ff00);
-        sleep(1);
-        lcd_set_color(0xff0000ff);
-        sleep(1);
     // memset(framebuffer, 0xff, 480*4);
     // memset(framebuffer[480*4*2], 0xff, 480*4);
     // for (int i = 0; i < 240; i++) {
