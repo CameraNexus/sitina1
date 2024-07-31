@@ -21,7 +21,8 @@ VFLAGS := -Wall -Wno-fatal -MMD --trace -cc \
 VFLAGS += \
 	-I../rtl \
 	-I../rtl/mulib/rtl \
-	-I../rtl/mulib/rtl/baseip
+	-I../rtl/mulib/rtl/baseip \
+	-I../rtl/mulib/rtl/baseip/generic
 ifeq ($(VERBOSE), 1)
 VFLAGS += +define+VERBOSE=1
 endif

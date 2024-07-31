@@ -81,14 +81,12 @@ void axiep_apply(uint8_t awid, uint32_t awaddr, uint8_t awlen, uint8_t awsize,
         uint8_t &rvalid) {
     // Called during every posedge clk
     // Default values
-    awready = 1;
-    arready = 1;
     wready = 0;
     bvalid = 0;
     rvalid = 0;
 
     // Handle read request
-    if ((read_req.beatcount == 0) && (arvalid)) {
+    if ((read_req.beatcount == 0) && (arvalid) && (arready)) {
         read_req.addr = araddr;
         read_req.id = arid;
         read_req.size = arsize;
@@ -140,9 +138,12 @@ void axiep_apply(uint8_t awid, uint32_t awaddr, uint8_t awlen, uint8_t awsize,
             }
         }
     }
+    else {
+        arready = 1;
+    }
 
     // Handle write request
-    if ((write_req.beatcount == 0) && (awvalid)) {
+    if ((write_req.beatcount == 0) && (awvalid) && (awready)) {
         write_req.addr = awaddr;
         write_req.id = awid;
         write_req.size = awsize;
@@ -202,5 +203,8 @@ void axiep_apply(uint8_t awid, uint32_t awaddr, uint8_t awlen, uint8_t awsize,
                 }
             }
         }
+    }
+    else {
+        awready = 1;
     }
 }

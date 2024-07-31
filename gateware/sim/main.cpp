@@ -39,12 +39,21 @@
 #define GPIO_BASE               0x00000
 #define CCDTG_BASE              0x10000
 #define DSILITE_BASE            0x20000
+#define PWMLITE_BASE            0x30000
+#define DCIF_BASE               0x40000
 
 #define GPIO_REG_ODR            0x0000
 #define GPIO_REG_IDR            0x0004
 #define GPIO_REG_BSR            0x0008
 #define GPIO_REG_BCR            0x000C
 #define GPIO_REG_OER            0x0010
+
+#define CCDTG_REG_CTRL          0x0000
+#define CCDTG_REG_DELAY_HTIME   0x0004
+#define CCDTG_REG_DELAY_VTIME   0x0008
+#define CCDTG_REG_ESHUT_LINE    0x000C
+
+#define CCDTG_CTRL_VAL          ((1 << 9) | (1 << 8) | (0 << 4) | (1 << 2))
 
 #define DSILITE_REG_PCTL        0x0000
 #define DSILITE_REG_DMACTL      0x0004
@@ -58,8 +67,34 @@
 #define FRAMEBUF_SIZE           (LCD_VACT * LCD_HACT * 4)
 #define FRAMEBUF_END            FRAMEBUF_BASE + FRAMEBUF_SIZE
 
+#define CAM_VACT                10
+#define CAM_HACT                1024
+#define CAM_VBLK                5
+#define CAM_HBLK                10
+
+#define CAMBUF_BASE             0x2000000
+#define CAMBUF_SIZE             (CAM_VACT * CAM_HACT * 2)
+#define CAMBUF_END              CAMBUF_BASE + CAMBUF_SIZE
+
 #define DMACTL_BURSTLEN         8   // in 64-bit words
 #define DMACTL_MAXINFLIGHT      4   // Max number of outstanding requests
+
+#define PWMLITE_REG_CTL         0x0000
+#define PWMLITE_REG_PSC         0x0004
+#define PWMLITE_REG_CNT         0x0008
+#define PWMLITE_REG_CMP         0x000C
+
+#define DCIF_REG_PCTL           0x0000
+#define DCIF_REG_DMACTL         0x0004
+#define DCIF_REG_FBSWAP         0x0008
+#define DCIF_REG_VBLK           0x0010
+#define DCIF_REG_VACT           0x0014
+#define DCIF_REG_HBLK           0x0018
+#define DCIF_REG_HACT           0x001C
+#define DCIF_REG_STARTADDR0_L   0x0020
+#define DCIF_REG_ENDADDR0_L     0x0028
+#define DCIF_REG_STARTADDR1_L   0x0030
+#define DCIF_REG_ENDADDR1_L     0x0038
 
 static bool unlimited = true;
 static uint64_t max_cycles = 100;
@@ -95,6 +130,22 @@ void testmain(void) {
         apbsim_write(DSILITE_BASE | DSILITE_REG_ENDADDR, FRAMEBUF_END);
         apbsim_write(DSILITE_BASE | DSILITE_REG_DMACTL, (DMACTL_MAXINFLIGHT << 8) | DMACTL_BURSTLEN);
         apbsim_write(DSILITE_BASE | DSILITE_REG_PCTL, 0x1);
+        apbsim_write(PWMLITE_BASE | PWMLITE_REG_PSC, 255);
+        apbsim_write(PWMLITE_BASE | PWMLITE_REG_CNT, 255);
+        apbsim_write(PWMLITE_BASE | PWMLITE_REG_CMP, 127);
+        apbsim_write(PWMLITE_BASE | PWMLITE_REG_CTL, 1);
+        apbsim_write(DCIF_BASE | DCIF_REG_DMACTL, (DMACTL_MAXINFLIGHT << 8) | DMACTL_BURSTLEN);
+        apbsim_write(DCIF_BASE | DCIF_REG_VBLK, CAM_VBLK);
+        apbsim_write(DCIF_BASE | DCIF_REG_VACT, CAM_VACT);
+        apbsim_write(DCIF_BASE | DCIF_REG_HBLK, CAM_HBLK);
+        apbsim_write(DCIF_BASE | DCIF_REG_HACT, CAM_HACT);
+        apbsim_write(DCIF_BASE | DCIF_REG_STARTADDR0_L, CAMBUF_BASE);
+        apbsim_write(DCIF_BASE | DCIF_REG_ENDADDR0_L, CAMBUF_END);
+        apbsim_write(DCIF_BASE | DCIF_REG_PCTL, 0x07 | (1 << 16) | (1 << 17));
+        apbsim_write(CCDTG_BASE | CCDTG_REG_CTRL, CCDTG_CTRL_VAL);
+        apbsim_write(CCDTG_BASE | CCDTG_REG_ESHUT_LINE, 0);
+        apbsim_write(CCDTG_BASE | CCDTG_REG_CTRL, CCDTG_CTRL_VAL | 1);
+        apbsim_write(DCIF_BASE | DCIF_REG_FBSWAP, 1);
         step = 1;
         break;
     case 1:
@@ -124,6 +175,8 @@ void tick(void) {
     uint8_t s_apb_psel = core->s_apb_psel;
     uint32_t s_apb_pwdata = core->s_apb_pwdata;
     uint32_t s_apb_paddr = core->s_apb_paddr;
+
+    uint16_t dvp_d = core->dvp_d;
 
     // Call simulated modules
     axiep_apply(
@@ -176,10 +229,17 @@ void tick(void) {
     //     core->dpi_data
     // );
 
+    camsim_apply(
+        core->dvp_hsync,
+        core->dvp_vsync,
+        dvp_d
+    );
+
     // Posedge
     core->clk = 1;
     core->clk_lcd = 1;
-    core->clk_ccd = 1;
+    core->clk_ccd_4x = 1;
+    core->dvp_pclk = 1;
     core->eval();
 
     // Apply changed input signals after clock edge
@@ -201,6 +261,15 @@ void tick(void) {
     core->s_apb_pwdata = s_apb_pwdata;
     core->s_apb_paddr = s_apb_paddr;
 
+    core->dvp_d = dvp_d;
+
+    static uint8_t clkdiv = 0;
+    core->clk_ccd_1x = (clkdiv >= 2) ? 1 : 0;
+    if (clkdiv == 3)
+        clkdiv = 0;
+    else 
+        clkdiv ++;
+
     // Let combinational changes propagate
     core->eval();
     if (enable_trace)
@@ -209,7 +278,8 @@ void tick(void) {
     // Negedge
     core->clk = 0;
     core->clk_lcd = 0;
-    core->clk_ccd = 0;
+    core->clk_ccd_4x = 0;
+    core->dvp_pclk = 0;
     core->eval();
     if (enable_trace)
         trace->dump(tickcount * 10 + 5);
@@ -237,7 +307,7 @@ void reset(void) {
     memmap_reset();
     //memmap_load("test_image.bin", FRAMEBUF_BASE - RAM_BASE);
     for (uint64_t i = FRAMEBUF_BASE; i < FRAMEBUF_END; i += 8) {
-        memmap_write(i, 0x0123456789abcdefull, 0xff);
+        memmap_write(i, 0x01234567893a01efull, 0xff);
     }
 }
 

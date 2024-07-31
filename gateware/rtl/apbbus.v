@@ -44,6 +44,7 @@ module apbbus #(
     input  wire [N-1:0]     down_pready_vec,
     input  wire [N*32-1:0]  down_prdata_vec
 );
+    localparam SELW = $clog2(N);
 
     assign down_pwrite = up_pwrite;
     assign down_pwdata = up_pwdata;
@@ -52,7 +53,7 @@ module apbbus #(
 
     // Each down stream device gets 64KB space (16-bit)
     // Decoding starts with bit 16
-    wire [1:0] dec_addr = up_paddr[17:16];
+    wire [SELW-1:0] dec_addr = up_paddr[16+:SELW];
 
     integer i;
     always @(*) begin
@@ -60,7 +61,7 @@ module apbbus #(
         up_prdata = 32'hdeadbeef;
         down_psel_vec = 'd0;
         for (i = 0; i < N; i = i + 1) begin
-            if ((dec_addr == i[1:0]) && up_psel) begin
+            if ((dec_addr == i[SELW-1:0]) && up_psel) begin
                 down_psel_vec[i] = 1'b1;
                 up_pready = down_pready_vec[i];
                 up_prdata = down_prdata_vec[i*32+:32];

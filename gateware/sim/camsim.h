@@ -23,4 +23,4 @@
 #pragma once
 
 void camsim_reset();
-void camsim_apply(uint8_t &hsync, uint8_t &vsync, uint16_t &d, uint8_t &clk);
+void camsim_apply(uint8_t hsync, uint8_t vsync, uint16_t &d);

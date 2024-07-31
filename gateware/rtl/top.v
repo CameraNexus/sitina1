@@ -53,6 +53,11 @@ module top (
     output wire         AFE_SDATA,
     output wire         AFE_SL,
     output wire         AFE_SCK,
+    // AFE Data
+    input wire [13:0]   DVP_D,
+    output wire         DVP_HSYNC,
+    output wire         DVP_VSYNC,
+    input wire          DVP_PCLK,
     // MIPI Output
     output wire 		DSI_LP_CP,
     output wire			DSI_LP_CN,
@@ -70,7 +75,9 @@ module top (
     output wire         TCON_STROBE,
     output wire         TCON_H1,
     output wire         TCON_H2,
-    output wire         TCON_RG
+    output wire         TCON_RG,
+    // PWM for VAB voltage control
+    output wire         VAB_PWM
 );
 
     parameter AXI_DW = 64;
@@ -160,7 +167,7 @@ module top (
         .DDR_reset_n(DDR_reset_n),
         .DDR_we_n(DDR_we_n),
         .FCLK_CLK0(clk),
-        .FCLK_CLK1(clk_lcd),
+        .FCLK_CLK1(),
         .FIXED_IO_ddr_vrn(FIXED_IO_ddr_vrn),
         .FIXED_IO_ddr_vrp(FIXED_IO_ddr_vrp),
         .FIXED_IO_mio(FIXED_IO_mio),
@@ -209,22 +216,24 @@ module top (
 	);
 
     // Reset synchronizer
-    wire rst_n_sync;
-    assign rst = !rst_n_sync;
-    mu_drsync rst_sync (
-        .clk(clk),
-        .in(1'b1),
-        .nreset(aresetn),
-        .out(rst_n_sync)
+    xpm_cdc_sync_rst rst_sync(
+        .dest_clk(clk),
+        .src_rst(!aresetn),
+        .dest_rst(rst)
     );
 
-    wire rst_n_lcd;
-    assign rst_lcd = !rst_n_lcd;
-    mu_drsync lcd_rst_sync (
-        .clk(clk_lcd),
-        .in(1'b1),
-        .nreset(aresetn),
-        .out(rst_n_lcd)
+    wire dvp_pclk_sdr;
+    wire dvp_rst;
+    wire clk_ccd;
+    wire rst_ccd;
+    ccdclk (
+        .clk(DVP_PCLK),
+        .rst(!aresetn),
+        .clk_2x(dvp_pclk_sdr),
+        .rst_2x(dvp_rst),
+        .clk_4x(clk_ccd),
+        .rst_4x(rst_ccd),
+        .locked()
     );
 
     wire [15:0]  dsi_hs_dat;
@@ -237,10 +246,16 @@ module top (
     ) system (
         .clk(clk),
         .clk_lcd(clk_lcd),
-        .clk_ccd(clk), // TODO
+        .clk_ccd_4x(clk_ccd),
+        .clk_ccd_1x(DVP_PCLK),
         .rst(rst),
         .rst_lcd(rst_lcd),
-        .rst_ccd(rst), // TODO
+        .rst_ccd(rst_ccd),
+        .dvp_d(DVP_D),
+        .dvp_hsync(DVP_HSYNC),
+        .dvp_vsync(DVP_VSYNC),
+        .dvp_pclk(dvp_pclk_sdr),
+        .dvp_rst(dvp_rst),
         .afe_rst(AFE_RST),
         .afe_sync(AFE_SYNC),
         .afe_sdata(AFE_SDATA),
@@ -261,6 +276,7 @@ module top (
         .tcon_h1(TCON_H1),
         .tcon_h2(TCON_H2),
         .tcon_rg(TCON_RG),
+        .vab_pwm(VAB_PWM),
         .s_apb_pwrite(apb_pwrite),
         .s_apb_pwdata(apb_pwdata),
         .s_apb_paddr(apb_paddr),
@@ -299,9 +315,13 @@ module top (
         .m_axi_rready(axi_rready)
     );
 
+    wire mmcm_locked;
     mu_dphy_7series #(.LANES(2)) dphy (
-        .clk(clk_lcd),
-        .rst(rst_lcd),
+        .clk(clk),
+        .rst(rst),
+        .locked(mmcm_locked),
+        .clk_lcd(clk_lcd),
+        .rst_lcd(rst_lcd),
         .hsck_ten(dsi_hsck_ten),
         .hsdat_ten(dsi_hsdat_ten),
         .dat(dsi_hs_dat),
@@ -310,6 +330,16 @@ module top (
         .dsi_hs_dp(DSI_HS_DP),
         .dsi_hs_dn(DSI_HS_DN)
     );
+    
+//    assign ila_probe[0] = mmcm_locked;
+//    assign ila_probe[7] = TCON_V1;
+//    assign ila_probe[6] = TCON_V2;
+//    assign ila_probe[5] = TCON_V23;
+//    assign ila_probe[4] = TCON_FDG;
+//    assign ila_probe[3] = TCON_STROBE;
+//    assign ila_probe[2] = TCON_H1;
+//    assign ila_probe[1] = TCON_RG;
+//    assign ila_probe = dsi_hs_dat;
 
 endmodule
 

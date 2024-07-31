@@ -30,7 +30,8 @@ module system #(
     parameter AXI_IDW = 1
 ) (
     input  wire         clk,        // Clock
-    input  wire         clk_ccd,    // CCD 4X pixel clock
+    input  wire         clk_ccd_4x, // CCD 4X pixel clock
+    input  wire         clk_ccd_1x, // CCD 1X pixel clock
     input  wire         clk_lcd,    // LCD pixel clock
     input  wire         rst,
     input  wire         rst_ccd,
@@ -40,6 +41,7 @@ module system #(
     output wire         dvp_hsync,
     output wire         dvp_vsync,
     input  wire         dvp_pclk,
+    input  wire         dvp_rst,
     // AD9990 control
     output wire         afe_rst,
     output wire         afe_sync,
@@ -72,7 +74,7 @@ module system #(
 );
 
     // Number of APB devices
-    localparam APB_N = 3;
+    localparam APB_N = 5;
 
     // Internal APB for register access
     wire regbus_pwrite;
@@ -136,7 +138,8 @@ module system #(
 
     ccdtimgen ccdtimgen (
         .clk(clk),
-        .clk_ccd(clk_ccd),
+        .clk_ccd(clk_ccd_4x),
+        .ref_clk(clk_ccd_1x),
         .rst(rst),
         .rst_ccd(rst_ccd),
         // APB device port for register access
@@ -164,6 +167,8 @@ module system #(
 //    assign tcon_h2 = 1'b0;
 //    assign tcon_rg = 1'b0;
 
+    `AXI_WIRES(lcd_, AXI_AW, AXI_DW, AXI_IDW);
+
     wire dsi_lp_ctl_cp;
     wire dsi_lp_ctl_cn;
     wire [1:0] dsi_lp_ctl_dp;
@@ -179,7 +184,7 @@ module system #(
         // APB device port for register access
         `APB_SLAVE_CONN(regbus_, 2),
 	    // AXI host port for direct memory access
-        `AXI_CONN(m_, m_),
+        `AXI_CONN(m_, lcd_),
 	    // Display interface
         .dpi_ext_vsync(1'b0),
         // DSI LP, to IO mux
@@ -199,6 +204,45 @@ module system #(
     assign dsi_lp_dp = dsi_lp_sel ? dsi_lp_gpio_dp : dsi_lp_ctl_dp;
     assign dsi_lp_dn = dsi_lp_sel ? dsi_lp_gpio_dn : dsi_lp_ctl_dn;
 
+    mu_pwmlite #(
+        .NCH(1),
+        .PSCW(8),
+        .CNTW(8)
+    ) mu_pwmlite (
+        .clk(clk),
+        .rst(rst),
+        `APB_SLAVE_CONN(regbus_, 3),
+        .pwm_out(vab_pwm)
+    );
+
+    `AXI_WIRES(cam_, AXI_AW, AXI_DW, AXI_IDW);
+
+    mu_dcif #(
+        .AXI_AW(AXI_AW),
+        .AXI_DW(AXI_DW)
+    ) mu_dcif (
+        .clk(clk),
+        .rst(rst),
+        `APB_SLAVE_CONN(regbus_, 4),
+        `AXI_CONN(m_, cam_),
+        .dvp_d({dvp_d, 2'b0}),
+        .dvp_hsync(dvp_hsync),
+        .dvp_vsync(dvp_vsync),
+        .dvp_pclk(dvp_pclk),
+        .dvp_rst(dvp_rst)
+    );
+
+    mu_aximerge #(
+        .AXI_AW(AXI_AW),
+        .AXI_DW(AXI_DW),
+        .AXI_IDW(AXI_IDW)
+    ) mu_aximerge (
+        .clk(clk),
+        .rst(rst),
+        `AXI_CONN(srd_, lcd_),
+        `AXI_CONN(swr_, cam_),
+        `AXI_CONN(m_, m_)
+    );
 
 endmodule
 

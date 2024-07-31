@@ -28,8 +28,8 @@
 #include "stb_image.h"
 #include "stb_image_resize.h"
 
-#define CAM_WIDTH   128
-#define CAM_HEIGHT  128
+#define CAM_WIDTH   200
+#define CAM_HEIGHT  160
 
 static uint16_t pixels[CAM_WIDTH * CAM_HEIGHT];
 static int x_counter;
@@ -65,9 +65,10 @@ void camsim_reset() {
     camsim_next_frame();
 }
 
-void camsim_apply(uint8_t &hsync, uint8_t &vsync, uint16_t &d, uint8_t &clk) {
-    vsync = (y_counter == 0) ? 1 : 0;
-    hsync = (x_counter == 0) ? 1 : 0;
+void camsim_apply(uint8_t hsync, uint8_t vsync, uint16_t &d) {
+    // TODO: THIS SHOULD BE IN SLAVE MODE
+    //vsync = (y_counter == 0) ? 1 : 0;
+    //hsync = (x_counter == 0) ? 1 : 0;
 
     d = pixels[y_counter * CAM_WIDTH + x_counter++];
 

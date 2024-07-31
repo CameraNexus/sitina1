@@ -30,8 +30,11 @@ module ccdtimgen(
     input  wire         clk_ccd, // 4X pixel clock
     input  wire         rst,
     input  wire         rst_ccd,
+    input  wire         ref_clk, // 1X pixel clock for synchronization
     // APB device port for register access
+    /* verilator lint_off UNUSEDSIGNAL */
     `APB_SLAVE_IF,
+    /* verilator lint_on UNUSEDSIGNAL */
     // To AFE
     output reg          dvp_hsync,
     output reg          dvp_vsync,
@@ -52,15 +55,79 @@ module ccdtimgen(
 
     localparam CNTW = 15; // Width of counters
 
-    // These should be registers, just wires for now
-    wire tgen_en = 1'b0;
-    wire tgen_rst = 1'b0;
-    wire tgen_embed_eshut = 1'b1;
-    wire tgen_start_eshut = 1'b0;
-    wire [CNTW-1:0] delay_htime = 10; // Start delay line time 
-    wire [CNTW-1:0] delay_vtime = 10; // Start delay line count
-    wire [3:0] vskip = 6; // Line skipping factor, need to be even for color
-    wire [CNTW-1:0] eshut_line = 98;
+    // Registers
+    localparam CCDTG_REG_CTRL           = 16'h0;
+    localparam CCDTG_REG_DELAY_HTIME    = 16'h4;
+    localparam CCDTG_REG_DELAY_VTIME    = 16'h8;
+    localparam CCDTG_REG_ESHUT_LINE     = 16'hC;
+
+    reg tgen_en_apb_clk; // default 0: enable timing gen
+    reg tgen_rst_apb_clk; // default 0: reset timing gen
+    reg tgen_embed_eshut_apb_clk; // default 1: Embed eshut in field
+    reg tgen_start_eshut_apb_clk; // default 0: Use eshut at start of the frame
+    reg [CNTW-1:0] delay_htime_apb_clk; // Start delay (for eshut) line length
+    reg [CNTW-1:0] delay_vtime_apb_clk; // Start delay (for eshut) line count
+    reg [3:0] vskip_apb_clk; // Line skipping factor
+    reg [CNTW-1:0] eshut_line_apb_clk; // Line when embed eshut kicks in
+    reg tgen_ccd_oen_apb_clk; // default 0: enable CCD timing output
+    reg tgen_sync_oen_apb_clk; // default 0: enable HV sync output
+
+    always @(posedge clk) begin
+        if (s_apb_penable && s_apb_pwrite && s_apb_psel) begin
+            case (s_apb_paddr[15:0])
+            CCDTG_REG_CTRL: begin
+                tgen_en_apb_clk <= s_apb_pwdata[0];
+                tgen_rst_apb_clk <= s_apb_pwdata[1];
+                tgen_embed_eshut_apb_clk <= s_apb_pwdata[2];
+                tgen_start_eshut_apb_clk <= s_apb_pwdata[3];
+                vskip_apb_clk <= s_apb_pwdata[7:4];
+                tgen_ccd_oen_apb_clk <= s_apb_pwdata[8];
+                tgen_sync_oen_apb_clk <= s_apb_pwdata[9];
+            end
+            CCDTG_REG_DELAY_HTIME: delay_htime_apb_clk <= s_apb_pwdata[CNTW-1:0];
+            CCDTG_REG_DELAY_VTIME: delay_vtime_apb_clk <= s_apb_pwdata[CNTW-1:0];
+            CCDTG_REG_ESHUT_LINE: eshut_line_apb_clk <= s_apb_pwdata[CNTW-1:0];
+            default: ;
+            endcase
+        end
+
+        if (rst) begin
+            tgen_en_apb_clk <= 1'b0;
+            tgen_rst_apb_clk <= 1'b0;
+            tgen_embed_eshut_apb_clk <= 1'b1;
+            tgen_start_eshut_apb_clk <= 1'b0;
+            delay_htime_apb_clk <= 'd10;
+            delay_vtime_apb_clk <= 'd10;
+            vskip_apb_clk <= 'd6;
+            eshut_line_apb_clk <= 'd98;
+        end
+    end
+
+    assign s_apb_pready = 1'b1;
+    assign s_apb_prdata = 32'hdeadbeef; // no readback
+
+
+    wire tgen_en;
+    wire tgen_rst;
+    wire tgen_embed_eshut;
+    wire tgen_start_eshut;
+    wire [CNTW-1:0] delay_htime;
+    wire [CNTW-1:0] delay_vtime;
+    wire [3:0] vskip;
+    wire [CNTW-1:0] eshut_line_pre;
+    wire tgen_ccd_oen;
+    wire tgen_sync_oen;
+
+    mu_dbsync #(1) tgen_en_sync (clk, clk_ccd, tgen_en_apb_clk, tgen_en);
+    mu_dbsync #(1) tgen_rst_sync (clk, clk_ccd, tgen_rst_apb_clk, tgen_rst);
+    mu_dbsync #(1) tgen_embed_eshut_sync (clk, clk_ccd, tgen_embed_eshut_apb_clk, tgen_embed_eshut);
+    mu_dbsync #(1) tgen_start_eshut_sync (clk, clk_ccd, tgen_start_eshut_apb_clk, tgen_start_eshut);
+    mu_dbsync #(CNTW) delay_htime_sync (clk, clk_ccd, delay_htime_apb_clk, delay_htime);
+    mu_dbsync #(CNTW) delay_vtime_sync (clk, clk_ccd, delay_vtime_apb_clk, delay_vtime);
+    mu_dbsync #(4) vskip_sync (clk, clk_ccd, vskip_apb_clk, vskip);
+    mu_dbsync #(CNTW) eshut_line_sync (clk, clk_ccd, eshut_line_apb_clk, eshut_line_pre);
+    mu_dbsync #(1) tgen_ccd_oen_sync (clk, clk_ccd, tgen_ccd_oen_apb_clk, tgen_ccd_oen);
+    mu_dbsync #(1) tgen_sync_oen_sync (clk, clk_ccd, tgen_sync_oen_apb_clk, tgen_sync_oen);
 
     // These can be synthesize-time constants
     // See pg. 26 for values, comment labed as min-nom-max
@@ -80,17 +147,32 @@ module ccdtimgen(
     wire [CNTW-1:0] tsd = 168; // 1-1.5-10 us
     // Resolution settings
     wire [CNTW-3:0] hpix = 2040 - 1; // Total horizontal pixel cycles
-    wire [CNTW-1:0] vpix = 2721 - 1;
-    wire [CNTW-1:0] hsw = 2;
+    //wire [CNTW-1:0] vpix = 2721 - 1;
+    wire [CNTW-1:0] vpix = 20 - 1;
+    wire [CNTW-1:0] hsw = 256;
 
     // T3P + TV3RD + TL should be dividable by 4
     // TVCCD + THD should be diviable by 4
     // TL should be dividable by 4
     // TFD should be dividable by 4
 
+    // Track reference 1X clock change
+    reg last_ref_clk;
+    reg reg_ref_clk;
+    always @(posedge clk_ccd) begin
+        reg_ref_clk <= ref_clk;
+        last_ref_clk <= reg_ref_clk;
+    end
+    wire ref_in_phase = last_ref_clk && !reg_ref_clk;
+
     reg [CNTW-1:0] h_cnt;
     reg [CNTW-1:0] v_cnt;
     reg [3:0] v_cnt_sub; // Counter for line skipping
+
+    reg [CNTW-1:0] eshut_line;
+
+    reg hsync;
+    reg vsync;
 
     reg [2:0] state;
     localparam STATE_IDLE = 3'd0;
@@ -109,10 +191,12 @@ module ccdtimgen(
             h_cnt <= 'd0;
             v_cnt <= 'd0;
 
-            dvp_hsync <= 1'b0;
-            dvp_vsync <= 1'b0;
+            hsync <= 1'b0;
+            vsync <= 1'b0;
 
-            if (tgen_en) begin
+            eshut_line <= eshut_line_pre;
+
+            if (tgen_en && ref_in_phase) begin
                 if (tgen_start_eshut) begin
                     // Enter delay state
                     state <= STATE_ESHUT;
@@ -142,18 +226,15 @@ module ccdtimgen(
             if (h_cnt == (t3p + tv3rd + tl - 'd1)) begin
                 h_cnt <= 'd0;
                 state <= STATE_HFP;
-                dvp_vsync <= 1'b1;
+                vsync <= 1'b1;
             end
         end
         STATE_HFP: begin
             h_cnt <= h_cnt + 'd1;
-            dvp_hsync <= (h_cnt < hsw);
+            hsync <= (h_cnt < hsw);
             if (h_cnt == (tvccd + thd - 'd1)) begin
                 h_cnt <= 'd0;
-                if (tgen_embed_eshut && (v_cnt == eshut_line))
-                    state <= STATE_ESHUT;
-                else
-                    state <= STATE_ACTIVE;
+                state <= STATE_ACTIVE;
             end
         end
         STATE_ACTIVE: begin
@@ -172,11 +253,15 @@ module ccdtimgen(
                 if (v_cnt < vpix) begin
                     if (vskip != 'd0)
                         state <= STATE_LINESKIP;
+                    else if (tgen_embed_eshut && (v_cnt == eshut_line))
+                        state <= STATE_ESHUT;
                     else
                         state <= STATE_HFP;
-                    dvp_vsync <= 1'b0;
+                    vsync <= 1'b0;
                 end
                 else begin
+                    // Update settings on VSYNC
+                    eshut_line <= eshut_line_pre;
                     v_cnt <= 'd0;
                     if (tgen_en) begin
                         state <= STATE_1STLINE;
@@ -192,7 +277,7 @@ module ccdtimgen(
                     // This eshut is applied at the start of the frame
                     state <= STATE_DELAY;
                 else
-                    state <= STATE_ACTIVE;
+                    state <= STATE_HFP;
             end
         end
         STATE_LINESKIP: begin
@@ -224,8 +309,8 @@ module ccdtimgen(
             state <= STATE_IDLE;
             h_cnt <= 'd0;
             v_cnt <= 'd0;
-            dvp_hsync <= 1'b0;
-            dvp_vsync <= 1'b0;
+            hsync <= 1'b0;
+            vsync <= 1'b0;
         end
     end
 
@@ -289,17 +374,8 @@ module ccdtimgen(
         endcase
     end
 
-    always @(posedge clk) begin
-        tcon_v1 <= !v1;
-        tcon_v2 <= !v2;
-        tcon_v23 <= !v23;
-        tcon_fdg <= !fdg;
-        tcon_h1 <= h1;
-        tcon_h2 <= h2;
-        tcon_rg <= rg;
-        tcon_strobe <= !strobe;
-
-        if (rst_ccd) begin
+    always @(posedge clk_ccd) begin
+        if (rst_ccd || !tgen_ccd_oen) begin
             tcon_v1 <= 1'b0;
             tcon_v2 <= 1'b1;
             tcon_v23 <= 1'b1;
@@ -308,6 +384,25 @@ module ccdtimgen(
             tcon_h2 <= 1'b0;
             tcon_rg <= 1'b0;
             tcon_strobe <= 1'b1;
+        end
+        else begin
+            tcon_v1 <= !v1;
+            tcon_v2 <= !v2;
+            tcon_v23 <= !v23;
+            tcon_fdg <= !fdg;
+            tcon_h1 <= h1;
+            tcon_h2 <= h2;
+            tcon_rg <= rg;
+            tcon_strobe <= !strobe;
+        end
+
+        if (rst_ccd || !tgen_sync_oen) begin
+            dvp_hsync <= 1'b1;
+            dvp_vsync <= 1'b1;
+        end
+        else begin
+            dvp_hsync <= !hsync;
+            dvp_vsync <= !vsync;
         end
     end
 
