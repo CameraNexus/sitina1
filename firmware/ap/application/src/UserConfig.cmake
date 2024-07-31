@@ -10,7 +10,6 @@ cmake_minimum_required(VERSION 3.16)
 # Add any compiler definitions, they will be added as extra definitions
 # Example adding VERBOSE=1 will pass -DVERBOSE=1 to the compiler.
 set(USER_COMPILE_DEFINITIONS
-""
 )
 
 # Undefine any previously specified compiler definitions, either built in or provided with a -D option
@@ -54,7 +53,7 @@ set(USER_COMPILE_WARNINGS_INHIBIT_ALL )
 # -----------------------------------------
 
 # Optimization level   "-O0" [None] , "-O1" [Optimize] , "-O2" [Optimize More], "-O3" [Optimize Most] or "-Os" [Optimize Size]
-set(USER_COMPILE_OPTIMIZATION_LEVEL -O0)
+set(USER_COMPILE_OPTIMIZATION_LEVEL -O2)
 
 # Other flags related to optimization
 set(USER_COMPILE_OPTIMIZATION_OTHER_FLAGS )
@@ -65,7 +64,7 @@ set(USER_COMPILE_OPTIMIZATION_OTHER_FLAGS )
 set(USER_COMPILE_DEBUG_LEVEL -g3)
 
 # Other flags releated to debugging
-set(USER_COMPILE_DEBUG_OTHER_FLAGS )
+set(USER_COMPILE_DEBUG_OTHER_FLAGS "-ffunction-sections -fdata-sections")
 
 # -----------------------------------------
 
@@ -121,6 +120,7 @@ set(USER_LINKER_SCRIPT "${CMAKE_SOURCE_DIR}/lscript.ld")
 # Add linker options to be passed, they will be added as extra linker options
 # Example : adding -s will pass -s to the linker.
 set(USER_LINK_OTHER_FLAGS
+"-Wl,--gc-sections"
 )
 
 # -----------------------------------------

@@ -50,7 +50,6 @@ int main()
     //Xil_DCacheFlushRange((UINTPTR)s_image_buffer, IMAGE_WIDTH * IMAGE_HEIGHT * IMAGE_PIXEL_SIZE);
 
     for(;;) {
-    	sleep(1);
         mcusvc_set_led(true);
         lcd_set_color(0xffff0000);
         sleep(1);
@@ -58,6 +57,7 @@ int main()
         lcd_set_color(0xff00ff00);
         sleep(1);
         lcd_set_color(0xff0000ff);
+        sleep(1);
     // memset(framebuffer, 0xff, 480*4);
     // memset(framebuffer[480*4*2], 0xff, 480*4);
     // for (int i = 0; i < 240; i++) {

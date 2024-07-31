@@ -15,12 +15,6 @@ enable_language(C ASM)
 collect(PROJECT_LIB_DEPS xiltimer;xilffs;xilrsa)
 
 
-
-
-
-
-
-
 collect(PROJECT_LIB_DEPS xilffs)
 collect(PROJECT_LIB_DEPS xilrsa)
 collect(PROJECT_LIB_DEPS xil)
