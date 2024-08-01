@@ -1,0 +1,646 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "ba41827b-f176-424d-b6d5-0b0e1ddda097")
+	(paper "A4")
+	(title_block
+		(title "Sitina 1 Sensor Board")
+		(date "2024-06-09")
+		(rev "R0.10")
+		(company "Copyright 2024 Anhang Li, Wenting Zhang")
+		(comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
+		(comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
+		(comment 4 "This source describes Open Hardware and is licensed under the CERN-OHL-P v2.")
+	)
+	(lib_symbols)
+	(text "AFE"
+		(exclude_from_sim no)
+		(at 43.18 55.88 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "02a5f57d-4a28-47eb-9819-eae5d362c2bc")
+	)
+	(text "8"
+		(exclude_from_sim no)
+		(at 33.02 106.68 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "1e87a1a8-08d3-4d87-9f9d-3fe3a13fba05")
+	)
+	(text "3"
+		(exclude_from_sim no)
+		(at 33.02 55.88 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "2a7b977b-1bce-42a4-8eb2-97fb3f6c57f9")
+	)
+	(text "6"
+		(exclude_from_sim no)
+		(at 33.02 86.36 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "348322e2-ddf1-490f-9279-9812a946030a")
+	)
+	(text "CCD Driver - V Clocks"
+		(exclude_from_sim no)
+		(at 43.18 96.52 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "35c43a5e-0fe0-4095-bc59-aa0fbe5b282a")
+	)
+	(text "CCD"
+		(exclude_from_sim no)
+		(at 43.18 66.04 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "36baf7a0-b907-4632-a98d-3c208ab8b9ae")
+	)
+	(text "Table of Contents"
+		(exclude_from_sim no)
+		(at 43.18 35.56 0)
+		(effects
+			(font
+				(size 2.9972 2.9972)
+				(thickness 0.5994)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+		(uuid "381457cc-8e00-49b0-bed6-8c7335498798")
+	)
+	(text "Connector"
+		(exclude_from_sim no)
+		(at 43.18 76.2 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "39bf547e-c566-4b7b-aa64-538efa010969")
+	)
+	(text "FPGA Power"
+		(exclude_from_sim no)
+		(at 43.18 137.16 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "54678525-692a-4fdd-8bfc-31867b6d68b1")
+	)
+	(text "FPGA Config"
+		(exclude_from_sim no)
+		(at 43.18 106.68 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "55aab0bd-298c-4857-a81f-bbee9391fc54")
+	)
+	(text "5"
+		(exclude_from_sim no)
+		(at 33.02 76.2 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "64708e7e-f0d0-4c18-bb1f-8561017182e8")
+	)
+	(text "1"
+		(exclude_from_sim no)
+		(at 33.02 35.56 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "69967e43-1c12-4c14-9657-453ca7ddd2d1")
+	)
+	(text "7"
+		(exclude_from_sim no)
+		(at 33.02 96.52 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "96db472b-2173-4973-9a84-b9f6f8f5b5d6")
+	)
+	(text "CCD Driver"
+		(exclude_from_sim no)
+		(at 43.18 86.36 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "9acc6089-e789-4474-abac-9ea670be4698")
+	)
+	(text "11"
+		(exclude_from_sim no)
+		(at 33.02 137.16 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "9ae9974f-ba80-4307-94cf-a4c559cdff95")
+	)
+	(text "9"
+		(exclude_from_sim no)
+		(at 33.02 116.84 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "9f2d685a-e2cb-47db-89aa-16bbf13f59ac")
+	)
+	(text "Power"
+		(exclude_from_sim no)
+		(at 43.18 45.72 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "aa723430-9bb1-4d26-b371-3ee78f5d9d1a")
+	)
+	(text "FPGA DDR"
+		(exclude_from_sim no)
+		(at 43.18 116.84 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "adc28392-60d8-460e-b8ac-6c42bbf0ad49")
+	)
+	(text "10"
+		(exclude_from_sim no)
+		(at 33.02 127 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "c14e782f-5d16-405f-8aca-66a78070368e")
+	)
+	(text "2"
+		(exclude_from_sim no)
+		(at 33.02 45.72 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "d8f4a8fb-fcf8-4d13-81a7-e0329872e4dc")
+	)
+	(text "FPGA IO"
+		(exclude_from_sim no)
+		(at 43.18 127 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "da4a42b3-425b-49d1-8107-7193a9cc6e5c")
+	)
+	(text "4"
+		(exclude_from_sim no)
+		(at 33.02 66.04 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "dd28bcb8-5695-46d2-bee3-ebe22b87a9a3")
+	)
+	(sheet
+		(at 40.64 71.12)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "28025b55-6a64-43e1-9d20-34020d299147")
+		(property "Sheetname" "connector"
+			(at 40.64 70.4084 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "connector.kicad_sch"
+			(at 40.64 76.7846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 81.28)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "568a197d-3d07-4ce3-9dad-204d21f52839")
+		(property "Sheetname" "ccd_driver"
+			(at 40.64 80.5684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "ccd_driver.kicad_sch"
+			(at 40.64 86.9446 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 132.08)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "6bd93fa5-b04c-403a-8268-88485f724a4c")
+		(property "Sheetname" "fpga_power"
+			(at 40.64 131.3684 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "fpga_power.kicad_sch"
+			(at 40.64 137.7446 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "11")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 40.64)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "a00c2049-0a3f-4994-b4b1-e2d67645b8de")
+		(property "Sheetname" "ccd_power"
+			(at 40.64 39.9284 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "ccd_power.kicad_sch"
+			(at 40.64 46.3046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 101.6)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "b64fe68d-aec8-4292-896e-119ca6ece6c8")
+		(property "Sheetname" "fpga_config"
+			(at 40.64 100.8884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "fpga_config.kicad_sch"
+			(at 40.64 107.2646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "8")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 50.8)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "bbc4a8ed-000d-45bd-b682-5f5fc521899f")
+		(property "Sheetname" "afe"
+			(at 40.64 50.0884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "afe.kicad_sch"
+			(at 40.64 56.4646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 121.92)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "c8f749b7-cbde-4482-9507-8dea52b97a2d")
+		(property "Sheetname" "fpga_io"
+			(at 40.64 121.2084 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "fpga_io.kicad_sch"
+			(at 40.64 127.5846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "10")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 111.76)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "cbfc77f8-d1e2-4799-a485-39d64530b305")
+		(property "Sheetname" "fpga_ddr"
+			(at 40.64 111.0484 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "fpga_ddr.kicad_sch"
+			(at 40.64 117.4246 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "9")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 60.96)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "d2b12579-7abd-4725-8e52-61afb581d660")
+		(property "Sheetname" "ccd"
+			(at 40.64 60.2484 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "ccd.kicad_sch"
+			(at 40.64 66.6246 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 91.44)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "d386a9bf-0103-410c-b6e1-cdc61e904cc1")
+		(property "Sheetname" "ccd_driver_v"
+			(at 40.64 90.7284 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "ccd_driver_v.kicad_sch"
+			(at 40.64 97.1046 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "7")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)
