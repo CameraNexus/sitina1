@@ -3203,6 +3203,16 @@
 	)
 	(wire
 		(pts
+			(xy 246.38 152.4) (xy 254 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2efbcc86-df80-4a9a-83b7-069d027e4994")
+	)
+	(wire
+		(pts
 			(xy 35.56 134.62) (xy 38.1 134.62)
 		)
 		(stroke
@@ -3270,6 +3280,16 @@
 			(type default)
 		)
 		(uuid "3275681d-51d7-4612-b472-b95f910dd7d6")
+	)
+	(wire
+		(pts
+			(xy 213.36 152.4) (xy 220.98 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "32ba2a29-b5ab-4d34-a6ff-f86990ab236c")
 	)
 	(wire
 		(pts
@@ -3423,7 +3443,7 @@
 	)
 	(wire
 		(pts
-			(xy 228.6 149.86) (xy 236.22 149.86)
+			(xy 246.38 142.24) (xy 254 142.24)
 		)
 		(stroke
 			(width 0)
@@ -3513,7 +3533,7 @@
 	)
 	(wire
 		(pts
-			(xy 246.38 142.24) (xy 248.92 142.24)
+			(xy 231.14 142.24) (xy 233.68 142.24)
 		)
 		(stroke
 			(width 0)
@@ -3580,6 +3600,16 @@
 			(type default)
 		)
 		(uuid "7b640041-a003-43ed-813e-da08ab3775be")
+	)
+	(wire
+		(pts
+			(xy 231.14 152.4) (xy 233.68 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7db01b54-0eab-4122-acba-6c3625d3f5f7")
 	)
 	(wire
 		(pts
@@ -3653,7 +3683,7 @@
 	)
 	(wire
 		(pts
-			(xy 246.38 149.86) (xy 248.92 149.86)
+			(xy 264.16 142.24) (xy 266.7 142.24)
 		)
 		(stroke
 			(width 0)
@@ -3973,7 +4003,7 @@
 	)
 	(wire
 		(pts
-			(xy 228.6 142.24) (xy 236.22 142.24)
+			(xy 213.36 142.24) (xy 220.98 142.24)
 		)
 		(stroke
 			(width 0)
@@ -4050,6 +4080,16 @@
 			(type default)
 		)
 		(uuid "c75583c7-a4b7-47f0-bb3c-e254a541f96f")
+	)
+	(wire
+		(pts
+			(xy 264.16 152.4) (xy 266.7 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cb110e9a-757d-487f-8997-31cc6b93ca03")
 	)
 	(wire
 		(pts
@@ -4337,7 +4377,7 @@
 		(uuid "319b5823-9375-4975-8127-1766508786fe")
 	)
 	(label "KEYMENU"
-		(at 228.6 142.24 0)
+		(at 213.36 142.24 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4401,6 +4441,17 @@
 			(justify left bottom)
 		)
 		(uuid "56c67783-97f2-4bce-9139-b2de66f3ff6b")
+	)
+	(label "KEYFN6"
+		(at 114.3 149.86 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5b46056e-cb82-4506-9303-b1c9dfd46a76")
 	)
 	(label "KEYUP"
 		(at 114.3 132.08 0)
@@ -4501,6 +4552,17 @@
 		)
 		(uuid "ab08a942-b30a-4a1d-8900-e92aae322453")
 	)
+	(label "KEYFN5"
+		(at 114.3 147.32 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cd386189-8581-4b94-aa5e-a32726d832e7")
+	)
 	(label "KEYDOWN"
 		(at 68.58 83.82 0)
 		(fields_autoplaced yes)
@@ -4568,7 +4630,7 @@
 		(uuid "e37558e0-f40d-44f2-a033-b789a0507e4a")
 	)
 	(label "KEYPB"
-		(at 228.6 149.86 0)
+		(at 246.38 142.24 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -4588,6 +4650,28 @@
 			(justify left bottom)
 		)
 		(uuid "f645d544-45f9-45e7-9360-fc9a95fccacf")
+	)
+	(label "KEYFN5"
+		(at 213.36 152.4 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fa021d56-b688-44d2-a43f-75b8a5204f3d")
+	)
+	(label "KEYFN6"
+		(at 246.38 152.4 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fc58f6d6-64fb-4fdf-bc2a-b403c277b04c")
 	)
 	(global_label "SPI_CS"
 		(shape input)
@@ -4991,6 +5075,75 @@
 		)
 	)
 	(symbol
+		(lib_id "Switch:SW_Push")
+		(at 259.08 152.4 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "01640f85-7fc7-4163-ad89-27fe1cadfc69")
+		(property "Reference" "SW13"
+			(at 259.08 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "~"
+			(at 259.08 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "footprints:HX-TS5208A"
+			(at 259.08 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 259.08 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, generic, two pins"
+			(at 259.08 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "9b7c6d33-5438-4fe7-9762-d84ff9295a6c")
+		)
+		(pin "1"
+			(uuid "c5e3735e-4559-443e-a1f2-aa0b5923da8b")
+		)
+		(instances
+			(project "gripflex"
+				(path "/ee2c1e0c-05c3-47d2-821c-645ea87609bc"
+					(reference "SW13")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "power:GND")
 		(at 71.12 106.68 0)
 		(unit 1)
@@ -5051,6 +5204,75 @@
 			(project "gripflex"
 				(path "/ee2c1e0c-05c3-47d2-821c-645ea87609bc"
 					(reference "#PWR010")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Switch:SW_Push")
+		(at 226.06 152.4 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "043e77fb-8029-4ae9-811a-052075155279")
+		(property "Reference" "SW12"
+			(at 226.06 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "~"
+			(at 226.06 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "footprints:HX-TS5208A"
+			(at 226.06 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 226.06 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, generic, two pins"
+			(at 226.06 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "cf629605-693e-47c8-950a-284bb055ffa8")
+		)
+		(pin "1"
+			(uuid "9c8e6511-529a-4746-a7fa-0c248906e84d")
+		)
+		(instances
+			(project "gripflex"
+				(path "/ee2c1e0c-05c3-47d2-821c-645ea87609bc"
+					(reference "SW12")
 					(unit 1)
 				)
 			)
@@ -5191,7 +5413,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 248.92 149.86 90)
+		(at 266.7 142.24 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5200,7 +5422,7 @@
 		(fields_autoplaced yes)
 		(uuid "13f5a07d-460d-49f7-a195-ea84ca60f3b5")
 		(property "Reference" "#PWR032"
-			(at 255.27 149.86 0)
+			(at 273.05 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5209,7 +5431,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 252.73 149.8599 90)
+			(at 270.51 142.2399 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5218,7 +5440,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 248.92 149.86 0)
+			(at 266.7 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5227,7 +5449,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 248.92 149.86 0)
+			(at 266.7 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5236,7 +5458,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 248.92 149.86 0)
+			(at 266.7 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6063,7 +6285,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 241.3 149.86 0)
+		(at 259.08 142.24 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6072,7 +6294,7 @@
 		(fields_autoplaced yes)
 		(uuid "4d726718-adb2-4042-a4ca-897cbaa8fc29")
 		(property "Reference" "SW11"
-			(at 241.3 144.78 0)
+			(at 259.08 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6080,7 +6302,7 @@
 			)
 		)
 		(property "Value" "~"
-			(at 241.3 144.78 0)
+			(at 259.08 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6089,7 +6311,7 @@
 			)
 		)
 		(property "Footprint" "footprints:HX-TS5208A"
-			(at 241.3 144.78 0)
+			(at 259.08 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6098,7 +6320,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 241.3 144.78 0)
+			(at 259.08 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6107,7 +6329,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 241.3 149.86 0)
+			(at 259.08 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6125,6 +6347,73 @@
 			(project "gripflex"
 				(path "/ee2c1e0c-05c3-47d2-821c-645ea87609bc"
 					(reference "SW11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 233.68 152.4 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "4f498230-5199-421d-9927-536ac523590e")
+		(property "Reference" "#PWR033"
+			(at 240.03 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 237.49 152.3999 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 233.68 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 233.68 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 233.68 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3a7a77a4-facf-4d94-a5fb-c724a0d08c10")
+		)
+		(instances
+			(project "gripflex"
+				(path "/ee2c1e0c-05c3-47d2-821c-645ea87609bc"
+					(reference "#PWR033")
 					(unit 1)
 				)
 			)
@@ -6337,7 +6626,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 248.92 142.24 90)
+		(at 233.68 142.24 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6346,7 +6635,7 @@
 		(fields_autoplaced yes)
 		(uuid "61186e5c-c5cf-4a2a-a022-e01bcbeb1ce1")
 		(property "Reference" "#PWR031"
-			(at 255.27 142.24 0)
+			(at 240.03 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6355,7 +6644,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 252.73 142.2399 90)
+			(at 237.49 142.2399 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6364,7 +6653,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 248.92 142.24 0)
+			(at 233.68 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6373,7 +6662,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 248.92 142.24 0)
+			(at 233.68 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6382,7 +6671,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 248.92 142.24 0)
+			(at 233.68 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6404,7 +6693,7 @@
 	)
 	(symbol
 		(lib_id "Switch:SW_Push")
-		(at 241.3 142.24 0)
+		(at 226.06 142.24 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6413,7 +6702,7 @@
 		(fields_autoplaced yes)
 		(uuid "66883ee3-40cd-4862-81ca-7b701023548e")
 		(property "Reference" "SW10"
-			(at 241.3 137.16 0)
+			(at 226.06 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6421,7 +6710,7 @@
 			)
 		)
 		(property "Value" "~"
-			(at 241.3 137.16 0)
+			(at 226.06 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6430,7 +6719,7 @@
 			)
 		)
 		(property "Footprint" "footprints:HX-TS5208A"
-			(at 241.3 137.16 0)
+			(at 226.06 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6439,7 +6728,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 241.3 137.16 0)
+			(at 226.06 137.16 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6448,7 +6737,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 241.3 142.24 0)
+			(at 226.06 142.24 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8785,6 +9074,73 @@
 			(project "gripflex"
 				(path "/ee2c1e0c-05c3-47d2-821c-645ea87609bc"
 					(reference "#PWR08")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 266.7 152.4 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "f903948b-5fb4-4ed8-b93d-b7ad7fe5946f")
+		(property "Reference" "#PWR034"
+			(at 273.05 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 270.51 152.3999 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 266.7 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 266.7 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 266.7 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "e41e3922-50d6-4c9b-8e25-137beaeca821")
+		)
+		(instances
+			(project "gripflex"
+				(path "/ee2c1e0c-05c3-47d2-821c-645ea87609bc"
+					(reference "#PWR034")
 					(unit 1)
 				)
 			)

@@ -432,7 +432,7 @@
       "no_connect_dangling": "warning",
       "pin_not_connected": "error",
       "pin_not_driven": "error",
-      "pin_to_pin": "warning",
+      "pin_to_pin": "error",
       "power_pin_not_driven": "error",
       "similar_labels": "warning",
       "simulation_model_issue": "ignore",
@@ -493,6 +493,7 @@
   },
   "schematic": {
     "annotate_start_num": 0,
+    "bom_export_filename": "",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",
@@ -604,7 +605,7 @@
   "sheets": [
     [
       "ee2c1e0c-05c3-47d2-821c-645ea87609bc",
-      "Root"
+      "根目录"
     ]
   ],
   "text_variables": {}
