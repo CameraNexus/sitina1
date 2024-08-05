@@ -7215,8 +7215,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_02x06_Odd_Even")
-		(at 109.22 177.8 0)
-		(mirror y)
+		(at 109.22 180.34 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -7224,7 +7223,7 @@
 		(dnp no)
 		(uuid "3f4d1f6d-800f-43a9-a56a-b22efd93ee54")
 		(property "Reference" "J9"
-			(at 107.95 166.37 0)
+			(at 107.95 191.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7232,15 +7231,15 @@
 			)
 		)
 		(property "Value" "Conn_02x06_Odd_Even"
-			(at 107.95 168.91 0)
+			(at 107.95 189.23 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_1.27mm:PinHeader_2x06_P1.27mm_Horizontal"
-			(at 109.22 177.8 0)
+		(property "Footprint" "Connector_PinSocket_1.27mm:PinSocket_2x06_P1.27mm_Horizontal"
+			(at 109.22 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7249,7 +7248,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 109.22 177.8 0)
+			(at 109.22 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7258,7 +7257,7 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x06, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 109.22 177.8 0)
+			(at 109.22 180.34 0)
 			(effects
 				(font
 					(size 1.27 1.27)
