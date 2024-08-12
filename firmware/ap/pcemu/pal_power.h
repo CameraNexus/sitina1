@@ -22,7 +22,7 @@
 //
 #pragma once
 
-void os_pwr_init(void);
-void os_pwr_refresh(void);
-uint8_t os_pwr_get_battery_percent(void);
-bool os_pwr_is_battery_charging(void);
+void pal_pwr_init(void);
+void pal_pwr_refresh(void);
+uint8_t pal_pwr_get_battery_percent(void);
+bool pal_pwr_is_battery_charging(void);

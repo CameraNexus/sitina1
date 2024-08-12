@@ -22,25 +22,25 @@
 //
 #include <SDL.h>
 #include <stdbool.h>
-#include "os_input.h"
+#include "pal_input.h"
 
 uint32_t key_state;
 int encoder_count;
 
-void os_input_init(void) {
+void pal_input_init(void) {
     key_state = 0;
     encoder_count = 0;
 }
 
-void os_input_deinit(void) {
+void pal_input_deinit(void) {
 
 }
 
-uint32_t os_input_get_keys(void) {
+uint32_t pal_input_get_keys(void) {
     return key_state;
 }
 
-static void _os_input_handle_sdl_keyevent(SDL_KeyboardEvent event) {
+static void _pal_input_handle_sdl_keyevent(SDL_KeyboardEvent event) {
     uint32_t key_mask;
 
     switch (event.keysym.sym) {
@@ -93,13 +93,13 @@ static void _os_input_handle_sdl_keyevent(SDL_KeyboardEvent event) {
     }
 }
 
-int os_input_get_encoder(uint32_t id) {
+int pal_input_get_encoder(uint32_t id) {
     if (id != 0)
         return 0;
     return encoder_count;
 }
 
-void os_input_scan(void) {
+void pal_input_scan(void) {
     SDL_Event event;
 
     if (SDL_PollEvent(&event)) {
@@ -112,7 +112,7 @@ void os_input_scan(void) {
 
         case SDL_KEYDOWN:
         case SDL_KEYUP:
-            _os_input_handle_sdl_keyevent(event.key);
+            _pal_input_handle_sdl_keyevent(event.key);
             break;
 
         default:

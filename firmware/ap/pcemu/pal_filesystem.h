@@ -49,28 +49,28 @@ typedef struct {
     char fname[256]; // 255 byte LFN + 1 byte
 } FileInfo;
 
-int os_fs_init();
-void os_fs_deinit();
+int pal_fs_init();
+void pal_fs_deinit();
 // Open a file, return pointer when success, NULL on error
-File *os_fs_open(const char *path, OpenMode mode);
+File *pal_fs_open(const char *path, OpenMode mode);
 // Read from a file, return bytes read, negative on error
-int os_fs_read(File *fp, void *dst, size_t count);
+int pal_fs_read(File *fp, void *dst, size_t count);
 // Write to a file, return bytes written, negative on error
-int os_fs_write(File *fp, void *src, size_t count);
+int pal_fs_write(File *fp, void *src, size_t count);
 // Get current seek, negative on error
-int os_fs_tell(File *fp);
+int pal_fs_tell(File *fp);
 // Get file size, negative on error
-int os_fs_size(File *fp);
+int pal_fs_size(File *fp);
 // Set seek, returns the new actual seek, negative on error.
-int os_fs_seek(File *fp, size_t seek);
+int pal_fs_seek(File *fp, size_t seek);
 // Close file
-int os_fs_close(File *fp);
+int pal_fs_close(File *fp);
 
 // Open a directory
-Directory *os_fs_opendir(char *path);
+Directory *pal_fs_opendir(char *path);
 // Read directoy file
-int os_fs_readdir(Directory *dp, FileInfo* fno);
+int pal_fs_readdir(Directory *dp, FileInfo* fno);
 // Close a directory
-int os_fs_closedir(Directory *dp);
+int pal_fs_closedir(Directory *dp);
 // Change current directory
-int os_fs_chdir(char *path);
+int pal_fs_chdir(char *path);

@@ -1,6 +1,6 @@
 //
 // Sitina1
-// Copyright 2023 Wenting Zhang
+// Copyright 2022 Wenting Zhang
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -22,19 +22,7 @@
 //
 #pragma once
 
-typedef enum {
-    CM_DRAFT, // small size image
-    CM_STILL // full size still image
-} CAM_CAPTURE_MODE;
+typedef void (*pal_timer_cb)(void);
 
-void os_cam_init(void);
-void os_cam_deinit(void);
-void os_cam_set_capture_mode(CAM_CAPTURE_MODE cm);
-void os_cam_set_shutter_speed(uint32_t shutter_ns);
-void os_cam_set_gain(uint32_t gain_x10);
-void os_cam_start(void);
-void os_cam_stop(void);
-void os_cam_submit_empty_buffer(uint16_t *buf);
-uint16_t *os_cam_get_full_buffer();
-uint16_t *os_cam_still_capture(void);
-size_t os_cam_get_still_size(void);
+void pal_timer_register_systick(uint32_t interval, pal_timer_cb callback);
+void pal_timer_deinit(void);

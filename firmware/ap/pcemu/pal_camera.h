@@ -1,6 +1,6 @@
 //
 // Sitina1
-// Copyright 2022 Wenting Zhang
+// Copyright 2023 Wenting Zhang
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -8,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-//
+// 
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -20,24 +20,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-#include <SDL.h>
-#include "os_timer.h"
+#pragma once
 
-static SDL_TimerID timerID = 0;
-static os_timer_cb user_callback;
+typedef enum {
+    CM_DRAFT, // small size image
+    CM_STILL // full size still image
+} CAM_CAPTURE_MODE;
 
-static uint32_t sdl_callback(uint32_t interval, void* name) {
-    user_callback();
-    return interval;
-}
-
-
-void os_timer_register_systick(uint32_t interval, os_timer_cb callback) {
-    user_callback = callback;
-    timerID = SDL_AddTimer(interval, sdl_callback, NULL);
-}
-
-void os_timer_deinit(void) {
-    if (timerID)
-        SDL_RemoveTimer(timerID);
-}
+void pal_cam_init(void);
+void pal_cam_deinit(void);
+void pal_cam_set_capture_mode(CAM_CAPTURE_MODE cm);
+void pal_cam_set_shutter_speed(uint32_t shutter_ns);
+void pal_cam_set_gain(uint32_t gain_x10);
+void pal_cam_start(void);
+void pal_cam_stop(void);
+void pal_cam_submit_empty_buffer(uint16_t *buf);
+uint16_t *pal_cam_get_full_buffer();
+uint16_t *pal_cam_still_capture(void);
+size_t pal_cam_get_still_size(void);

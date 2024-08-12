@@ -33,8 +33,8 @@
 #define KEY_MASK_FN5    (1 << 8)
 #define KEY_MASK_FN6    (1 << 9)
 
-void os_input_init(void);
-void os_input_deinit(void);
-uint32_t os_input_get_keys(void);
-int os_input_get_encoder(uint32_t id);
-void os_input_scan(void);
+void pal_input_init(void);
+void pal_input_deinit(void);
+uint32_t pal_input_get_keys(void);
+int pal_input_get_encoder(uint32_t id);
+void pal_input_scan(void);

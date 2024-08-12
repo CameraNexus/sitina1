@@ -20,19 +20,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-#include "os_filesystem.h"
+#include "pal_filesystem.h"
 
-int os_fs_init() {
+int pal_fs_init() {
     // nothing need to be done on Linux
     return 0;
 }
 
-void os_fs_deinit() {
+void pal_fs_deinit() {
 
 }
 
 // Open a file, return pointer when success, NULL on error
-File *os_fs_open(const char *path, OpenMode mode) {
+File *pal_fs_open(const char *path, OpenMode mode) {
     char *fopenmode;
     switch (mode)
     {
@@ -60,22 +60,22 @@ File *os_fs_open(const char *path, OpenMode mode) {
 }
 
 // Read from a file, return bytes read, negative on error
-int os_fs_read(File *fp, void *dst, size_t count) {
+int pal_fs_read(File *fp, void *dst, size_t count) {
     return fread(dst, 1, count, fp);
 }
 
 // Write to a file, return bytes written, negative on error
-int os_fs_write(File *fp, void *src, size_t count) {
+int pal_fs_write(File *fp, void *src, size_t count) {
     return fwrite(src, 1, count, fp);
 }
 
 // Get current seek, negative on error
-int os_fs_tell(File *fp) {
+int pal_fs_tell(File *fp) {
     return ftell(fp);
 }
 
 // Get file size, negative on error
-int os_fs_size(File *fp) {
+int pal_fs_size(File *fp) {
     size_t seek = ftell(fp);
     fseek(fp, 0, SEEK_END);
     int size = (int)ftell(fp);
@@ -84,22 +84,22 @@ int os_fs_size(File *fp) {
 }
 
 // Set seek, returns the new actual seek, negative on error.
-int os_fs_seek(File *fp, size_t seek) {
+int pal_fs_seek(File *fp, size_t seek) {
     return fseek(fp, seek, SEEK_SET);
 }
 
 // Close file
-int os_fs_close(File *fp) {
+int pal_fs_close(File *fp) {
     return fclose(fp);
 }
 
 // Open a directory
-Directory *os_fs_opendir(char *path) {
+Directory *pal_fs_opendir(char *path) {
     return opendir(path);
 }
 
 // Read directoy file
-int os_fs_readdir(Directory *dp, FileInfo* fno) {
+int pal_fs_readdir(Directory *dp, FileInfo* fno) {
     struct dirent *ent = readdir(dp);
     if (ent == NULL)
         return -1;
@@ -114,11 +114,11 @@ int os_fs_readdir(Directory *dp, FileInfo* fno) {
 }
 
 // Close a directory
-int os_fs_closedir(Directory *dp) {
+int pal_fs_closedir(Directory *dp) {
     return closedir(dp);
 }
 
 // Change current directory 
-int os_fs_chdir(char *path) {
+int pal_fs_chdir(char *path) {
     return chdir(path);
 }

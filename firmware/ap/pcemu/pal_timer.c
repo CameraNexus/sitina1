@@ -20,22 +20,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-#include <stdint.h>
-#include <stdbool.h>
-#include "os_power.h"
+#include <SDL.h>
+#include "pal_timer.h"
 
-void os_pwr_init(void) {
-    //
+static SDL_TimerID timerID = 0;
+static pal_timer_cb user_callback;
+
+static uint32_t sdl_callback(uint32_t interval, void* name) {
+    user_callback();
+    return interval;
 }
 
-void os_pwr_refresh(void) {
-    //
+
+void pal_timer_register_systick(uint32_t interval, pal_timer_cb callback) {
+    user_callback = callback;
+    timerID = SDL_AddTimer(interval, sdl_callback, NULL);
 }
 
-uint8_t os_pwr_get_battery_percent(void) {
-    return 60;
-}
-
-bool os_pwr_is_battery_charging(void) {
-    return false;
+void pal_timer_deinit(void) {
+    if (timerID)
+        SDL_RemoveTimer(timerID);
 }

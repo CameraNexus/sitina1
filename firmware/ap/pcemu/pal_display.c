@@ -22,7 +22,7 @@
 //
 #include <SDL.h>
 #include <assert.h>
-#include "os_display.h"
+#include "pal_display.h"
 
 static SDL_Surface *screen = NULL;
 static SDL_Window *window = NULL;
@@ -30,7 +30,7 @@ static SDL_Renderer *renderer = NULL;
 static SDL_Texture *texture = NULL;
 static SDL_Rect textureRect;
 
-void os_disp_init() {
+void pal_disp_init() {
     window = SDL_CreateWindow("Sitina", 
             SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
             DISP_WIDTH, DISP_HEIGHT, SDL_SWSURFACE);
@@ -67,10 +67,10 @@ void os_disp_init() {
     }
 
     SDL_FillRect(screen, &textureRect, 0xFF0000FF);
-    os_disp_return_buffer(screen->pixels);
+    pal_disp_return_buffer(screen->pixels);
 }
 
-void os_disp_deinit() {
+void pal_disp_deinit() {
     if (screen != NULL)
     {
         SDL_FreeSurface(screen);
@@ -92,19 +92,19 @@ void os_disp_deinit() {
     }
 }
 
-void os_disp_enter_sleep() {
-    printf("os_disp: enter sleep\n");
+void pal_disp_enter_sleep() {
+    printf("pal_disp: enter sleep\n");
 }
 
-void os_disp_exit_sleep() {
-    printf("os_disp: exit sleep\n");
+void pal_disp_exit_sleep() {
+    printf("pal_disp: exit sleep\n");
 }
 
-uint32_t *os_disp_get_buffer() {
+uint32_t *pal_disp_get_buffer() {
     return screen->pixels;
 }
 
-void os_disp_return_buffer(uint32_t *buf) {
+void pal_disp_return_buffer(uint32_t *buf) {
     assert(screen->pixels == buf);
 
 	void *texturePixels;

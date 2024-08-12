@@ -20,9 +20,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-#pragma once
+#include <stdint.h>
+#include <stdbool.h>
+#include "pal_power.h"
 
-typedef void (*os_timer_cb)(void);
+void pal_pwr_init(void) {
+    //
+}
 
-void os_timer_register_systick(uint32_t interval, os_timer_cb callback);
-void os_timer_deinit(void);
+void pal_pwr_refresh(void) {
+    //
+}
+
+uint8_t pal_pwr_get_battery_percent(void) {
+    return 60;
+}
+
+bool pal_pwr_is_battery_charging(void) {
+    return false;
+}

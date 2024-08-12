@@ -25,7 +25,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "os_power.h"
+#include "pal_power.h"
 #include "uilib.h"
 #include "gui.h"
 #include "assets/assets.h"
@@ -354,8 +354,8 @@ void gui_draw_battery(void *ptr) {
     uilib_fill_rect(x, y + 2, W, h - 2 * W, CL);
     uilib_fill_rect(x + w - T - W, y + 2, W, h - 2 * W, CL);
     uilib_fill_rect(x + w - T, y + TD, T, h - 2 * TD, CL);
-    uint8_t bat_pct = os_pwr_get_battery_percent();
-    bool bat_charging = os_pwr_is_battery_charging();
+    uint8_t bat_pct = pal_pwr_get_battery_percent();
+    bool bat_charging = pal_pwr_is_battery_charging();
     uint32_t bat_w = w - TD - W * 2 - S * 2;
     bat_w = bat_w * bat_pct / 100;
     uilib_fill_rect(x + W + S, y + W + S, bat_w, h - 2 * W - 2 * S,

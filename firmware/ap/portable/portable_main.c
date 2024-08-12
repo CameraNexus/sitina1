@@ -25,29 +25,29 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include "os_camera.h"
-#include "os_display.h"
-#include "os_filesystem.h"
-#include "os_input.h"
-#include "os_timer.h"
+#include "pal_camera.h"
+#include "pal_display.h"
+#include "pal_filesystem.h"
+#include "pal_input.h"
+#include "pal_timer.h"
 #include "uilib.h"
 #include "gui.h"
 
 void portable_main(void) {
-    os_disp_init();
-    os_fs_init();
-    os_input_init();
-    //os_timer_register_systick(10, app_tick);
-    //os_cam_init();
-    //os_cam_set_capture_mode(CM_DRAFT);
+    pal_disp_init();
+    pal_fs_init();
+    pal_input_init();
+    //pal_timer_register_systick(10, app_tick);
+    //pal_cam_init();
+    //pal_cam_set_capture_mode(CM_DRAFT);
 
     uilib_init();
     //gui_init();
     //gui_show_preview_screen();
 
-    uint32_t *disp_buf = os_disp_get_buffer();
+    uint32_t *disp_buf = pal_disp_get_buffer();
 
-    //os_cam_start();
+    //pal_cam_start();
     uilib_mark_update();
 
     //uint16_t *cam_buf;
@@ -55,19 +55,19 @@ void portable_main(void) {
         uilib_set_framebuffer((uint8_t *)disp_buf);
         
         gui_run_capture_screen(false);
-        //while ((cam_buf = os_cam_get_full_buffer()) == NULL);
+        //while ((cam_buf = pal_cam_get_full_buffer()) == NULL);
         //uint32_t duration = OSA_TimeGetMsec();
         //ip_filter_draft_image(cam_buf, disp_buf + 120*720, 0);
-        //os_cam_submit_empty_buffer(cam_buf);
-        os_input_scan();
+        //pal_cam_submit_empty_buffer(cam_buf);
+        pal_input_scan();
         //gui_scan_input();
-        os_disp_return_buffer(disp_buf);
+        pal_disp_return_buffer(disp_buf);
     }
 
     //gui_deinit();
 
-    //os_timer_deinit();
-    os_disp_deinit();
-    os_fs_deinit();
-    os_input_deinit();
+    //pal_timer_deinit();
+    pal_disp_deinit();
+    pal_fs_deinit();
+    pal_input_deinit();
 }

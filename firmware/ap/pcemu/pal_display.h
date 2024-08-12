@@ -28,12 +28,12 @@
 #define DISP_HEIGHT (480)
 
 // Power control
-void os_disp_init();
-void os_disp_deinit();
+void pal_disp_init();
+void pal_disp_deinit();
 
-void os_disp_enter_sleep();
-void os_disp_exit_sleep();
+void pal_disp_enter_sleep();
+void pal_disp_exit_sleep();
 
 // Framebuffer operation
-uint32_t *os_disp_get_buffer();
-void os_disp_return_buffer(uint32_t *buf);
+uint32_t *pal_disp_get_buffer();
+void pal_disp_return_buffer(uint32_t *buf);

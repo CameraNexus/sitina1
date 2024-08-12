@@ -24,7 +24,7 @@
 #include <stdbool.h>
 #include <assert.h>
 #include <SDL.h>
-#include "os_camera.h"
+#include "pal_camera.h"
 
 #define CAM_STILL_SAMPLE_FILE   "./cam_still_sample.bin"
 #define CAM_DRAFT_SAMPLE_FILE   "./cam_draft_sample.bin"
@@ -56,7 +56,7 @@ static uint8_t *load_file(char *fn) {
     return buf;
 }
 
-void os_cam_init(void) {
+void pal_cam_init(void) {
     // Load source of fake camera image
     cam_still_buf = load_file(CAM_STILL_SAMPLE_FILE);
     cam_draft_buf = load_file(CAM_DRAFT_SAMPLE_FILE);
@@ -64,12 +64,12 @@ void os_cam_init(void) {
     frame_ready = false;
 }
 
-void os_cam_deinit(void) {
+void pal_cam_deinit(void) {
     free(cam_still_buf);
     free(cam_draft_buf);
 }
 
-void os_cam_set_capture_mode(CAM_CAPTURE_MODE cm) {
+void pal_cam_set_capture_mode(CAM_CAPTURE_MODE cm) {
     cam_cm = cm;
     if (cm == CM_DRAFT) {
         cam_buf = cam_draft_buf;
@@ -79,11 +79,11 @@ void os_cam_set_capture_mode(CAM_CAPTURE_MODE cm) {
     }
 }
 
-void os_cam_set_shutter_speed(uint32_t shutter_ns) {
+void pal_cam_set_shutter_speed(uint32_t shutter_ns) {
     cam_shutter_ms = shutter_ns / 1000000;
 }
 
-void os_cam_set_gain(uint32_t gain_x10) {
+void pal_cam_set_gain(uint32_t gain_x10) {
     // ignore for now
 }
 
@@ -101,22 +101,22 @@ static uint32_t cam_timer_callback(uint32_t interval, void *name) {
     return get_total_readout_time();
 }
 
-void os_cam_start(void) {
+void pal_cam_start(void) {
     frame_ready = false;
     //frame_ready = true;
     timer_id = SDL_AddTimer(get_total_readout_time(), cam_timer_callback, NULL);
 }
 
-void os_cam_stop(void) {
+void pal_cam_stop(void) {
     if (timer_id)
         SDL_RemoveTimer(timer_id);
 }
 
-void os_cam_submit_empty_buffer(uint16_t *buf) {
+void pal_cam_submit_empty_buffer(uint16_t *buf) {
     // Nothing
 }
 
-uint16_t *os_cam_get_full_buffer() {
+uint16_t *pal_cam_get_full_buffer() {
     if (frame_ready) {
         frame_ready = false;
         return (uint16_t *)cam_buf;
@@ -126,12 +126,12 @@ uint16_t *os_cam_get_full_buffer() {
     }
 }
 
-uint16_t *os_cam_still_capture(void) {
+uint16_t *pal_cam_still_capture(void) {
     SDL_Delay(300);
     return (uint16_t *)cam_still_buf;
 }
 
-size_t os_cam_get_still_size(void) {
+size_t pal_cam_get_still_size(void) {
     //return CCD_LINES * CCD_LINE_LENGTH * 2 * 2;
     return 0; // TODO
 }
