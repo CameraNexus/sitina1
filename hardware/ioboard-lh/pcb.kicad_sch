@@ -1,0 +1,522 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "ba41827b-f176-424d-b6d5-0b0e1ddda097")
+	(paper "A4")
+	(title_block
+		(title "Sitina 1 IO Board")
+		(date "2024-06-09")
+		(rev "R0.10")
+		(company "Copyright 2024 Anhang Li, Wenting Zhang")
+		(comment 2 "MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A PARTICULAR PURPOSE.")
+		(comment 3 "This source is distributed WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF")
+		(comment 4 "This source describes Open Hardware and is licensed under the CERN-OHL-P v2.")
+	)
+	(lib_symbols)
+	(text "5"
+		(exclude_from_sim no)
+		(at 33.02 76.2 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "01310b87-63fd-4f89-87c6-a2e2a1b33cca")
+	)
+	(text "CCD Power Supply"
+		(exclude_from_sim no)
+		(at 43.18 55.88 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "0804db26-524f-47c0-b3d2-ec91583aa3c3")
+	)
+	(text "Power Plan"
+		(exclude_from_sim no)
+		(at 43.18 116.84 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "19fdd026-4a2d-4a04-8b1c-dee02d16b1d5")
+	)
+	(text "A1"
+		(exclude_from_sim no)
+		(at 33.02 116.84 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "1ac9fdaf-8b29-4ea6-a283-3053981e2a28")
+	)
+	(text "7"
+		(exclude_from_sim no)
+		(at 33.02 96.52 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "1f13b7bb-c561-4590-b2d7-6456e47f3509")
+	)
+	(text "System Power Supply"
+		(exclude_from_sim no)
+		(at 43.18 45.72 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "1f40dc14-a320-4374-bb27-46d3f5c897ef")
+	)
+	(text "Table of Contents"
+		(exclude_from_sim no)
+		(at 43.18 35.56 0)
+		(effects
+			(font
+				(size 2.9972 2.9972)
+				(thickness 0.5994)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+		(uuid "381457cc-8e00-49b0-bed6-8c7335498798")
+	)
+	(text "USB"
+		(exclude_from_sim no)
+		(at 43.18 106.68 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "3fe83452-8f35-4e46-8007-249a8eed789b")
+	)
+	(text "Microcontroller"
+		(exclude_from_sim no)
+		(at 43.18 66.04 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "56924ae8-f64b-4768-a6b4-af0a7c1d3f33")
+	)
+	(text "1"
+		(exclude_from_sim no)
+		(at 33.02 35.56 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "69967e43-1c12-4c14-9657-453ca7ddd2d1")
+	)
+	(text "6"
+		(exclude_from_sim no)
+		(at 33.02 86.36 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "8510375c-0e11-4bd6-a302-0354edb6fdeb")
+	)
+	(text "Display"
+		(exclude_from_sim no)
+		(at 43.18 96.52 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "9a1c8ec0-d8e8-48f7-9b9a-73d36cfb311f")
+	)
+	(text "3"
+		(exclude_from_sim no)
+		(at 33.02 55.88 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "a2f32006-294e-4058-81f4-301d71167a06")
+	)
+	(text "Storage"
+		(exclude_from_sim no)
+		(at 43.18 86.36 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "a3cd50d7-b18b-44e0-b0cf-aefcb89c6445")
+	)
+	(text "2"
+		(exclude_from_sim no)
+		(at 33.02 45.72 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "ae9d795a-cb82-40f8-9c6a-32629c17c33b")
+	)
+	(text "8"
+		(exclude_from_sim no)
+		(at 33.02 106.68 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "c527fb06-e48a-4daa-a001-77304521682e")
+	)
+	(text "4"
+		(exclude_from_sim no)
+		(at 33.02 66.04 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "db502d30-44f7-4a74-b829-9b6137b20bee")
+	)
+	(text "Connectors"
+		(exclude_from_sim no)
+		(at 43.18 76.2 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+			)
+			(justify left bottom)
+		)
+		(uuid "f68f85ce-7e21-4644-97b5-745cbdcc5c1c")
+	)
+	(sheet
+		(at 40.64 101.6)
+		(size 73.66 5.08)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "00000000-0000-0000-0000-00005d1a413b")
+		(property "Sheetname" "usb"
+			(at 40.64 100.9645 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "usb.kicad_sch"
+			(at 40.64 107.1885 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "8")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 40.64)
+		(size 73.66 5.08)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "00000000-0000-0000-0000-00005d4c99f9")
+		(property "Sheetname" "power"
+			(at 40.64 40.0045 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "power.kicad_sch"
+			(at 40.64 46.2285 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 81.28)
+		(size 73.66 5.08)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "00000000-0000-0000-0000-00005db2122b")
+		(property "Sheetname" "storage"
+			(at 40.64 80.6445 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "storage.kicad_sch"
+			(at 40.64 86.8685 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 91.44)
+		(size 73.66 5.08)
+		(stroke
+			(width 0)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "00000000-0000-0000-0000-00005db51f59")
+		(property "Sheetname" "lcd"
+			(at 40.64 90.8045 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "lcd.kicad_sch"
+			(at 40.64 97.0285 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "7")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 71.12)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "276f6775-fa51-456c-9efd-4a3857d51911")
+		(property "Sheetname" "connectors"
+			(at 40.64 70.4084 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "connectors.kicad_sch"
+			(at 40.64 76.7846 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 111.76)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "29701ff7-982b-4d2f-bdf1-0ba214ff9cfa")
+		(property "Sheetname" "power_plan"
+			(at 40.64 111.0484 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "power_plan.kicad_sch"
+			(at 40.64 117.4246 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "9")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 50.8)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "6fdeef19-357a-4649-9a2f-ba61e11fd25a")
+		(property "Sheetname" "ccd_power"
+			(at 40.64 50.0884 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "ccd_power.kicad_sch"
+			(at 40.64 56.4646 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 40.64 60.96)
+		(size 73.66 5.08)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "b61872a6-746d-4ff9-af68-9ad658cb2408")
+		(property "Sheetname" "mcu"
+			(at 40.64 60.2484 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "mcu.kicad_sch"
+			(at 40.64 66.6246 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "pcb"
+				(path "/ba41827b-f176-424d-b6d5-0b0e1ddda097"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)
