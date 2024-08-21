@@ -67,6 +67,19 @@ module system #(
     output wire         tcon_rg,
     // Power control
     output wire         vab_pwm,
+    // I2C
+    output wire         i2c_pl0_scl_oe,
+    output wire         i2c_pl0_scl_o,
+    input  wire         i2c_pl0_scl_i,
+    output wire         i2c_pl0_sda_oe,
+    output wire         i2c_pl0_sda_o,
+    input  wire         i2c_pl0_sda_i,
+    output wire         i2c_pl1_scl_oe,
+    output wire         i2c_pl1_scl_o,
+    input  wire         i2c_pl1_scl_i,
+    output wire         i2c_pl1_sda_oe,
+    output wire         i2c_pl1_sda_o,
+    input  wire         i2c_pl1_sda_i,
     // APB device port for register access
     `APB_SLAVE_IF,
     // AXI host port for memory access
@@ -134,7 +147,21 @@ module system #(
     wire [1:0] dsi_lp_gpio_dp = gpio_out[9:8];
     wire [1:0] dsi_lp_gpio_dn = gpio_out[11:10];
 
-    assign gpio_in = 32'd0;
+    assign i2c_pl0_scl_o = gpio_out[12];
+    assign i2c_pl0_sda_o = gpio_out[13];
+    assign i2c_pl0_scl_oe = gpio_oe[12];
+    assign i2c_pl0_sda_oe = gpio_oe[13];
+    assign gpio_in[12] = i2c_pl0_scl_i;
+    assign gpio_in[13] = i2c_pl0_sda_i;
+    assign i2c_pl1_scl_o = gpio_out[14];
+    assign i2c_pl1_sda_o = gpio_out[15];
+    assign i2c_pl1_scl_oe = gpio_oe[14];
+    assign i2c_pl1_sda_oe = gpio_oe[15];
+    assign gpio_in[14] = i2c_pl1_scl_i;
+    assign gpio_in[15] = i2c_pl1_sda_i;
+
+    assign gpio_in[11:0] = 'd0;
+    assign gpio_in[31:16] = 'd0;
 
     ccdtimgen ccdtimgen (
         .clk(clk),

@@ -49,9 +49,9 @@ module ccdtimgen(
     output reg          tcon_rg
 );
 
-    // We run the CCD at 28MHz, or around 36ns pixel time
-    // This logic runs at 4x CCD clock (112MHz, 9ns) to provide subpixel timing
-    // Minimum pulse possible is then 9ns, used for RG
+    // We run the CCD at 27MHz, or around 37ns pixel time
+    // This logic runs at 4x CCD clock (108MHz, 9.26ns) to provide subpixel timing
+    // Minimum pulse possible is then 9.26ns, used for RG
 
     localparam CNTW = 15; // Width of counters
 
@@ -132,23 +132,23 @@ module ccdtimgen(
     // These can be synthesize-time constants
     // See pg. 26 for values, comment labed as min-nom-max
     // See fig. 17 for timing diagram
-    wire [CNTW-1:0] t3p = 13332; // 100-120-200 us
-    wire [CNTW-1:0] tv3rd = 1112; // 8-10-15 us
-    wire [CNTW-1:0] t3d = 2224 ; // 15-20-80 us
+    wire [CNTW-1:0] t3p = 3240 * 4; // 100-120-200 us
+    wire [CNTW-1:0] tv3rd = 270 * 4; // 8-10-15 us
+    wire [CNTW-1:0] t3d = 540 * 4 ; // 15-20-80 us
     wire [CNTW-1:0] tl = 2040 * 4;
     wire [CNTW-1:0] tve = 4; // 0-na-100 ns
-    wire [CNTW-1:0] tvccd = 392; // 3-3.5-20 us
-    wire [CNTW-1:0] thd = 392; // 3-3.5-10 us
+    wire [CNTW-1:0] tvccd = 94 * 4; // 3-3.5-20 us
+    wire [CNTW-1:0] thd = 94 * 4; // 3-3.5-10 us
     wire [CNTW-1:0] th = 4; // TH is always 1 pixel time
     // See fig. 29 for timing diagram
-    wire [CNTW-1:0] tfd = 196; // 0.5-na-na us
+    wire [CNTW-1:0] tfd = 47 * 4; // 0.5-na-na us, typically around half tvccd
     // See fig. 30 for timing diagram
-    wire [CNTW-1:0] ts = 444; // 3-4-10 us
-    wire [CNTW-1:0] tsd = 168; // 1-1.5-10 us
+    wire [CNTW-1:0] ts = 108 * 4; // 3-4-10 us
+    wire [CNTW-1:0] tsd = 40 * 4; // 1-1.5-10 us
     // Resolution settings
-    wire [CNTW-3:0] hpix = 2040 - 1; // Total horizontal pixel cycles
-    //wire [CNTW-1:0] vpix = 2721 - 1;
-    wire [CNTW-1:0] vpix = 20 - 1;
+    wire [CNTW-3:0] hpix = 2040 + 24 - 1; // Total horizontal pixel cycles
+    wire [CNTW-1:0] vpix = 2721 - 1;
+    //wire [CNTW-1:0] vpix = 20 - 1;
     wire [CNTW-1:0] hsw = 256;
 
     // T3P + TV3RD + TL should be dividable by 4
@@ -163,7 +163,7 @@ module ccdtimgen(
         reg_ref_clk <= ref_clk;
         last_ref_clk <= reg_ref_clk;
     end
-    wire ref_in_phase = last_ref_clk && !reg_ref_clk;
+    wire ref_in_phase = !last_ref_clk && reg_ref_clk;
 
     reg [CNTW-1:0] h_cnt;
     reg [CNTW-1:0] v_cnt;
@@ -342,8 +342,8 @@ module ccdtimgen(
             rg = (h_cnt[1:0] == 2'b00);
         end
         STATE_ACTIVE: begin
-            h1 = (h_cnt[0] == 1'b0);
-            h2 = (h_cnt[0] == 1'b1);
+            h1 = (h_cnt[1] == 1'b0);
+            h2 = (h_cnt[1] == 1'b1);
             rg = (h_cnt[1:0] == 2'b00);
         end
         STATE_HBP: begin
@@ -389,7 +389,7 @@ module ccdtimgen(
             tcon_v1 <= !v1;
             tcon_v2 <= !v2;
             tcon_v23 <= !v23;
-            tcon_fdg <= !fdg;
+            tcon_fdg <= fdg;
             tcon_h1 <= h1;
             tcon_h2 <= h2;
             tcon_rg <= rg;

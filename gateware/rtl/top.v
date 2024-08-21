@@ -77,7 +77,12 @@ module top (
     output wire         TCON_H2,
     output wire         TCON_RG,
     // PWM for VAB voltage control
-    output wire         VAB_PWM
+    output wire         VAB_PWM,
+    // I2C for DCDC
+    inout  wire         I2C_PL0_SCL,
+    inout  wire         I2C_PL0_SDA,
+    inout  wire         I2C_PL1_SCL,
+    inout  wire         I2C_PL1_SDA
 );
 
     parameter AXI_DW = 64;
@@ -239,6 +244,18 @@ module top (
     wire [15:0]  dsi_hs_dat;
     wire         dsi_hsck_ten;
     wire         dsi_hsdat_ten;
+    wire         i2c_pl0_scl_oe;
+    wire         i2c_pl0_scl_o;
+    wire         i2c_pl0_scl_i;
+    wire         i2c_pl0_sda_oe;
+    wire         i2c_pl0_sda_o;
+    wire         i2c_pl0_sda_i;
+    wire         i2c_pl1_scl_oe;
+    wire         i2c_pl1_scl_o;
+    wire         i2c_pl1_scl_i;
+    wire         i2c_pl1_sda_oe;
+    wire         i2c_pl1_sda_o;
+    wire         i2c_pl1_sda_i;
     system #(
         .AXI_AW (AXI_AW),
         .AXI_DW(AXI_DW),
@@ -277,6 +294,18 @@ module top (
         .tcon_h2(TCON_H2),
         .tcon_rg(TCON_RG),
         .vab_pwm(VAB_PWM),
+        .i2c_pl0_scl_oe(i2c_pl0_scl_oe),
+        .i2c_pl0_scl_o(i2c_pl0_scl_o),
+        .i2c_pl0_scl_i(i2c_pl0_scl_i),
+        .i2c_pl0_sda_oe(i2c_pl0_sda_oe),
+        .i2c_pl0_sda_o(i2c_pl0_sda_o),
+        .i2c_pl0_sda_i(i2c_pl0_sda_i),
+        .i2c_pl1_scl_oe(i2c_pl1_scl_oe),
+        .i2c_pl1_scl_o(i2c_pl1_scl_o),
+        .i2c_pl1_scl_i(i2c_pl1_scl_i),
+        .i2c_pl1_sda_oe(i2c_pl1_sda_oe),
+        .i2c_pl1_sda_o(i2c_pl1_sda_o),
+        .i2c_pl1_sda_i(i2c_pl1_sda_i),
         .s_apb_pwrite(apb_pwrite),
         .s_apb_pwdata(apb_pwdata),
         .s_apb_paddr(apb_paddr),
@@ -314,6 +343,15 @@ module top (
         .m_axi_rvalid(axi_rvalid),
         .m_axi_rready(axi_rready)
     );
+
+    assign I2C_PL0_SCL = i2c_pl0_scl_oe ? i2c_pl0_scl_o : 1'bz;
+    assign I2C_PL0_SDA = i2c_pl0_sda_oe ? i2c_pl0_sda_o : 1'bz;
+    assign I2C_PL1_SCL = i2c_pl1_scl_oe ? i2c_pl1_scl_o : 1'bz;
+    assign I2C_PL1_SDA = i2c_pl1_sda_oe ? i2c_pl1_sda_o : 1'bz;
+    assign i2c_pl0_scl_i = I2C_PL0_SCL;
+    assign i2c_pl0_sda_i = I2C_PL0_SDA;
+    assign i2c_pl1_scl_i = I2C_PL1_SCL;
+    assign i2c_pl1_sda_i = I2C_PL1_SDA;
 
     wire mmcm_locked;
     mu_dphy_7series #(.LANES(2)) dphy (
