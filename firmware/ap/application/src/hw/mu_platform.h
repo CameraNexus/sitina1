@@ -69,6 +69,8 @@
 #define GPIO0_BSR           (IOREG(GPIO0_BASE + 0x08))
 #define GPIO0_BCR           (IOREG(GPIO0_BASE + 0x0C))
 #define GPIO0_OER           (IOREG(GPIO0_BASE + 0x10))
+#define GPIO0_OESR          (IOREG(GPIO0_BASE + 0x14))
+#define GPIO0_OECR          (IOREG(GPIO0_BASE + 0x18))
 
 #define CCDTG_CTRL          (IOREG(CCDTG_BASE + 0x00))
 #define CCDTG_DELAY_HTIME   (IOREG(CCDTG_BASE + 0x04))

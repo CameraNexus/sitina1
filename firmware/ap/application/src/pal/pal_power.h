@@ -1,7 +1,6 @@
 //
-// afe.h: AD9990 AFE driver
-//
-// Copyright 2021 Wenting Zhang <zephray@outlook.com>
+// Sitina1
+// Copyright 2024 Wenting Zhang
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -9,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-//
+// 
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -23,10 +22,8 @@
 //
 #pragma once
 
-void afe_init(void);
-void afe_start(void);
-void afe_stop(void);
-void afe_switch_to_draft(void);
-void afe_switch_to_still(void);
-void afe_pause(void);
-
+void pal_pwr_init(void);
+void pal_pwr_refresh(void);
+uint8_t pal_pwr_get_battery_percent(void);
+bool pal_pwr_is_battery_charging(void);
+void pal_pwr_set_vab(uint8_t setpoint);

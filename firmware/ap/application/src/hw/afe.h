@@ -1,7 +1,7 @@
 //
-// power.h: Power management related functions
+// afe.h: AD9990 AFE driver
 //
-// Copyright 2024 Wenting Zhang <zephray@outlook.com>
+// Copyright 2021 Wenting Zhang <zephray@outlook.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,5 +23,13 @@
 //
 #pragma once
 
-void power_init(void);
-void power_set_vab(uint8_t val);
+void afe_init(void);
+void afe_start(void);
+void afe_stop(void);
+void afe_switch_to_draft(void);
+void afe_switch_to_still(void);
+void afe_pause(void);
+
+// internal functions for debugging purpose
+void afe_write_reg(uint32_t reg, uint32_t val);
+void afe_debug(uint32_t val);

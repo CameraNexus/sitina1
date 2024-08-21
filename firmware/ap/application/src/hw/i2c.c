@@ -33,7 +33,6 @@
 #include "i2c.h"
 
 XIicPs i2c0;
-XIicPs i2c1;
 
 static void i2c_init_instance(XIicPs *i2c, uint32_t baseaddr, uint32_t fsclk) {
     XIicPs_Config *config;
@@ -50,7 +49,6 @@ static void i2c_init_instance(XIicPs *i2c, uint32_t baseaddr, uint32_t fsclk) {
 
 void i2c_init(void) {
     i2c_init_instance(&i2c0, XPAR_XIICPS_0_BASEADDR, 100*1000);
-    i2c_init_instance(&i2c1, XPAR_XIICPS_1_BASEADDR, 100*1000);
 }
 
 int i2c_write_byte(I2C_TYPE *i2c, uint8_t addr, uint8_t val) {
@@ -87,13 +85,19 @@ int i2c_read_reg(I2C_TYPE *i2c, uint8_t addr, uint8_t reg, uint8_t *val) {
 
 int i2c_read_payload(I2C_TYPE *i2c, uint8_t addr, uint8_t *tx_payload, size_t tx_len, uint8_t *rx_payload, size_t rx_len) {
     // TODO: Unsupported for now
-    return -1;
+    int result;
+    result = XIicPs_MasterSendPolled(i2c, tx_payload, tx_len, addr);
+    if (result != XST_SUCCESS)
+        return -1;
+    result = XIicPs_MasterRecvPolled(i2c, rx_payload, rx_len, addr);
+    return (result == XST_SUCCESS) ? 0 : -1;
 }
 
 int i2c_read_byte(I2C_TYPE *i2c, uint8_t addr, uint8_t *val) {
     uint8_t buf[1];
     int result;
     result = XIicPs_MasterRecvPolled(i2c, buf, 1, addr);
+    *val = buf[0];
     return (result == XST_SUCCESS) ? 0 : -1;
 }
 

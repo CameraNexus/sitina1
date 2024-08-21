@@ -31,7 +31,6 @@
 #define AFE_SCK_GPIO_PIN    GPIO_PIN_4
 #define AFE_CS_GPIO_PIN     GPIO_PIN_3
 #define AFE_RST_GPIO_PIN    GPIO_PIN_0
-#define AFE_SYNC_GPIO_PIN   GPIO_PIN_1
 
 // This is the active field count. Programmed numbers can be higher
 #define AFE_FIELD_COUNT (1)
@@ -63,9 +62,9 @@ static uint32_t gpo_status;
 
 void afe_init_io(void) {
 	*GPIO0_BSR = AFE_MOSI_GPIO_PIN | AFE_SCK_GPIO_PIN | AFE_CS_GPIO_PIN |
-			AFE_RST_GPIO_PIN | AFE_SYNC_GPIO_PIN;
+			AFE_RST_GPIO_PIN;
 	*GPIO0_OER |= AFE_MOSI_GPIO_PIN | AFE_SCK_GPIO_PIN | AFE_CS_GPIO_PIN |
-			AFE_RST_GPIO_PIN | AFE_SYNC_GPIO_PIN;
+			AFE_RST_GPIO_PIN;
 }
 
 static void afe_delay() {
@@ -181,8 +180,8 @@ void afe_init(void) {
 
     afe_write_reg(0x38,
             (0 << 0) | // SHDLOC
-            (32 << 8) | // SHPLOC
-            (10 << 16)); // SHPWIDTH
+            (20 << 8) | // SHPLOC
+            (8 << 16)); // SHPWIDTH
 
     // Data output
     // afe_write_reg(0x39,
@@ -229,7 +228,7 @@ void afe_init(void) {
 
     // Configure vertical sequence 0: image readout
     afe_set_conf_reg(R_VSEQ, 0, 0x00,
-            (1 << 0) | // CLPOB starts as invalid
+            (1 << 0) | // CLPOB starts as valid
             (0 << 1)); // PBLK starts as valid
     afe_set_conf_reg(R_VSEQ, 0, 0x01, CCD_LINE_LENGTH); // HD even line length
     afe_set_conf_reg(R_VSEQ, 0, 0x02, CCD_LINE_LENGTH); // HD odd line length
@@ -261,9 +260,9 @@ void afe_init(void) {
     afe_set_conf_reg(R_VSEQ, 0, 0x16, 0);
     afe_set_conf_reg(R_VSEQ, 0, 0x17,
             (0 << 0) | // HBLKSTART = 0
-            ((CCD_HBLK_LENGTH - 1) << 13)); // HBLKEND = CCD_HBLK_LENGTH
+            ((CCD_HBLK_LENGTH - AFE_TIM_OFFSET - 1) << 13)); // HBLKEND = CCD_HBLK_LENGTH
     afe_set_conf_reg(R_VSEQ, 0, 0x18,
-            (CCD_HBLK_LENGTH << 0) | // HBLKLEN
+            ((CCD_HBLK_LENGTH - AFE_TIM_OFFSET) << 0) | // HBLKLEN
             (1 << 13)); // HBLKREP = 1
     afe_set_conf_reg(R_VSEQ, 0, 0x19,
             (8191 << 0) |
@@ -291,11 +290,14 @@ void afe_init(void) {
             0); // FREEZE/RESUME not enabled
     afe_set_conf_reg(R_VSEQ, 0, 0x21, 0); // HBLK Odd field repeat area pattern
     afe_set_conf_reg(R_VSEQ, 0, 0x22,
-            (CCD_CLPOB_BEGIN << 0) | // CLPOB toggle position 1
-            (CCD_CLPOB_END << 13)); // CLPOB toggle position 2
+            ((CCD_CLPOB_BEGIN - AFE_TIM_OFFSET) << 0) | // CLPOB toggle position 1
+            ((CCD_CLPOB_END - AFE_TIM_OFFSET) << 13)); // CLPOB toggle position 2
+    // afe_set_conf_reg(R_VSEQ, 0, 0x22,
+    //         (8191 << 0) | // CLPOB toggle position 1
+    //         (8191 << 13)); // CLPOB toggle position 2
     afe_set_conf_reg(R_VSEQ, 0, 0x23,
-            (CCD_HBLK_LENGTH << 0) | // PBLK toggle position 1
-            (8191 << 13)); // PBLK toggle position 2
+            ((CCD_HBLK_LENGTH - AFE_TIM_OFFSET) << 0) | // PBLK toggle position 1
+            ((CCD_LINE_LENGTH - AFE_TIM_OFFSET) << 13)); // PBLK toggle position 2
     afe_set_conf_reg(R_VSEQ, 0, 0x24, 0); // HBLK offset A for mode 2
     afe_set_conf_reg(R_VSEQ, 0, 0x25, 0); // HBLK offset B for mode 2
     afe_set_conf_reg(R_VSEQ, 0, 0x26, 0); // HBLK offset C for mode 2
@@ -333,6 +335,12 @@ void afe_start(void) {
     // SDK_DelayAtLeastUs(10, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
     // GPIO_PinWrite(AFE_SYNC_GPIO, AFE_SYNC_GPIO_PIN, 1);
     afe_write_reg(0x13, AFE_SYNC_CONFIG | (1 << 24));
+}
+
+void afe_debug(uint32_t val) {
+    afe_set_conf_reg(R_VSEQ, 0, 0x22,
+        ((val) << 0) | // CLPOB toggle position 1
+        ((val + 16) << 13)); // CLPOB toggle position 2
 }
 
 void afe_stop(void) {

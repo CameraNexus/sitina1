@@ -1,7 +1,6 @@
 //
-// power.c: Power management related functions
-//
-// Copyright 2024 Wenting Zhang <zephray@outlook.com>
+// Sitina 1
+// Copyright 2024 Wenting Zhang
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,19 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-#include <stdint.h>
-#include <stdbool.h>
-#include "mu_platform.h"
-#include "power.h"
+#pragma once
 
-void power_init(void) {
-    *PWMLITE_PSC = 1;
-    *PWMLITE_CNT = 255;
-    *PWMLITE_CMP = 127;
-    *PWMLITE_CTL = 1;
-}
-
-void power_set_vab(uint8_t val) {
-    // 5-16V
-    *PWMLITE_CMP = val;
-}
+void pwm_init(void);
+void pwm_set(uint8_t val);

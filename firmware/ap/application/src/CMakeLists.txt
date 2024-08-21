@@ -11,7 +11,161 @@ find_package(common)
 enable_language(C ASM CXX)
 collect(PROJECT_LIB_DEPS xilstandalone)
 collect(PROJECT_LIB_DEPS xil)
-collect(PROJECT_LIB_DEPS xiltimer)
+collect(PROJECT_LIB_DEPS xiltimer;xilffs)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -75,7 +229,25 @@ collect(PROJECT_LIB_DEPS xiltimer)
 collect(PROJECT_LIB_DEPS gcc)
 collect(PROJECT_LIB_DEPS c)
 
-aux_source_directory(${CMAKE_SOURCE_DIR} _sources)
+#aux_source_directory(${CMAKE_SOURCE_DIR} _sources)
+set (_sources
+    hw/afe.c
+    hw/ccdtg.c
+    hw/dcif.c
+    hw/gpio_lp.c
+    hw/i2c.c
+    hw/lcd.c
+    hw/mcusvc.c
+    hw/pwm.c
+    hw/softi2c.c
+    pal/pal_camera.c
+    pal/pal_display.c
+    pal/pal_filesystem.c
+    pal/pal_input.c
+    pal/pal_power.c
+    image480480.c
+    main.c
+    )
 foreach (source ${_sources})
     get_filename_component(ext ${source} EXT)
     list(APPEND src_ext ${ext})

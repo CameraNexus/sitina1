@@ -22,4 +22,9 @@
 //
 #pragma once
 
+#define LCD_DEFAULT_BRIGHTNESS  120
+
+extern uint8_t framebuffer[];
+
 void lcd_init(void);
+void lcd_deinit(void);

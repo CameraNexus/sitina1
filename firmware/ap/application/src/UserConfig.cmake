@@ -25,6 +25,8 @@ set(USER_UNDEFINED_SYMBOLS
 # Example 3: Adding ${CMAKE_SOURCE_DIR}/data/include to add data/include from this project.
 
 set(USER_INCLUDE_DIRECTORIES
+./hw
+./pal
 )
 
 # -----------------------------------------
@@ -64,7 +66,7 @@ set(USER_COMPILE_OPTIMIZATION_OTHER_FLAGS )
 set(USER_COMPILE_DEBUG_LEVEL -g3)
 
 # Other flags releated to debugging
-set(USER_COMPILE_DEBUG_OTHER_FLAGS "-ffunction-sections -fdata-sections")
+set(USER_COMPILE_DEBUG_OTHER_FLAGS )
 
 # -----------------------------------------
 
@@ -81,7 +83,7 @@ set(USER_COMPILE_ANSI )
 
 # Add any compiler options that are not covered by the above variables, they will be added as extra compiler options
 # To enable profiling -pg [ for gprof ]  or -p [ for prof information ]
-set(USER_COMPILE_OTHER_FLAGS )
+set(USER_COMPILE_OTHER_FLAGS "-ffunction-sections -fdata-sections")
 
 # -----------------------------------------
 

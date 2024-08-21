@@ -1,7 +1,6 @@
 //
-// dcif.h: Digital camera I/F peripheral driver
-//
-// Copyright 2024 Wenting Zhang <zephray@outlook.com>
+// Sitina1
+// Copyright 2024 Wenting Zhang
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -9,7 +8,7 @@
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-//
+// 
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
 //
@@ -21,20 +20,46 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-#pragma once
+#include <stdbool.h>
+#include <stdint.h>
+#include "mcusvc.h"
+#include "pal_input.h"
 
-#include "ccd_timing.h"
+uint32_t key_state;
+uint32_t key_used;
+int encoder_count;
 
-#define CAM_DMA_BURSTLEN         8   // in 64-bit words
-#define CAM_DMA_MAXINFLIGHT      4   // Max number of outstanding requests            
-#define CAM_VACT        (CCD_LINES - 1)
-#define CAM_HACT        ((CCD_LINE_PIXCNT - 8) * 2) // TODO
-#define CAM_BUFSIZE     (CAM_VACT * CAM_HACT * 2)
-#define CAM_BUFALIGN    (CAM_DMA_BURSTLEN * 8)
-#if ((CAM_BUFSIZE % CAM_BUFALIGN) != 0)
-#error "Buffer not aligned"
+void pal_input_init(void) {
+    key_state = 0;
+    key_used = 0;
+    encoder_count = 0;
+}
+
+void pal_input_deinit(void) {
+
+}
+
+uint32_t pal_input_get_keys(void) {
+#if 0
+    uint32_t retval = key_state & ~key_used; // only return newly pressed keys
+    key_used |= key_state;
+    return retval;
+#else
+    return key_state;
 #endif
+}
 
-void dcif_init(void);
-void dcif_engage(void);
-uint8_t *dcif_waitnextbuffer(void);
+int pal_input_get_encoder(uint32_t id) {
+    if (id != 0)
+        return 0;
+    int cnt = encoder_count;
+    encoder_count = 0;
+    return cnt;
+}
+
+void pal_input_scan(void) {
+    key_state = mcusvc_get_buttons();
+    //encoder_count += mcusvc_get_rotenc();
+    // clear keys that have been released
+    key_used &= key_state;
+}

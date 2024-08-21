@@ -45,6 +45,8 @@ extern const unsigned char gImage_image480480[921600];
 #define FRAMEBUF_SIZE   IMAGE_WIDTH * IMAGE_HEIGHT * IMAGE_PIXEL_SIZE
 uint8_t __aligned(64) framebuffer[FRAMEBUF_SIZE];
 
+static uint8_t lcd_brightness = LCD_DEFAULT_BRIGHTNESS;
+
 static uint8_t s_lcd_init_seq[] = {
 		0xFF,  5, 0x77, 0x01, 0x00, 0x00, 0x13,
 		0xEF,  1, 0x08,
@@ -120,7 +122,7 @@ void lcd_init(void) {
 
 	usleep(200 * 1000);
 
-    mcusvc_set_lcd_bl(120);
+    mcusvc_set_lcd_bl(lcd_brightness);
     mcusvc_set_lcd_power(true);
 
     usleep(200 * 1000);
@@ -147,4 +149,11 @@ void lcd_init(void) {
     *DSILITE_ENDADDR = (uint32_t)framebuffer + FRAMEBUF_SIZE;
     *DSILITE_DMACTL = (DMACTL_MAXINFLIGHT << 8) | DMACTL_BURSTLEN;
     *DSILITE_PCTL = DCCTL_TGEN_EN;
+}
+
+void lcd_deinit(void) {
+    mcusvc_set_lcd_bl(0);
+    *DSILITE_PCTL = 0;
+    usleep(20*1000);
+    mcusvc_set_lcd_power(false);
 }

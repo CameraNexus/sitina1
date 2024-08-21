@@ -28,24 +28,25 @@
 // 30MHz - 33.33ns
 
 // Timing for normal readout
-#define CCD_TVCCD_PIX       98 // 3.5 us
-#define CCD_THD_PIX         98 // 3.5 us
+#define CCD_TVCCD_PIX       94 // 3.5 us
+#define CCD_THD_PIX         94 // 3.5 us
 #define CCD_DUMMY_PIX       4
 #define CCD_DARK_PIX        19
 #define CCD_BUFFER_PIX      13
 #define CCD_ACTIVE_PIX      2004
-#define CCD_T3P_PIX         3333 // 120 us
-#define CCD_TV3RD_PIX       278 // 10 us
-#define CCD_T3D_PIX         556 // 20 us
+#define CCD_T3P_PIX         3240 // 120 us
+#define CCD_TV3RD_PIX       270 // 10 us
+#define CCD_T3D_PIX         540 // 20 us
 #define CCD_LINE_PIXCNT     (CCD_DUMMY_PIX + CCD_DARK_PIX + CCD_BUFFER_PIX + CCD_ACTIVE_PIX)
 #define CCD_HBLK_LENGTH     (CCD_TVCCD_PIX + CCD_THD_PIX)
 #define CCD_LINE_LENGTH     (CCD_HBLK_LENGTH + CCD_LINE_PIXCNT)
 #define CCD_VSG_LENGTH      (CCD_T3P_PIX + CCD_TV3RD_PIX + CCD_LINE_LENGTH)
 #define CCD_CLPOB_BEGIN     (CCD_HBLK_LENGTH + CCD_DUMMY_PIX + 1)
 #define CCD_CLPOB_END       (CCD_HBLK_LENGTH + CCD_DUMMY_PIX + CCD_DARK_PIX - 1)
+#define AFE_TIM_OFFSET      36
 
 // Timing for fast line dumping
-#define CCD_TFD_PIX         24 // 1us
+#define CCD_TFD_PIX         47 // 1us
 #define CCD_DUMP_VTOG       (CCD_TFD_PIX + CCD_TVCCD_PIX)
 #define CCD_DUMP_LENGTH     (CCD_TVCCD_PIX * 2)
 

@@ -20,12 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 //
-// File : mcusvc.h
-// Brief: Service provided by MCU
-//
-#pragma once
 
-void mcusvc_init(void);
-void mcusvc_set_lcd_power(bool en);
-void mcusvc_set_lcd_bl(uint8_t brightness);
-void mcusvc_set_led(bool on);
+typedef enum {
+    SI2C0 = 0,
+    SI2C1 = 1
+} SI2C_PORT;
+
+void si2c_init(void);
+int si2c_write_reg(SI2C_PORT i2c, uint8_t addr, uint8_t reg, uint8_t val);
+int si2c_read_reg(SI2C_PORT i2c, uint8_t addr, uint8_t reg, uint8_t *val);

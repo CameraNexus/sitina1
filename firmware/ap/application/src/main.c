@@ -22,72 +22,172 @@
 //
 #include <stdio.h>
 #include <stdbool.h>
-#include "afe.h"
-#include "dcif.h"
 #include "i2c.h"
-#include "lcd.h"
-#include "ccdtg.h"
+#include "softi2c.h"
 #include "mcusvc.h"
-#include "power.h"
+#include "ccd_timing.h"
+#include "afe.h" // debug
+#include "dcif.h" // For now, the buffer size should match image size
+#include "pal_camera.h"
+#include "pal_display.h"
+#include "pal_power.h"
+#include "pal_input.h"
 #include "xil_printf.h"
 #include "xil_cache.h"
 #include "xparameters.h"
 #include "xscugic.h"
+#include "font.h"
 
-extern uint8_t framebuffer[];
+extern const unsigned char gImage_image480480[921600];
 
-void lcd_set_color(uint32_t color) {
-    uint32_t *wrptr = framebuffer;
-    for (int i = 0; i < 480*480; i++) {
-        *wrptr++ = color;
+
+static void lcd_set_pixel(uint32_t *buf, int x, int y, int c) {
+    x = 479 - x;
+    y = 479 - y;
+    buf[y * 480 + x] = (c) ? 0xffffffff : 0x00000000;
+}
+
+void lcd_disp_char(uint32_t *buf, int x, int y, char c) {
+    for (int yy = 0; yy < 12; yy++) {
+        for (int xx = 0; xx < 8; xx++) {
+            if ((charMap_ascii[(uint32_t)c][yy] >> xx) & 0x01) {
+                lcd_set_pixel(buf, x + xx, y + yy, 1);
+            }
+            else {
+                lcd_set_pixel(buf, x + xx, y + yy, 0);
+            }
+        }
     }
-    Xil_DCacheFlushRange((intptr_t)framebuffer, 480*480*4);
+}
+
+void lcd_disp_string(uint32_t *buf, int x, int y, char *str) {
+    while (*str) {
+        lcd_disp_char(buf, x, y, *str);
+        x += 8;
+        str++;
+    }
 }
 
 int main()
 {
     i2c_init();
+    si2c_init();
     mcusvc_init();
-    power_init();
-    lcd_init();
-    afe_init();
-    dcif_init();
-    ccdtg_init();
+
+    int retval = si2c_write_reg(SI2C0, 0x41, 0x00, 0x8f);
+    if (retval < 0) {
+        printf("SI2C write failed!\n");
+    }
+    retval = si2c_write_reg(SI2C1, 0x41, 0x00, 0x8f);
+    if (retval < 0) {
+        printf("SI2C write failed!\n");
+    }
+
+    pal_pwr_init();
+    pal_cam_init();
+    pal_disp_init();
+    pal_input_init();
     
-    power_set_vab(127);
+    pal_pwr_set_vab(127);
 
-    //afe_start();
-    dcif_engage();
-    ccdtg_start();
-    //memset(s_image_buffer, 0xFF, IMAGE_WIDTH * IMAGE_HEIGHT * IMAGE_PIXEL_SIZE);
+    pal_cam_start();
 
-    //memcpy(s_image_buffer, gImage_image480480, IMAGE_WIDTH * IMAGE_HEIGHT * IMAGE_PIXEL_SIZE);
-    //Xil_DCacheFlushRange((UINTPTR)s_image_buffer, IMAGE_WIDTH * IMAGE_HEIGHT * IMAGE_PIXEL_SIZE);
+    uint32_t *scrbuf = pal_disp_get_buffer();
 
-    for(;;) {
-        uint16_t *cambuf = (uint16_t *)dcif_waitnextbuffer();
+    /*while (1) {
         mcusvc_set_led(true);
-        uint32_t *scrbuf = framebuffer;
+        usleep(500*1000);
+        mcusvc_set_led(false);
+        usleep(500*1000);
+    }*/
+
+    uint32_t cnt0 = 16;
+    uint32_t cnt1 = 36;
+    uint32_t cnt2 = 192;
+    bool update = true;
+
+    while (1) {
+        uint32_t *scrbuf = pal_disp_get_buffer();
+        pal_input_scan();
+
+        uint16_t *cambuf = pal_cam_get_full_buffer();
+        mcusvc_set_led(true);
         
+        //memset(scrbuf, 0x00, 480*480*4);
+        uint32_t *wrptr = scrbuf;
         for (int y = 0; y < 337; y++) {
             for (int x = 0; x < 480; x++) {
-                uint16_t pix = cambuf[y * 8 * CAM_HACT + x * 8];
-                uint32_t rgb = pix;
-                *scrbuf++ = rgb;
+                uint32_t pix;
+                if (x >= 240) {
+                    pix = (uint32_t)cambuf[y * 8 * CAM_HACT + (239 - (x - 240)) * 16 + 252 + 1];
+                    //pix = (uint32_t)cambuf[y * 8 * CAM_HACT + (239 * 8 - (x - 240)) * 2 + 250];
+                }
+                else {
+                    pix = (uint32_t)cambuf[y * 8 * CAM_HACT + x * 16 + 252];
+                }
+                
+                pix >>= 8;
+                pix &= 0xff;
+                pix |= (pix << 8) | (pix << 16);
+                *wrptr++ = pix;
             }
         }
-        Xil_DCacheFlushRange((intptr_t)framebuffer, 480*480*4);
-        mcusvc_set_led(false);
-    // memset(framebuffer, 0xff, 480*4);
-    // memset(framebuffer[480*4*2], 0xff, 480*4);
-    // for (int i = 0; i < 240; i++) {
-    //     framebuffer[480*4*4+i*2*4 + 0] = 0xff;
-    //     framebuffer[480*4*4+i*2*4 + 1] = 0xff;
-    //     framebuffer[480*4*4+i*2*4 + 2] = 0xff;
-    //     framebuffer[480*4*4+i*2*4 + 3] = 0xff;
-    // }
 
-    
+        uint32_t btns = pal_input_get_keys();
+        if (btns & 0x100) {
+            // up
+            if (cnt0 < 63)
+                cnt0 ++;
+            update = true;
+        }
+        else if (btns & 0x800) {
+            // down
+            if (cnt0 > 0)
+                cnt0 --;
+            update = true;
+        }
+        if (btns & 0x200) {
+            // left
+            if (cnt1 > 0)
+                cnt1 --;
+            update = true;
+        }
+        else if (btns & 0x400) {
+            // right
+            if (cnt1 < 63)
+                cnt1 ++;
+            update = true;
+        }
+        if (btns & 0x1000) {
+            if (cnt2 > 1)
+                cnt2 -= 2;
+            update = true;
+        }
+        else if (btns & 0x2000) {
+            if (cnt2 < 300)
+                cnt2 += 2;
+            update = true;
+        }
+        char strbuf[16];
+        snprintf(strbuf, 15, "SHDL %d", cnt0);
+        lcd_disp_string(scrbuf, 0, 0, strbuf);
+        snprintf(strbuf, 15, "SHPL %d", cnt1);
+        lcd_disp_string(scrbuf, 0, 16, strbuf);
+        snprintf(strbuf, 15, "CLPOB %d", cnt2);
+        lcd_disp_string(scrbuf, 0, 32, strbuf);
+
+        if (update) {
+            afe_write_reg(0x38,
+                (cnt0 << 0) | // SHDLOC
+                (cnt1 << 8) | // SHPLOC
+                (8 << 16)); // SHPWIDTH
+            update = false;
+        }
+        
+        memset(cambuf, 0xff, CAM_BUFSIZE);
+        Xil_DCacheFlushRange(cambuf, CAM_BUFSIZE);
+        pal_disp_return_buffer(scrbuf);
+        mcusvc_set_led(false);
     }
 
     return 0;
