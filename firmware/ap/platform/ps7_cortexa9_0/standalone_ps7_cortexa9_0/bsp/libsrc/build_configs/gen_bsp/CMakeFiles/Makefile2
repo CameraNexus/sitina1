@@ -69,18 +69,21 @@ CMAKE_BINARY_DIR = /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/sta
 all: libsrc/all
 all: libsrc/standalone/src/all
 all: libsrc/xiltimer/src/all
+all: libsrc/xilffs/src/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
 preinstall: libsrc/preinstall
 preinstall: libsrc/standalone/src/preinstall
 preinstall: libsrc/xiltimer/src/preinstall
+preinstall: libsrc/xilffs/src/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
 clean: libsrc/clean
 clean: libsrc/standalone/src/clean
 clean: libsrc/xiltimer/src/clean
+clean: libsrc/xilffs/src/clean
 .PHONY : clean
 
 #=============================================================================
@@ -442,6 +445,38 @@ libsrc/xadcps/src/clean: libsrc/xadcps/src/CMakeFiles/xadcps.dir/clean
 .PHONY : libsrc/xadcps/src/clean
 
 #=============================================================================
+# Directory level rules for directory libsrc/xilffs/src
+
+# Recursive "all" directory target.
+libsrc/xilffs/src/all: libsrc/xilffs/src/CMakeFiles/xilffs.dir/all
+libsrc/xilffs/src/all: libsrc/xilffs/src/include/all
+.PHONY : libsrc/xilffs/src/all
+
+# Recursive "preinstall" directory target.
+libsrc/xilffs/src/preinstall: libsrc/xilffs/src/include/preinstall
+.PHONY : libsrc/xilffs/src/preinstall
+
+# Recursive "clean" directory target.
+libsrc/xilffs/src/clean: libsrc/xilffs/src/CMakeFiles/xilffs.dir/clean
+libsrc/xilffs/src/clean: libsrc/xilffs/src/include/clean
+.PHONY : libsrc/xilffs/src/clean
+
+#=============================================================================
+# Directory level rules for directory libsrc/xilffs/src/include
+
+# Recursive "all" directory target.
+libsrc/xilffs/src/include/all:
+.PHONY : libsrc/xilffs/src/include/all
+
+# Recursive "preinstall" directory target.
+libsrc/xilffs/src/include/preinstall:
+.PHONY : libsrc/xilffs/src/include/preinstall
+
+# Recursive "clean" directory target.
+libsrc/xilffs/src/include/clean:
+.PHONY : libsrc/xilffs/src/include/clean
+
+#=============================================================================
 # Directory level rules for directory libsrc/xiltimer/src
 
 # Recursive "all" directory target.
@@ -528,7 +563,7 @@ libsrc/CMakeFiles/combined.dir/all: libsrc/xadcps/src/CMakeFiles/xadcps.dir/all
 
 # Build rule for subdir invocation for target.
 libsrc/CMakeFiles/combined.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles 58
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles 56
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libsrc/CMakeFiles/combined.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles 0
 .PHONY : libsrc/CMakeFiles/combined.dir/rule
@@ -627,12 +662,12 @@ libsrc/dmaps/src/CMakeFiles/dmaps.dir/clean:
 libsrc/gpiops/src/CMakeFiles/gpiops.dir/all:
 	$(MAKE) $(MAKESILENT) -f libsrc/gpiops/src/CMakeFiles/gpiops.dir/build.make libsrc/gpiops/src/CMakeFiles/gpiops.dir/depend
 	$(MAKE) $(MAKESILENT) -f libsrc/gpiops/src/CMakeFiles/gpiops.dir/build.make libsrc/gpiops/src/CMakeFiles/gpiops.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=13,14,15,16,17,18 "Built target gpiops"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=13,14,15,16,17 "Built target gpiops"
 .PHONY : libsrc/gpiops/src/CMakeFiles/gpiops.dir/all
 
 # Build rule for subdir invocation for target.
 libsrc/gpiops/src/CMakeFiles/gpiops.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libsrc/gpiops/src/CMakeFiles/gpiops.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles 0
 .PHONY : libsrc/gpiops/src/CMakeFiles/gpiops.dir/rule
@@ -653,7 +688,7 @@ libsrc/gpiops/src/CMakeFiles/gpiops.dir/clean:
 libsrc/iicps/src/CMakeFiles/iicps.dir/all:
 	$(MAKE) $(MAKESILENT) -f libsrc/iicps/src/CMakeFiles/iicps.dir/build.make libsrc/iicps/src/CMakeFiles/iicps.dir/depend
 	$(MAKE) $(MAKESILENT) -f libsrc/iicps/src/CMakeFiles/iicps.dir/build.make libsrc/iicps/src/CMakeFiles/iicps.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=19,20,21,22,23,24,25,26,27 "Built target iicps"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=18,19,20,21,22,23,24,25,26 "Built target iicps"
 .PHONY : libsrc/iicps/src/CMakeFiles/iicps.dir/all
 
 # Build rule for subdir invocation for target.
@@ -679,7 +714,7 @@ libsrc/iicps/src/CMakeFiles/iicps.dir/clean:
 libsrc/qspips/src/CMakeFiles/qspips.dir/all:
 	$(MAKE) $(MAKESILENT) -f libsrc/qspips/src/CMakeFiles/qspips.dir/build.make libsrc/qspips/src/CMakeFiles/qspips.dir/depend
 	$(MAKE) $(MAKESILENT) -f libsrc/qspips/src/CMakeFiles/qspips.dir/build.make libsrc/qspips/src/CMakeFiles/qspips.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=28,29,30,31,32,33 "Built target qspips"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=27,28,29,30,31,32 "Built target qspips"
 .PHONY : libsrc/qspips/src/CMakeFiles/qspips.dir/all
 
 # Build rule for subdir invocation for target.
@@ -705,12 +740,12 @@ libsrc/qspips/src/CMakeFiles/qspips.dir/clean:
 libsrc/scugic/src/CMakeFiles/scugic.dir/all:
 	$(MAKE) $(MAKESILENT) -f libsrc/scugic/src/CMakeFiles/scugic.dir/build.make libsrc/scugic/src/CMakeFiles/scugic.dir/depend
 	$(MAKE) $(MAKESILENT) -f libsrc/scugic/src/CMakeFiles/scugic.dir/build.make libsrc/scugic/src/CMakeFiles/scugic.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=34,35,36,37,38,39 "Built target scugic"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=33,34,35,36,37 "Built target scugic"
 .PHONY : libsrc/scugic/src/CMakeFiles/scugic.dir/all
 
 # Build rule for subdir invocation for target.
 libsrc/scugic/src/CMakeFiles/scugic.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libsrc/scugic/src/CMakeFiles/scugic.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles 0
 .PHONY : libsrc/scugic/src/CMakeFiles/scugic.dir/rule
@@ -731,7 +766,7 @@ libsrc/scugic/src/CMakeFiles/scugic.dir/clean:
 libsrc/scutimer/src/CMakeFiles/scutimer.dir/all:
 	$(MAKE) $(MAKESILENT) -f libsrc/scutimer/src/CMakeFiles/scutimer.dir/build.make libsrc/scutimer/src/CMakeFiles/scutimer.dir/depend
 	$(MAKE) $(MAKESILENT) -f libsrc/scutimer/src/CMakeFiles/scutimer.dir/build.make libsrc/scutimer/src/CMakeFiles/scutimer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=40,41,42,43 "Built target scutimer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=38,39,40,41 "Built target scutimer"
 .PHONY : libsrc/scutimer/src/CMakeFiles/scutimer.dir/all
 
 # Build rule for subdir invocation for target.
@@ -757,7 +792,7 @@ libsrc/scutimer/src/CMakeFiles/scutimer.dir/clean:
 libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/all:
 	$(MAKE) $(MAKESILENT) -f libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/build.make libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/depend
 	$(MAKE) $(MAKESILENT) -f libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/build.make libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=44,45,46,47 "Built target scuwdt"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=42,43,44,45 "Built target scuwdt"
 .PHONY : libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/all
 
 # Build rule for subdir invocation for target.
@@ -783,7 +818,7 @@ libsrc/scuwdt/src/CMakeFiles/scuwdt.dir/clean:
 libsrc/sdps/src/CMakeFiles/sdps.dir/all:
 	$(MAKE) $(MAKESILENT) -f libsrc/sdps/src/CMakeFiles/sdps.dir/build.make libsrc/sdps/src/CMakeFiles/sdps.dir/depend
 	$(MAKE) $(MAKESILENT) -f libsrc/sdps/src/CMakeFiles/sdps.dir/build.make libsrc/sdps/src/CMakeFiles/sdps.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=48,49,50,51,52,53 "Built target sdps"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=46,47,48,49,50,51 "Built target sdps"
 .PHONY : libsrc/sdps/src/CMakeFiles/sdps.dir/all
 
 # Build rule for subdir invocation for target.
@@ -809,7 +844,7 @@ libsrc/sdps/src/CMakeFiles/sdps.dir/clean:
 libsrc/xadcps/src/CMakeFiles/xadcps.dir/all:
 	$(MAKE) $(MAKESILENT) -f libsrc/xadcps/src/CMakeFiles/xadcps.dir/build.make libsrc/xadcps/src/CMakeFiles/xadcps.dir/depend
 	$(MAKE) $(MAKESILENT) -f libsrc/xadcps/src/CMakeFiles/xadcps.dir/build.make libsrc/xadcps/src/CMakeFiles/xadcps.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=54,55,56,57,58 "Built target xadcps"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=52,53,54,55,56 "Built target xadcps"
 .PHONY : libsrc/xadcps/src/CMakeFiles/xadcps.dir/all
 
 # Build rule for subdir invocation for target.
@@ -835,12 +870,12 @@ libsrc/xadcps/src/CMakeFiles/xadcps.dir/clean:
 libsrc/standalone/src/CMakeFiles/xilstandalone.dir/all:
 	$(MAKE) $(MAKESILENT) -f libsrc/standalone/src/CMakeFiles/xilstandalone.dir/build.make libsrc/standalone/src/CMakeFiles/xilstandalone.dir/depend
 	$(MAKE) $(MAKESILENT) -f libsrc/standalone/src/CMakeFiles/xilstandalone.dir/build.make libsrc/standalone/src/CMakeFiles/xilstandalone.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96 "Built target xilstandalone"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96 "Built target xilstandalone"
 .PHONY : libsrc/standalone/src/CMakeFiles/xilstandalone.dir/all
 
 # Build rule for subdir invocation for target.
 libsrc/standalone/src/CMakeFiles/xilstandalone.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles 38
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles 36
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libsrc/standalone/src/CMakeFiles/xilstandalone.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles 0
 .PHONY : libsrc/standalone/src/CMakeFiles/xilstandalone.dir/rule
@@ -879,6 +914,32 @@ xiltimer: libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/rule
 libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/clean:
 	$(MAKE) $(MAKESILENT) -f libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/build.make libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/clean
 .PHONY : libsrc/xiltimer/src/CMakeFiles/xiltimer.dir/clean
+
+#=============================================================================
+# Target rules for target libsrc/xilffs/src/CMakeFiles/xilffs.dir
+
+# All Build rule for target.
+libsrc/xilffs/src/CMakeFiles/xilffs.dir/all:
+	$(MAKE) $(MAKESILENT) -f libsrc/xilffs/src/CMakeFiles/xilffs.dir/build.make libsrc/xilffs/src/CMakeFiles/xilffs.dir/depend
+	$(MAKE) $(MAKESILENT) -f libsrc/xilffs/src/CMakeFiles/xilffs.dir/build.make libsrc/xilffs/src/CMakeFiles/xilffs.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles --progress-num=57,58,59,60 "Built target xilffs"
+.PHONY : libsrc/xilffs/src/CMakeFiles/xilffs.dir/all
+
+# Build rule for subdir invocation for target.
+libsrc/xilffs/src/CMakeFiles/xilffs.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 libsrc/xilffs/src/CMakeFiles/xilffs.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/CMakeFiles 0
+.PHONY : libsrc/xilffs/src/CMakeFiles/xilffs.dir/rule
+
+# Convenience name for target.
+xilffs: libsrc/xilffs/src/CMakeFiles/xilffs.dir/rule
+.PHONY : xilffs
+
+# clean rule for target.
+libsrc/xilffs/src/CMakeFiles/xilffs.dir/clean:
+	$(MAKE) $(MAKESILENT) -f libsrc/xilffs/src/CMakeFiles/xilffs.dir/build.make libsrc/xilffs/src/CMakeFiles/xilffs.dir/clean
+.PHONY : libsrc/xilffs/src/CMakeFiles/xilffs.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

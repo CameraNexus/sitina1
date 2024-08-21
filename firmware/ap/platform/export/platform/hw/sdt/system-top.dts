@@ -27,7 +27,6 @@
 		serial0 = &coresight;
 		spi0 = &qspi;
 		i2c0 = &i2c0;
-		i2c1 = &i2c1;
 	};
 	cpus_a9: cpus-a9@0 {
 		compatible = "cpus,cluster";
@@ -48,7 +47,6 @@
 			      <0xe000a000 &gpio0 0xe000a000 0x1000>, 
 			      <0xf8900000 &ps7_gpv_0 0xf8900000 0x100000>, 
 			      <0xe0004000 &i2c0 0xe0004000 0x1000>, 
-			      <0xe0005000 &i2c1 0xe0005000 0x1000>, 
 			      <0xf8f01000 &intc 0xf8f01000 0x1000>, 
 			      <0xe0200000 &ps7_iop_bus_config_0 0xe0200000 0x1000>, 
 			      <0xf8f02000 &L2 0xf8f02000 0x1000>, 

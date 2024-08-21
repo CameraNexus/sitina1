@@ -37,9 +37,6 @@ ps7_gpv_0:
 ps7_i2c_0:
 - ps7_i2c
 - iicps
-ps7_i2c_1:
-- ps7_i2c
-- iicps
 ps7_intc_dist_0:
 - ps7_intc_dist
 - scugic

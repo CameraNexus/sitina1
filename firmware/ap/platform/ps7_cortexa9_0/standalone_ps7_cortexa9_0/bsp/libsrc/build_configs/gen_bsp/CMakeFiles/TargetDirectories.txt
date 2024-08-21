@@ -168,3 +168,16 @@
 /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src/core/scutimer/CMakeFiles/install.dir
 /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src/core/scutimer/CMakeFiles/install/local.dir
 /home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xiltimer/src/core/scutimer/CMakeFiles/install/strip.dir
+/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xilffs/src/CMakeFiles/xilffs.dir
+/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xilffs/src/CMakeFiles/edit_cache.dir
+/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xilffs/src/CMakeFiles/rebuild_cache.dir
+/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xilffs/src/CMakeFiles/list_install_components.dir
+/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xilffs/src/CMakeFiles/install.dir
+/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xilffs/src/CMakeFiles/install/local.dir
+/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xilffs/src/CMakeFiles/install/strip.dir
+/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xilffs/src/include/CMakeFiles/edit_cache.dir
+/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xilffs/src/include/CMakeFiles/rebuild_cache.dir
+/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xilffs/src/include/CMakeFiles/list_install_components.dir
+/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xilffs/src/include/CMakeFiles/install.dir
+/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xilffs/src/include/CMakeFiles/install/local.dir
+/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/libsrc/build_configs/gen_bsp/libsrc/xilffs/src/include/CMakeFiles/install/strip.dir

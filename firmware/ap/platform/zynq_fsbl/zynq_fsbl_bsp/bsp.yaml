@@ -106,10 +106,6 @@ drv_info:
     driver: iicps
     ip_name: ps7_i2c
     path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/iicps_v3_18
-  ps7_i2c_1:
-    driver: iicps
-    ip_name: ps7_i2c
-    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/iicps_v3_18
   ps7_intc_dist_0:
     driver: scugic
     ip_name: ps7_intc_dist

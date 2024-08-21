@@ -106,10 +106,6 @@ drv_info:
     driver: iicps
     ip_name: ps7_i2c
     path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/iicps_v3_18
-  ps7_i2c_1:
-    driver: iicps
-    ip_name: ps7_i2c
-    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/iicps_v3_18
   ps7_intc_dist_0:
     driver: scugic
     ip_name: ps7_intc_dist
@@ -144,6 +140,10 @@ drv_info:
 lib_info:
   xiltimer:
     path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xiltimer_v1_3
+  xilffs:
+    path: /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilffs_v5_1
+    examples:
+      xilffs_polled_example.c: []
 lib_config:
   xiltimer:
     XILTIMER_en_interval_timer:
@@ -176,3 +176,138 @@ lib_config:
       - None
       - ps7_scutimer_0
       description: This parameter is used to select specific timer for tick functionality
+  xilffs:
+    XILFFS_enable_exfat:
+      name: XILFFS_enable_exfat
+      permission: read_write
+      type: boolean
+      value: 'false'
+      default: 'false'
+      options:
+      - 'true'
+      - 'false'
+      description: 0:Disable exFAT, 1:Enable exFAT(Also Enables LFN)
+    XILFFS_enable_multi_partition:
+      name: XILFFS_enable_multi_partition
+      permission: read_write
+      type: boolean
+      value: 'false'
+      default: 'false'
+      options:
+      - 'true'
+      - 'false'
+      description: 0:Single partition, 1:Enable multiple partition
+    XILFFS_fs_interface:
+      name: XILFFS_fs_interface
+      permission: read_write
+      type: integer
+      value: '1'
+      default: '1'
+      options:
+      - '1'
+      - '2'
+      description: Enables file system with selected interface. Enter 1 for SD. Enter
+        2 for RAM
+    XILFFS_num_logical_vol:
+      name: XILFFS_num_logical_vol
+      permission: read_write
+      type: integer
+      value: '2'
+      default: '2'
+      options: []
+      description: Number of volumes (logical drives, from 1 to 10) to be used.
+    XILFFS_ramfs_size:
+      name: XILFFS_ramfs_size
+      permission: read_write
+      type: integer
+      value: '3145728'
+      default: '3145728'
+      options: []
+      description: RAM FS size
+    XILFFS_ramfs_start_addr:
+      name: XILFFS_ramfs_start_addr
+      permission: read_write
+      type: string
+      value: ''
+      default: ''
+      options: []
+      description: RAM FS start address
+    XILFFS_read_only:
+      name: XILFFS_read_only
+      permission: read_write
+      type: boolean
+      value: 'false'
+      default: 'false'
+      options:
+      - 'true'
+      - 'false'
+      description: Enables the file system in Read_Only mode if true. ZynqMP fsbl
+        will set this to true
+    XILFFS_set_fs_rpath:
+      name: XILFFS_set_fs_rpath
+      permission: read_write
+      type: integer
+      value: '0'
+      default: '0'
+      options:
+      - '0'
+      - '1'
+      - '2'
+      description: Configures relative path feature (valid values 0 to 2).
+    XILFFS_use_chmod:
+      name: XILFFS_use_chmod
+      permission: read_write
+      type: boolean
+      value: 'false'
+      default: 'false'
+      options:
+      - 'true'
+      - 'false'
+      description: Enables use of CHMOD functionality for changing attributes (valid
+        only with read_only set to false)
+    XILFFS_use_lfn:
+      name: XILFFS_use_lfn
+      permission: read_write
+      type: integer
+      value: '0'
+      default: '0'
+      options:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      description: 'Enables the Long File Name(LFN) support if non-zero. Disabled
+        by default: 0, LFN with static working buffer: 1, Dynamic working buffer:
+        2 (on stack) or 3 (on heap)'
+    XILFFS_use_mkfs:
+      name: XILFFS_use_mkfs
+      permission: read_write
+      type: boolean
+      value: 'true'
+      default: 'true'
+      options:
+      - 'true'
+      - 'false'
+      description: Disable(0) or Enable(1) f_mkfs function. ZynqMP fsbl will set this
+        to false
+    XILFFS_use_strfunc:
+      name: XILFFS_use_strfunc
+      permission: read_write
+      type: integer
+      value: '0'
+      default: '0'
+      options:
+      - '0'
+      - '1'
+      - '2'
+      description: Enables the string functions (valid values 0 to 2).
+    XILFFS_word_access:
+      name: XILFFS_word_access
+      permission: read_write
+      type: boolean
+      value: 'true'
+      default: 'true'
+      options:
+      - 'true'
+      - 'false'
+      description: Enables word access for misaligned memory access platform

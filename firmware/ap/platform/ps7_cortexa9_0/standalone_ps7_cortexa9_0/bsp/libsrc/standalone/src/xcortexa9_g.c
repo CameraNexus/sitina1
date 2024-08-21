@@ -2,6 +2,6 @@
 
 XCortexa9_Config XCortexa9_ConfigTable[] __attribute__ ((section (".drvcfg_sec"))) = {
 	{
-		0x27bc86bf  /* xlnx,cpu-clk-freq-hz */
+		0x13de4360  /* xlnx,cpu-clk-freq-hz */
 	}
 };
