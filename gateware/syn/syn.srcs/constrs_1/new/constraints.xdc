@@ -19,6 +19,13 @@ set_property IOSTANDARD DIFF_HSTL_I_18 [get_ports {DSI_HS_DN[1]}]
 set_property IOSTANDARD DIFF_HSTL_I_18 [get_ports DSI_HS_CP]
 set_property IOSTANDARD DIFF_HSTL_I_18 [get_ports DSI_HS_CN]
 
+set_property SLEW FAST [get_ports {DSI_HS_DP[0]}]
+set_property SLEW FAST [get_ports {DSI_HS_DN[0]}]
+set_property SLEW FAST [get_ports {DSI_HS_DP[1]}]
+set_property SLEW FAST [get_ports {DSI_HS_DN[1]}]
+set_property SLEW FAST [get_ports DSI_HS_CP]
+set_property SLEW FAST [get_ports DSI_HS_CN]
+
 set_property PACKAGE_PIN W19 [get_ports DSI_LP_CN]
 set_property PACKAGE_PIN U19 [get_ports DSI_LP_CP]
 set_property PACKAGE_PIN N18 [get_ports {DSI_LP_DP[1]}]
@@ -49,6 +56,9 @@ set_property IOSTANDARD LVCMOS33 [get_ports TCON_STROBE]
 set_property IOSTANDARD LVCMOS33 [get_ports TCON_V1]
 set_property IOSTANDARD LVCMOS33 [get_ports TCON_V2]
 set_property IOSTANDARD LVCMOS33 [get_ports TCON_V23]
+set_property SLEW FAST [get_ports TCON_RG]
+set_property SLEW FAST [get_ports TCON_H2]
+set_property SLEW FAST [get_ports TCON_H1]
 
 set_property PACKAGE_PIN U14 [get_ports DVP_PCLK]
 set_property PACKAGE_PIN Y16 [get_ports DVP_HSYNC]
@@ -88,4 +98,30 @@ set_property IOSTANDARD LVCMOS18 [get_ports {DVP_D[13]}]
 set_property PACKAGE_PIN B19 [get_ports VAB_PWM]
 set_property IOSTANDARD LVCMOS33 [get_ports VAB_PWM]
 
+set_property PACKAGE_PIN D20 [get_ports I2C_PL0_SCL]
+set_property PACKAGE_PIN D19 [get_ports I2C_PL0_SDA]
+set_property PACKAGE_PIN E19 [get_ports I2C_PL1_SCL]
+set_property PACKAGE_PIN F20 [get_ports I2C_PL1_SDA]
+set_property IOSTANDARD LVCMOS33 [get_ports I2C_PL0_SCL]
+set_property IOSTANDARD LVCMOS33 [get_ports I2C_PL0_SDA]
+set_property IOSTANDARD LVCMOS33 [get_ports I2C_PL1_SCL]
+set_property IOSTANDARD LVCMOS33 [get_ports I2C_PL1_SDA]
+
 create_clock -period 37.040 -name dvp_clock -waveform {0.000 18.520} [get_ports DVP_PCLK]
+
+set_max_delay -from [get_pins {system/mu_dsilite/dsi_outbuf_reg[0]/C}] -to [get_pins {dphy/genblk1[0].data_serdes/D1}] 2
+set_max_delay -from [get_pins {system/mu_dsilite/dsi_outbuf_reg[1]/C}] -to [get_pins {dphy/genblk1[0].data_serdes/D2}] 2
+set_max_delay -from [get_pins {system/mu_dsilite/dsi_outbuf_reg[2]/C}] -to [get_pins {dphy/genblk1[0].data_serdes/D3}] 2
+set_max_delay -from [get_pins {system/mu_dsilite/dsi_outbuf_reg[3]/C}] -to [get_pins {dphy/genblk1[0].data_serdes/D4}] 2
+set_max_delay -from [get_pins {system/mu_dsilite/dsi_outbuf_reg[4]/C}] -to [get_pins {dphy/genblk1[0].data_serdes/D5}] 2
+set_max_delay -from [get_pins {system/mu_dsilite/dsi_outbuf_reg[5]/C}] -to [get_pins {dphy/genblk1[0].data_serdes/D6}] 2
+set_max_delay -from [get_pins {system/mu_dsilite/dsi_outbuf_reg[6]/C}] -to [get_pins {dphy/genblk1[0].data_serdes/D7}] 2
+set_max_delay -from [get_pins {system/mu_dsilite/dsi_outbuf_reg[7]/C}] -to [get_pins {dphy/genblk1[0].data_serdes/D8}] 2
+set_max_delay -from [get_pins {system/mu_dsilite/dsi_outbuf_reg[8]/C}] -to [get_pins {dphy/genblk1[1].data_serdes/D1}] 2
+set_max_delay -from [get_pins {system/mu_dsilite/dsi_outbuf_reg[9]/C}] -to [get_pins {dphy/genblk1[1].data_serdes/D2}] 2
+set_max_delay -from [get_pins {system/mu_dsilite/dsi_outbuf_reg[10]/C}] -to [get_pins {dphy/genblk1[1].data_serdes/D3}] 2
+set_max_delay -from [get_pins {system/mu_dsilite/dsi_outbuf_reg[11]/C}] -to [get_pins {dphy/genblk1[1].data_serdes/D4}] 2
+set_max_delay -from [get_pins {system/mu_dsilite/dsi_outbuf_reg[12]/C}] -to [get_pins {dphy/genblk1[1].data_serdes/D5}] 2
+set_max_delay -from [get_pins {system/mu_dsilite/dsi_outbuf_reg[13]/C}] -to [get_pins {dphy/genblk1[1].data_serdes/D6}] 2
+set_max_delay -from [get_pins {system/mu_dsilite/dsi_outbuf_reg[14]/C}] -to [get_pins {dphy/genblk1[1].data_serdes/D7}] 2
+set_max_delay -from [get_pins {system/mu_dsilite/dsi_outbuf_reg[15]/C}] -to [get_pins {dphy/genblk1[1].data_serdes/D8}] 2
