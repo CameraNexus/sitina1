@@ -1,6 +1,6 @@
 //
 // Sitina1
-// Copyright 2023 Wenting Zhang
+// Copyright 2024 Wenting Zhang
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,22 +23,10 @@
 #pragma once
 
 #include <stdint.h>
+#include "uilib.h"
 
-#define DISP_WIDTH  (480)
-#define DISP_HEIGHT (480)
-#define AOND_WIDTH  (128)
-#define AOND_HEIGHT (128)
-
-// Power control
-void pal_disp_init(void);
-void pal_disp_deinit(void);
-
-void pal_disp_enter_sleep(void);
-void pal_disp_exit_sleep(void);
-
-// Framebuffer operation
-uint32_t *pal_disp_get_buffer(void);
-void pal_disp_return_buffer(uint32_t *buf);
-
-// 2nd always-on display
-void pal_disp_update_aondisp(uint8_t *buf);
+void aondisp_clear(uint8_t cl);
+void aondisp_update(void);
+void aondisp_set_font(const UIFONT *font);
+void aondisp_draw_string(uint32_t x, uint32_t y, char *string, uint32_t maxlen,
+    uint32_t cl);

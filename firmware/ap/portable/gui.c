@@ -26,6 +26,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include "pal_power.h"
+#include "pal_input.h"
 #include "uilib.h"
 #include "gui.h"
 #include "assets/assets.h"
@@ -430,8 +431,14 @@ void gui_init(void) {
 
 CAP_ACT gui_run_capture_screen(bool redraw) {
     bool update_needed = false;
+    CAP_ACT action = CAP_ACT_NOTHING;
+
+    // Capture screen internal states
+    // A forced redraw should bring these back to correct states
+    static bool is_highlighting = false;
 
     // TODO: GUI logic!
+    uint32_t btn = pal_input_get_keys();
 
     if (redraw || update_needed) {
         uilib_mark_update();
@@ -439,7 +446,7 @@ CAP_ACT gui_run_capture_screen(bool redraw) {
     // Draw need to be called
     uilib_draw(&capture_screen_drawlist);
 
-    return CAP_ACT_NOTHING;
+    return action;
 }
 
 PB_ACT gui_run_playback_screen(bool redraw) {

@@ -1,6 +1,6 @@
 //
 // Sitina1
-// Copyright 2023 Wenting Zhang
+// Copyright 2024 Wenting Zhang
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,21 +24,18 @@
 
 #include <stdint.h>
 
-#define DISP_WIDTH  (480)
-#define DISP_HEIGHT (480)
-#define AOND_WIDTH  (128)
-#define AOND_HEIGHT (128)
+// Define meta data
+typedef struct {
+    uint8_t val; // ISO speed
+    uint8_t cdsgain; // 0 = -3dB, 4 = 0dB, 6 = +3dB, 7 = +6dB
+    uint16_t vgagain; // 6-42dB in 0.0358dB steps
+    char name[6];
+} ISO_SETPOINT;
 
-// Power control
-void pal_disp_init(void);
-void pal_disp_deinit(void);
+typedef struct {
+    uint32_t time; // time in ns
+    char name[8];
+} SHUT_SETPOINT;
 
-void pal_disp_enter_sleep(void);
-void pal_disp_exit_sleep(void);
-
-// Framebuffer operation
-uint32_t *pal_disp_get_buffer(void);
-void pal_disp_return_buffer(uint32_t *buf);
-
-// 2nd always-on display
-void pal_disp_update_aondisp(uint8_t *buf);
+extern const ISO_SETPOINT iso_setpoints;
+extern const ISO_SETPOINT shut_setpoints;

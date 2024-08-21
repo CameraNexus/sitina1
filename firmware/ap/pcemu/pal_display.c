@@ -30,10 +30,13 @@ static SDL_Renderer *renderer = NULL;
 static SDL_Texture *texture = NULL;
 static SDL_Rect textureRect;
 
-void pal_disp_init() {
-    window = SDL_CreateWindow("Sitina", 
+// Only exist on this implementation, not part of public API
+uint32_t pal_disp_fb[DISP_WIDTH * DISP_HEIGHT];
+
+void pal_disp_init(void) {
+    window = SDL_CreateWindow("Sitina",
             SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
-            DISP_WIDTH, DISP_HEIGHT, SDL_SWSURFACE);
+            DISP_WIDTH + AOND_WIDTH, DISP_HEIGHT, SDL_SWSURFACE);
 
     if (window == NULL) {
         fprintf(stderr, "Unable to create window\n");
@@ -43,70 +46,62 @@ void pal_disp_init() {
     renderer = SDL_CreateRenderer(window, -1, 
             SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
-    if (renderer == NULL)
-    {
+    if (renderer == NULL) {
         fprintf(stderr, "Unable to create renderer\n");
         return;
     }
 
-    screen = SDL_CreateRGBSurface(SDL_SWSURFACE, DISP_WIDTH, DISP_HEIGHT, 32,
-            0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
+    screen = SDL_CreateRGBSurface(SDL_SWSURFACE, DISP_WIDTH + AOND_WIDTH,
+            DISP_HEIGHT, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000);
 
     textureRect.x = textureRect.y = 0;
-    textureRect.w = DISP_WIDTH; 
+    textureRect.w = DISP_WIDTH + AOND_WIDTH;
     textureRect.h = DISP_HEIGHT;
 
     texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, 
-            SDL_TEXTUREACCESS_STREAMING, DISP_WIDTH, DISP_HEIGHT);
+            SDL_TEXTUREACCESS_STREAMING, DISP_WIDTH + AOND_WIDTH, DISP_HEIGHT);
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "0");
 
-    if (screen == NULL || texture == NULL)
-    {
+    if (screen == NULL || texture == NULL) {
         fprintf(stderr, "Unable to allocate framebuffer or texture\n");
         return;
     }
 
-    SDL_FillRect(screen, &textureRect, 0xFF0000FF);
-    pal_disp_return_buffer(screen->pixels);
+    memset(pal_disp_fb, 0, sizeof(pal_disp_fb));
+    pal_disp_return_buffer(pal_disp_fb);
 }
 
-void pal_disp_deinit() {
-    if (screen != NULL)
-    {
+void pal_disp_deinit(void) {
+    if (screen != NULL) {
         SDL_FreeSurface(screen);
     }
 
-    if (texture)
-    {
+    if (texture) {
 	    SDL_DestroyTexture(texture);
     }
 
-    if (renderer)
-    {
+    if (renderer) {
         SDL_DestroyRenderer(renderer);
     }
 
-    if (window)
-    {
+    if (window) {
         SDL_DestroyWindow(window);
     }
 }
 
-void pal_disp_enter_sleep() {
+void pal_disp_enter_sleep(void) {
     printf("pal_disp: enter sleep\n");
 }
 
-void pal_disp_exit_sleep() {
+void pal_disp_exit_sleep(void) {
     printf("pal_disp: exit sleep\n");
 }
 
-uint32_t *pal_disp_get_buffer() {
-    return screen->pixels;
+uint32_t *pal_disp_get_buffer(void) {
+    return (uint32_t *)pal_disp_fb;
 }
 
-void pal_disp_return_buffer(uint32_t *buf) {
-    assert(screen->pixels == buf);
-
+static void pal_disp_render_copy(void) {
 	void *texturePixels;
 	int texturePitch;
 
@@ -114,12 +109,12 @@ void pal_disp_return_buffer(uint32_t *buf) {
 	memset(texturePixels, 0, textureRect.y * texturePitch);
 	uint8_t *pixels = (uint8_t *)texturePixels + textureRect.y * texturePitch;
 	uint8_t *src = (uint8_t *)screen->pixels;
-	int leftPitch = textureRect.x << 2;
-	int rightPitch = texturePitch - ((textureRect.x + textureRect.w) << 2);
-	for (int y = 0; y < textureRect.h; y++, src += screen->pitch)
-	{
+	int leftPitch = textureRect.x * 4;
+	int rightPitch = texturePitch - ((textureRect.x + textureRect.w) * 4);
+	for (int y = 0; y < textureRect.h; y++, src += screen->pitch) {
 		memset(pixels, 0, leftPitch); pixels += leftPitch;
-		memcpy(pixels, src, DISP_WIDTH << 2); pixels += DISP_WIDTH << 2;
+		memcpy(pixels, src, (DISP_WIDTH + AOND_WIDTH) * 4);
+        pixels += (DISP_WIDTH + AOND_WIDTH) * 4;
 		memset(pixels, 0, rightPitch); pixels += rightPitch;
 	}
 	memset(pixels, 0, textureRect.y * texturePitch);
@@ -128,4 +123,39 @@ void pal_disp_return_buffer(uint32_t *buf) {
 	SDL_RenderClear(renderer);
 	SDL_RenderCopy(renderer, texture, NULL, NULL);
 	SDL_RenderPresent(renderer);
+}
+
+void pal_disp_return_buffer(uint32_t *buf) {
+    assert((uint32_t *)pal_disp_fb == buf);
+
+    // First copy fb into screen buffer
+    uint32_t *rdptr = buf;
+    uint32_t *wrptr = screen->pixels;
+    for (int y = 0; y < DISP_HEIGHT; y++) {
+        memcpy(wrptr, rdptr, DISP_WIDTH * 4);
+        //memset(wrptr, 0xff, DISP_WIDTH * 4);
+        rdptr += DISP_WIDTH;
+        wrptr += (DISP_WIDTH + AOND_WIDTH);
+    }
+
+    pal_disp_render_copy();
+}
+
+void pal_disp_update_aondisp(uint8_t *buf) {
+    uint8_t *rdptr = buf;
+    uint32_t *wrptr = screen->pixels;
+    wrptr += DISP_WIDTH;
+    for (int y = 0; y < AOND_HEIGHT; y++) {
+        for (int x = 0; x < AOND_WIDTH / 8; x++) {
+            uint8_t pix = *rdptr++;
+            for (int z = 0; z < 8; z++) {
+                uint32_t cl = (pix & 0x1) ? 0xFFBBBBBB : 0xFF111111;
+                *wrptr++ = cl;
+                pix >>= 1;
+            }
+        }
+        wrptr += DISP_WIDTH;
+    }
+
+    pal_disp_render_copy();
 }

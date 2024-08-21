@@ -31,6 +31,7 @@
 #include "pal_input.h"
 #include "pal_timer.h"
 #include "uilib.h"
+#include "aondisp.h"
 #include "gui.h"
 
 void portable_main(void) {
@@ -44,14 +45,19 @@ void portable_main(void) {
     uilib_init();
     //gui_init();
     //gui_show_preview_screen();
+    aondisp_clear(0x00);
+    aondisp_set_font(&font_12x20);
+    aondisp_draw_string(0, 0, "RUNNING", 10, 1);
+    aondisp_update();
 
-    uint32_t *disp_buf = pal_disp_get_buffer();
+    uint32_t *disp_buf;
 
     //pal_cam_start();
     uilib_mark_update();
 
     //uint16_t *cam_buf;
     while(1) {
+        disp_buf = pal_disp_get_buffer();
         uilib_set_framebuffer((uint8_t *)disp_buf);
         
         gui_run_capture_screen(false);

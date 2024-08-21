@@ -99,6 +99,8 @@ static uint32_t uilib_getpixel(const uint8_t *fb, UIPIXFMT pixfmt, uint32_t w,
     case PIXFMT_XRGB8888:
         rgb = fb32[y * w + x];
         break;
+    default:
+        return 0;
     }
     return COLOR_RGB2FB(rgb);
 }
@@ -148,11 +150,12 @@ static uint32_t uilib_draw_char(uint32_t x, uint32_t y, uint32_t chr,
         break;
     default:
         // TODO
+        return 0;
         break;
     }
     if (current_font->pixfmt == PIXFMT_Y1) {
         for (uint32_t yy = 0; yy < h; yy++) {
-            uint8_t byte;
+            uint8_t byte = 0; // not necessary, to silence warning
             for (uint32_t xx = 0; xx < dw; xx++) {
                 if (xx % 8 == 0) {
                     byte = gbuf[yy * bw / 8 + xx / 8];
@@ -160,8 +163,9 @@ static uint32_t uilib_draw_char(uint32_t x, uint32_t y, uint32_t chr,
                 else {
                     byte >>= 1;
                 }
-                if (byte & 0x1)
+                if (byte & 0x1) {
                     uilib_putpixel(x + xx, y + yy, fgcl);
+                }
                 else if (!transparent) {
                     uilib_putpixel(x + xx, y + yy, bgcl);
                 }
