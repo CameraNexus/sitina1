@@ -28,16 +28,21 @@
 #include <stdbool.h>
 #include "i2c.h"
 #include "power.h"
+#include "lcd.h"
+#include "key.h"
 #include "mcusvc.h"
 
 static enum {
     STATE_IDLE,
     STATE_HDR_RX_WAIT,
-    STATE_FB_RX_WAIT
+    STATE_FB_RX_WAIT,
+	STATE_TX_WAIT
 } state;
 
-static uint8_t rx_buffer[64];
-extern I2C_HandleTypeDef hi2c2;
+static uint8_t rx_buffer[2048];
+extern I2C_HandleTypeDef hi2c1;
+
+#define MCUSVC_I2C			&hi2c1
 
 #define CMD_NOP             0x00
 #define CMD_SET_LCD_PWR     0x01
@@ -52,14 +57,15 @@ void mcusvc_init(void) {
 }
 
 void mcusvc_tick(void) {
+	HAL_StatusTypeDef result;
     switch (state) {
     case STATE_IDLE:
-        if (HAL_I2C_Slave_Receive_IT(&hi2c2, rx_buffer, 5) == HAL_OK) {
+        if (HAL_I2C_Slave_Receive_DMA(MCUSVC_I2C, rx_buffer, 5) == HAL_OK) {
             state = STATE_HDR_RX_WAIT;
         }
         break;
     case STATE_HDR_RX_WAIT:
-        if (HAL_I2C_GetState(&hi2c2) == HAL_I2C_STATE_READY) {
+        if (HAL_I2C_GetState(MCUSVC_I2C) == HAL_I2C_STATE_READY) {
             // Buffer ready
             // By default enter IDLE state
             state = STATE_IDLE;
@@ -79,8 +85,55 @@ void mcusvc_tick(void) {
             case CMD_SET_LCD_BL:
                 power_lcd_set_brightness(rx_buffer[1]);
                 break;
+            case CMD_FRAMEBUF_XFER:
+            	result = HAL_I2C_Slave_Receive_DMA(MCUSVC_I2C, rx_buffer, 2048);
+            	assert(result == HAL_OK);
+            	state = STATE_FB_RX_WAIT;
+            	break;
+            case CMD_GET_BUTTONS: {
+            	uint16_t btn = key_get_buttons();
+            	rx_buffer[1] = btn & 0xff;
+            	rx_buffer[2] = (btn >> 8) & 0xff;
+            	rx_buffer[3] = 0x00;
+            	rx_buffer[4] = 0x00;
+            	result = HAL_I2C_Slave_Transmit_DMA(MCUSVC_I2C, rx_buffer, 5);
+            	assert(result == HAL_OK);
+            	state = STATE_TX_WAIT;
+            	}
+            	break;
+            case CMD_GET_ROTENC: {
+            	int8_t rotenc = key_get_rotenc();
+            	key_set_rotenc(0);
+            	*(int8_t *)&rx_buffer[1] = rotenc;
+            	rx_buffer[2] = 0x00;
+            	rx_buffer[3] = 0x00;
+            	rx_buffer[4] = 0x00;
+            	result = HAL_I2C_Slave_Transmit_DMA(MCUSVC_I2C, rx_buffer, 5);
+				assert(result == HAL_OK);
+				state = STATE_TX_WAIT;
+            	}
+            	break;
             }
         }
         break;
+    case STATE_FB_RX_WAIT:
+    	if (HAL_I2C_GetState(MCUSVC_I2C) == HAL_I2C_STATE_READY) {
+    		uint16_t *wrptr = (uint16_t *)&framebuffer[2];
+    		uint16_t *rdptr = (uint16_t *)rx_buffer;
+    		for (int i = 0; i < 128; i++) {
+    			for (int j = 0; j < 8; j++) {
+    				*wrptr++ = *rdptr++;
+    			}
+    			wrptr++; // skip 2 bytes on WR
+    		}
+    		lcd_schedule_update();
+    		state = STATE_IDLE;
+    	}
+    	break;
+    case STATE_TX_WAIT:
+    	if (HAL_I2C_GetState(MCUSVC_I2C) == HAL_I2C_STATE_READY) {
+			state = STATE_IDLE;
+		}
+		break;
     }
 }

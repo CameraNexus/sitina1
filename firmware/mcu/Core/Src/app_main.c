@@ -69,6 +69,12 @@ void app_init(void) {
     lcd_stby_update();
     key_init();
     mcusvc_init();
+    power_lcd_set_brightness(10);
+    power_lcd_on();
+    HAL_Delay(100);
+    power_lcd_off();
+    HAL_Delay(100);
+    power_lcd_on();
 }
 
 void app_tick(void) {

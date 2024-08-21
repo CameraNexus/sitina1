@@ -193,7 +193,6 @@ static void power_lcd_bl_off(void) {
 }
 
 void power_lcd_on(void) {
-    // Doesn't actually turn ON the LCD, just prepare it to be turned on by Zynq
     HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
     power_lcd_bl_on();
 }

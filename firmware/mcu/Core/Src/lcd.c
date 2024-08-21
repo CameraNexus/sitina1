@@ -46,7 +46,7 @@
 extern SPI_HandleTypeDef hspi1;
 extern DMA_HandleTypeDef hdma_spi1_tx;
 
-static uint8_t framebuffer[18*128+2];
+uint8_t framebuffer[18*128+2];
 static uint8_t rx[2];
 static int vcom;
 

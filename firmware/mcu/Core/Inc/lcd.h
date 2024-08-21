@@ -25,6 +25,8 @@
 //
 #pragma once
 
+extern uint8_t framebuffer[18*128+2];
+
 void lcd_init(void);
 void lcd_set_pixel(int x, int y, int c);
 void lcd_disp_char(int x, int y, char c);
