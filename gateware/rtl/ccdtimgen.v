@@ -109,22 +109,22 @@ module ccdtimgen(
 
     wire tgen_en;
     wire tgen_rst;
-    wire tgen_embed_eshut;
-    wire tgen_start_eshut;
+    wire tgen_embed_eshut_pre;
+    wire tgen_start_eshut_pre;
     wire [CNTW-1:0] delay_htime;
     wire [CNTW-1:0] delay_vtime;
-    wire [3:0] vskip;
+    wire [3:0] vskip_pre;
     wire [CNTW-1:0] eshut_line_pre;
     wire tgen_ccd_oen;
     wire tgen_sync_oen;
 
     mu_dbsync #(1) tgen_en_sync (clk, clk_ccd, tgen_en_apb_clk, tgen_en);
     mu_dbsync #(1) tgen_rst_sync (clk, clk_ccd, tgen_rst_apb_clk, tgen_rst);
-    mu_dbsync #(1) tgen_embed_eshut_sync (clk, clk_ccd, tgen_embed_eshut_apb_clk, tgen_embed_eshut);
-    mu_dbsync #(1) tgen_start_eshut_sync (clk, clk_ccd, tgen_start_eshut_apb_clk, tgen_start_eshut);
+    mu_dbsync #(1) tgen_embed_eshut_sync (clk, clk_ccd, tgen_embed_eshut_apb_clk, tgen_embed_eshut_pre);
+    mu_dbsync #(1) tgen_start_eshut_sync (clk, clk_ccd, tgen_start_eshut_apb_clk, tgen_start_eshut_pre);
     mu_dbsync #(CNTW) delay_htime_sync (clk, clk_ccd, delay_htime_apb_clk, delay_htime);
     mu_dbsync #(CNTW) delay_vtime_sync (clk, clk_ccd, delay_vtime_apb_clk, delay_vtime);
-    mu_dbsync #(4) vskip_sync (clk, clk_ccd, vskip_apb_clk, vskip);
+    mu_dbsync #(4) vskip_sync (clk, clk_ccd, vskip_apb_clk, vskip_pre);
     mu_dbsync #(CNTW) eshut_line_sync (clk, clk_ccd, eshut_line_apb_clk, eshut_line_pre);
     mu_dbsync #(1) tgen_ccd_oen_sync (clk, clk_ccd, tgen_ccd_oen_apb_clk, tgen_ccd_oen);
     mu_dbsync #(1) tgen_sync_oen_sync (clk, clk_ccd, tgen_sync_oen_apb_clk, tgen_sync_oen);
@@ -147,8 +147,8 @@ module ccdtimgen(
     wire [CNTW-1:0] tsd = 40 * 4; // 1-1.5-10 us
     // Resolution settings
     wire [CNTW-3:0] hpix = 2040 + 24 - 1; // Total horizontal pixel cycles
-    wire [CNTW-1:0] vpix = 2721 - 1;
-    //wire [CNTW-1:0] vpix = 20 - 1;
+    //wire [CNTW-1:0] vpix = 2721 - 1;
+    wire [CNTW-1:0] vpix = 10 - 1;
     wire [CNTW-1:0] hsw = 256;
 
     // T3P + TV3RD + TL should be dividable by 4
@@ -169,6 +169,10 @@ module ccdtimgen(
     reg [CNTW-1:0] v_cnt;
     reg [3:0] v_cnt_sub; // Counter for line skipping
 
+    // Settings need to be updated only during VSYNC
+    reg tgen_embed_eshut;
+    reg tgen_start_eshut;
+    reg [3:0] vskip;
     reg [CNTW-1:0] eshut_line;
 
     reg hsync;
@@ -194,11 +198,14 @@ module ccdtimgen(
             hsync <= 1'b0;
             vsync <= 1'b0;
 
+            tgen_embed_eshut <= tgen_embed_eshut_pre;
+            tgen_start_eshut <= tgen_start_eshut_pre;
             eshut_line <= eshut_line_pre;
+            vskip <= vskip_pre;
 
             if (tgen_en && ref_in_phase) begin
                 if (tgen_start_eshut) begin
-                    // Enter delay state
+                    // Apply eshut and wait first
                     state <= STATE_ESHUT;
                 end
                 else begin
@@ -261,10 +268,20 @@ module ccdtimgen(
                 end
                 else begin
                     // Update settings on VSYNC
+                    tgen_embed_eshut <= tgen_embed_eshut_pre;
+                    tgen_start_eshut <= tgen_start_eshut_pre;
                     eshut_line <= eshut_line_pre;
+                    vskip <= vskip_pre;
                     v_cnt <= 'd0;
                     if (tgen_en) begin
-                        state <= STATE_1STLINE;
+                        if (tgen_start_eshut_pre) begin
+                            // Apply eshut and wait first
+                            state <= STATE_ESHUT;
+                        end
+                        else begin
+                            // Starts shift out directly
+                            state <= STATE_1STLINE;
+                        end
                     end
                 end
             end

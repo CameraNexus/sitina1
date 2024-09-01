@@ -54,6 +54,7 @@
 #define CCDTG_REG_ESHUT_LINE    0x000C
 
 #define CCDTG_CTRL_VAL          ((1 << 9) | (1 << 8) | (0 << 4) | (1 << 2))
+#define CCDTG_CTRL_VAL_STILL    ((1 << 9) | (1 << 8) | (0 << 4) | (1 << 3))
 
 #define DSILITE_REG_PCTL        0x0000
 #define DSILITE_REG_DMACTL      0x0004
@@ -146,6 +147,9 @@ void testmain(void) {
         apbsim_write(CCDTG_BASE | CCDTG_REG_ESHUT_LINE, 0);
         apbsim_write(CCDTG_BASE | CCDTG_REG_CTRL, CCDTG_CTRL_VAL | 1);
         apbsim_write(DCIF_BASE | DCIF_REG_FBSWAP, 1);
+        apbsim_write(CCDTG_BASE | CCDTG_REG_DELAY_HTIME, 4 - 1);
+        apbsim_write(CCDTG_BASE | CCDTG_REG_DELAY_VTIME, 0);
+        apbsim_write(CCDTG_BASE | CCDTG_REG_CTRL, CCDTG_CTRL_VAL_STILL | 1);
         step = 1;
         break;
     case 1:
