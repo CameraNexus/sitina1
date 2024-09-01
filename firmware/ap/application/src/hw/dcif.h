@@ -29,7 +29,7 @@
 #define CAM_DMA_MAXINFLIGHT      4   // Max number of outstanding requests            
 #define CAM_VBLK        (1)
 #define CAM_VACT        (CCD_LINES - 3)
-#define CAM_HBLK        ((CCD_HBLK_LENGTH + 16) * 2)
+#define CAM_HBLK        ((CCD_HBLK_LENGTH + 16) * 2 + 15)
 #define CAM_HACT        (CCD_LINE_PIXCNT * 2)
 #define CAM_BUFSIZE     (CAM_VACT * CAM_HACT * 2)
 #define CAM_BUFALIGN    (CAM_DMA_BURSTLEN * 8)

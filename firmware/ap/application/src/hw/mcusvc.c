@@ -34,7 +34,6 @@
 #define CMD_FRAMEBUF_XFER   0x03
 #define CMD_SET_LED         0x04
 #define CMD_GET_BUTTONS     0x80
-#define CMD_GET_ROTENC      0x81
 #define CMD_GET_BAT         0x82    // {voltage[15:0], capacity[15:0]}
 #define CMD_GET_PWR         0x83    // {7'd0, is_charging, 8'd0, power[15:0]}
 
@@ -51,6 +50,8 @@ typedef struct {
 
 #define MCU_I2C             &i2c0
 #define MCU_I2C_ADDR        0x20
+
+static uint8_t rotenc_val;
 
 void mcusvc_init(void) {
     // nothing
@@ -134,18 +135,11 @@ uint32_t mcusvc_get_buttons(void) {
         PKT_SIZE, (uint8_t *)&pkt, PKT_SIZE);
     if (result < 0)
         return 0xDEADBEEF;
+    rotenc_val = *(int8_t *)(&(pkt.param4));
     return pkt.param1 | ((uint32_t)(pkt.param2) << 8) |
-        ((uint32_t)(pkt.param3) << 16) | ((uint32_t)(pkt.param4) << 24);
+        ((uint32_t)(pkt.param3) << 16);
 }
 
 int8_t mcusvc_get_rotenc(void) {
-    DATA_PKT pkt = {
-        .cmd = CMD_GET_ROTENC,
-    };
-    int result = i2c_read_payload(MCU_I2C, MCU_I2C_ADDR, (uint8_t *)&pkt,
-        PKT_SIZE, (uint8_t *)&pkt, PKT_SIZE);
-    if (result < 0)
-        return false;
-    int8_t rotenc_val = *(int8_t *)(&(pkt.param1));
     return rotenc_val;
 }

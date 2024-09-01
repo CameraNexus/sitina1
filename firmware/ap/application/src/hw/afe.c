@@ -179,8 +179,8 @@ void afe_init(void) {
     afe_write_reg(0x35, 0x00); // Disable retime for H1, H2, HLA, HLB
 
     afe_write_reg(0x38,
-            (0 << 0) | // SHDLOC
-            (20 << 8) | // SHPLOC
+            (15 << 0) | // SHDLOC
+            (35 << 8) | // SHPLOC
             (8 << 16)); // SHPWIDTH
 
     // Data output
@@ -309,6 +309,9 @@ void afe_init(void) {
 
     usleep(500);
 
+    afe_write_reg(0x07, 0x04); // CDS gain +6dB
+    afe_write_reg(0x05, 0x0f); // VGA gain +6dB
+
     // Release internal timing core reset
     afe_write_reg(0x14, 0x01);
 
@@ -338,9 +341,7 @@ void afe_start(void) {
 }
 
 void afe_debug(uint32_t val) {
-    afe_set_conf_reg(R_VSEQ, 0, 0x22,
-        ((val) << 0) | // CLPOB toggle position 1
-        ((val + 16) << 13)); // CLPOB toggle position 2
+    afe_write_reg(0x05, val);
 }
 
 void afe_stop(void) {
@@ -354,14 +355,7 @@ void afe_power_down(void) {
     //afe_set_reg(AFE_REG_STANDBY, 0x3, true);
 }
 
-void afe_switch_to_draft(void) {
-
-}
-
-void afe_switch_to_still(void) {
-
-}
-
-void afe_capture_finish(void) {
-    
+void afe_set_gain(uint32_t cds_gain, uint32_t vga_gain) {
+    afe_write_reg(0x07, cds_gain);
+    afe_write_reg(0x05, vga_gain);
 }

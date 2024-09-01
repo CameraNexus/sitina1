@@ -32,6 +32,7 @@
 #include "pal_display.h"
 #include "pal_power.h"
 #include "pal_input.h"
+#include "image_processing.h"
 #include "xil_printf.h"
 #include "xil_cache.h"
 #include "xparameters.h"
@@ -39,7 +40,7 @@
 #include "font.h"
 
 extern const unsigned char gImage_image480480[921600];
-
+uint32_t previewbuf[PROC_PREVIEW_HEIGHT * PROC_PREVIEW_WIDTH];
 
 static void lcd_set_pixel(uint32_t *buf, int x, int y, int c) {
     x = 479 - x;
@@ -68,6 +69,9 @@ void lcd_disp_string(uint32_t *buf, int x, int y, char *str) {
     }
 }
 
+extern uint16_t maxlvl;
+extern uint16_t minlvl;
+
 int main()
 {
     i2c_init();
@@ -92,8 +96,6 @@ int main()
 
     pal_cam_start();
 
-    uint32_t *scrbuf = pal_disp_get_buffer();
-
     /*while (1) {
         mcusvc_set_led(true);
         usleep(500*1000);
@@ -101,10 +103,12 @@ int main()
         usleep(500*1000);
     }*/
 
-    uint32_t cnt0 = 16;
-    uint32_t cnt1 = 36;
-    uint32_t cnt2 = 192;
+    uint32_t cnt0 = 15;
+    uint32_t cnt1 = 34;
+    uint32_t cnt2 = 67;
     bool update = true;
+
+    ip_init();
 
     while (1) {
         uint32_t *scrbuf = pal_disp_get_buffer();
@@ -112,13 +116,23 @@ int main()
 
         uint16_t *cambuf = pal_cam_get_full_buffer();
         mcusvc_set_led(true);
+
+        ip_filter_draft_image(cambuf, previewbuf);
         
         //memset(scrbuf, 0x00, 480*480*4);
         uint32_t *wrptr = scrbuf;
-        for (int y = 0; y < 337; y++) {
+        for (int y = 0; y < 336; y++) {
+            for (int x = 0; x < 480; x++) {
+                uint32_t pix = previewbuf[y * PROC_DRAFT_WIDTH + x];
+                *wrptr++ = pix;
+            }
+        }
+        /*for (int y = 0; y < 337; y++) {
             for (int x = 0; x < 480; x++) {
                 uint32_t pix;
                 if (x >= 240) {
+                    // when X = 240, X = 239*16+252+1 = 4077
+                    // when X = 239, X = 4076
                     pix = (uint32_t)cambuf[y * 8 * CAM_HACT + (239 - (x - 240)) * 16 + 252 + 1];
                     //pix = (uint32_t)cambuf[y * 8 * CAM_HACT + (239 * 8 - (x - 240)) * 2 + 250];
                 }
@@ -131,7 +145,7 @@ int main()
                 pix |= (pix << 8) | (pix << 16);
                 *wrptr++ = pix;
             }
-        }
+        }*/
 
         uint32_t btns = pal_input_get_keys();
         if (btns & 0x100) {
@@ -159,33 +173,44 @@ int main()
             update = true;
         }
         if (btns & 0x1000) {
-            if (cnt2 > 1)
-                cnt2 -= 2;
+            if (cnt2 > 3)
+                cnt2 -= 4;
             update = true;
         }
         else if (btns & 0x2000) {
-            if (cnt2 < 300)
-                cnt2 += 2;
+            if (cnt2 < 1020)
+                cnt2 += 4;
             update = true;
         }
-        char strbuf[16];
+        char strbuf[24];
         snprintf(strbuf, 15, "SHDL %d", cnt0);
         lcd_disp_string(scrbuf, 0, 0, strbuf);
         snprintf(strbuf, 15, "SHPL %d", cnt1);
         lcd_disp_string(scrbuf, 0, 16, strbuf);
-        snprintf(strbuf, 15, "CLPOB %d", cnt2);
+        uint32_t dbx10000 = 57600 + 358 * cnt2;
+        snprintf(strbuf, 23, "GAIN %d (%d.%02d dB)", cnt2, dbx10000/ 10000, (dbx10000 % 10000) / 100);
         lcd_disp_string(scrbuf, 0, 32, strbuf);
+
+        snprintf(strbuf, 15, "MIN %d", minlvl);
+        lcd_disp_string(scrbuf, 0, 48, strbuf);
+        snprintf(strbuf, 15, "MAX %d", maxlvl);
+        lcd_disp_string(scrbuf, 0, 64, strbuf);
+        minlvl = 65535;
+        maxlvl = 0;
+        // snprintf(strbuf, 15, "CLPOB %d", cnt2);
+        // lcd_disp_string(scrbuf, 0, 32, strbuf);
 
         if (update) {
             afe_write_reg(0x38,
                 (cnt0 << 0) | // SHDLOC
                 (cnt1 << 8) | // SHPLOC
-                (8 << 16)); // SHPWIDTH
+                (cnt2 << 16)); // SHPWIDTH
+            afe_debug(cnt2);
             update = false;
         }
         
-        memset(cambuf, 0xff, CAM_BUFSIZE);
-        Xil_DCacheFlushRange(cambuf, CAM_BUFSIZE);
+        //memset(cambuf, 0xff, CAM_BUFSIZE);
+        //Xil_DCacheFlushRange(cambuf, CAM_BUFSIZE);
         pal_disp_return_buffer(scrbuf);
         mcusvc_set_led(false);
     }
