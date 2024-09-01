@@ -43,7 +43,6 @@ void key_scan(uint16_t val) {
         buttons |= 0x0100;
 
     uint8_t rotenc_raw = (buttons >> 5) & 0x3;
-    buttons |= 0xc000; // mask out unused keys
     buttons |= 0x0060; // mask out rotenc
     buttons = ~buttons;
 

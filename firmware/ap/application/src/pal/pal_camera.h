@@ -30,8 +30,9 @@ typedef enum {
 void pal_cam_init(void);
 void pal_cam_deinit(void);
 void pal_cam_set_capture_mode(CAM_CAPTURE_MODE cm);
-void pal_cam_set_shutter_speed(uint32_t shutter_ns);
-void pal_cam_set_gain(uint32_t gain_x10);
+void pal_cam_set_preview_shutter_speed(uint32_t shutter_line);
+void pal_cam_set_still_shutter_speed(uint32_t shutter_us);
+void pal_cam_set_gain(uint32_t cds_gain, uint32_t vga_gain);
 void pal_cam_start(void);
 void pal_cam_stop(void);
 uint16_t *pal_cam_get_full_buffer();

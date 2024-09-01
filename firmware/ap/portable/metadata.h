@@ -33,9 +33,23 @@ typedef struct {
 } ISO_SETPOINT;
 
 typedef struct {
-    uint32_t time; // time in ns
+    uint32_t time; // time in us
+    uint32_t draft_lines; // timing in draft mode // TBD
     char name[8];
 } SHUT_SETPOINT;
 
-extern const ISO_SETPOINT iso_setpoints;
-extern const ISO_SETPOINT shut_setpoints;
+typedef enum {
+    AEM_P, // Auto
+    AEM_A, // Aperature priority
+    AEM_S, // Shutter speed priority
+    AEM_M, // Manual
+} AE_MODE;
+
+extern const ISO_SETPOINT iso_setpoints[];
+extern const int no_iso_setpoints;
+extern const SHUT_SETPOINT shut_setpoints[];
+extern const int no_shut_setpoints;
+
+extern int current_shutter;
+extern int current_iso;
+extern AE_MODE current_aem;

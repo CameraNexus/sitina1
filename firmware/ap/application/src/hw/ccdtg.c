@@ -38,7 +38,7 @@ void ccdtg_init() {
     //     (1 << CCDTG_CTRL_CCD_OEN_OFFSET) |
     //     (1 << CCDTG_CTRL_SYNC_OEN_OFFSET);
     *CCDTG_CTRL = ctrl_val;
-    *CCDTG_ESHUT_LINE = 0;
+    *CCDTG_ESHUT_LINE = 325;
 }
 
 void ccdtg_start() {
@@ -47,4 +47,30 @@ void ccdtg_start() {
 
 void ccdtg_stop() {
     *CCDTG_CTRL = ctrl_val;
+}
+
+void ccdtg_set_start_eshut_delay(uint32_t htime, uint32_t vtime) {
+    *CCDTG_DELAY_HTIME = htime;
+    *CCDTG_DELAY_VTIME = vtime;
+}
+
+void ccdtg_set_embed_eshut_delay(uint32_t line) {
+    *CCDTG_ESHUT_LINE = line;
+}
+
+void ccdtg_set_line_skip(uint32_t vskip) {
+    ctrl_val &= ~(0xf << CCDTG_CTRL_VSKIP_OFFSET);
+    ctrl_val |= (vskip & 0xf) << CCDTG_CTRL_VSKIP_OFFSET;
+    *CCDTG_CTRL = ctrl_val;
+}
+
+void ccdtg_set_eshut(ESHUT_TYPE type) {
+    ctrl_val &= ~(0x1 << CCDTG_CTRL_EMBED_ESHUT_OFFSET);
+    ctrl_val &= ~(0x1 << CCDTG_CTRL_START_ESHUT_OFFSET);
+    if (type == EMBED_ESHUT) {
+        ctrl_val |= CCDTG_CTRL_EMBED_ESHUT_OFFSET;
+    }
+    else if (type == START_ESHUT) {
+        ctrl_val |= CCDTG_CTRL_START_ESHUT_OFFSET;
+    }
 }

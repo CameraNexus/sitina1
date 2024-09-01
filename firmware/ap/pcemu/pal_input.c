@@ -74,6 +74,15 @@ static void _pal_input_handle_sdl_keyevent(SDL_KeyboardEvent event) {
     case SDLK_x:
         key_mask = KEY_MASK_FN6;
         break;
+    case SDLK_a:
+        key_mask = KEY_MASK_FN7;
+        break;
+    case SDLK_s:
+        key_mask = KEY_MASK_FN8;
+        break;
+    case SDLK_SPACE:
+        key_mask = KEY_MASK_SHUTTER;
+        break;
     case SDLK_o:
         encoder_count--;
         break;
@@ -96,7 +105,9 @@ static void _pal_input_handle_sdl_keyevent(SDL_KeyboardEvent event) {
 int pal_input_get_encoder(uint32_t id) {
     if (id != 0)
         return 0;
-    return encoder_count;
+    int count = encoder_count;
+    encoder_count = 0;
+    return count;
 }
 
 void pal_input_scan(void) {

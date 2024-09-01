@@ -60,6 +60,6 @@ uint8_t *dcif_waitnextbuffer(void) {
     *DCIF_FBSWAP = 1;
     while (*DCIF_FBSWAP);
     uint32_t buf_addr = *DCIF_STARTADDR1_L;
-    Xil_DCacheInvalidateRange((intptr_t)buf_addr, CAM_BUFSIZE);
+    //Xil_DCacheInvalidateRange((intptr_t)buf_addr, CAM_BUFSIZE);
     return (uint8_t *)buf_addr;
 }

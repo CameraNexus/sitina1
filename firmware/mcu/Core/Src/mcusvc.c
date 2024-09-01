@@ -50,7 +50,6 @@ extern I2C_HandleTypeDef hi2c1;
 #define CMD_FRAMEBUF_XFER   0x03
 #define CMD_SET_LED         0x04
 #define CMD_GET_BUTTONS     0x80
-#define CMD_GET_ROTENC      0x81
 
 void mcusvc_init(void) {
     state = STATE_IDLE;
@@ -92,25 +91,15 @@ void mcusvc_tick(void) {
             	break;
             case CMD_GET_BUTTONS: {
             	uint16_t btn = key_get_buttons();
+            	int8_t rotenc = key_get_rotenc();
+            	key_set_rotenc(0);
             	rx_buffer[1] = btn & 0xff;
             	rx_buffer[2] = (btn >> 8) & 0xff;
             	rx_buffer[3] = 0x00;
-            	rx_buffer[4] = 0x00;
+            	rx_buffer[4] = *(uint8_t *)&rotenc;
             	result = HAL_I2C_Slave_Transmit_DMA(MCUSVC_I2C, rx_buffer, 5);
             	assert(result == HAL_OK);
             	state = STATE_TX_WAIT;
-            	}
-            	break;
-            case CMD_GET_ROTENC: {
-            	int8_t rotenc = key_get_rotenc();
-            	key_set_rotenc(0);
-            	*(int8_t *)&rx_buffer[1] = rotenc;
-            	rx_buffer[2] = 0x00;
-            	rx_buffer[3] = 0x00;
-            	rx_buffer[4] = 0x00;
-            	result = HAL_I2C_Slave_Transmit_DMA(MCUSVC_I2C, rx_buffer, 5);
-				assert(result == HAL_OK);
-				state = STATE_TX_WAIT;
             	}
             	break;
             }

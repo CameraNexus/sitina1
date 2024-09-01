@@ -21,6 +21,16 @@
 //
 #pragma once
 
+typedef enum {
+    EMBED_ESHUT,
+    START_ESHUT,
+    NO_ESHUT
+} ESHUT_TYPE;
+
 void ccdtg_init();
 void ccdtg_start();
 void ccdtg_stop();
+void ccdtg_set_start_eshut_delay(uint32_t htime, uint32_t vtime);
+void ccdtg_set_embed_eshut_delay(uint32_t line);
+void ccdtg_set_line_skip(uint32_t vskip);
+void ccdtg_set_eshut(ESHUT_TYPE type);

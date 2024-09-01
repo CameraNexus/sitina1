@@ -39,15 +39,50 @@ void pal_cam_deinit(void) {
 }
 
 void pal_cam_set_capture_mode(CAM_CAPTURE_MODE cm) {
-
+    if (cm == CM_DRAFT) {
+        // TODO: Enable line skipping as well
+        ccdtg_set_eshut(EMBED_ESHUT);
+    }
+    else if (cm == CM_STILL) {
+        ccdtg_set_line_skip(0); // Disable line skipping
+        ccdtg_set_eshut(START_ESHUT);
+    }
 }
 
-void pal_cam_set_shutter_speed(uint32_t shutter_ns) {
-
+void pal_cam_set_preview_shutter_speed(uint32_t shutter_line) {
+    ccdtg_set_embed_eshut_delay(shutter_line);
 }
 
-void pal_cam_set_gain(uint32_t gain_x10) {
+void pal_cam_set_still_shutter_speed(uint32_t shutter_us) {
+    const uint32_t MIN_SHUTTER = 132; // Minimum time due to shift delay
+    uint32_t htime;
+    uint32_t vtime;
+    if (shutter_us <= MIN_SHUTTER) {
+        // Minimum delay time
+        htime = 3;
+        vtime = 0;
+    }
+    else if (shutter_us < 10000) {
+        // 1us resolution, up to 10000us (10ms)
+        htime = 27 * 4 - 1;
+        vtime = shutter_us - MIN_SHUTTER;
+    }
+    else if (shutter_us < 6400 * 1000) {
+        // 100us resolution, up to 3200ms (3.2s)
+        // Has error of MIN_SHUTTER us (around 1% max)
+        htime = 2700 * 4 - 1;
+        vtime = shutter_us / 100;
+    }
+    else {
+        // Not supported yet
+        htime =  3;
+        vtime = 0;
+    }
+    ccdtg_set_start_eshut_delay(htime, vtime);
+}
 
+void pal_cam_set_gain(uint32_t cds_gain, uint32_t vga_gain) {
+    afe_set_gain(cds_gain, vga_gain);
 }
 
 void pal_cam_start(void) {
@@ -57,7 +92,7 @@ void pal_cam_start(void) {
 }
 
 void pal_cam_stop(void) {
-
+    ccdtg_stop();
 }
 
 uint16_t *pal_cam_get_full_buffer() {

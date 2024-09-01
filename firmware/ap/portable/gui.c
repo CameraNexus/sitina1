@@ -27,8 +27,10 @@
 #include <string.h>
 #include "pal_power.h"
 #include "pal_input.h"
+#include "pal_camera.h"
 #include "uilib.h"
 #include "gui.h"
+#include "metadata.h"
 #include "assets/assets.h"
 
 #define COLOR_FOCUSED   COLOR_WHITE
@@ -126,7 +128,7 @@ UICOMP label_fn3 = {
         .bgcl = COLOR_BG,
         .font = &font_12x20,
         .align = ALIGN_RIGHT,
-        .string = "Exp"
+        .string = "Mode"
     }
 };
 
@@ -142,7 +144,7 @@ UICOMP label_fn4 = {
         .bgcl = COLOR_BG,
         .font = &font_12x20,
         .align = ALIGN_RIGHT,
-        .string = "Mode"
+        .string = "Focus"
     }
 };
 
@@ -254,11 +256,11 @@ UICOMP custom_battery = {
     }
 };
 
-UICOMP label_remaining = {
+UICOMP label_exposure = {
     .type = COMP_LABEL,
-    .x = 260,
+    .x = 220,
     .y = 410,
-    .w = 12 * 5,
+    .w = 12 * 4,
     .h = 20,
     .specifics.label = {
         .transparent = false,
@@ -266,13 +268,13 @@ UICOMP label_remaining = {
         .bgcl = COLOR_BG,
         .font = &font_12x20,
         .align = ALIGN_LEFT,
-        .string = "[999]"
+        .string = "+0.0"
     }
 };
 
 UICOMP label_focus = {
     .type = COMP_LABEL,
-    .x = 230,
+    .x = 290,
     .y = 410,
     .w = 12 * 2,
     .h = 20,
@@ -332,7 +334,7 @@ UIDRAWLIST capture_screen_drawlist = {
         &label_aperture,
         &label_iso,
         &custom_battery,
-        &label_remaining,
+        &label_exposure,
         &custom_exposure,
         &custom_histogram
     }
@@ -433,12 +435,171 @@ CAP_ACT gui_run_capture_screen(bool redraw) {
     bool update_needed = false;
     CAP_ACT action = CAP_ACT_NOTHING;
 
+    typedef enum {
+        SEL_NONE,
+        SEL_SHUTTER,
+        SEL_AECOMP,
+        SEL_APER,
+        SEL_ISO,
+        SEL_AF,
+        SEL_AEM
+    } ROTENC_SEL;
+
     // Capture screen internal states
     // A forced redraw should bring these back to correct states
-    static bool is_highlighting = false;
+    static bool sel_highlight = false;
+    static ROTENC_SEL sel_item = SEL_NONE;
+
+    bool need_highlight = false;
+    ROTENC_SEL current_sel;
 
     // TODO: GUI logic!
     uint32_t btn = pal_input_get_keys();
+    if (btn & KEY_MASK_FN1) {
+        need_highlight = true;
+        current_sel =
+            (current_aem == AEM_P) ? SEL_AECOMP :
+            (current_aem == AEM_A) ? SEL_AECOMP :
+            (current_aem == AEM_S) ? SEL_AECOMP :
+            (current_aem == AEM_M) ? SEL_APER : SEL_NONE;
+    }
+    else if (btn & KEY_MASK_FN2) {
+        need_highlight = true;
+        current_sel = SEL_ISO;
+    }
+    else if (btn & KEY_MASK_FN3) {
+        need_highlight = true;
+        current_sel = SEL_AEM;
+    }
+    else if (btn & KEY_MASK_FN4) {
+        need_highlight = true;
+        current_sel = SEL_AF;
+    }
+    else {
+        need_highlight = false;
+        current_sel =
+            (current_aem == AEM_P) ? SEL_NONE :
+            (current_aem == AEM_A) ? SEL_APER :
+            (current_aem == AEM_S) ? SEL_SHUTTER :
+            (current_aem == AEM_M) ? SEL_SHUTTER : SEL_NONE;
+    }
+
+    if ((need_highlight != sel_highlight) || (sel_item != current_sel)
+            || redraw) {
+        update_needed = true;
+        if (need_highlight) {
+            label_mode.specifics.label.fgcl = COLOR_DIM;
+            label_shutter.specifics.label.fgcl = COLOR_DIM;
+            label_aperture.specifics.label.fgcl = COLOR_DIM;
+            label_iso.specifics.label.fgcl = COLOR_DIM;
+            label_exposure.specifics.label.fgcl = COLOR_DIM;
+            label_focus.specifics.label.fgcl = COLOR_DIM;
+            switch (current_sel) {
+            case SEL_SHUTTER:
+                label_shutter.specifics.label.fgcl = COLOR_FOCUSED;
+                break;
+            case SEL_AECOMP:
+                label_exposure.specifics.label.fgcl = COLOR_FOCUSED;
+                break;
+            case SEL_APER:
+                label_aperture.specifics.label.fgcl = COLOR_FOCUSED;
+                break;
+            case SEL_ISO:
+                label_iso.specifics.label.fgcl = COLOR_FOCUSED;
+                break;
+            case SEL_AF:
+                label_focus.specifics.label.fgcl = COLOR_FOCUSED;
+                break;
+            case SEL_AEM:
+                label_mode.specifics.label.fgcl = COLOR_FOCUSED;
+                break;
+            }
+        }
+        else {
+            label_mode.specifics.label.fgcl = COLOR_NORMAL;
+            label_shutter.specifics.label.fgcl = COLOR_NORMAL;
+            label_aperture.specifics.label.fgcl = COLOR_NORMAL;
+            label_iso.specifics.label.fgcl = COLOR_NORMAL;
+            label_exposure.specifics.label.fgcl = COLOR_NORMAL;
+            label_focus.specifics.label.fgcl = COLOR_NORMAL;
+        }
+        sel_highlight = need_highlight;
+        sel_item = current_sel;
+    }
+
+    int8_t rotenc = pal_input_get_encoder(0);
+    bool update_labels = false;
+
+    if (rotenc != 0) {
+        int *sel_val = NULL;
+        int sel_val_max;
+
+        switch (current_sel) {
+        case SEL_SHUTTER:
+            sel_val = &current_shutter;
+            sel_val_max = no_shut_setpoints - 1;
+            break;
+        case SEL_AECOMP:
+            // Not implemented
+            sel_val = NULL;
+            break;
+        case SEL_APER:
+            // Not implemented
+            sel_val = NULL;
+            break;
+        case SEL_ISO:
+            sel_val = &current_iso;
+            sel_val_max = no_iso_setpoints - 1;
+            break;
+        case SEL_AF:
+            // Not implemented
+            sel_val = NULL;
+            break;
+        case SEL_AEM:
+            // Not implemented
+            sel_val = NULL;
+            break;
+        }
+
+        if (sel_val != NULL) {
+            update_needed = true;
+            update_labels = true;
+            if (rotenc > 0) {
+                if (*sel_val + rotenc >= sel_val_max) {
+                    *sel_val = sel_val_max;
+                }
+                else {
+                    *sel_val += rotenc;
+                }
+            }
+            else {
+                if (*sel_val + rotenc <= 0) {
+                    *sel_val = 0;
+                }
+                else {
+                    *sel_val += rotenc;
+                }
+            }
+        }
+    }
+
+    if (update_labels || redraw) {
+        // Update UI strings
+        snprintf(label_shutter.specifics.label.string, UILIB_LABEL_MAXLEN,
+                "%ss", shut_setpoints[current_shutter].name);
+        snprintf(label_iso.specifics.label.string, UILIB_LABEL_MAXLEN,
+                "ISO-%s", iso_setpoints[current_iso].name);
+
+        // Apply settings as well
+        pal_cam_set_gain(iso_setpoints[current_iso].cdsgain,
+                iso_setpoints[current_iso].vgagain);
+        pal_cam_set_preview_shutter_speed(
+                shut_setpoints[current_shutter].draft_lines);
+    }
+
+    if (btn & KEY_MASK_SHUTTER) {
+        action = CAP_ACT_CAPTURE;
+    }
 
     if (redraw || update_needed) {
         uilib_mark_update();

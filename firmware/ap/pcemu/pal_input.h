@@ -22,16 +22,19 @@
 //
 #pragma once
 
-#define KEY_MASK_LEFT   (1 << 0)
-#define KEY_MASK_RIGHT  (1 << 1)
-#define KEY_MASK_UP     (1 << 2)
-#define KEY_MASK_DOWN   (1 << 3)
-#define KEY_MASK_FN1    (1 << 4)
-#define KEY_MASK_FN2    (1 << 5)
-#define KEY_MASK_FN3    (1 << 6)
-#define KEY_MASK_FN4    (1 << 7)
-#define KEY_MASK_FN5    (1 << 8)
-#define KEY_MASK_FN6    (1 << 9)
+#define KEY_MASK_LEFT       0x0200
+#define KEY_MASK_RIGHT      0x0400
+#define KEY_MASK_UP         0x0100
+#define KEY_MASK_DOWN       0x0800
+#define KEY_MASK_SHUTTER    0x0010
+#define KEY_MASK_FN1        0x0001
+#define KEY_MASK_FN2        0x0002
+#define KEY_MASK_FN3        0x0004
+#define KEY_MASK_FN4        0x0008
+#define KEY_MASK_FN5        0x1000
+#define KEY_MASK_FN6        0x2000
+#define KEY_MASK_FN7        0x4000
+#define KEY_MASK_FN8        0x8000
 
 void pal_input_init(void);
 void pal_input_deinit(void);

@@ -56,11 +56,13 @@ void portable_main(void) {
     uilib_mark_update();
 
     //uint16_t *cam_buf;
+    bool redraw = true;
     while(1) {
         disp_buf = pal_disp_get_buffer();
         uilib_set_framebuffer((uint8_t *)disp_buf);
-        
-        gui_run_capture_screen(false);
+
+        gui_run_capture_screen(redraw);
+        redraw = false;
         //while ((cam_buf = pal_cam_get_full_buffer()) == NULL);
         //uint32_t duration = OSA_TimeGetMsec();
         //ip_filter_draft_image(cam_buf, disp_buf + 120*720, 0);
