@@ -1,5 +1,5 @@
 TARGET := emu
-OBJODIR := obj
+OBJODIR := obj/pcemu
 
 CC = gcc
 LD = gcc
@@ -13,13 +13,13 @@ LDFLAGS :=
 
 INCLUDES += \
     -I.\
-    -I../portable
+    -I../application/src/portable
 
 CSRCS += \
 	$(wildcard ./*.c) \
-	$(wildcard ../portable/fonts/*.c) \
-	$(wildcard ../portable/assets/*.c) \
-	$(wildcard ../portable/*.c)
+	$(wildcard ../application/src/portable/fonts/*.c) \
+	$(wildcard ../application/src/portable/assets/*.c) \
+	$(wildcard ../application/src/portable/*.c)
 
 OBJS :=	$(CSRCS:%.c=$(OBJODIR)/%.o)
 
