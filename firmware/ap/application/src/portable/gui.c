@@ -28,6 +28,7 @@
 #include "pal_power.h"
 #include "pal_input.h"
 #include "pal_camera.h"
+#include "pal_display.h"
 #include "uilib.h"
 #include "gui.h"
 #include "metadata.h"
@@ -230,7 +231,7 @@ UICOMP label_iso = {
     .type = COMP_LABEL,
     .x = 260,
     .y = 445,
-    .w = 5*16,
+    .w = 8*16,
     .h = 26,
     .specifics.label = {
         .transparent = false,
@@ -340,6 +341,14 @@ UIDRAWLIST capture_screen_drawlist = {
     }
 };
 
+UIDRAWLIST capture_screen_always_update_drawlist = {
+    // TODO: Add exposure meter here
+    .ncomp = 1,
+    .comp = {
+        &custom_histogram
+    }
+};
+
 void gui_draw_battery(void *ptr) {
     UICOMP *uicomp = (UICOMP *)ptr;
     uint32_t x = uicomp->x;
@@ -419,7 +428,7 @@ void gui_draw_histogram(void *ptr) {
     uilib_fill_rect(x + w - 1, y + 1, 1, h - 2, COLOR_NORMAL);
     // TODO: Feed source from actual histogram
     for (int i = 0; i < 256; i++) {
-        uint8_t level = rand() & 0xff;
+        uint8_t level = histogram[i];
         level /= 4; // 0-63
         if (level != 63)
             uilib_fill_rect(x + 1 + i, y + 1, 1, 63-level, COLOR_BG);
@@ -603,9 +612,17 @@ CAP_ACT gui_run_capture_screen(bool redraw) {
 
     if (redraw || update_needed) {
         uilib_mark_update();
+        // Draw need to be called
+        uilib_draw(&capture_screen_drawlist);
     }
-    // Draw need to be called
-    uilib_draw(&capture_screen_drawlist);
+    else {
+        // No update requested, but uilib draw need to be called on the full
+        // drawlist anyway to ensure proper operation on dual buffered mode
+        uilib_draw(&capture_screen_drawlist);
+        // And update things that's always need to be updated
+        uilib_mark_update();
+        uilib_draw(&capture_screen_always_update_drawlist);
+    }
 
     return action;
 }
@@ -616,4 +633,21 @@ PB_ACT gui_run_playback_screen(bool redraw) {
 
 SET_ACT gui_run_setting_screen(bool redraw) {
     return SET_ACT_NOTHING;
+}
+
+void gui_show_fatal(char *msg) {
+    // Show fatal error message
+    uint32_t *disp_buf = pal_disp_get_buffer();
+    uilib_set_framebuffer((uint8_t *)disp_buf);
+    printf("Fatal: %s\n", msg);
+    uilib_set_font(&font_16x26);
+    uilib_draw_string(0, 0, UILIB_FB_WIDTH, "FATAL ERROR", 11, false, COLOR_RED,
+            COLOR_BLACK);
+    uilib_draw_string(0, 32, UILIB_FB_WIDTH, msg, 1024, false, COLOR_WHITE,
+            COLOR_BLACK);
+    pal_disp_return_buffer(disp_buf);
+    while (1) {
+        //TODO
+        pal_input_scan();
+    }
 }

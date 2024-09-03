@@ -46,3 +46,4 @@ void gui_init(void);
 CAP_ACT gui_run_capture_screen(bool redraw);
 PB_ACT gui_run_playback_screen(bool redraw);
 SET_ACT gui_run_setting_screen(bool redraw);
+void gui_show_fatal(char *msg);

@@ -51,3 +51,7 @@ void pal_pwr_set_vab(uint8_t setpoint) {
     // 5-16V
     pwm_set(setpoint);
 }
+
+void pal_pwr_set_cpu_power(POWER_LEVEL setpoint) {
+    // TODO
+}

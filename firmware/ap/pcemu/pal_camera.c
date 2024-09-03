@@ -58,8 +58,9 @@ static uint8_t *load_file(char *fn) {
 
 void pal_cam_init(void) {
     // Load source of fake camera image
-    cam_still_buf = load_file(CAM_STILL_SAMPLE_FILE);
-    cam_draft_buf = load_file(CAM_DRAFT_SAMPLE_FILE);
+    // TODO
+    //cam_still_buf = load_file(CAM_STILL_SAMPLE_FILE);
+    //cam_draft_buf = load_file(CAM_DRAFT_SAMPLE_FILE);
     cam_buf = cam_draft_buf;
     frame_ready = false;
 }

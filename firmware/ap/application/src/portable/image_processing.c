@@ -37,6 +37,7 @@ uint16_t minlvl = 65535;
 
 //static uint16_t degamma_table[256];
 static uint8_t gamma_table[1024];
+static uint32_t histo_tmp[256];
 
 static void build_gamma_table(void) {
     for (int i = 0; i < 1024; i++) {
@@ -69,12 +70,13 @@ static uint32_t y2rgb888(uint32_t y) {
     return (0xff000000ul | (y << 16) | (y << 8) | (y));
 }
 
-void ip_filter_draft_image(uint16_t *in, uint32_t *out) {
+void ip_filter_draft_image(uint16_t *in, uint32_t *out, uint8_t *histogram) {
     // No faster readout currently possible
     uint16_t *evenptr = in + PROC_IN_SKIP_LINE * PROC_IN_WIDTH + PROC_IN_SKIP;
     uint16_t *oddptr = evenptr + PROC_IN_WIDTH;
     uint32_t *leftptr = out;
     uint32_t *rightptr = out + PROC_DRAFT_WIDTH - 1;
+    memset(histo_tmp, 0, 256 * 4);
     for (int i = 0; i < PROC_DRAFT_HEIGHT; i++) {
         for (int j = 0; j < PROC_DRAFT_WIDTH / 2; j++) {
             uint8_t p0b = ip_scale_pixel(*evenptr++);
@@ -91,6 +93,13 @@ void ip_filter_draft_image(uint16_t *in, uint32_t *out) {
             uint8_t p1g = p1g0;
             uint32_t p0 = ((uint32_t)p0r << 16) | ((uint32_t)p0g << 8) | p0b;
             uint32_t p1 = ((uint32_t)p1r << 16) | ((uint32_t)p1g << 8) | p1b;
+
+            // Incorrect but fast RGB to Y
+            uint8_t p0y = (p0g0 >> 1) + (p0b >> 2) + (p0r >> 2);
+            uint8_t p1y = (p1g0 >> 1) + (p1b >> 2) + (p1r >> 2);
+            histo_tmp[p0y]++;
+            histo_tmp[p1y]++;
+
             *leftptr++ = p0;
             *rightptr-- = p1;
             //*leftptr++ = 0x00ff0000;
@@ -104,6 +113,15 @@ void ip_filter_draft_image(uint16_t *in, uint32_t *out) {
         evenptr += (PROC_IN_WIDTH) * 6 + 4;
         leftptr += (PROC_DRAFT_WIDTH / 2);
         rightptr += (PROC_DRAFT_WIDTH / 2) + PROC_DRAFT_WIDTH;
+    }
+
+    uint32_t hmax = 0;
+    for (int i = 0; i < 256; i++) {
+        if (hmax < histo_tmp[i])
+            hmax = histo_tmp[i];
+    }
+    for (int i = 0; i < 256; i++) {
+        histogram[i] = histo_tmp[i] * 255 / hmax;
     }
 }
 

@@ -1,5 +1,5 @@
 //
-// Sitina 1
+// Sitina1
 // Copyright 2024 Wenting Zhang
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,12 +21,7 @@
 // SOFTWARE.
 //
 #include <stdio.h>
-#include <stdbool.h>
-#include "portable_main.h"
 
-int main()
-{
-    portable_main();
+void pal_init(void) {
 
-    return 0;
 }

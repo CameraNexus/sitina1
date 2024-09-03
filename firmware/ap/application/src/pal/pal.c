@@ -1,5 +1,5 @@
 //
-// Sitina 1
+// Sitina1
 // Copyright 2024 Wenting Zhang
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,11 +22,22 @@
 //
 #include <stdio.h>
 #include <stdbool.h>
-#include "portable_main.h"
+#include "i2c.h"
+#include "softi2c.h"
+#include "mcusvc.h"
+#include "pal.h"
 
-int main()
-{
-    portable_main();
+void pal_init(void) {
+    i2c_init();
+    si2c_init();
+    mcusvc_init();
 
-    return 0;
+    int retval = si2c_write_reg(SI2C0, 0x41, 0x00, 0x8f);
+    if (retval < 0) {
+        printf("SI2C write failed!\n");
+    }
+    retval = si2c_write_reg(SI2C1, 0x41, 0x00, 0x8f);
+    if (retval < 0) {
+         printf("SI2C write failed!\n");
+    }
 }

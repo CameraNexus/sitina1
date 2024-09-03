@@ -49,6 +49,12 @@ typedef struct {
     char fname[256]; // 255 byte LFN + 1 byte
 } FileInfo;
 
+// TODO
+#define FS_OK           0
+#define FS_DISK_ERR     1
+#define FS_INVALID_FS   1
+#define FS_NO_FILE      1
+
 int pal_fs_init();
 void pal_fs_deinit();
 // Open a file, return pointer when success, NULL on error

@@ -45,5 +45,5 @@
 #endif
 
 void ip_init(void);
-void ip_filter_draft_image(uint16_t *in, uint32_t *out);
+void ip_filter_draft_image(uint16_t *in, uint32_t *out, uint8_t *histogram);
 void ip_filter_preview_image(uint16_t *in, uint32_t *out);

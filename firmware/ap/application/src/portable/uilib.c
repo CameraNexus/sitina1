@@ -50,6 +50,11 @@ static fb_info *current_framebuffer_info;
 
 // Putpixel only writes to framebuffer, fixed format
 static void uilib_putpixel(uint32_t x, uint32_t y, uint32_t cl) {
+#if (UILIB_FB_ROTATE == 180)
+    x = UILIB_FB_WIDTH - 1 - x;
+    y = UILIB_FB_HEIGHT - 1 - y;
+#endif
+
 #if defined(UILIB_FB_XRGB8888)
     uint32_t *fb = (uint32_t *)current_framebuffer;
     fb[y * UILIB_FB_WIDTH + x] = cl;
@@ -206,8 +211,9 @@ static void uilib_draw_label(UICOMP *label) {
     }
     uilib_set_font(label->specifics.label.font);
     if (label->specifics.label.align == ALIGN_LEFT) {
-        uilib_draw_string(label->x, label->y, label->specifics.label.string,
-            UILIB_LABEL_MAXLEN, label->specifics.label.transparent,
+        uilib_draw_string(label->x, label->y, label->w,
+            label->specifics.label.string, UILIB_LABEL_MAXLEN,
+            label->specifics.label.transparent,
             label->specifics.label.fgcl, label->specifics.label.bgcl);
     }
     else {
@@ -215,7 +221,7 @@ static void uilib_draw_label(UICOMP *label) {
             UILIB_LABEL_MAXLEN);
         uint32_t x = (label->specifics.label.align == ALIGN_RIGHT) ?
             label->x + label->w - width : label->x + (label->w - width) / 2;
-        uilib_draw_string(x, label->y, label->specifics.label.string,
+        uilib_draw_string(x, label->y, label->w, label->specifics.label.string,
             UILIB_LABEL_MAXLEN, label->specifics.label.transparent,
             label->specifics.label.fgcl, label->specifics.label.bgcl);
     }
@@ -239,12 +245,25 @@ static void uilib_draw_bitmap(UICOMP *bitmap) {
         uint8_t *srcptr = (uint8_t *)(bitmap->specifics.bitmap.pbuf);
         uint8_t *dstptr = (uint8_t *)current_framebuffer;
     #endif
+
+    #if (UILIB_FB_ROTATE == 180)
+        dstptr += (UILIB_FB_HEIGHT - 1 - bitmap->y) * UILIB_FB_WIDTH +
+                (UILIB_FB_WIDTH - 1 - bitmap->x);
+        for (int y = 0; y < h; y++) {
+            for (int x = 0; x < w; x++) {
+                *dstptr-- = *srcptr++;
+            }
+            srcptr += bitmap->specifics.bitmap.buf_width - w;
+            dstptr += UILIB_FB_WIDTH - w;
+        }
+    #else
         dstptr += bitmap->y * UILIB_FB_WIDTH + bitmap->x;
         for (int y = 0; y < h; y++) {
             memcpy(dstptr, srcptr, w * UILIB_FB_BYTEPERPIX);
             srcptr += bitmap->specifics.bitmap.buf_width;
             dstptr += UILIB_FB_WIDTH;
         }
+    #endif
     }
     else {
         // Slow path
@@ -325,6 +344,12 @@ void uilib_set_framebuffer(uint8_t *fb) {
 }
 
 void uilib_fill_rect(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint32_t cl) {
+
+#if (UILIB_FB_ROTATE == 180)
+    x = UILIB_FB_WIDTH - 1 - x - w;
+    y = UILIB_FB_HEIGHT - 1 - y - h;
+#endif
+
 #if defined(UILIB_FB_XRGB8888)
     uint32_t *wptr = (uint32_t *)current_framebuffer;
     wptr += y * UILIB_FB_WIDTH + x;
@@ -356,13 +381,18 @@ void uilib_set_font(const UIFONT *font) {
         uilib_get_bufsize(font->pixfmt, font->buf_width, font->height);
 }
 
-void uilib_draw_string(uint32_t x, uint32_t y, char *string, uint32_t maxlen,
-        bool transparent, uint32_t fgcl, uint32_t bgcl) {
+void uilib_draw_string(uint32_t x, uint32_t y, uint32_t w, char *string,
+        uint32_t maxlen, bool transparent, uint32_t fgcl, uint32_t bgcl) {
     // TODO: Unicode/ CJK
     char c;
     uint32_t i = 0;
+    uint32_t xx = x;
     while ((i++ < maxlen) && (c = *string++)) {
-        x += uilib_draw_char(x, y, c, transparent, fgcl, bgcl);
+        xx += uilib_draw_char(xx, y, c, transparent, fgcl, bgcl);
+        if (xx > (x + w - current_font->disp_width)) {
+            y += current_font->height + 1;
+            xx = x;
+        }
     }
 }
 
@@ -375,10 +405,10 @@ void uilib_draw(UIDRAWLIST *drawlist) {
     if (current_content_counter == current_framebuffer_info->counter)
         return;
 
-    printf("Redraw for framebuffer %p\n", current_framebuffer);
+    //printf("Redraw for framebuffer %p\n", current_framebuffer);
 
-    memset(current_framebuffer, 0,
-        uilib_get_bufsize(UILIB_FB_FORMAT, UILIB_FB_WIDTH, UILIB_FB_HEIGHT));
+    //memset(current_framebuffer, 0,
+    //    uilib_get_bufsize(UILIB_FB_FORMAT, UILIB_FB_WIDTH, UILIB_FB_HEIGHT));
     for (int i = 0; i < drawlist->ncomp; i++) {
         uilib_draw_component(drawlist->comp[i]);
     }

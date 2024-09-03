@@ -31,7 +31,21 @@ set (_sources
     pal/pal_filesystem.c
     pal/pal_input.c
     pal/pal_power.c
-    image_processing.c
+    pal/pal.c
+    portable/assets/dpad2.c
+    portable/assets/shutter.c
+    portable/assets/dpad1.c
+    portable/fonts/font_16x26.c
+    portable/fonts/font_32x53.c
+    portable/fonts/font_24x40.c
+    portable/fonts/font_12x20.c
+    portable/fonts/font_8x14.c
+    portable/aondisp.c
+    portable/uilib.c
+    portable/metadata.c
+    portable/portable_main.c
+    portable/gui.c
+    portable/image_processing.c
     image480480.c
     main.c
     )

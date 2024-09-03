@@ -33,6 +33,8 @@
 #define UILIB_FB_WIDTH      (480)
 #define UILIB_FB_HEIGHT     (480)
 
+#define UILIB_FB_ROTATE     (180)
+
 // Various configurations
 #define UILIB_LABEL_MAXLEN  (32)
 
@@ -196,7 +198,7 @@ void uilib_set_framebuffer(uint8_t *fb);
 void uilib_set_font(const UIFONT *font);
 // LL functions for custom component only or when update/redraw features are not used
 void uilib_fill_rect(uint32_t x, uint32_t y, uint32_t w, uint32_t h, uint32_t cl);
-void uilib_draw_string(uint32_t x, uint32_t y, char *string, uint32_t maxlen,
-    bool transparent, uint32_t fgcl, uint32_t bgcl);
+void uilib_draw_string(uint32_t x, uint32_t y, uint32_t w, char *string,
+        uint32_t maxlen, bool transparent, uint32_t fgcl, uint32_t bgcl);
 void uilib_mark_update(void); // Called before redraw, when things are expected to change
 void uilib_draw(UIDRAWLIST *drawlist); // Called every frame

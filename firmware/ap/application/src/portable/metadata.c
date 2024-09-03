@@ -27,7 +27,7 @@
 
 const ISO_SETPOINT iso_setpoints[] = {
     {100, 4, 0 * STEP_PER_DB + ISO_OFFSET, "100"},
-    {160, 6, 0 * STEP_PER_DB + ISO_OFFSET, "140"},
+    {140, 6, 0 * STEP_PER_DB + ISO_OFFSET, "140"},
     {200, 7, 0 * STEP_PER_DB + ISO_OFFSET, "200"},
     {400, 7, 6 * STEP_PER_DB + ISO_OFFSET, "400"},
     {800, 7, 12 * STEP_PER_DB + ISO_OFFSET, "800"},
@@ -79,3 +79,5 @@ const int no_shut_setpoints = sizeof(shut_setpoints) / sizeof(SHUT_SETPOINT);
 int current_shutter = 0;
 int current_iso = 0;
 AE_MODE current_aem = AEM_M;
+
+uint8_t histogram[256];

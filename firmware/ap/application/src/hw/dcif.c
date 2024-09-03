@@ -52,6 +52,18 @@ void dcif_init(void) {
     *DCIF_PCTL = ctrl_val;
 }
 
+void dcif_set_draft(void) {
+    *DCIF_VBLK = CAM_DRAFT_VBLK;
+    *DCIF_VACT = CAM_DRAFT_VACT;
+    *DCIF_ENDADDR1_L = *DCIF_STARTADDR1_L + CAM_DRAFT_BUFSIZE;
+}
+
+void dcif_set_still(void) {
+    *DCIF_VBLK = CAM_VBLK;
+    *DCIF_VACT = CAM_VACT;
+    *DCIF_ENDADDR1_L = *DCIF_STARTADDR1_L + CAM_BUFSIZE;
+}
+
 void dcif_engage(void) {
     *DCIF_PCTL = ctrl_val | 0x1;
 }

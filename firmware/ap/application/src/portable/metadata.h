@@ -26,8 +26,8 @@
 
 // Define meta data
 typedef struct {
-    uint8_t val; // ISO speed
-    uint8_t cdsgain; // 0 = -3dB, 4 = 0dB, 6 = +3dB, 7 = +6dB
+    uint16_t val; // ISO speed
+    uint16_t cdsgain; // 0 = -3dB, 4 = 0dB, 6 = +3dB, 7 = +6dB
     uint16_t vgagain; // 6-42dB in 0.0358dB steps
     char name[6];
 } ISO_SETPOINT;
@@ -53,3 +53,5 @@ extern const int no_shut_setpoints;
 extern int current_shutter;
 extern int current_iso;
 extern AE_MODE current_aem;
+
+extern uint8_t histogram[256];

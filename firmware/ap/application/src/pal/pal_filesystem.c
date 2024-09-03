@@ -33,11 +33,16 @@ static FATFS fatfs;
 static TCHAR rootpath[] = "0:/";
 
 int pal_fs_init() {
+    uint8_t *tmp = malloc(512*1024);
+
     FRESULT res;
-    res = f_mount(&fatfs, rootpath, 0);
-    if (res != FR_OK)
-        return -1;
-    return 0;
+    res = f_mkfs(rootpath, 0, tmp, 512*1024);
+    if (res != FR_OK) {
+        printf("Failed to format card %d\n", res);
+    }
+
+    res = f_mount(&fatfs, rootpath, 1);
+    return (int)res;
 }
 
 void pal_fs_deinit() {
@@ -73,6 +78,7 @@ File *pal_fs_open(const char *path, OpenMode mode) {
     }
     result = f_open((FIL *)file, path, fatfsmode);
     if (result != FR_OK) {
+        printf("fopen failed %d\n", result);
         free(file);
         return NULL;
     }
@@ -95,10 +101,13 @@ int pal_fs_read(File *fp, void *dst, size_t count) {
 int pal_fs_write(File *fp, void *src, size_t count) {
     unsigned int bytes;
     FRESULT result = f_write(fp, src, count, &bytes);
-    if (result != FR_OK)
+    if (result != FR_OK) {
+        printf("fwrite failed %d\n", result);
         return -1;
-    else
+    }
+    else {
         return bytes;
+    }
 }
 
 // Get current seek, negative on error
