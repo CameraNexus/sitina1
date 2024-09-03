@@ -147,8 +147,8 @@ module ccdtimgen(
     wire [CNTW-1:0] tsd = 40 * 4; // 1-1.5-10 us
     // Resolution settings
     wire [CNTW-3:0] hpix = 2040 + 24 - 1; // Total horizontal pixel cycles
-    //wire [CNTW-1:0] vpix = 2721 - 1;
-    wire [CNTW-1:0] vpix = 10 - 1;
+    wire [CNTW-1:0] vpix = 2721 - 1;
+    //wire [CNTW-1:0] vpix = 10 - 1;
     wire [CNTW-1:0] hsw = 256;
 
     // T3P + TV3RD + TL should be dividable by 4
