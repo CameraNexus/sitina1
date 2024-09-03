@@ -485,7 +485,7 @@
                         xlnx,has-power = <0x0>;
                         xlnx,interconnect-s-axi-masters = "ps7_cortexa9_0.M_AXI_DP , & , ps7_cortexa9_1.M_AXI_DP";
                         xlnx,ip-name = "ps7_sdio";
-                        xlnx,sdio-clk-freq-hz = <0x5f5e100>;
+                        xlnx,sdio-clk-freq-hz = <0x2faf080>;
                         xlnx,has-wp = <0x0>;
                         xlnx,has-cd = <0x0>;
                         xlnx,name = "ps7_sd_0";
@@ -1286,7 +1286,7 @@
                         xlnx,pcw-fpga-fclk2-enable = <0x0>;
                         xlnx,pcw-clk0-freq = <0x2faf080>;
                         xlnx,pcw-mio-47-slew = "slow";
-                        xlnx,pcw-sdio-peripheral-divisor0 = <0x10>;
+                        xlnx,pcw-sdio-peripheral-divisor0 = <0x20>;
                         xlnx,pcw-use-expanded-iop = <0x0>;
                         xlnx,pcw-mio-44-slew = "slow";
                         xlnx,pcw-qspi-peripheral-divisor0 = <0x8>;
@@ -1575,7 +1575,7 @@
                         xlnx,pcw-mio-7-direction = "out";
                         xlnx,pcw-i2c0-reset-enable = <0x0>;
                         xlnx,pcw-mio-53-slew = "slow";
-                        xlnx,pcw-sdio-peripheral-freqmhz = <0x64>;
+                        xlnx,pcw-sdio-peripheral-freqmhz = <0x32>;
                         xlnx,pcw-uart1-uart1-io = "<Select>";
                         xlnx,pcw-dqs-width = <0x4>;
                         xlnx,pcw-s-axi-hp2-data-width = <0x40>;
@@ -1700,7 +1700,7 @@
                         xlnx,pcw-enet0-baseaddr = <0xe000b000>;
                         xlnx,pcw-nor-sram-cs1-t-wp = <0x1>;
                         xlnx,pcw-act-ttc-peripheral-freqmhz = <0x32>;
-                        xlnx,pcw-act-sdio-peripheral-freqmhz = <0x64>;
+                        xlnx,pcw-act-sdio-peripheral-freqmhz = <0x32>;
                         xlnx,pcw-import-board-preset = "None";
                         xlnx,pcw-mio-16-iotype = "LVCMOS , 3.3V";
                         xlnx,pcw-mio-8-pullup = "disabled";

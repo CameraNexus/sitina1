@@ -1,7 +1,7 @@
 {
    "ActiveEmotionalView":"Default View",
    "Default View_ScaleFactor":"0.734861",
-   "Default View_TopLeft":"-135,-196",
+   "Default View_TopLeft":"-135,-128",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.5.8 2022-09-21 7111 VDI=41 GEI=38 GUI=JA:10.0 TLS
 #  -string -flagsOSRD
@@ -16,15 +16,15 @@ preplace inst processing_system7_0 -pg 1 -lvl 2 -x 630 -y 320 -defaultsOSRD
 preplace inst axi_protocol_convert_0 -pg 1 -lvl 1 -x 220 -y 80 -defaultsOSRD
 preplace inst axi_apb_bridge_0 -pg 1 -lvl 2 -x 630 -y 100 -defaultsOSRD
 preplace inst rst_ps7_0_50M -pg 1 -lvl 1 -x 220 -y 410 -defaultsOSRD
-preplace netloc processing_system7_0_FCLK_CLK0 1 0 3 30 170 420 420 860
-preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 3 40 300 400J 430 840
-preplace netloc rst_ps7_0_50M_peripheral_aresetn 1 0 3 40 160 410 180 NJ
+preplace netloc processing_system7_0_FCLK_CLK0 1 0 3 40 170 430 420 850
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 3 50 300 390J 430 830
+preplace netloc rst_ps7_0_50M_peripheral_aresetn 1 0 3 50 160 400 180 NJ
 preplace netloc S_AXI_HP0_0_1 1 0 2 NJ 310 NJ
 preplace netloc axi_apb_bridge_0_APB_M 1 2 1 NJ 100
 preplace netloc axi_protocol_convert_0_M_AXI 1 1 1 N 80
-preplace netloc processing_system7_0_DDR 1 2 1 850J 250n
-preplace netloc processing_system7_0_FIXED_IO 1 2 1 860J 280n
-preplace netloc processing_system7_0_M_AXI_GP0 1 0 3 20 190 NJ 190 840
+preplace netloc processing_system7_0_DDR 1 2 1 840J 250n
+preplace netloc processing_system7_0_FIXED_IO 1 2 1 850J 280n
+preplace netloc processing_system7_0_M_AXI_GP0 1 0 3 30 190 NJ 190 830
 levelinfo -pg 1 0 220 630 880
 pagesize -pg 1 -db -bbox -sgen -140 0 1100 510
 "

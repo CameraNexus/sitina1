@@ -479,7 +479,7 @@
 			xlnx,pcw-fpga-fclk2-enable = <0>;
 			xlnx,pcw-clk0-freq = <50000000>;
 			xlnx,pcw-mio-47-slew = "slow";
-			xlnx,pcw-sdio-peripheral-divisor0 = <16>;
+			xlnx,pcw-sdio-peripheral-divisor0 = <32>;
 			xlnx,pcw-use-expanded-iop = <0>;
 			xlnx,pcw-mio-44-slew = "slow";
 			xlnx,pcw-qspi-peripheral-divisor0 = <8>;
@@ -768,7 +768,7 @@
 			xlnx,pcw-mio-7-direction = "out";
 			xlnx,pcw-i2c0-reset-enable = <0>;
 			xlnx,pcw-mio-53-slew = "slow";
-			xlnx,pcw-sdio-peripheral-freqmhz = <100>;
+			xlnx,pcw-sdio-peripheral-freqmhz = <50>;
 			xlnx,pcw-uart1-uart1-io = "<Select>";
 			xlnx,pcw-dqs-width = <4>;
 			xlnx,pcw-s-axi-hp2-data-width = <64>;
@@ -893,7 +893,7 @@
 			xlnx,pcw-enet0-baseaddr = <0xE000B000>;
 			xlnx,pcw-nor-sram-cs1-t-wp = <1>;
 			xlnx,pcw-act-ttc-peripheral-freqmhz = <50>;
-			xlnx,pcw-act-sdio-peripheral-freqmhz = <100>;
+			xlnx,pcw-act-sdio-peripheral-freqmhz = <50>;
 			xlnx,pcw-import-board-preset = "None";
 			xlnx,pcw-mio-16-iotype = "LVCMOS , 3.3V";
 			xlnx,pcw-mio-8-pullup = "disabled";
@@ -1126,7 +1126,7 @@
 		status = "okay";
 		xlnx,interconnect-s-axi-masters = "ps7_cortexa9_0.M_AXI_DP , & , ps7_cortexa9_1.M_AXI_DP";
 		xlnx,ip-name = "ps7_sdio";
-		xlnx,sdio-clk-freq-hz = <100000000>;
+		xlnx,sdio-clk-freq-hz = <50000000>;
 		xlnx,has-wp = <0>;
 		xlnx,has-cd = <0>;
 		xlnx,name = "ps7_sd_0";
