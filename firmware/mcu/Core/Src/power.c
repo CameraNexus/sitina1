@@ -175,6 +175,17 @@ void power_power_off_lens(void) {
     LENSPWREN_GPIO->BRR = LENSPWREN_PIN;
 }
 
+void power_power_off_pmic(void) {
+	i2c_write_reg(AXP_I2C_HOST, AXP_I2C_ADDR, 0x32, 0x46 | 0x80);
+}
+
+uint8_t power_get_pek(void) {
+	uint8_t val;
+	i2c_read_reg(AXP_I2C_HOST, AXP_I2C_ADDR, 0x4a, &val);
+	i2c_write_reg(AXP_I2C_HOST, AXP_I2C_ADDR, 0x4a, 0x03);
+	return val & 0x03;
+}
+
 void power_release_fpga_reset(void) {
     FPGARST_GPIO->BSRR = FPGARST_PIN;
 }
@@ -204,4 +215,12 @@ void power_lcd_set_brightness(uint8_t val) {
 void power_lcd_off(void) {
     power_lcd_bl_off();
     HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_1);
+}
+
+void power_off(void) {
+	power_lcd_off();
+	power_fpga_reset();
+	power_power_off_ccd();
+	power_power_off_lens();
+	power_power_off_pmic();
 }

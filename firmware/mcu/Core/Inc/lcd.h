@@ -36,5 +36,6 @@ void lcd_clear(uint8_t color);
 void lcd_update(void);
 void lcd_schedule_update(void);
 void lcd_schedule_com_inversion(void);
+void lcd_stby_resume(void);
 void lcd_stby_com_inversion(void);
 void lcd_stby_update(void);

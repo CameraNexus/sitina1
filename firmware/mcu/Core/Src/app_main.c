@@ -63,18 +63,20 @@ void app_systick(void) {
 void app_init(void) {
     // First booting up
     // Initialize always ON sections
-    lcd_init();
-    lcd_disp_string(0, 0, "Sitina 1");
-    lcd_disp_string(0, 12, "EC VER 1.0");
-    lcd_stby_update();
+	if (__HAL_PWR_GET_FLAG(PWR_FLAG_SB) != RESET) {
+		// Waked up from standby, skip LCD initialization
+		__HAL_PWR_CLEAR_FLAG(PWR_FLAG_SB);
+		lcd_stby_resume();
+		lcd_vcom_update_req = true;
+	}
+	else {
+		lcd_init();
+		lcd_disp_string(0, 0, "Sitina 1");
+		lcd_disp_string(0, 12, "EC VER 1.0");
+		lcd_stby_update();
+	}
     key_init();
     mcusvc_init();
-    power_lcd_set_brightness(10);
-    power_lcd_on();
-    HAL_Delay(100);
-    power_lcd_off();
-    HAL_Delay(100);
-    power_lcd_on();
 }
 
 void app_tick(void) {
@@ -138,6 +140,10 @@ void app_tick(void) {
                 lcd_disp_char(16, 12, '0' + (rotenc_abs % 10));
                 lcd_schedule_update();
             }
+
+            if (power_get_pek()) {
+            	power_power_off_pmic(); // TODO: This ideally should have been handled by Zynq
+            }
         }
 
         if (tick_120hz) {
@@ -190,7 +196,7 @@ void app_tick(void) {
         }
         else {
             // Go back to sleep
-            // TODO
+        	HAL_PWR_EnterSTANDBYMode();
         }
     }
 }

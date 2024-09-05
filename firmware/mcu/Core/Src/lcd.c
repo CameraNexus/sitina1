@@ -45,6 +45,7 @@
 
 extern SPI_HandleTypeDef hspi1;
 extern DMA_HandleTypeDef hdma_spi1_tx;
+extern RTC_HandleTypeDef hrtc;
 
 uint8_t framebuffer[18*128+2];
 static uint8_t rx[2];
@@ -187,6 +188,10 @@ void lcd_schedule_com_inversion(void) {
     vcom = !vcom;
 }
 
+void lcd_stby_resume(void) {
+	vcom = HAL_RTCEx_BKUPRead(&hrtc, 0);
+}
+
 void lcd_stby_com_inversion(void) {
     uint8_t cmd[2] = {0x00, 0x00};
     vcom = !vcom;
@@ -195,6 +200,7 @@ void lcd_stby_com_inversion(void) {
     LCD_CS_SEL();
     SPI_SEND(cmd, 2);
     LCD_CS_DESEL();
+    HAL_RTCEx_BKUPWrite(&hrtc, 0, vcom);
 }
 
 void lcd_stby_update(void) {
