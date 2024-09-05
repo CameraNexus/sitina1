@@ -33,20 +33,20 @@ static FATFS fatfs;
 static TCHAR rootpath[] = "0:/";
 
 int pal_fs_init() {
-    uint8_t *tmp = malloc(512*1024);
+    //uint8_t *tmp = malloc(512*1024);
 
     FRESULT res;
-    res = f_mkfs(rootpath, 0, tmp, 512*1024);
-    if (res != FR_OK) {
-        printf("Failed to format card %d\n", res);
-    }
+    // res = f_mkfs(rootpath, 0, tmp, 512*1024);
+    // if (res != FR_OK) {
+    //     printf("Failed to format card %d\n", res);
+    // }
 
     res = f_mount(&fatfs, rootpath, 1);
     return (int)res;
 }
 
 void pal_fs_deinit() {
-    //
+    f_unmount(rootpath);
 }
 
 // Open a file, return pointer when success, NULL on error

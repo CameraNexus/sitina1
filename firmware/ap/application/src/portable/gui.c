@@ -317,6 +317,22 @@ UICOMP custom_histogram = {
     }
 };
 
+UICOMP label_debug1 = {
+    .type = COMP_LABEL,
+    .x = 10,
+    .y = 405,
+    .w = 8 * 16,
+    .h = 28,
+    .specifics.label = {
+        .transparent = false,
+        .fgcl = COLOR_NORMAL,
+        .bgcl = COLOR_BG,
+        .font = &font_8x14,
+        .align = ALIGN_LEFT,
+        .string = "*L SHD 15 SHP 35 R SHD 15 SHP 35"
+    }
+};
+
 UIDRAWLIST capture_screen_drawlist = {
     .ncomp = 18,
     .comp = {
@@ -336,7 +352,8 @@ UIDRAWLIST capture_screen_drawlist = {
         &label_iso,
         &custom_battery,
         &label_exposure,
-        &custom_exposure,
+        //&custom_exposure,
+        &label_debug1,
         &custom_histogram
     }
 };
@@ -464,6 +481,7 @@ CAP_ACT gui_run_capture_screen(bool redraw) {
 
     // TODO: GUI logic!
     uint32_t btn = pal_input_get_keys();
+
     if (btn & KEY_MASK_FN1) {
         need_highlight = true;
         current_sel =
@@ -609,6 +627,59 @@ CAP_ACT gui_run_capture_screen(bool redraw) {
     if (btn & KEY_MASK_SHUTTER) {
         action = CAP_ACT_CAPTURE;
     }
+
+    if (btn & KEY_MASK_PEK_SHORT) {
+        action = CAP_ACT_SHUTDOWN;
+    }
+
+    // Debug control
+    static int sh_right = 0;
+    static uint8_t shd[2] = {14, 06};
+    static uint8_t shp[2] = {33, 35};
+    bool update_debug1 = false;
+    if (btn & KEY_MASK_FN5) {
+        sh_right = !sh_right;
+        update_debug1 = true;
+    }
+
+    if (btn & KEY_MASK_LEFT) {
+        if (shd[sh_right] > 0) {
+            shd[sh_right] --;
+            update_debug1 = true;
+        }
+    }
+
+    if (btn & KEY_MASK_RIGHT) {
+        if (shd[sh_right] < 63) {
+            shd[sh_right] ++;
+            update_debug1 = true;
+        }
+    }
+
+    if (btn & KEY_MASK_UP) {
+        if (shp[sh_right] > 0) {
+            shp[sh_right] --;
+            update_debug1 = true;
+        }
+    }
+
+    if (btn & KEY_MASK_DOWN) {
+        if (shp[sh_right] < 63) {
+            shp[sh_right] ++;
+            update_debug1 = true;
+        }
+    }
+
+    if (update_debug1 || redraw) {
+        snprintf(label_debug1.specifics.label.string, UILIB_LABEL_MAXLEN,
+                "%cL SHD %02d SHP %02d%cR SHD %02d SHP %02d",
+                sh_right ? ' ' : '*', shd[0], shp[0],
+                sh_right ? '*' : ' ', shd[1], shp[1]);
+        pal_cam_set_shl(sh_right, shd[sh_right], shp[sh_right]);
+        update_needed = true;
+    }
+
+
 
     if (redraw || update_needed) {
         uilib_mark_update();

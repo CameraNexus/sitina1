@@ -40,10 +40,16 @@
 #define PROC_DRAFT_HEIGHT   (PROC_PREVIEW_HEIGHT / 4)
 #define PROC_DRAFT_WIDTH    (PROC_PREVIEW_WIDTH / 4)
 
+// temp, to be removed
+#define PROC_CAM_VACT       (CCD_LINES - 3)
+#define PROC_CAM_HBLK       ((CCD_HBLK_LENGTH + 16) * 2 + 15)
+#define PROC_CAM_HACT       (CCD_LINE_PIXCNT * 2)
+#define PROC_CAM_BUFSIZE    (PROC_CAM_VACT * PROC_CAM_HACT * 2)
+
 #if (PROC_IN_SKIP_END < 0)
 #error "OFFSET TOO LARGE"
 #endif
 
 void ip_init(void);
 void ip_filter_draft_image(uint16_t *in, uint32_t *out, uint8_t *histogram);
-void ip_filter_preview_image(uint16_t *in, uint32_t *out);
+void ip_filter_preview_image(uint16_t *in, uint32_t *out, uint8_t *histogram);

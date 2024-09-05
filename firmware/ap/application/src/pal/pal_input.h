@@ -35,6 +35,8 @@
 #define KEY_MASK_FN6        0x2000
 #define KEY_MASK_FN7        0x4000
 #define KEY_MASK_FN8        0x8000
+#define KEY_MASK_PEK_SHORT  0x010000
+#define KEY_MASK_PEK_LONG   0x020000
 
 void pal_input_init(void);
 void pal_input_deinit(void);

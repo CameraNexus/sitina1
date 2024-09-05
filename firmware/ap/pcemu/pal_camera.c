@@ -92,6 +92,10 @@ void pal_cam_set_gain(uint32_t cds_gain, uint32_t vga_gain) {
     // ignore for now
 }
 
+void pal_cam_set_shl(uint8_t ch, uint8_t shd, uint8_t shp) {
+    printf("Set channel %d SHD %d SHP %d\n", ch, shd, shp);
+}
+
 static uint32_t get_total_readout_time() {
     if (cam_cm == CM_DRAFT) {
         return PREVIEW_READOUT_TIME_MS + cam_shutter_ms;

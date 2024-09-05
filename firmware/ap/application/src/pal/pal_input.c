@@ -59,7 +59,7 @@ int pal_input_get_encoder(uint32_t id) {
 
 void pal_input_scan(void) {
     key_state = mcusvc_get_buttons();
-    //encoder_count += mcusvc_get_rotenc();
+    encoder_count += mcusvc_get_rotenc();
     // clear keys that have been released
     key_used &= key_state;
 }

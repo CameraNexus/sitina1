@@ -28,12 +28,12 @@
 const ISO_SETPOINT iso_setpoints[] = {
     {100, 4, 0 * STEP_PER_DB + ISO_OFFSET, "100"},
     {140, 6, 0 * STEP_PER_DB + ISO_OFFSET, "140"},
-    {200, 7, 0 * STEP_PER_DB + ISO_OFFSET, "200"},
-    {400, 7, 6 * STEP_PER_DB + ISO_OFFSET, "400"},
-    {800, 7, 12 * STEP_PER_DB + ISO_OFFSET, "800"},
-    {1600, 7, 18 * STEP_PER_DB + ISO_OFFSET, "1600"},
-    {3200, 7, 24 * STEP_PER_DB + ISO_OFFSET, "3200"},
-    {6400, 7, 30 * STEP_PER_DB + ISO_OFFSET, "6400"}
+    {200, 6, 3 * STEP_PER_DB + ISO_OFFSET, "200"},
+    {400, 6, 9 * STEP_PER_DB + ISO_OFFSET, "400"},
+    {800, 6, 15 * STEP_PER_DB + ISO_OFFSET, "800"},
+    {1600, 6, 21 * STEP_PER_DB + ISO_OFFSET, "1600"},
+    {3200, 6, 27 * STEP_PER_DB + ISO_OFFSET, "3200"},
+    {6400, 6, 33 * STEP_PER_DB + ISO_OFFSET, "6400"}
 };
 
 const int no_iso_setpoints = sizeof(iso_setpoints) / sizeof(ISO_SETPOINT);

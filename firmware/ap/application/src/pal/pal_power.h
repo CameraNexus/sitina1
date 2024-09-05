@@ -34,3 +34,4 @@ uint8_t pal_pwr_get_battery_percent(void);
 bool pal_pwr_is_battery_charging(void);
 void pal_pwr_set_vab(uint8_t setpoint);
 void pal_pwr_set_cpu_power(POWER_LEVEL setpoint);
+void pal_pwr_off(void);

@@ -309,7 +309,7 @@ void afe_init(void) {
 
     usleep(500);
 
-    afe_write_reg(0x07, 0x04); // CDS gain +6dB
+    afe_write_reg(0x04, 0x04); // CDS gain 0dB
     afe_write_reg(0x05, 0x0f); // VGA gain +6dB
 
     // Release internal timing core reset
@@ -356,6 +356,6 @@ void afe_power_down(void) {
 }
 
 void afe_set_gain(uint32_t cds_gain, uint32_t vga_gain) {
-    afe_write_reg(0x07, cds_gain);
+    afe_write_reg(0x04, cds_gain);
     afe_write_reg(0x05, vga_gain);
 }

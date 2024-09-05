@@ -36,7 +36,7 @@
 #define UILIB_FB_ROTATE     (180)
 
 // Various configurations
-#define UILIB_LABEL_MAXLEN  (32)
+#define UILIB_LABEL_MAXLEN  (40)
 
 #define RGB_TO_XRGB8888(x)  (x)
 #define RGB_TO_RGB565(x)    (((x & 0xff) >> 3) | \

@@ -34,7 +34,7 @@ void ccdtg_init() {
         (1 << CCDTG_CTRL_SYNC_OEN_OFFSET);
     // ctrl_val =
     //     (1 << CCDTG_CTRL_EMBED_ESHUT_OFFSET) |
-    //     (6 << CCDTG_CTRL_VSKIP_OFFSET) |
+    //     (2 << CCDTG_CTRL_VSKIP_OFFSET) |
     //     (1 << CCDTG_CTRL_CCD_OEN_OFFSET) |
     //     (1 << CCDTG_CTRL_SYNC_OEN_OFFSET);
     *CCDTG_CTRL = ctrl_val;

@@ -40,12 +40,14 @@ void pal_cam_deinit(void) {
 
 void pal_cam_set_capture_mode(CAM_CAPTURE_MODE cm) {
     if (cm == CM_DRAFT) {
-        // TODO: Enable line skipping as well
+        ccdtg_set_line_skip(2); // Enable line skipping
         ccdtg_set_eshut(EMBED_ESHUT);
+        dcif_set_draft();
     }
     else if (cm == CM_STILL) {
         ccdtg_set_line_skip(0); // Disable line skipping
         ccdtg_set_eshut(START_ESHUT);
+        dcif_set_still();
     }
 }
 
@@ -83,6 +85,13 @@ void pal_cam_set_still_shutter_speed(uint32_t shutter_us) {
 
 void pal_cam_set_gain(uint32_t cds_gain, uint32_t vga_gain) {
     afe_set_gain(cds_gain, vga_gain);
+}
+
+void pal_cam_set_shl(uint8_t ch, uint8_t shd, uint8_t shp) {
+    afe_write_reg(ch ? 0x138 : 0x238,
+            (shd << 0) | // SHDLOC
+            (shp << 8) | // SHPLOC
+            (8 << 16)); // SHPWIDTH
 }
 
 void pal_cam_start(void) {

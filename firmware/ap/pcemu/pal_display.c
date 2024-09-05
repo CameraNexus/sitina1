@@ -129,13 +129,13 @@ void pal_disp_return_buffer(uint32_t *buf) {
     assert((uint32_t *)pal_disp_fb == buf);
 
     // First copy fb into screen buffer
-    uint32_t *rdptr = buf;
+    uint32_t *rdptr = buf + DISP_HEIGHT * DISP_WIDTH;
     uint32_t *wrptr = screen->pixels;
     for (int y = 0; y < DISP_HEIGHT; y++) {
-        memcpy(wrptr, rdptr, DISP_WIDTH * 4);
-        //memset(wrptr, 0xff, DISP_WIDTH * 4);
-        rdptr += DISP_WIDTH;
-        wrptr += (DISP_WIDTH + AOND_WIDTH);
+        for (int x = 0; x < DISP_WIDTH; x++) {
+            *wrptr++ = *rdptr--;
+        }
+        wrptr += AOND_WIDTH;
     }
 
     pal_disp_render_copy();

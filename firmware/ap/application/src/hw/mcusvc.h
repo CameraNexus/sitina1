@@ -35,3 +35,4 @@ uint32_t mcusvc_get_bat_voltage(void);
 bool mcusvc_get_is_bat_charging(void);
 uint32_t mcusvc_get_buttons(void);
 int8_t mcusvc_get_rotenc(void);
+void mcusvc_power_off(void);

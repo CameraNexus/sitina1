@@ -27,19 +27,22 @@ typedef enum {
     CAP_ACT_NOTHING,
     CAP_ACT_CAPTURE,
     CAP_ACT_PLAYBACK,
-    CAP_ACT_SETTING
+    CAP_ACT_SETTING,
+    CAP_ACT_SHUTDOWN
 } CAP_ACT;
 
 typedef enum {
     PB_ACT_NOTHING,
     PB_ACT_PREV,
     PB_ACT_NEXT,
-    PB_ACT_EXIT
+    PB_ACT_EXIT,
+    PB_ACT_SHUTDOWN
 } PB_ACT;
 
 typedef enum {
     SET_ACT_NOTHING,
-    SET_ACT_EXIT
+    SET_ACT_EXIT,
+    SET_ACT_SHUTDOWN
 } SET_ACT;
 
 void gui_init(void);

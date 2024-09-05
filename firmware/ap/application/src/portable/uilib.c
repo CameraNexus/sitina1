@@ -334,7 +334,7 @@ void uilib_set_framebuffer(uint8_t *fb) {
             break;
         }
         else if (framebuffer_info[i].addr == NULL) {
-            printf("Registering framebuffer %p\n", fb);
+            //printf("Registering framebuffer %p\n", fb);
             framebuffer_info[i].addr = fb;
             current_framebuffer_info = &framebuffer_info[i];
             break;

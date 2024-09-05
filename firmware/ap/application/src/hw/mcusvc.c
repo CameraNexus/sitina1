@@ -33,6 +33,7 @@
 #define CMD_SET_LCD_BL      0x02
 #define CMD_FRAMEBUF_XFER   0x03
 #define CMD_SET_LED         0x04
+#define CMD_POWER_OFF       0x05
 #define CMD_GET_BUTTONS     0x80
 #define CMD_GET_BAT         0x82    // {voltage[15:0], capacity[15:0]}
 #define CMD_GET_PWR         0x83    // {7'd0, is_charging, 8'd0, power[15:0]}
@@ -134,7 +135,7 @@ uint32_t mcusvc_get_buttons(void) {
     int result = i2c_read_payload(MCU_I2C, MCU_I2C_ADDR, (uint8_t *)&pkt,
         PKT_SIZE, (uint8_t *)&pkt, PKT_SIZE);
     if (result < 0)
-        return 0xDEADBEEF;
+        return 0x0;
     rotenc_val = *(int8_t *)(&(pkt.param4));
     return pkt.param1 | ((uint32_t)(pkt.param2) << 8) |
         ((uint32_t)(pkt.param3) << 16);
@@ -142,4 +143,11 @@ uint32_t mcusvc_get_buttons(void) {
 
 int8_t mcusvc_get_rotenc(void) {
     return rotenc_val;
+}
+
+void mcusvc_power_off(void) {
+    DATA_PKT pkt = {
+        .cmd = CMD_POWER_OFF
+    };
+    i2c_write_payload(MCU_I2C, MCU_I2C_ADDR, (uint8_t *)&pkt, PKT_SIZE);
 }

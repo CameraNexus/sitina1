@@ -38,12 +38,15 @@
 #endif
 
 #define CAM_DRAFT_VBLK      (1)
-#define CAM_DRAFT_VACT      (CCD_LINES / 3 - 1)
+//#define CAM_DRAFT_VACT      (CCD_LINES / 3 - 49)
+#define CAM_DRAFT_VACT      (830)
 #define CAM_DRAFT_BUFSIZE   (CAM_DRAFT_VACT * CAM_HACT * 2)
 #if ((CAM_DRAFT_BUFSIZE % CAM_BUFALIGN) != 0)
 #error "Draft buffer not aligned"
 #endif
 
 void dcif_init(void);
+void dcif_set_draft(void);
+void dcif_set_still(void);
 void dcif_engage(void);
 uint8_t *dcif_waitnextbuffer(void);

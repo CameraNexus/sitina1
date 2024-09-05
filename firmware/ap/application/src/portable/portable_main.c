@@ -37,8 +37,6 @@
 #include "gui.h"
 #include "metadata.h"
 
-#include "dcif.h" // TODO: Remove this, saved RAW file shouldn't require this
-
 uint32_t previewbuf[PROC_PREVIEW_HEIGHT * PROC_PREVIEW_WIDTH];
 
 uint32_t get_save_seq(void) {
@@ -110,6 +108,10 @@ void portable_main(void) {
         CAP_ACT act = gui_run_capture_screen(redraw);
         redraw = false;
 
+        if (act == CAP_ACT_SHUTDOWN) {
+            break;
+        }
+
         if (act == CAP_ACT_CAPTURE) {
             // Release shutter and save image
             //pal_cam_set_capture_mode(CM_STILL);
@@ -140,7 +142,7 @@ void portable_main(void) {
             char fn[13];
             snprintf(fn, 13, "SNE%05d.RAW", seq);
             File *fp = pal_fs_open(fn, OM_WRITE);
-            size_t filesize = CAM_BUFSIZE;
+            size_t filesize = PROC_CAM_BUFSIZE;
             uint8_t *saveptr = (uint8_t *)cambuf;
             const size_t chunksize = 1048576;
             for (int i = 0; i < (filesize / chunksize); i++) {
@@ -159,7 +161,7 @@ void portable_main(void) {
             seq++;
             update_save_seq(seq);
             // Resume live view
-            pal_cam_set_capture_mode(CM_DRAFT);
+            //pal_cam_set_capture_mode(CM_DRAFT);
             redraw = true;
         }
 
@@ -182,4 +184,6 @@ void portable_main(void) {
     pal_disp_deinit();
     pal_fs_deinit();
     pal_input_deinit();
+
+    pal_pwr_off();
 }

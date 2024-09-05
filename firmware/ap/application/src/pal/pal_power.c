@@ -55,3 +55,7 @@ void pal_pwr_set_vab(uint8_t setpoint) {
 void pal_pwr_set_cpu_power(POWER_LEVEL setpoint) {
     // TODO
 }
+
+void pal_pwr_off(void) {
+    mcusvc_power_off();
+}

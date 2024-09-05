@@ -59,6 +59,8 @@ static uint16_t ip_scale_pixel(uint16_t pixel) {
     else
         pixel -= BLACK_LEVEL;
     pixel /= (FULL_LEVEL - BLACK_LEVEL) / 1023;
+    if (pixel > 1023)
+        pixel = 1023;
     return gamma_table[pixel];
 }
 
@@ -71,7 +73,61 @@ static uint32_t y2rgb888(uint32_t y) {
 }
 
 void ip_filter_draft_image(uint16_t *in, uint32_t *out, uint8_t *histogram) {
-    // No faster readout currently possible
+    // Skip 4 lines
+    /*uint16_t *evenptr = in + PROC_IN_SKIP_LINE * PROC_IN_WIDTH + PROC_IN_SKIP;
+    uint16_t *oddptr = evenptr + PROC_IN_WIDTH;
+    uint32_t *leftptr = out;
+    uint32_t *rightptr = out + PROC_DRAFT_WIDTH - 1;
+    memset(histo_tmp, 0, 256 * 4);
+    for (int i = 0; i < PROC_DRAFT_HEIGHT; i++) {
+        for (int j = 0; j < PROC_DRAFT_WIDTH / 2; j++) {
+            uint8_t p0b = ip_scale_pixel(*evenptr++);
+            uint8_t p1g0 = ip_scale_pixel(*evenptr++);
+            uint8_t p0g0 = ip_scale_pixel(*evenptr++);
+            uint8_t p1b = ip_scale_pixel(*evenptr++);
+            uint8_t p0g1 = ip_scale_pixel(*oddptr++);
+            uint8_t p1r = ip_scale_pixel(*oddptr++);
+            uint8_t p0r = ip_scale_pixel(*oddptr++);
+            uint8_t p1g1 = ip_scale_pixel(*oddptr++);
+            //uint8_t p0g = ((uint16_t)p0g0 + (uint16_t)p0g1) / 2;
+            //uint8_t p1g = ((uint16_t)p1g0 + (uint16_t)p1g1) / 2;
+            uint8_t p0g = p0g0;
+            uint8_t p1g = p1g0;
+            uint32_t p0 = ((uint32_t)p0r << 16) | ((uint32_t)p0g << 8) | p0b;
+            uint32_t p1 = ((uint32_t)p1r << 16) | ((uint32_t)p1g << 8) | p1b;
+
+            // Incorrect but fast RGB to Y
+            uint8_t p0y = (p0g0 >> 1) + (p0b >> 2) + (p0r >> 2);
+            uint8_t p1y = (p1g0 >> 1) + (p1b >> 2) + (p1r >> 2);
+            histo_tmp[p0y]++;
+            histo_tmp[p1y]++;
+
+            *leftptr++ = p0;
+            *rightptr-- = p1;
+            //*leftptr++ = 0x00ff0000;
+            //*rightptr-- = 0x0000ff00;
+            evenptr += (4 * 3); // skip 3 pixels
+            oddptr += (4 * 3);
+        }
+        oddptr += PROC_IN_WIDTH + PROC_IN_SKIP + PROC_IN_SKIP_END + 4; // Skip line
+        evenptr += PROC_IN_WIDTH + PROC_IN_SKIP + PROC_IN_SKIP_END + 4;
+        if (i % 3 == 0) {
+            oddptr += (PROC_IN_WIDTH) * 2; // skip additional lines
+            evenptr += (PROC_IN_WIDTH) * 2;
+        }
+        
+        leftptr += (PROC_DRAFT_WIDTH / 2);
+        rightptr += (PROC_DRAFT_WIDTH / 2) + PROC_DRAFT_WIDTH;
+    }
+
+    uint32_t hmax = 0;
+    for (int i = 0; i < 256; i++) {
+        if (hmax < histo_tmp[i])
+            hmax = histo_tmp[i];
+    }
+    for (int i = 0; i < 256; i++) {
+        histogram[i] = histo_tmp[i] * 255 / hmax;
+    }*/
     uint16_t *evenptr = in + PROC_IN_SKIP_LINE * PROC_IN_WIDTH + PROC_IN_SKIP;
     uint16_t *oddptr = evenptr + PROC_IN_WIDTH;
     uint32_t *leftptr = out;
@@ -125,8 +181,8 @@ void ip_filter_draft_image(uint16_t *in, uint32_t *out, uint8_t *histogram) {
     }
 }
 
-void ip_filter_preview_image(uint16_t *in, uint32_t *out) {
-    // interleaved input
+void ip_filter_preview_image(uint16_t *in, uint32_t *out, uint8_t *histogram) {
+    /*// interleaved input
     uint16_t *evenptr = in + PROC_IN_SKIP_LINE * PROC_IN_WIDTH + PROC_IN_SKIP;
     uint16_t *oddptr = evenptr + PROC_IN_WIDTH;
     uint32_t *leftptr = out;
@@ -156,6 +212,57 @@ void ip_filter_preview_image(uint16_t *in, uint32_t *out) {
         evenptr += PROC_IN_WIDTH + PROC_IN_SKIP + PROC_IN_SKIP_END;
         leftptr += (PROC_PREVIEW_WIDTH / 2);
         rightptr += (PROC_PREVIEW_WIDTH / 2) + PROC_PREVIEW_WIDTH;
+    }*/
+    uint16_t *evenptr = in + PROC_IN_SKIP_LINE * PROC_IN_WIDTH + PROC_IN_SKIP;
+    uint16_t *oddptr = evenptr + PROC_IN_WIDTH;
+    uint32_t *leftptr = out;
+    uint32_t *rightptr = out + PROC_DRAFT_WIDTH - 1;
+    memset(histo_tmp, 0, 256 * 4);
+    for (int i = 0; i < PROC_DRAFT_HEIGHT; i++) {
+        for (int j = 0; j < PROC_DRAFT_WIDTH / 2; j++) {
+            uint8_t p0b = ip_scale_pixel(*evenptr++);
+            uint8_t p1g0 = ip_scale_pixel(*evenptr++);
+            uint8_t p0g0 = ip_scale_pixel(*evenptr++);
+            uint8_t p1b = ip_scale_pixel(*evenptr++);
+            uint8_t p0g1 = ip_scale_pixel(*oddptr++);
+            uint8_t p1r = ip_scale_pixel(*oddptr++);
+            uint8_t p0r = ip_scale_pixel(*oddptr++);
+            uint8_t p1g1 = ip_scale_pixel(*oddptr++);
+            //uint8_t p0g = ((uint16_t)p0g0 + (uint16_t)p0g1) / 2;
+            //uint8_t p1g = ((uint16_t)p1g0 + (uint16_t)p1g1) / 2;
+            uint8_t p0g = p0g0;
+            uint8_t p1g = p1g0;
+            uint32_t p0 = ((uint32_t)p0r << 16) | ((uint32_t)p0g << 8) | p0b;
+            uint32_t p1 = ((uint32_t)p1r << 16) | ((uint32_t)p1g << 8) | p1b;
+
+            // Incorrect but fast RGB to Y
+            uint8_t p0y = (p0g0 >> 1) + (p0b >> 2) + (p0r >> 2);
+            uint8_t p1y = (p1g0 >> 1) + (p1b >> 2) + (p1r >> 2);
+            histo_tmp[p0y]++;
+            histo_tmp[p1y]++;
+
+            *leftptr++ = p0;
+            *rightptr-- = p1;
+            //*leftptr++ = 0x00ff0000;
+            //*rightptr-- = 0x0000ff00;
+            evenptr += (4 * 3); // skip 3 pixels
+            oddptr += (4 * 3);
+        }
+        oddptr += PROC_IN_WIDTH + PROC_IN_SKIP + PROC_IN_SKIP_END; // Skip line
+        evenptr += PROC_IN_WIDTH + PROC_IN_SKIP + PROC_IN_SKIP_END;
+        oddptr += (PROC_IN_WIDTH) * 6 + 4; // skip additional lines
+        evenptr += (PROC_IN_WIDTH) * 6 + 4;
+        leftptr += (PROC_DRAFT_WIDTH / 2);
+        rightptr += (PROC_DRAFT_WIDTH / 2) + PROC_DRAFT_WIDTH;
+    }
+
+    uint32_t hmax = 0;
+    for (int i = 0; i < 256; i++) {
+        if (hmax < histo_tmp[i])
+            hmax = histo_tmp[i];
+    }
+    for (int i = 0; i < 256; i++) {
+        histogram[i] = histo_tmp[i] * 255 / hmax;
     }
 }
 
