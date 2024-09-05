@@ -1,5 +1,30 @@
 ps7_cortexa9_0:
   standalone:
+    xiltimer:
+      description: Xiltimer library provides generic timer interface for the timer IP's.
+      depends_libs: []
+      path:
+      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xiltimer_v1_3
+    xilskey:
+      description: Xilinx Secure Key Library supports programming efuse and bbram.
+      depends_libs: []
+      path:
+      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilskey_v7_5
+    xilrsa:
+      description: Xilinx RSA Library to access RSA and SHA software algorithms on Zynq.
+      depends_libs: []
+      path:
+      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilrsa_v1_7
+    xilflash:
+      description: Xilinx Flash library for Intel/AMD CFI compliant parallel flash.
+      depends_libs: []
+      path:
+      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilflash_v4_10
+    xilffs:
+      description: Generic Fat File System Library.
+      depends_libs: []
+      path:
+      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilffs_v5_1
     libmetal:
       description: Provide runtime primitives APIs across heterogenous processors.
       depends_libs: []
@@ -16,32 +41,32 @@ ps7_cortexa9_0:
       - libmetal
       path:
       - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/ThirdParty/sw_services/openamp_v1_9
-    xilskey:
-      description: Xilinx Secure Key Library supports programming efuse and bbram.
-      depends_libs: []
-      path:
-      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilskey_v7_5
-    xiltimer:
-      description: Xiltimer library provides generic timer interface for the timer IP's.
-      depends_libs: []
-      path:
-      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xiltimer_v1_3
-    xilffs:
-      description: Generic Fat File System Library.
-      depends_libs: []
-      path:
-      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilffs_v5_1
-    xilflash:
-      description: Xilinx Flash library for Intel/AMD CFI compliant parallel flash.
-      depends_libs: []
-      path:
-      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilflash_v4_10
-    xilrsa:
-      description: Xilinx RSA Library to access RSA and SHA software algorithms on Zynq.
-      depends_libs: []
-      path:
-      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilrsa_v1_7
   freertos:
+    xiltimer:
+      description: Xiltimer library provides generic timer interface for the timer IP's.
+      depends_libs: []
+      path:
+      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xiltimer_v1_3
+    xilskey:
+      description: Xilinx Secure Key Library supports programming efuse and bbram.
+      depends_libs: []
+      path:
+      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilskey_v7_5
+    xilrsa:
+      description: Xilinx RSA Library to access RSA and SHA software algorithms on Zynq.
+      depends_libs: []
+      path:
+      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilrsa_v1_7
+    xilflash:
+      description: Xilinx Flash library for Intel/AMD CFI compliant parallel flash.
+      depends_libs: []
+      path:
+      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilflash_v4_10
+    xilffs:
+      description: Generic Fat File System Library.
+      depends_libs: []
+      path:
+      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilffs_v5_1
     libmetal:
       description: Provide runtime primitives APIs across heterogenous processors.
       depends_libs: []
@@ -58,28 +83,3 @@ ps7_cortexa9_0:
       - libmetal
       path:
       - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/ThirdParty/sw_services/openamp_v1_9
-    xilskey:
-      description: Xilinx Secure Key Library supports programming efuse and bbram.
-      depends_libs: []
-      path:
-      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilskey_v7_5
-    xiltimer:
-      description: Xiltimer library provides generic timer interface for the timer IP's.
-      depends_libs: []
-      path:
-      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xiltimer_v1_3
-    xilffs:
-      description: Generic Fat File System Library.
-      depends_libs: []
-      path:
-      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilffs_v5_1
-    xilflash:
-      description: Xilinx Flash library for Intel/AMD CFI compliant parallel flash.
-      depends_libs: []
-      path:
-      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilflash_v4_10
-    xilrsa:
-      description: Xilinx RSA Library to access RSA and SHA software algorithms on Zynq.
-      depends_libs: []
-      path:
-      - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilrsa_v1_7

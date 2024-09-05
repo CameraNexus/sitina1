@@ -1,6 +1,6 @@
-set(CMAKE_HOST_SYSTEM "Linux-6.8.0-40-generic")
+set(CMAKE_HOST_SYSTEM "Linux-6.5.0-18-generic")
 set(CMAKE_HOST_SYSTEM_NAME "Linux")
-set(CMAKE_HOST_SYSTEM_VERSION "6.8.0-40-generic")
+set(CMAKE_HOST_SYSTEM_VERSION "6.5.0-18-generic")
 set(CMAKE_HOST_SYSTEM_PROCESSOR "x86_64")
 
 include("/home/wenting/Sitina1/firmware/ap/platform/ps7_cortexa9_0/standalone_ps7_cortexa9_0/bsp/cortexa9_toolchain.cmake")

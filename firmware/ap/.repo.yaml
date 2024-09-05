@@ -1,291 +1,336 @@
 paths:
   /tools/Xilinx/Vitis/2023.2/data/embeddedsw: {}
 os:
-  freertos10_xilinx:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/ThirdParty/bsp/freertos10_xilinx_v1_14
   standalone:
     path:
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/bsp/standalone_v9_0
+  freertos10_xilinx:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/ThirdParty/bsp/freertos10_xilinx_v1_14
 driver:
-  sdps:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/sdps_v4_2
-  spips:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/spips_v3_9
-  scugic:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/scugic_v5_2
-  coresightps_dcc:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/coresightps_dcc_v1_9
-  rtcpsu:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/rtcpsu_v1_13
-  bram:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/bram_v4_9
-  cframe:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/cframe_v1_5
-  tft:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/tft_v6_4
   scutimer:
     path:
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/scutimer_v2_5
-  sysmonpsv:
+  axis_switch:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/sysmonpsv_v4_1
-  sysmon:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axis_switch_v1_6
+  uartlite:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/sysmon_v7_8
-  qspipsu:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/uartlite_v3_9
+  dfemix:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/qspipsu_v1_18
-  clockps:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfemix_v1_6
+  zdma:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/clockps_v1_5
-  sysmonpsu:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/zdma_v1_17
+  usb:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/sysmonpsu_v2_9
-  trngpsx:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/usb_v5_6
+  wdttb:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/trngpsx_v1_1
-  usbpsu:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/usbpsu_v1_14
-  ttcps:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/ttcps_v3_18
-  xdmapcie:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/xdmapcie_v1_7
-  cfupmc:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/cfupmc_v1_6
-  nandps:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/nandps_v2_8
-  wdtps:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/wdtps_v3_6
-  intc:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/intc_v3_17
-  dpdma:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dpdma_v1_5
-  video_common:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/video_common_v4_14
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/wdttb_v5_7
   clk_wiz:
     path:
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/clk_wiz_v1_6
+  dfxasm:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfxasm_v1_2
+  cfupmc:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/cfupmc_v1_6
+  prd:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/prd_v2_2
+  mbox:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/mbox_v4_6
+  qspipsu:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/qspipsu_v1_18
+  usbps:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/usbps_v2_8
+  axivdma:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axivdma_v6_14
+  bram:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/bram_v4_9
+  nandpsu:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/nandpsu_v1_12
+  scugic:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/scugic_v5_2
+  trafgen:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/trafgen_v4_5
+  uartps:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/uartps_v3_13
+  canps:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/canps_v3_7
+  mutex:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/mutex_v4_7
+  mcdma:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/mcdma_v1_9
+  wdtps:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/wdtps_v3_6
+  axicdma:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axicdma_v4_12
+  hwicap:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/hwicap_v11_6
+  tmrctr:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/tmrctr_v4_11
+  emc:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/emc_v4_2
+  scuwdt:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/scuwdt_v2_5
+  uartpsv:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/uartpsv_v1_9
+  sdps:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/sdps_v4_2
+  clockps:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/clockps_v1_5
+  emaclite:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/emaclite_v4_8
+  qspips:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/qspips_v3_11
+  sysmonpsv:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/sysmonpsv_v4_1
+  v_frmbuf_wr:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/v_frmbuf_wr_v4_7
+  resetps:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/resetps_v1_6
+  rtcpsu:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/rtcpsu_v1_13
+  dfeprach:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfeprach_v1_6
+  dfeccf:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfeccf_v1_6
+  avbuf:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/avbuf_v2_6
+  tft:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/tft_v6_4
+  ipipsu:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/ipipsu_v2_14
+  iomodule:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/iomodule_v2_15
   llfifo:
     path:
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/llfifo_v5_5
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/llfifo_v5_6
-  dfeequ:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfeequ_v1_5
-  iic:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/iic_v3_10
-  avbuf:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/avbuf_v2_6
-  ipipsu:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/ipipsu_v2_14
-  axipmon:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axipmon_v6_10
-  trngpsv:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/trngpsv_v1_4
-  dfeprach:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfeprach_v1_6
-  prc:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/prc_v2_2
-  axiethernet:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axiethernet_v5_16
-  canfd:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/canfd_v2_8
-  uartpsv:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/uartpsv_v1_9
-  dfeofdm:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfeofdm_v1_1
-  csudma:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/csudma_v1_14
-  mbox:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/mbox_v4_6
-  gpiops:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/gpiops_v3_12
-  uartns550:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/uartns550_v3_9
-  xxvethernet:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/xxvethernet_v1_8
-  uartps:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/uartps_v3_13
-  trafgen:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/trafgen_v4_5
-  aienginev2:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/aienginev2_v3_4
-  resetps:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/resetps_v1_6
-  tmr_inject:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/tmr_inject_v1_6
-  can:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/can_v3_7
-  dfemix:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfemix_v1_6
   emacps:
     path:
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/emacps_v3_19
-  prd:
+  tmr_inject:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/prd_v2_2
-  pciepsu:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/tmr_inject_v1_6
+  ttcps:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/pciepsu_v1_6
-  sd_fec:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/ttcps_v3_18
+  cframe:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/sd_fec_v1_3
-  uartlite:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/cframe_v1_5
+  trngpsx:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/uartlite_v3_9
-  scuwdt:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/trngpsx_v1_1
+  iic:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/scuwdt_v2_5
-  axidma:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axidma_v9_17
-  vtc:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/vtc_v8_5
-  axivdma:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axivdma_v6_14
-  mcdma:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/mcdma_v1_9
-  canps:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/canps_v3_7
-  usbps:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/usbps_v2_8
-  iomodule:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/iomodule_v2_15
-  zdma:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/zdma_v1_17
-  tmr_manager:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/tmr_manager_v1_5
-  qspips:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/qspips_v3_11
-  v_tpg:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/v_tpg_v8_5
-  xadcps:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/xadcps_v2_7
-  common:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/common_v1_3
-  gpio:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/gpio_v4_10
-  hwicap:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/hwicap_v11_6
-  v_frmbuf_wr:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/v_frmbuf_wr_v4_7
-  ddrcpsu:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/ddrcpsu_v1_5
-  mutex:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/mutex_v4_7
-  dfxasm:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfxasm_v1_2
-  wdttb:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/wdttb_v5_7
-  axis_switch:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axis_switch_v1_6
-  emaclite:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/emaclite_v4_8
-  tmrctr:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/tmrctr_v4_11
-  devcfg:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/devcfg_v3_8
-  dfeccf:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfeccf_v1_6
-  dppsu:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dppsu_v1_7
-  axicdma:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axicdma_v4_12
-  iicps:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/iicps_v3_18
-  usb:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/usb_v5_6
-  rfdc:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/rfdc_v12_1
-  ospipsv:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/ospipsv_v1_9
-  spi:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/spi_v4_11
-  emc:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/emc_v4_2
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/iic_v3_10
   dmaps:
     path:
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dmaps_v2_9
+  ddrcpsu:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/ddrcpsu_v1_5
+  tmr_manager:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/tmr_manager_v1_5
+  usbpsu:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/usbpsu_v1_14
   v_frmbuf_rd:
     path:
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/v_frmbuf_rd_v4_7
-  nandpsu:
+  pciepsu:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/nandpsu_v1_12
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/pciepsu_v1_6
+  uartns550:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/uartns550_v3_9
+  vtc:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/vtc_v8_5
+  dfeofdm:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfeofdm_v1_1
+  rfdc:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/rfdc_v12_1
+  trngpsv:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/trngpsv_v1_4
+  ospipsv:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/ospipsv_v1_9
+  aienginev2:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/aienginev2_v3_4
+  sd_fec:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/sd_fec_v1_3
+  spi:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/spi_v4_11
+  devcfg:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/devcfg_v3_8
+  canfd:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/canfd_v2_8
+  dfeequ:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dfeequ_v1_5
+  common:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/common_v1_3
+  v_tpg:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/v_tpg_v8_5
+  xdmapcie:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/xdmapcie_v1_7
+  prc:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/prc_v2_2
+  nandps:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/nandps_v2_8
+  iicps:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/iicps_v3_18
+  sysmon:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/sysmon_v7_8
+  axidma:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axidma_v9_17
+  coresightps_dcc:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/coresightps_dcc_v1_9
+  dppsu:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dppsu_v1_7
+  axiethernet:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axiethernet_v5_16
+  csudma:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/csudma_v1_14
+  intc:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/intc_v3_17
+  video_common:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/video_common_v4_14
+  spips:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/spips_v3_9
+  sysmonpsu:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/sysmonpsu_v2_9
+  can:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/can_v3_7
+  axipmon:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/axipmon_v6_10
+  gpiops:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/gpiops_v3_12
+  gpio:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/gpio_v4_10
+  xxvethernet:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/xxvethernet_v1_8
+  dpdma:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/dpdma_v1_5
+  xadcps:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/XilinxProcessorIPLib/drivers/xadcps_v2_7
 library:
+  xilpuf:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilpuf_v2_2
+  xiltimer:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xiltimer_v1_3
+  xilmailbox:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilmailbox_v1_8
+  xilfpga:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilfpga_v6_5
+  xilskey:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilskey_v7_5
+  xilsem:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilsem_v1_8
+  xilsecure:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilsecure_v5_2
+  xilpm:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilpm_v5_1
+  xilrsa:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilrsa_v1_7
+  xilloader:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilloader_v1_9
+  xilflash:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilflash_v4_10
+  xilffs:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilffs_v5_1
+  xilpdi:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilpdi_v1_8
+  xilplmi:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilplmi_v1_9
+  xilnvm:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilnvm_v3_2
   libmetal:
     path:
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/ThirdParty/sw_services/libmetal_v2_6
@@ -295,142 +340,97 @@ library:
   openamp:
     path:
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/ThirdParty/sw_services/openamp_v1_9
-  xilplmi:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilplmi_v1_9
-  xilfpga:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilfpga_v6_5
-  xilsecure:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilsecure_v5_2
-  xilpuf:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilpuf_v2_2
-  xilskey:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilskey_v7_5
-  xilmailbox:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilmailbox_v1_8
-  xilpm:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilpm_v5_1
-  xiltimer:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xiltimer_v1_3
-  xilsem:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilsem_v1_8
-  xilpdi:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilpdi_v1_8
-  xilffs:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilffs_v5_1
-  xilloader:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilloader_v1_9
-  xilflash:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilflash_v4_10
-  xilrsa:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilrsa_v1_7
-  xilnvm:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_services/xilnvm_v3_2
 apps:
-  lwip_echo_server:
+  zynq_fsbl:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/lwip_echo_server
-  memory_tests:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/memory_tests
-  freertos_lwip_udp_perf_client:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/freertos_lwip_udp_perf_client
-  empty_application:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/empty_application
-  freertos_lwip_echo_server:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/freertos_lwip_echo_server
-  lwip_udp_perf_client:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/lwip_udp_perf_client
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/zynq_fsbl
   freertos_hello_world:
     path:
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/freertos_hello_world
   openamp_rpc_demo:
     path:
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/openamp_rpc_demo
-  hello_world:
+  zynq_dram_test:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/hello_world
-  freertos_lwip_udp_perf_server:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/zynq_dram_test
+  memory_tests:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/freertos_lwip_udp_perf_server
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/memory_tests
+  openamp_echo_test:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/openamp_echo_test
+  lwip_tcp_perf_server:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/lwip_tcp_perf_server
+  lwip_tcp_perf_client:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/lwip_tcp_perf_client
+  rsa_auth_app:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/rsa_auth_app
+  lwip_echo_server:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/lwip_echo_server
+  libmetal_echo_demo:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/libmetal_echo_demo
+  zynqmp_fsbl:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/zynqmp_fsbl
+  freertos_lwip_echo_server:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/freertos_lwip_echo_server
+  dhrystone:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/dhrystone
   openamp_matrix_multiply:
     path:
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/openamp_matrix_multiply
-  zynq_fsbl:
+  srec_bootloader:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/zynq_fsbl
-  ddr_self_refresh:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/srec_bootloader
+  zynqmp_pmufw:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/ddr_self_refresh
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/zynqmp_pmufw
+  zynqmp_dram_test:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/zynqmp_dram_test
+  lwip_udp_perf_client:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/lwip_udp_perf_client
+  freertos_lwip_udp_perf_server:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/freertos_lwip_udp_perf_server
+  freertos_lwip_tcp_perf_client:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/freertos_lwip_tcp_perf_client
+  lwip_udp_perf_server:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/lwip_udp_perf_server
   versal_psmfw:
     path:
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/versal_psmfw
   versal_plm:
     path:
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/versal_plm
-  srec_spi_bootloader:
+  freertos_lwip_udp_perf_client:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/srec_spi_bootloader
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/freertos_lwip_udp_perf_client
+  ddr_self_refresh:
+    path:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/ddr_self_refresh
   freertos_lwip_tcp_perf_server:
     path:
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/freertos_lwip_tcp_perf_server
-  freertos_lwip_tcp_perf_client:
+  hello_world:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/freertos_lwip_tcp_perf_client
-  rsa_auth_app:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/rsa_auth_app
-  zynqmp_pmufw:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/zynqmp_pmufw
-  srec_bootloader:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/srec_bootloader
-  lwip_tcp_perf_client:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/lwip_tcp_perf_client
-  lwip_udp_perf_server:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/lwip_udp_perf_server
-  zynqmp_fsbl:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/zynqmp_fsbl
-  libmetal_echo_demo:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/libmetal_echo_demo
-  zynqmp_dram_test:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/zynqmp_dram_test
-  lwip_tcp_perf_server:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/lwip_tcp_perf_server
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/hello_world
   peripheral_tests:
     path:
     - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/peripheral_tests
-  dhrystone:
+  srec_spi_bootloader:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/dhrystone
-  openamp_echo_test:
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/srec_spi_bootloader
+  empty_application:
     path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/openamp_echo_test
-  zynq_dram_test:
-    path:
-    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/zynq_dram_test
+    - /tools/Xilinx/Vitis/2023.2/data/embeddedsw/lib/sw_apps/empty_application
