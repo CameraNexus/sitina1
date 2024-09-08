@@ -28,7 +28,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <cmath>
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 #include "effusus.h"
 #include "effusus_rawio.h"

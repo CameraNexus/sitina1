@@ -25,7 +25,7 @@
 
 # tool macros
 CXX := g++
-CXXFLAGS := $(shell pkg-config sdl --cflags --libs) $(shell pkg-config libpng --cflags --libs) -ltiff -lm
+CXXFLAGS := $(shell pkg-config sdl --cflags --libs) $(shell pkg-config libpng --cflags --libs) $(shell pkg-config libtiff-4 --cflags --libs) -lm
 DBGFLAGS := -g
 CCOBJFLAGS := $(CXXFLAGS) -c
 

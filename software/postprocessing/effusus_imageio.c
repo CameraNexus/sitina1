@@ -1,8 +1,8 @@
 #include "effusus_imageio.h"
-#include <malloc.h>
+#include <stdlib.h>
 #include <math.h>
 
-#include <libpng/png.h>
+#include <png.h>
 
 void effusus_dither_to_vram(uint16_t* vram, uint16_t* rawbuf, double gamma, \
     int SCR_W, int SCR_H, effusus_imageio_dither_t dither){
