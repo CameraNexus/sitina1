@@ -1,11 +1,11 @@
 #include "effusus_bin2raw.h"
 #include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
 
 // TODO: remove the magic numbers
 uint16_t* effusus_bin2raw(uint16_t* rawbuf, uint8_t* binbuf, int CCD_W, int CCD_H, int SCR_W, int SCR_H){
     const long bias = 0;
-    long gapsize  = 8;    // Dirty Hack
+    long gapsize  = 6;    // Dirty Hack
     long gapshift = 1023;   // Dirty Hack
     
     for(int y=0;y<SCR_H;y++){
@@ -22,26 +22,19 @@ uint16_t* effusus_bin2raw(uint16_t* rawbuf, uint8_t* binbuf, int CCD_W, int CCD_
             // | G2 | R  |
             // +----+----+
             //
-
-            // Pixel Format:
-            // +----+----+
-            // | G1 | B  |
-            // +----+----+
-            // | R  | G2 |
-            // +----+----+
-            //
             if(x&0x01){
-                g1 = MAKE16((y*2+1)*CCD_W+((x+1)*2+1));
-                r  = MAKE16( y*2   *CCD_W+((x+1)*2+1));
                 g2 = MAKE16( y*2   *CCD_W+( x   *2+1));
-                b  = MAKE16((y*2+1)*CCD_W+( x   *2+1));
+                g1 = MAKE16((y*2+1)*CCD_W+((x-3)*2+1));
+                b  = MAKE16((y*2+1)*CCD_W+( x  *2+1));
+                r  = MAKE16( y*2   *CCD_W+((x-3)*2+1));
                 wrptr = 4*(y*SCR_W+x/2);
                 
             } else {
-                g2  = MAKE16( y   *2*CCD_W+( x   *2));
-                r   = MAKE16( y   *2*CCD_W+((x+1)*2));
-                g1  = MAKE16((y*2+1)*CCD_W+((x+1)*2));
+                // GOLDEN
+                g2  = MAKE16( y*2   *CCD_W+( x   *2));
                 b   = MAKE16((y*2+1)*CCD_W+( x   *2));
+                r   = MAKE16( y*2   *CCD_W+((x+1)*2));
+                g1  = MAKE16((y*2+1)*CCD_W+((x+1)*2));
                 wrptr = 4*(y*SCR_W+(SCR_W-x/2));
             }
             rawbuf[wrptr+0] = r;
