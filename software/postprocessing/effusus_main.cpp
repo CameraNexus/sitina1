@@ -35,8 +35,8 @@
 #include "effusus_bin2raw.h"
 #include "effusus_imageio.h"
 
-#define CCD_H (2725)
-#define CCD_W (4416)
+#define CCD_H (2718)
+#define CCD_W (4080)
 #define SCR_H (CCD_H/2)
 #define SCR_W (CCD_W/2)
 
@@ -78,7 +78,7 @@ int main(int argc, char** argv) {
             savebayer = true;
         }
         if(strcmp(argv[i],"--gui")==0){
-            savebayer = true;
+            gui = true;
         }
         if(strncmp(argv[i],"--gamma=",8)==0) {
             gamma = atof(argv[i]+8);

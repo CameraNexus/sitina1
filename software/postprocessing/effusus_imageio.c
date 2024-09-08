@@ -140,7 +140,7 @@ void effusus_writepng(const char* fn, uint16_t* raw, int SCR_W, int SCR_H){
     uint16_t* raw_rgb = (uint16_t*)malloc(2*(SCR_W+1)*SCR_H*3);
         for(int y=0;y<SCR_H;y++){
             for(int x=0;x<SCR_W;x++){
-                    int ptr3 = 3*(y*SCR_W+x);
+                    int ptr3 = 3*((SCR_H - y - 1)*SCR_W+(SCR_W - x - 1));
                     int ptr4 = 4*(y*SCR_W+x);
                     raw_rgb[ptr3+0] = raw[ptr4+0];
                     raw_rgb[ptr3+1] = (raw[ptr4+1]>>1)+(raw[ptr4+3]>>1);

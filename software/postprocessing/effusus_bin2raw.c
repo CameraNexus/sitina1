@@ -4,9 +4,9 @@
 
 // TODO: remove the magic numbers
 uint16_t* effusus_bin2raw(uint16_t* rawbuf, uint8_t* binbuf, int CCD_W, int CCD_H, int SCR_W, int SCR_H){
-    const long bias = 768;
-    long gapsize  = 175;    // Dirty Hack
-    long gapshift = 1191;   // Dirty Hack
+    const long bias = 0;
+    long gapsize  = 8;    // Dirty Hack
+    long gapshift = 1023;   // Dirty Hack
     
     for(int y=0;y<SCR_H;y++){
         for(int x=0;x<SCR_W;x++){
@@ -14,7 +14,7 @@ uint16_t* effusus_bin2raw(uint16_t* rawbuf, uint8_t* binbuf, int CCD_W, int CCD_
             uint16_t r, g1, g2, g, b;
             int wrptr;
             r=0;g=0;b=0;
-            #define MAKE16(a8) (binbuf[(a8)*2+bias+1]<<8|binbuf[(a8)*2+bias])
+            #define MAKE16(a8) (((uint16_t)binbuf[(a8)*2+bias+1])<<8|((uint16_t)binbuf[(a8)*2+bias]))
             // Pixel Format:
             // +----+----+
             // | B  | G1 |
@@ -22,18 +22,26 @@ uint16_t* effusus_bin2raw(uint16_t* rawbuf, uint8_t* binbuf, int CCD_W, int CCD_
             // | G2 | R  |
             // +----+----+
             //
+
+            // Pixel Format:
+            // +----+----+
+            // | G1 | B  |
+            // +----+----+
+            // | R  | G2 |
+            // +----+----+
+            //
             if(x&0x01){
-                b  = MAKE16((y*2+1)*CCD_W+((x+1)*2+1));
-                g2 = MAKE16( y*2   *CCD_W+((x+1)*2+1));
-                r  = MAKE16( y*2   *CCD_W+( x   *2+1));
-                g1 = MAKE16((y*2+1)*CCD_W+( x   *2+1));
+                g1 = MAKE16((y*2+1)*CCD_W+((x+1)*2+1));
+                r  = MAKE16( y*2   *CCD_W+((x+1)*2+1));
+                g2 = MAKE16( y*2   *CCD_W+( x   *2+1));
+                b  = MAKE16((y*2+1)*CCD_W+( x   *2+1));
                 wrptr = 4*(y*SCR_W+x/2);
                 
             } else {
-                r   = MAKE16( y   *2*CCD_W+( x   *2));
-                g2  = MAKE16( y   *2*CCD_W+((x+1)*2));
-                b   = MAKE16((y*2+1)*CCD_W+((x+1)*2));
-                g1  = MAKE16((y*2+1)*CCD_W+( x   *2));
+                g2  = MAKE16( y   *2*CCD_W+( x   *2));
+                r   = MAKE16( y   *2*CCD_W+((x+1)*2));
+                g1  = MAKE16((y*2+1)*CCD_W+((x+1)*2));
+                b   = MAKE16((y*2+1)*CCD_W+( x   *2));
                 wrptr = 4*(y*SCR_W+(SCR_W-x/2));
             }
             rawbuf[wrptr+0] = r;
