@@ -636,6 +636,8 @@ CAP_ACT gui_run_capture_screen(bool redraw) {
     static int sh_right = 0;
     static uint8_t shd[2] = {14, 06};
     static uint8_t shp[2] = {33, 35};
+    // static uint8_t shd[2] = {13, 07};
+    // static uint8_t shp[2] = {33, 33};
     bool update_debug1 = false;
     if (btn & KEY_MASK_FN5) {
         sh_right = !sh_right;
@@ -656,14 +658,14 @@ CAP_ACT gui_run_capture_screen(bool redraw) {
         }
     }
 
-    if (btn & KEY_MASK_UP) {
+    if (btn & KEY_MASK_FN7) {
         if (shp[sh_right] > 0) {
             shp[sh_right] --;
             update_debug1 = true;
         }
     }
 
-    if (btn & KEY_MASK_DOWN) {
+    if (btn & KEY_MASK_FN8) {
         if (shp[sh_right] < 63) {
             shp[sh_right] ++;
             update_debug1 = true;
@@ -710,7 +712,7 @@ void gui_show_fatal(char *msg) {
     // Show fatal error message
     uint32_t *disp_buf = pal_disp_get_buffer();
     uilib_set_framebuffer((uint8_t *)disp_buf);
-    printf("Fatal: %s\n", msg);
+    //printf("Fatal: %s\n", msg);
     uilib_set_font(&font_16x26);
     uilib_draw_string(0, 0, UILIB_FB_WIDTH, "FATAL ERROR", 11, false, COLOR_RED,
             COLOR_BLACK);
