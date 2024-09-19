@@ -350,11 +350,11 @@ typedef struct {
  * By default SD HS mode is disabled for Versal and enabled for
  * other platforms.
  */
-#ifdef versal
+//#ifdef versal
 #define SD_HS_MODE_ENABLE	0
-#else
-#define SD_HS_MODE_ENABLE	1
-#endif
+//#else
+//#define SD_HS_MODE_ENABLE	1
+//#endif
 /** @} */
 
 /**
