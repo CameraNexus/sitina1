@@ -53,7 +53,7 @@
 #define CCDTG_REG_DELAY_VTIME   0x0008
 #define CCDTG_REG_ESHUT_LINE    0x000C
 
-#define CCDTG_CTRL_VAL          ((1 << 9) | (1 << 8) | (0 << 4) | (1 << 2))
+#define CCDTG_CTRL_VAL          ((1 << 9) | (1 << 8) | (2 << 4) | (1 << 2))
 #define CCDTG_CTRL_VAL_STILL    ((1 << 9) | (1 << 8) | (0 << 4) | (1 << 3))
 
 #define DSILITE_REG_PCTL        0x0000
@@ -153,7 +153,18 @@ void testmain(void) {
         step = 1;
         break;
     case 1:
+        if (!apbsim_is_busy()) {
+            step = 2;
+        }
         break;
+    case 2:
+        // Some transaction for delay purposes
+        apbsim_write(GPIO_BASE | GPIO_REG_BSR, 0x00);
+        apbsim_write(GPIO_BASE | GPIO_REG_BSR, 0x00);
+        apbsim_write(GPIO_BASE | GPIO_REG_BSR, 0x00);
+        apbsim_write(GPIO_BASE | GPIO_REG_BSR, 0x00);
+        // Set new resolution
+        
     default:
         break;
     // Do more test here
