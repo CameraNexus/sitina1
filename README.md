@@ -9,6 +9,8 @@ I have made 2 videos about this project:
 - First video in 2023 (r0.6 hardware): [https://www.youtube.com/watch?v=Ma9FrN5COIo](https://www.youtube.com/watch?v=Ma9FrN5COIo)
 - Second video in 2024 (r0.11-B hardware): [https://www.youtube.com/watch?v=OkfzjmY9cF8](https://www.youtube.com/watch?v=OkfzjmY9cF8)
 
+Join discussion if you wish: [https://discord.gg/2zAJycbpU5](https://discord.gg/2zAJycbpU5)
+
 ## Specifications
 
 The following are preliminary.
