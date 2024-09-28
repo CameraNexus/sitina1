@@ -250,3 +250,7 @@ As mentiond in r0.9 notes... this is a bug fix release. A new sensorboard releas
 The color scheme has also been changed to black to better match with the lens:
 
 ![r0p10](/assets/r0p10.jpg)
+
+### Rev 0.11 - Aug 2024
+
+Two sub-versions exists for this revision: R0.11 and R0.11-B. The main change for the non-B version is an experimental reactive V driver is implemented. The B version still uses the old V driver.

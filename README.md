@@ -1,6 +1,13 @@
 # Sitina 1
 
-Open-source 35mm full-frame (36mm x 24mm) CCD mirror-less interchangable lens camera (MILC). The original goal of this project was to create a digital camera back to convert SLR cameras to DSLR cameras, but has since changed to build a full MILC. See also Sitina 2.
+![front](/assets/r0p11_front.jpg)
+
+Open-source 35mm full-frame (36mm x 24mm) CCD mirror-less interchangable lens camera (MILC). The original goal of this project was to create a digital camera back to convert SLR cameras to DSLR cameras, but has since changed to build a full MILC.
+
+I have made 2 videos about this project:
+
+- First video in 2023 (r0.6 hardware): [https://www.youtube.com/watch?v=Ma9FrN5COIo](https://www.youtube.com/watch?v=Ma9FrN5COIo)
+- Second video in 2024 (r0.11-B hardware): [https://www.youtube.com/watch?v=OkfzjmY9cF8](https://www.youtube.com/watch?v=OkfzjmY9cF8)
 
 ## Specifications
 
@@ -40,12 +47,19 @@ The following are possible with hardware, but not necessarily supported by the c
   - 4008x2672 up to 5FPS
   - 4008x480 at 28FPS (line skipping live view, rescaled to 480x320 for output)
 - Video recording is not supported
-- ISO:
-  - TBD
+- ISO: 100 to 6400 (color version)
 
 ## Status
 
-Hardware R0.6 tested and working. Harware R0.9 bringing up in progress.
+Hardware R0.11 tested and working. The hardware still need a lot of work and is not ready yet.
+
+## Sample Photos
+
+![sample_721725966846.jpg](/assets/sample_721725966846.jpg)
+
+![sample_851725972700.jpg](/assets/sample_851725972700.jpg)
+
+![sample_861725972700.jpg](/assets/sample_861725972700.jpg)
 
 ## Revision History
 
